@@ -25,7 +25,6 @@
 	</script>
 	       
     <style>	
-		
         .reqField{ color:#FF0000;}
         .errorChk{ color:#FF0000; text-shadow:none;}
 		.errorMsg{ color:#FF0000; text-shadow:none;}
@@ -42,10 +41,9 @@
     		text-align: center;
    			margin: 16px 0px;
     		color: #000;
-    		font-size: 18px;
+    		font-size: 20px;
 			border: 1px solid #095d5c;
 		}
-		
 		
 		.routselect{
 		    background: #88caca;
@@ -55,38 +53,34 @@
 			text-align: left;
 			box-shadow: 4px 7px 5px 0px #6ea58b;
 			}
-		/*#btn_receive{
-			    background-color: #f35b5b;
-                color: #fff;
-				
-              }*/
-			  
+		.ui-btn {
+			overflow:inherit;
+		}
+		.headerc {
+			color:#ffffff;
+		}
     </style>	
 </head>
 
 <body >
 
 
-
-
-
-
 <!-- MAIN MENU ----------------------------------------------------------------------------- -->
-<div data-theme="c" data-role="page" id="homePage" style="overflow:scroll;">
+<div data-theme="c" data-role="page" id="homePage" >
     <div data-theme="c" data-role="header" data-position="fixed" >
         <a data-role="button" href="#leftpanel" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets" ><img src="menu.png" /></a>
         
         <a data-role="button" onClick="exit();" ><img src="exit.png" /></a>
-        <h3>Select Town</h3>
+        <h3 class="headerc">Select Town</h3>
     </div>
     <div data-role="content" >  
-    <div id="townList"></div>
+    <div id="townList" style="height:450px; overflow:scroll;"></div>
     <a data-role="button" id="townSUP" onclick="townSelect()" href="#" data-transition="slide" >Next</a>
         
     <div class="errorChk" style="color:#cc0000;" ></div>       
     </div>
     
-    <div data-theme="c" data-role="footer" data-position="fixed" style="font-size:12px;background-color:#CCC;" align="center" >mReporting 20180813</div><!------/footer 20150401-20150309 -->
+    <div data-theme="c" data-role="footer" data-position="fixed" style="font-size:12px;background-color:#CCC;" align="center" >mReporting 20180814</div>
     
     <div data-role="panel" id="leftpanel" data-position="left" data-display="overlay" data-theme="c">
         <div align="center"></div>
@@ -107,12 +101,11 @@
 </div>
 
 
-
 <!-- ------------------- sync page---------------------------------------------------------------------------------------- -->
 <div data-theme="c" data-role="page" id="pagesync" >
     <div data-theme="c" data-role="header" data-position="fixed" >
         <a data-role="button" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets " ><img src="menu.png" /></a>
-        <h3>Sync</h3>
+        <h3 class="headerc">Sync</h3>
     </div>
     <div data-role="content">
         <div class="errorMsg"></div>
@@ -157,8 +150,7 @@
     </div>
     
 </div>
-        
-                
+                     
 		
 <div data-role="page" data-theme="c" id="second_page" style="overflow:scroll;">
     <div data-theme="c" data-role="header" data-position="fixed" >
@@ -169,7 +161,7 @@
     
     <div data-role="content" >    
     <div id="townSelctRec" class="routselect"></div>   
-    <div class="routselect" >Receive</div>          
+    <div class="routselect" style="font-size:20px;" >Receive</div>          
     <ul data-role="listview" data-inset="true">
     	<li class="ui-field-contain" >
         	<table width="100%" class="ui-body-d ui-shadow table-stripe ui-responsive" id="beneficiaryCount" style="cell-spacing:0px;"  data-role="table" data-theme="d"  data-mode="display:none">
@@ -222,7 +214,7 @@
     <div data-theme="c" data-role="header" data-position="fixed" >
         <a data-role="button" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets " ><img src="menu.png" /></a>
         <a data-role="button" onclick="backClick();" data-rel="back" class="ui-btn-right" data-transition="slide"><img src="back.png" /></a>
-        <h3></h3>
+        <h3 class="headerc">Select Route</h3>
     </div>
     
     <div data-role="content" >  
@@ -244,7 +236,7 @@
  <div data-theme="c" data-role="header" data-position="fixed" >
         <a data-role="button" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets " ><img src="menu.png" /></a>
         <a data-role="button" onclick="backClick();" data-rel="back" class="ui-btn-right" data-transition="slide"><img src="back.png" /></a>
-        <h3></h3>
+        <h3 class="headerc">Select Outlet</h3>
     </div>
     
     <div data-role="content" >  
