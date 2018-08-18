@@ -672,11 +672,11 @@ function submit_data_agency(){
 		
 	}else{
 		
-		if (imagePathC!=""){							
+		/*if (imagePathC!=""){							
 			$(".errorChk").text("Syncing photo ..");
 			imageName3 = localStorage.mobileNo+"_"+get_time+".jpg";
 			uploadPhotoAgency(imagePathC, imageName3);
-		}
+		}*/
 		
 		//alert(apipath+"submitData_agency?&syncCode="+localStorage.sync_code+"&outletIdNameAgency="+outletIdNameAgency+"&outlet_route="+outlet_route+"&outlet_town_name="+outlet_town_name+"&posmcode="+posmcode+"&aqty="+aqty+"&aset="+aset+"&alight="+alight+"&apaint="+apaint+"&imageName3="+imageName3);
 		$.ajax({
@@ -712,7 +712,7 @@ function submit_data_agency(){
 }
 
 
-function getAgencyImage() { 
+/*function getAgencyImage() { 
 	navigator.camera.getPicture(onSuccess2, onFail2, { quality: 90,
 	targetWidth: 600,
 	destinationType: Camera.DestinationType.FILE_URI,correctOrientation: true });	
@@ -757,7 +757,7 @@ function win3(r) {
 function onfail3(r) {
 	$(".errorChk").text('File upload Failed. Please check internet connection.');
 	$("#btn_submit_agency").show();
-}
+}*/
 
 
 
