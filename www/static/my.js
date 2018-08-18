@@ -1,7 +1,10 @@
 var imagePathA='';
 var imagePathB='';
+var imagePathC='';
 var imageName='';
 var imageName2='';
+var imageName3='';
+
 
 var select_town='';
 var townCode='';
@@ -12,7 +15,7 @@ var routeName='';
 var outlet_code='';
 var outlet_name='';
 
-//Online
+//---Online
 var apipath="http://w02.yeapps.com/merchandizing/syncmobile/";
 //--- local
 //var apipath="http://127.0.0.1:8000/merchandizing/syncmobile/";
@@ -39,8 +42,12 @@ $(document).ready(function(){
 			$('#posmCodeList').empty();
 			$('#posmCodeList').append(localStorage.posmCode).trigger('create');
 			
-			url = "#first_page";	
-		}else{
+			url = "#first_page";
+
+				
+		}else if (localStorage.rep_type == 'CM_SUP'){
+			
+			$('#btn_receive').show();
 			$('#btn_receive').show();
 			$('#townList').empty();
 			$('#townList').append(localStorage.townStr).trigger('create');
@@ -52,9 +59,28 @@ $(document).ready(function(){
 			$('#posmCodeList').append(localStorage.posmCode).trigger('create');
 			
 			url = "#homePage";
-		}
+			
+		}else{
 		
+			var townCName=localStorage.town.replace('|', '-');
+			$('#townSelct').html(townCName)
+			
+			$('#routeList').empty();
+			$('#routeList').append(localStorage.route).trigger('create');
+			
+			$('#outletList').empty();
+			$('#outletList').append(localStorage.outletList).trigger('create');
+			
+			$('#posmCodeList').empty();
+			$('#posmCodeList').append(localStorage.posmCode).trigger('create');
+			
+			$('#outletListAgency').empty();
+			$('#outletListAgency').append(localStorage.outStr).trigger('create');
+			
+			url = "#page6";
+			}
 		}
+
 	$.mobile.navigate(url);
 	
 });
@@ -90,6 +116,7 @@ function syncBasic(){
 					localStorage.rep_type=syncResultArray[6];	
 					localStorage.route=syncResultArray[7];
 					localStorage.posmCode=syncResultArray[8];
+					localStorage.outlet_agency=syncResultArray[9];
 					
 					var townlist=localStorage.town.split('fdfd');					
 					
@@ -103,7 +130,23 @@ function syncBasic(){
 					}
 					localStorage.townStr=townStr;
 					
-																
+					//=============================
+					
+					var outletAgency=localStorage.outlet_agency.split('fdfd');					
+					
+					var outStr='';
+					for (i=0;i<outletAgency.length;i++){
+						outLi=outletAgency[i].split('|');						
+						outletCode=outLi[0]
+						outletName=outLi[1]
+						outlet_route=outLi[2]
+						outlet_town_code=outLi[3]
+						outlet_town_name=outLi[4]						
+						
+						outStr+='<label for="'+outletCode+'"><input type="radio" name="outlet_agency_select" id="'+outletCode+'" value="'+outletCode+'|'+outletName+'" onclick="agencySelectOutlet();">'+outletCode+'-'+outletName+'</label>'
+					}
+					localStorage.outStr=outStr;
+							
 					$(".errorMsg").html("Sync Successful");
 					$('#syncBasic').show();
 										
@@ -122,7 +165,8 @@ function syncBasic(){
 						url = "#first_page";
 						$.mobile.navigate(url);		
 						
-					}else{						
+					}else if (localStorage.rep_type == 'CM_SUP'){
+												
 						$("#btn_receive").show();
 						
 						$('#townList').empty();
@@ -137,8 +181,14 @@ function syncBasic(){
 					
 						url = "#homePage";
 						$.mobile.navigate(url);	
-					}
-																					
+					}else {
+
+						$('#outletListAgency').empty();
+						$('#outletListAgency').append(localStorage.outStr).trigger('create');
+						
+						url = "#page6";
+						$.mobile.navigate(url);	
+					}													
 				}else{						
 					$(".errorMsg").html("Sync Failed. Authorization or Network Error.");
 					$('#syncBasic').show();
@@ -180,6 +230,39 @@ function townSelect(){
 	}
 }
 
+
+function agencySelectOutlet(){
+	var outlet_agency_select=$("input[name='outlet_agency_select']:checked").val();
+	//alert(apipath+"getAllDataAgency?&outlet_agency_select="+outlet_agency_select);
+	$.ajax({
+		type: 'POST',
+		url:apipath+"getAllDataAgency?&outlet_agency_select="+outlet_agency_select,																																																											
+		success: function(result) {	
+			var resultArray = result.split('rdrd');
+				recStatus=resultArray[0];
+			if (recStatus=='Success'){	
+				var outletCode=resultArray[1];	
+				var outletRoute=resultArray[2];
+				var outletTownCode=resultArray[3];	
+				var outletTownName=resultArray[4];
+				
+				$("#outlet_route_code").val(outletRoute);
+				$("#outlet_town_name").val(outletTownCode+'|'+outletTownName);
+			}else{
+				$(".errorChk").text("Please check internet connection");
+			}
+		}
+	})
+	
+	
+}
+/*********************outlet_agency_select**************************/
+
+function alloDetailsagency(){
+	var outletCode=$("#outlet_code").val();
+	//alert(apipath+"getAllDataAgency?&outletCode="+outletCode);
+	
+}
 
 function receive(){
 	
@@ -435,6 +518,7 @@ function outlet(){
 
 function submit_data_usages(){
 	$("#btn_submit_usages").hide();
+	
 	var d = new Date();	
 	var get_time=d.getTime();
 		
@@ -527,6 +611,152 @@ function win2(r) {
 function onfail2(r) {
 	$(".errorChk").text('File upload Failed. Please check internet connection.');
 	$("#btn_submit_usages").show();
+}
+
+/**------------------------page 6 ----------------------------********/
+
+function agency(){
+	
+	
+	$(".errorChk").text("");			
+	url="#page6";
+					
+	$.mobile.navigate(url);	
+}
+/**------------------------page 7 ----------------------------********/
+function searchoutlet(){
+	
+	
+	$(".errorChk").text("");			
+	url="#page7";
+					
+	$.mobile.navigate(url);	
+}
+/**------------------------page 8 ----------------------------********/
+var outletIdNameAgency='';
+function execution(){
+	if($("#outletListAgency").find("input[name='outlet_agency_select']:checked").length==0){
+		$(".errorChk").text("Select Outlet");
+	}else{
+		outletIdNameAgency=$("input[name='outlet_agency_select']:checked").val();
+	
+		$(".errorChk").text("");			
+		url="#page8";
+						
+		$.mobile.navigate(url);	
+	}
+}
+
+/**------------------------Agency Submit Data ----------------------------********/
+function submit_data_agency(){
+	$("#btn_submit_agency").hide();
+	var posmcode=$("#posmCode").val();
+	var aqty=$("#agencyQty").val();
+	var aset=$("#set").val();
+	var alight=$("#light").val();
+	var apaint=$("#paint").val();
+	var agencyphoto=$("#agency_photo").val();
+	
+	var outlet_route=$("#outlet_route_code").val();
+	var outlet_town_name=$("#outlet_town_name").val();
+	
+	if(posmcode=='' || posmcode==0){
+		$(".errorChk").text("Required POSM Code");
+		$("#btn_submit_agency").show();
+	}else if(aqty==''|| aqty==0){
+		$(".errorChk").text("Required Qty ");
+		$("#btn_submit_agency").show();
+	}else if(aset==''||aset==0){
+		$(".errorChk").text("Required Set");
+		$("#btn_submit_agency").show();
+		
+	}else{
+		
+		if (imagePathC!=""){							
+			$(".errorChk").text("Syncing photo ..");
+			imageName3 = localStorage.mobileNo+"_"+get_time+".jpg";
+			uploadPhotoAgency(imagePathC, imageName3);
+		}
+		
+		//alert(apipath+"submitData_agency?&syncCode="+localStorage.sync_code+"&outletIdNameAgency="+outletIdNameAgency+"&outlet_route="+outlet_route+"&outlet_town_name="+outlet_town_name+"&posmcode="+posmcode+"&aqty="+aqty+"&aset="+aset+"&alight="+alight+"&apaint="+apaint+"&imageName3="+imageName3);
+		$.ajax({
+			type: 'POST',
+			url:apipath+"submitData_agency?&syncCode="+localStorage.sync_code+"&outletIdNameAgency="+outletIdNameAgency+"&outlet_route="+outlet_route+"&outlet_town_name="+outlet_town_name+"&posmcode="+posmcode+"&aqty="+aqty+"&aset="+aset+"&alight="+alight+"&apaint="+apaint+"&imageName3="+imageName3,
+																																																													
+			success: function(result) {			
+				if(result=='Success'){
+					
+					$("#posmCode").val("");	
+					$("#agencyQty").val("");	
+					$("#set").val("");
+					$("#light").val("");
+					$("#paint").val("");
+					$("#allocation").val("");
+					document.getElementById('myImageA').src = '';
+									
+					$(".sucChk").text('Successfully Submitted');
+					$(".errorChk").text("");
+					$("#btn_submit_agency").hide();
+					setTimeout(function(){
+						location.reload();
+					},5000);				
+				}else{		
+					$(".errorChk").text("Please check internet connection");													
+					$("#btn_submit_agency").show();
+					
+				}
+				
+			}//end result
+		});//end ajax
+	}
+}
+
+
+function getAgencyImage() { 
+	navigator.camera.getPicture(onSuccess2, onFail2, { quality: 90,
+	targetWidth: 600,
+	destinationType: Camera.DestinationType.FILE_URI,correctOrientation: true });	
+}
+
+function onSuccess2(imageURI) {		
+    var image = document.getElementById('myImageC');
+    image.src = imageURI;
+	imagePathC = imageURI;	
+	$("#agency_photo").val(imagePathC);
+	
+}
+
+function onFail2(message) {
+	imagePathB="";
+	$("#agency_photo").val('');
+    alert('Failed because: ' + message);
+}
+
+function uploadPhotoAgency(imageURI, imageName3) { 	
+	//winAchInfo();
+	var options = new FileUploadOptions();
+    options.fileKey="upload";
+    options.fileName=imageName3;
+    options.mimeType="image/jpeg";
+
+    var params = {};
+    params.value1 = "test";
+    params.value2 = "param";
+    options.params = params;
+	
+	options.chunkedMode = false;
+
+    var ft = new FileTransfer();
+	ft.upload(imageURI, encodeURI("http://i001.yeapps.com/image_hub/merchandizing_image/merchandizing_image/"),win3,onfail3,options);
+}
+
+function win3(r) {	
+	$(".errorChk").text('Image upload Successful.');
+}
+
+function onfail3(r) {
+	$(".errorChk").text('File upload Failed. Please check internet connection.');
+	$("#btn_submit_agency").show();
 }
 
 

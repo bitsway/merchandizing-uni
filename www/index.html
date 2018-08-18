@@ -35,30 +35,130 @@
 		
 		.tbl_bro_color{border:1px solid #B8DCDC;}
 		
-		#townSelct{
+		#townSelct {
 			font-weight: bold;
 			padding: 20px;
-    		text-align: center;
-   			margin: 16px 0px;
-    		color: #000;
-    		font-size: 20px;
-			border: 1px solid #095d5c;
-		}
-		
-		.routselect{
-		    background: #88caca;
+			text-align: center;
+			margin: 16px 0px;
 			color: #000;
 			font-size: 18px;
-			padding: 5px;
-			text-align: left;
-			box-shadow: 4px 7px 5px 0px #6ea58b;
+			border: 1px solid #CE295E;
+			border-radius: 7px;
+			background-color: #fff;
+}
+		
+		.routselect{
+		          font-weight: bold;
+					padding: 8px;
+					text-align: center;
+					margin: 2px 0px;
+					color: #000;
+					font-size: 14px;
+					border: 1px solid #CE295E;
+					border-radius: 5px;
+					background-color: #fff;
 			}
 		.ui-btn {
 			overflow:inherit;
+			border-radius: 8px;
+			
 		}
 		.headerc {
 			color:#ffffff;
 		}
+		
+		.ui-overlay-c, .ui-page-theme-c, .ui-page-theme-c .ui-panel-wrapper{
+			background-color:#fff;
+			}
+			
+			.ui-bar-c, .ui-page-theme-c .ui-bar-inherit, html .ui-bar-c .ui-bar-inherit, html .ui-body-c .ui-bar-inherit, html      body .ui-group-theme-c .ui-bar-inherit {
+				background-color:#CE295E;
+				border-color: transparent;}
+				#syncBasic{
+					background-color:#CE295E;
+					font-weight:0;
+					color:#FFF;}
+					
+		
+		.ui-body-c, .ui-page-theme-c .ui-body-inherit, html .ui-bar-c .ui-body-inherit, html .ui-body-c .ui-body-inherit, html          body .ui-group-theme-c .ui-body-inherit, html .ui-panel-page-container-c {
+			background-color:#BFBFBF;
+			color:#000;}
+		
+		.ui-page-theme-c .ui-btn:active, html .ui-bar-c .ui-btn:active, html .ui-body-c .ui-btn:active, html body .ui-group-theme-c .ui-btn:active, html head + body .ui-btn.ui-btn-c:active { 
+		background-color:#CE295E;
+		border-color:transparent;}
+		.ui-page-theme-c .ui-btn:hover, html .ui-bar-c .ui-btn:hover, html .ui-body-c .ui-btn:hover, html body .ui-group-theme-c .ui-btn:hover, html head + body .ui-btn.ui-btn-c:hover { background-color: #CE295E;
+		border-color:transparent;}
+		
+		
+		
+		.ui-page-theme-c .ui-btn, html .ui-bar-c .ui-btn, html .ui-body-c .ui-btn, html body .ui-group-theme-c .ui-btn, html head + body .ui-btn.ui-btn-c{background-color:#82888a;
+		border-color:transparent;
+		color:#FFF;}
+		
+		.ui-input-text input, .ui-input-search input {
+			background-color:#fff;}
+			.ui-page-theme-c .ui-btn:hover, html .ui-bar-c .ui-btn:hover, html .ui-body-c .ui-btn:hover, html body .ui-group-theme-c .ui-btn:, html head + body .ui-btn.ui-btn-c:hover {background-color:#fff;
+			color:#000;}
+	#btn_receive{
+		
+		background-color:#CE295E;}
+		
+	#btn_usages{
+		
+		background-color:#CE295E}	
+			
+	#btn_stock{
+	
+		background-color:#CE295E;}
+				
+	#report{
+		
+		background-color:#CE295E;}	
+		.btn-color{
+			color:#000;}
+			.ui-page-theme-c .ui-btn, html .ui-bar-c .ui-btn, html .ui-body-c .ui-btn, html body .ui-group-theme-c .ui-btn, html head + body .ui-btn.ui-btn-c {
+    background-color: #fff;
+    
+    color: #151414;
+    
+    border: 1px solid #D42E5C;
+}
+#entry{
+	font-weight:0;
+	color:#fff;
+	background-color:#CE295E;}
+
+#summary_report{
+	color:#fff;
+	background-color:#CE295E;
+	}
+.sync-img img{background-color:#D42E5C;
+            border-radius: 50% !important;}
+. sync-header{
+	background-color:#000;}
+	.header{background-color:#595959;}
+	.sync-header{
+		background-color:#595959;}
+
+	.sync-box{
+		background-color:#595959;}
+		
+		.text-color{
+			color:#fff;}
+			
+			.ui-bar-c, .ui-page-theme-c .ui-bar-inherit, html .ui-bar-c .ui-bar-inherit, html .ui-body-c .ui-bar-inherit, html body .ui-group-theme-c .ui-bar-inherit{
+				background-color:#595959;
+				
+				
+				#btn_receive{
+					background-color:#CE295E;}
+					#btn_usages{
+						background-color:#CE295E;}
+					#btn_stock {
+						background-color:#CE295E;}
+					# report{
+						background-color:#CE295E;}
     </style>	
 </head>
 
@@ -66,23 +166,23 @@
 
 
 <!-- MAIN MENU ----------------------------------------------------------------------------- -->
-<div data-theme="c" data-role="page" id="homePage" >
-    <div data-theme="c" data-role="header" data-position="fixed" >
-        <a data-role="button" href="#leftpanel" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets" ><img src="menu.png" /></a>
+<div data-theme="c" data-role="page" id="homePage">
+    <div data-theme="c" data-role="header" data-position="fixed">
+        <a data-role="button" href="#leftpanel" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets"   ><img src="menu.png" /></a>
         
         <a data-role="button" onClick="exit();" ><img src="exit.png" /></a>
         <h3 class="headerc">Select Town</h3>
     </div>
     <div data-role="content" >  
     <div id="townList" style="height:450px; overflow:scroll;"></div>
-    <a data-role="button" id="townSUP" onclick="townSelect()" href="#" data-transition="slide" >Next</a>
+    <a data-role="button" id="townSUP" onclick="townSelect()" href="#" data-transition="slide" style="background-color:#CE295E;" ><span class="text-color">Next</span></a>
         
     <div class="errorChk" style="color:#cc0000;" ></div>       
     </div>
     
-    <div data-theme="c" data-role="footer" data-position="fixed" style="font-size:12px;background-color:#CCC;" align="center" >mReporting 20180814</div>
+    <div data-theme="c" data-role="footer" data-position="fixed" style="font-size:12px;background-color:#CE295E; color:#fff;" align="center" >mReporting 20180818</div>
     
-    <div data-role="panel" id="leftpanel" data-position="left" data-display="overlay" data-theme="c">
+    <div data-role="panel" id="leftpanel" data-position="left" data-display="overlay" data-theme="c" style="background-color:#CE295E;">
         <div align="center"></div>
         <br/>
         <br/>
@@ -91,34 +191,38 @@
         <br/>
         <br/>
         <ul data-role="listview" >
-          <li><a data-role="button" class="ui-btn" onclick="syncPage();"><center><img src="sync.png" /></center></a></li>		  
+          <li><a data-role="button" class="ui-btn sync-img" onclick="syncPage();" style="background-color:#fff"><center><img src="sync.png" /></center></a></li>		  
         </ul>
         <br/>
         <br/>
         <br/>
-        <div align="center"><img src="logo_gp.png" /></div>
+        <div align="center"><img src="logo_gp.png"  style="border-radius:5%" /></div>
     </div>
 </div>
 
 
 <!-- ------------------- sync page---------------------------------------------------------------------------------------- -->
 <div data-theme="c" data-role="page" id="pagesync" >
-    <div data-theme="c" data-role="header" data-position="fixed" >
-        <a data-role="button" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets " ><img src="menu.png" /></a>
+    <div data-theme="c" data-role="header" data-position="fixed" class="sync-header" >
+        <a data-role="button" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets" ><img src="menu.png" /></a>
         <h3 class="headerc">Sync</h3>
     </div>
     <div data-role="content">
         <div class="errorMsg"></div>
-        <ul data-role="listview" data-inset="true" data-theme="c">
-            <li class="ui-field-contain">
-                <label for="mobile"> Mobile No</label>
-                <input name="mobile" id="mobile" placeholder="" value="" type="number">
+		
+		
+      
+        <ul data-role="listview" data-inset="true" data-theme="c" >
+            <li class="ui-field-contain" style="background-color:#BFBFBF">
+                <label for="mobile" class="btn1" style="color:#000;" > Mobile No</label>
+                <input name="mobile" id="mobile" placeholder="" value="" type="number" style=" background-color:#fff"">
             </li>
-            <li class="ui-field-contain">
-                <label for="password">Password </label>
-                <input type="password" name="password" id="password" placeholder="" value="" >
+            <li class="ui-field-contain"  style="background-color:#BFBFBF">
+                <label for="password"  style="color:#000">Password </label>
+                <input type="password" name="password" id="password" placeholder="" value="" style=" background-color:#fff"  >
             </li>
         </ul>
+		
         <a data-role="button" href="#" id="syncBasic" onclick="syncBasic()"  data-theme="c" data-transition="slide" >Sync</a>
 		<div id="#syncData"></div>
         <br/>
@@ -140,10 +244,10 @@
     
     <div data-role="content" >    
     <div id="townSelct"></div>             
-    <a data-role="button" id="btn_receive" onclick="receive('Receive')" href="#" data-transition="slide">Receive</a>
-    <a data-role="button" id="btn_usages" onclick="usages('Usages')" href="#" data-transition="slide">Usages </a> 
-    <a data-role="button" id="stock" onclick="()" href="#" data-transition="slide"  >Stock Report </a>  
-    <a data-role="button" id="report" onclick="()" href="#" data-transition="slide" >Receive and Usage Report </a>  
+    <a data-role="button" id="btn_receive" onclick="receive('Receive')" href="#" data-transition="slide" style="color:#fff">Receive</a>
+    <a data-role="button" id="btn_usages" onclick="usages('Usages')" href="#" data-transition="slide" style="color:#fff">Usages </a> 
+    <a data-role="button" id="btn_stock" onclick="('')" href="#" data-transition="slide" style="color:#fff"  >Stock Report </a>  
+    <a data-role="button" id="report" onclick="()" href="#" data-transition="slide" style="color:#fff">Receive and Usage Report </a>  
      <div class="errorChk" style="color:#cc0000;"></div>
         <br/><br/>
   	<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
@@ -160,34 +264,37 @@
     </div>
     
     <div data-role="content" >    
-    <div id="townSelctRec" class="routselect"></div>   
-    <div class="routselect" style="font-size:20px;" >Receive</div>          
+    <div id="townSelctRec" class="routselect">
+	
+	
+	</div>   
+          <div class="routselect" style="font-size:18px;">Receive</div>    
     <ul data-role="listview" data-inset="true">
     	<li class="ui-field-contain" >
         	<table width="100%" class="ui-body-d ui-shadow table-stripe ui-responsive" id="beneficiaryCount" style="cell-spacing:0px;"  data-role="table" data-theme="d"  data-mode="display:none">
               <tr>
-                <td>POSM Code</td>
+                <td style="color:#fff">POSM Code</td>
                 <td><div id="posm_code"></div></td>
               </tr>
               <tr>
-                <td>POSM Type</td>
-                <td><input type="text" id="posm_type" name="posm_type" readonly="readonly"/></td>
+                <td style="color:#fff">POSM Type</td>
+                <td><input type="text" id="posm_type" name="posm_type" readonly="readonly" /></td>
               </tr>
               <tr>
-                <td>Brand</td>
+                <td style="color:#fff">Brand</td>
                 <td><input type="text" id="brand" name="brand" readonly="readonly" /></td>
               </tr>
               <tr>
-                <td>Allocation</td>
+                <td style="color:#fff">Allocation</td>
                 <td><input type="number" id="allocation" name="allocation" readonly="readonly" /></td>
               </tr>
                <tr>
-                <td>Received</td>
-                <td><input type="number" id="received" name="received" /></td>
+                <td style="color:#fff">Received</td>
+                <td style="color:#fff"><input type="number" id="received" name="received" /></td>
               </tr>
               <tr>
               	<td colspan="2">
-                	<a data-role="button" id="btn_take_pic" onClick="getReceiveImage();" class="ui-btn" >Take Picture</a>       
+                	<a data-role="button" id="btn_take_pic" onClick="getReceiveImage();" class="ui-btn" style="background-color:#D42E5C; color:#FFF;">Take Picture</a>       
                     <img src="" width="128" height="128" alt="Image1" id="myImageA" />        
                     <input name="recPhoto" id="recPhoto" value=""  type="hidden">
                 </td>
@@ -196,7 +303,7 @@
         </li>
     </ul>
      
-     <a data-role="button" id="btn_submit_receive" onClick="submit_data_receive();" class="ui-btn" >Submit</a>
+     <a data-role="button" id="btn_submit_receive" onClick="submit_data_receive();" class="ui-btn"style="background-color:#D42E5C; color:#FFF;">Submit</a>
      <div class="sucChk" style="color:#004d00;"></div>
      <div class="errorChk" style="color:#cc0000;"></div>
      
@@ -221,7 +328,7 @@
      <div id="usagesBtnShow" class="routselect"></div>   
      <br />
      <div id="routeList" style="height:450px; overflow:scroll;"></div> 
-     <a data-role="button" id="" onClick="route();" class="ui-btn" >Next</a>
+     <a data-role="button" id="" onClick="route();" class="ui-btn" style="background-color:#D42E5C; color:#FFF;" >Next</a>
      <div class="sucChk" style="color:#004d00;"></div>
      <div class="errorChk" style="color:#cc0000;"></div>
      
@@ -243,7 +350,7 @@
      <div id="routeSelect" class="routselect"></div>
      <br />
      <div id="outletList" style="height:450px; overflow:scroll;"></div> 
-     <a data-role="button" id="btn_submit" onClick="outlet();" class="ui-btn" >Next</a>
+     <a data-role="button" id="btn_submit" onClick="outlet();" class="ui-btn" style="background-color:#D42E5C; color:#FFF;" >Next</a>
      <div class="sucChk" style="color:#004d00;"></div>
      <div class="errorChk" style="color:#cc0000;"></div>
      
@@ -272,11 +379,11 @@
               </tr>
               <tr>
                 <td>Qty</td>
-                <td><input type="text" id="qty" name="qty" /></td>
+                <td><input type="number" id="qty" name="qty" /></td>
               </tr>
               <tr>
               	<td colspan="2">
-                	<a data-role="button" id="btn_take_pic" onClick="getUsagesImage();" class="ui-btn" >Take Picture</a>       
+                	<a data-role="button" id="btn_take_pic" onClick="getUsagesImage();" class="ui-btn" style="background-color:#D42E5C; color:#FFF;">Take Picture</a>       
                     <img src="" width="128" height="128" alt="Image1" id="myImageB" />        
                     <input name="usagesPhoto" id="usagesPhoto" value=""  type="hidden">
                 </td>
@@ -285,7 +392,7 @@
         </li>
     </ul>
      
-     <a data-role="button" id="btn_submit_usages" onClick="submit_data_usages();" class="ui-btn" >Submit</a>
+     <a data-role="button" id="btn_submit_usages" onClick="submit_data_usages();" class="ui-btn" style="background-color:#D42E5C; color:#FFF;">Submit</a>
      <div class="sucChk" style="color:#004d00;"></div>
      <div class="errorChk" style="color:#cc0000;"></div>
      
@@ -294,7 +401,122 @@
             <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
     </div>
 </div>
-
+<!-----------------------------------------Agency page 6-------------------------------------------->
+<div data-role="page" data-theme="c" id="page6">
+    <div data-theme="c" data-role="header" data-position="fixed" class="header" >
+        <a data-role="button" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets " ><img src="menu.png" /></a>
+        <a data-role="button" onclick="backClick();" data-rel="back" class="ui-btn-right" data-transition="slide"><img src="back.png" /></a>
+         <h3 class="headerc">Agency</h3>
+    </div>
+    
+    <div data-role="content" >    
+    <div id="agency"></div>             
+    <a data-role="button" id="entry" onclick="searchoutlet('entry')" href="#" data-transition="slide">Entry</a>
+    <a data-role="button" id="summary_report" onclick="summary_report('summary_report')" href="#" data-transition="slide">Summary Report </a>  
+     <div class="errorChk" style="color:#cc0000;"></div>
+        <br/><br/>
+  	<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+    </div>
+    
+</div>
+<!---------------------------------------------------- page 7------------------------------------------------->
+<div data-role="page" data-theme="c" id="page7" style="overflow:scroll;">
+ <div data-theme="c" data-role="header" data-position="fixed" >
+        <a data-role="button" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets " ><img src="menu.png" /></a>
+        <a data-role="button" onclick="backClick();" data-rel="back" class="ui-btn-right" data-transition="slide"><img src="back.png" /></a>
+        <h3 class="headerc">Select Outlet</h3>
+    </div>
+    
+    <div data-role="content" >  
+     <div id="outletListAgency"></div> 
+     <div class="sucChk" style="color:#004d00;"></div>
+     <div class="errorChk" style="color:#cc0000;"></div>
+     
+        <br/>
+ 
+    </div>
+    <div data-role="content">
+    <ul data-role="listview" data-inset="true">
+    	<li class="ui-field-contain" >
+        	<table width="100%" class="ui-body-d ui-shadow table-stripe ui-responsive" id="beneficiaryCount" style="cell-spacing:0px;"  data-role="table" data-theme="d"  data-mode="display:none">
+              
+              <!--<tr>
+                <td>Outlet ID</td>
+                <td><input type="text" id="outlet_code" name="outlet_code" readonly="readonly"/></td>
+              </tr>
+              <tr>
+                <td>Name</td>
+                <td><input type="text" id="outlet_route" name="outlet_route" readonly="readonly" /></td>
+              </tr>-->
+              <tr>
+                <td > <span class="btn-color"> Route</span></td>
+                <td><input type="text" id="outlet_route_code" name="outlet_route_code" readonly="readonly" /></td>
+              </tr>
+               <tr>
+                <td > <span class="btn-color">Town</span></td>
+                <td><input type="text" id="outlet_town_name" name="outlet_town_name" readonly="readonly" /></td>
+              </tr>  
+            </table>     
+        </li>
+    </ul>
+      <a data-role="button" id="btn_submit" onClick="execution()" class="ui-btn" style="background-color:#CE295E"> <span class="text-color">Next</span></a>
+      </div>
+      
+</div>
+<!----------------------------page 8---------------------------------------->
+<div data-role="page" data-theme="c" id="page8" style="overflow:scroll;">
+    <div data-theme="c" data-role="header" data-position="fixed" >
+        <a data-role="button" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets " ><img src="menu.png" /></a>
+        <a data-role="button" onclick="backClick();" data-rel="back" class="ui-btn-right" data-transition="slide"><img src="back.png" /></a>
+       <h3 class="headerc">Bashundhara</h3>
+    </div>
+    
+    <div data-role="content" >    
+    <div class="routselect" style="font-size:18px; text-align:center; margin:2px;">Execution</div>             
+    <ul data-role="listview" data-inset="true">
+    	<li class="ui-field-contain" >
+        	<table width="100%" class="ui-body-d ui-shadow table-stripe ui-responsive" id="beneficiaryCount" style="cell-spacing:0px;"  data-role="table" data-theme="d"  data-mode="display:none" style="color:#fff">
+              <tr>
+                <td > <span class="btn-color">POSM Code</span></td>
+                 <td><input type="number" id="posmCode" name="posmCode" /></td>
+              </tr>
+              <tr>
+                <td > <span class="btn-color">Qty</span></td>
+                <td><input type="number" id="agencyQty" name="agencyQty" /></td>
+              </tr>
+              <tr>
+              <tr>
+                <td > <span class="btn-color">SFT</span></td>
+                 <td><input type="number" id="set" name="set" /></td>
+              </tr>
+              <tr>
+                <td ><span class="btn-color"># of Light</span></td>
+                <td><input type="number" id="light" name="light" /></td>
+              </tr>
+              <tr>
+              <tr>
+                <td style="color:fff;"><span class="btn-color">Paint</span></td>
+                <td><input type="number" id="paint" name="paint" /></td>
+              </tr>
+              	<td colspan="2">
+                	<a data-role="button" id="btn_take_pic" onClick="getAgencyImage();" class="ui-btn" style="background-color:#CE295E"> Take Picture</a>       
+                    <img src="" width="128" height="128" alt="Image1" id="myImageC" />        
+                    <input name="agency_photo" id="agency_photo" value=""  type="hidden">
+                </td>
+              </tr>     
+            </table>     
+        </li>
+    </ul>
+     
+     <a data-role="button" id="btn_submit_agency" onClick="submit_data_agency();" class="ui-btn" style="background-color:#CE295E" > <span class="text-color">Submit</span></a>
+     <div class="sucChk" style="color:#004d00;"></div>
+     <div class="errorChk" style="color:#cc0000;"></div>
+     
+        <br/><br/>
+  
+            <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+    </div>
+</div>
   <script type="text/javascript" src="phonegap.js"></script>
   
 </body>
