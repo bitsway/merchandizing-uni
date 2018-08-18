@@ -692,7 +692,7 @@ function submit_data_agency(){
 					$("#light").val("");
 					$("#paint").val("");
 					$("#allocation").val("");
-					document.getElementById('myImageA').src = '';
+					document.getElementById('myImageC').src = '';
 									
 					$(".sucChk").text('Successfully Submitted');
 					$(".errorChk").text("");
@@ -727,7 +727,7 @@ function onSuccess2(imageURI) {
 }
 
 function onFail2(message) {
-	imagePathB="";
+	imagePathC="";
 	$("#agency_photo").val('');
     alert('Failed because: ' + message);
 }
