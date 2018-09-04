@@ -24,9 +24,13 @@ url ="";
 
 $(document).ready(function(){
 	if (localStorage.synced!='YES'){
-			 url = "#pagesync";						
+		url = "#pagesync";						
 	}else{
+		
 		if (localStorage.rep_type=='CM'){
+			var usg='<div data-theme="c" data-role="header" data-position="fixed" ><a data-role="button" href="#leftpanel2" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets"   ><img src="menu.png" /></a><a data-role="button" onclick="backClick();" data-rel="back" class="ui-btn-right" data-transition="slide"><img src="back.png" /></a><h3></h3></div>'
+			$('#usg').html(usg);
+						
 			$("#btn_receive").hide();
 			$("#townSelct").show();
 			
@@ -42,11 +46,13 @@ $(document).ready(function(){
 			$('#posmCodeList').empty();
 			$('#posmCodeList').append(localStorage.posmCode).trigger('create');
 			
-			url = "#first_page";
+			//url = "#first_page";
 
 				
 		}else if (localStorage.rep_type == 'CM_SUP'){
-			
+			var rec='<div data-theme="c" data-role="header" data-position="fixed" ><a data-role="button" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets " ><img src="menu.png" /></a><a data-role="button" onclick="backClick();" data-rel="back" class="ui-btn-right" data-transition="slide"><img src="back.png" /></a><h3></h3></div>'
+			$('#rec').html(rec);
+						
 			$('#btn_receive').show();
 			$('#btn_receive').show();
 			$('#townList').empty();
@@ -56,9 +62,9 @@ $(document).ready(function(){
 			$('#posm_code').append(localStorage.posmCode).trigger('create');
 			
 			$('#posmCodeList').empty();
-			$('#posmCodeList').append(localStorage.posmCode).trigger('create');
+			$('#posmCodeList').append(localStorage.posmCodeAll).trigger('create');
 			
-			url = "#homePage";
+			//url = "#homePage";
 			
 		}else{
 		
@@ -77,11 +83,11 @@ $(document).ready(function(){
 			$('#outletListAgency').empty();
 			$('#outletListAgency').append(localStorage.outStr).trigger('create');
 			
-			url = "#page6";
+			//url = "#page6";
 			}
 		}
 
-	$.mobile.navigate(url);
+	//$.mobile.navigate(url);
 	
 });
 
@@ -117,6 +123,7 @@ function syncBasic(){
 					localStorage.route=syncResultArray[7];
 					localStorage.posmCode=syncResultArray[8];
 					localStorage.outlet_agency=syncResultArray[9];
+					localStorage.posmCodeAll=syncResultArray[10];				
 					
 					var townlist=localStorage.town.split('fdfd');					
 					
@@ -151,6 +158,9 @@ function syncBasic(){
 					$('#syncBasic').show();
 										
 					if (localStorage.rep_type=='CM'){
+						var usg='<div data-theme="c" data-role="header" data-position="fixed" ><a data-role="button" href="#leftpanel2" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets"   ><img src="menu.png" /></a><a data-role="button" onclick="backClick();" data-rel="back" class="ui-btn-right" data-transition="slide"><img src="back.png" /></a><h3></h3></div>'
+						$('#usg').html(usg);
+						
 						$("#btn_receive").hide();						
 						$("#townSelct").show();
 						
@@ -162,10 +172,12 @@ function syncBasic(){
 						$('#posmCodeList').empty();
 						$('#posmCodeList').append(localStorage.posmCode).trigger('create');
 												
-						url = "#first_page";
-						$.mobile.navigate(url);		
+						//url = "#first_page";
+						//$.mobile.navigate(url);		
 						
 					}else if (localStorage.rep_type == 'CM_SUP'){
+						var rec='<div data-theme="c" data-role="header" data-position="fixed" ><a data-role="button" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets " ><img src="menu.png" /></a><a data-role="button" onclick="backClick();" data-rel="back" class="ui-btn-right" data-transition="slide"><img src="back.png" /></a><h3></h3></div>'
+						$('#rec').html(rec);
 												
 						$("#btn_receive").show();
 						
@@ -176,19 +188,18 @@ function syncBasic(){
 						$('#posm_code').append(localStorage.posmCode).trigger('create');
 						
 						$('#posmCodeList').empty();
-						$('#posmCodeList').append(localStorage.posmCode).trigger('create');
+						$('#posmCodeList').append(localStorage.posmCodeAll).trigger('create');
 						
-					
-						url = "#homePage";
-						$.mobile.navigate(url);	
+						//url = "#homePage";
+						//$.mobile.navigate(url);	
 					}else {
 
 						$('#outletListAgency').empty();
 						$('#outletListAgency').append(localStorage.outStr).trigger('create');
 						
-						url = "#page6";
-						$.mobile.navigate(url);	
-					}													
+						//url = "#page6";
+						//$.mobile.navigate(url);	
+					}												
 				}else{						
 					$(".errorMsg").html("Sync Failed. Authorization or Network Error.");
 					$('#syncBasic').show();
@@ -205,7 +216,15 @@ function menuClick(){
 	$("#btn_take_pic").show();
 	$("#btn_ach_lat_long").show();
 	
-	url = "#homePage";
+	if (localStorage.rep_type=='CM_SUP'){ 
+		url = "#homePage";
+	}else if (localStorage.rep_type=='CM'){
+		url = "#first_page";	
+	}else if (localStorage.rep_type=='AGENCY_REP'){
+		url = "#page6";	
+	}
+	
+	//url = "#homePage";
 	$.mobile.navigate(url);
 }
 //----------------back button
@@ -272,7 +291,7 @@ function receive(){
 }
 
 function alloDetails(){
-	var posmCode=$("#posmCode").val();
+	var posmCode=$("#posmCodeSup").val();
 	//alert(apipath+"getAllData?&posmCode="+posmCode);
 	$.ajax({
 		type: 'POST',
@@ -283,11 +302,13 @@ function alloDetails(){
 			if (recStatus=='Success'){	
 				var posmType=resultArray[1];	
 				var brand=resultArray[2];
-				var a_qty=resultArray[3];	
+				var a_qty=resultArray[3];
+				var alc_id=resultArray[4];	
 				
 				$("#posm_type").val(posmType);
 				$("#brand").val(brand);
 				$("#allocation").val(a_qty);
+				$("#alcId").val(alc_id);
 			}else{
 				$(".errorChk").text("Please check internet connection");
 			}
@@ -301,12 +322,14 @@ function submit_data_receive(){
 	var d = new Date();	
 	var get_time=d.getTime();
 	
-	var posm_code=$("#posm_code").val();
+	var posm_code=$("#posmCodeSup").val();
 	var posm_type=$("#posm_type").val();
+	
 	var brand=$("#brand").val();
 	var allocation=$("#allocation").val();
 	var received=$("#received").val();
 	var recPhoto=$("#recPhoto").val();
+	var alcId=$("#alcId").val();
 	
 	if(received=='' || received==0){
 		$(".errorChk").text("Required Receive Qty");
@@ -319,10 +342,10 @@ function submit_data_receive(){
 			uploadPhotoRec(imagePathA, imageName);
 		}
 		
-		//alert(apipath+"submitData_receive?&syncCode="+localStorage.sync_code+"&repID="+localStorage.repID+"&repName="+localStorage.repName+"&mobileNo="+localStorage.mobileNo+"&select_town="+localStorage.select_town+"&posm_code="+posm_code+"&posm_type="+posm_type+"&brand="+brand+"&allocation="+allocation+"&received="+received+"&imageName="+imageName);	
+		//alert(apipath+"submitData_receive?&syncCode="+localStorage.sync_code+"&repID="+localStorage.repID+"&repName="+localStorage.repName+"&mobileNo="+localStorage.mobileNo+"&select_town="+localStorage.select_town+"&posm_code="+posm_code+"&posm_type="+posm_type+"&brand="+brand+"&allocation="+allocation+"&received="+received+"&imageName="+imageName+"&alcId="+alcId);	
 		$.ajax({
 			type: 'POST',
-			url:apipath+"submitData_receive?&syncCode="+localStorage.sync_code+"&repID="+localStorage.repID+"&repName="+localStorage.repName+"&mobileNo="+localStorage.mobileNo+"&select_town="+localStorage.select_town+"&posm_code="+posm_code+"&posm_type="+posm_type+"&brand="+brand+"&allocation="+allocation+"&received="+received+"&imageName="+imageName,
+			url:apipath+"submitData_receive?&syncCode="+localStorage.sync_code+"&repID="+localStorage.repID+"&repName="+localStorage.repName+"&mobileNo="+localStorage.mobileNo+"&select_town="+localStorage.select_town+"&posm_code="+posm_code+"&posm_type="+posm_type+"&brand="+brand+"&allocation="+allocation+"&received="+received+"&imageName="+imageName+"&alcId="+alcId,
 																																																													
 			success: function(result) {			
 				if(result=='Success'){
@@ -333,14 +356,19 @@ function submit_data_receive(){
 					$("#posm_type").val("");
 					$("#brand").val("");
 					$("#allocation").val("");
+					$("#alcId").val("");
+					
 					document.getElementById('myImageA').src = '';
 									
 					$(".sucChk").text('Successfully Submitted');
 					$(".errorChk").text("");
-					$("#btn_submit_receive").hide();
-					setTimeout(function(){
+					$(".sucChk").text('');
+					$("#btn_submit_receive").show();
+					url="#homePage";					
+					$.mobile.navigate(url);	
+					/*setTimeout(function(){
 						location.reload();
-					},5000);				
+					},500);*/				
 				}else{		
 					$(".errorChk").text("Please check internet connection");													
 					$("#btn_submit_receive").show();
@@ -401,7 +429,9 @@ function onfail(r) {
 
 /*================usagepage3=================*/
 function usages(Usages){
-	if (localStorage.rep_type!='CM'){		
+	if (localStorage.rep_type!='CM'){	
+		/*$('#posmCodeList').empty();
+		$('#posmCodeList').append(localStorage.posmCode).trigger('create');	*/	
 		//alert(apipath+"getRoute?&townCodeName="+localStorage.select_town);
 		$.ajax({
 			type: 'POST',
@@ -417,7 +447,7 @@ function usages(Usages){
 					$('#routeList').append(localStorage.routeListSup).trigger('create');
 					
 				}else{
-					
+					$(".errorChk").text("");
 				}
 			}
 		})
@@ -521,12 +551,21 @@ function submit_data_usages(){
 	
 	var d = new Date();	
 	var get_time=d.getTime();
-		
-	posmCode=$("#posmCode").val();
+
+	if (localStorage.rep_type == 'CM_SUP'){
+		posmCode=$("#posmCodeAll").val();
+	}else{
+		posmCode=$("#posmCodeCm").val();
+	}
+	
+	
 	a_qty=$("#qty").val();
 	var usagesPhoto=$("#usagesPhoto").val();
 	
-	if (a_qty=='' || a_qty==0){
+	if (posmCode=='' || posmCode==0){
+		$(".errorChk").text("Required POSM Code");
+		$("#btn_submit_usages").show();
+	}else if(a_qty=='' || a_qty==0){
 		$(".errorChk").text("Required Qty");
 		$("#btn_submit_usages").show();
 	}else{
@@ -551,10 +590,18 @@ function submit_data_usages(){
 									
 					$(".sucChk").text('Successfully Submitted');
 					$(".errorChk").text("");
-					$("#btn_submit_usages").hide();	
-					setTimeout(function(){
+					$(".sucChk").text('');
+					$("#btn_submit_usages").show();
+					if (localStorage.rep_type == 'CM_SUP'){
+						url="#homePage";					
+						$.mobile.navigate(url);	
+					}else{
+					url="#first_page";					
+					$.mobile.navigate(url);
+					}
+					/*setTimeout(function(){
 						location.reload();
-					},5000);		
+					},500);*/		
 				}else{
 					$(".errorChk").text("Please check internet connection");															
 					$("#btn_submit_usages").show();
@@ -650,11 +697,12 @@ function execution(){
 /**------------------------Agency Submit Data ----------------------------********/
 function submit_data_agency(){
 	$("#btn_submit_agency").hide();
-	var posmcode=$("#posmCode").val();
+	var posmcode=$("#posmcode").val();
 	var aqty=$("#agencyQty").val();
 	var aset=$("#set").val();
 	var alight=$("#light").val();
 	var apaint=$("#paint").val();
+	var acity=$("#citycor").val();
 	var agencyphoto=$("#agency_photo").val();
 	
 	var outlet_route=$("#outlet_route_code").val();
@@ -672,21 +720,21 @@ function submit_data_agency(){
 		
 	}else{
 		
-		/*if (imagePathC!=""){							
+		if (imagePathC!=""){							
 			$(".errorChk").text("Syncing photo ..");
 			imageName3 = localStorage.mobileNo+"_"+get_time+".jpg";
 			uploadPhotoAgency(imagePathC, imageName3);
-		}*/
+		}
 		
 		//alert(apipath+"submitData_agency?&syncCode="+localStorage.sync_code+"&outletIdNameAgency="+outletIdNameAgency+"&outlet_route="+outlet_route+"&outlet_town_name="+outlet_town_name+"&posmcode="+posmcode+"&aqty="+aqty+"&aset="+aset+"&alight="+alight+"&apaint="+apaint+"&imageName3="+imageName3);
 		$.ajax({
 			type: 'POST',
-			url:apipath+"submitData_agency?&syncCode="+localStorage.sync_code+"&outletIdNameAgency="+outletIdNameAgency+"&outlet_route="+outlet_route+"&outlet_town_name="+outlet_town_name+"&posmcode="+posmcode+"&aqty="+aqty+"&aset="+aset+"&alight="+alight+"&apaint="+apaint+"&imageName3="+imageName3,
+			url:apipath+"submitData_agency?&syncCode="+localStorage.sync_code+"&outletIdNameAgency="+outletIdNameAgency+"&outlet_route="+outlet_route+"&outlet_town_name="+outlet_town_name+"&posmcode="+posmcode+"&aqty="+aqty+"&aset="+aset+"&alight="+alight+"&apaint="+apaint+"&acity="+acity+"&imageName3="+imageName3,
 																																																													
 			success: function(result) {			
 				if(result=='Success'){
 					
-					$("#posmCode").val("");	
+					$("#posmcode").val("");	
 					$("#agencyQty").val("");	
 					$("#set").val("");
 					$("#light").val("");
@@ -696,10 +744,13 @@ function submit_data_agency(){
 									
 					$(".sucChk").text('Successfully Submitted');
 					$(".errorChk").text("");
-					$("#btn_submit_agency").hide();
-					setTimeout(function(){
+					$(".sucChk").text('');
+					$("#btn_submit_agency").show();
+					url="#page6";					
+					$.mobile.navigate(url);
+					/*setTimeout(function(){
 						location.reload();
-					},5000);				
+					},500);*/				
 				}else{		
 					$(".errorChk").text("Please check internet connection");													
 					$("#btn_submit_agency").show();
@@ -712,7 +763,7 @@ function submit_data_agency(){
 }
 
 
-/*function getAgencyImage() { 
+function getAgencyImage() { 
 	navigator.camera.getPicture(onSuccess2, onFail2, { quality: 90,
 	targetWidth: 600,
 	destinationType: Camera.DestinationType.FILE_URI,correctOrientation: true });	
@@ -757,7 +808,7 @@ function win3(r) {
 function onfail3(r) {
 	$(".errorChk").text('File upload Failed. Please check internet connection.');
 	$("#btn_submit_agency").show();
-}*/
+}
 
 
 
