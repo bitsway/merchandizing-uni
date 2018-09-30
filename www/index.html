@@ -3,18 +3,23 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Merchandizing</title>
+    <title>POST-IT</title>
     <link rel="stylesheet" href="static/c.min.css" />
     <link rel="stylesheet" href="static/jquery.mobile-1.4.0.min.css" /> 
+   <link rel="stylesheet" href="static/list.css" /> 
    
     <script src="static/jquery-1.10.2.min.js">   </script>
     <script src="static/jquery.mobile-1.4.0.min.js">   </script>		
-    
+    <script src="static/list.min.js">   </script>	
 	<script src="static/my.js">   </script>
 	
 	<script>
 		$(document).ready(function(){
-				
+			$(".sucMsg").hide();	
+			$("#bufferImage").hide();
+			$(".sucMsgR").hide();
+			$("#bufferImageR").hide();
+			$("#recData").hide();	
 		});
 	
 		function syncPage(){
@@ -26,150 +31,191 @@
 	       
     <style>	
 	
-        .reqField{ color:#FF0000;}
-        .errorChk{ color:#FF0000; text-shadow:none;}
-		.errorMsg{ color:#FF0000; text-shadow:none;}
-    	.auto_break{
-			word-wrap:break-word!important;
-			white-space:normal!important;
-		}
+    .reqField{ 
+	color:#FF0000;
+	}
+	
+    .errorChk{ 
+	color:#FF0000; text-shadow:none;
+	}
+	
+	.errorMsg{ 
+	color:#FF0000; text-shadow:none;
+	}
+	
+    .auto_break{
+		word-wrap:break-word!important;
+		white-space:normal!important;
+	}
 		
-		.tbl_bro_color{border:1px solid #B8DCDC;}
+	.tbl_bro_color{
+		border:1px solid #B8DCDC;
+	}	
+	
+	#townSelct {
+		font-weight: bold;
+		padding: 20px;
+		text-align: center;
+		margin: 16px 0px;
+		color: #000;
+		font-size: 18px;
+		border: 1px solid #CE295E;
+		border-radius: 7px;
+		background-color: #fff;
+	}
 		
-		#townSelct {
-			font-weight: bold;
-			padding: 20px;
-			text-align: center;
-			margin: 16px 0px;
-			color: #000;
-			font-size: 18px;
-			border: 1px solid #CE295E;
-			border-radius: 7px;
-			background-color: #fff;
-}
+	.routselect{
+		font-weight: bold;
+		padding: 8px;
+		text-align: center;
+		margin: 2px 0px;
+		color: #000;
+		font-size: 14px;
+		border: 1px solid #CE295E;
+		border-radius: 5px;
+		background-color: #fff;
+	}
+	
+	.ui-btn {
+		overflow:inherit;
+		border-radius: 8px;		
+	}
 		
-		.routselect{
-		        font-weight: bold;
-				padding: 8px;
-				text-align: center;
-				margin: 2px 0px;
-				color: #000;
-				font-size: 14px;
-				border: 1px solid #CE295E;
-				border-radius: 5px;
-				background-color: #fff;
-			}
-		.ui-btn {
-			overflow:inherit;
-			border-radius: 8px;
-			
-		}	
-		.headerc {
-			color:#ffffff;
-			font-weight:1;
-		}
+	.headerc {
+		color:#ffffff;
+		font-weight:1;
+	}
+	
+	.ui-overlay-c, .ui-page-theme-c, .ui-page-theme-c .ui-panel-wrapper{
+		background-color:#fff;
+	}
 		
-		.ui-overlay-c, .ui-page-theme-c, .ui-page-theme-c .ui-panel-wrapper{
-			background-color:#fff;
-			}
-			
-			.ui-bar-c, .ui-page-theme-c .ui-bar-inherit, html .ui-bar-c .ui-bar-inherit, html .ui-body-c .ui-bar-inherit, html      body .ui-group-theme-c .ui-bar-inherit {
-				background-color:#CE295E;
-				border-color: transparent;}
-				#syncBasic{
-					background-color:#CE295E;
-					font-weight:1;
-					font-family:'Montserrat',sans-serif;
-					color:#FFF;}
-					
-		
-		.ui-body-c, .ui-page-theme-c .ui-body-inherit, html .ui-bar-c .ui-body-inherit, html .ui-body-c .ui-body-inherit, html          body .ui-group-theme-c .ui-body-inherit, html .ui-panel-page-container-c {
-			background-color:#BFBFBF;
-			color:#000;}
-		
-		.ui-page-theme-c .ui-btn:active, html .ui-bar-c .ui-btn:active, html .ui-body-c .ui-btn:active, html body .ui-group-theme-c .ui-btn:active, html head + body .ui-btn.ui-btn-c:active { 
+	.ui-bar-c, .ui-page-theme-c .ui-bar-inherit, html .ui-bar-c .ui-bar-inherit, html .ui-body-c .ui-bar-inherit, html      body .ui-group-theme-c .ui-bar-inherit {
 		background-color:#CE295E;
-		border-color:transparent;}
-		.ui-page-theme-c .ui-btn:hover, html .ui-bar-c .ui-btn:hover, html .ui-body-c .ui-btn:hover, html body .ui-group-theme-c .ui-btn:hover, html head + body .ui-btn.ui-btn-c:hover { background-color: #CE295E;
-		border-color:transparent;}
-		
-		
-		
-		.ui-page-theme-c .ui-btn, html .ui-bar-c .ui-btn, html .ui-body-c .ui-btn, html body .ui-group-theme-c .ui-btn, html head + body .ui-btn.ui-btn-c{background-color:#82888a;
+		border-color: transparent;
+	}
+	
+	#syncBasic{
+		background-color:#CE295E;
+		font-weight:1;
+		font-family:'Montserrat',sans-serif;
+		color:#FFF;
+	}
+						
+	.ui-body-c, .ui-page-theme-c .ui-body-inherit, html .ui-bar-c .ui-body-inherit, html .ui-body-c .ui-body-inherit, html body .ui-group-theme-c .ui-body-inherit, html .ui-panel-page-container-c {
+		background-color:#BFBFBF;
+		color:#000;
+	}
+	
+		.ui-page-theme-c .ui-btn:active, html .ui-bar-c .ui-btn:active, html .ui-body-c .ui-btn:active, html body      	        .ui-group-theme-c .ui-btn:active, html head + body .ui-btn.ui-btn-c:active { 
+		background-color:#CE295E;
 		border-color:transparent;
-		color:#FFF;}
+	}
+	
+	.ui-page-theme-c .ui-btn:hover, html .ui-bar-c .ui-btn:hover, html .ui-body-c .ui-btn:hover, html body .ui-group-theme-c .ui-btn:hover, html head + body .ui-btn.ui-btn-c:hover {
+		background-color: #FFFFFF;
+		border-color:transparent;
+	}
 		
-		.ui-input-text input, .ui-input-search input {
-			background-color:#fff;}
-			.ui-page-theme-c .ui-btn:hover, html .ui-bar-c .ui-btn:hover, html .ui-body-c .ui-btn:hover, html body .ui-group-theme-c .ui-btn:, html head + body .ui-btn.ui-btn-c:hover {background-color:#fff;
-			color:#000;}
-	#btn_receive{
-		font-weight:1;
+	.ui-page-theme-c .ui-btn, html .ui-bar-c .ui-btn, html .ui-body-c .ui-btn, html body .ui-group-theme-c .ui-btn, html head + body .ui-btn.ui-btn-c{
+		background-color:#82888a;
+		border-color:transparent;
+		color:#FFF;
+	}
 		
-		background-color:#CE295E;}
-		
-	#btn_usages{
-		font-weight:1;
-		background-color:#CE295E}	
+	.ui-input-text input, .ui-input-search input {
+		background-color:#fff;
+	}
+	
+	.ui-page-theme-c .ui-btn:hover, html .ui-bar-c .ui-btn:hover, html .ui-body-c .ui-btn:hover, html body .ui-group-theme-c     .ui-btn:, html head + body .ui-btn.ui-btn-c:hover {
+		background-color:#fff;
+		color:#000;
+	}
+	
+	.btn-color{
+		color:#000;
+	}
 			
-	#btn_stock{
-	    font-weight:1;
-		background-color:#CE295E;}
-				
-	#report{
-		font-weight:1;
-		background-color:#CE295E;}	
-		.btn-color{
-			color:#000;}
-			.ui-page-theme-c .ui-btn, html .ui-bar-c .ui-btn, html .ui-body-c .ui-btn, html body .ui-group-theme-c .ui-btn, html head + body .ui-btn.ui-btn-c {
-    background-color: #fff;
-    
-    color: #151414;
-    
-    border: 1px solid #D42E5C;
-}
-#entry{
+	.ui-page-theme-c .ui-btn, html .ui-bar-c .ui-btn, html .ui-body-c .ui-btn, html body .ui-group-theme-c .ui-btn, html 		     head + body .ui-btn.ui-btn-c {
+		background-color: #fff;
+		color: #151414;
+		border: 1px solid #D42E5C;
+	}
+	
+	#entry{
 	font-weight:1;
-	color:#fff;
-	background-color:#CE295E;}
-
-#summary_report{
 	color:#fff;
 	background-color:#CE295E;
 	}
-.sync-img img{background-color:#D42E5C;
-            border-radius: 50% !important;}
-. sync-header{
-	background-color:#000;}
-	.header{background-color:#595959;}
+
+	#summary_report{
+	color:#fff;
+	background-color:#CE295E;
+	}
+	
+	.sync-img img{
+	background-color:#D42E5C;
+    border-radius: 50% !important;
+	}
+	
 	.sync-header{
-		background-color:#595959;}
+	background-color:#000;
+	}
+	
+	.header{
+		background-color:#595959;
+	}
+	
+	.sync-header{
+		background-color:#595959;
+	}
 
 	.sync-box{
-		background-color:#595959;}
+		background-color:#595959;
+	}
 		
-		.text-color{
-			color:#fff;
-			font-weight:1;}
+	.text-color{
+		color:#fff;
+		font-weight:1;
+	}
 			
-			.ui-bar-c, .ui-page-theme-c .ui-bar-inherit, html .ui-bar-c .ui-bar-inherit, html .ui-body-c .ui-bar-inherit, html body .ui-group-theme-c .ui-bar-inherit{
-				background-color:#595959;
+	.ui-bar-c, .ui-page-theme-c .ui-bar-inherit, html .ui-bar-c .ui-bar-inherit, html .ui-body-c .ui-bar-inherit, html body 					    .ui-group-theme-c .ui-bar-inherit{
+		background-color:#595959;
+	}
+			
+	#btn_receive{
+		font-weight:1;
+		background-color:#CE295E;
+	}
+
+	#btn_usages{
+		font-weight:1;
+		background-color:#CE295E;
+	}	
+			
+	#btn_stock{
+	    font-weight:1;
+		background-color:#CE295E;
+	}
 				
-				
-				#btn_receive{
-					background-color:#CE295E;}
-				#btn_usages{
-					background-color:#CE295E;}
-				#btn_stock {
-					background-color:#CE295E;}
-				#report{
-					background-color:#CE295E;}
-				
+	#report{
+		font-weight:1;
+		background-color:#CE295E;
+	}	
+
     </style>	
 </head>
 
 <body >
 
+<!--<ul  data-role="listview" data-filter="true" >
+    	<li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+        <li>6</li>
+    </ul>-->
 
 <!------------------------------------------MAIN MENU----------------------------------------------------------->
 <div data-theme="c" data-role="page" id="homePage">
@@ -179,7 +225,11 @@
         <a data-role="button" onClick="exit();" ><img src="exit.png" /></a>
         <h3 class="headerc">Select Town</h3>
     </div>
-    <div data-role="content" >  
+    <div data-role="content" >
+    
+    <div id="suprepname" style="color:#DA335A; text-align:center;"></div>  
+    <div id="supreptype" style="color:#DA335A; text-align:center;"></div>
+    <div id="suprepid" style="color:#DA335A; text-align:center;"></div>    
     <div id="townList" style="height:450px; overflow:scroll;"></div>
     <a data-role="button" id="townSUP" onclick="townSelect()" href="#" data-transition="slide" style="background-color:#CE295E;" ><span class="text-color">Next</span></a>
         
@@ -201,6 +251,7 @@
         </ul>
         
     </div>
+    
 </div>
 
 
@@ -208,7 +259,7 @@
 <div data-theme="c" data-role="page" id="pagesync" >
     <div data-theme="c" data-role="header" data-position="fixed" class="sync-header" >
         <a data-role="button" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets" ><img src="menu.png" /></a>
-        <h3 class="headerc">Sync</h3>
+        <h3 class="headerc">POST-IT</h3>
     </div>
     <div data-role="content">
         <div class="errorMsg"></div>
@@ -232,12 +283,13 @@
         <br/>
         <br/>
         <br/>
-         <div data-role="footer" data-position="fixed" style="font-size:12px; color:#999; background-color:#FFF; font-weight:1;" align="center" >20180904</div>
+         <div data-role="footer" data-position="fixed" style="font-size:12px; color:#595959; background-color:#FFF; font-weight:1;" align="center" >20180930</div>
     </div>
 </div>
 
 <!-- ------------------------------------first_page--------------------------------- -->
 <div data-role="page" data-theme="c" id="first_page" >
+	
 	<div id="rec"></div>
     <div id="usg"></div>
     <!--<div data-theme="c" data-role="header" data-position="fixed" >
@@ -246,12 +298,15 @@
         <h3></h3>
     </div>-->
     
-    <div data-role="content" >    
-    <div id="townSelct"></div>             
+    <div data-role="content" >
+    <div id="cmprepname" style="color:#DA335A; text-align:center;"></div>  
+    <div id="cmpreptype" style="color:#DA335A; text-align:center;"></div>
+     <div id="cmprepid" style="color:#DA335A; text-align:center;"></div>    
+    <div id="townSelct" style="color:#D42E5C;"></div>             
     <a data-role="button" id="btn_receive" onclick="receive('Receive')" href="#" data-transition="slide" style="color:#fff">Receive</a>
-    <a data-role="button" id="btn_usages" onclick="usages('Usages')" href="#" data-transition="slide" style="color:#fff">Usages </a> 
-    <a data-role="button" id="btn_stock" onclick="('')" href="#" data-transition="slide" style="color:#fff"  >Stock Report </a>  
-    <a data-role="button" id="report" onclick="()" href="#" data-transition="slide" style="color:#fff">Receive and Usage Report </a>  
+    <a data-role="button" id="btn_usages" onclick="usages('Usages')" href="#" data-transition="slide" style="color:#fff">Usage </a> 
+    <a data-role="button" id="btn_stock" onclick="stock('stock')" href="" data-transition="slide" style="color:#fff"  >Stock Report </a> 
+     <a data-role="button" id="report" onclick="repo('repo')" href="#" data-transition="slide" style="color:#fff"  >Receive And Usage Report </a>   
      <div class="errorChk" style="color:#cc0000;"></div>
         <br/><br/>
   	<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
@@ -277,36 +332,92 @@
     <div data-theme="c" data-role="header" data-position="fixed" >
         <a data-role="button" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets " ><img src="menu.png" /></a>
         <a data-role="button" onclick="backClick();" data-rel="back" class="ui-btn-right" data-transition="slide"><img src="back.png" /></a>
-        <h3></h3>
+        <h3 style="color:#fff;">POST-IT</h3>
+        
+        </div>
+    
+    <div data-role="content" >    
+    <div id="townSelctRec" class="routselect"></div>
+     <div class="routselect" style="font-size:18px;">Receive</div>             
+   
+        <table width="100%" class="ui-body-d ui-shadow table-stripe ui-responsive" id="beneficiaryCount" style="cell-spacing:0px; background-color:#BFBFBF;"  data-role="table" data-theme="d"  data-mode="display:none">
+          <tr>
+            <td><label style="color:#D42E5C;  font-weight:1;">POSM Code</label><div id="posm_code"></div></td>
+            <td style="vertical-align:bottom;">
+                <a data-role="button" id="" onClick="alloDetails();" class="ui-btn" style="background-color:#D42E5C; color:#FFF;  font-weight:1;">Next</a>
+            </td>
+          </tr>
+          </table>  
+          <br />
+        <div id="bufferImageR" style="text-align:center;"><img src="running.gif" /></div>
+        <div id="allHideR">
+        <div id="recDataR"> 
+            <table table width="100%" class="ui-body-d ui-shadow table-stripe ui-responsive" id="beneficiaryCount" style="cell-spacing:0px; color:#D42E5C; background-color:#BFBFBF;"  data-role="table" data-theme="d"  data-mode="display:none">
+            
+            	 <tr>
+                    <td><div id="brand"></div></td>
+                </tr>
+                <tr>
+                    <td><div id="posm_type"></div> </td>
+                </tr>
+               
+                <tr>
+               		 <td><div id="allocation"> </div></td>
+                </tr>
+            </table>
+        </div>
+        <table table width="100%" class="ui-body-d ui-shadow table-stripe ui-responsive" id="beneficiaryCount" style="cell-spacing:0px; "  data-role="table" data-theme="d"  data-mode="display:none">
+            <tr style="background-color:#AAAAAA;">
+                <td style="color:#FFF; text-align:center; padding:0 20 0 20px; font-weight:1";>Received Qty</td>
+                 <td style="color:#fff"><input type="number" id="received" name="received" /> <input type="hidden" id="alcId" name="alcId" /></td>
+              </tr>
+              <tr>
+                <td colspan="2">
+                    <a data-role="button" id="btn_take_pic" onClick="getUsagesImage();" class="ui-btn" style="background-color:#D42E5C; color:#FFF;  font-weight:1;">Take Picture</a>       
+                    <img src="" width="128" height="128" alt="Image1" id="myImageA" />        
+                    <input name="usagesPhoto" id="usagesPhoto" value=""  type="hidden">
+                </td>
+              </tr>     
+        </table>  
+        </div>   
+        <a data-role="button" id="btn_submit_receive" onClick="submit_data_receive();" class="ui-btn" style="background-color:#D42E5C; color:#FFF;  font-weight:1;">Submit</a>
+         <div class="sucMsgR" style="color:#FFF; text-align:center; background-color:#DA335A; padding:30px 0px 30px 0px; border-radius:10px;"></div>
+         <div class="errorChk" style="color:#cc0000;"></div>
+ 
+    
+  	</ul>
+            <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
     </div>
+</div>
+    <!--</div>
     
     <div data-role="content" >    
     <div id="townSelctRec" class="routselect">
 	
 	
 	</div>   
-          <div class="routselect" style="font-size:18px;">Receive</div>    
-    <ul data-role="listview" data-inset="true">
+          <div class="routselect" style="font-size:18px;">Receive</div>-->    
+    <!--<ul data-role="listview" data-inset="true">
     	<li class="ui-field-contain" >
         	<table width="100%" class="ui-body-d ui-shadow table-stripe ui-responsive" id="beneficiaryCount" style="cell-spacing:0px;"  data-role="table" data-theme="d"  data-mode="display:none">
               <tr>
-                <td style="color:#fff;  font-weight:1;">POSM Code</td>
+                <td style="color:#DA335A;  font-weight:1;">POSM Code</td>
                 <td><div id="posm_code"></div></td>
               </tr>
               <tr>
-                <td style="color:#fff;  font-weight:1;">POSM Type</td>
+                <td style="color:#DA335A; font-weight:1;">POSM Type</td>
                 <td><input type="text" id="posm_type" name="posm_type" readonly="readonly" /></td>
               </tr>
               <tr>
-                <td style="color:#fff;  font-weight:1;">Brand</td>
+                <td style="color:#DA335A;  font-weight:1;">Brand</td>
                 <td><input type="text" id="brand" name="brand" readonly="readonly" /></td>
               </tr>
               <tr>
-                <td style="color:#fff";  font-weight:1;>Allocation</td>
+                <td style="color:#DA335A";  font-weight:1;>Allocation</td>
                 <td><input type="number" id="allocation" name="allocation" readonly="readonly" /></td>
               </tr>
                <tr>
-                <td style="color:#fff;  font-weight:1;">Received</td>
+                <td style="color:#0b2571;  font-weight:1;">Received</td>
                 <td style="color:#fff"><input type="number" id="received" name="received" /> <input type="hidden" id="alcId" name="alcId" /></td>
               </tr>
               <tr>
@@ -328,7 +439,7 @@
   
             <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
     </div>
-</div>
+</div>-->
 
 
 <!--===============================end Sup======================================-->
@@ -340,17 +451,26 @@
         <a data-role="button" onclick="backClick();" data-rel="back" class="ui-btn-right" data-transition="slide"><img src="back.png" /></a>
         <h3 class="headerc" style="font-weight:1;">Select Route</h3>
     </div>
-    
+   
     <div data-role="content" >  
-     <div id="usagesBtnShow" class="routselect"></div>   
-     <br />
-     <div id="routeList" style="height:450px; overflow:scroll;"></div> 
-     <a data-role="button" id="" onClick="route();" class="ui-btn" style="background-color:#D42E5C; color:#FFF;  font-weight:1;" >Next</a>
+     <div id="usagesBtnShow" style="color:#D42E5C;" ></div>
+    
+     
+<!--     <input class="search" type="text" id="myInput" placeholder="Search for names..">-->
+     
+<!--     
+     <ul data-role="listview" id="routeList" class="list" data-filter="true" data-inset="true" style="height:450px; overflow:scroll;"> 
+       
+     </ul> -->
+     
+     <div id="routeList"></div>
+     <!--<a data-role="button" id="" onClick="route();" class="ui-btn" style="background-color:#D42E5C; color:#FFF;  font-weight:1;" >Next</a>
+     
      <div class="sucChk" style="color:#004d00;"></div>
-     <div class="errorChk" style="color:#cc0000;"></div>
+     <div class="errorChk" style="color:#cc0000;"></div>-->
      
         <br/><br/>
-  
+  	
             <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
     </div>
 </div>
@@ -364,12 +484,18 @@
     </div>
     
     <div data-role="content" >  
-     <div id="routeSelect" class="routselect"></div>
-     <br />
-     <div id="outletList" style="height:450px; overflow:scroll;"></div> 
-     <a data-role="button" id="btn_submit" onClick="outlet();" class="ui-btn" style="background-color:#D42E5C; color:#FFF;  font-weight:1;" >Next</a>
+     <div id="routeSelect" style="color:#D42E5C;"></div>
+     
+    <!-- <ul  data-role="listview" data-filter="true" >
+     <li id="outletList" style="height:450px; overflow:scroll;"></li>-->
+     <!--<div id="outletList" style="height:450px; overflow:scroll;"></div>-->
+      <!--<ul data-role="listview" id="outletList" class="list" data-filter="true" data-inset="true" style="height:450px; overflow:scroll;"> 
+     </ul>-->
+     <div id="outletList"></div>
+     
+     <!--<a data-role="button" id="btn_submit" onClick="outlet();" class="ui-btn" style="background-color:#D42E5C; color:#FFF;  font-weight:1;" >Next</a>
      <div class="sucChk" style="color:#004d00;"></div>
-     <div class="errorChk" style="color:#cc0000;"></div>
+     <div class="errorChk" style="color:#cc0000;"></div>-->
      
         <br/><br/>
   
@@ -381,22 +507,77 @@
     <div data-theme="c" data-role="header" data-position="fixed" >
         <a data-role="button" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets " ><img src="menu.png" /></a>
         <a data-role="button" onclick="backClick();" data-rel="back" class="ui-btn-right" data-transition="slide"><img src="back.png" /></a>
-        <h3></h3>
+        <h3 style="color:#fff;">POST-IT</h3>
     </div>
-    
-    <div data-role="content" >    
-    <div id="routeSelectOutletP" class="routselect"></div>
-     <div id="outletSelect" class="routselect"></div>             
-    <ul data-role="listview" data-inset="true">
-    	<li class="ui-field-contain" >
-        	<table width="100%" class="ui-body-d ui-shadow table-stripe ui-responsive" id="beneficiaryCount" style="cell-spacing:0px;"  data-role="table" data-theme="d"  data-mode="display:none">
-              <tr>
-                <td>POSM Code</td>
-                <td><div id="posmCodeList"></div></td>
+   
+    <div data-role="content">
+    <div id="routeSelectA" style="color:#D42E5C;"></div>
+    <div id="outletSelect" style="color:#D42E5C;"></div>             
+   
+        <table width="100%" class="ui-body-d ui-shadow table-stripe ui-responsive" id="beneficiaryCount" style="cell-spacing:0px;  background-color:#BFBFBF;"  data-role="table" data-theme="d"  data-mode="display:none">
+          <tr>
+            <td><label style="color:#D42E5C;  font-weight:1;">POSM Code</label><div id="posmCodeList"></div></td>
+            <td style="vertical-align:bottom;">
+                <a data-role="button" id="" onClick="alloDetailsU();" class="ui-btn" style="background-color:#D42E5C; color:#FFF;  font-weight:1;">Next</a>
+            </td>
+          </tr>
+          </table>  
+          <br />
+        <div id="bufferImage" style="text-align:center;"><img src="running.gif" /></div>
+        <div id="allHide">
+        <div id="recData"> 
+            <table table width="100%" class="ui-body-d ui-shadow table-stripe ui-responsive" id="beneficiaryCount" style="cell-spacing:0px; color:#D42E5C; background-color:#BFBFBF;"  data-role="table" data-theme="d"  data-mode="display:none">
+            	
+                <tr>
+                    <td><div id="ubrand"></div></td>
+                </tr>
+                <tr>
+                    <td><div id="uposm_type"></div> </td>
+                </tr>
+                
+                <tr>
+               		 <td><div id="uallocation"> </div></td>
+                </tr>
+            </table>
+        </div>
+        <table table width="100%" class="ui-body-d ui-shadow table-stripe ui-responsive" id="beneficiaryCount" style="cell-spacing:0px;"  data-role="table" data-theme="d"  data-mode="display:none">
+            <tr style="background-color:#AAAAAA;">
+                <td style="color:#FFF; text-align:center; padding:20px; font-weight:1">Usage Qty</td>
+                <td><input type="number" id="qty" name="qty" style="background-color:#FFF;" /><input type="hidden" id="ualcId" name="alcId" /></td>
               </tr>
               <tr>
-                <td>Qty</td>
-                <td><input type="number" id="qty" name="qty" /></td>
+                <td colspan="2">
+                    <a data-role="button" id="btn_take_pic" onClick="getUsagesImage();" class="ui-btn" style="background-color:#D42E5C; color:#FFF;  font-weight:1;">Take Picture</a>       
+                    <img src="" width="128" height="128" alt="Image1" id="myImageB" />        
+                    <input name="usagesPhoto" id="usagesPhoto" value=""  type="hidden">
+                </td>
+              </tr>     
+        </table>  
+        </div>   
+        <a data-role="button" id="btn_submit_usages" onClick="submit_data_usages();" class="ui-btn" style="background-color:#D42E5C; color:#FFF;  font-weight:1;">Submit</a>
+         <div class="sucMsg" style="color:#FFF; text-align:center; background-color:#DA335A; padding:30px 0px 30px 0px; border-radius:10px;"></div>
+         <div class="errorChk" style="color:#cc0000;"></div>
+ 
+    
+  	</ul>
+            <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+    </div>
+</div>
+              <!--<tr>
+                <td style="color:#DA335A;  font-weight:1;">POSM Type</td>
+                <td><input type="text" id="uposm_type" name="uposm_type" readonly="readonly" /></td>
+              </tr>
+              <tr>
+                <td style="color:#DA335A;  font-weight:1;">Brand</td>
+                <td><input type="text" id="ubrand" name="ubrand" readonly="readonly" /></td>
+              </tr>
+              <tr>
+                <td style="color:#DA335A";  font-weight:1;>Stock</td>
+                <td><input type="number" id="uallocation" name="uallocation" readonly="readonly" /></td>
+              </tr>
+              <tr>
+                <td style="color:#0b2571";  font-weight:1;>Qty</td>
+                <td><input type="number" id="qty" name="qty" /><input type="hidden" id="ualcId" name="alcId" /></td>
               </tr>
               <tr>
               	<td colspan="2">
@@ -411,25 +592,25 @@
      
      <a data-role="button" id="btn_submit_usages" onClick="submit_data_usages();" class="ui-btn" style="background-color:#D42E5C; color:#FFF;  font-weight:1;">Submit</a>
      <div class="sucChk" style="color:#004d00;"></div>
-     <div class="errorChk" style="color:#cc0000;"></div>
+     <div class="errorChk" style="color:#cc0000;"></div>-->
      
-        <br/><br/>
-  
-            <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-    </div>
-</div>
 <!-----------------------------------------Agency page 6-------------------------------------------->
 <div data-role="page" data-theme="c" id="page6">
     <div data-theme="c" data-role="header" data-position="fixed" class="header" >
          <a data-role="button" href="#leftpanel3" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets"   ><img src="menu.png" /></a>
-        <a data-role="button" onclick="backClick();" data-rel="back" class="ui-btn-right" data-transition="slide"><img src="back.png" /></a>
+        <a data-role="button" onClick="exit();" ><img src="exit.png" /></a>
          <h3 class="headerc">Agency</h3>
     </div>
     
-    <div data-role="content" >    
-    <div id="agency"></div>             
+    <div data-role="content" >
+    <div id="anprepname" style="color:#DA335A; text-align:center;"></div>  
+    <div id="anpreptype" style="color:#DA335A; text-align:center;"></div>
+     <div id="anprepid" style="color:#DA335A; text-align:center;"></div>    
+    <div id="agency"></div> 
     <a data-role="button" id="entry" onclick="searchoutlet('entry')" href="#" data-transition="slide">Entry</a>
-    <a data-role="button" id="summary_report" onclick="summary_report('summary_report')" href="#" data-transition="slide" style="font-weight:1">Summary Report </a>  
+    <a data-role="button" id="summary_report" onclick="summary_report('summary_report')" href="#" data-transition="slide" style="font-weight:1">Summary Report </a>            
+    <!--<a data-role="button" id="entry" onclick="searchoutlet('entry')" href="#" data-transition="slide">Entry</a>
+    <a data-role="button" id="summary_report" onclick="summary_report('summary_report')" href="#" data-transition="slide" style="font-weight:1">Summary Report </a>-->  
      <div class="errorChk" style="color:#cc0000;"></div>
         <br/><br/>
   	<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
@@ -462,7 +643,7 @@
      <div class="errorChk" style="color:#cc0000;"></div>
      
         <br/>
- 
+ 	
     </div>
     <div data-role="content">
     <ul data-role="listview" data-inset="true">
@@ -488,17 +669,20 @@
     <div data-theme="c" data-role="header" data-position="fixed" >
         <a data-role="button" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets " ><img src="menu.png" /></a>
         <a data-role="button" onclick="backClick();" data-rel="back" class="ui-btn-right" data-transition="slide"><img src="back.png" /></a>
-       <h3 class="headerc">Bashundhara</h3>
+        <h3 style="color:#fff;">POST-IT</h3>
     </div>
     
-    <div data-role="content" >    
+    <div data-role="content" > 
+    <div id="TownNameAgency" style="color:#CE295E"></div> 
+    <div id="RouteNameAgency" style="color:#CE295E"></div>  
+    <div id="OutletNameAgency" style="color:#CE295E"></div> 
     <div class="routselect" style="font-size:18px; text-align:center; margin:2px;">Execution</div>             
     <ul data-role="listview" data-inset="true">
     	<li class="ui-field-contain" >
         	<table width="100%" class="ui-body-d ui-shadow table-stripe ui-responsive" id="beneficiaryCount" style="cell-spacing:0px;"  data-role="table" data-theme="d"  data-mode="display:none" style="color:#fff">
               <tr>
                 <td > <span class="btn-color">POSM Code</span></td>
-                 <td><input type="number" id="posmcode" name="posmcode" /></td>
+                 <td><input type="text" id="posmcode" name="posmcode" /></td>
               </tr>
               <tr>
                 <td > <span class="btn-color">Qty</span></td>
@@ -519,7 +703,7 @@
                 <td><input type="number" id="paint" name="paint" /></td>
               </tr>
               <tr>
-                <td style="color:fff;"><span class="btn-color">City Cor</span></td>
+                <td style="color:fff;"><span class="btn-color">City Corp</span></td>
                 <td><input type="text" id="citycor" name="citycor" /></td>
               </tr>
               	<td colspan="2">
@@ -539,6 +723,112 @@
         <br/><br/>
   
             <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+    </div>
+</div>
+<!-------------------------------------------Report------------------------------>
+<div data-role="page" data-theme="c" id="page9" style="overflow:scroll;">
+    <div data-theme="c" data-role="header" data-position="fixed" >
+        <a data-role="button" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets " ><img src="menu.png" /></a>
+        <a data-role="button" onclick="backClick();" data-rel="back" class="ui-btn-right" data-transition="slide"><img src="back.png" /></a>
+       <h3 class="headerc">Report</h3>
+    </div>
+    
+    <div data-role="content" >               
+    <!--<ul data-role="listview" data-inset="true">
+    	<li class="ui-field-contain" >
+        	<table width="100%" class="ui-body-d ui-shadow table-stripe ui-responsive" id="beneficiaryCount" style="cell-spacing:0px;"  data-role="table" data-theme="d"  data-mode="display:none" style="color:#fff">
+             <!-- <tr>
+                <td > <span class="btn-color">ID</span></td>
+                 <td><input type="text" id="" name="" /></td>
+              </tr>-->
+              <!--<tr>
+                <td > <span class="btn-color">From</span></td>
+                <td><input type="date" id="fromdate" name="fromdate" /></td>
+              </tr>
+              <tr>
+              <tr>
+                <td > <span class="btn-color">SFT</span></td>
+                 <td><input type="date" id="todate" name="todate" /></td>
+              </tr> 
+            </table>     
+        </li>
+    </ul>-->
+     
+     <a data-role="button" id="recReport" onClick="recReport('recReport');" class="ui-btn" style="background-color:#CE295E" > <span class="text-color">Receive Report</span></a>
+     <a data-role="button" id="recUsage" onClick="recUsage('recUsage');" class="ui-btn" style="background-color:#CE295E" > <span class="text-color">Usage Report</span></a>
+     
+     <div class="sucChk" style="color:#004d00;"></div>
+     <div class="errorChk" style="color:#cc0000;"></div>
+     
+        <br/><br/>
+  
+            <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+    </div>
+</div>
+<!--------------------------------Report Viev page10----------------------->
+<div data-role="page" data-theme="c" id="page10" style="overflow:scroll;">
+    <div data-theme="c" data-role="header" data-position="fixed" >
+        <a data-role="button" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets " ><img src="menu.png" /></a>
+        <a data-role="button" onclick="backClick();" data-rel="back" class="ui-btn-right" data-transition="slide"><img src="back.png" /></a>
+       <h3 class="headerc">Receive Report</h3>
+    </div>
+    
+    <div data-role="content" > 
+    <div id="repIDR" style="color:#DA335A;"></div>
+    <div id="townNameR" style="color:#DA335A;"></div>  
+                   
+    <ul data-role="listview" data-inset="true">
+    	<li class="ui-field-contain" >
+  
+      <!--<table id="stockRept" style="width:100%">
+             
+     </table>-->
+     <div id="receiveReportR"></div>
+     <div class="errorChk" style="color:#cc0000;"></div>
+    </div>
+</div>
+<!--------------------------------------------------------------->
+<div data-role="page" data-theme="c" id="page12" style="overflow:scroll;">
+    <div data-theme="c" data-role="header" data-position="fixed" >
+        <a data-role="button" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets " ><img src="menu.png" /></a>
+        <a data-role="button" onclick="backClick();" data-rel="back" class="ui-btn-right" data-transition="slide"><img src="back.png" /></a>
+       <h3 class="headerc">Usage Report</h3>
+    </div>
+    
+    <div data-role="content" > 
+    <div id="repIDU" style="color:#DA335A;"></div>
+    <div id="townNameU" style="color:#DA335A;"></div>  
+                   
+    <ul data-role="listview" data-inset="true">
+    	<li class="ui-field-contain" >
+  
+      <!--<table id="stockRept" style="width:100%">
+             
+     </table>-->
+     <div id="usageReportR"></div>
+     <div class="errorChk" style="color:#cc0000;"></div>
+    </div>
+</div>
+<!--------------------------stock report-------------------------->
+<div data-role="page" data-theme="c" id="page11" style="overflow:scroll;">
+    <div data-theme="c" data-role="header" data-position="fixed" >
+        <a data-role="button" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets " ><img src="menu.png" /></a>
+        <a data-role="button" onclick="backClick();" data-rel="back" class="ui-btn-right" data-transition="slide"><img src="back.png" /></a>
+       <h3 class="headerc">Stock</h3>
+    </div>
+    
+    <div data-role="content" > 
+    <div id="repID" style="color:#DA335A;"></div>
+    <div id="townName" style="color:#DA335A;"></div>  
+                   
+    <ul data-role="listview" data-inset="true">
+    	<li class="ui-field-contain" >
+  
+      <!--<table id="stockRept" style="width:100%">
+             
+     </table>-->
+     <div id="stockRept"></div>
+     <div class="errorChk" style="color:#cc0000;"></div>
     </div>
 </div>
   <script type="text/javascript" src="phonegap.js"></script>
