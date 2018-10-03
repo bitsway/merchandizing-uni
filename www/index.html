@@ -232,7 +232,7 @@
     <div id="suprepname" style="color:#DA335A; text-align:center;"></div>  
     <div id="supreptype" style="color:#DA335A; text-align:center;"></div>
     <div id="suprepid" style="color:#DA335A; text-align:center;"></div>    
-    <div id="townList" style="height:450px; overflow:scroll;"></div>
+    <div id="townList" style="height:420px; overflow:scroll;"></div>
     <a data-role="button" id="townSUP" onclick="townSelect()" href="#" data-transition="slide" style="background-color:#CE295E;" ><span class="text-color">Next</span></a>
         
     <div class="errorChk" style="color:#cc0000;" ></div>       
@@ -279,14 +279,17 @@
         </ul>
 		
         <a data-role="button" href="#" id="syncBasic" onclick="syncBasic()"  data-theme="c" data-transition="slide" >Sync</a>
-		<div id="#syncData"></div>
+        
+        <br/>
+        <br/>
+        <br/>
+		<div id="bufferImageSync" style="text-align:center;"><img src="running.gif" /></div>
+        <div id="#syncData"></div>
         <br/>
         <br/>
         <br/>
         <br/>
-        <br/>
-        <br/>
-         <div data-role="footer" data-position="fixed" style="font-size:12px; color:#595959; background-color:#FFF; font-weight:1;" align="center" >20180930</div>
+         <div data-role="footer" data-position="fixed" style="font-size:12px; color:#595959; background-color:#FFF; font-weight:1;" align="center" >20181003</div>
     </div>
 </div>
 
@@ -338,7 +341,7 @@
         <h3 style="color:#fff;">POST-IT</h3>
         
         </div>
-    <br/><br/>
+    <br/>
     <div data-role="content" >    
     <div id="townSelctRec" class="routselect"></div>
      <div class="routselect" style="font-size:18px;">Receive</div>             
@@ -366,6 +369,9 @@
                
                 <tr>
                		 <td><div id="allocation"> </div></td>
+                </tr>
+                <tr>
+               		 <td><div id="due"> </div></td>
                 </tr>
             </table>
         </div>
@@ -454,8 +460,9 @@
         <a data-role="button" onclick="backClick();" data-rel="back" class="ui-btn-right" data-transition="slide"><img src="back.png" /></a>
         <h3 class="headerc" style="font-weight:1;">Select Route</h3>
     </div>
-   	<br/><br/>
-    <div data-role="content" >  
+   	<br/>
+    <div data-role="content" > 
+    <div id="town" style="color:#D42E5C;"></div>  
      <div id="usagesBtnShow" style="color:#D42E5C;" ></div>
     
      
@@ -485,8 +492,9 @@
         <a data-role="button" onclick="backClick();" data-rel="back" class="ui-btn-right" data-transition="slide"><img src="back.png" /></a>
         <h3 class="headerc">Select Outlet</h3>
     </div>
-    <br/><br/>
-    <div data-role="content" >  
+    <br/>
+    <div data-role="content" > 
+    <div id="town" style="color:#D42E5C;"></div> 
      <div id="routeSelect" style="color:#D42E5C;"></div>
      
     <!-- <ul  data-role="listview" data-filter="true" >
@@ -512,8 +520,9 @@
         <a data-role="button" onclick="backClick();" data-rel="back" class="ui-btn-right" data-transition="slide"><img src="back.png" /></a>
         <h3 style="color:#fff;">POST-IT</h3>
     </div>
-   <br/><br/>
+   <br/>
     <div data-role="content">
+    <div id="town" style="color:#D42E5C;"></div>
     <div id="routeSelectA" style="color:#D42E5C;"></div>
     <div id="outletSelect" style="color:#D42E5C;"></div>             
    
@@ -540,6 +549,9 @@
                 
                 <tr>
                		 <td><div id="uallocation"> </div></td>
+                </tr>
+                <tr>
+               		 <td><div id="balance"> </div></td>
                 </tr>
             </table>
         </div>
@@ -639,7 +651,6 @@
         <a data-role="button" onclick="backClick();" data-rel="back" class="ui-btn-right" data-transition="slide"><img src="back.png" /></a>
         <h3 class="headerc">Select Outlet</h3>
     </div>
-    <br/><br/>
     <div data-role="content" >  
      <div id="outletListAgency"></div> 
      <div class="sucChk" style="color:#004d00;"></div>
@@ -674,7 +685,6 @@
         <a data-role="button" onclick="backClick();" data-rel="back" class="ui-btn-right" data-transition="slide"><img src="back.png" /></a>
         <h3 style="color:#fff;">POST-IT</h3>
     </div>
-    <br/><br/>
     <div data-role="content" > 
     <div id="TownNameAgency" style="color:#CE295E"></div> 
     <div id="RouteNameAgency" style="color:#CE295E"></div>  
@@ -779,14 +789,41 @@
     <div data-role="content" > 
     <div id="repIDR" style="color:#DA335A;"></div>
     <div id="townNameR" style="color:#DA335A;"></div>  
-                   
+                  
     <ul data-role="listview" data-inset="true">
     	<li class="ui-field-contain" >
-  
+        </li>
+    </ul>
+  	<div id="bufferImageRecR" style="text-align:center;"><img src="running.gif" /></div>
       <!--<table id="stockRept" style="width:100%">
              
      </table>-->
      <div id="receiveReportR"></div>
+     <div class="errorChk" style="color:#cc0000;"></div>
+    </div>
+</div>
+
+<!--------------------------stock report-------------------------->
+<div data-role="page" data-theme="c" id="page11" style="overflow:scroll;">
+    <div data-theme="c" data-role="header" data-position="fixed" >
+        <a data-role="button" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets " ><img src="menu.png" /></a>
+        <a data-role="button" onclick="backClick();" data-rel="back" class="ui-btn-right" data-transition="slide"><img src="back.png" /></a>
+       <h3 class="headerc">Stock</h3>
+    </div>
+    <br/>
+    <div data-role="content" > 
+    <div id="repID" style="color:#DA335A;"></div>
+    <div id="townName" style="color:#DA335A;"></div>  
+                   
+    <ul data-role="listview" data-inset="true">
+    	<li class="ui-field-contain">
+        </li>
+    </ul>
+  	<div id="bufferImageStockR" style="text-align:center;"><img src="running.gif" /></div>
+      <!--<table id="stockRept" style="width:100%">
+             
+     </table>-->
+     <div id="stockRept"></div>
      <div class="errorChk" style="color:#cc0000;"></div>
     </div>
 </div>
@@ -797,40 +834,21 @@
         <a data-role="button" onclick="backClick();" data-rel="back" class="ui-btn-right" data-transition="slide"><img src="back.png" /></a>
        <h3 class="headerc">Usage Report</h3>
     </div>
-    <br/><br/>
+    <br/>
     <div data-role="content" > 
     <div id="repIDU" style="color:#DA335A;"></div>
     <div id="townNameU" style="color:#DA335A;"></div>  
                    
     <ul data-role="listview" data-inset="true">
     	<li class="ui-field-contain" >
+        </li>
+    </ul>    
+     <div id="bufferImageUsaR" style="text-align:center;"><img src="running.gif" /></div>
   
       <!--<table id="stockRept" style="width:100%">
              
      </table>-->
      <div id="usageReportR"></div>
-     <div class="errorChk" style="color:#cc0000;"></div>
-    </div>
-</div>
-<!--------------------------stock report-------------------------->
-<div data-role="page" data-theme="c" id="page11" style="overflow:scroll;">
-    <div data-theme="c" data-role="header" data-position="fixed" >
-        <a data-role="button" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets " ><img src="menu.png" /></a>
-        <a data-role="button" onclick="backClick();" data-rel="back" class="ui-btn-right" data-transition="slide"><img src="back.png" /></a>
-       <h3 class="headerc">Stock</h3>
-    </div>
-    <br/><br/>
-    <div data-role="content" > 
-    <div id="repID" style="color:#DA335A;"></div>
-    <div id="townName" style="color:#DA335A;"></div>  
-                   
-    <ul data-role="listview" data-inset="true">
-    	<li class="ui-field-contain" >
-  
-      <!--<table id="stockRept" style="width:100%">
-             
-     </table>-->
-     <div id="stockRept"></div>
      <div class="errorChk" style="color:#cc0000;"></div>
     </div>
 </div>

@@ -16,7 +16,6 @@ var outlet_code='';
 var outlet_name='';
 
 
-
 //---Online
 var apipath="http://w02.yeapps.com/merchandizing/syncmobile/";
 //--- local
@@ -25,6 +24,7 @@ var apipath="http://w02.yeapps.com/merchandizing/syncmobile/";
 url ="";
 
 $(document).ready(function(){
+	$('#bufferImageSync').hide();
 	if (localStorage.synced!='YES'){
 		url = "#pagesync";						
 	}else{
@@ -46,9 +46,7 @@ $(document).ready(function(){
 			
 			$('#routeList').empty();
 			$('#routeList').append(localStorage.route).trigger('create');
-			
-			
-			
+									
 			$('#outletList').empty();
 			$('#outletList').append(localStorage.outletList).trigger('create');
 			
@@ -75,11 +73,16 @@ $(document).ready(function(){
 			$('#townList').empty();
 			$('#townList').append(localStorage.townStr).trigger('create');
 			
-			$('#posm_code').empty();
+			/*$('#posm_code').empty();
 			$('#posm_code').append(localStorage.posmCode).trigger('create');
 			
 			$('#posmCodeList').empty();
-			$('#posmCodeList').append(localStorage.posmCodeAll).trigger('create');
+			$('#posmCodeList').append(localStorage.posmCodeSup).trigger('create');*/
+			$("#posm_code").empty();
+			$("#posm_code").append(localStorage.posmCodeSup).trigger('create');
+			
+			$('#posmCodeList').empty();
+			$('#posmCodeList').append(localStorage.posmCodeSup).trigger('create');
 			
 			$('#routeList').empty();
 			$('#routeList').append(localStorage.routeListSup).trigger('create');
@@ -121,8 +124,10 @@ function syncBasic(){
 	var password=$("#password").val() ;
 	
 	if (mobile=="" || password==""){
+		$('#bufferImageSync').hide();
 		$(".errorMsg").html("Required mobile no and password");	
-	}else{	
+	}else{
+		$('#bufferImageSync').show();	
 		$('#syncBasic').hide();			 
 		$(".errorMsg").html("Sync in progress. Please wait...");
 		if(localStorage.sync_code==undefined || localStorage.sync_code==""){
@@ -130,13 +135,15 @@ function syncBasic(){
 		}
 	
 		//alert(apipath+'user_check?mobile='+mobile+'&password='+encodeURIComponent(password)+'&sync_code='+localStorage.sync_code);
+		
 		$.ajax({
 		  url:apipath+'user_check?mobile='+mobile+'&password='+encodeURIComponent(password)+'&sync_code='+localStorage.sync_code,
-		  success: function(result) {
+		  success: function(result) { 
 			syncResult=result
 			var syncResultArray = syncResult.split('rdrd');
 				localStorage.synced=syncResultArray[0];
-				if (localStorage.synced=='YES'){	
+				if (localStorage.synced=='YES'){
+					$('#bufferImageSync').hide();	
 					localStorage.sync_code=syncResultArray[1];										
 					localStorage.repID=syncResultArray[2];					
 					localStorage.repName=syncResultArray[3];
@@ -146,7 +153,7 @@ function syncBasic(){
 					localStorage.routeList=syncResultArray[7];
 					localStorage.posmCode=syncResultArray[8];
 					localStorage.outlet_agency=syncResultArray[9];
-					localStorage.posmCodeAll=syncResultArray[10];				
+					//localStorage.posmCodeAll=syncResultArray[10];				
 					
 					var townlist=localStorage.town.split('fdfd');					
 					var townStr='';
@@ -226,15 +233,15 @@ function syncBasic(){
 						$('#townList').empty();
 						$('#townList').append(localStorage.townStr).trigger('create');
 						
-						$('#posm_code').empty();
-						$('#posm_code').append(localStorage.posmCode).trigger('create');
+						/*$("#posm_code").empty();
+						$("#posm_code").append(localStorage.posmCodeSup).trigger('create');*/
 						
-						$('#posmCodeList').empty();
-						$('#posmCodeList').append(localStorage.posmCodeAll).trigger('create');
+						/*$('#posmCodeList').empty();
+						$('#posmCodeList').append(localStorage.posmCodeSup).trigger('create');*/
 						
-						$("#suprepname").html("Name:		"+localStorage.repName);
-						$("#supreptype").html("Type:		"+localStorage.rep_type);
-						$("#suprepid").html("ID:		"+localStorage.repID);
+						$("#suprepname").html("Name	:		"+localStorage.repName);
+						$("#supreptype").html("Type	:		"+localStorage.rep_type);
+						$("#suprepid").html("ID	:		"+localStorage.repID);
 						
 						url = "#homePage";
 						$.mobile.navigate(url);	
@@ -243,14 +250,15 @@ function syncBasic(){
 						$('#outletListAgency').empty();
 						$('#outletListAgency').append(localStorage.outStr).trigger('create');
 						
-						$("#anprepname").html("Name:		"+localStorage.repName);
-						$("#anpreptype").html("Type:		"+localStorage.rep_type);
-						$("#anprepid").html("ID:		"+localStorage.repID);
+						$("#anprepname").html("Name	:		"+localStorage.repName);
+						$("#anpreptype").html("Type	:		"+localStorage.rep_type);
+						$("#anprepid").html("ID	:		"+localStorage.repID);
 						
 						url = "#page6";
 						$.mobile.navigate(url);	
 					}												
-				}else{						
+				}else{
+					$('#bufferImageSync').hide();						
 					$(".errorMsg").html("Sync Failed. Authorization or Network Error.");
 					$('#syncBasic').show();
 				}				
@@ -295,26 +303,29 @@ function townSelect(){
 		  success: function(result) {
 			var resultArray = result.split('rdrd');
 				if (resultArray[0]=='Success'){	
-					localStorage.posmCodeSup=resultArray[1];					
-					//alert (localStorage.posmCodeSup)
+					localStorage.posmCodeSup=resultArray[1];
+					localStorage.posmCodeSupUges=resultArray[2];					
+					
 					$("#posm_code").empty();
 					$("#posm_code").append(localStorage.posmCodeSup).trigger('create');
+					
+					$('#posmCodeList').empty();
+					$('#posmCodeList').append(localStorage.posmCodeSupUges).trigger('create');
+					
 					
 					$("#townSelct").html("Town:		"+localStorage.select_town);
 					$('#townSelctRec').html("Town:		"+localStorage.select_town);
 				
 					
 					$(".errorChk").text("");		
-					url="#second_page";					
+					url="#first_page";					
 					$.mobile.navigate(url);
 				}else{
-					url="#first_page";	
+					url="#homePage";					
+					$.mobile.navigate(url);
 					$(".errorChk").text("");
 						
 				}
-			
-				url="#first_page";					
-				$.mobile.navigate(url);
 		  	}
 		  })
 		
@@ -333,9 +344,8 @@ function alloDetailsagency(){
 
 function receive(){
 	
-
+	$(".sucMsgR").hide();
 	$(".errorChk").text("");
-	
 	$("#allHideR").hide();
 	$("#btn_submit_receive").hide();			
 	url="#second_page";					
@@ -344,6 +354,7 @@ function receive(){
 
 
 function alloDetails(){
+	
 	$("#bufferImageR").hide();
 	$("#recDataR").hide();	
 	$(".sucMsgR").hide();
@@ -364,14 +375,18 @@ function alloDetails(){
 				var posmType=resultArray[1];	
 				var brand=resultArray[2];
 				var a_qty=resultArray[3];
-				var alc_id=resultArray[4];	
+				var due_qty=resultArray[4];
+				var alc_id=resultArray[5];
+					
 				
 				$("#posm_type").html("Posm Type	:	"+posmType);
 				$("#brand").html("Brand			:	"+brand);
 				$("#allocation").html("Allocation Qty	:	"+a_qty);
+				$("#due").html("Due Qty	:	"+due_qty);
 				$("#posm_type").val(posmType);
 				$("#brand").val(brand);
 				$("#allocation").val(a_qty);
+				$("#due").val(due_qty);
 				$("#alcId").val(alc_id);
 			}else{
 				$(".errorChk").text("Please check internet connection");
@@ -382,6 +397,7 @@ function alloDetails(){
 
 
 function submit_data_receive(){
+	
 	$("#btn_submit_receive").hide();
 	var d = new Date();	
 	var get_time=d.getTime();
@@ -391,6 +407,7 @@ function submit_data_receive(){
 	
 	var brand=$("#brand").val();
 	var allocation=$("#allocation").val();
+	
 	var received=$("#received").val();
 	var recPhoto=$("#recPhoto").val();
 	var alcId=$("#alcId").val();
@@ -422,6 +439,7 @@ function submit_data_receive(){
 					$("#allocation").val("");
 					$("#alcId").val("");
 					
+					
 				//$("input:radio[name='town_select']").attr('checked','');
 				$("input:radio[name=town_select]").each(function(i) {
                     this.checked=false;
@@ -445,7 +463,7 @@ function submit_data_receive(){
 					},500);*/	
 				}else if (result=='Faild'){
 					
-						$(".errorChk").text("Can't Receive more than Allocation Qty");
+						$(".errorChk").text("Can't Receive more than Due Qty");
 						$("#allHideR").show();
 						$("#btn_submit_receive").show();
 				}else{		
@@ -539,11 +557,13 @@ function usages(Usages){
 				}
 			}
 		})
+		$("#town").html('Town		:		' + localStorage.select_town);
 		$("#usagesBtnShow").html(Usages);
 		$(".errorChk").text("");			
 		url="#page3";					
 		$.mobile.navigate(url);
-	}else{	
+	}else{
+		$("#town").html('Town		:		' + localStorage.town);	
 		$("#usagesBtnShow").html(Usages);
 		$(".errorChk").text("");			
 		url="#page3";					
@@ -567,6 +587,7 @@ ul.onclick=function(event){
 
 var rName='';
 function sRoute(routeName){
+	
 	rName=routeName;
 	//alert(routeName);
 	if (localStorage.rep_type =='CM'){
@@ -601,7 +622,7 @@ function sRoute(routeName){
 	}else{
 		var selectTown=localStorage.select_town.replace('-','|');
 		//alert(apipath+"getOutlet?&routeName="+rName+"&townCode="+selectTown);
-		
+		//alert (selectTown)
 		$.ajax({
 		type: 'POST',
 		url:apipath+"getOutlet?&routeName="+rName+"&townCode="+selectTown,
@@ -628,9 +649,12 @@ function sRoute(routeName){
 			
 			}
 		})
+		
 	}
 //$("#routeSelect").html('Route		:		' + routeName);
-		$("#routeSelectOutletP").html('Route		:		' + routeName);
+		
+		//$("#townO").html('Town		:		' + selectTown);
+		
 		$("#routeSelect").html('Route		:		' + rName);
 		$(".errorChk").text("");			
 		url="#page4";					
@@ -710,11 +734,12 @@ function outlet(outletIDName){
 		outlet_name=outletS[0]
 		outlet_code=outletS[1]
 		
+		
 		$("#routeSelectA").html('Route		:		' + rName);
 		$("#outletSelect").html('Outlet		:	' + outlet_name+'-'+outlet_code);
 		$(".errorChk").text("");	
 		
-		
+		$(".sucMsg").hide();
 		$("#btn_submit_usages").hide();
 		$("#allHide").hide();	
 		
@@ -729,21 +754,20 @@ function alloDetailsU(){
 	$("#recData").hide();	
 	$(".sucMsg").hide();
 	
-	
 	if (localStorage.rep_type =='SUPERVISOR'){
-		posmCode=$("#posmCodeAll").val();		
+		posmCode=$("#posmCodeSupUges").val();		
 	}else{ 
 		posmCode=$("#posmCodeCm").val();
 	}
+	
 	if (posmCode==''){
-		
 		$(".errorChk").text("Select posm Code");	
 	}else{
 		//alert(apipath+"getAllData?&posmCode="+posmCode);
 		$("#bufferImage").show();	
 		$.ajax({
 			type: 'POST',
-			url:apipath+"getAllData?&posmCode="+posmCode,																																																											
+			url:apipath+"getAllDataUsage?&posmCode="+posmCode,																																																											
 			success: function(result) {	
 				var resultArray = result.split('rdrd');
 					recStatus=resultArray[0];
@@ -755,11 +779,14 @@ function alloDetailsU(){
 					var posmType=resultArray[1];	
 					var brand=resultArray[2];
 					var a_qty=resultArray[3];
-					var alc_id=resultArray[4];
+					var balance_qty=resultArray[4];
+					var alc_id=resultArray[5];
+					
 					
 					$("#uposm_type").html("Posm Type	:	"+ posmType);
 					$("#ubrand").html("Brand	:	"+brand);
 					$("#uallocation").html("Stock Qty:	"+a_qty);
+					$("#balance").html("Balance Qty:	"+balance_qty);
 					$("#uposm_type").val(posmType);
 					$("#ubrand").val(brand);
 					$("#uallocation").val(a_qty);
@@ -826,6 +853,7 @@ function submit_data_usages(){
 					$("#ubrand").val("");
 					$("#uallocation").val("");
 					$("#qty").val("");	
+					
 					document.getElementById('myImageB').src = '';
 					
 					$(".errorChk").text("");
@@ -836,7 +864,7 @@ function submit_data_usages(){
 					url="#page5";					
 					$.mobile.navigate(url);	
 				}else if (result=='Faild'){					
-						$(".errorChk").text("Receive Qty less then Allocation Qty");
+						$(".errorChk").text("Receive Qty less then Balance Qty");
 						$("#allHide").show();
 						$("#btn_submit_usages").show();	
 				}else{
@@ -1123,18 +1151,20 @@ function recReport(){
 	}
 	
 	//alert (apipath+"receive_report?&repID="+localStorage.repID+"&repName="+localStorage.repName+"&townName="+town)
+	$("#bufferImageRecR").show();
 	$.ajax({
 			type: 'POST',
 			url:apipath+"receive_report?&repID="+localStorage.repID+"&repName="+localStorage.repName+"&townName="+town,																																																				
 			success: function(result) {
 				getResult=result.split('||');	
-				if(getResult[0]=='Success'){				
+				if(getResult[0]=='Success'){
+				$("#bufferImageRecR").hide();				
 				localStorage.receiveReportR=getResult[1];
 				//alert (localStorage.receiveReportR)	
 				
 				var ReceiveRpt=localStorage.receiveReportR.split('rdrd');					
 				var rectable='<table>';
-					rectable += '<tr style="font-size:12px;" ><th>DATE</th><th>BRAND</th><th>POSM_TYPE</th><th>REC_QTY</th><th>STOCK</th></tr>'
+					rectable += '<tr style="font-size:12px;" ><th>DATE</th><th>BRAND</th><th>POSM TYPE</th><th>REC QTY</th><th>STOCK</th></tr>'
 					for (i=0;i<ReceiveRpt.length;i++){	
 						recordR=ReceiveRpt[i].split('|');
 						dateR=recordR[0];
@@ -1146,7 +1176,7 @@ function recReport(){
 									
 						
 										
-						rectable +='<tr style="font-size:10px; text-align:center;"><td>'+dateR+'</td><td>'+brand+'</td><td>'+posmType+'</td><td>'+recQty+'</td><td>'+stock+'</td></tr>'
+						rectable +='<tr style="font-size:11px; text-align:center;"><td>'+dateR+'</td><td>'+brand+'</td><td>'+posmType+'</td><td>'+recQty+'</td><td>'+stock+'</td></tr>'
 					
 					}
 					rectable +='</table>'
@@ -1185,6 +1215,7 @@ function recUsage(){
 	}
 	
 	//alert (apipath+"usage_report?&repID="+localStorage.repID+"&repName="+localStorage.repName+"&townName="+town)
+	$("#bufferImageUsaR").show();
 	$.ajax({
 			type: 'POST',
 			url:apipath+"usage_report?&repID="+localStorage.repID+"&repName="+localStorage.repName+"&townName="+town,
@@ -1192,12 +1223,13 @@ function recUsage(){
 			success: function(result) {
 				getResult=result.split('||');
 				//alert (getResult)
-				if(getResult[0]=='Success'){				
+				if(getResult[0]=='Success'){
+					$("#bufferImageUsaR").hide();				
 				localStorage.usageReportR=getResult[1];
 				//alert (localStorage.usageReportR)
 				var UsageRpt=localStorage.usageReportR.split('rdrd');			
 				var usatable='<table>';
-					usatable +='<tr style="font-size:12px;" ><th>DATE</th><th>Outlet-Code</th><th>Name</th><th>Qty</th></tr>'
+					usatable +='<tr style="font-size:12px;" ><th>DATE</th><th>Outlet Code</th><th>Name</th><th>C Qty</th></tr>'
 					for (i=0;i<UsageRpt.length;i++){	
 						usageR=UsageRpt[i].split('|');
 						dateU=usageR[0];
@@ -1205,7 +1237,7 @@ function recUsage(){
 						outletname=usageR[2];
 						Uqty=usageR[3];
 				
-						usatable += '<tr style="font-size:10px; text-align:center;"><td>'+dateU+'</td><td>'+outletcode+'</td><td>'+outletname+'</td><td>'+Uqty+'</td></tr>'
+						usatable += '<tr style="font-size:11px; text-align:center;"><td>'+dateU+'</td><td>'+outletcode+'</td><td>'+outletname+'</td><td>'+Uqty+'</td></tr>'
 					
 					}
 					usatable +='</table>'
@@ -1246,6 +1278,7 @@ function stock(){
 	}
 	
 	//alert (apipath+"stock_report?&repID="+localStorage.repID+"&repName="+localStorage.repName+"&townName="+town)
+	$("#bufferImageStockR").show();
 	$.ajax({
 			type: 'POST',
 			url:apipath+"stock_report?&repID="+localStorage.repID+"&repName="+localStorage.repName+"&townName="+town,
@@ -1253,7 +1286,8 @@ function stock(){
 			success: function(result) {
 				getResult=result.split('||');
 				
-				if(getResult[0]=='Success'){				
+				if(getResult[0]=='Success'){
+					$("#bufferImageStockR").hide();				
 				localStorage.stockReport=getResult[1];
 				//alert (localStorage.stockReport)	
 				
@@ -1270,7 +1304,7 @@ function stock(){
 									
 						
 										
-						cmRouteStr += '<tr style="font-size:10px; text-align:center;"><td>'+brand+'</td><td>'+posmType+'</td><td>'+posmCode+'</td><td>'+allocation+'</td><td>'+stock+'</td></tr>'
+						cmRouteStr += '<tr style="font-size:11px; text-align:center;"><td>'+brand+'</td><td>'+posmType+'</td><td>'+posmCode+'</td><td>'+allocation+'</td><td>'+stock+'</td></tr>'
 					
 					}
 					cmRouteStr +='</table>'
