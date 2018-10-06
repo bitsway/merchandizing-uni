@@ -268,6 +268,8 @@ function syncBasic(){
 }
 	
 function menuClick(){
+	$(".sucChkR").text("");
+	$(".errorChkP").text("");
 	$(".errorChk").text("");
 	$(".sucChk").text("");
 	
@@ -287,8 +289,10 @@ function menuClick(){
 }
 //----------------back button
 function backClick(){
+	$(".errorChkP").text("");
 	$(".errorChk").text("");
 	$(".sucChk").text("");
+	$(".sucChkR").text("");
 }
 
 //---------
@@ -354,11 +358,21 @@ function receive(){
 
 
 function alloDetails(){
-	
+	$(".errorChkP").text("");
+	$("#received").val("");
+	$(".errorChk").text("");
+	$("#recPhoto").val("");
 	$("#bufferImageR").hide();
 	$("#recDataR").hide();	
 	$(".sucMsgR").hide();
 	var posmCode=$("#posmCodeSup").val();
+	if(posmCode==""){
+		$(".errorChkP").text("Select posm Code");
+		$("#recDataR").hide();
+		$("#allHideR").hide();
+		$("#btn_submit_receive").hide();
+	}else{
+	
 	//alert(apipath+"getAllData?&posmCode="+posmCode);
 	$("#bufferImageR").show();
 	$.ajax({
@@ -388,11 +402,13 @@ function alloDetails(){
 				$("#allocation").val(a_qty);
 				$("#due").val(due_qty);
 				$("#alcId").val(alc_id);
+				$(".errorChkP").text("");
 			}else{
 				$(".errorChk").text("Please check internet connection");
 			}
 		}
 	})
+	}
 }
 
 
@@ -602,6 +618,7 @@ function sRoute(routeName){
 			
 			if(syncResultArray[0]=='Success'){				
 				localStorage.outletLi=syncResultArray[1];
+				//alert (localStorage.outletLi)
 				var outletListaAll=localStorage.outletLi.split('rdrd');
 				
 				var outletStr='<ul data-role="listview" class="list" data-filter="true" data-inset="true" style="height:450px; overflow:scroll;">';
@@ -750,6 +767,10 @@ function outlet(outletIDName){
 }
 /*=======================usage page5============================*/
 function alloDetailsU(){
+	$("#qty").val("");
+	$(".errorChk").text("");
+	$(".errorChkP").text("");
+	$("#usagesPhoto").val("");
 	$("#bufferImage").hide();
 	$("#recData").hide();	
 	$(".sucMsg").hide();
@@ -761,7 +782,10 @@ function alloDetailsU(){
 	}
 	
 	if (posmCode==''){
-		$(".errorChk").text("Select posm Code");	
+		$(".errorChkP").text("Select posm Code");
+		$("#btn_submit_usages").hide();
+		$("#recData").hide();
+		$("#allHide").hide();	
 	}else{
 		//alert(apipath+"getAllData?&posmCode="+posmCode);
 		$("#bufferImage").show();	
@@ -775,7 +799,9 @@ function alloDetailsU(){
 					$("#bufferImage").hide();
 					$("#btn_submit_usages").show();
 					$("#recData").show();
-					$("#allHide").show();	
+					$("#allHide").show();
+					$(".errorChkP").text("");
+						
 					var posmType=resultArray[1];	
 					var brand=resultArray[2];
 					var a_qty=resultArray[3];
@@ -830,7 +856,7 @@ function submit_data_usages(){
 		$(".errorChk").text("Required POSM Code");
 		$("#btn_submit_usages").show();
 	}else if(a_qty=='' || a_qty==0){
-		$(".errorChk").text("Required Qty");
+		$(".errorChk").text("Required Usage Qty");
 		$("#btn_submit_usages").show();
 	}else{
 		if (imagePathB!=""){							
@@ -864,7 +890,7 @@ function submit_data_usages(){
 					url="#page5";					
 					$.mobile.navigate(url);	
 				}else if (result=='Faild'){					
-						$(".errorChk").text("Receive Qty less then Balance Qty");
+						$(".errorChk").text("Usage Qty less then Balance Qty");
 						$("#allHide").show();
 						$("#btn_submit_usages").show();	
 				}else{
@@ -1224,12 +1250,12 @@ function recUsage(){
 				getResult=result.split('||');
 				//alert (getResult)
 				if(getResult[0]=='Success'){
-					$("#bufferImageUsaR").hide();				
+				$("#bufferImageUsaR").hide();				
 				localStorage.usageReportR=getResult[1];
 				//alert (localStorage.usageReportR)
 				var UsageRpt=localStorage.usageReportR.split('rdrd');			
 				var usatable='<table>';
-					usatable +='<tr style="font-size:12px;" ><th>DATE</th><th>Outlet Code</th><th>Name</th><th>C Qty</th></tr>'
+					usatable +='<tr style="font-size:12px;" ><th>DATE</th><th>Outlet Code</th><th>Name</th><th>Usage Qty</th></tr>'
 					for (i=0;i<UsageRpt.length;i++){	
 						usageR=UsageRpt[i].split('|');
 						dateU=usageR[0];
@@ -1269,14 +1295,13 @@ function recUsage(){
 }
 
 
-function stock(){
+function stockReport(){
 	if (localStorage.rep_type == 'CM'){
 		town=localStorage.town;
 		
 	}else{
 		town=localStorage.select_town;
 	}
-	
 	//alert (apipath+"stock_report?&repID="+localStorage.repID+"&repName="+localStorage.repName+"&townName="+town)
 	$("#bufferImageStockR").show();
 	$.ajax({
@@ -1287,15 +1312,17 @@ function stock(){
 				getResult=result.split('||');
 				
 				if(getResult[0]=='Success'){
-					$("#bufferImageStockR").hide();				
+				$("#bufferImageStockR").hide();				
 				localStorage.stockReport=getResult[1];
 				//alert (localStorage.stockReport)	
 				
-				var stockRpt=localStorage.stockReport.split('rdrd');					
-				var cmRouteStr='<table>';
-					cmRouteStr += '<tr style="font-size:12px;"><th>Brand</th><th>POSM TYPE</th><th>POSM CODE</th><th>Allocation</th><th>STOCK</th></tr>'
-					for (i=0;i<stockRpt.length;i++){	
-						stockR=stockRpt[i].split('|');
+				var stockRPT=localStorage.stockReport.split('rdrd');	
+				//alert (stockRPT)				
+				var cmRouteSTr='<table>';
+					cmRouteSTr += '<tr style="font-size:12px;"><th>Brand</th><th>POSM TYPE</th><th>POSM CODE</th><th>Allocation</th><th>STOCK</th></tr>'
+					for (i=0;i<stockRPT.length;i++){	
+						stockR=stockRPT[i].split('|');
+						//alert (stockR)
 						brand=stockR[0];
 						posmType=stockR[1];
 						posmCode=stockR[2];
@@ -1304,12 +1331,13 @@ function stock(){
 									
 						
 										
-						cmRouteStr += '<tr style="font-size:11px; text-align:center;"><td>'+brand+'</td><td>'+posmType+'</td><td>'+posmCode+'</td><td>'+allocation+'</td><td>'+stock+'</td></tr>'
+						cmRouteSTr += '<tr style="font-size:11px; text-align:center;"><td>'+brand+'</td><td>'+posmType+'</td><td>'+posmCode+'</td><td>'+allocation+'</td><td>'+stock+'</td></tr>'
 					
 					}
-					cmRouteStr +='</table>'
-					$('#stockRept').empty();
-					$('#stockRept').append(cmRouteStr).trigger('create');
+					cmRouteSTr +='</table>'
+					//alert (cmRouteSTr)
+					$('#stockReport').empty();
+					$('#stockReport').append(cmRouteSTr).trigger('create');
 					
 					var townName=town;
 					var repid=localStorage.repID;
@@ -1317,10 +1345,12 @@ function stock(){
 					$("#repID").html ("Rep ID	:		"+repid);
 				
 			}else{
+				
 				var townName=town;
 				var repid=localStorage.repID;
 				$("#townName").html ("Town	:		"+townName);
 				$("#repID").html ("Rep ID	:		"+repid);
+				$("#bufferImageStockR").hide();
 				$(".errorChk").text("No Record In DataBase");
 				}
 		}
@@ -1329,7 +1359,7 @@ function stock(){
 	
 	$(".errorChk").text("");			
 	url="#page11";				
-	$.mobile.navigate(url);	
+	$.mobile.navigate(url);
 }
 
 function exit() {

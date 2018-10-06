@@ -77,7 +77,7 @@
 	}
 	
 	.ui-btn {
-		overflow:inherit;
+		/*<!--overflow:inherit;-->*/
 		border-radius: 8px;		
 	}
 		
@@ -201,8 +201,7 @@
 	#report{
 		font-weight:1;
 		background-color:#CE295E;
-	}	
-
+	}
     </style>	
 </head>
 
@@ -227,8 +226,7 @@
     </div>
     <br/>
     <br/>
-    <div data-role="content" >
-    
+    <div data-role="content">
     <div id="suprepname" style="color:#DA335A; text-align:center;"></div>  
     <div id="supreptype" style="color:#DA335A; text-align:center;"></div>
     <div id="suprepid" style="color:#DA335A; text-align:center;"></div>    
@@ -289,7 +287,7 @@
         <br/>
         <br/>
         <br/>
-         <div data-role="footer" data-position="fixed" style="font-size:12px; color:#595959; background-color:#FFF; font-weight:1;" align="center" >20181003</div>
+         <div data-role="footer" data-position="fixed" style="font-size:12px; color:#595959; background-color:#FFF; font-weight:1;" align="center" >20181006</div>
     </div>
 </div>
 
@@ -311,7 +309,7 @@
     <div id="townSelct" style="color:#D42E5C;"></div>             
     <a data-role="button" id="btn_receive" onclick="receive('Receive')" href="#" data-transition="slide" style="color:#fff">Receive</a>
     <a data-role="button" id="btn_usages" onclick="usages('Usages')" href="#" data-transition="slide" style="color:#fff">Usage </a> 
-    <a data-role="button" id="btn_stock" onclick="stock('stock')" href="" data-transition="slide" style="color:#fff"  >Stock Report </a> 
+    <a data-role="button" id="btn_stock" onclick="stockReport()" href="#" data-transition="slide" style="color:#fff"  >Stock Report </a> 
      <a data-role="button" id="report" onclick="repo('repo')" href="#" data-transition="slide" style="color:#fff"  >Receive And Usage Report </a>   
      <div class="errorChk" style="color:#cc0000;"></div>
         <br/><br/>
@@ -355,6 +353,7 @@
           </tr>
           </table>  
           <br />
+        <div class="errorChkP" style="color:#cc0000; background-color:#FFF;"></div>
         <div id="bufferImageR" style="text-align:center;"><img src="running.gif" /></div>
         <div id="allHideR">
         <div id="recDataR"> 
@@ -375,6 +374,7 @@
                 </tr>
             </table>
         </div>
+        <div class="errorChk" style="color:#cc0000; background-color:#FFF;"></div>
         <table table width="100%" class="ui-body-d ui-shadow table-stripe ui-responsive" id="beneficiaryCount" style="cell-spacing:0px; "  data-role="table" data-theme="d"  data-mode="display:none">
             <tr style="background-color:#AAAAAA;">
                 <td style="color:#FFF; text-align:center; padding:0 20 0 20px; font-weight:1";>Received Qty</td>
@@ -382,16 +382,16 @@
               </tr>
               <tr>
                 <td colspan="2">
-                    <a data-role="button" id="btn_take_pic" onClick="getUsagesImage();" class="ui-btn" style="background-color:#D42E5C; color:#FFF;  font-weight:1;">Take Picture</a>       
+                    <a data-role="button" id="btn_take_pic" onClick="getReceiveImage();" class="ui-btn" style="background-color:#D42E5C; color:#FFF;  font-weight:1;">Take Picture</a>       
                     <img src="" width="128" height="128" alt="Image1" id="myImageA" />        
                     <input name="usagesPhoto" id="usagesPhoto" value=""  type="hidden">
                 </td>
               </tr>     
         </table>  
-        </div>   
+        </div> 
         <a data-role="button" id="btn_submit_receive" onClick="submit_data_receive();" class="ui-btn" style="background-color:#D42E5C; color:#FFF;  font-weight:1;">Submit</a>
          <div class="sucMsgR" style="color:#FFF; text-align:center; background-color:#DA335A; padding:30px 0px 30px 0px; border-radius:10px;"></div>
-         <div class="errorChk" style="color:#cc0000;"></div>
+         
  
     
   	</ul>
@@ -461,6 +461,7 @@
         <h3 class="headerc" style="font-weight:1;">Select Route</h3>
     </div>
    	<br/>
+    <br/>
     <div data-role="content" > 
     <div id="town" style="color:#D42E5C;"></div>  
      <div id="usagesBtnShow" style="color:#D42E5C;" ></div>
@@ -493,6 +494,7 @@
         <h3 class="headerc">Select Outlet</h3>
     </div>
     <br/>
+    <br/>
     <div data-role="content" > 
     <div id="town" style="color:#D42E5C;"></div> 
      <div id="routeSelect" style="color:#D42E5C;"></div>
@@ -521,10 +523,11 @@
         <h3 style="color:#fff;">POST-IT</h3>
     </div>
    <br/>
+   <br/>
     <div data-role="content">
     <div id="town" style="color:#D42E5C;"></div>
     <div id="routeSelectA" style="color:#D42E5C;"></div>
-    <div id="outletSelect" style="color:#D42E5C;"></div>             
+    <div id="outletSelect" style="color:#D42E5C;"></div>            
    
         <table width="100%" class="ui-body-d ui-shadow table-stripe ui-responsive" id="beneficiaryCount" style="cell-spacing:0px;  background-color:#BFBFBF;"  data-role="table" data-theme="d"  data-mode="display:none">
           <tr>
@@ -535,6 +538,7 @@
           </tr>
           </table>  
           <br />
+        <div class="errorChkP" style="color:#cc0000; background-color:#FFF;"></div>
         <div id="bufferImage" style="text-align:center;"><img src="running.gif" /></div>
         <div id="allHide">
         <div id="recData"> 
@@ -555,6 +559,7 @@
                 </tr>
             </table>
         </div>
+        <div class="errorChk" style="color:#cc0000; background-color:#FFF;"></div>
         <table table width="100%" class="ui-body-d ui-shadow table-stripe ui-responsive" id="beneficiaryCount" style="cell-spacing:0px;"  data-role="table" data-theme="d"  data-mode="display:none">
             <tr style="background-color:#AAAAAA;">
                 <td style="color:#FFF; text-align:center; padding:20px; font-weight:1">Usage Qty</td>
@@ -571,7 +576,7 @@
         </div>   
         <a data-role="button" id="btn_submit_usages" onClick="submit_data_usages();" class="ui-btn" style="background-color:#D42E5C; color:#FFF;  font-weight:1;">Submit</a>
          <div class="sucMsg" style="color:#FFF; text-align:center; background-color:#DA335A; padding:30px 0px 30px 0px; border-radius:10px;"></div>
-         <div class="errorChk" style="color:#cc0000;"></div>
+         
  
     
   	</ul>
@@ -792,13 +797,10 @@
                   
     <ul data-role="listview" data-inset="true">
     	<li class="ui-field-contain" >
-        </li>
+  		<div id="bufferImageRecR" style="text-align:center;"><img src="running.gif" /></div>
+     	<div id="receiveReportR"></div>
+     	</li>
     </ul>
-  	<div id="bufferImageRecR" style="text-align:center;"><img src="running.gif" /></div>
-      <!--<table id="stockRept" style="width:100%">
-             
-     </table>-->
-     <div id="receiveReportR"></div>
      <div class="errorChk" style="color:#cc0000;"></div>
     </div>
 </div>
@@ -811,19 +813,17 @@
        <h3 class="headerc">Stock</h3>
     </div>
     <br/>
+    <br/>
     <div data-role="content" > 
     <div id="repID" style="color:#DA335A;"></div>
     <div id="townName" style="color:#DA335A;"></div>  
                    
     <ul data-role="listview" data-inset="true">
     	<li class="ui-field-contain">
-        </li>
+  		<div id="bufferImageStockR" style="text-align:center;"><img src="running.gif" /></div>
+     	<div id="stockReport"></div>
+     	</li>
     </ul>
-  	<div id="bufferImageStockR" style="text-align:center;"><img src="running.gif" /></div>
-      <!--<table id="stockRept" style="width:100%">
-             
-     </table>-->
-     <div id="stockRept"></div>
      <div class="errorChk" style="color:#cc0000;"></div>
     </div>
 </div>
@@ -835,20 +835,17 @@
        <h3 class="headerc">Usage Report</h3>
     </div>
     <br/>
+    <br/>
     <div data-role="content" > 
     <div id="repIDU" style="color:#DA335A;"></div>
-    <div id="townNameU" style="color:#DA335A;"></div>  
-                   
+    <div id="townNameU" style="color:#DA335A;"></div> 
+                
     <ul data-role="listview" data-inset="true">
-    	<li class="ui-field-contain" >
-        </li>
-    </ul>    
-     <div id="bufferImageUsaR" style="text-align:center;"><img src="running.gif" /></div>
-  
-      <!--<table id="stockRept" style="width:100%">
-             
-     </table>-->
-     <div id="usageReportR"></div>
+    	<li class="ui-field-contain" >  
+     	<div id="bufferImageUsaR" style="text-align:center;"><img src="running.gif" /></div>
+    	 <div id="usageReportR"></div>
+     	</li>
+    </ul> 
      <div class="errorChk" style="color:#cc0000;"></div>
     </div>
 </div>
