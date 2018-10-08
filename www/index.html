@@ -207,14 +207,6 @@
 
 <body >
 
-<!--<ul  data-role="listview" data-filter="true" >
-    	<li>1</li>
-        <li>2</li>
-        <li>3</li>
-        <li>4</li>
-        <li>5</li>
-        <li>6</li>
-    </ul>-->
 
 <!------------------------------------------MAIN MENU----------------------------------------------------------->
 <div data-theme="c" data-role="page" id="homePage">
@@ -235,8 +227,6 @@
         
     <div class="errorChk" style="color:#cc0000;" ></div>       
     </div>
-    
-   <!-- <div data-theme="c" data-role="footer" data-position="fixed" style="font-size:12px;background-color:#CE295E; color:#fff; font-weight:1;" align="center" >mReporting 20180818</div>-->
     
     <div data-role="panel" id="leftpanel" data-position="left" data-display="overlay" data-theme="c" style="background-color:#CE295E;">
         <div align="center"></div>
@@ -287,7 +277,7 @@
         <br/>
         <br/>
         <br/>
-         <div data-role="footer" data-position="fixed" style="font-size:12px; color:#595959; background-color:#FFF; font-weight:1;" align="center" >20181007</div>
+         <div data-role="footer" data-position="fixed" style="font-size:12px; color:#595959; background-color:#FFF; font-weight:1;" align="center" >20181008</div>
     </div>
 </div>
 
@@ -296,12 +286,6 @@
 	<br/><br/>
 	<div id="rec"></div>
     <div id="usg"></div>
-    <!--<div data-theme="c" data-role="header" data-position="fixed" >
-         <a data-role="button" href="#leftpanel" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets"   ><img src="menu.png" /></a>
-        <a data-role="button" onclick="backClick();" data-rel="back" class="ui-btn-right" data-transition="slide"><img src="back.png" /></a>
-        <h3></h3>
-    </div>-->
-    
     <div data-role="content" >
     <div id="cmprepname" style="color:#DA335A; text-align:center;"></div>  
     <div id="cmpreptype" style="color:#DA335A; text-align:center;"></div>
@@ -383,74 +367,20 @@
               <tr>
                 <td colspan="2">
                     <a data-role="button" id="btn_take_pic" onClick="getReceiveImage();" class="ui-btn" style="background-color:#D42E5C; color:#FFF;  font-weight:1;">Take Picture</a>       
-                    <img src="" width="128" height="128" alt="Image1" id="myImageA" />        
-                    <input name="usagesPhoto" id="usagesPhoto" value=""  type="hidden">
+                    <img src="" width="128" height="128" alt="Image1" id="myImageA" />       
+                    <input name="recPhoto_path" id="recPhoto_path" value=""  type="hidden">
+                    <input name="recPhoto_name" id="recPhoto_name" value=""  type="hidden">
                 </td>
               </tr>     
         </table>  
         </div> 
         <a data-role="button" id="btn_submit_receive" onClick="submit_data_receive();" class="ui-btn" style="background-color:#D42E5C; color:#FFF;  font-weight:1;">Submit</a>
          <div class="sucMsgR" style="color:#FFF; text-align:center; background-color:#DA335A; padding:30px 0px 30px 0px; border-radius:10px;"></div>
-         
- 
-    
+
   	</ul>
             <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
     </div>
 </div>
-    <!--</div>
-    
-    <div data-role="content" >    
-    <div id="townSelctRec" class="routselect">
-	
-	
-	</div>   
-          <div class="routselect" style="font-size:18px;">Receive</div>-->    
-    <!--<ul data-role="listview" data-inset="true">
-    	<li class="ui-field-contain" >
-        	<table width="100%" class="ui-body-d ui-shadow table-stripe ui-responsive" id="beneficiaryCount" style="cell-spacing:0px;"  data-role="table" data-theme="d"  data-mode="display:none">
-              <tr>
-                <td style="color:#DA335A;  font-weight:1;">POSM Code</td>
-                <td><div id="posm_code"></div></td>
-              </tr>
-              <tr>
-                <td style="color:#DA335A; font-weight:1;">POSM Type</td>
-                <td><input type="text" id="posm_type" name="posm_type" readonly="readonly" /></td>
-              </tr>
-              <tr>
-                <td style="color:#DA335A;  font-weight:1;">Brand</td>
-                <td><input type="text" id="brand" name="brand" readonly="readonly" /></td>
-              </tr>
-              <tr>
-                <td style="color:#DA335A";  font-weight:1;>Allocation</td>
-                <td><input type="number" id="allocation" name="allocation" readonly="readonly" /></td>
-              </tr>
-               <tr>
-                <td style="color:#0b2571;  font-weight:1;">Received</td>
-                <td style="color:#fff"><input type="number" id="received" name="received" /> <input type="hidden" id="alcId" name="alcId" /></td>
-              </tr>
-              <tr>
-              	<td colspan="2">
-                	<a data-role="button" id="btn_take_pic" onClick="getReceiveImage();" class="ui-btn" style="background-color:#D42E5C; color:#FFF;  font-weight:1;">Take Picture</a>       
-                    <img src="" width="128" height="128" alt="Image1" id="myImageA" />        
-                    <input name="recPhoto" id="recPhoto" value=""  type="hidden">
-                </td>
-              </tr>     
-            </table>     
-        </li>
-    </ul>
-     
-     <a data-role="button" id="btn_submit_receive" onClick="submit_data_receive();" class="ui-btn"style="background-color:#D42E5C; color:#FFF;font-weight:1;">Submit</a>
-     <div class="sucChk" style="color:#004d00;"></div>
-     <div class="errorChk" style="color:#cc0000;"></div>
-     
-        <br/><br/>
-  
-            <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-    </div>
-</div>-->
-
-
 <!--===============================end Sup======================================-->
 <!--===============================page3======================================-->
 
@@ -465,21 +395,7 @@
     <div data-role="content" > 
     <div id="town" style="color:#D42E5C;"></div>  
      <div id="usagesBtnShow" style="color:#D42E5C;" ></div>
-    
-     
-<!--     <input class="search" type="text" id="myInput" placeholder="Search for names..">-->
-     
-<!--     
-     <ul data-role="listview" id="routeList" class="list" data-filter="true" data-inset="true" style="height:450px; overflow:scroll;"> 
-       
-     </ul> -->
-     
      <div id="routeList"></div>
-     <!--<a data-role="button" id="" onClick="route();" class="ui-btn" style="background-color:#D42E5C; color:#FFF;  font-weight:1;" >Next</a>
-     
-     <div class="sucChk" style="color:#004d00;"></div>
-     <div class="errorChk" style="color:#cc0000;"></div>-->
-     
         <br/><br/>
   	
             <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
@@ -498,18 +414,7 @@
     <div data-role="content" > 
     <div id="town" style="color:#D42E5C;"></div> 
      <div id="routeSelect" style="color:#D42E5C;"></div>
-     
-    <!-- <ul  data-role="listview" data-filter="true" >
-     <li id="outletList" style="height:450px; overflow:scroll;"></li>-->
-     <!--<div id="outletList" style="height:450px; overflow:scroll;"></div>-->
-      <!--<ul data-role="listview" id="outletList" class="list" data-filter="true" data-inset="true" style="height:450px; overflow:scroll;"> 
-     </ul>-->
      <div id="outletList"></div>
-     
-     <!--<a data-role="button" id="btn_submit" onClick="outlet();" class="ui-btn" style="background-color:#D42E5C; color:#FFF;  font-weight:1;" >Next</a>
-     <div class="sucChk" style="color:#004d00;"></div>
-     <div class="errorChk" style="color:#cc0000;"></div>-->
-     
         <br/><br/>
   
             <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
@@ -583,37 +488,7 @@
             <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
     </div>
 </div>
-              <!--<tr>
-                <td style="color:#DA335A;  font-weight:1;">POSM Type</td>
-                <td><input type="text" id="uposm_type" name="uposm_type" readonly="readonly" /></td>
-              </tr>
-              <tr>
-                <td style="color:#DA335A;  font-weight:1;">Brand</td>
-                <td><input type="text" id="ubrand" name="ubrand" readonly="readonly" /></td>
-              </tr>
-              <tr>
-                <td style="color:#DA335A";  font-weight:1;>Stock</td>
-                <td><input type="number" id="uallocation" name="uallocation" readonly="readonly" /></td>
-              </tr>
-              <tr>
-                <td style="color:#0b2571";  font-weight:1;>Qty</td>
-                <td><input type="number" id="qty" name="qty" /><input type="hidden" id="ualcId" name="alcId" /></td>
-              </tr>
-              <tr>
-              	<td colspan="2">
-                	<a data-role="button" id="btn_take_pic" onClick="getUsagesImage();" class="ui-btn" style="background-color:#D42E5C; color:#FFF;  font-weight:1;">Take Picture</a>       
-                    <img src="" width="128" height="128" alt="Image1" id="myImageB" />        
-                    <input name="usagesPhoto" id="usagesPhoto" value=""  type="hidden">
-                </td>
-              </tr>     
-            </table>     
-        </li>
-    </ul>
-     
-     <a data-role="button" id="btn_submit_usages" onClick="submit_data_usages();" class="ui-btn" style="background-color:#D42E5C; color:#FFF;  font-weight:1;">Submit</a>
-     <div class="sucChk" style="color:#004d00;"></div>
-     <div class="errorChk" style="color:#cc0000;"></div>-->
-     
+
 <!-----------------------------------------Agency page 6-------------------------------------------->
 <div data-role="page" data-theme="c" id="page6">
     <div data-theme="c" data-role="header" data-position="fixed" class="header" >
@@ -629,8 +504,6 @@
     <div id="agency"></div> 
     <a data-role="button" id="entry" onclick="searchoutlet('entry')" href="#" data-transition="slide">Entry</a>
     <a data-role="button" id="summary_report" onclick="summary_report('summary_report')" href="#" data-transition="slide" style="font-weight:1">Summary Report </a>            
-    <!--<a data-role="button" id="entry" onclick="searchoutlet('entry')" href="#" data-transition="slide">Entry</a>
-    <a data-role="button" id="summary_report" onclick="summary_report('summary_report')" href="#" data-transition="slide" style="font-weight:1">Summary Report </a>-->  
      <div class="errorChk" style="color:#cc0000;"></div>
         <br/><br/>
   	<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
@@ -751,27 +624,7 @@
        <h3 class="headerc">Report</h3>
     </div>
     <br/><br/>
-    <div data-role="content" >               
-    <!--<ul data-role="listview" data-inset="true">
-    	<li class="ui-field-contain" >
-        	<table width="100%" class="ui-body-d ui-shadow table-stripe ui-responsive" id="beneficiaryCount" style="cell-spacing:0px;"  data-role="table" data-theme="d"  data-mode="display:none" style="color:#fff">
-             <!-- <tr>
-                <td > <span class="btn-color">ID</span></td>
-                 <td><input type="text" id="" name="" /></td>
-              </tr>-->
-              <!--<tr>
-                <td > <span class="btn-color">From</span></td>
-                <td><input type="date" id="fromdate" name="fromdate" /></td>
-              </tr>
-              <tr>
-              <tr>
-                <td > <span class="btn-color">SFT</span></td>
-                 <td><input type="date" id="todate" name="todate" /></td>
-              </tr> 
-            </table>     
-        </li>
-    </ul>-->
-     
+    <div data-role="content" > 
      <a data-role="button" id="recReport" onClick="recReport('recReport');" class="ui-btn" style="background-color:#CE295E" > <span class="text-color">Receive Report</span></a>
      <a data-role="button" id="recUsage" onClick="recUsage('recUsage');" class="ui-btn" style="background-color:#CE295E" > <span class="text-color">Usage Report</span></a>
      
