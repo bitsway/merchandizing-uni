@@ -375,7 +375,7 @@
         </table>  
         </div> 
         <a data-role="button" id="btn_submit_receive" onClick="submit_data_receive();" class="ui-btn" style="background-color:#D42E5C; color:#FFF;  font-weight:1;">Submit</a>
-         <div class="sucMsgR" style="color:#FFF; text-align:center; background-color:#DA335A; padding:30px 0px 30px 0px; border-radius:10px;"></div>
+         <div class="sucMsgR" style="color:#FFF; text-align:center; background-color:#DA335A; padding:30px 0px 30px 0px; border-radius:10px;">Successfully Submitted</div>
 
   	</ul>
             <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
@@ -473,16 +473,16 @@
               <tr>
                 <td colspan="2">
                     <a data-role="button" id="btn_take_pic" onClick="getUsagesImage();" class="ui-btn" style="background-color:#D42E5C; color:#FFF;  font-weight:1;">Take Picture</a>       
-                    <img src="" width="128" height="128" alt="Image1" id="myImageB" />        
-                    <input name="usagesPhoto" id="usagesPhoto" value=""  type="hidden">
+                    <img src="" width="128" height="128" alt="Image1" id="myImageB" /> 
+                    <input name="usePhoto_path" id="usePhoto_path" value=""  type="hidden">
+                    <input name="usePhoto_name" id="usePhoto_name" value=""  type="hidden">
                 </td>
               </tr>     
         </table>  
         </div>   
         <a data-role="button" id="btn_submit_usages" onClick="submit_data_usages();" class="ui-btn" style="background-color:#D42E5C; color:#FFF;  font-weight:1;">Submit</a>
-         <div class="sucMsg" style="color:#FFF; text-align:center; background-color:#DA335A; padding:30px 0px 30px 0px; border-radius:10px;"></div>
-         
- 
+          <div class="sucMsgU" style="color:#FFF; text-align:center; background-color:#DA335A; padding:30px 0px 30px 0px; border-radius:10px;">Successfully Submitted</div>
+
     
   	</ul>
             <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
@@ -600,7 +600,9 @@
               	<td colspan="2">
                 	<a data-role="button" id="btn_take_pic" onClick="getAgencyImage();" class="ui-btn" style="background-color:#CE295E; color: #fff; font-weight:1; font-family:'Montserrat',sans-serif"; > Take Picture</a>       
                     <img src="" width="128" height="128" alt="Image1" id="myImageC" />        
-                    <input name="agency_photo" id="agency_photo" value=""  type="hidden">
+                   
+                     <input name="agnPhoto_path" id="agnPhoto_path" value=""  type="hidden">
+                    <input name="agnPhoto_name" id="agnPhoto_name" value=""  type="hidden">
                 </td>
               </tr>     
             </table>     
@@ -608,6 +610,7 @@
     </ul>
      
      <a data-role="button" id="btn_submit_agency" onClick="submit_data_agency();" class="ui-btn" style="background-color:#CE295E" > <span class="text-color">Submit</span></a>
+     
      <div class="sucChk" style="color:#004d00;"></div>
      <div class="errorChk" style="color:#cc0000;"></div>
      

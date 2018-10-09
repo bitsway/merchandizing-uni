@@ -437,8 +437,7 @@ function submit_data_receive(){
 					uploadPhotoRec(imagePathA, imageName);
 					
 					$(".sucMsgR").text('Successfully Submitted');
-					$("#imageName").val("");	
-					$("#imagePathA").val("");	
+						
 					url="#second_page";					
 					$.mobile.navigate(url);	
 					/*setTimeout(function(){
@@ -485,7 +484,7 @@ function onSuccessA(imageURI) {
 
 function onFailA(message) {
 	imagePathA="";
-	$("#recPhoto").val('');
+	$("#recPhoto_name").val('');
     alert('Failed because: ' + message);
 }
 
@@ -641,7 +640,7 @@ function outlet(outletIDName){
 		$("#outletSelect").html('Outlet		:	' + outlet_name+'-'+outlet_code);
 		$(".errorChk").text("");	
 		
-		$(".sucMsg").hide();
+		$(".sucMsgU").hide();
 		$("#btn_submit_usages").hide();
 		$("#allHide").hide();	
 		
@@ -658,7 +657,7 @@ function alloDetailsU(){
 	$("#usagesPhoto").val("");
 	$("#bufferImage").hide();
 	$("#recData").hide();	
-	$(".sucMsg").hide();
+	$(".sucMsgU").hide();
 	
 	if (localStorage.rep_type =='SUPERVISOR'){
 		posmCode=$("#posmCodeSupUges").val();		
@@ -728,7 +727,8 @@ function submit_data_usages(){
 	var uallocation=$("#uallocation").val();
 	var alcId=$("#ualcId").val();
 	var a_qty=$("#qty").val();
-	var usagesPhoto=$("#usagesPhoto").val();
+	imageName2=$("#usePhoto_name").val();
+	imagePathB=$("#usePhoto_path").val();
 	
 	if (posmCode=='' || posmCode==0){
 		$(".errorChk").text("Required POSM Code");
@@ -737,11 +737,7 @@ function submit_data_usages(){
 		$(".errorChk").text("Required Usage Qty");
 		$("#btn_submit_usages").show();
 	}else{
-		if (imagePathB!=""){							
-			$(".errorChk").text("Syncing photo ..");
-			imageName2 = localStorage.mobileNo+"_"+get_time+".jpg";			
-			uploadPhotoUsag(imagePathB, imageName2);
-		}		
+				
 		//alert(apipath+"submitData_usages?&syncCode="+localStorage.sync_code+"&repID="+localStorage.repID+"&repName="+localStorage.repName+"&mobileNo="+localStorage.mobileNo+"&town="+town+"&routeName="+rName+"&outlet_code="+outlet_code+"&outlet_name="+outlet_name+"&posmCode="+posmCode+"&uposm_type="+uposm_type+"&ubrand="+ubrand+"&uallocation="+uallocation+"&a_qty="+a_qty+"&alcId="+alcId+"&imageName2="+imageName2);
 		$.ajax({
 			type: 'POST',
@@ -750,7 +746,7 @@ function submit_data_usages(){
 			success: function(result) {			
 				if(result=='Success'){
 					
-					$("#usagesPhoto").val("");	
+						
 					$("#uposm_type").val("");
 					$("#ubrand").val("");
 					$("#uallocation").val("");
@@ -760,13 +756,16 @@ function submit_data_usages(){
 					document.getElementById('myImageB').src = '';
 					
 					$(".errorChk").text("");
-					$(".sucMsg").show();
+					$(".sucMsgU").show();
 					$("#allHide").hide();
 					$("#btn_submit_usages").hide();
 					
+					uploadPhotoRec(imagePathB, imageName2);
 					
+					$(".sucMsgU").text('Successfully Submitted');
 					
-					$(".sucMsg").text('Successfully Submitted');
+					$("#imageName2").val("");
+					$("#imagePathB").val("");
 					url="#page5";					
 					$.mobile.navigate(url);	
 				}else if (result=='Faild'){					
@@ -788,6 +787,11 @@ function submit_data_usages(){
 
 
 function getUsagesImage() { 
+	var get_time=$.now();
+	var image_Name2 = localStorage.mobileNo+"_"+get_time+".jpg";
+	$("#usePhoto_path").val(image_Name2);
+	$("#usePhoto_name").val(image_Name2);
+	
 	navigator.camera.getPicture(onSuccess1, onFail1, { quality: 90,
 	targetWidth: 600,
 	destinationType: Camera.DestinationType.FILE_URI,correctOrientation: true });	
@@ -796,8 +800,8 @@ function getUsagesImage() {
 function onSuccess1(imageURI) {		
     var image = document.getElementById('myImageB');
     image.src = imageURI;
-	imagePathB = imageURI;	
-	$("#usagesPhoto").val(imagePathB);
+	var image_pathB = "usePhoto_path";	
+	$("#image_pathB").val(imageURI);
 	
 }
 
@@ -805,6 +809,7 @@ function onFail1(message) {
 	imagePathB="";
 	$("#usagesPhoto").val('');
     alert('Failed because: ' + message);
+	
 }
 
 function uploadPhotoUsag(imageURI, imageName2) { 	
@@ -902,7 +907,8 @@ function submit_data_agency(){
 	var alight=$("#light").val();
 	var apaint=$("#paint").val();
 	var acity=$("#citycor").val();
-	var agencyphoto=$("#agency_photo").val();
+	imageName3=$("#agnPhoto_name").val();
+	imagePathC=$("#agnPhoto_path").val();
 	var outlet_route=$("#outlet_route_code").val();
 	var outlet_town_name=$("#outlet_town_name").val();
 	
@@ -935,13 +941,12 @@ function submit_data_agency(){
 					$("#allocation").val("");
 					document.getElementById('myImageC').src = '';
 					
-					if (imagePathC!=""){							
-						$(".errorChk").text("Syncing photo ..");
-						imageName3 = localStorage.mobileNo+"_"+get_time+".jpg";
-						uploadPhotoAgency(imagePathC, imageName3);
-					}
-									
+					uploadPhotoRec(imagePathC, imageName3);
+					
 					$(".sucChk").text('Successfully Submitted');
+					$("#imagePathC").val("");	
+					$("#imageName3").val("");
+					
 					$(".errorChk").text("");
 					$("#btn_submit_agency").show();
 					url="#page8";					
@@ -962,6 +967,11 @@ function submit_data_agency(){
 
 
 function getAgencyImage() { 
+	var get_time=$.now();
+	var image_Name3 = localStorage.mobileNo+"_"+get_time+".jpg";
+	$("#agnPhoto_path").val(image_Name3);
+	$("#agnPhoto_name").val(image_Name3);
+	
 	navigator.camera.getPicture(onSuccess2, onFail2, { quality: 90,
 	targetWidth: 600,
 	destinationType: Camera.DestinationType.FILE_URI,correctOrientation: true });	
@@ -970,8 +980,8 @@ function getAgencyImage() {
 function onSuccess2(imageURI) {		
     var image = document.getElementById('myImageC');
     image.src = imageURI;
-	imagePathC = imageURI;	
-	$("#agency_photo").val(imagePathC);
+	var image_pathC = agnPhoto_path;	
+	$("#image_pathC").val(imageURI);
 	
 }
 
