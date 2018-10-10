@@ -349,7 +349,7 @@ function alloDetails(){
 		$("#btn_submit_receive").hide();
 	}else{
 	
-	alert(apipath+"getAllData?&posmCode="+posmCode+"&townR="+localStorage.select_town);
+	//alert(apipath+"getAllData?&posmCode="+posmCode+"&townR="+localStorage.select_town);
 	$("#bufferImageR").show();
 	$.ajax({
 		type: 'POST',
@@ -677,7 +677,7 @@ function alloDetailsU(){
 		$("#recData").hide();
 		$("#allHide").hide();	
 	}else{
-		alert (apipath+"getAllDataUsage?&posmCode="+posmCode+"&town="+town);
+		//alert (apipath+"getAllDataUsage?&posmCode="+posmCode+"&town="+town);
 		$("#bufferImage").show();	
 		$.ajax({
 			type: 'POST',
@@ -991,7 +991,7 @@ function submit_data_agency(){
 }
 
 
-function getAgencyImage() { 
+function getAgencyImage() {
 	var get_time=$.now();
 	var image_Name = localStorage.mobileNo+"_"+get_time+".jpg";
 	$("#agnPhoto_path").val(image_Name);
@@ -1006,18 +1006,17 @@ function onSuccessC(imageURI) {
     var image = document.getElementById('myImageC');
     image.src = imageURI;
 	var image_path = "agnPhoto_path";	
-	$("#image_path").val(imageURI);
+	$("#"+image_path).val(imageURI);
 	
 }
 
 function onFailC(message) {
 	imagePathC="";
-	$("#agnPhoto_name").val('');
+	$("#recPhoto_name").val('');
     alert('Failed because: ' + message);
 }
 
 function uploadPhotoAgency(imageURI, imageName3) { 	
-	//winAchInfo();
 	var options = new FileUploadOptions();
     options.fileKey="upload";
     options.fileName=imageName3;
@@ -1042,6 +1041,8 @@ function onfail3(r) {
 	$(".errorChk").text('File upload Failed. Please check internet connection.');
 	$("#btn_submit_agency").show();
 }
+
+
 
 function repo(){
 	if (localStorage.rep_type == 'CM'){
