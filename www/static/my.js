@@ -333,6 +333,7 @@ function receive(){
 }
 
 function alloDetails(){
+	
 	$(".errorChkP").text("");
 	$("#received").val("");
 	$(".errorChk").text("");
@@ -348,11 +349,11 @@ function alloDetails(){
 		$("#btn_submit_receive").hide();
 	}else{
 	
-	//alert(apipath+"getAllData?&posmCode="+posmCode);
+	alert(apipath+"getAllData?&posmCode="+posmCode+"&townR="+localStorage.select_town);
 	$("#bufferImageR").show();
 	$.ajax({
 		type: 'POST',
-		url:apipath+"getAllData?&posmCode="+posmCode,																																																											
+		url:apipath+"getAllData?&posmCode="+posmCode+"&townR="+localStorage.select_town,																																																											
 		success: function(result) {	
 			var resultArray = result.split('rdrd');
 				recStatus=resultArray[0];
@@ -372,6 +373,7 @@ function alloDetails(){
 				$("#brand").html("Brand			:	"+brand);
 				$("#allocation").html("Allocation Qty	:	"+a_qty);
 				$("#due").html("Due Qty	:	"+due_qty);
+				
 				$("#posm_type").val(posmType);
 				$("#brand").val(brand);
 				$("#allocation").val(a_qty);
@@ -452,7 +454,6 @@ function submit_data_receive(){
 					$(".errorChk").text("Please check internet connection");															
 					$("#btn_submit_receive").show();
 					$("#allHideR").show();
-					$("#btn_submit_receive").show();	
 					
 				}
 				
@@ -664,18 +665,23 @@ function alloDetailsU(){
 	}else{ 
 		posmCode=$("#posmCodeCm").val();
 	}
-	
+	if (localStorage.rep_type =='SUPERVISOR'){
+		town=localStorage.select_town.replace('-', '|');
+		
+	}else{
+		town=localStorage.town;	
+	}
 	if (posmCode==''){
 		$(".errorChkP").text("Select posm Code");
 		$("#btn_submit_usages").hide();
 		$("#recData").hide();
 		$("#allHide").hide();	
 	}else{
-		//alert(apipath+"getAllData?&posmCode="+posmCode);
+		alert (apipath+"getAllDataUsage?&posmCode="+posmCode+"&town="+town);
 		$("#bufferImage").show();	
 		$.ajax({
 			type: 'POST',
-			url:apipath+"getAllDataUsage?&posmCode="+posmCode,																																																											
+			url:apipath+"getAllDataUsage?&posmCode="+posmCode+"&town="+town,																																																											
 			success: function(result) {	
 				var resultArray = result.split('rdrd');
 					recStatus=resultArray[0];
@@ -760,7 +766,7 @@ function submit_data_usages(){
 					$("#allHide").hide();
 					$("#btn_submit_usages").hide();
 					
-					uploadPhotoRec(imagePathB, imageName2);
+					uploadPhotoUsa(imagePathB, imageName2);
 					
 					$(".sucMsgU").text('Successfully Submitted');
 					
@@ -774,7 +780,7 @@ function submit_data_usages(){
 					$(".errorChk").text("Please check internet connection");															
 					$("#btn_submit_usages").show();
 					$("#allHide").show();
-					$("#btn_submit_usages").show();	
+					
 				}
 				
 			}//end result
@@ -784,34 +790,32 @@ function submit_data_usages(){
 }
 
 
-function getUsagesImage() { 
+function getUsagesImage() {
 	var get_time=$.now();
 	var image_Name = localStorage.mobileNo+"_"+get_time+".jpg";
 	$("#usePhoto_path").val(image_Name);
 	$("#usePhoto_name").val(image_Name);
 	
-	navigator.camera.getPicture(onSuccess1, onFail1, { quality: 90,
+	navigator.camera.getPicture(onSuccessB, onFailB, { quality: 90,
 	targetWidth: 600,
 	destinationType: Camera.DestinationType.FILE_URI,correctOrientation: true });	
 }
 
-function onSuccess1(imageURI) {		
+function onSuccessB(imageURI) {		
     var image = document.getElementById('myImageB');
     image.src = imageURI;
 	var image_path = "usePhoto_path";	
-	$("#image_path").val(imageURI);
+	$("#"+image_path).val(imageURI);
 	
 }
 
-function onFail1(message) {
+function onFailB(message) {
 	imagePathB="";
 	$("#usePhoto_name").val('');
     alert('Failed because: ' + message);
-	
 }
 
-function uploadPhotoUsag(imageURI, imageName2) { 	
-	//winAchInfo();
+function uploadPhotoUsa(imageURI, imageName2) { 	
 	var options = new FileUploadOptions();
     options.fileKey="upload";
     options.fileName=imageName2;
@@ -846,6 +850,7 @@ function agency(){
 }
 /**------------------------page 7 ----------------------------********/
 function searchoutlet(){
+	
 	$(".errorChk").text("");			
 	url="#page7";				
 	$.mobile.navigate(url);	
@@ -853,12 +858,18 @@ function searchoutlet(){
 /**------------------------page 8 ----------------------------********/
 var outletIdNameAgency='';
 function execution(){
+	
+	$("#btn_submit_agency").show();
+	$("#allhideA").show();
+	$("#sucMsgA").hide();
+	
 	if($("#outletListAgency").find("input[name='outlet_agency_select']:checked").length==0){
 		$(".errorChk").text("Select Outlet");
 	}else{
 		outletIdNameAgency=$("input[name='outlet_agency_select']:checked").val();
 		$("#OutletNameAgency").html("Outlet:		"+outletIdNameAgency);
-		$(".errorChk").text("");			
+		$(".errorChk").text("");
+				
 		url="#page8";				
 		$.mobile.navigate(url);	
 	}
@@ -867,6 +878,11 @@ function execution(){
 
 var outletIdNameAgency='';
 function agencySelectOutlet(outlet_agency){
+	
+	$("#btn_submit_agency").show();
+	$("#allhideA").show();
+	$("#sucMsgA").hide();
+	
 	outletIdNameAgency=outlet_agency;
 	//alert(apipath+"getAllDataAgency?&outlet_agency_select="+outletIdNameAgency);
 	$.ajax({
@@ -886,6 +902,7 @@ function agencySelectOutlet(outlet_agency){
 				$("#OutletNameAgency").html ("Outlet	:		"+outletIdNameAgency);
 				$("#RouteNameAgency").html ("Route	:		"+outletRoute);
 				$("#TownNameAgency").html ("Town	:		"+outletTownCode+'|'+outletTownName);
+				
 				url="#page8";					
 				$.mobile.navigate(url);	
 			}else{
@@ -898,6 +915,7 @@ function agencySelectOutlet(outlet_agency){
 }
 /**------------------------Agency Submit Data ----------------------------********/
 function submit_data_agency(){
+	
 	$("#btn_submit_agency").hide();
 	var posmcode=$("#posmcode").val().replace('+','').replace('-','').replace('.','').replace('/','').replace('*','').replace(',','');
 	var aqty=$("#agencyQty").val().replace('+','').replace('-','').replace('.','').replace('/','').replace('*','').replace(',','');
@@ -916,9 +934,14 @@ function submit_data_agency(){
 	}else if(aqty==''|| aqty==0){
 		$(".errorChk").text("Required Qty ");
 		$("#btn_submit_agency").show();
+		$("#allhideA").show();
+		$("#sucMsgA").hide();
+		
 	}else if(aset==''||aset==0){
 		$(".errorChk").text("Required Set");
 		$("#btn_submit_agency").show();
+		$("#allhideA").show();
+		$("#sucMsgA").hide();
 		
 	}else{
 		
@@ -937,21 +960,28 @@ function submit_data_agency(){
 					$("#paint").val("");
 					$("#citycor").val("");
 					$("#allocation").val("");
+					
+					$("#allhideA").hide();
+					$("#sucMsgA").show();
+					$(".errorChk").text("");
+					$("#btn_submit_agency").hide();
+					
 					document.getElementById('myImageC').src = '';
 					
-					uploadPhotoRec(imagePathC, imageName3);
+					uploadPhotoAgency(imagePathC, imageName3);
 					
 					$(".sucChk").text('Successfully Submitted');
-					$(".errorChk").text("");
-					$("#btn_submit_agency").show();
+				
+				
 					url="#page8";					
 					$.mobile.navigate(url);
 					/*setTimeout(function(){
 						location.reload();
 					},500);*/				
-				}else{		
-					$(".errorChk").text("Please check internet connection");													
-					$("#btn_submit_agency").show();
+				}else{
+					$(".errorChk").text("Please check internet connection");															
+					$("#btn_submit_agency").show();	
+					$("#allHideA").show();
 					
 				}
 				
@@ -967,12 +997,12 @@ function getAgencyImage() {
 	$("#agnPhoto_path").val(image_Name);
 	$("#agnPhoto_name").val(image_Name);
 	
-	navigator.camera.getPicture(onSuccess2, onFail2, { quality: 90,
+	navigator.camera.getPicture(onSuccessC, onFailC, { quality: 90,
 	targetWidth: 600,
 	destinationType: Camera.DestinationType.FILE_URI,correctOrientation: true });	
 }
 
-function onSuccess2(imageURI) {		
+function onSuccessC(imageURI) {		
     var image = document.getElementById('myImageC');
     image.src = imageURI;
 	var image_path = "agnPhoto_path";	
@@ -980,7 +1010,7 @@ function onSuccess2(imageURI) {
 	
 }
 
-function onFail2(message) {
+function onFailC(message) {
 	imagePathC="";
 	$("#agnPhoto_name").val('');
     alert('Failed because: ' + message);

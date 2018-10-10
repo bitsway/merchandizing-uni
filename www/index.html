@@ -277,7 +277,7 @@
         <br/>
         <br/>
         <br/>
-         <div data-role="footer" data-position="fixed" style="font-size:12px; color:#595959; background-color:#FFF; font-weight:1;" align="center" >20181009</div>
+         <div data-role="footer" data-position="fixed" style="font-size:12px; color:#595959; background-color:#FFF; font-weight:1;" align="center" >20181010</div>
     </div>
 </div>
 
@@ -552,7 +552,7 @@
             </table>     
         </li>
     </ul>
-      <a data-role="button" id="btn_submit" onClick="execution()" class="ui-btn" style="background-color:#CE295E"> <span class="text-color">Next</span></a>
+      <a data-role="button" id="btn_submit" onClick="execution()" class="ui-btn" style="background-color:#CE295E"> <span class="text-color"></span></a>
       </div>
       
 </div>
@@ -567,7 +567,8 @@
     <div id="TownNameAgency" style="color:#CE295E"></div> 
     <div id="RouteNameAgency" style="color:#CE295E"></div>  
     <div id="OutletNameAgency" style="color:#CE295E"></div> 
-    <div class="routselect" style="font-size:18px; text-align:center; margin:2px;">Execution</div>             
+    <div class="routselect" style="font-size:18px; text-align:center; margin:2px;">Execution</div> 
+    <div id="allhideA">          
     <ul data-role="listview" data-inset="true">
     	<li class="ui-field-contain" >
         	<table width="100%" class="ui-body-d ui-shadow table-stripe ui-responsive" id="beneficiaryCount" style="cell-spacing:0px;"  data-role="table" data-theme="d"  data-mode="display:none" style="color:#fff">
@@ -608,10 +609,12 @@
             </table>     
         </li>
     </ul>
+    </div>  
      
      <a data-role="button" id="btn_submit_agency" onClick="submit_data_agency();" class="ui-btn" style="background-color:#CE295E" > <span class="text-color">Submit</span></a>
+     <div id="sucMsgA" style="color:#FFF; text-align:center; background-color:#DA335A; padding:30px 0px 30px 0px; border-radius:10px;">Successfully Submitted</div>
      
-     <div class="sucChk" style="color:#004d00;"></div>
+     <!--<div class="sucChk" style="color:#004d00;"></div>-->
      <div class="errorChk" style="color:#cc0000;"></div>
      
         <br/><br/>
