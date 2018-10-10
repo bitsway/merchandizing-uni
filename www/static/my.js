@@ -399,7 +399,7 @@ function submit_data_receive(){
 	var brand=$("#brand").val();
 	var allocation=$("#allocation").val();
 	
-	var received=$("#received").val();
+	var received=$("#received").val().replace('+','').replace('-','').replace('.','').replace('/','').replace('*','').replace(',','');
 	imageName=$("#recPhoto_name").val();
 	imagePathA=$("#recPhoto_path").val();
 	var alcId=$("#alcId").val();
@@ -726,7 +726,7 @@ function submit_data_usages(){
 	var ubrand=$("#ubrand").val();
 	var uallocation=$("#uallocation").val();
 	var alcId=$("#ualcId").val();
-	var a_qty=$("#qty").val();
+	var a_qty=$("#qty").val().replace('+','').replace('-','').replace('.','').replace('/','').replace('*','').replace(',','');
 	imageName2=$("#usePhoto_name").val();
 	imagePathB=$("#usePhoto_path").val();
 	
@@ -764,8 +764,6 @@ function submit_data_usages(){
 					
 					$(".sucMsgU").text('Successfully Submitted');
 					
-					$("#imageName2").val("");
-					$("#imagePathB").val("");
 					url="#page5";					
 					$.mobile.navigate(url);	
 				}else if (result=='Faild'){					
@@ -788,9 +786,9 @@ function submit_data_usages(){
 
 function getUsagesImage() { 
 	var get_time=$.now();
-	var image_Name2 = localStorage.mobileNo+"_"+get_time+".jpg";
-	$("#usePhoto_path").val(image_Name2);
-	$("#usePhoto_name").val(image_Name2);
+	var image_Name = localStorage.mobileNo+"_"+get_time+".jpg";
+	$("#usePhoto_path").val(image_Name);
+	$("#usePhoto_name").val(image_Name);
 	
 	navigator.camera.getPicture(onSuccess1, onFail1, { quality: 90,
 	targetWidth: 600,
@@ -800,14 +798,14 @@ function getUsagesImage() {
 function onSuccess1(imageURI) {		
     var image = document.getElementById('myImageB');
     image.src = imageURI;
-	var image_pathB = "usePhoto_path";	
-	$("#image_pathB").val(imageURI);
+	var image_path = "usePhoto_path";	
+	$("#image_path").val(imageURI);
 	
 }
 
 function onFail1(message) {
 	imagePathB="";
-	$("#usagesPhoto").val('');
+	$("#usePhoto_name").val('');
     alert('Failed because: ' + message);
 	
 }
@@ -901,12 +899,12 @@ function agencySelectOutlet(outlet_agency){
 /**------------------------Agency Submit Data ----------------------------********/
 function submit_data_agency(){
 	$("#btn_submit_agency").hide();
-	var posmcode=$("#posmcode").val();
-	var aqty=$("#agencyQty").val();
-	var aset=$("#set").val();
-	var alight=$("#light").val();
-	var apaint=$("#paint").val();
-	var acity=$("#citycor").val();
+	var posmcode=$("#posmcode").val().replace('+','').replace('-','').replace('.','').replace('/','').replace('*','').replace(',','');
+	var aqty=$("#agencyQty").val().replace('+','').replace('-','').replace('.','').replace('/','').replace('*','').replace(',','');
+	var aset=$("#set").val().replace('+','').replace('-','').replace('.','').replace('/','').replace('*','').replace(',','');
+	var alight=$("#light").val().replace('+','').replace('-','').replace('.','').replace('/','').replace('*','').replace(',','');
+	var apaint=$("#paint").val().replace('+','').replace('-','').replace('.','').replace('/','').replace('*','').replace(',','');
+	var acity=$("#citycor").val().replace('+','').replace('-','').replace('.','').replace('/','').replace('*','').replace(',','');
 	imageName3=$("#agnPhoto_name").val();
 	imagePathC=$("#agnPhoto_path").val();
 	var outlet_route=$("#outlet_route_code").val();
@@ -944,9 +942,6 @@ function submit_data_agency(){
 					uploadPhotoRec(imagePathC, imageName3);
 					
 					$(".sucChk").text('Successfully Submitted');
-					$("#imagePathC").val("");	
-					$("#imageName3").val("");
-					
 					$(".errorChk").text("");
 					$("#btn_submit_agency").show();
 					url="#page8";					
@@ -968,9 +963,9 @@ function submit_data_agency(){
 
 function getAgencyImage() { 
 	var get_time=$.now();
-	var image_Name3 = localStorage.mobileNo+"_"+get_time+".jpg";
-	$("#agnPhoto_path").val(image_Name3);
-	$("#agnPhoto_name").val(image_Name3);
+	var image_Name = localStorage.mobileNo+"_"+get_time+".jpg";
+	$("#agnPhoto_path").val(image_Name);
+	$("#agnPhoto_name").val(image_Name);
 	
 	navigator.camera.getPicture(onSuccess2, onFail2, { quality: 90,
 	targetWidth: 600,
@@ -980,14 +975,14 @@ function getAgencyImage() {
 function onSuccess2(imageURI) {		
     var image = document.getElementById('myImageC');
     image.src = imageURI;
-	var image_pathC = agnPhoto_path;	
-	$("#image_pathC").val(imageURI);
+	var image_path = "agnPhoto_path";	
+	$("#image_path").val(imageURI);
 	
 }
 
 function onFail2(message) {
 	imagePathC="";
-	$("#agency_photo").val('');
+	$("#agnPhoto_name").val('');
     alert('Failed because: ' + message);
 }
 
