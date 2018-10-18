@@ -17,9 +17,9 @@ var outlet_name='';
 
 
 //---Online
-var apipath="http://w02.yeapps.com/postit/syncmobile/";
+var apipath="http://w02.yeapps.com/postit/syncmobile_20181018/";
 //--- local
-//var apipath="http://127.0.0.1:8000/postit/syncmobile/";
+//var apipath="http://127.0.0.1:8000/postit/syncmobile_20181018/";
 
 url ="";
 
@@ -36,6 +36,9 @@ $(document).ready(function(){
 			
 			$("#btn_submit_usages").hide();
 			$("#allHide").hide();
+			
+			$("#entryAgency").hide();
+			$("#summaryAgency").hide();
 						
 			$("#btn_receive").hide();
 			$("#townSelct").show();
@@ -62,9 +65,13 @@ $(document).ready(function(){
 			
 			$("#btn_submit_usages").hide();
 			$("#allHide").hide();
-						
+			$("#entryAgency").hide();
+			$("#summaryAgency").hide();
 			$('#btn_receive').show();
-			$('#btn_receive').show();
+			$('#btn_usages').show();
+			$('#btn_stock').show();
+			$('#report').show();
+			
 			$('#townList').empty();
 			$('#townList').append(localStorage.townStr).trigger('create');
 
@@ -83,20 +90,37 @@ $(document).ready(function(){
 			
 		}else{
 		
-			var townCName=localStorage.town.replace('|', '-');
-			$('#townSelct').html(townCName)
+			var agn='<div data-theme="c" data-role="header" data-position="fixed" ><a data-role="button" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets " ><img src="menu.png" /></a><a data-role="button" onclick="backClick();" data-rel="back" class="ui-btn-right" data-transition="slide"><img src="back.png" /></a> <h3 style="color:#fff;">POST-IT</h3></div>'
+			$('#agn').empty();
+			$('#agn').append(agn).trigger('create');
+			
+			
+			
+			$("#allHideR").hide();
+			$("#btn_submit_receive").hide();
+			
+			$("#btn_submit_usages").hide();
+			$("#allHide").hide();
+						
+			$('#btn_receive').hide();
+			$('#btn_usages').hide();
+			$('#btn_stock').hide();
+			$('#report').hide();
+			
+			$('#townList').empty();
+			$('#townList').append(localStorage.townStr).trigger('create');
+
+			$("#posmCodeAgn").empty();
+			$("#posmCodeAgn").append(localStorage.posmCodeAgency).trigger('create');
+			
+			$('#posmCodeList').empty();
+			$('#posmCodeList').append(localStorage.posmCodeAgency).trigger('create');
 			
 			$('#routeList').empty();
-			$('#routeList').append(localStorage.route).trigger('create');
+			$('#routeList').append(localStorage.routeListSup).trigger('create');
 			
 			$('#outletList').empty();
 			$('#outletList').append(localStorage.outletList).trigger('create');
-			
-			$('#posmCodeList').empty();
-			$('#posmCodeList').append(localStorage.posmCode).trigger('create');
-			
-			$('#outletListAgency').empty();
-			$('#outletListAgency').append(localStorage.outStr).trigger('create');
 
 			}
 		}
@@ -157,7 +181,7 @@ function syncBasic(){
 					//=============================
 					
 					var outletAgency=localStorage.outlet_agency.split('fdfd');				
-					var outStr='<ul data-role="listview" class="list" data-filter="true" data-inset="true" style="height:450px; overflow:scroll;">';
+					var outStr='<ul data-role="listview"  class="list" data-filter="true" data-inset="true" style="height:450px; overflow:scroll;">';
 					for (i=0;i<outletAgency.length;i++){
 						outLi=outletAgency[i].split('|');						
 						outletCode=outLi[0]
@@ -177,7 +201,7 @@ function syncBasic(){
 					//========================
 					
 					var cmRoute=localStorage.routeList.split('||');					
-					var cmRouteStr='<ul data-role="listview" class="list" data-filter="true" data-inset="true" style="height:450px; overflow:scroll;">';
+					var cmRouteStr='<ul data-role="listview" class="list" data-filter="true" data-inset="true" style="height:450px;  overflow:scroll;">';
 					for (i=0;i<cmRoute.length;i++){						
 						cmRouteStr += '<li style="background-color:#FFF; border-top-color:#F03; border-bottom-color:#F03;" onclick="sRoute(\''+cmRoute[i]+'\')"><a>'+cmRoute[i]+'</a></li>'
 					
@@ -191,8 +215,14 @@ function syncBasic(){
 						$('#usg').empty();
 						$('#usg').append(usg).trigger('create');
 						
+						$("#entryAgency").hide();
+						$("#summaryAgency").hide();
 						$("#btn_receive").hide();
-						$("#rec").hide();			
+						$("#rec").hide();
+						$("#agn").hide();
+						$('#btn_usages').show();
+						$('#btn_stock').show();
+						$('#report').show();			
 						$("#townSelct").show();
 						
 						var townCodeName=localStorage.town.replace('|','-')					
@@ -203,9 +233,9 @@ function syncBasic(){
 						$('#posmCodeList').empty();
 						$('#posmCodeList').append(localStorage.posmCode).trigger('create');
 						
-						$("#cmprepname").html("Name:		"+localStorage.repName);
-						$("#cmpreptype").html("Type:		"+localStorage.rep_type);
-						$("#cmprepid").html("ID:		"+localStorage.repID);
+						$("#cmprepname").html("Name	:		"+localStorage.repName);
+						$("#cmpreptype").html("Type	:		"+localStorage.rep_type);
+						$("#cmprepid").html("ID	:		"+localStorage.repID);
 												
 						url = "#first_page";
 						$.mobile.navigate(url);		
@@ -215,8 +245,15 @@ function syncBasic(){
 						$('#rec').empty();
 						$('#rec').append(rec).trigger('create');
 						//$('#rec').html(rec);
-												
-						$("#btn_receive").show();
+						$("#usg").hide();
+						$("#agn").hide();						
+						$('#btn_receive').show();
+						$('#btn_usages').show();
+						$('#btn_stock').show();
+						$('#report').show();
+			
+						$("#entryAgency").hide();
+						$("#summaryAgency").hide();
 						$('#townList').empty();
 						$('#townList').append(localStorage.townStr).trigger('create');
 						
@@ -228,23 +265,41 @@ function syncBasic(){
 						$.mobile.navigate(url);	
 					}else {
 
-						$('#outletListAgency').empty();
-						$('#outletListAgency').append(localStorage.outStr).trigger('create');
+						var agn='<div data-theme="c" data-role="header" data-position="fixed" ><a data-role="button" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets"><img src="menu.png"/></a><a data-role="button" onclick="backClick();" data-rel="back" class="ui-btn-right" data-transition="slide"><img src="back.png"/></a> <h3 style="color:#fff;">POST-IT</h3></div>'
+						$('#agn').empty();
+						$('#agn').append(agn).trigger('create');
+						//$('#rec').html(rec);
+						$("#rec").hide();
+						$("#usg").hide();
 						
-						$("#anprepname").html("Name	:		"+localStorage.repName);
-						$("#anpreptype").html("Type	:		"+localStorage.rep_type);
-						$("#anprepid").html("ID	:		"+localStorage.repID);
 						
-						url = "#page6";
+						$("#entryAgency").show();
+						$("#summaryAgency").show();
+												
+						$('#btn_receive').hide();
+						$('#btn_usages').hide();
+						$('#btn_stock').hide();
+						$('#report').hide();
+						$('#townList').empty();
+						$('#townList').append(localStorage.townStr).trigger('create');
+						
+						$("#suprepname").html("Name	:		"+localStorage.repName);
+						$("#supreptype").html("Type	:		"+localStorage.rep_type);
+						$("#suprepid").html("ID	:		"+localStorage.repID);
+						
+						url = "#homePage";
 						$.mobile.navigate(url);	
 					}												
 				}else{
 					$('#bufferImageSync').hide();						
 					$(".errorMsg").html("Sync Failed. Authorization or Network Error.");
 					$('#syncBasic').show();
+					
+					
 				}				
 		  }//----/success f
 		});//------/ajax			
+	
 	}//-----/field			
 }
 	
@@ -262,7 +317,7 @@ function menuClick(){
 	}else if (localStorage.rep_type=='CM'){
 		url = "#first_page";	
 	}else if (localStorage.rep_type=='AGENCY'){
-		url = "#page6";	
+		url = "#homePage";	
 	}
 	
 	$.mobile.navigate(url);
@@ -289,6 +344,7 @@ function townSelect(){
 				if (resultArray[0]=='Success'){	
 					localStorage.posmCodeSup=resultArray[1];
 					localStorage.posmCodeSupUges=resultArray[2];					
+					localStorage.posmCodeAgency=resultArray[3];
 					
 					$("#posm_code").empty();
 					$("#posm_code").append(localStorage.posmCodeSup).trigger('create');
@@ -296,9 +352,12 @@ function townSelect(){
 					$('#posmCodeList').empty();
 					$('#posmCodeList').append(localStorage.posmCodeSupUges).trigger('create');
 					
+					$('#posmCodeAgn').empty();
+					$('#posmCodeAgn').append(localStorage.posmCodeAgency).trigger('create');
 					
 					$("#townSelct").html("Town:		"+localStorage.select_town);
 					$('#townSelctRec').html("Town:		"+localStorage.select_town);
+					$('#townSelctAgency').html("Town:		"+localStorage.select_town);
 				
 					
 					$(".errorChk").text("");		
@@ -399,7 +458,7 @@ function submit_data_receive(){
 	var posm_type=$("#posm_type").val();
 	
 	var brand=$("#brand").val();
-	var allocation=$("#allocation").val();
+	var dueRec=$("#due").val();
 	
 	var received=$("#received").val().replace('+','').replace('-','').replace('.','').replace('/','').replace('*','').replace(',','');
 	imageName=$("#recPhoto_name").val();
@@ -412,10 +471,10 @@ function submit_data_receive(){
 		$("#btn_submit_receive").show();
 	}else{
 				
-		//alert(apipath+"submitData_receive?&syncCode="+localStorage.sync_code+"&repID="+localStorage.repID+"&repName="+localStorage.repName+"&mobileNo="+localStorage.mobileNo+"&select_town="+localStorage.select_town+"&posm_code="+posm_code+"&posm_type="+posm_type+"&brand="+brand+"&allocation="+allocation+"&received="+received+"&imageName="+imageName+"&alcId="+alcId);	
+		//alert(apipath+"submitData_receive?&syncCode="+localStorage.sync_code+"&repID="+localStorage.repID+"&repName="+localStorage.repName+"&mobileNo="+localStorage.mobileNo+"&select_town="+localStorage.select_town+"&posm_code="+posm_code+"&posm_type="+posm_type+"&brand="+brand+"&dueRec="+dueRec+"&received="+received+"&imageName="+imageName+"&alcId="+alcId);	
 		$.ajax({
 			type: 'POST',
-			url:apipath+"submitData_receive?&syncCode="+localStorage.sync_code+"&repID="+localStorage.repID+"&repName="+localStorage.repName+"&mobileNo="+localStorage.mobileNo+"&select_town="+localStorage.select_town+"&posm_code="+posm_code+"&posm_type="+posm_type+"&brand="+brand+"&allocation="+allocation+"&received="+received+"&imageName="+imageName+"&alcId="+alcId,
+			url:apipath+"submitData_receive?&syncCode="+localStorage.sync_code+"&repID="+localStorage.repID+"&repName="+localStorage.repName+"&mobileNo="+localStorage.mobileNo+"&select_town="+localStorage.select_town+"&posm_code="+posm_code+"&posm_type="+posm_type+"&brand="+brand+"&dueRec="+dueRec+"&received="+received+"&imageName="+imageName+"&alcId="+alcId,
 																																																													
 			success: function(result) {			
 				if(result=='Success'){
@@ -425,7 +484,7 @@ function submit_data_receive(){
 					//$("#posm_code").val("");
 					$("#posm_type").val("");
 					$("#brand").val("");
-					$("#allocation").val("");
+					$("#dueRec").val("");
 					$("#alcId").val("");
 				
 					document.getElementById('myImageA').src = '';
@@ -596,6 +655,7 @@ function sRoute(routeName){
 		})
 	}else{
 		var selectTown=localStorage.select_town.replace('-','|');
+		//alert (apipath+"getOutlet?&routeName="+rName+"&townCode="+selectTown);
 		$.ajax({
 		type: 'POST',
 		url:apipath+"getOutlet?&routeName="+rName+"&townCode="+selectTown,
@@ -631,7 +691,7 @@ function sRoute(routeName){
 
 function outlet(outletIDName){
 
-		
+		//alert(outletIDName)
 		outletS=outletIDName.split('-');
 		outlet_name=outletS[0]
 		outlet_code=outletS[1]
@@ -644,12 +704,21 @@ function outlet(outletIDName){
 		$(".sucMsgU").hide();
 		$("#btn_submit_usages").hide();
 		$("#allHide").hide();	
-		
+		if(localStorage.rep_type =='CM'){	
+			url="#page5";					
+		}else if (localStorage.rep_type =='SUPERVISOR'){
+			url="#page5";
+		}else{
+			$("#sucMsgAgency").hide();
+			$("#bufferImageAgency").hide();
+			$("#btn_submit_Agency").hide();
+			$("#recDataAgency").hide();
+			$("#allHideAgency").hide();
+			url="#page14";					
 			
-		url="#page5";					
+		}
 		$.mobile.navigate(url);
-			
-}
+}		
 /*=======================usage page5============================*/
 function alloDetailsU(){
 	$("#qty").val("");
@@ -705,7 +774,7 @@ function alloDetailsU(){
 					$("#balance").html("Balance Qty:	"+balance_qty);
 					$("#uposm_type").val(posmType);
 					$("#ubrand").val(brand);
-					$("#uallocation").val(a_qty);
+					$("#balance").val(balance_qty);
 					$("#ualcId").val(alc_id);
 				}else{
 					$(".errorChk").text("Please check internet connection");
@@ -730,7 +799,7 @@ function submit_data_usages(){
 	var uposm_type=$("#uposm_type").val();
 	
 	var ubrand=$("#ubrand").val();
-	var uallocation=$("#uallocation").val();
+	var baUsage=$("#balance").val();
 	var alcId=$("#ualcId").val();
 	var a_qty=$("#qty").val().replace('+','').replace('-','').replace('.','').replace('/','').replace('*','').replace(',','');
 	imageName2=$("#usePhoto_name").val();
@@ -744,10 +813,10 @@ function submit_data_usages(){
 		$("#btn_submit_usages").show();
 	}else{
 				
-		//alert(apipath+"submitData_usages?&syncCode="+localStorage.sync_code+"&repID="+localStorage.repID+"&repName="+localStorage.repName+"&mobileNo="+localStorage.mobileNo+"&town="+town+"&routeName="+rName+"&outlet_code="+outlet_code+"&outlet_name="+outlet_name+"&posmCode="+posmCode+"&uposm_type="+uposm_type+"&ubrand="+ubrand+"&uallocation="+uallocation+"&a_qty="+a_qty+"&alcId="+alcId+"&imageName2="+imageName2);
+		//alert(apipath+"submitData_usages?&syncCode="+localStorage.sync_code+"&repID="+localStorage.repID+"&repName="+localStorage.repName+"&mobileNo="+localStorage.mobileNo+"&town="+town+"&routeName="+rName+"&outlet_code="+outlet_code+"&outlet_name="+outlet_name+"&posmCode="+posmCode+"&uposm_type="+uposm_type+"&ubrand="+ubrand+"&baUsage="+baUsage+"&a_qty="+a_qty+"&alcId="+alcId+"&imageName2="+imageName2);
 		$.ajax({
 			type: 'POST',
-			url:apipath+"submitData_usages?&syncCode="+localStorage.sync_code+"&repID="+localStorage.repID+"&repName="+localStorage.repName+"&mobileNo="+localStorage.mobileNo+"&town="+town+"&routeName="+rName+"&outlet_code="+outlet_code+"&outlet_name="+outlet_name+"&posmCode="+posmCode+"&uposm_type="+uposm_type+"&ubrand="+ubrand+"&uallocation="+uallocation+"&a_qty="+a_qty+"&alcId="+alcId+"&imageName2="+imageName2,
+			url:apipath+"submitData_usages?&syncCode="+localStorage.sync_code+"&repID="+localStorage.repID+"&repName="+localStorage.repName+"&mobileNo="+localStorage.mobileNo+"&town="+town+"&routeName="+rName+"&outlet_code="+outlet_code+"&outlet_name="+outlet_name+"&posmCode="+posmCode+"&uposm_type="+uposm_type+"&ubrand="+ubrand+"&baUsage="+baUsage+"&a_qty="+a_qty+"&alcId="+alcId+"&imageName2="+imageName2,
 																																																													
 			success: function(result) {			
 				if(result=='Success'){
@@ -755,7 +824,7 @@ function submit_data_usages(){
 						
 					$("#uposm_type").val("");
 					$("#ubrand").val("");
-					$("#uallocation").val("");
+					$("#baUsage").val("");
 					$("#qty").val("");	
 					
 					
@@ -851,6 +920,7 @@ function agency(){
 /**------------------------page 7 ----------------------------********/
 function searchoutlet(){
 	
+	$("#routeTown").hide();
 	$(".errorChk").text("");			
 	url="#page7";				
 	$.mobile.navigate(url);	
@@ -861,7 +931,7 @@ function execution(){
 	
 	$("#btn_submit_agency").show();
 	$("#allhideA").show();
-	$("#sucMsgA").hide();
+	$("#sucMsgAgency").hide();
 	
 	if($("#outletListAgency").find("input[name='outlet_agency_select']:checked").length==0){
 		$(".errorChk").text("Select Outlet");
@@ -879,9 +949,7 @@ function execution(){
 var outletIdNameAgency='';
 function agencySelectOutlet(outlet_agency){
 	
-	$("#btn_submit_agency").show();
-	$("#allhideA").show();
-	$("#sucMsgA").hide();
+	
 	
 	outletIdNameAgency=outlet_agency;
 	//alert(apipath+"getAllDataAgency?&outlet_agency_select="+outletIdNameAgency);
@@ -914,74 +982,139 @@ function agencySelectOutlet(outlet_agency){
 	
 }
 /**------------------------Agency Submit Data ----------------------------********/
+function alloDetailsAgency(){
+	$("#agencyQty").val("");
+	$("#set").val("");
+	$("#light").val("");
+	$("#paint").val("");
+	$("#citycor").val("");
+	$("#imageName3").val("");
+	$(".errorChk").text("");
+	$(".errorChkP").text("");
+	$("#bufferImageAgency").hide();
+	$("#recDataAgency").hide();
+	$("#btn_submit_Agency").hide();	
+	$("#sucMsgAgency").hide();
+	
+	var posmCode=$("#posmCodeAgency").val();
+	var town=localStorage.select_town.replace('-', '|');
+	
+	if (posmCode==''){
+		$(".errorChkP").text("Select posm Code");
+		$("#btn_submit_Agency").hide();
+		$("#recDataAgency").hide();
+		$("#allHideAgency").hide();	
+	}else{
+		//alert (apipath+"getAllDataAgncy?&posmCode="+posmCode+"&town="+town);
+		$("#bufferImageAgency").show();	
+		$.ajax({
+			type: 'POST',
+			url:apipath+"getAllDataAgncy?&posmCode="+posmCode+"&town="+town,																																																											
+			success: function(result) {	
+				var resultArray = result.split('rdrd');
+					recStatus=resultArray[0];
+				if (recStatus=='Success'){	
+					$("#bufferImageAgency").hide();
+					$("#btn_submit_Agency").show();
+					$("#recDataAgency").show();
+					$("#allHideAgency").show();
+					$(".errorChk").text("");
+						
+					var posmType=resultArray[1];	
+					var brand=resultArray[2];
+					var allo_qty=resultArray[3];
+					var balance_qty=resultArray[4];
+					
+					$("#agencyposm_type").html("Posm Type	:	"+ posmType);
+					$("#agencybrand").html("Brand	:	"+brand);
+					$("#agencyallocation").html("Stock Qty:	"+allo_qty);
+					$("#agencydue").html("Balance Qty:	"+balance_qty);
+					$("#agencyposm_type").val(posmType);
+					$("#agencybrand").val(brand);
+					$("#agencydue").val(balance_qty);
+					$("#agencyallocation").val(allo_qty);
+					
+				}else{
+					$(".errorChk").text("Please check internet connection");
+				}
+			}
+		})
+	}
+}
+
+
 function submit_data_agency(){
 	
-	$("#btn_submit_agency").hide();
-	var posmcode=$("#posmcode").val().replace('+','').replace('-','').replace('.','').replace('/','').replace('*','').replace(',','');
+	$("#btn_submit_Agency").hide();
+	
+	var posmCode=$("#posmCodeAgency").val();
+	var posmType=$("#agencyposm_type").val();
+	var brandAgency=$("#agencybrand").val();
+	var balanceAgency=$("#agencydue").val();
+	var allocationAgency=$("#agencyallocation").val();
+	//alert (brandAgency+"-"+balanceAgency+"-"+allocationAgency)
+	
 	var aqty=$("#agencyQty").val().replace('+','').replace('-','').replace('.','').replace('/','').replace('*','').replace(',','');
 	var aset=$("#set").val().replace('+','').replace('-','').replace('.','').replace('/','').replace('*','').replace(',','');
 	var alight=$("#light").val().replace('+','').replace('-','').replace('.','').replace('/','').replace('*','').replace(',','');
-	var apaint=$("#paint").val().replace('+','').replace('-','').replace('.','').replace('/','').replace('*','').replace(',','');
+	var apaint=$("#paint").val();
 	var acity=$("#citycor").val().replace('+','').replace('-','').replace('.','').replace('/','').replace('*','').replace(',','');
+	//alert (aqty+"-"+aset+"-"+alight+"-"+apaint+"-"+acity)
 	imageName3=$("#agnPhoto_name").val();
 	imagePathC=$("#agnPhoto_path").val();
-	var outlet_route=$("#outlet_route_code").val();
-	var outlet_town_name=$("#outlet_town_name").val();
 	
-	if(posmcode=='' || posmcode==0){
-		$(".errorChk").text("Required POSM Code");
-		$("#btn_submit_agency").show();
-	}else if(aqty==''|| aqty==0){
+	var town=localStorage.select_town.replace('-', '|');
+	
+	if(aqty==''|| aqty==0){
 		$(".errorChk").text("Required Qty ");
-		$("#btn_submit_agency").show();
-		$("#allhideA").show();
-		$("#sucMsgA").hide();
-		
-	}else if(aset==''||aset==0){
-		$(".errorChk").text("Required Set");
-		$("#btn_submit_agency").show();
-		$("#allhideA").show();
-		$("#sucMsgA").hide();
+		$("#btn_submit_Agency").show();
+		$("#allHideAgency").show();
+		$("#sucMsgAgency").hide();
 		
 	}else{
 		
-		//alert(apipath+"submitData_agency?&syncCode="+localStorage.sync_code+"&outletIdNameAgency="+outletIdNameAgency+"&outlet_route="+outlet_route+"&outlet_town_name="+outlet_town_name+"&posmcode="+posmcode+"&aqty="+aqty+"&aset="+aset+"&alight="+alight+"&apaint="+apaint+"&imageName3="+imageName3);
+		//alert(apipath+"submitData_agency?&syncCode="+localStorage.sync_code+"&posmCode="+posmCode+"&repID="+localStorage.repID+"&repName="+localStorage.repName+"&mobileNo="+localStorage.mobileNo+"&town="+town+"&routeName="+rName+"&outlet_code="+outlet_code+"&outlet_name="+outlet_name+"&posmType="+posmType+"&brandAgency="+brandAgency+"&balanceAgency="+balanceAgency+"&allocationAgency="+allocationAgency+"&aqty="+aqty+"&aset="+aset+"&alight="+alight+"&apaint="+apaint+"&acity="+acity+"&imageName3="+imageName3);
 		$.ajax({
 			type: 'POST',
-			url:apipath+"submitData_agency?&syncCode="+localStorage.sync_code+"&outletIdNameAgency="+outletIdNameAgency+"&outlet_route="+outlet_route+"&outlet_town_name="+outlet_town_name+"&posmcode="+posmcode+"&aqty="+aqty+"&aset="+aset+"&alight="+alight+"&apaint="+apaint+"&acity="+acity+"&imageName3="+imageName3,
+			url:apipath+"submitData_agency?&syncCode="+localStorage.sync_code+"&posmCode="+posmCode+"&repID="+localStorage.repID+"&repName="+localStorage.repName+"&mobileNo="+localStorage.mobileNo+"&town="+town+"&routeName="+rName+"&outlet_code="+outlet_code+"&outlet_name="+outlet_name+"&posmType="+posmType+"&brandAgency="+brandAgency+"&balanceAgency="+balanceAgency+"&allocationAgency="+allocationAgency+"&aqty="+aqty+"&aset="+aset+"&alight="+alight+"&apaint="+apaint+"&acity="+acity+"&imageName3="+imageName3,
 																																																													
 			success: function(result) {			
 				if(result=='Success'){
 					
-					$("#posmcode").val("");	
-					$("#agencyQty").val("");	
-					$("#set").val("");
-					$("#light").val("");
-					$("#paint").val("");
-					$("#citycor").val("");
-					$("#allocation").val("");
 					
-					$("#allhideA").hide();
-					$("#sucMsgA").show();
+					$("#aqty").val("");
+					$("#aset").val("");
+					$("#alight").val("");
+					$("#apaint").val("");
+					$("#acity").val("");
+					
+					
+					
+					$("#allHideAgency").hide();
+					$("#sucMsgAgency").show();
 					$(".errorChk").text("");
-					$("#btn_submit_agency").hide();
+					$("#btn_submit_Agency").hide();
 					
 					document.getElementById('myImageC').src = '';
 					
 					uploadPhotoAgency(imagePathC, imageName3);
 					
-					$(".sucChk").text('Successfully Submitted');
+					//$(".sucChk").text('Successfully Submitted');
 				
 				
-					url="#page8";					
+					url="#page14";					
 					$.mobile.navigate(url);
 					/*setTimeout(function(){
 						location.reload();
 					},500);*/				
+				}else if (result=='Faild'){					
+						$(".errorChk").text("Usage Qty less then Balance Qty");
+						$("#allHideAgency").show();
+						$("#btn_submit_Agency").show();	
 				}else{
 					$(".errorChk").text("Please check internet connection");															
-					$("#btn_submit_agency").show();	
-					$("#allHideA").show();
+					$("#btn_submit_Agency").show();
+					$("#allHideAgency").show();
 					
 				}
 				
@@ -1087,7 +1220,7 @@ function recReport(){
 						recQty=recordR[3];
 						stock=recordR[4];
 										
-						rectable +='<tr style="font-size:11px; text-align:center;"><td>'+dateR+'</td><td>'+brand+'</td><td>'+posmType+'</td><td>'+recQty+'</td><td>'+stock+'</td></tr>'
+						rectable +='<tr style="font-size:11px;"><td>'+dateR+'</td><td>'+brand+'</td><td>'+posmType+'</td><td>'+recQty+'</td><td>'+stock+'</td></tr>'
 					
 					}
 					rectable +='</table>'
@@ -1138,15 +1271,16 @@ function recUsage(){
 				localStorage.usageReportR=getResult[1];
 				var UsageRpt=localStorage.usageReportR.split('rdrd');			
 				var usatable='<table>';
-					usatable +='<tr style="font-size:12px;" ><th>DATE</th><th>Outlet Code</th><th>Name</th><th>Usage Qty</th></tr>'
+					usatable +='<tr style="font-size:12px; text-align:center;" ><th>Date</th><th>Outlet_Code</th><th>Name</th><th>POSM_Type</th><th>Usage_Qty</th></tr>'
 					for (i=0;i<UsageRpt.length;i++){	
 						usageR=UsageRpt[i].split('|');
 						dateU=usageR[0];
 						outletcode=usageR[1];
 						outletname=usageR[2];
-						Uqty=usageR[3];
+						uposmType=usageR[3];
+						Uqty=usageR[4];
 				
-						usatable += '<tr style="font-size:11px; text-align:center;"><td>'+dateU+'</td><td>'+outletcode+'</td><td>'+outletname+'</td><td>'+Uqty+'</td></tr>'
+						usatable += '<tr style="font-size:11px; text-align:center;"><td>'+dateU+'</td><td>'+outletcode+'</td><td>'+outletname+'</td><td>'+uposmType+'</td><td>'+Uqty+'</td></tr>'
 					
 					}
 					usatable +='</table>'
@@ -1200,7 +1334,7 @@ function stockReport(){
 				
 				var stockRPT=localStorage.stockReport.split('rdrd');			
 				var cmRouteSTr='<table>';
-					cmRouteSTr += '<tr style="font-size:12px;"><th>Brand</th><th>POSM TYPE</th><th>POSM CODE</th><th>Allocation</th><th>STOCK</th></tr>'
+					cmRouteSTr += '<tr style="font-size:12px;"><th>Brand</th><th>POSM Type</th><th>POSM Code</th><th>Allocation</th><th>Stock</th></tr>'
 					for (i=0;i<stockRPT.length;i++){	
 						stockR=stockRPT[i].split('|');
 						//alert (stockR)
@@ -1240,6 +1374,64 @@ function stockReport(){
 	url="#page11";				
 	$.mobile.navigate(url);
 }
+
+function summary_report(){
+	var posmCode=$("#posmCodeAgency").val();
+	var town=localStorage.select_town.replace('-', '|');
+	
+	//alert (apipath+"Agency_report?&repID="+localStorage.repID+"&repName="+localStorage.repName+"&townName="+town)
+	$("#bufferImageAgencyA").show();
+	$.ajax({
+			type: 'POST',
+			url:apipath+"Agency_report?&repID="+localStorage.repID+"&repName="+localStorage.repName+"&townName="+town,
+																																																													
+			success: function(result) {
+				getResult=result.split('||');
+				if(getResult[0]=='Success'){
+				$("#bufferImageAgencyA").hide();				
+				localStorage.usageReportA=getResult[1];
+				var agnRpt=localStorage.usageReportA.split('rdrd');			
+				var agentable='<table>';
+					agentable +='<tr style="font-size:12px; text-align:center;" ><th>Town</th><th>Outlet_ID</th><th>Name</th><th>POSM_Code</th><th>Usage_Qty</th></tr>'
+					for (i=0;i<agnRpt.length;i++){	
+						agnR=agnRpt[i].split('|');
+						town=agnR[0];
+						outletid=agnR[1];
+						outletname=agnR[2];
+						posmcode=agnR[3];
+						qty=agnR[4];
+				
+						agentable += '<tr style="font-size:11px; text-align:center;"><td>'+town+'</td><td>'+outletid+'</td><td>'+outletname+'</td><td>'+posmcode+'</td><td>'+qty+'</td></tr>'
+					
+					}
+					agentable +='</table>'
+					
+					
+					$('#usageReportAgency').empty();
+					$('#usageReportAgency').append(agentable).trigger('create');
+					
+					var townName=town;
+					var repid=localStorage.repID;
+					$("#townNameA").html ("Town	:		"+townName);
+					$("#repIDA").html ("Rep ID	:		"+repid);
+					
+				
+			}else{
+				var townName=town;
+				var repid=localStorage.repID;
+				$("#townNameA").html ("Town	:		"+townName);
+				$("#repIDA").html ("Rep ID	:		"+repid);
+				$(".errorChk").text("No Record In DataBase");
+				}
+		}
+	})
+
+	$(".errorChk").text("");			
+	url="#page13";				
+	$.mobile.navigate(url);
+		
+}
+
 
 function exit() {
 	navigator.app.exitApp();

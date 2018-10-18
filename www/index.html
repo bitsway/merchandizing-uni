@@ -147,6 +147,7 @@
 	color:#fff;
 	background-color:#CE295E;
 	}
+	
 
 	#summary_report{
 	color:#fff;
@@ -202,6 +203,16 @@
 		font-weight:1;
 		background-color:#CE295E;
 	}
+	#entryAgency{
+	    font-weight:1;
+		background-color:#CE295E;
+	}
+				
+	#summaryAgency{
+		font-weight:1;
+		background-color:#CE295E;
+	}
+	
     </style>	
 </head>
 
@@ -222,7 +233,7 @@
     <div id="suprepname" style="color:#DA335A; text-align:center;"></div>  
     <div id="supreptype" style="color:#DA335A; text-align:center;"></div>
     <div id="suprepid" style="color:#DA335A; text-align:center;"></div>    
-    <div id="townList" style="height:420px; overflow:scroll;"></div>
+    <div id="townList" style="height:0 auto; overflow:scroll;"></div>
     <a data-role="button" id="townSUP" onclick="townSelect()" href="#" data-transition="slide" style="background-color:#CE295E;" ><span class="text-color">Next</span></a>
         
     <div class="errorChk" style="color:#cc0000;" ></div>       
@@ -277,7 +288,7 @@
         <br/>
         <br/>
         <br/>
-         <div data-role="footer" data-position="fixed" style="font-size:12px; color:#595959; background-color:#FFF; font-weight:1;" align="center" >20181010</div>
+         <div data-role="footer" data-position="fixed" style="font-size:12px; color:#595959; background-color:#FFF; font-weight:1;" align="center" >20181018</div>
     </div>
 </div>
 
@@ -286,6 +297,7 @@
 	<br/><br/>
 	<div id="rec"></div>
     <div id="usg"></div>
+    <div id="agn"></div>
     <div data-role="content" >
     <div id="cmprepname" style="color:#DA335A; text-align:center;"></div>  
     <div id="cmpreptype" style="color:#DA335A; text-align:center;"></div>
@@ -294,7 +306,9 @@
     <a data-role="button" id="btn_receive" onclick="receive('Receive')" href="#" data-transition="slide" style="color:#fff">Receive</a>
     <a data-role="button" id="btn_usages" onclick="usages('Usages')" href="#" data-transition="slide" style="color:#fff">Usage </a> 
     <a data-role="button" id="btn_stock" onclick="stockReport()" href="#" data-transition="slide" style="color:#fff"  >Stock Report </a> 
-     <a data-role="button" id="report" onclick="repo('repo')" href="#" data-transition="slide" style="color:#fff"  >Receive And Usage Report </a>   
+     <a data-role="button" id="report" onclick="repo('repo')" href="#" data-transition="slide" style="color:#fff"  >Receive And Usage Report </a> 
+     <a data-role="button" id="entryAgency" onclick="usages('usages')" href="#" data-transition="slide" style="color:#fff"  > Entry </a> 
+     <a data-role="button" id="summaryAgency" onclick="summary_report('summary_report')" href="#" data-transition="slide" style="color:#fff"  >Summary Report</a>  
      <div class="errorChk" style="color:#cc0000;"></div>
         <br/><br/>
   	<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
@@ -323,7 +337,7 @@
         <h3 style="color:#fff;">POST-IT</h3>
         
         </div>
-    <br/>
+    <br/><br/>
     <div data-role="content" >    
     <div id="townSelctRec" class="routselect"></div>
      <div class="routselect" style="font-size:18px;">Receive</div>             
@@ -503,7 +517,8 @@
      <div id="anprepid" style="color:#DA335A; text-align:center;"></div>    
     <div id="agency"></div> 
     <a data-role="button" id="entry" onclick="searchoutlet('entry')" href="#" data-transition="slide">Entry</a>
-    <a data-role="button" id="summary_report" onclick="summary_report('summary_report')" href="#" data-transition="slide" style="font-weight:1">Summary Report </a>            
+     <a data-role="button" id="btn_stock" onclick="()" href="#" data-transition="slide" style="color:#fff"  >Stock Report </a> 
+    <a data-role="button" id="" onclick="('')" href="#" data-transition="slide" style="font-weight:1">Summary Report </a>            
      <div class="errorChk" style="color:#cc0000;"></div>
         <br/><br/>
   	<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
@@ -537,7 +552,7 @@
         <br/>
  	
     </div>
-    <div data-role="content">
+    <div id="routeTown" data-role="content">
     <ul data-role="listview" data-inset="true">
     	<li class="ui-field-contain" >
         	<table width="100%" class="ui-body-d ui-shadow table-stripe ui-responsive" id="beneficiaryCount" style="cell-spacing:0px;"  data-role="table" data-theme="d"  data-mode="display:none">
@@ -552,12 +567,12 @@
             </table>     
         </li>
     </ul>
-      <a data-role="button" id="btn_submit" onClick="execution()" class="ui-btn" style="background-color:#CE295E"> <span class="text-color"></span></a>
+      <a data-role="button" id="btn_submit" onClick="execution()" class="ui-btn" style="background-color:#CE295E"> <span class="text-color">Next</span></a>
       </div>
       
 </div>
 <!-------------------------------------page 8---------------------------------------->
-<div data-role="page" data-theme="c" id="page8" style="overflow:scroll;">
+<!--<div data-role="page" data-theme="c" id="page8" style="overflow:scroll;">
     <div data-theme="c" data-role="header" data-position="fixed" >
         <a data-role="button" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets " ><img src="menu.png" /></a>
         <a data-role="button" onclick="backClick();" data-rel="back" class="ui-btn-right" data-transition="slide"><img src="back.png" /></a>
@@ -592,7 +607,8 @@
               <tr>
               <tr>
                 <td style="color:fff;"><span class="btn-color">Paint</span></td>
-                <td><input type="number" id="paint" name="paint" required="required"/></td>
+                
+                <td><select id="paint"name="paint" required="required"><option value="Yes">Yes</option><option value="No">No</option></select></td>
               </tr>
               <tr>
                 <td style="color:fff;"><span class="btn-color">City Corp</span></td>
@@ -611,17 +627,17 @@
     </ul>
     </div>  
      
-     <a data-role="button" id="btn_submit_agency" onClick="submit_data_agency();" class="ui-btn" style="background-color:#CE295E" > <span class="text-color">Submit</span></a>
+     <a data-role="button" id="btn_submit_agency" onClick="submit_data_agency();" class="ui-btn" style="background-color:#CE295E"  <span class="text-color">Submit</span></a>
      <div id="sucMsgA" style="color:#FFF; text-align:center; background-color:#DA335A; padding:30px 0px 30px 0px; border-radius:10px;">Successfully Submitted</div>
      
-     <!--<div class="sucChk" style="color:#004d00;"></div>-->
+     
      <div class="errorChk" style="color:#cc0000;"></div>
      
         <br/><br/>
   
             <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
     </div>
-</div>
+</div>-->
 <!-------------------------------------------Report------------------------------>
 <div data-role="page" data-theme="c" id="page9" style="overflow:scroll;">
     <div data-theme="c" data-role="header" data-position="fixed" >
@@ -702,12 +718,121 @@
     <ul data-role="listview" data-inset="true">
     	<li class="ui-field-contain" >  
      	<div id="bufferImageUsaR" style="text-align:center;"><img src="running.gif" /></div>
-    	 <div id="usageReportR"></div>
+    	 <div id="usageReportR"  style="overflow:scroll; "></div>
      	</li>
     </ul> 
      <div class="errorChk" style="color:#cc0000;"></div>
     </div>
 </div>
+<!-------------Agency Report------------------------------------------------------------>
+<div data-role="page" data-theme="c" id="page13" style="overflow:scroll;">
+    <div data-theme="c" data-role="header" data-position="fixed" >
+        <a data-role="button" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets " ><img src="menu.png" /></a>
+        <a data-role="button" onclick="backClick();" data-rel="back" class="ui-btn-right" data-transition="slide"><img src="back.png" /></a>
+       <h3 class="headerc">Summary Report</h3>
+    </div>
+    <br/>
+    <br/>
+    <div data-role="content" > 
+    <div id="townNameA" style="color:#DA335A; text-align:center;"></div>  
+    <div id="repIDA" style="color:#DA335A; text-align:center;"></div>
+   
+                
+    <ul data-role="listview" data-inset="true">
+    	<li class="ui-field-contain" >  
+     	<div id="bufferImageAgencyA" style="text-align:center;"><img src="running.gif" /></div>
+    	 <div id="usageReportAgency"  style="overflow:scroll; "></div>
+     	</li>
+    </ul> 
+     <div class="errorChk" style="color:#cc0000;"></div>
+    </div>
+</div>
+<!----------------------Agncy Combo------------------------------->
+<div data-role="page" data-theme="c" id="page14" style="overflow:scroll;">
+    <div data-theme="c" data-role="header" data-position="fixed" >
+        <a data-role="button" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets " ><img src="menu.png" /></a>
+        <a data-role="button" onclick="backClick();" data-rel="back" class="ui-btn-right" data-transition="slide"><img src="back.png" /></a>
+        <h3 style="color:#fff;">POST-IT</h3>
+        
+        </div>
+    <br/><br/>
+    <div data-role="content" >    
+    <div id="townSelctAgency" class="routselect"></div>
+     <div class="routselect" style="font-size:18px;">EXICUTION</div> 
+               
+   
+        <table width="100%" class="ui-body-d ui-shadow table-stripe ui-responsive" id="beneficiaryCount" style="cell-spacing:0px; background-color:#BFBFBF;"  data-role="table" data-theme="d"  data-mode="display:none">
+          <tr>
+            <td><label style="color:#D42E5C;  font-weight:1;">POSM Code</label><div id="posmCodeAgn"></div></td>
+            <td style="vertical-align:bottom;">
+                <a data-role="button" id="" onClick="alloDetailsAgency();" class="ui-btn" style="background-color:#D42E5C; color:#FFF;  font-weight:1;">Next</a>
+            </td>
+          </tr>
+          </table>  
+          <br />
+        <div class="errorChkP" style="color:#cc0000; background-color:#FFF;"></div>
+        <div id="bufferImageAgency" style="text-align:center;"><img src="running.gif" /></div>
+        <div id="allHideAgency">
+        <div id="recDataAgency"> 
+            <table table width="100%" class="ui-body-d ui-shadow table-stripe ui-responsive" id="beneficiaryCount" style="cell-spacing:0px; color:#D42E5C; background-color:#BFBFBF;"  data-role="table" data-theme="d"  data-mode="display:none">
+            
+            	 <tr>
+                    <td><div id="agencybrand"></div></td>
+                </tr>
+                <tr>
+                    <td><div id="agencyposm_type"></div> </td>
+                </tr>
+               
+                <tr>
+               		 <td><div id="agencyallocation"> </div></td>
+                </tr>
+                <tr>
+               		 <td><div id="agencydue"> </div></td>
+                </tr>
+            </table>
+        </div>
+        <div class="errorChk" style="color:#cc0000; background-color:#FFF;"></div>
+        <table table width="100%" class="ui-body-d ui-shadow table-stripe ui-responsive" id="beneficiaryCount" style="cell-spacing:0px; "  data-role="table" data-theme="d"  data-mode="display:none">
+        
+            <tr style="background-color:#AAAAAA;">
+                <td > <span class="btn-color">Qty</span></td>
+                <td><input type="number" id="agencyQty" name="agencyQty" /></td>
+              </tr>
+              <tr style="background-color:#AAAAAA;">
+                <td > <span class="btn-color">SFT</span></td>
+                 <td><input type="number" id="set" name="set" /></td>
+              </tr>
+              <tr style="background-color:#AAAAAA;">
+                <td ><span class="btn-color"># of Light</span></td>
+                <td><input type="number" id="light" name="light" /></td>
+              </tr>
+              <tr style="background-color:#AAAAAA;">
+                <td style="color:fff;"><span class="btn-color">Paint</span></td>
+                <!--<td><input type="text" id="paint" name="paint" required="required"/></td>-->
+                <td><select id="paint"name="paint" required="required"><option value="Yes">Yes</option><option value="No">No</option></select></td>
+              </tr>
+              <tr style="background-color:#AAAAAA;">
+                <td style="color:fff;"><span class="btn-color">City Corp</span></td>
+                <td><input type="text" id="citycor" name="citycor" required="required" /></td>
+              </tr>
+              <tr>
+                <td colspan="2">
+                    <a data-role="button" id="btn_take_pic" onClick="getAgencyImage();" class="ui-btn" style="background-color:#D42E5C; color:#FFF;  font-weight:1;">Take Picture</a>       
+                    <img src="" width="128" height="128" alt="Image1" id="myImageC" />       
+                    <input name="agnPhoto_path" id="agnPhoto_path" value=""  type="hidden">
+                    <input name="agnPhoto_name" id="agnPhoto_name" value=""  type="hidden">
+                </td>
+              </tr>     
+        </table>  
+        </div> 
+        <a data-role="button" id="btn_submit_Agency" onClick="submit_data_agency();" class="ui-btn" style="background-color:#D42E5C; color:#FFF;  font-weight:1;">Submit</a>
+         <div id="sucMsgAgency" style="color:#FFF; text-align:center; background-color:#DA335A; padding:30px 0px 30px 0px; border-radius:10px;">Successfully Submitted</div>
+
+  	</ul>
+            <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+    </div>
+</div>
+
   <script type="text/javascript" src="phonegap.js"></script>
   
 </body>
