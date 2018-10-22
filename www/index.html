@@ -185,30 +185,38 @@
 	}
 			
 	#btn_receive{
+		margin:2px;
 		font-weight:1;
 		background-color:#CE295E;
 	}
 
 	#btn_usages{
+		margin:2px;
 		font-weight:1;
 		background-color:#CE295E;
 	}	
 			
 	#btn_stock{
-	    font-weight:1;
-		background-color:#CE295E;
+	   margin:2px;
+	   font-weight:1;
+	   background-color:#CE295E;
 	}
 				
-	#report{
+	#reportbtn{
+		margin:2px;
 		font-weight:1;
 		background-color:#CE295E;
 	}
 	#entryAgency{
-	    font-weight:1;
+		
+	    margin:2px;
+		font-weight:1;
 		background-color:#CE295E;
 	}
 				
 	#summaryAgency{
+		
+		margin:2px;
 		font-weight:1;
 		background-color:#CE295E;
 	}
@@ -217,7 +225,41 @@
 </head>
 
 <body >
-
+<!-- ------------------- sync page---------------------------------------------------------------------------------------- -->
+<div data-theme="c" data-role="page" id="pagesync" >
+    <div data-theme="c" data-role="header" data-position="fixed" class="sync-header" >
+        <a data-role="button" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets" ><img src="menu.png" /></a>
+        <h3 class="headerc">POST-IT</h3>
+    </div>
+    <br/><br/>
+    <div data-role="content">
+        <div class="errorMsg"></div>
+		      
+        <ul data-role="listview" data-inset="true" data-theme="c" >
+            <li class="ui-field-contain" style="background-color:#BFBFBF">
+                <label for="mobile" class="btn1" style="color:#000;" > Mobile No</label>
+                <input name="mobile" id="mobile"  type="number" style=" background-color:#fff"">
+            </li>
+            <li class="ui-field-contain"  style="background-color:#BFBFBF">
+                <label for="password"  style="color:#000">Password </label>
+                <input type="password" name="password" id="password" style=" background-color:#fff"  >
+            </li>
+        </ul>
+		
+        <a data-role="button" href="#" id="syncBasic" onclick="syncBasic()"  data-theme="c" data-transition="slide" >Sync</a>
+        
+        <br/>
+        <br/>
+        <br/>
+		<div id="bufferImageSync" style="text-align:center;"><img src="running.gif" /></div>
+        <div id="#syncData"></div>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+         <div data-role="footer" data-position="fixed" style="font-size:12px; color:#595959; background-color:#FFF; font-weight:1;" align="center" >20181021</div>
+    </div>
+</div>
 
 <!------------------------------------------MAIN MENU----------------------------------------------------------->
 <div data-theme="c" data-role="page" id="homePage">
@@ -256,41 +298,7 @@
 </div>
 
 
-<!-- ------------------- sync page---------------------------------------------------------------------------------------- -->
-<div data-theme="c" data-role="page" id="pagesync" >
-    <div data-theme="c" data-role="header" data-position="fixed" class="sync-header" >
-        <a data-role="button" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets" ><img src="menu.png" /></a>
-        <h3 class="headerc">POST-IT</h3>
-    </div>
-    <br/><br/>
-    <div data-role="content">
-        <div class="errorMsg"></div>
-		      
-        <ul data-role="listview" data-inset="true" data-theme="c" >
-            <li class="ui-field-contain" style="background-color:#BFBFBF">
-                <label for="mobile" class="btn1" style="color:#000;" > Mobile No</label>
-                <input name="mobile" id="mobile"  type="number" style=" background-color:#fff"">
-            </li>
-            <li class="ui-field-contain"  style="background-color:#BFBFBF">
-                <label for="password"  style="color:#000">Password </label>
-                <input type="password" name="password" id="password" style=" background-color:#fff"  >
-            </li>
-        </ul>
-		
-        <a data-role="button" href="#" id="syncBasic" onclick="syncBasic()"  data-theme="c" data-transition="slide" >Sync</a>
-        
-        <br/>
-        <br/>
-        <br/>
-		<div id="bufferImageSync" style="text-align:center;"><img src="running.gif" /></div>
-        <div id="#syncData"></div>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-         <div data-role="footer" data-position="fixed" style="font-size:12px; color:#595959; background-color:#FFF; font-weight:1;" align="center" >20181018</div>
-    </div>
-</div>
+
 
 <!-- ------------------------------------first_page--------------------------------- -->
 <div data-role="page" data-theme="c" id="first_page" >
@@ -302,13 +310,14 @@
     <div id="cmprepname" style="color:#DA335A; text-align:center;"></div>  
     <div id="cmpreptype" style="color:#DA335A; text-align:center;"></div>
      <div id="cmprepid" style="color:#DA335A; text-align:center;"></div>    
-    <div id="townSelct" style="color:#D42E5C;"></div>             
-    <a data-role="button" id="btn_receive" onclick="receive('Receive')" href="#" data-transition="slide" style="color:#fff">Receive</a>
-    <a data-role="button" id="btn_usages" onclick="usages('Usages')" href="#" data-transition="slide" style="color:#fff">Usage </a> 
-    <a data-role="button" id="btn_stock" onclick="stockReport()" href="#" data-transition="slide" style="color:#fff"  >Stock Report </a> 
-     <a data-role="button" id="report" onclick="repo('repo')" href="#" data-transition="slide" style="color:#fff"  >Receive And Usage Report </a> 
-     <a data-role="button" id="entryAgency" onclick="usages('usages')" href="#" data-transition="slide" style="color:#fff"  > Entry </a> 
-     <a data-role="button" id="summaryAgency" onclick="summary_report('summary_report')" href="#" data-transition="slide" style="color:#fff"  >Summary Report</a>  
+    <div id="townSelct" style="color:#D42E5C;"></div> 
+                
+    <button data-role="button" id="btn_receive" onclick="receive('Receive')" href="#" data-transition="slide" style="color:#fff">Receive</button>
+    <button data-role="button" id="btn_usages" onclick="usages('Usages')" href="#" data-transition="slide" style="color:#fff">Usage </button> 
+    <button data-role="button" id="btn_stock" onclick="stockReport()" href="#" data-transition="slide" style="color:#fff"  >Stock Report </button> 
+     <button data-role="button" id="reportbtn" onclick="repo('repo')" href="#" data-transition="slide" style="color:#fff"  >Receive And Usage Report </button>
+     <button data-role="button" id="entryAgency" onclick="usages('usages')" href="#" data-transition="slide" style="color:#fff"  > Usage Entry </button> 
+     <button data-role="button" id="summaryAgency" onclick="summary_report('summary_report')" href="#" data-transition="slide" style="color:#fff"  >Summary Report</button>  
      <div class="errorChk" style="color:#cc0000;"></div>
         <br/><br/>
   	<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
@@ -504,7 +513,7 @@
 </div>
 
 <!-----------------------------------------Agency page 6-------------------------------------------->
-<div data-role="page" data-theme="c" id="page6">
+<!--<div data-role="page" data-theme="c" id="page6">
     <div data-theme="c" data-role="header" data-position="fixed" class="header" >
          <a data-role="button" href="#leftpanel3" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets"   ><img src="menu.png" /></a>
         <a data-role="button" onClick="exit();" ><img src="exit.png" /></a>
@@ -536,7 +545,7 @@
         </ul>
         
     </div>
-</div>
+</div>-->
 <!---------------------------------------------------- page 7------------------------------------------------->
 <div data-role="page" data-theme="c" id="page7" style="overflow:scroll;">
  <div data-theme="c" data-role="header" data-position="fixed" >
@@ -647,8 +656,8 @@
     </div>
     <br/><br/>
     <div data-role="content" > 
-     <a data-role="button" id="recReport" onClick="recReport('recReport');" class="ui-btn" style="background-color:#CE295E" > <span class="text-color">Receive Report</span></a>
-     <a data-role="button" id="recUsage" onClick="recUsage('recUsage');" class="ui-btn" style="background-color:#CE295E" > <span class="text-color">Usage Report</span></a>
+     <button data-role="button" id="recReport" onClick="recReport('recReport');" class="ui-btn" style="background-color:#CE295E" > <span class="text-color">Receive Report</span></button>
+     <button data-role="button" id="recUsage" onClick="recUsage('recUsage');" class="ui-btn" style="background-color:#CE295E" > <span class="text-color">Usage Report</span></button>
      
      <div class="sucChk" style="color:#004d00;"></div>
      <div class="errorChk" style="color:#cc0000;"></div>
@@ -736,7 +745,7 @@
     <div data-role="content" > 
     <div id="townNameA" style="color:#DA335A; text-align:center;"></div>  
     <div id="repIDA" style="color:#DA335A; text-align:center;"></div>
-   
+    
                 
     <ul data-role="listview" data-inset="true">
     	<li class="ui-field-contain" >  

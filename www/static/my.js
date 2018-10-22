@@ -17,16 +17,17 @@ var outlet_name='';
 
 
 //---Online
-var apipath="http://w02.yeapps.com/postit/syncmobile_20181018/";
+var apipath="http://w02.yeapps.com/postit/syncmobile_20181021/";
 //--- local
-//var apipath="http://127.0.0.1:8000/postit/syncmobile_20181018/";
+//var apipath="http://127.0.0.1:8000/postit/syncmobile/";
 
 url ="";
 
 $(document).ready(function(){
 	$('#bufferImageSync').hide();
 	if (localStorage.synced!='YES'){
-		url = "#pagesync";						
+		url = "#pagesync";	
+		$.mobile.navigate(url);					
 	}else{
 		
 		if (localStorage.rep_type=='CM'){
@@ -70,7 +71,7 @@ $(document).ready(function(){
 			$('#btn_receive').show();
 			$('#btn_usages').show();
 			$('#btn_stock').show();
-			$('#report').show();
+			$('#reportbtn').show();
 			
 			$('#townList').empty();
 			$('#townList').append(localStorage.townStr).trigger('create');
@@ -105,7 +106,7 @@ $(document).ready(function(){
 			$('#btn_receive').hide();
 			$('#btn_usages').hide();
 			$('#btn_stock').hide();
-			$('#report').hide();
+			$('#reportbtn').hide();
 			
 			$('#townList').empty();
 			$('#townList').append(localStorage.townStr).trigger('create');
@@ -222,7 +223,7 @@ function syncBasic(){
 						$("#agn").hide();
 						$('#btn_usages').show();
 						$('#btn_stock').show();
-						$('#report').show();			
+						$('#reportbtn').show();			
 						$("#townSelct").show();
 						
 						var townCodeName=localStorage.town.replace('|','-')					
@@ -250,7 +251,7 @@ function syncBasic(){
 						$('#btn_receive').show();
 						$('#btn_usages').show();
 						$('#btn_stock').show();
-						$('#report').show();
+						$('#reportbtn').show();
 			
 						$("#entryAgency").hide();
 						$("#summaryAgency").hide();
@@ -279,7 +280,7 @@ function syncBasic(){
 						$('#btn_receive').hide();
 						$('#btn_usages').hide();
 						$('#btn_stock').hide();
-						$('#report').hide();
+						$('#reportbtn').hide();
 						$('#townList').empty();
 						$('#townList').append(localStorage.townStr).trigger('create');
 						
