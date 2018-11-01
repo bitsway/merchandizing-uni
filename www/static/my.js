@@ -57,7 +57,7 @@ $(document).ready(function(){
 			$('#posmCodeList').append(localStorage.posmCode).trigger('create');
 			
 			url = "#first_page";
-			$.mobile.navigate(url);	
+			//$.mobile.navigate(url);	
 				
 		}else if (localStorage.rep_type == 'SUPERVISOR'){
 			var rec='<div data-theme="c" data-role="header" data-position="fixed" ><a data-role="button" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets " ><img src="menu.png" /></a><a data-role="button" onclick="backClick();" data-rel="back" class="ui-btn-right" data-transition="slide"><img src="back.png" /></a> <h3 style="color:#fff;">POST-IT</h3></div>'
@@ -92,7 +92,7 @@ $(document).ready(function(){
 			$('#outletList').append(localStorage.outletList).trigger('create');
 			
 			url = "#homePage";
-			$.mobile.navigate(url);
+			//$.mobile.navigate(url);
 			
 		}else{
 		
@@ -129,11 +129,10 @@ $(document).ready(function(){
 			$('#outletList').append(localStorage.outletList).trigger('create');
 			
 			url = "#homePage";
-			$.mobile.navigate(url);
+			//$.mobile.navigate(url);
 			}
+			$.mobile.navigate(url);
 		}
-
-	//$.mobile.navigate(url);
 	
 });
 
@@ -578,11 +577,11 @@ function uploadPhotoRec(imageURI, imageName) {
 }
 
 function win(r) {	
-	$(".errorChk").text('Image upload Successful.');
+	$(".errorChk").text('');
 }
 
 function onfail(r) {
-	$(".errorChk").text('File upload Failed. Please check internet connection.');
+	$(".errorChk").text('');
 	$("#btn_submit_receive").hide();
 }
 
@@ -925,11 +924,11 @@ function uploadPhotoUsa(imageURI, imageName2) {
 }
 
 function win2(r) {	
-	$(".errorChk").text('Image upload Successful.');
+	$(".errorChk").text('');
 }
 
 function onfail2(r) {
-	$(".errorChk").text('File upload Failed. Please check internet connection.');
+	$(".errorChk").text('');
 	$("#btn_submit_usages").hide();
 }
 
@@ -1195,11 +1194,11 @@ function uploadPhotoAgency(imageURI, imageName3) {
 }
 
 function win3(r) {	
-	$(".errorChk").text('Image upload Successful.');
+	$(".errorChk").text('');
 }
 
 function onfail3(r) {
-	$(".errorChk").text('File upload Failed. Please check internet connection.');
+	$(".errorChk").text('');
 	$("#btn_submit_agency").hide();
 }
 
