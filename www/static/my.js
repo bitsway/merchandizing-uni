@@ -17,7 +17,7 @@ var outlet_name='';
 
 
 //---Online
-var apipath="http://w02.yeapps.com/postit/syncmobile_20181021/";
+var apipath="http://w02.yeapps.com/postit/syncmobile_20181031/";
 //--- local
 //var apipath="http://127.0.0.1:8000/postit/syncmobile/";
 
@@ -55,6 +55,9 @@ $(document).ready(function(){
 			
 			$('#posmCodeList').empty();
 			$('#posmCodeList').append(localStorage.posmCode).trigger('create');
+			
+			url = "#first_page";
+			$.mobile.navigate(url);	
 				
 		}else if (localStorage.rep_type == 'SUPERVISOR'){
 			var rec='<div data-theme="c" data-role="header" data-position="fixed" ><a data-role="button" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets " ><img src="menu.png" /></a><a data-role="button" onclick="backClick();" data-rel="back" class="ui-btn-right" data-transition="slide"><img src="back.png" /></a> <h3 style="color:#fff;">POST-IT</h3></div>'
@@ -88,6 +91,8 @@ $(document).ready(function(){
 			$('#outletList').empty();
 			$('#outletList').append(localStorage.outletList).trigger('create');
 			
+			url = "#homePage";
+			$.mobile.navigate(url);
 			
 		}else{
 		
@@ -122,7 +127,9 @@ $(document).ready(function(){
 			
 			$('#outletList').empty();
 			$('#outletList').append(localStorage.outletList).trigger('create');
-
+			
+			url = "#homePage";
+			$.mobile.navigate(url);
 			}
 		}
 
@@ -337,9 +344,9 @@ function townSelect(){
 		$(".errorChk").text("Select Town");
 	}else{
 		localStorage.select_town=$("input[name='town_select']:checked").val();
-		//alert (apipath+'get_posm_sup?select_town='+localStorage.select_town)
+		//alert (apipath+'get_posm_sup?select_town='+localStorage.select_town+"&repID="+localStorage.repID)
 		$.ajax({
-		  url:apipath+'get_posm_sup?select_town='+localStorage.select_town,
+		  url:apipath+'get_posm_sup?select_town='+localStorage.select_town+"&repID="+localStorage.repID,
 		  success: function(result) {
 			var resultArray = result.split('rdrd');
 				if (resultArray[0]=='Success'){	
@@ -356,9 +363,9 @@ function townSelect(){
 					$('#posmCodeAgn').empty();
 					$('#posmCodeAgn').append(localStorage.posmCodeAgency).trigger('create');
 					
-					$("#townSelct").html("Town:		"+localStorage.select_town);
-					$('#townSelctRec').html("Town:		"+localStorage.select_town);
-					$('#townSelctAgency').html("Town:		"+localStorage.select_town);
+					$("#townSelct").html("Town	:		"+localStorage.select_town);
+					$('#townSelctRec').html("Town	:		"+localStorage.select_town);
+					$('#townSelctAgency').html("Town	:		"+localStorage.select_town);
 				
 					
 					$(".errorChk").text("");		
@@ -460,8 +467,9 @@ function submit_data_receive(){
 	
 	var brand=$("#brand").val();
 	var dueRec=$("#due").val();
-	
+	var reg = /^[0-9]*$/;
 	var received=$("#received").val().replace('+','').replace('-','').replace('.','').replace('/','').replace('*','').replace(',','');
+	//alert (typeof(parseInt(received)))
 	imageName=$("#recPhoto_name").val();
 	imagePathA=$("#recPhoto_path").val();
 	var alcId=$("#alcId").val();
@@ -469,6 +477,9 @@ function submit_data_receive(){
 	
 	if(received=='' || received==0){
 		$(".errorChk").text("Required Receive Qty");
+		$("#btn_submit_receive").show();
+	}else if (!reg.test(received)){
+		$(".errorChk").text("Qty must Number");
 		$("#btn_submit_receive").show();
 	}else{
 				
@@ -572,7 +583,7 @@ function win(r) {
 
 function onfail(r) {
 	$(".errorChk").text('File upload Failed. Please check internet connection.');
-	$("#btn_submit_receive").show();
+	$("#btn_submit_receive").hide();
 }
 
 /*================usagepage3=================*/
@@ -605,13 +616,13 @@ function usages(Usages){
 			}
 		});
 		$("#town").html('Town		:		' + localStorage.select_town);
-		$("#usagesBtnShow").html(Usages);
+		//$("#usagesBtnShow").html(Usages);
 		$(".errorChk").text("");			
 		url="#page3";					
 		$.mobile.navigate(url);
 	}else{
 		$("#town").html('Town		:		' + localStorage.town);	
-		$("#usagesBtnShow").html(Usages);
+		//$("#usagesBtnShow").html(Usages);
 		$(".errorChk").text("");			
 		url="#page3";					
 		$.mobile.navigate(url);
@@ -643,7 +654,7 @@ function sRoute(routeName){
 				for (i=0;i<outletListaAll.length;i++){					
 					outletLi=outletListaAll[i].split('|');
 					
-					outletStr += '<li style="background-color:#FFF; border-top-color:#F03; border-bottom-color:#F03;" onclick="outlet(\''+ outletLi[0]+'-'+ outletLi[1]+'\')"><a>'+ outletLi[0]+'-'+ outletLi[1]+'</a></li>'
+					outletStr += '<li style="background-color:#FFF; border-top-color:#F03; border-bottom-color:#F03;" onclick="outlet(\''+ outletLi[0]+'|'+ outletLi[1]+'\')"><a>'+ outletLi[0]+'-'+ outletLi[1]+'</a></li>'
 				}
 				outletStr +='</ul>';
 				localStorage.outletList=outletStr;		
@@ -654,6 +665,7 @@ function sRoute(routeName){
 			
 			}
 		})
+		
 	}else{
 		var selectTown=localStorage.select_town.replace('-','|');
 		//alert (apipath+"getOutlet?&routeName="+rName+"&townCode="+selectTown);
@@ -670,7 +682,7 @@ function sRoute(routeName){
 				for (i=0;i<outletListaAll.length;i++){					
 					outletLi=outletListaAll[i].split('|');
 					
-					outletStr += '<li style="background-color:#FFF; border-top-color:#F03; border-bottom-color:#F03;" onclick="outlet(\''+ outletLi[0]+'-'+ outletLi[1]+'\')"><a>'+ outletLi[0]+'-'+ outletLi[1]+'</a></li>'
+					outletStr += '<li style="background-color:#FFF; border-top-color:#F03; border-bottom-color:#F03;" onclick="outlet(\''+ outletLi[0]+'|'+ outletLi[1]+'\')"><a>'+ outletLi[0]+'-'+ outletLi[1]+'</a></li>'
 				}
 				outletStr +='</ul>';
 				localStorage.outletList=outletStr;		
@@ -682,34 +694,43 @@ function sRoute(routeName){
 			}
 		})
 		
-	}
-		$("#routeSelect").html('Route		:		' + rName);
+	}	if(localStorage.rep_type =='CM'){
+			$("#townAbc").html('Town	:		' + localStorage.town);
+		}else{
+			$("#townAbc").html('Town	:		' + localStorage.select_town);
+			}
+		
+		$("#routeSelect").html('Route	:		' + rName);
 		$(".errorChk").text("");			
 		url="#page4";					
-		$.mobile.navigate(url);	
+		$.mobile.navigate(url);		
 
 }
 
 function outlet(outletIDName){
 
 		//alert(outletIDName)
-		outletS=outletIDName.split('-');
+		outletS=outletIDName.split('|');
 		outlet_name=outletS[0]
 		outlet_code=outletS[1]
+		//alert (outlet_code)
 		
-		
-		$("#routeSelectA").html('Route		:		' + rName);
-		$("#outletSelect").html('Outlet		:	' + outlet_name+'-'+outlet_code);
+		$("#routeSelectA").html('Route	:		' + rName);
+		$("#outletSelect").html('Outlet	:	' + outletIDName);
 		$(".errorChk").text("");	
 		
 		$(".sucMsgU").hide();
 		$("#btn_submit_usages").hide();
 		$("#allHide").hide();	
-		if(localStorage.rep_type =='CM'){	
+		if(localStorage.rep_type =='CM'){
+			$("#townAusa").html('Town	:		' + localStorage.town);	
 			url="#page5";					
 		}else if (localStorage.rep_type =='SUPERVISOR'){
+			$("#townAusa").html('Town	:		' + localStorage.select_town);
 			url="#page5";
 		}else{
+			$("#routeSelectAbc").html('Route		:		' + rName);
+			$("#outletSelectAbc").html('Outlet		:	' + outletIDName);
 			$("#sucMsgAgency").hide();
 			$("#bufferImageAgency").hide();
 			$("#btn_submit_Agency").hide();
@@ -802,12 +823,13 @@ function submit_data_usages(){
 	var ubrand=$("#ubrand").val();
 	var baUsage=$("#balance").val();
 	var alcId=$("#ualcId").val();
+	var regg = /^[0-9]*$/;
 	var a_qty=$("#qty").val().replace('+','').replace('-','').replace('.','').replace('/','').replace('*','').replace(',','');
 	imageName2=$("#usePhoto_name").val();
 	imagePathB=$("#usePhoto_path").val();
 	
-	if (posmCode=='' || posmCode==0){
-		$(".errorChk").text("Required POSM Code");
+	if (!regg.test(a_qty)){
+		$(".errorChk").text("Qty must Number");
 		$("#btn_submit_usages").show();
 	}else if(a_qty=='' || a_qty==0){
 		$(".errorChk").text("Required Usage Qty");
@@ -908,7 +930,7 @@ function win2(r) {
 
 function onfail2(r) {
 	$(".errorChk").text('File upload Failed. Please check internet connection.');
-	$("#btn_submit_usages").show();
+	$("#btn_submit_usages").hide();
 }
 
 /**------------------------page 6 ----------------------------********/
@@ -938,7 +960,7 @@ function execution(){
 		$(".errorChk").text("Select Outlet");
 	}else{
 		outletIdNameAgency=$("input[name='outlet_agency_select']:checked").val();
-		$("#OutletNameAgency").html("Outlet:		"+outletIdNameAgency);
+		$("#OutletNameAgency").html("Outlet	:		"+outletIdNameAgency);
 		$(".errorChk").text("");
 				
 		url="#page8";				
@@ -997,6 +1019,7 @@ function alloDetailsAgency(){
 	$("#btn_submit_Agency").hide();	
 	$("#sucMsgAgency").hide();
 	
+	
 	var posmCode=$("#posmCodeAgency").val();
 	var town=localStorage.select_town.replace('-', '|');
 	
@@ -1010,7 +1033,7 @@ function alloDetailsAgency(){
 		$("#bufferImageAgency").show();	
 		$.ajax({
 			type: 'POST',
-			url:apipath+"getAllDataAgncy?&posmCode="+posmCode+"&town="+town,																																																											
+			url:apipath+"getAllDataAgncy?&posmCode="+posmCode+"&town="+town,																																																										
 			success: function(result) {	
 				var resultArray = result.split('rdrd');
 					recStatus=resultArray[0];
@@ -1054,7 +1077,7 @@ function submit_data_agency(){
 	var balanceAgency=$("#agencydue").val();
 	var allocationAgency=$("#agencyallocation").val();
 	//alert (brandAgency+"-"+balanceAgency+"-"+allocationAgency)
-	
+	var reggg = /^[0-9]*$/;
 	var aqty=$("#agencyQty").val().replace('+','').replace('-','').replace('.','').replace('/','').replace('*','').replace(',','');
 	var aset=$("#set").val().replace('+','').replace('-','').replace('.','').replace('/','').replace('*','').replace(',','');
 	var alight=$("#light").val().replace('+','').replace('-','').replace('.','').replace('/','').replace('*','').replace(',','');
@@ -1071,7 +1094,11 @@ function submit_data_agency(){
 		$("#btn_submit_Agency").show();
 		$("#allHideAgency").show();
 		$("#sucMsgAgency").hide();
-		
+	}else if (!reggg.test(aqty)){
+		$(".errorChk").text("Qty must Number");
+		$("#btn_submit_Agency").show();
+		$("#allHideAgency").show();
+		$("#sucMsgAgency").hide();
 	}else{
 		
 		//alert(apipath+"submitData_agency?&syncCode="+localStorage.sync_code+"&posmCode="+posmCode+"&repID="+localStorage.repID+"&repName="+localStorage.repName+"&mobileNo="+localStorage.mobileNo+"&town="+town+"&routeName="+rName+"&outlet_code="+outlet_code+"&outlet_name="+outlet_name+"&posmType="+posmType+"&brandAgency="+brandAgency+"&balanceAgency="+balanceAgency+"&allocationAgency="+allocationAgency+"&aqty="+aqty+"&aset="+aset+"&alight="+alight+"&apaint="+apaint+"&acity="+acity+"&imageName3="+imageName3);
@@ -1173,7 +1200,7 @@ function win3(r) {
 
 function onfail3(r) {
 	$(".errorChk").text('File upload Failed. Please check internet connection.');
-	$("#btn_submit_agency").show();
+	$("#btn_submit_agency").hide();
 }
 
 
@@ -1211,8 +1238,8 @@ function recReport(){
 				localStorage.receiveReportR=getResult[1];	
 				
 				var ReceiveRpt=localStorage.receiveReportR.split('rdrd');					
-				var rectable='<table>';
-					rectable += '<tr style="font-size:12px;" ><th>DATE</th><th>BRAND</th><th>POSM TYPE</th><th>REC QTY</th><th>STOCK</th></tr>'
+				var rectable='<table id="reccRepp">';
+					rectable += '<tr style="font-size:12px;" ><th>Rec_Date</th><th>Brand</th><th>POSM_Type</th><th>POSM_Code</th><th>Rec_Qty</th><th>Stock</th></tr>'
 					for (i=0;i<ReceiveRpt.length;i++){	
 						recordR=ReceiveRpt[i].split('|');
 						dateR=recordR[0];
@@ -1220,8 +1247,9 @@ function recReport(){
 						posmType=recordR[2];
 						recQty=recordR[3];
 						stock=recordR[4];
+						posmCode=recordR[5];
 										
-						rectable +='<tr style="font-size:11px;"><td>'+dateR+'</td><td>'+brand+'</td><td>'+posmType+'</td><td>'+recQty+'</td><td>'+stock+'</td></tr>'
+						rectable +='<tr style="font-size:11px;"><td>'+dateR+'</td><td>'+brand+'</td><td>'+posmType+'</td><td>'+posmCode+'</td><td style="text-align:center;">'+recQty+'</td><td style="text-align:center;">'+stock+'</td></tr>'
 					
 					}
 					rectable +='</table>'
@@ -1244,7 +1272,7 @@ function recReport(){
 				$(".errorChk").text("No Record In DataBase");
 				}
 		}
-	})
+	});
 
 	$(".errorChk").text("");
 	url="#page10";
@@ -1271,8 +1299,8 @@ function recUsage(){
 				$("#bufferImageUsaR").hide();				
 				localStorage.usageReportR=getResult[1];
 				var UsageRpt=localStorage.usageReportR.split('rdrd');			
-				var usatable='<table>';
-					usatable +='<tr style="font-size:12px; text-align:center;" ><th>Date</th><th>Outlet_Code</th><th>Name</th><th>POSM_Type</th><th>Usage_Qty</th></tr>'
+				var usatable='<table id="usageRepp">';
+					usatable +='<tr style="font-size:12px;" ><th>Usage_Date</th><th>Outlet_Code</th><th>Outlet_Name</th><th>Brand</th><th>POSM_Type</th><th>POSM_Code</th><th>Usage_Qty</th></tr>'
 					for (i=0;i<UsageRpt.length;i++){	
 						usageR=UsageRpt[i].split('|');
 						dateU=usageR[0];
@@ -1280,8 +1308,10 @@ function recUsage(){
 						outletname=usageR[2];
 						uposmType=usageR[3];
 						Uqty=usageR[4];
+						uposmCode=usageR[5];
+						brand=usageR[6];
 				
-						usatable += '<tr style="font-size:11px; text-align:center;"><td>'+dateU+'</td><td>'+outletcode+'</td><td>'+outletname+'</td><td>'+uposmType+'</td><td>'+Uqty+'</td></tr>'
+						usatable += '<tr style="font-size:11px;"><td>'+dateU+'</td><td>'+outletcode+'</td><td>'+outletname+'</td><td>'+brand+'</td><td>'+uposmType+'</td><td>'+uposmCode+'</td><td style="text-align:center;">'+Uqty+'</td></tr>'
 					
 					}
 					usatable +='</table>'
@@ -1304,7 +1334,7 @@ function recUsage(){
 				$(".errorChk").text("No Record In DataBase");
 				}
 		}
-	})
+	});
 
 	$(".errorChk").text("");
 	url="#page12";
@@ -1320,6 +1350,7 @@ function stockReport(){
 	}else{
 		town=localStorage.select_town;
 	}
+
 	//alert (apipath+"stock_report?&repID="+localStorage.repID+"&repName="+localStorage.repName+"&townName="+town)
 	$("#bufferImageStockR").show();
 	$.ajax({
@@ -1334,8 +1365,8 @@ function stockReport(){
 				localStorage.stockReport=getResult[1];	
 				
 				var stockRPT=localStorage.stockReport.split('rdrd');			
-				var cmRouteSTr='<table>';
-					cmRouteSTr += '<tr style="font-size:12px;"><th>Brand</th><th>POSM Type</th><th>POSM Code</th><th>Allocation</th><th>Stock</th></tr>'
+				var cmRouteSTr='<table id="stockRepp">';
+					cmRouteSTr += '<tr style="font-size:12px;"><th>Brand</th><th>POSM_Type</th><th>POSM_Code</th><th>Allocation</th><th>Stock</th></tr>'
 					for (i=0;i<stockRPT.length;i++){	
 						stockR=stockRPT[i].split('|');
 						//alert (stockR)
@@ -1345,7 +1376,7 @@ function stockReport(){
 						allocation=stockR[3];
 						stock=stockR[4];	
 											
-						cmRouteSTr += '<tr style="font-size:11px; text-align:center;"><td>'+brand+'</td><td>'+posmType+'</td><td>'+posmCode+'</td><td>'+allocation+'</td><td>'+stock+'</td></tr>'
+						cmRouteSTr += '<tr style="font-size:11px;"><td>'+brand+'</td><td>'+posmType+'</td><td>'+posmCode+'</td><td style="text-align:center;">'+allocation+'</td><td style="text-align:center;">'+stock+'</td></tr>'
 					
 					}
 					cmRouteSTr +='</table>'
@@ -1368,7 +1399,7 @@ function stockReport(){
 				$(".errorChk").text("No Record In DataBase");
 				}
 		}
-	})
+	});
 
 	
 	$(".errorChk").text("");			
@@ -1380,11 +1411,11 @@ function summary_report(){
 	var posmCode=$("#posmCodeAgency").val();
 	var town=localStorage.select_town.replace('-', '|');
 	
-	//alert (apipath+"Agency_report?&repID="+localStorage.repID+"&repName="+localStorage.repName+"&townName="+town)
+	//alert (apipath+"agency_report?&repID="+localStorage.repID+"&repName="+localStorage.repName+"&townName="+town)
 	$("#bufferImageAgencyA").show();
 	$.ajax({
 			type: 'POST',
-			url:apipath+"Agency_report?&repID="+localStorage.repID+"&repName="+localStorage.repName+"&townName="+town,
+			url:apipath+"agency_report?&repID="+localStorage.repID+"&repName="+localStorage.repName+"&townName="+town,
 																																																													
 			success: function(result) {
 				getResult=result.split('||');
@@ -1392,17 +1423,19 @@ function summary_report(){
 				$("#bufferImageAgencyA").hide();				
 				localStorage.usageReportA=getResult[1];
 				var agnRpt=localStorage.usageReportA.split('rdrd');			
-				var agentable='<table>';
-					agentable +='<tr style="font-size:12px; text-align:center;" ><th>Town</th><th>Outlet_ID</th><th>Name</th><th>POSM_Code</th><th>Usage_Qty</th></tr>'
+				var agentable='<table id="sumRepp">';
+					agentable +='<tr style="font-size:12px;" ><th>Date</th><th>Outlet_ID</th><th>Outlet_Name</th><th>Brand</th><th>POSM_Type</th><th>POSM_Code</th><th>Usage_Qty</th></tr>'
 					for (i=0;i<agnRpt.length;i++){	
 						agnR=agnRpt[i].split('|');
-						town=agnR[0];
+						date=agnR[0];
 						outletid=agnR[1];
 						outletname=agnR[2];
 						posmcode=agnR[3];
 						qty=agnR[4];
+						brand=agnR[5];
+						posmtype=agnR[6];
 				
-						agentable += '<tr style="font-size:11px; text-align:center;"><td>'+town+'</td><td>'+outletid+'</td><td>'+outletname+'</td><td>'+posmcode+'</td><td>'+qty+'</td></tr>'
+						agentable += '<tr style="font-size:11px;"><td>'+date+'</td><td>'+outletid+'</td><td>'+outletname+'</td><td>'+brand+'</td><td>'+posmtype+'</td><td>'+posmcode+'</td><td style="text-align:center;">'+qty+'</td></tr>'
 					
 					}
 					agentable +='</table>'
@@ -1425,7 +1458,7 @@ function summary_report(){
 				$(".errorChk").text("No Record In DataBase");
 				}
 		}
-	})
+	});
 
 	$(".errorChk").text("");			
 	url="#page13";				
@@ -1438,3 +1471,5 @@ function exit() {
 	navigator.app.exitApp();
 	//navigator.device.exitApp();
 }
+
+

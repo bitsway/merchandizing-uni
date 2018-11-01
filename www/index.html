@@ -19,14 +19,15 @@
 			$("#bufferImage").hide();
 			$(".sucMsgR").hide();
 			$("#bufferImageR").hide();
-			$("#recData").hide();	
+			$("#recData").hide();
+			
 		});
 	
 		function syncPage(){
 			$(".errorChk").text("");
 			$.mobile.navigate("#pagesync");
-		}		
-		
+		}
+		//$("#listFilter").attr("placeholder","Search Route");	
 	</script>
 	       
     <style>	
@@ -215,11 +216,58 @@
 	}
 				
 	#summaryAgency{
-		
 		margin:2px;
 		font-weight:1;
 		background-color:#CE295E;
 	}
+	
+	#stockReport> table{
+		border-collapse:collapse;
+		}
+	#stockReport> table tr th{
+		background-color:#D42E5C;
+		color:#FFF;
+		font-weight:1;
+		}
+	#stockReport> table tr td{
+		border:1px solid #D42E5C;
+		}
+		
+	#receiveReportR> table{
+		border-collapse:collapse;
+		}
+	#receiveReportR> table tr th{
+		background-color:#D42E5C;
+		color:#FFF;
+		font-weight:1;
+		}
+	#receiveReportR> table tr td{
+		border:1px solid #D42E5C;
+		}
+	
+	#usageReportR> table{
+		border-collapse:collapse;
+		}
+	#usageReportR> table tr th{
+		background-color:#D42E5C;
+		color:#FFF;
+		font-weight:1;
+		}
+	#usageReportR> table tr td{
+		border:1px solid #D42E5C;
+		}
+	
+	#usageReportAgency> table{
+		border-collapse:collapse;
+		}
+	#usageReportAgency> table tr th{
+		background-color:#D42E5C;
+		color:#FFF;
+		font-weight:1;
+		}
+	#usageReportAgency> table tr td{
+		border:1px solid #D42E5C;
+		}
 	
     </style>	
 </head>
@@ -257,7 +305,7 @@
         <br/>
         <br/>
         <br/>
-         <div data-role="footer" data-position="fixed" style="font-size:12px; color:#595959; background-color:#FFF; font-weight:1;" align="center" >20181021</div>
+         <div data-role="footer" data-position="fixed" style="font-size:12px; color:#595959; background-color:#FFF; font-weight:1;" align="center" >20181030</div>
     </div>
 </div>
 
@@ -351,7 +399,7 @@
     <div id="townSelctRec" class="routselect"></div>
      <div class="routselect" style="font-size:18px;">Receive</div>             
    
-        <table width="100%" class="ui-body-d ui-shadow table-stripe ui-responsive" id="beneficiaryCount" style="cell-spacing:0px; background-color:#BFBFBF;"  data-role="table" data-theme="d"  data-mode="display:none">
+        <table width="100%" class="ui-body-d ui-shadow table-stripe ui-responsive" id="beneficiaryCount" style="cell-spacing:0px; background-color:#BFBFBF;" data-role="table" data-theme="d"  data-mode="display:none">
           <tr>
             <td><label style="color:#D42E5C;  font-weight:1;">POSM Code</label><div id="posm_code"></div></td>
             <td style="vertical-align:bottom;">
@@ -381,7 +429,7 @@
                 </tr>
             </table>
         </div>
-        <div class="errorChk" style="color:#cc0000; background-color:#FFF;"></div>
+        
         <table table width="100%" class="ui-body-d ui-shadow table-stripe ui-responsive" id="beneficiaryCount" style="cell-spacing:0px; "  data-role="table" data-theme="d"  data-mode="display:none">
             <tr style="background-color:#AAAAAA;">
                 <td style="color:#FFF; text-align:center; padding:0 20 0 20px; font-weight:1";>Received Qty</td>
@@ -401,6 +449,7 @@
          <div class="sucMsgR" style="color:#FFF; text-align:center; background-color:#DA335A; padding:30px 0px 30px 0px; border-radius:10px;">Successfully Submitted</div>
 
   	</ul>
+    <div class="errorChk" style="color:#cc0000; background-color:#FFF;"></div>
             <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
     </div>
 </div>
@@ -416,8 +465,8 @@
    	<br/>
     <br/>
     <div data-role="content" > 
-    <div id="town" style="color:#D42E5C;"></div>  
-     <div id="usagesBtnShow" style="color:#D42E5C;" ></div>
+    <div id="town" style="color:#D42E5C;"></div><br/>  
+     <!--<div id="usagesBtnShow" style="color:#D42E5C;" ></div>-->
      <div id="routeList"></div>
         <br/><br/>
   	
@@ -435,8 +484,8 @@
     <br/>
     <br/>
     <div data-role="content" > 
-    <div id="town" style="color:#D42E5C;"></div> 
-     <div id="routeSelect" style="color:#D42E5C;"></div>
+    <div id="townAbc" style="color:#D42E5C;"></div> 
+    <div id="routeSelect" style="color:#D42E5C;"></div>
      <div id="outletList"></div>
         <br/><br/>
   
@@ -453,7 +502,7 @@
    <br/>
    <br/>
     <div data-role="content">
-    <div id="town" style="color:#D42E5C;"></div>
+    <div id="townAusa" style="color:#D42E5C;"></div>
     <div id="routeSelectA" style="color:#D42E5C;"></div>
     <div id="outletSelect" style="color:#D42E5C;"></div>            
    
@@ -487,7 +536,7 @@
                 </tr>
             </table>
         </div>
-        <div class="errorChk" style="color:#cc0000; background-color:#FFF;"></div>
+        
         <table table width="100%" class="ui-body-d ui-shadow table-stripe ui-responsive" id="beneficiaryCount" style="cell-spacing:0px;"  data-role="table" data-theme="d"  data-mode="display:none">
             <tr style="background-color:#AAAAAA;">
                 <td style="color:#FFF; text-align:center; padding:20px; font-weight:1">Usage Qty</td>
@@ -504,10 +553,9 @@
         </table>  
         </div>   
         <a data-role="button" id="btn_submit_usages" onClick="submit_data_usages();" class="ui-btn" style="background-color:#D42E5C; color:#FFF;  font-weight:1;">Submit</a>
-          <div class="sucMsgU" style="color:#FFF; text-align:center; background-color:#DA335A; padding:30px 0px 30px 0px; border-radius:10px;">Successfully Submitted</div>
-
-    
+          <div class="sucMsgU" style="color:#FFF; text-align:center; background-color:#DA335A; padding:30px 0px 30px 0px; border-radius:10px;">Successfully Submitted</div> 
   	</ul>
+    <div class="errorChk" style="color:#cc0000; background-color:#FFF;"></div>
             <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
     </div>
 </div>
@@ -680,9 +728,9 @@
     <div id="townNameR" style="color:#DA335A;"></div>  
                   
     <ul data-role="listview" data-inset="true">
-    	<li class="ui-field-contain" >
+    	<li class="ui-field-contain" style="background-color:inherit; padding:0;">
   		<div id="bufferImageRecR" style="text-align:center;"><img src="running.gif" /></div>
-     	<div id="receiveReportR"></div>
+     	<div id="receiveReportR" style="overflow:scroll;"></div>
      	</li>
     </ul>
      <div class="errorChk" style="color:#cc0000;"></div>
@@ -703,9 +751,9 @@
     <div id="townName" style="color:#DA335A;"></div>  
                    
     <ul data-role="listview" data-inset="true">
-    	<li class="ui-field-contain">
+    	<li class="ui-field-contain" style="background-color:inherit; padding:0;">
   		<div id="bufferImageStockR" style="text-align:center;"><img src="running.gif" /></div>
-     	<div id="stockReport"></div>
+     	<div id="stockReport" style="overflow:scroll;"></div>
      	</li>
     </ul>
      <div class="errorChk" style="color:#cc0000;"></div>
@@ -725,7 +773,7 @@
     <div id="townNameU" style="color:#DA335A;"></div> 
                 
     <ul data-role="listview" data-inset="true">
-    	<li class="ui-field-contain" >  
+    	<li class="ui-field-contain" style="background-color:inherit; padding:0;">  
      	<div id="bufferImageUsaR" style="text-align:center;"><img src="running.gif" /></div>
     	 <div id="usageReportR"  style="overflow:scroll; "></div>
      	</li>
@@ -742,13 +790,12 @@
     </div>
     <br/>
     <br/>
-    <div data-role="content" > 
-    <div id="townNameA" style="color:#DA335A; text-align:center;"></div>  
-    <div id="repIDA" style="color:#DA335A; text-align:center;"></div>
-    
+    <div data-role="content"> 
+    <div id="repIDA" style="color:#DA335A;"></div>
+    <div id="townNameA" style="color:#DA335A;"></div>
                 
     <ul data-role="listview" data-inset="true">
-    	<li class="ui-field-contain" >  
+    	<li class="ui-field-contain" style="background-color:inherit; padding:0;">  
      	<div id="bufferImageAgencyA" style="text-align:center;"><img src="running.gif" /></div>
     	 <div id="usageReportAgency"  style="overflow:scroll; "></div>
      	</li>
@@ -766,7 +813,9 @@
         </div>
     <br/><br/>
     <div data-role="content" >    
-    <div id="townSelctAgency" class="routselect"></div>
+    <div id="townSelctAgency" style="color:#DA335A;"></div>
+    <div id="routeSelectAbc" style="color:#DA335A;"></div>
+    <div id="outletSelectAbc" style="color:#DA335A;"></div>
      <div class="routselect" style="font-size:18px;">EXICUTION</div> 
                
    
@@ -800,7 +849,7 @@
                 </tr>
             </table>
         </div>
-        <div class="errorChk" style="color:#cc0000; background-color:#FFF;"></div>
+        
         <table table width="100%" class="ui-body-d ui-shadow table-stripe ui-responsive" id="beneficiaryCount" style="cell-spacing:0px; "  data-role="table" data-theme="d"  data-mode="display:none">
         
             <tr style="background-color:#AAAAAA;">
@@ -836,8 +885,9 @@
         </div> 
         <a data-role="button" id="btn_submit_Agency" onClick="submit_data_agency();" class="ui-btn" style="background-color:#D42E5C; color:#FFF;  font-weight:1;">Submit</a>
          <div id="sucMsgAgency" style="color:#FFF; text-align:center; background-color:#DA335A; padding:30px 0px 30px 0px; border-radius:10px;">Successfully Submitted</div>
-
+		
   	</ul>
+    <div class="errorChk" style="color:#cc0000; background-color:#FFF;"></div>
             <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
     </div>
 </div>
