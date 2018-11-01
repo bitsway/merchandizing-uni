@@ -17,7 +17,7 @@ var outlet_name='';
 
 
 //---Online
-var apipath="http://w02.yeapps.com/postit/syncmobile_20181031/";
+var apipath="http://w02.yeapps.com/postit/syncmobile_20181101/";
 //--- local
 //var apipath="http://127.0.0.1:8000/postit/syncmobile/";
 
