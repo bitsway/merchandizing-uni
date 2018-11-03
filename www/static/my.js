@@ -96,11 +96,9 @@ $(document).ready(function(){
 			
 		}else{
 		
-			var agn='<div data-theme="c" data-role="header" data-position="fixed" ><a data-role="button" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets " ><img src="menu.png" /></a><a data-role="button" onclick="backClick();" data-rel="back" class="ui-btn-right" data-transition="slide"><img src="back.png" /></a> <h3 style="color:#fff;">POST-IT</h3></div>'
-			$('#agn').empty();
-			$('#agn').append(agn).trigger('create');
-			
-			
+			var rec='<div data-theme="c" data-role="header" data-position="fixed" ><a data-role="button" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets " ><img src="menu.png" /></a><a data-role="button" onclick="backClick();" data-rel="back" class="ui-btn-right" data-transition="slide"><img src="back.png" /></a> <h3 style="color:#fff;">POST-IT</h3></div>'
+			$('#rec').empty();
+			$('#rec').append(rec).trigger('create');
 			
 			$("#allHideR").hide();
 			$("#btn_submit_receive").hide();
@@ -130,9 +128,9 @@ $(document).ready(function(){
 			
 			url = "#homePage";
 			//$.mobile.navigate(url);
-			}
-			$.mobile.navigate(url);
 		}
+		$.mobile.navigate(url);
+	}
 	
 });
 
@@ -226,7 +224,7 @@ function syncBasic(){
 						$("#summaryAgency").hide();
 						$("#btn_receive").hide();
 						$("#rec").hide();
-						$("#agn").hide();
+						$("#usg").show();
 						$('#btn_usages').show();
 						$('#btn_stock').show();
 						$('#reportbtn').show();			
@@ -245,7 +243,7 @@ function syncBasic(){
 						$("#cmprepid").html("ID	:		"+localStorage.repID);
 												
 						url = "#first_page";
-						$.mobile.navigate(url);		
+						//$.mobile.navigate(url);		
 						
 					}else if (localStorage.rep_type == 'SUPERVISOR'){
 						var rec='<div data-theme="c" data-role="header" data-position="fixed" ><a data-role="button" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets"><img src="menu.png"/></a><a data-role="button" onclick="backClick();" data-rel="back" class="ui-btn-right" data-transition="slide"><img src="back.png"/></a> <h3 style="color:#fff;">POST-IT</h3></div>'
@@ -253,7 +251,7 @@ function syncBasic(){
 						$('#rec').append(rec).trigger('create');
 						//$('#rec').html(rec);
 						$("#usg").hide();
-						$("#agn").hide();						
+						$("#rec").show();						
 						$('#btn_receive').show();
 						$('#btn_usages').show();
 						$('#btn_stock').show();
@@ -269,14 +267,14 @@ function syncBasic(){
 						$("#suprepid").html("ID	:		"+localStorage.repID);
 						
 						url = "#homePage";
-						$.mobile.navigate(url);	
+						//$.mobile.navigate(url);	
 					}else {
 
-						var agn='<div data-theme="c" data-role="header" data-position="fixed" ><a data-role="button" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets"><img src="menu.png"/></a><a data-role="button" onclick="backClick();" data-rel="back" class="ui-btn-right" data-transition="slide"><img src="back.png"/></a> <h3 style="color:#fff;">POST-IT</h3></div>'
-						$('#agn').empty();
-						$('#agn').append(agn).trigger('create');
+						var rec='<div data-theme="c" data-role="header" data-position="fixed" ><a data-role="button" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets"><img src="menu.png"/></a><a data-role="button" onclick="backClick();" data-rel="back" class="ui-btn-right" data-transition="slide"><img src="back.png"/></a> <h3 style="color:#fff;">POST-IT</h3></div>'
+						$('#rec').empty();
+						$('#rec').append(rec).trigger('create');
 						//$('#rec').html(rec);
-						$("#rec").hide();
+						$("#rec").show();
 						$("#usg").hide();
 						
 						
@@ -295,8 +293,9 @@ function syncBasic(){
 						$("#suprepid").html("ID	:		"+localStorage.repID);
 						
 						url = "#homePage";
-						$.mobile.navigate(url);	
-					}												
+						//$.mobile.navigate(url);	
+					}	
+					$.mobile.navigate(url);													
 				}else{
 					$('#bufferImageSync').hide();						
 					$(".errorMsg").html("Sync Failed. Authorization or Network Error.");
