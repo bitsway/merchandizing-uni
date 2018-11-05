@@ -17,17 +17,18 @@ var outlet_name='';
 
 
 //---Online
-var apipath="http://w02.yeapps.com/postit/syncmobile_20181101/";
+var apipath="http://w02.yeapps.com/postit/syncmobile_20181104/";
 //--- local
 //var apipath="http://127.0.0.1:8000/postit/syncmobile/";
 
 url ="";
 
 $(document).ready(function(){
+	//alert(localStorage.synced);
 	$('#bufferImageSync').hide();
 	if (localStorage.synced!='YES'){
 		url = "#pagesync";	
-		$.mobile.navigate(url);					
+		//$.mobile.navigate(url);					
 	}else{
 		
 		if (localStorage.rep_type=='CM'){
@@ -95,7 +96,7 @@ $(document).ready(function(){
 			//$.mobile.navigate(url);
 			
 		}else{
-		
+		//alert(localStorage.rep_type);
 			var rec='<div data-theme="c" data-role="header" data-position="fixed" ><a data-role="button" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets " ><img src="menu.png" /></a><a data-role="button" onclick="backClick();" data-rel="back" class="ui-btn-right" data-transition="slide"><img src="back.png" /></a> <h3 style="color:#fff;">POST-IT</h3></div>'
 			$('#rec').empty();
 			$('#rec').append(rec).trigger('create');
@@ -128,18 +129,19 @@ $(document).ready(function(){
 			
 			url = "#homePage";
 			//$.mobile.navigate(url);
-		}
-		$.mobile.navigate(url);
+		}		
 	}
+	$.mobile.navigate(url);
 	
 });
 
 
 
 function syncBasic(){
+	//alert(localStorage.synced);
 	var mobile=$("#mobile").val() ;
 	var password=$("#password").val() ;
-	
+	//alert(localStorage.rep_type);
 	if (mobile=="" || password==""){
 		$('#bufferImageSync').hide();
 		$(".errorMsg").html("Required mobile no and password");	
@@ -150,7 +152,7 @@ function syncBasic(){
 		if(localStorage.sync_code==undefined || localStorage.sync_code==""){
 			localStorage.sync_code=0;
 		}
-	
+		
 		//alert(apipath+'user_check?mobile='+mobile+'&password='+encodeURIComponent(password)+'&sync_code='+localStorage.sync_code);
 		
 		$.ajax({
@@ -273,7 +275,6 @@ function syncBasic(){
 						var rec='<div data-theme="c" data-role="header" data-position="fixed" ><a data-role="button" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets"><img src="menu.png"/></a><a data-role="button" onclick="backClick();" data-rel="back" class="ui-btn-right" data-transition="slide"><img src="back.png"/></a> <h3 style="color:#fff;">POST-IT</h3></div>'
 						$('#rec').empty();
 						$('#rec').append(rec).trigger('create');
-						//$('#rec').html(rec);
 						$("#rec").show();
 						$("#usg").hide();
 						
@@ -291,16 +292,18 @@ function syncBasic(){
 						$("#suprepname").html("Name	:		"+localStorage.repName);
 						$("#supreptype").html("Type	:		"+localStorage.rep_type);
 						$("#suprepid").html("ID	:		"+localStorage.repID);
-						
+						//alert(localStorage.rep_type);
 						url = "#homePage";
 						//$.mobile.navigate(url);	
 					}	
-					$.mobile.navigate(url);													
+					$.mobile.navigate(url);
+																		
 				}else{
 					$('#bufferImageSync').hide();						
 					$(".errorMsg").html("Sync Failed. Authorization or Network Error.");
 					$('#syncBasic').show();
-					
+					//url = "#pagesync";	
+					//$.mobile.navigate(url);
 					
 				}				
 		  }//----/success f
@@ -308,6 +311,7 @@ function syncBasic(){
 	
 	}//-----/field			
 }
+
 	
 function menuClick(){
 	$(".sucChkR").text("");
