@@ -17,7 +17,7 @@ var outlet_name='';
 
 
 //---Online
-var apipath="http://w02.yeapps.com/postit/syncmobile_20181104/";
+var apipath="http://w02.yeapps.com/postit/syncmobile_20181106/";
 //--- local
 //var apipath="http://127.0.0.1:8000/postit/syncmobile/";
 
@@ -28,7 +28,7 @@ $(document).ready(function(){
 	$('#bufferImageSync').hide();
 	if (localStorage.synced!='YES'){
 		url = "#pagesync";	
-		//$.mobile.navigate(url);					
+		$.mobile.navigate(url);					
 	}else{
 		
 		if (localStorage.rep_type=='CM'){
@@ -57,7 +57,7 @@ $(document).ready(function(){
 			$('#posmCodeList').empty();
 			$('#posmCodeList').append(localStorage.posmCode).trigger('create');
 			
-			url = "#first_page";
+			//url = "#first_page";
 			//$.mobile.navigate(url);	
 				
 		}else if (localStorage.rep_type == 'SUPERVISOR'){
@@ -92,7 +92,7 @@ $(document).ready(function(){
 			$('#outletList').empty();
 			$('#outletList').append(localStorage.outletList).trigger('create');
 			
-			url = "#homePage";
+			//url = "#homePage";
 			//$.mobile.navigate(url);
 			
 		}else{
@@ -127,11 +127,11 @@ $(document).ready(function(){
 			$('#outletList').empty();
 			$('#outletList').append(localStorage.outletList).trigger('create');
 			
-			url = "#homePage";
+			//url = "#homePage";
 			//$.mobile.navigate(url);
 		}		
 	}
-	$.mobile.navigate(url);
+	//$.mobile.navigate(url);
 	
 });
 
@@ -186,8 +186,9 @@ function syncBasic(){
 					localStorage.townStr=townStr;
 					
 					//=============================
-					
-					var outletAgency=localStorage.outlet_agency.split('fdfd');				
+					var outletAgency='';
+					var outStr='';
+					/*outletAgency=localStorage.outlet_agency.split('fdfd');				
 					var outStr='<ul data-role="listview"  class="list" data-filter="true" data-inset="true" style="height:450px; overflow:scroll;">';
 					for (i=0;i<outletAgency.length;i++){
 						outLi=outletAgency[i].split('|');						
@@ -198,7 +199,7 @@ function syncBasic(){
 						outlet_town_name=outLi[4]						
 						
 						outStr+='<li onclick="agencySelectOutlet(\''+outletName+'|'+outletCode+'\');"><a>'+outletName+'-'+outletCode+'</a></li>'
-					}
+					}*/
 					outStr+='</ul>';
 					localStorage.outStr=outStr;
 							
@@ -342,6 +343,10 @@ function backClick(){
 
 //---------
 function townSelect(){	
+	$("#cmprepname").text("");
+	$("#cmpreptype").text("");
+	$("#cmprepid").text("");
+	
 	if($("#townList").find("input[name='town_select']:checked").length==0){
 		$(".errorChk").text("Select Town");
 	}else{
