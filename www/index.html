@@ -20,7 +20,7 @@
 			$(".sucMsgR").hide();
 			$("#bufferImageR").hide();
 			$("#recData").hide();
-			
+						
 		});
 		
 		function syncPage(){
@@ -305,7 +305,7 @@
         <br/>
         <br/>
         <br/>
-         <div data-role="footer" data-position="fixed" style="font-size:12px; color:#595959; background-color:#FFF; font-weight:1;" align="center" >20181106</div>
+         <div data-role="footer" data-position="fixed" style="font-size:12px; color:#595959; background-color:#FFF; font-weight:1;" align="center" >20181111</div>
     </div>
 </div>
 
@@ -350,9 +350,12 @@
 
 <!-- ------------------------------------first_page--------------------------------- -->
 <div data-role="page" data-theme="c" id="first_page" >
-	<br/><br/>
-	<div id="rec"></div>
-    <div id="usg"></div>
+	<div data-theme="c" data-role="header" data-position="fixed" >
+        <a data-role="button" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets " ><img src="menu.png" /></a>
+        <a data-role="button" onclick="backClick();" data-rel="back" class="ui-btn-right" data-transition="slide"><img src="back.png" /></a>
+        <h3 class="headerc" style="height:42px;"></h3>
+    </div>
+    <br /><br />
     <div data-role="content" >
     <div id="cmprepname" style="color:#DA335A; text-align:center;"></div>  
     <div id="cmpreptype" style="color:#DA335A; text-align:center;"></div>
@@ -396,11 +399,13 @@
     <br/><br/>
     <div data-role="content" >    
     <div id="townSelctRec" class="routselect"></div>
-     <div class="routselect" style="font-size:18px;">Receive</div>             
-   
-        <table width="100%" class="ui-body-d ui-shadow table-stripe ui-responsive" id="beneficiaryCount" style="cell-spacing:0px; background-color:#BFBFBF;" data-role="table" data-theme="d"  data-mode="display:none">
+     <div class="routselect" style="font-size:18px;">Receive</div>        
+   		
+        <table width="100%" class="ui-body-d ui-shadow table-stripe ui-responsive" style="cell-spacing:0px; background-color:#BFBFBF;" data-role="table" data-theme="c"  data-mode="display:none">
           <tr >
-            <td ><label style="color:#D42E5C;  font-weight:1;">POSM Code</label><div id="posm_code" style="width:210px; display:inline-block;"></div></td>
+            <td ><label style="color:#D42E5C;  font-weight:1;">POSM Code</label><!--<div id="posmCodeRec" style="width:210px; display:inline-block;"></div>-->
+            <select id="posmCodeRec" class="auto_break" name="posmCodeRec" style=""></select>
+            </td>
             <td style="vertical-align:bottom;">
                 <a data-role="button" id="" onClick="alloDetails();" class="ui-btn" style="background-color:#D42E5C; color:#FFF;  font-weight:1;">Next</a>
             </td>
@@ -411,7 +416,7 @@
         <div id="bufferImageR" style="text-align:center;"><img src="running.gif" /></div>
         <div id="allHideR">
         <div id="recDataR"> 
-            <table table width="100%" class="ui-body-d ui-shadow table-stripe ui-responsive" id="beneficiaryCount" style="cell-spacing:0px; color:#D42E5C; background-color:#BFBFBF;"  data-role="table" data-theme="d"  data-mode="display:none">
+            <table table width="100%" class="ui-body-d ui-shadow table-stripe ui-responsive" style="cell-spacing:0px; color:#D42E5C; background-color:#BFBFBF;"  data-role="table" data-theme="c"  data-mode="display:none">
             
             	 <tr>
                     <td><div id="brand"></div></td>
@@ -465,7 +470,7 @@
     <br/>
     <div data-role="content" > 
     <div id="town" style="color:#D42E5C;"></div><br/>  
-     <!--<div id="usagesBtnShow" style="color:#D42E5C;" ></div>-->
+     <div id="bufferImageRoute" style="text-align:center;"><img src="running.gif" /></div>
      <div id="routeList"></div>
         <br/><br/>
   	
@@ -485,6 +490,7 @@
     <div data-role="content" > 
     <div id="townAbc" style="color:#D42E5C;"></div> 
     <div id="routeSelect" style="color:#D42E5C;"></div>
+    <div id="bufferImageOutlet" style="text-align:center;"><img src="running.gif" /></div>
      <div id="outletList"></div>
         <br/><br/>
   
@@ -507,7 +513,9 @@
    
         <table width="100%" class="ui-body-d ui-shadow table-stripe ui-responsive" id="beneficiaryCount" style="cell-spacing:0px;  background-color:#BFBFBF;"  data-role="table" data-theme="d"  data-mode="display:none">
           <tr>
-            <td><label style="color:#D42E5C;  font-weight:1;">POSM Code</label><div id="posmCodeList" style="width:210px; display:inline-block;"></div></td>
+            <td><label style="color:#D42E5C;  font-weight:1;">POSM Code</label><!--<div id="posmCodeList" style="width:210px; display:inline-block;"></div>-->
+            <select id="posmCodeUsges" class="auto_break" name="posmCodeUsges"  style="width:150px; display:inline-block;"></select>
+            </td>
             <td style="vertical-align:bottom;">
                 <a data-role="button" id="" onClick="alloDetailsU();" class="ui-btn" style="background-color:#D42E5C; color:#FFF;  font-weight:1;">Next</a>
             </td>
@@ -820,7 +828,9 @@
    
         <table width="100%" class="ui-body-d ui-shadow table-stripe ui-responsive" id="beneficiaryCount" style="cell-spacing:0px; background-color:#BFBFBF;"  data-role="table" data-theme="d"  data-mode="display:none">
           <tr>
-            <td><label style="color:#D42E5C;  font-weight:1;">POSM Code</label><div id="posmCodeAgn" style="width:210px; display:inline-block;"></div></td>
+            <td><label style="color:#D42E5C;  font-weight:1;">POSM Code</label><!--<div id="posmCodeAgn" style="width:210px; display:inline-block;"></div>-->
+            <select id="posmCodeAgn" class="auto_break" name="posmCodeAgn"  style="width:150px; display:inline-block;"></select>
+            </td>
             <td style="vertical-align:bottom;">
                 <a data-role="button" id="" onClick="alloDetailsAgency();" class="ui-btn" style="background-color:#D42E5C; color:#FFF;  font-weight:1;">Next</a>
             </td>
@@ -866,7 +876,16 @@
               <tr style="background-color:#AAAAAA;">
                 <td style="color:fff;"><span class="btn-color">Paint</span></td>
                 <!--<td><input type="text" id="paint" name="paint" required="required"/></td>-->
-                <td><select id="paint"name="paint" required="required"><option value="Yes">Yes</option><option value="No">No</option></select></td>
+                <td><!--<select id="paint"name="paint" required="required"><option value="Yes">Yes</option><option value="No">No</option></select>-->
+ 
+                    <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
+                        <input name="paint" id="radio-choice-h-6a" value="YES"  checked="checked" type="radio">
+                        <label for="radio-choice-h-6a">YES</label>
+                        <input name="paint" id="radio-choice-h-6b"  value="NO" type="radio">
+                        <label for="radio-choice-h-6b">NO</label>
+                    </fieldset>
+                
+                </td>
               </tr>
               <tr style="background-color:#AAAAAA;">
                 <td style="color:fff;"><span class="btn-color">City Corp</span></td>

@@ -17,7 +17,7 @@ var outlet_name='';
 
 
 //---Online
-var apipath="http://w02.yeapps.com/postit/syncmobile_20181106/";
+var apipath="http://w02.yeapps.com/postit/syncmobile_20181111/";
 //--- local
 //var apipath="http://127.0.0.1:8000/postit/syncmobile/";
 
@@ -27,14 +27,13 @@ $(document).ready(function(){
 	//alert(localStorage.synced);
 	$('#bufferImageSync').hide();
 	if (localStorage.synced!='YES'){
-		url = "#pagesync";	
-		$.mobile.navigate(url);					
+		$.mobile.navigate("#pagesync");					
 	}else{
 		
 		if (localStorage.rep_type=='CM'){
-			var usg='<div data-theme="c" data-role="header" data-position="fixed" ><a data-role="button" href="#leftpanel2" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets"><img src="menu.png" /></a><a data-role="button" onClick="exit();"><img src="exit.png"/></a> <h3 style="color:#fff;">POST-IT</h3></div>'
+			/*var usges='<div data-theme="c" data-role="header" data-position="fixed" ><a data-role="button" href="#leftpanel2" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets"><img src="menu.png" /></a><a data-role="button" onClick="exit();"><img src="exit.png"/></a> <h3 style="color:#fff;">POST-IT</h3></div>'
 			$('#usg').empty();
-			$('#usg').append(usg).trigger('create');
+			$('#usg').append(usges).trigger('create');*/
 			
 			$("#btn_submit_usages").hide();
 			$("#allHide").hide();
@@ -48,22 +47,25 @@ $(document).ready(function(){
 			var townCName=localStorage.town.replace('|', '-');
 			$('#townSelct').html(townCName)
 			
+			$('#townList').empty();
+			$('#townList').append(localStorage.townStr).trigger('create');
+						
+			$("#posmCodeUsges").empty();
+			$("#posmCodeUsges").append(localStorage.posmCodeSup).trigger('create');	
+			
 			$('#routeList').empty();
 			$('#routeList').append(localStorage.route).trigger('create');
 									
 			$('#outletList').empty();
 			$('#outletList').append(localStorage.outletList).trigger('create');
 			
-			$('#posmCodeList').empty();
-			$('#posmCodeList').append(localStorage.posmCode).trigger('create');
-			
-			//url = "#first_page";
+			url = "#homePage";
 			//$.mobile.navigate(url);	
 				
 		}else if (localStorage.rep_type == 'SUPERVISOR'){
-			var rec='<div data-theme="c" data-role="header" data-position="fixed" ><a data-role="button" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets " ><img src="menu.png" /></a><a data-role="button" onclick="backClick();" data-rel="back" class="ui-btn-right" data-transition="slide"><img src="back.png" /></a> <h3 style="color:#fff;">POST-IT</h3></div>'
+			/*var rece='<div data-theme="c" data-role="header" data-position="fixed" ><a data-role="button" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets " ><img src="menu.png" /></a><a data-role="button" onclick="backClick();" data-rel="back" class="ui-btn-right" data-transition="slide"><img src="back.png" /></a> <h3 style="color:#fff;">POST-IT</h3></div>'
 			$('#rec').empty();
-			$('#rec').append(rec).trigger('create');
+			$('#rec').append(rece).trigger('create');*/
 			
 			$("#allHideR").hide();
 			$("#btn_submit_receive").hide();
@@ -79,27 +81,27 @@ $(document).ready(function(){
 			
 			$('#townList').empty();
 			$('#townList').append(localStorage.townStr).trigger('create');
-
-			$("#posm_code").empty();
-			$("#posm_code").append(localStorage.posmCodeSup).trigger('create');
 			
-			$('#posmCodeList').empty();
-			$('#posmCodeList').append(localStorage.posmCodeSup).trigger('create');
+			$("#posmCodeRec").empty();
+			$("#posmCodeRec").append(localStorage.posmCodeSup).trigger('create');	
 			
+			$("#posmCodeUsges").empty();
+			$("#posmCodeUsges").append(localStorage.posmCodeSup).trigger('create');	
+						
 			$('#routeList').empty();
 			$('#routeList').append(localStorage.routeListSup).trigger('create');
 			
 			$('#outletList').empty();
 			$('#outletList').append(localStorage.outletList).trigger('create');
 			
-			//url = "#homePage";
+			url = "#homePage";
 			//$.mobile.navigate(url);
 			
 		}else{
 		//alert(localStorage.rep_type);
-			var rec='<div data-theme="c" data-role="header" data-position="fixed" ><a data-role="button" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets " ><img src="menu.png" /></a><a data-role="button" onclick="backClick();" data-rel="back" class="ui-btn-right" data-transition="slide"><img src="back.png" /></a> <h3 style="color:#fff;">POST-IT</h3></div>'
+			/*var rece='<div data-theme="c" data-role="header" data-position="fixed" ><a data-role="button" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets " ><img src="menu.png" /></a><a data-role="button" onclick="backClick();" data-rel="back" class="ui-btn-right" data-transition="slide"><img src="back.png" /></a> <h3 style="color:#fff;">POST-IT</h3></div>'
 			$('#rec').empty();
-			$('#rec').append(rec).trigger('create');
+			$('#rec').append(rece).trigger('create');*/
 			
 			$("#allHideR").hide();
 			$("#btn_submit_receive").hide();
@@ -116,10 +118,7 @@ $(document).ready(function(){
 			$('#townList').append(localStorage.townStr).trigger('create');
 
 			$("#posmCodeAgn").empty();
-			$("#posmCodeAgn").append(localStorage.posmCodeAgency).trigger('create');
-			
-			$('#posmCodeList').empty();
-			$('#posmCodeList').append(localStorage.posmCodeAgency).trigger('create');
+			$("#posmCodeAgn").append(localStorage.posmCode_agency).trigger('create');	
 			
 			$('#routeList').empty();
 			$('#routeList').append(localStorage.routeListSup).trigger('create');
@@ -127,11 +126,11 @@ $(document).ready(function(){
 			$('#outletList').empty();
 			$('#outletList').append(localStorage.outletList).trigger('create');
 			
-			//url = "#homePage";
+			url = "#homePage";
 			//$.mobile.navigate(url);
-		}		
+		}	
+		$.mobile.navigate(url);
 	}
-	//$.mobile.navigate(url);
 	
 });
 
@@ -170,8 +169,8 @@ function syncBasic(){
 					localStorage.town=syncResultArray[5];
 					localStorage.rep_type=syncResultArray[6];	
 					localStorage.routeList=syncResultArray[7];
-					localStorage.posmCode=syncResultArray[8];
-					localStorage.outlet_agency=syncResultArray[9];
+					//localStorage.posmCode=syncResultArray[8];
+					//localStorage.outlet_agency=syncResultArray[9];
 					//localStorage.posmCodeAll=syncResultArray[10];				
 					
 					var townlist=localStorage.town.split('fdfd');					
@@ -185,23 +184,9 @@ function syncBasic(){
 					}
 					localStorage.townStr=townStr;
 					
-					//=============================
-					var outletAgency='';
-					var outStr='';
-					/*outletAgency=localStorage.outlet_agency.split('fdfd');				
-					var outStr='<ul data-role="listview"  class="list" data-filter="true" data-inset="true" style="height:450px; overflow:scroll;">';
-					for (i=0;i<outletAgency.length;i++){
-						outLi=outletAgency[i].split('|');						
-						outletCode=outLi[0]
-						outletName=outLi[1]
-						outlet_route=outLi[2]
-						outlet_town_code=outLi[3]
-						outlet_town_name=outLi[4]						
+					$('#townList').empty();
+					$('#townList').append(localStorage.townStr).trigger('create');
 						
-						outStr+='<li onclick="agencySelectOutlet(\''+outletName+'|'+outletCode+'\');"><a>'+outletName+'-'+outletCode+'</a></li>'
-					}*/
-					outStr+='</ul>';
-					localStorage.outStr=outStr;
 							
 					$(".errorMsg").html("Sync Successful");
 					$('#syncBasic').show();
@@ -219,15 +204,15 @@ function syncBasic(){
 					
 										
 					if (localStorage.rep_type=='CM'){
-						var usg='<div data-theme="c" data-role="header" data-position="fixed" ><a data-role="button" href="#leftpanel2" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets"><img src="menu.png"/></a><a data-role="button" onClick="exit();"><img src="exit.png"/></a> <h3 style="color:#fff;">POST-IT</h3></div>'
+						/*var usges='<div data-theme="c" data-role="header" data-position="fixed" ><a data-role="button" href="#leftpanel2" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets"><img src="menu.png"/></a><a data-role="button" onClick="exit();"><img src="exit.png"/></a> <h3 style="color:#fff;">POST-IT</h3></div>'
 						$('#usg').empty();
-						$('#usg').append(usg).trigger('create');
+						$('#usg').append(usges).trigger('create');*/
 						
 						$("#entryAgency").hide();
 						$("#summaryAgency").hide();
 						$("#btn_receive").hide();
-						$("#rec").hide();
-						$("#usg").show();
+						/*$("#rec").hide();
+						$("#usg").show();*/
 						$('#btn_usages').show();
 						$('#btn_stock').show();
 						$('#reportbtn').show();			
@@ -235,35 +220,31 @@ function syncBasic(){
 						
 						var townCodeName=localStorage.town.replace('|','-')					
 						$("#townSelct").html(townCodeName);
+												
 						$('#routeList').empty();
 						$('#routeList').append(localStorage.route).trigger('create');
-						
-						$('#posmCodeList').empty();
-						$('#posmCodeList').append(localStorage.posmCode).trigger('create');
-						
-						$("#cmprepname").html("Name	:		"+localStorage.repName);
-						$("#cmpreptype").html("Type	:		"+localStorage.rep_type);
-						$("#cmprepid").html("ID	:		"+localStorage.repID);
 												
-						url = "#first_page";
+						$("#suprepname").html("Name	:		"+localStorage.repName);
+						$("#supreptype").html("Type	:		"+localStorage.rep_type);
+						$("#suprepid").html("ID	:		"+localStorage.repID);
+												
+						url = "#homePage";
 						//$.mobile.navigate(url);		
 						
 					}else if (localStorage.rep_type == 'SUPERVISOR'){
-						var rec='<div data-theme="c" data-role="header" data-position="fixed" ><a data-role="button" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets"><img src="menu.png"/></a><a data-role="button" onclick="backClick();" data-rel="back" class="ui-btn-right" data-transition="slide"><img src="back.png"/></a> <h3 style="color:#fff;">POST-IT</h3></div>'
+						/*var rece='<div data-theme="c" data-role="header" data-position="fixed" ><a data-role="button" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets"><img src="menu.png"/></a><a data-role="button" onclick="backClick();" data-rel="back" class="ui-btn-right" data-transition="slide"><img src="back.png"/></a> <h3 style="color:#fff;">POST-IT</h3></div>'
 						$('#rec').empty();
-						$('#rec').append(rec).trigger('create');
-						//$('#rec').html(rec);
+						$('#rec').append(rece).trigger('create');
+
 						$("#usg").hide();
-						$("#rec").show();						
+						$("#rec").show();	*/					
 						$('#btn_receive').show();
 						$('#btn_usages').show();
 						$('#btn_stock').show();
 						$('#reportbtn').show();
-			
+						
 						$("#entryAgency").hide();
 						$("#summaryAgency").hide();
-						$('#townList').empty();
-						$('#townList').append(localStorage.townStr).trigger('create');
 						
 						$("#suprepname").html("Name	:		"+localStorage.repName);
 						$("#supreptype").html("Type	:		"+localStorage.rep_type);
@@ -273,11 +254,11 @@ function syncBasic(){
 						//$.mobile.navigate(url);	
 					}else {
 
-						var rec='<div data-theme="c" data-role="header" data-position="fixed" ><a data-role="button" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets"><img src="menu.png"/></a><a data-role="button" onclick="backClick();" data-rel="back" class="ui-btn-right" data-transition="slide"><img src="back.png"/></a> <h3 style="color:#fff;">POST-IT</h3></div>'
+						/*var rece='<div data-theme="c" data-role="header" data-position="fixed" ><a data-role="button" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets"><img src="menu.png"/></a><a data-role="button" onclick="backClick();" data-rel="back" class="ui-btn-right" data-transition="slide"><img src="back.png"/></a> <h3 style="color:#fff;">POST-IT</h3></div>'
 						$('#rec').empty();
-						$('#rec').append(rec).trigger('create');
+						$('#rec').append(rece).trigger('create');
 						$("#rec").show();
-						$("#usg").hide();
+						$("#usg").hide();*/
 						
 						
 						$("#entryAgency").show();
@@ -287,8 +268,6 @@ function syncBasic(){
 						$('#btn_usages').hide();
 						$('#btn_stock').hide();
 						$('#reportbtn').hide();
-						$('#townList').empty();
-						$('#townList').append(localStorage.townStr).trigger('create');
 						
 						$("#suprepname").html("Name	:		"+localStorage.repName);
 						$("#supreptype").html("Type	:		"+localStorage.rep_type);
@@ -320,17 +299,17 @@ function menuClick(){
 	$(".errorChk").text("");
 	$(".sucChk").text("");
 	
-	$("#btn_take_pic").show();
-	$("#btn_ach_lat_long").show();
+	//$("#btn_take_pic").show();
+	//$("#btn_ach_lat_long").show();
 	
-	if (localStorage.rep_type=='SUPERVISOR'){ 
+	/*if (localStorage.rep_type=='SUPERVISOR'){ 
 		url = "#homePage";
 	}else if (localStorage.rep_type=='CM'){
 		url = "#first_page";	
-	}else if (localStorage.rep_type=='AGENCY'){
-		url = "#homePage";	
-	}
-	
+	}else{
+			
+	}*/
+	url = "#homePage";
 	$.mobile.navigate(url);
 }
 //----------------back button
@@ -338,15 +317,15 @@ function backClick(){
 	$(".errorChkP").text("");
 	$(".errorChk").text("");
 	$(".sucChk").text("");
-	$(".sucChkR").text("");
+	$(".sucChkR").text("");	
 }
 
 //---------
-function townSelect(){	
+function townSelect(){
 	$("#cmprepname").text("");
 	$("#cmpreptype").text("");
 	$("#cmprepid").text("");
-	
+		
 	if($("#townList").find("input[name='town_select']:checked").length==0){
 		$(".errorChk").text("Select Town");
 	}else{
@@ -357,9 +336,37 @@ function townSelect(){
 		  success: function(result) {
 			var resultArray = result.split('rdrd');
 				if (resultArray[0]=='Success'){	
-					localStorage.posmCodeSup=resultArray[1];
-					localStorage.posmCodeSupUges=resultArray[2];					
-					localStorage.posmCodeAgency=resultArray[3];
+					localStorage.posmCodeCmSup=resultArray[1];
+					localStorage.posmCodeAgency=resultArray[2];					
+				//====CM/Sup	
+				var posmCodeCmSup=localStorage.posmCodeCmSup.split('fdfd');
+				var posmStr = '<option value="">Select POSM</option>'
+				for (i=0;i<posmCodeCmSup.length;i++){	
+					posmCodeCmSupStr=posmCodeCmSup[i].split('-');								
+					posmStr += '<option value='+posmCodeCmSupStr[1]+'>'+posmCodeCmSupStr[0]+'-'+posmCodeCmSupStr[1]+'</option>'
+				}
+				posmStr =posmStr
+				localStorage.posmCodeSup=posmStr;
+				$("#posmCodeRec").empty();
+				$("#posmCodeRec").append(localStorage.posmCodeSup).trigger('create');	
+				
+				$("#posmCodeUsges").empty();
+				$("#posmCodeUsges").append(localStorage.posmCodeSup).trigger('create');	
+				
+				//=======Agency
+				var posmCodeAgency=localStorage.posmCodeAgency.split('fdfd');
+				var posmAgencyStr = '<option value="">Select POSM</option>'
+				for (i=0;i<posmCodeAgency.length;i++){	
+					posmCodeAgencyStr=posmCodeAgency[i].split('-');								
+					posmAgencyStr += '<option value='+posmCodeAgencyStr[1]+'>'+posmCodeAgencyStr[0]+'-'+posmCodeAgencyStr[1]+'</option>'
+				}
+				posmAgencyStr =posmAgencyStr
+				localStorage.posmCode_agency=posmAgencyStr;
+				$("#posmCodeAgn").empty();
+				$("#posmCodeAgn").append(localStorage.posmCode_agency).trigger('create');	
+									
+					/*localStorage.posmCodeAgency=resultArray[3];
+					localStorage.posmCodeCM=resultArray[4];
 					
 					$("#posm_code").empty();
 					$("#posm_code").append(localStorage.posmCodeSup).trigger('create');
@@ -370,6 +377,9 @@ function townSelect(){
 					$('#posmCodeAgn').empty();
 					$('#posmCodeAgn').append(localStorage.posmCodeAgency).trigger('create');
 					
+					$('#posmCodeList').empty();
+					$('#posmCodeList').append(localStorage.posmCodeCM).trigger('create');*/
+					
 					$("#townSelct").html("Town	:		"+localStorage.select_town);
 					$('#townSelctRec').html("Town	:		"+localStorage.select_town);
 					$('#townSelctAgency').html("Town	:		"+localStorage.select_town);
@@ -379,9 +389,10 @@ function townSelect(){
 					url="#first_page";					
 					$.mobile.navigate(url);
 				}else{
+					$(".errorChk").text("");
 					url="#homePage";					
 					$.mobile.navigate(url);
-					$(".errorChk").text("");
+					
 						
 				}
 		  	}
@@ -415,7 +426,7 @@ function alloDetails(){
 	$("#bufferImageR").hide();
 	$("#recDataR").hide();	
 	$(".sucMsgR").hide();
-	var posmCode=$("#posmCodeSup").val();
+	var posmCode=$("#posmCodeRec").val();
 	if(posmCode==""){
 		$(".errorChkP").text("Select posm Code");
 		$("#recDataR").hide();
@@ -469,7 +480,7 @@ function submit_data_receive(){
 	var d = new Date();	
 	var get_time=d.getTime();
 	
-	var posm_code=$("#posmCodeSup").val();
+	var posm_code=$("#posmCodeRec").val();
 	var posm_type=$("#posm_type").val();
 	
 	var brand=$("#brand").val();
@@ -595,8 +606,8 @@ function onfail(r) {
 
 /*================usagepage3=================*/
 function usages(Usages){
-	if (localStorage.rep_type!='CM'){	
-
+	/*if (localStorage.rep_type!='CM'){	*/
+		$('#bufferImageRoute').show();	
 		$.ajax({
 			type: 'POST',
 			url:apipath+"getRoute?&townCodeName="+localStorage.select_town,
@@ -604,7 +615,8 @@ function usages(Usages){
 			success: function(result) {	
 				var resultArray = result.split('rdrd');	
 				//alert(resultArray[1]);
-				if(resultArray[0]=='Success'){				
+				if(resultArray[0]=='Success'){	
+					$('#bufferImageRoute').hide();			
 					localStorage.routeListSupALL=resultArray[1];
 					var routeListSupALL=localStorage.routeListSupALL.split('||');
 					var routeStr='<ul data-role="listview" class="list" data-filter="true" data-inset="true" style="height:450px; overflow:scroll;">';
@@ -617,23 +629,25 @@ function usages(Usages){
 					$('#routeList').empty();
 					$('#routeList').append(localStorage.routeListSup).trigger('create');
 					
+					$("#town").html('Town		:		' + localStorage.select_town.replace('|','-'));
+					$(".errorChk").text("");			
+					url="#page3";					
+					$.mobile.navigate(url);					
 				}else{
-					$(".errorChk").text("");
+					$(".errorChk").text("Route not Available");
 				}
+			},error: function(result){
+				$(".errorChk").text("Please check internet connection");
 			}
 		});
-		$("#town").html('Town		:		' + localStorage.select_town);
-		//$("#usagesBtnShow").html(Usages);
-		$(".errorChk").text("");			
-		url="#page3";					
-		$.mobile.navigate(url);
-	}else{
+		
+	/*}else{
 		$("#town").html('Town		:		' + localStorage.town);	
 		//$("#usagesBtnShow").html(Usages);
 		$(".errorChk").text("");			
 		url="#page3";					
 		$.mobile.navigate(url);
-	}
+	}*/
 }
 
 /************************usage*page4********************/
@@ -642,17 +656,18 @@ var rName='';
 function sRoute(routeName){
 	
 	rName=routeName;
-	if (localStorage.rep_type =='CM'){
-		//alert(apipath+"getOutlet?&routeName="+rName+"&townCode="+localStorage.town);
-		
+	/*if (localStorage.rep_type =='CM'){*/
+		//alert(apipath+"getOutlet?&routeName="+rName+"&townCode="+localStorage.select_town);
+		$('#bufferImageOutlet').show();	
 		$.ajax({
 		type: 'POST',
-		url:apipath+"getOutlet?&routeName="+rName+"&townCode="+localStorage.town,
+		url:apipath+"getOutlet?&routeName="+rName+"&townCode="+localStorage.select_town,
 																																																												
 		success: function(result) {	
 			var syncResultArray = result.split('|||');	
 			
-			if(syncResultArray[0]=='Success'){				
+			if(syncResultArray[0]=='Success'){		
+				$('#bufferImageOutlet').hide();			
 				localStorage.outletLi=syncResultArray[1];
 				//alert (localStorage.outletLi)
 				var outletListaAll=localStorage.outletLi.split('rdrd');
@@ -668,12 +683,21 @@ function sRoute(routeName){
 				$('#outletList').empty();
 				$('#outletList').append(localStorage.outletList).trigger('create');
 				
+				$("#townAbc").html('Town	:		' + localStorage.select_town.replace('|','-'));
+				$("#routeSelect").html('Route	:		' + rName);
+				$(".errorChk").text("");			
+				url="#page4";					
+				$.mobile.navigate(url);		
+				
+			}else{
+				$(".errorChk").text("Outlet not Available");
 			}
-			
-			}
-		})
+		},error: function(result){
+			$(".errorChk").text("Please check internet connection");
+		}
+	})
 		
-	}else{
+	/*}else{
 		var selectTown=localStorage.select_town.replace('-','|');
 		//alert (apipath+"getOutlet?&routeName="+rName+"&townCode="+selectTown);
 		$.ajax({
@@ -701,16 +725,9 @@ function sRoute(routeName){
 			}
 		})
 		
-	}	if(localStorage.rep_type =='CM'){
-			$("#townAbc").html('Town	:		' + localStorage.town);
-		}else{
-			$("#townAbc").html('Town	:		' + localStorage.select_town);
-			}
+	}	*/
+	
 		
-		$("#routeSelect").html('Route	:		' + rName);
-		$(".errorChk").text("");			
-		url="#page4";					
-		$.mobile.navigate(url);		
 
 }
 
@@ -728,12 +745,13 @@ function outlet(outletIDName){
 		
 		$(".sucMsgU").hide();
 		$("#btn_submit_usages").hide();
-		$("#allHide").hide();	
+		$("#allHide").hide();
+			
 		if(localStorage.rep_type =='CM'){
-			$("#townAusa").html('Town	:		' + localStorage.town);	
+			$("#townAusa").html('Town	:		' + localStorage.select_town.replace('|','-'));	
 			url="#page5";					
 		}else if (localStorage.rep_type =='SUPERVISOR'){
-			$("#townAusa").html('Town	:		' + localStorage.select_town);
+			$("#townAusa").html('Town	:		' + localStorage.select_town.replace('|','-'));
 			url="#page5";
 		}else{
 			$("#routeSelectAbc").html('Route		:		' + rName);
@@ -758,28 +776,30 @@ function alloDetailsU(){
 	$("#recData").hide();	
 	$(".sucMsgU").hide();
 	
-	if (localStorage.rep_type =='SUPERVISOR'){
+	/*if (localStorage.rep_type =='SUPERVISOR'){
 		posmCode=$("#posmCodeSupUges").val();		
 	}else{ 
 		posmCode=$("#posmCodeCm").val();
-	}
-	if (localStorage.rep_type =='SUPERVISOR'){
+	}*/
+	posmCode=$("#posmCodeUsges").val();
+	/*if (localStorage.rep_type =='SUPERVISOR'){
 		town=localStorage.select_town.replace('-', '|');
 		
 	}else{
 		town=localStorage.town;	
-	}
+	}*/
 	if (posmCode==''){
 		$(".errorChkP").text("Select posm Code");
 		$("#btn_submit_usages").hide();
 		$("#recData").hide();
 		$("#allHide").hide();	
 	}else{
-		//alert (apipath+"getAllDataUsage?&posmCode="+posmCode+"&town="+town);
+		
+		//alert (apipath+"getAllDataUsage?&posmCode="+posmCode+"&town="+localStorage.select_town);
 		$("#bufferImage").show();	
 		$.ajax({
 			type: 'POST',
-			url:apipath+"getAllDataUsage?&posmCode="+posmCode+"&town="+town,																																																											
+			url:apipath+"getAllDataUsage?&posmCode="+posmCode+"&town="+localStorage.select_town,																																																											
 			success: function(result) {	
 				var resultArray = result.split('rdrd');
 					recStatus=resultArray[0];
@@ -1026,9 +1046,8 @@ function alloDetailsAgency(){
 	$("#btn_submit_Agency").hide();	
 	$("#sucMsgAgency").hide();
 	
-	
-	var posmCode=$("#posmCodeAgency").val();
-	var town=localStorage.select_town.replace('-', '|');
+	//alert(localStorage.select_town);
+	var posmCode=$("#posmCodeAgn").val();
 	
 	if (posmCode==''){
 		$(".errorChkP").text("Select posm Code");
@@ -1040,7 +1059,7 @@ function alloDetailsAgency(){
 		$("#bufferImageAgency").show();	
 		$.ajax({
 			type: 'POST',
-			url:apipath+"getAllDataAgncy?&posmCode="+posmCode+"&town="+town,																																																										
+			url:apipath+"getAllDataAgncy?&posmCode="+posmCode+"&town="+localStorage.select_town,																																																										
 			success: function(result) {	
 				var resultArray = result.split('rdrd');
 					recStatus=resultArray[0];
@@ -1078,7 +1097,7 @@ function submit_data_agency(){
 	
 	$("#btn_submit_Agency").hide();
 	
-	var posmCode=$("#posmCodeAgency").val();
+	var posmCode=$("#posmCodeAgn").val();
 	var posmType=$("#agencyposm_type").val();
 	var brandAgency=$("#agencybrand").val();
 	var balanceAgency=$("#agencydue").val();
@@ -1088,7 +1107,11 @@ function submit_data_agency(){
 	var aqty=$("#agencyQty").val().replace('+','').replace('-','').replace('.','').replace('/','').replace('*','').replace(',','');
 	var aset=$("#set").val().replace('+','').replace('-','').replace('.','').replace('/','').replace('*','').replace(',','');
 	var alight=$("#light").val().replace('+','').replace('-','').replace('.','').replace('/','').replace('*','').replace(',','');
-	var apaint=$("#paint").val();
+	
+	var apaint=$('input[name=paint]:checked').val();
+	//alert(apaint);
+	
+	
 	var acity=$("#citycor").val().replace('+','').replace('-','').replace('.','').replace('/','').replace('*','').replace(',','');
 	//alert (aqty+"-"+aset+"-"+alight+"-"+apaint+"-"+acity)
 	imageName3=$("#agnPhoto_name").val();
