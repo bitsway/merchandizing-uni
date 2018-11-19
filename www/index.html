@@ -374,8 +374,8 @@
         <br/>
         <br/>
          <div data-role="footer" data-position="fixed" style="font-size:12px; color:#595959; background-color:#FFF; font-weight:1;" align="center" >20181118</div>
-    </div>
-</div>
+    </div><!--div contain-->
+</div><!--div 1-->
 
 <!------------------------------------------MAIN MENU----------------------------------------------------------->
 <div data-theme="c" data-role="page" id="homePage" style="overflow:scroll;">
@@ -419,12 +419,12 @@
          	
          </div>
          
-         </br>
+         <br/>
          
          <div id="auditOutletList"></div> 
-           </br>
+           <br/>
            <div class="errAudit" style="color:#cc0000;" ></div> 
-           </br>
+           <br/>
        	<button data-role="button" id="btn_audit_entry" onclick="outletAudit()" href="#" data-transition="slide" style="color:#fff">Next</button>   
       </div>
     <button data-role="button" id="townSUP" onclick="townSelect()" href="#" data-transition="slide" style="background-color:#CE295E; " ><span class="text-color">Next</span></button>
@@ -553,8 +553,6 @@
         </div> 
         <a data-role="button" id="btn_submit_receive" onClick="submit_data_receive();" class="ui-btn" style="background-color:#D42E5C; color:#FFF;  font-weight:1;">Submit</a>
          <div class="sucMsgR" style="color:#FFF; text-align:center; background-color:#DA335A; padding:30px 0px 30px 0px; border-radius:10px;">Successfully Submitted</div>
-
-  	</ul>
     <div class="errorChk" style="color:#cc0000; background-color:#FFF;"></div>
             <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
     </div>
@@ -663,46 +661,12 @@
         </div>   
         <a data-role="button" id="btn_submit_usages" onClick="submit_data_usages();" class="ui-btn" style="background-color:#D42E5C; color:#FFF;  font-weight:1;">Submit</a>
           <div class="sucMsgU" style="color:#FFF; text-align:center; background-color:#DA335A; padding:30px 0px 30px 0px; border-radius:10px;">Successfully Submitted</div> 
-  	</ul>
     <div class="errorChk" style="color:#cc0000; background-color:#FFF;"></div>
             <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
     </div>
 </div>
 
-<!-----------------------------------------Agency page 6-------------------------------------------->
-<!--<div data-role="page" data-theme="c" id="page6">
-    <div data-theme="c" data-role="header" data-position="fixed" class="header" >
-         <a data-role="button" href="#leftpanel3" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets"   ><img src="menu.png" /></a>
-        <a data-role="button" onClick="exit();" ><img src="exit.png" /></a>
-         <h3 class="headerc">Agency</h3>
-    </div>
-    <br/><br/>
-    <div data-role="content" >
-    <div id="anprepname" style="color:#DA335A; text-align:center;"></div>  
-    <div id="anpreptype" style="color:#DA335A; text-align:center;"></div>
-     <div id="anprepid" style="color:#DA335A; text-align:center;"></div>    
-    <div id="agency"></div> 
-    <a data-role="button" id="entry" onclick="searchoutlet('entry')" href="#" data-transition="slide">Entry</a>
-     <a data-role="button" id="btn_stock" onclick="()" href="#" data-transition="slide" style="color:#fff"  >Stock Report </a> 
-    <a data-role="button" id="" onclick="('')" href="#" data-transition="slide" style="font-weight:1">Summary Report </a>            
-     <div class="errorChk" style="color:#cc0000;"></div>
-        <br/><br/>
-  	<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-    </div>
-    <div data-role="panel" id="leftpanel3" data-position="left" data-display="overlay" data-theme="c" style="background-color:#CE295E;">
-        <div align="center"></div>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <ul data-role="listview" >
-          <li><a data-role="button" class="ui-btn sync-img" onclick="syncPage();" style="background-color:#fff" ><center><img src="sync.png" /></center></a></li>		  
-        </ul>
-        
-    </div>
-</div>-->
+
 <!---------------------------------------------------- page 7------------------------------------------------->
 <div data-role="page" data-theme="c" id="page7" style="overflow:scroll;">
  <div data-theme="c" data-role="header" data-position="fixed" >
@@ -737,73 +701,7 @@
       </div>
       
 </div>
-<!-------------------------------------page 8---------------------------------------->
-<!--<div data-role="page" data-theme="c" id="page8" style="overflow:scroll;">
-    <div data-theme="c" data-role="header" data-position="fixed" >
-        <a data-role="button" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets " ><img src="menu.png" /></a>
-        <a data-role="button" onclick="backClick();" data-rel="back" class="ui-btn-right" data-transition="slide"><img src="back.png" /></a>
-        <h3 style="color:#fff;">POST-IT</h3>
-    </div>
-    <div data-role="content" > 
-    <div id="TownNameAgency" style="color:#CE295E"></div> 
-    <div id="RouteNameAgency" style="color:#CE295E"></div>  
-    <div id="OutletNameAgency" style="color:#CE295E"></div> 
-    <div class="routselect" style="font-size:18px; text-align:center; margin:2px;">Execution</div> 
-    <div id="allhideA">          
-    <ul data-role="listview" data-inset="true">
-    	<li class="ui-field-contain" >
-        	<table width="100%" class="ui-body-d ui-shadow table-stripe ui-responsive" id="beneficiaryCount" style="cell-spacing:0px;"  data-role="table" data-theme="d"  data-mode="display:none" style="color:#fff">
-              <tr>
-                <td > <span class="btn-color">POSM Code</span></td>
-                 <td><input type="text" id="posmcode" name="posmcode" /></td>
-              </tr>
-              <tr>
-                <td > <span class="btn-color">Qty</span></td>
-                <td><input type="number" id="agencyQty" name="agencyQty" /></td>
-              </tr>
-              <tr>
-              <tr>
-                <td > <span class="btn-color">SFT</span></td>
-                 <td><input type="number" id="set" name="set" /></td>
-              </tr>
-              <tr>
-                <td ><span class="btn-color"># of Light</span></td>
-                <td><input type="number" id="light" name="light" /></td>
-              </tr>
-              <tr>
-              <tr>
-                <td style="color:fff;"><span class="btn-color">Paint</span></td>
-                
-                <td><select id="paint"name="paint" required="required"><option value="Yes">Yes</option><option value="No">No</option></select></td>
-              </tr>
-              <tr>
-                <td style="color:fff;"><span class="btn-color">City Corp</span></td>
-                <td><input type="text" id="citycor" name="citycor" required="required" /></td>
-              </tr>
-              	<td colspan="2">
-                	<a data-role="button" id="btn_take_pic" onClick="getAgencyImage();" class="ui-btn" style="background-color:#CE295E; color: #fff; font-weight:1; font-family:'Montserrat',sans-serif"; > Take Picture</a>       
-                    <img src="" width="128" height="128" alt="Image1" id="myImageC" />        
-                   
-                     <input name="agnPhoto_path" id="agnPhoto_path" value=""  type="hidden">
-                    <input name="agnPhoto_name" id="agnPhoto_name" value=""  type="hidden">
-                </td>
-              </tr>     
-            </table>     
-        </li>
-    </ul>
-    </div>  
-     
-     <a data-role="button" id="btn_submit_agency" onClick="submit_data_agency();" class="ui-btn" style="background-color:#CE295E"  <span class="text-color">Submit</span></a>
-     <div id="sucMsgA" style="color:#FFF; text-align:center; background-color:#DA335A; padding:30px 0px 30px 0px; border-radius:10px;">Successfully Submitted</div>
-     
-     
-     <div class="errorChk" style="color:#cc0000;"></div>
-     
-        <br/><br/>
-  
-            <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-    </div>
-</div>-->
+
 <!-------------------------------------------Report------------------------------>
 <div data-role="page" data-theme="c" id="page9" style="overflow:scroll;">
     <div data-theme="c" data-role="header" data-position="fixed" >
@@ -1005,8 +903,6 @@
         </div> 
         <a data-role="button" id="btn_submit_Agency" onClick="submit_data_agency();" class="ui-btn" style="background-color:#D42E5C; color:#FFF;  font-weight:1;">Submit</a>
          <div id="sucMsgAgency" style="color:#FFF; text-align:center; background-color:#DA335A; padding:30px 0px 30px 0px; border-radius:10px;">Successfully Submitted</div>
-		
-  	</ul>
     <div class="errorChk" style="color:#cc0000; background-color:#FFF;"></div>
             <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
     </div>
@@ -1130,24 +1026,57 @@
                     <input name="agnAudPhoto_path" id="agnAudPhoto_path" value=""  type="hidden">
                     <input name="agnAudPhoto_name" id="agnAudPhoto_name" value=""  type="hidden">
                 </td>
-              </tr>     
-        </table>
-        <ul data-role="listview" data-inset="true">
+              </tr> 
+              <tr>
+                <td colspan="2">
                 <input name="aud_lat" id="aud_lat"  type="hidden">
                 <input name="aud_long" id="aud_long"  type="hidden">
-        		<a data-role="button" id="btn_area_lat_long" onClick="getLocationInfo();" class="ui-btn" >Confarm Location</a>
-         </ul>
+        		<a data-role="button" id="btn_area_lat_long" onClick="getLocationInfo();" class="ui-btn" style="background-color:#FFE4C4; color:#D42E5C;  font-weight:1;">Confarm Location</a>
+                </td>
+              </tr>    
+        </table>
+        
         </div>
-        </div> 
         <a data-role="button" id="btn_submit_audit" onClick="submit_data_auditor();" class="ui-btn" style="background-color:#D42E5C; color:#FFF;  font-weight:1;">Submit</a>
-          
          <div id="msg_submit_audit" style="color:#FFF; text-align:center; background-color:#DA335A; padding:30px 0px 30px 0px; border-radius:10px;">Successfully Submitted</div>
-		
-  	</ul>
+
     <div class="errorChk" style="color:#cc0000; background-color:#FFF;"></div>
             <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+       </div>
+ </div>
+ 
+ 
+ <!-----------------------------------common Page for all---------------------->
+<div data-theme="c" data-role="page" id="allUser" style="overflow:scroll;">
+    <div data-theme="c" data-role="header" data-position="fixed">
+        <a data-role="button" href="#leftpanel" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets"><img src="menu.png"/></a>
+        
+        <a data-role="button" onClick="exit();" ><img src="exit.png" /></a>
+        <h3 class="headerc" id="headerName">POST-IT</h3>
     </div>
+    <br/>
+    <br/>
+    <div data-role="content">
+ 		<div style="color:#FFF; text-align:center; background-color:#DA335A; padding:30px 0px 30px 0px; border-radius:10px;"><h3>Welcome To POST-IT</h3> <br/>Required Sync</div>
+    </div>
+    <div data-role="panel" id="leftpanel" data-position="left" data-display="overlay" data-theme="c" style="background-color:#CE295E;">
+        <div align="center"></div>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <ul data-role="listview" >
+          <li><a data-role="button" class="ui-btn sync-img" href="#pagesync"  style="background-color:#fff" ><center><img src="sync.png" /></center></a></li>		  
+        </ul>
+        
+    </div>
+    <br/><br/><br/>
+    <div data-role="footer" data-position="fixed" style="font-size:12px; color:#595959; background-color:#FFF; font-weight:1;" align="center" >20181118</div>
 </div>
+
+
 
   <script type="text/javascript" src="phonegap.js"></script>
   

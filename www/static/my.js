@@ -28,10 +28,6 @@ url ="";
 $(document).ready(function(){
 	//alert(localStorage.synced);
 	$('#bufferImageSync').hide();
-	if (localStorage.synced!='YES'){
-		$.mobile.navigate("#pagesync");					
-	}else{
-		
 		if (localStorage.rep_type=='CM'){
 			/*var usges='<div data-theme="c" data-role="header" data-position="fixed" ><a data-role="button" href="#leftpanel2" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets"><img src="menu.png" /></a><a data-role="button" onClick="exit();"><img src="exit.png"/></a> <h3 style="color:#fff;">POST-IT</h3></div>'
 			$('#usg').empty();
@@ -65,7 +61,7 @@ $(document).ready(function(){
 			$('#outletList').empty();
 			$('#outletList').append(localStorage.outletList).trigger('create');
 			
-			//url = "#homePage";
+			url = "#homePage";
 			//$.mobile.navigate(url);	
 				
 		}else if (localStorage.rep_type == 'SUPERVISOR'){
@@ -104,7 +100,7 @@ $(document).ready(function(){
 			$('#outletList').empty();
 			$('#outletList').append(localStorage.outletList).trigger('create');
 			
-			//url = "#homePage";
+			url = "#homePage";
 			//$.mobile.navigate(url);
 			
 		}else if(localStorage.rep_type == 'AGENCY'){
@@ -140,14 +136,12 @@ $(document).ready(function(){
 			$('#outletList').empty();
 			$('#outletList').append(localStorage.outletList).trigger('create');
 			
-			//url = "#homePage";
+			url = "#homePage";
 			//$.mobile.navigate(url);
-		}else{
+		}else if(localStorage.rep_type == 'AUDITOR'){
 			$("#auditorDiv").show();
-			
 			$("#auditorBrandList").empty();
 			$("#auditorBrandList").append(localStorage.auditorBrand).trigger('create');
-			
 			$('#headerName').html('POST-IT');
 			$('#townList').hide();
 			$('#townSUP').hide();
@@ -155,12 +149,14 @@ $(document).ready(function(){
 			$("#btn_audit_entry").hide();
 			$("#auditorHead").hide();
 			$("#auditOutletList").hide();
-			//url = "#homePage";
+			url = "#homePage";
+		}else{
+			
+			url = "#allUser";	
 		}
-		url = "#homePage";
+		$(".errorChk").text('');
+		//url = "#homePage";
 		$.mobile.navigate(url);
-	}
-	
 });
 
 
@@ -236,6 +232,7 @@ function syncBasic(){
 						/*var usges='<div data-theme="c" data-role="header" data-position="fixed" ><a data-role="button" href="#leftpanel2" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets"><img src="menu.png"/></a><a data-role="button" onClick="exit();"><img src="exit.png"/></a> <h3 style="color:#fff;">POST-IT</h3></div>'
 						$('#usg').empty();
 						$('#usg').append(usges).trigger('create');*/
+						
 						$('#townSUP').show();
 						$('#townList').show();
 						$("#auditorDiv").hide();
@@ -261,8 +258,6 @@ function syncBasic(){
 						$("#supreptype").html("Type	:		"+localStorage.rep_type);
 						$("#suprepid").html("ID	:		"+localStorage.repID);
 												
-						url = "#homePage";
-						//$.mobile.navigate(url);		
 						
 					}else if (localStorage.rep_type == 'SUPERVISOR'){
 						/*var rece='<div data-theme="c" data-role="header" data-position="fixed" ><a data-role="button" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets"><img src="menu.png"/></a><a data-role="button" onclick="backClick();" data-rel="back" class="ui-btn-right" data-transition="slide"><img src="back.png"/></a> <h3 style="color:#fff;">POST-IT</h3></div>'
@@ -288,8 +283,7 @@ function syncBasic(){
 						$("#supreptype").html("Type	:		"+localStorage.rep_type);
 						$("#suprepid").html("ID	:		"+localStorage.repID);
 						
-						url = "#homePage";
-						//$.mobile.navigate(url);	
+							
 					}else if(localStorage.rep_type == 'AGENCY'){
 
 						/*var rece='<div data-theme="c" data-role="header" data-position="fixed" ><a data-role="button" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets"><img src="menu.png"/></a><a data-role="button" onclick="backClick();" data-rel="back" class="ui-btn-right" data-transition="slide"><img src="back.png"/></a> <h3 style="color:#fff;">POST-IT</h3></div>'
@@ -314,8 +308,7 @@ function syncBasic(){
 						$("#supreptype").html("Type	:		"+localStorage.rep_type);
 						$("#suprepid").html("ID	:		"+localStorage.repID);
 						//alert(localStorage.rep_type);
-						url = "#homePage";
-						//$.mobile.navigate(url);	
+						
 					}else{
 						$("#auditOutSearch").val('');
 						$("#auditorDiv").show();
@@ -331,8 +324,10 @@ function syncBasic(){
 						$("#suprepid").html("ID	:		"+localStorage.repID);
 						
 						
-						url = "#homePage";
+						
 					}	
+					$(".errorChk").text('');
+					url = "#homePage";
 					$.mobile.navigate(url);
 																		
 				}else{
@@ -387,78 +382,83 @@ function townSelect(){
 	$("#cmprepname").text("");
 	$("#cmpreptype").text("");
 	$("#cmprepid").text("");
-		
-	if($("#townList").find("input[name='town_select']:checked").length==0){
-		$(".errorChk").text("Select Town");
+	
+	if (localStorage.synced!='YES'){
+		$(".errorChk").text("Required Sync");
 	}else{
-		localStorage.select_town=$("input[name='town_select']:checked").val();
-		//alert (apipath+'get_posm_sup?select_town='+localStorage.select_town+"&repID="+localStorage.repID)
-		$.ajax({
-		  url:apipath+'get_posm_sup?select_town='+localStorage.select_town+"&repID="+localStorage.repID,
-		  success: function(result) {
-			var resultArray = result.split('rdrd');
-				if (resultArray[0]=='Success'){	
-					localStorage.posmCodeCmSup=resultArray[1];
-					localStorage.posmCodeAgency=resultArray[2];					
-				//====CM/Sup	
-				var posmCodeCmSup=localStorage.posmCodeCmSup.split('fdfd');
-				var posmStr = '<option value="">Select POSM</option>'
-				for (i=0;i<posmCodeCmSup.length;i++){	
-					posmCodeCmSupStr=posmCodeCmSup[i].split('-');								
-					posmStr += '<option value='+posmCodeCmSupStr[1]+'>'+posmCodeCmSupStr[0]+'-'+posmCodeCmSupStr[1]+'</option>'
-				}
-				posmStr =posmStr
-				localStorage.posmCodeSup=posmStr;
-				$("#posmCodeRec").empty();
-				$("#posmCodeRec").append(localStorage.posmCodeSup).trigger('create');	
-				
-				$("#posmCodeUsges").empty();
-				$("#posmCodeUsges").append(localStorage.posmCodeSup).trigger('create');	
-				
-				//=======Agency
-				var posmCodeAgency=localStorage.posmCodeAgency.split('fdfd');
-				var posmAgencyStr = '<option value="">Select POSM</option>'
-				for (i=0;i<posmCodeAgency.length;i++){	
-					posmCodeAgencyStr=posmCodeAgency[i].split('-');								
-					posmAgencyStr += '<option value='+posmCodeAgencyStr[1]+'>'+posmCodeAgencyStr[0]+'-'+posmCodeAgencyStr[1]+'</option>'
-				}
-				posmAgencyStr =posmAgencyStr
-				localStorage.posmCode_agency=posmAgencyStr;
-				$("#posmCodeAgn").empty();
-				$("#posmCodeAgn").append(localStorage.posmCode_agency).trigger('create');	
-									
-					/*localStorage.posmCodeAgency=resultArray[3];
-					localStorage.posmCodeCM=resultArray[4];
+		
+		if($("#townList").find("input[name='town_select']:checked").length==0){
+			$(".errorChk").text("Select Town");
+		}else{
+			localStorage.select_town=$("input[name='town_select']:checked").val();
+			//alert (apipath+'get_posm_sup?select_town='+localStorage.select_town+"&repID="+localStorage.repID)
+			$.ajax({
+			  url:apipath+'get_posm_sup?select_town='+localStorage.select_town+"&repID="+localStorage.repID,
+			  success: function(result) {
+				var resultArray = result.split('rdrd');
+					if (resultArray[0]=='Success'){	
+						localStorage.posmCodeCmSup=resultArray[1];
+						localStorage.posmCodeAgency=resultArray[2];					
+					//====CM/Sup	
+					var posmCodeCmSup=localStorage.posmCodeCmSup.split('fdfd');
+					var posmStr = '<option value="">Select POSM</option>'
+					for (i=0;i<posmCodeCmSup.length;i++){	
+						posmCodeCmSupStr=posmCodeCmSup[i].split('-');								
+						posmStr += '<option value='+posmCodeCmSupStr[1]+'>'+posmCodeCmSupStr[0]+'-'+posmCodeCmSupStr[1]+'</option>'
+					}
+					posmStr =posmStr
+					localStorage.posmCodeSup=posmStr;
+					$("#posmCodeRec").empty();
+					$("#posmCodeRec").append(localStorage.posmCodeSup).trigger('create');	
 					
-					$("#posm_code").empty();
-					$("#posm_code").append(localStorage.posmCodeSup).trigger('create');
+					$("#posmCodeUsges").empty();
+					$("#posmCodeUsges").append(localStorage.posmCodeSup).trigger('create');	
 					
-					$('#posmCodeList').empty();
-					$('#posmCodeList').append(localStorage.posmCodeSupUges).trigger('create');
-					
-					$('#posmCodeAgn').empty();
-					$('#posmCodeAgn').append(localStorage.posmCodeAgency).trigger('create');
-					
-					$('#posmCodeList').empty();
-					$('#posmCodeList').append(localStorage.posmCodeCM).trigger('create');*/
-					
-					$("#townSelct").html("Town	:		"+localStorage.select_town);
-					$('#townSelctRec').html("Town	:		"+localStorage.select_town);
-					$('#townSelctAgency').html("Town	:		"+localStorage.select_town);
-				
-					
-					$(".errorChk").text("");		
-					url="#first_page";					
-					$.mobile.navigate(url);
-				}else{
-					$(".errorChk").text("");
-					url="#homePage";					
-					$.mobile.navigate(url);
+					//=======Agency
+					var posmCodeAgency=localStorage.posmCodeAgency.split('fdfd');
+					var posmAgencyStr = '<option value="">Select POSM</option>'
+					for (i=0;i<posmCodeAgency.length;i++){	
+						posmCodeAgencyStr=posmCodeAgency[i].split('-');								
+						posmAgencyStr += '<option value='+posmCodeAgencyStr[1]+'>'+posmCodeAgencyStr[0]+'-'+posmCodeAgencyStr[1]+'</option>'
+					}
+					posmAgencyStr =posmAgencyStr
+					localStorage.posmCode_agency=posmAgencyStr;
+					$("#posmCodeAgn").empty();
+					$("#posmCodeAgn").append(localStorage.posmCode_agency).trigger('create');	
+										
+						/*localStorage.posmCodeAgency=resultArray[3];
+						localStorage.posmCodeCM=resultArray[4];
+						
+						$("#posm_code").empty();
+						$("#posm_code").append(localStorage.posmCodeSup).trigger('create');
+						
+						$('#posmCodeList').empty();
+						$('#posmCodeList').append(localStorage.posmCodeSupUges).trigger('create');
+						
+						$('#posmCodeAgn').empty();
+						$('#posmCodeAgn').append(localStorage.posmCodeAgency).trigger('create');
+						
+						$('#posmCodeList').empty();
+						$('#posmCodeList').append(localStorage.posmCodeCM).trigger('create');*/
+						
+						$("#townSelct").html("Town	:		"+localStorage.select_town);
+						$('#townSelctRec').html("Town	:		"+localStorage.select_town);
+						$('#townSelctAgency').html("Town	:		"+localStorage.select_town);
 					
 						
+						$(".errorChk").text("");		
+						url="#first_page";					
+						$.mobile.navigate(url);
+					}else{
+						$(".errorChk").text("");
+						url="#homePage";					
+						$.mobile.navigate(url);
+						
+							
+					}
 				}
-		  	}
-		  });
+			  });
+		}
 	}
 }
 
@@ -763,79 +763,83 @@ function sRoute(routeName){
 //auditor Outlet
 function auditorOutlet(){
 		$(".errAudit").text("");
-		var auditSerach=$("#auditOutSearch").val();
-		if(auditSerach==''){
-			$(".errAudit").text("Please Search Outlet");
-			$("#auditorHead").hide();
-			$("#auditOutletList").hide();
-			$("#btn_audit_entry").hide();
+		if (localStorage.synced!='YES'){
+			$(".errorChk").text("Required Sync");
 		}else{
-			$("#btn_audit_entry").show();
-			$('#bufferImageOutlet').show();	
-			//alert(apipath+"getOutletAuditor?&auditSerach="+auditSerach);
-			$.ajax({
-			type: 'POST',
-			url:apipath+"getOutletAuditor?&auditSerach="+auditSerach,
-																																																													
-			success: function(result) {	
-				var syncResultArray = result.split('rdrd');	
-				if(syncResultArray[0]=='Success'){		
-					$('#bufferImageOutlet').hide();
-					
-					localStorage.outletLi=syncResultArray[1];
-					localStorage.aOutletCode=syncResultArray[2];
-					localStorage.aOutletName=syncResultArray[3];
-					localStorage.aOutletAddress=syncResultArray[4];
-					localStorage.aOutletRoute=syncResultArray[5];
-					localStorage.aTown=syncResultArray[6];
-					localStorage.aBrand=syncResultArray[7];
-					//localStorage.auditorBrandList=syncResultArray[8];
-					//alert (localStorage.outletLi +'|||'+localStorage.aOutletCode);
-					if (localStorage.aOutletCode !='' || localStorage.outletLi!=''){			//
-						if (localStorage.aOutletCode !=''){
-							$("#auditorHead").show();
-							$("#auditOutletList").show();
-							$('#oCode').text(localStorage.aOutletCode+'|'+localStorage.aOutletName);
-							$('#oAddress').text(localStorage.aOutletAddress);
-							$('#oRoute').text(localStorage.aOutletRoute);
-							$('#oTown').text(localStorage.aTown);
+			var auditSerach=$("#auditOutSearch").val();
+			if(auditSerach==''){
+				$(".errAudit").text("Please Search Outlet");
+				$("#auditorHead").hide();
+				$("#auditOutletList").hide();
+				$("#btn_audit_entry").hide();
+			}else{
+				$("#btn_audit_entry").show();
+				$('#bufferImageOutlet').show();	
+				//alert(apipath+"getOutletAuditor?&auditSerach="+auditSerach);
+				$.ajax({
+				type: 'POST',
+				url:apipath+"getOutletAuditor?&auditSerach="+auditSerach,
+																																																														
+				success: function(result) {	
+					var syncResultArray = result.split('rdrd');	
+					if(syncResultArray[0]=='Success'){		
+						$('#bufferImageOutlet').hide();
+						
+						localStorage.outletLi=syncResultArray[1];
+						localStorage.aOutletCode=syncResultArray[2];
+						localStorage.aOutletName=syncResultArray[3];
+						localStorage.aOutletAddress=syncResultArray[4];
+						localStorage.aOutletRoute=syncResultArray[5];
+						localStorage.aTown=syncResultArray[6];
+						localStorage.aBrand=syncResultArray[7];
+						//localStorage.auditorBrandList=syncResultArray[8];
+						//alert (localStorage.outletLi +'|||'+localStorage.aOutletCode);
+						if (localStorage.aOutletCode !='' || localStorage.outletLi!=''){			//
+							if (localStorage.aOutletCode !=''){
+								$("#auditorHead").show();
+								$("#auditOutletList").show();
+								$('#oCode').text(localStorage.aOutletCode+'|'+localStorage.aOutletName);
+								$('#oAddress').text(localStorage.aOutletAddress);
+								$('#oRoute').text(localStorage.aOutletRoute);
+								$('#oTown').text(localStorage.aTown);
+								
+							}else{
+								$("#auditorHead").hide();
+								$(".errAudit").text("দোকানটি লিষ্টে নাই, সাবমিট করতে চাইলে Next বাটন চাপুন |");	
+							}
 							
+							if (localStorage.outletLi !=''){
+								$("#auditOutletList").show();	
+								var outletDetails = localStorage.outletLi.split('fdfd');
+								
+								var auditOutletStr='<span style="background-color:#900; color:#FFF; margin:0px; padding:0px; display:block;">Submitted Data</span>';
+									for (i=0;i<outletDetails.length;i++){					
+										outletLi=outletDetails[i].split('|');
+										
+										auditOutletStr += '<p style="margin:0px; padding:0px; background-color:#FFF; border:1px solid #F00;">'+"Outlet:"+outletLi[0]+' | '+"Brand:"+outletLi[3]+' | '+"POSM Type:"+outletLi[4]+' | '+"Height:"+outletLi[5]+' | '+"Length:"+outletLi[6]+' | '+"Total Light:"+outletLi[1]+' | '+"Defective Light:"+outletLi[2]+'</p>'
+									}
+									localStorage.auditOutletList=auditOutletStr;		
+									$('#auditOutletList').empty();
+									$('#auditOutletList').append(localStorage.auditOutletList).trigger('create');
+							}else{
+								$('#auditOutletList').empty();
+								
+							}
 						}else{
 							$("#auditorHead").hide();
-							$(".errAudit").text("দোকানটি লিষ্টে নাই, সাবমিট করতে চাইলে Next বাটন চাপুন |");	
+							$('#auditOutletList').empty();
+							$(".errAudit").text("দোকানটি লিষ্টে নাই, সাবমিট করতে চাইলে Next বাটন চাপুন |");
 						}
 						
-						if (localStorage.outletLi !=''){
-							$("#auditOutletList").show();	
-							var outletDetails = localStorage.outletLi.split('fdfd');
-							
-							var auditOutletStr='<span style="background-color:#900; color:#FFF; margin:0px; padding:0px; display:block;">Submitted Data</span>';
-								for (i=0;i<outletDetails.length;i++){					
-									outletLi=outletDetails[i].split('|');
-									
-									auditOutletStr += '<p style="margin:0px; padding:0px; background-color:#FFF; border:1px solid #F00;">'+"Outlet:"+outletLi[0]+' | '+"Brand:"+outletLi[3]+' | '+"POSM Type:"+outletLi[4]+' | '+"Height:"+outletLi[5]+' | '+"Length:"+outletLi[6]+' | '+"Total Light:"+outletLi[1]+' | '+"Defective Light:"+outletLi[2]+'</p>'
-								}
-								localStorage.auditOutletList=auditOutletStr;		
-								$('#auditOutletList').empty();
-								$('#auditOutletList').append(localStorage.auditOutletList).trigger('create');
-						}else{
-							$('#auditOutletList').empty();
-							
-						}
-					}else{
-						$("#auditorHead").hide();
-						$('#auditOutletList').empty();
-						$(".errAudit").text("দোকানটি লিষ্টে নাই, সাবমিট করতে চাইলে Next বাটন চাপুন |");
-					}
-					
-					
-				}	
-			},error: function(){
-				$("#auditorHead").hide();
-				$('#auditOutletList').empty();
-				$(".errAudit").text("Please check internet connection");
-			}
-		});
+						
+					}	
+				},error: function(){
+					$("#auditorHead").hide();
+					$('#auditOutletList').empty();
+					$(".errAudit").text("Please check internet connection");
+				}
+			});
+		}
 	}
 }
 
@@ -851,10 +855,9 @@ function outletAudit(){
 			var auditorBrand=result.split(',');
 				var brandStr = '<option value="">Select Brand</option>'
 				for (i=0;i<auditorBrand.length;i++){	
-					brandStr += '<option value='+auditorBrand[i]+'>'+auditorBrand[i]+'</option>'
+					brandStr += '<option value="'+auditorBrand[i]+'">'+auditorBrand[i]+'</option>'
 				}
 				localStorage.auditorBrand=brandStr;
-				
 				$("#auditorBrandList").empty();
 				$("#auditorBrandList").append(localStorage.auditorBrand).trigger('create');
 			}
@@ -878,7 +881,7 @@ function submit_data_auditor(){
 	var d = new Date();	
 	var get_time=d.getTime();
 	
-	var a_brand=$("#auditorBrandList").val();	
+	var a_brand=$("#auditorBrandList").val();
 	var a_posm_type=$('input[name=a_posm_type]:checked').val();
 	var a_board=$('input[name=a_board]:checked').val();
 	var a_height=$("#a_height").val().replace('+','').replace('-','').replace('/','').replace('*','').replace(',','');
