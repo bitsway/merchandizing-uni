@@ -22,13 +22,271 @@
 			$("#recData").hide();				
 		});
 		
-		function syncPage(){
+		/*function syncPage(){
 			$(".errorChk").text("");
 			$.mobile.navigate("#pagesync");
-		}
+		}*/
 	
 	</script>
-	       
+ <style>	
+	
+    .reqField{ 
+	color:#FF0000;
+	}
+	
+    .errorChk{ 
+	color:#FF0000; text-shadow:none;
+	}
+	
+	.errorMsg{ 
+	color:#FF0000; text-shadow:none;
+	}
+	
+    .auto_break{
+		word-wrap:break-word!important;
+		white-space:normal!important;
+	}
+		
+	.tbl_bro_color{
+		border:1px solid #B8DCDC;
+	}	
+	
+	#townSelct {
+		font-weight: bold;
+		padding: 20px;
+		text-align: center;
+		margin: 16px 0px;
+		color: #000;
+		font-size: 18px;
+		border: 1px solid #CE295E;
+		border-radius: 7px;
+		background-color: #fff;
+	}
+		
+	.routselect{
+		font-weight: bold;
+		padding: 8px;
+		text-align: center;
+		margin: 2px 0px;
+		color: #000;
+		font-size: 14px;
+		border: 1px solid #CE295E;
+		border-radius: 5px;
+		background-color: #fff;
+	}
+	
+	.ui-btn {
+		border-radius: 8px;		
+	}
+		
+	.headerc {
+		color:#ffffff;
+		font-weight:1;
+	}
+	
+	.ui-overlay-c, .ui-page-theme-c, .ui-page-theme-c .ui-panel-wrapper{
+		background-color:#fff;
+	}
+		
+	.ui-bar-c, .ui-page-theme-c .ui-bar-inherit, html .ui-bar-c .ui-bar-inherit, html .ui-body-c .ui-bar-inherit, html      body .ui-group-theme-c .ui-bar-inherit {
+		background-color:#CE295E;
+		border-color: transparent;
+	}
+	
+	#syncBasicBtn{
+		background-color:#CE295E;
+		font-weight:1;
+		font-family:'Montserrat',sans-serif;
+		color:#FFF;
+	}
+						
+	.ui-body-c, .ui-page-theme-c .ui-body-inherit, html .ui-bar-c .ui-body-inherit, html .ui-body-c .ui-body-inherit, html body .ui-group-theme-c .ui-body-inherit, html .ui-panel-page-container-c {
+		background-color:#BFBFBF;
+		color:#000;
+	}
+	
+		.ui-page-theme-c .ui-btn:active, html .ui-bar-c .ui-btn:active, html .ui-body-c .ui-btn:active, html body      	        .ui-group-theme-c .ui-btn:active, html head + body .ui-btn.ui-btn-c:active { 
+		background-color:#CE295E;
+		border-color:transparent;
+	}
+	
+	.ui-page-theme-c .ui-btn:hover, html .ui-bar-c .ui-btn:hover, html .ui-body-c .ui-btn:hover, html body .ui-group-theme-c .ui-btn:hover, html head + body .ui-btn.ui-btn-c:hover {
+		background-color: #FFFFFF;
+		border-color:transparent;
+	}
+		
+	.ui-page-theme-c .ui-btn, html .ui-bar-c .ui-btn, html .ui-body-c .ui-btn, html body .ui-group-theme-c .ui-btn, html head + body .ui-btn.ui-btn-c{
+		background-color:#82888a;
+		border-color:transparent;
+		color:#FFF;
+	}
+		
+	.ui-input-text input, .ui-input-search input {
+		background-color:#fff;
+	}
+	
+	.ui-page-theme-c .ui-btn:hover, html .ui-bar-c .ui-btn:hover, html .ui-body-c .ui-btn:hover, html body .ui-group-theme-c     .ui-btn:, html head + body .ui-btn.ui-btn-c:hover {
+		background-color:#fff;
+		color:#000;
+	}
+	
+	.btn-color{
+		color:#000;
+	}
+			
+	.ui-page-theme-c .ui-btn, html .ui-bar-c .ui-btn, html .ui-body-c .ui-btn, html body .ui-group-theme-c .ui-btn, html 		     head + body .ui-btn.ui-btn-c {
+		background-color: #fff;
+		color: #151414;
+		border: 1px solid #D42E5C;
+	}
+	
+	#entry{
+	font-weight:1;
+	color:#fff;
+	background-color:#CE295E;
+	}
+	
+
+	#summary_report{
+	color:#fff;
+	background-color:#CE295E;
+	}
+	
+	.sync-img img{
+	background-color:#D42E5C;
+    border-radius: 50% !important;
+	}
+	
+	.sync_header{
+	background-color:#000;
+	}
+	
+	.header{
+		background-color:#595959;
+	}
+	
+	.sync_header{
+		background-color:#595959;
+	}
+
+	.sync_box{
+		background-color:#595959;
+	}
+		
+	.text-color{
+		color:#fff;
+		font-weight:1;
+	}
+			
+	.ui-bar-c, .ui-page-theme-c .ui-bar-inherit, html .ui-bar-c .ui-bar-inherit, html .ui-body-c .ui-bar-inherit, html body 					    .ui-group-theme-c .ui-bar-inherit{
+		background-color:#595959;
+	}
+			
+	#btn_receive{
+		margin:2px;
+		font-weight:1;
+		background-color:#CE295E;
+	}
+
+	#btn_usages{
+		margin:2px;
+		font-weight:1;
+		background-color:#CE295E;
+	}	
+	#btn_audit{
+		margin:2px;
+		font-weight:1;
+		background-color:#CE295E;
+	}
+	#btn_audit_entry{
+		margin:2px;
+		font-weight:1;
+		background-color:#CE295E;
+	}		
+	#btn_stock{
+	   margin:2px;
+	   font-weight:1;
+	   background-color:#CE295E;
+	}
+				
+	#reportbtn{
+		margin:2px;
+		font-weight:1;
+		background-color:#CE295E;
+	}
+	#entryAgency{
+		
+	    margin:2px;
+		font-weight:1;
+		background-color:#CE295E;
+	}
+				
+	#summaryAgency{
+		margin:2px;
+		font-weight:1;
+		background-color:#CE295E;
+	}
+	
+	#stockReport> table{
+		border-collapse:collapse;
+		}
+	#stockReport> table tr th{
+		background-color:#D42E5C;
+		color:#FFF;
+		font-weight:1;
+		}
+	#stockReport> table tr td{
+		border:1px solid #D42E5C;
+		}
+		
+	#receiveReportR> table{
+		border-collapse:collapse;
+		}
+	#receiveReportR> table tr th{
+		background-color:#D42E5C;
+		color:#FFF;
+		font-weight:1;
+		}
+	#receiveReportR> table tr td{
+		border:1px solid #D42E5C;
+		}
+	
+	#usageReportR> table{
+		border-collapse:collapse;
+		}
+	#usageReportR> table tr th{
+		background-color:#D42E5C;
+		color:#FFF;
+		font-weight:1;
+		}
+	#usageReportR> table tr td{
+		border:1px solid #D42E5C;
+		}
+
+	#usageReportAgency> table{
+		border-collapse:collapse;
+		}
+	#usageReportAgency> table tr th{
+		background-color:#D42E5C;
+		color:#FFF;
+		font-weight:1;
+		}
+	#usageReportAgency> table tr td{
+		border:1px solid #D42E5C;
+		}
+	#auditorHead> table{
+		border-collapse:collapse;
+		}
+	#auditorHead> table tr th{
+		background-color:#D42E5C;
+		color:#FFF;
+		font-weight:1;
+		}
+	#auditorHead> table tr td{
+		border:1px solid #D42E5C;
+		}
+	
+    </style>    
    	
 </head>
 
@@ -43,15 +301,15 @@
         <div class="errorMsg"></div>
         <ul data-role="listview" data-inset="true" data-theme="c">
             <li class="ui-field-contain">
-                <label for="mobile"> Mobile No</label>
+                <label > Mobile No</label>
                 <input name="mobile" id="mobile" type="number" />
             </li>
             <li class="ui-field-contain">
-                <label for="password">Password </label>
-                <input type="password" name="password" id="password"/>
+                <label >Password </label>
+                <input type="password" name="password" id="password" />
             </li>
         </ul>
-        <a data-role="button" href="#" id="syncBasic" onclick="syncBasic()" data-theme="c" data-transition="slide" >Sync</a>
+        <a data-role="button" href="#" id="syncBasicBtn" onclick="syncBasic()" data-theme="c" data-transition="slide" >Sync</a>
         <br/><br/>
         <div id="bufferImageSync" style="text-align:center;"><img src="running.gif" /></div>
 		<div id="#syncData"></div>
@@ -61,7 +319,7 @@
         <br/>
         <br/>
         <br/>
-         <div data-role="footer" data-position="fixed" style="font-size:12px; color:#595959; background-color:#FFF; font-weight:1;" align="center" >20181119.1</div>
+         <div data-role="footer" data-position="fixed" style="font-size:12px; color:#595959; background-color:#FFF; font-weight:1;" align="center" >20181119.2</div>
     </div>
 </div>
 <!------------------------------------------MAIN MENU----------------------------------------------------------->       
@@ -763,7 +1021,7 @@
         
     </div>
     <br/><br/><br/>
-    <div data-role="footer" data-position="fixed" style="font-size:12px; color:#595959; background-color:#FFF; font-weight:1;" align="center" >20181119.1</div>
+    <div data-role="footer" data-position="fixed" style="font-size:12px; color:#595959; background-color:#FFF; font-weight:1;" align="center" >20181119.2</div>
 </div>
 
 
