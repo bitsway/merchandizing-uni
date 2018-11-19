@@ -144,7 +144,7 @@ $(document).ready(function(){
 		$.mobile.navigate(url);
 	}else{
 		$(".errorChk").text('');
-		url = "#allUser";	
+		url = "#pagesync";	
 		$.mobile.navigate(url);
 	}
 });
@@ -331,7 +331,7 @@ function menuClick(){
 			
 	}*/
 	if(localStorage.rep_type == ''){
-		url = "#allUser";
+		url = "#pagesync";
 		$.mobile.navigate(url);
 	}else{
 		url = "#homePage";
