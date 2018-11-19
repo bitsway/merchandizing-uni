@@ -19,366 +19,21 @@
 			$("#bufferImage").hide();
 			$(".sucMsgR").hide();
 			$("#bufferImageR").hide();
-			$("#recData").hide();
-		
-		/*$('#auditOutSearch').keyup(function(){
-			var ref_name=$("#auditOutSearch").val();*/
-			/*alert(apipath+"sOutletAuditor");
-			$.ajax({
-				  url:apipath+"sOutletAuditor",
-				  success: function(resStr) {
-					  refListStr=resStr
-				  }
-			});
-		//})
-	
-	
-	$('#auditOutSearch').keyup(function(){
-			//-------------------------
-		var ref_list = refListStr.split(',');				
-		var ref_name=$("#auditOutSearch").val();
-		
-		//---------------- auto complete combo list
-		var ref_list_new=new Array();
-		lc=0;
-		i =0;
-		var refStr="";				
-		while (i < ref_list.length)
-		{
-			refStr=ref_list[i];
-			i=i+1;					
-			var res=refStr.toUpperCase().match(ref_name.toUpperCase());
-			if (res!=null){
-				ref_list_new[lc]=refStr;
-				lc=lc+1;
-				if (lc==30){
-					break;
-				};
-			}else{
-				continue;
-			}					
-		};
-		//alert (ref_list_new);
-		
-		//-------------- auto complete source
-		$( "input#auditOutSearch" ).autocomplete({
-			source: ref_list_new
-		});
-	
-  }); */
-			
-			
-						
+			$("#recData").hide();				
 		});
 		
 		function syncPage(){
 			$(".errorChk").text("");
 			$.mobile.navigate("#pagesync");
 		}
-		//$("#listFilter").attr("placeholder","Search Route");	
+	
 	</script>
 	       
-    <style>	
-	
-    .reqField{ 
-	color:#FF0000;
-	}
-	
-    .errorChk{ 
-	color:#FF0000; text-shadow:none;
-	}
-	
-	.errorMsg{ 
-	color:#FF0000; text-shadow:none;
-	}
-	
-    .auto_break{
-		word-wrap:break-word!important;
-		white-space:normal!important;
-	}
-		
-	.tbl_bro_color{
-		border:1px solid #B8DCDC;
-	}	
-	
-	#townSelct {
-		font-weight: bold;
-		padding: 20px;
-		text-align: center;
-		margin: 16px 0px;
-		color: #000;
-		font-size: 18px;
-		border: 1px solid #CE295E;
-		border-radius: 7px;
-		background-color: #fff;
-	}
-		
-	.routselect{
-		font-weight: bold;
-		padding: 8px;
-		text-align: center;
-		margin: 2px 0px;
-		color: #000;
-		font-size: 14px;
-		border: 1px solid #CE295E;
-		border-radius: 5px;
-		background-color: #fff;
-	}
-	
-	.ui-btn {
-		/*<!--overflow:inherit;-->*/
-		border-radius: 8px;		
-	}
-		
-	.headerc {
-		color:#ffffff;
-		font-weight:1;
-	}
-	
-	.ui-overlay-c, .ui-page-theme-c, .ui-page-theme-c .ui-panel-wrapper{
-		background-color:#fff;
-	}
-		
-	.ui-bar-c, .ui-page-theme-c .ui-bar-inherit, html .ui-bar-c .ui-bar-inherit, html .ui-body-c .ui-bar-inherit, html      body .ui-group-theme-c .ui-bar-inherit {
-		background-color:#CE295E;
-		border-color: transparent;
-	}
-	
-	#syncBasic{
-		background-color:#CE295E;
-		font-weight:1;
-		font-family:'Montserrat',sans-serif;
-		color:#FFF;
-	}
-						
-	.ui-body-c, .ui-page-theme-c .ui-body-inherit, html .ui-bar-c .ui-body-inherit, html .ui-body-c .ui-body-inherit, html body .ui-group-theme-c .ui-body-inherit, html .ui-panel-page-container-c {
-		background-color:#BFBFBF;
-		color:#000;
-	}
-	
-		.ui-page-theme-c .ui-btn:active, html .ui-bar-c .ui-btn:active, html .ui-body-c .ui-btn:active, html body      	        .ui-group-theme-c .ui-btn:active, html head + body .ui-btn.ui-btn-c:active { 
-		background-color:#CE295E;
-		border-color:transparent;
-	}
-	
-	.ui-page-theme-c .ui-btn:hover, html .ui-bar-c .ui-btn:hover, html .ui-body-c .ui-btn:hover, html body .ui-group-theme-c .ui-btn:hover, html head + body .ui-btn.ui-btn-c:hover {
-		background-color: #FFFFFF;
-		border-color:transparent;
-	}
-		
-	.ui-page-theme-c .ui-btn, html .ui-bar-c .ui-btn, html .ui-body-c .ui-btn, html body .ui-group-theme-c .ui-btn, html head + body .ui-btn.ui-btn-c{
-		background-color:#82888a;
-		border-color:transparent;
-		color:#FFF;
-	}
-		
-	.ui-input-text input, .ui-input-search input {
-		background-color:#fff;
-	}
-	
-	.ui-page-theme-c .ui-btn:hover, html .ui-bar-c .ui-btn:hover, html .ui-body-c .ui-btn:hover, html body .ui-group-theme-c     .ui-btn:, html head + body .ui-btn.ui-btn-c:hover {
-		background-color:#fff;
-		color:#000;
-	}
-	
-	.btn-color{
-		color:#000;
-	}
-			
-	.ui-page-theme-c .ui-btn, html .ui-bar-c .ui-btn, html .ui-body-c .ui-btn, html body .ui-group-theme-c .ui-btn, html 		     head + body .ui-btn.ui-btn-c {
-		background-color: #fff;
-		color: #151414;
-		border: 1px solid #D42E5C;
-	}
-	
-	#entry{
-	font-weight:1;
-	color:#fff;
-	background-color:#CE295E;
-	}
-	
-
-	#summary_report{
-	color:#fff;
-	background-color:#CE295E;
-	}
-	
-	.sync-img img{
-	background-color:#D42E5C;
-    border-radius: 50% !important;
-	}
-	
-	.sync_header{
-	background-color:#000;
-	}
-	
-	.header{
-		background-color:#595959;
-	}
-	
-	.sync_header{
-		background-color:#595959;
-	}
-
-	.sync_box{
-		background-color:#595959;
-	}
-		
-	.text-color{
-		color:#fff;
-		font-weight:1;
-	}
-			
-	.ui-bar-c, .ui-page-theme-c .ui-bar-inherit, html .ui-bar-c .ui-bar-inherit, html .ui-body-c .ui-bar-inherit, html body 					    .ui-group-theme-c .ui-bar-inherit{
-		background-color:#595959;
-	}
-			
-	#btn_receive{
-		margin:2px;
-		font-weight:1;
-		background-color:#CE295E;
-	}
-
-	#btn_usages{
-		margin:2px;
-		font-weight:1;
-		background-color:#CE295E;
-	}	
-	#btn_audit{
-		margin:2px;
-		font-weight:1;
-		background-color:#CE295E;
-	}
-	#btn_audit_entry{
-		margin:2px;
-		font-weight:1;
-		background-color:#CE295E;
-	}		
-	#btn_stock{
-	   margin:2px;
-	   font-weight:1;
-	   background-color:#CE295E;
-	}
-				
-	#reportbtn{
-		margin:2px;
-		font-weight:1;
-		background-color:#CE295E;
-	}
-	#entryAgency{
-		
-	    margin:2px;
-		font-weight:1;
-		background-color:#CE295E;
-	}
-				
-	#summaryAgency{
-		margin:2px;
-		font-weight:1;
-		background-color:#CE295E;
-	}
-	
-	#stockReport> table{
-		border-collapse:collapse;
-		}
-	#stockReport> table tr th{
-		background-color:#D42E5C;
-		color:#FFF;
-		font-weight:1;
-		}
-	#stockReport> table tr td{
-		border:1px solid #D42E5C;
-		}
-		
-	#receiveReportR> table{
-		border-collapse:collapse;
-		}
-	#receiveReportR> table tr th{
-		background-color:#D42E5C;
-		color:#FFF;
-		font-weight:1;
-		}
-	#receiveReportR> table tr td{
-		border:1px solid #D42E5C;
-		}
-	
-	#usageReportR> table{
-		border-collapse:collapse;
-		}
-	#usageReportR> table tr th{
-		background-color:#D42E5C;
-		color:#FFF;
-		font-weight:1;
-		}
-	#usageReportR> table tr td{
-		border:1px solid #D42E5C;
-		}
-
-	#usageReportAgency> table{
-		border-collapse:collapse;
-		}
-	#usageReportAgency> table tr th{
-		background-color:#D42E5C;
-		color:#FFF;
-		font-weight:1;
-		}
-	#usageReportAgency> table tr td{
-		border:1px solid #D42E5C;
-		}
-	#auditorHead> table{
-		border-collapse:collapse;
-		}
-	#auditorHead> table tr th{
-		background-color:#D42E5C;
-		color:#FFF;
-		font-weight:1;
-		}
-	#auditorHead> table tr td{
-		border:1px solid #D42E5C;
-		}
-	
-    </style>	
+   	
 </head>
 
 <body >
 <!-- ------------------- sync page---------------------------------------------------------------------------------------- -->
-<!--<div data-theme="c" data-role="page" id="pagesync" >
-    <div data-theme="c" data-role="header" data-position="fixed" class="sync_header" >
-
-        <a data-role="button" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets"><img src="menu.png" /></a>
-        
-        <h3 class="headerc">POST-IT</h3>
-    </div>
-    <br/><br/>
-    <div data-role="content">
-        <div class="errorMsg"></div>
-		      
-        <ul data-role="listview" data-inset="true" data-theme="c" >
-            <li class="ui-field-contain" style="background-color:#BFBFBF">
-                <label for="mobile" class="btn1" style="color:#000;" > Mobile No</label>
-                <input name="mobile" id="mobile"  type="number" style=" background-color:#fff"">
-            </li>
-            <li class="ui-field-contain"  style="background-color:#BFBFBF">
-                <label for="password"  style="color:#000">Password </label>
-                <input type="password" name="password" id="password" style=" background-color:#fff"  >
-            </li>
-        </ul>
-		
-        <a data-role="button" href="#" id="syncBasic" onclick="syncBasic()"  data-theme="c" data-transition="slide" >Sync</a>
-        
-        <br/>
-        <br/>
-        <br/>
-		<div id="bufferImageSync" style="text-align:center;"><img src="running.gif" /></div>
-        <div id="#syncData"></div>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-         <div data-role="footer" data-position="fixed" style="font-size:12px; color:#595959; background-color:#FFF; font-weight:1;" align="center" >20181118</div>
-    </div>
-</div>-->
-
 <div data-theme="c" data-role="page" id="pagesync" style="overflow:scroll" >
     <div data-theme="c" data-role="header" data-position="fixed" >
         <a data-role="button" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets " ><img src="menu.png"></a>
@@ -389,11 +44,11 @@
         <ul data-role="listview" data-inset="true" data-theme="c">
             <li class="ui-field-contain">
                 <label for="mobile"> Mobile No</label>
-                <input name="mobile" id="mobile" placeholder="" value="" type="number" />
+                <input name="mobile" id="mobile" type="number" />
             </li>
             <li class="ui-field-contain">
                 <label for="password">Password </label>
-                <input type="password" name="password" id="password" placeholder="" value=""  />
+                <input type="password" name="password" id="password"/>
             </li>
         </ul>
         <a data-role="button" href="#" id="syncBasic" onclick="syncBasic()" data-theme="c" data-transition="slide" >Sync</a>
@@ -406,16 +61,11 @@
         <br/>
         <br/>
         <br/>
-         <div data-role="footer" data-position="fixed" style="font-size:12px; color:#595959; background-color:#FFF; font-weight:1;" align="center" >20181119</div>
+         <div data-role="footer" data-position="fixed" style="font-size:12px; color:#595959; background-color:#FFF; font-weight:1;" align="center" >20181119.1</div>
     </div>
 </div>
-<!------------------------------------------MAIN MENU----------------------------------------------------------->
-<!--<div data-theme="c" data-role="page" id="homePage" style="overflow:scroll;">
-    <div data-theme="c" data-role="header" data-position="fixed">
-        <a data-role="button" href="#leftpanel" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets"><img src="menu.png"/></a>
-        <a data-role="button" onClick="exit();" ><img src="exit.png" /></a>-->
-        
-<div data-role="page" data-theme="d" id="homePage" style="overflow:scroll" >
+<!------------------------------------------MAIN MENU----------------------------------------------------------->       
+<div data-role="page" data-theme="c" id="homePage" style="overflow:scroll" >
     <div data-theme="c" data-role="header" data-position="fixed" >
         <a data-role="button" href="#leftpanel" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets " ><img src="menu.png"></a>
         
@@ -480,7 +130,6 @@
         <br/>
         <br/>
         <ul data-role="listview" >
-          <!--<li><a data-role="button" class="ui-btn sync-img" href="#pagesync"  style="background-color:#fff" ><center><img src="sync.png" /></center></a></li>-->	
           <li><a data-role="button" class="ui-btn" href="#pagesync" style="background-color:#fff" ><center><img src="sync.png" /></center></a></li>	  
         </ul>
         
@@ -1087,11 +736,12 @@
  
  
  <!-----------------------------------common Page for all---------------------->
-<div data-theme="c" data-role="page" id="allUser" style="overflow:scroll;">
-    <div data-theme="c" data-role="header" data-position="fixed">
-        <a data-role="button" href="#leftpanel" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets"><img src="menu.png"/></a>
+<div data-role="page" data-theme="c" id="allUser" style="overflow:scroll" >
+    <div data-theme="c" data-role="header" data-position="fixed" >
+        <a data-role="button" href="#leftpanel2" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets " ><img src="menu.png"></a>
         
-        <a data-role="button" onClick="exit();" ><img src="exit.png" /></a>
+        <a data-role="button" onClick="exit();" ><img src="exit.png"/> </a>
+        
         <h3 class="headerc" id="headerName">POST-IT</h3>
     </div>
     <br/>
@@ -1099,7 +749,7 @@
     <div data-role="content">
  		<div style="color:#FFF; text-align:center; background-color:#DA335A; padding:30px 0px 30px 0px; border-radius:10px;"><h3>Welcome To POST-IT</h3> <br/>Required Sync</div>
     </div>
-    <div data-role="panel" id="leftpanel" data-position="left" data-display="overlay" data-theme="c" style="background-color:#CE295E;">
+    <div data-role="panel" id="leftpanel2" data-position="left" data-display="overlay" data-theme="c" style="background-color:#CE295E;">
         <div align="center"></div>
         <br/>
         <br/>
@@ -1113,7 +763,7 @@
         
     </div>
     <br/><br/><br/>
-    <div data-role="footer" data-position="fixed" style="font-size:12px; color:#595959; background-color:#FFF; font-weight:1;" align="center" >20181118</div>
+    <div data-role="footer" data-position="fixed" style="font-size:12px; color:#595959; background-color:#FFF; font-weight:1;" align="center" >20181119.1</div>
 </div>
 
 
