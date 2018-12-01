@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="static/c.min.css" />
     <link rel="stylesheet" href="static/jquery.mobile-1.4.0.min.css" /> 
    <link rel="stylesheet" href="static/list.css" /> 
-   
     <script src="static/jquery-1.10.2.min.js">   </script>
     <script src="static/jquery.mobile-1.4.0.min.js">   </script>		
     <script src="static/list.min.js">   </script>	
@@ -19,7 +18,8 @@
 			$("#bufferImage").hide();
 			$(".sucMsgR").hide();
 			$("#bufferImageR").hide();
-			$("#recData").hide();				
+			$("#recData").hide();
+							
 		});
 		
 		/*function syncPage(){
@@ -208,7 +208,16 @@
 	   font-weight:1;
 	   background-color:#CE295E;
 	}
-				
+	#btn_dff{
+	   margin:2px;
+	   font-weight:1;
+	   background-color:#CE295E;
+	}
+	#btn_defective{
+	   margin:2px;
+	   font-weight:1;
+	   background-color:#CE295E;
+	}
 	#reportbtn{
 		margin:2px;
 		font-weight:1;
@@ -319,7 +328,7 @@
         <br/>
         <br/>
         <br/>
-         <div data-role="footer" data-position="fixed" style="font-size:12px; color:#595959; background-color:#FFF; font-weight:1;" align="center" >20181119.3</div>
+         <div data-role="footer" data-position="fixed" style="font-size:12px; color:#595959; background-color:#FFF; font-weight:1;" align="center" >20181201</div>
     </div>
 </div>
 <!------------------------------------------MAIN MENU----------------------------------------------------------->       
@@ -413,9 +422,11 @@
     <div id="townSelct" style="color:#D42E5C;"></div>          
     <button data-role="button" id="btn_receive" onclick="receive('Receive')" href="#" data-transition="slide" style="color:#fff">Receive</button>
     <button data-role="button" id="btn_usages" onclick="usages('Usages')" href="#" data-transition="slide" style="color:#fff">Usage </button> 
+     <button data-role="button" id="btn_defective" onclick="defective()" href="#" data-transition="slide" style="color:#fff"  >Defective</button>
+    <button data-role="button" id="btn_dff" onclick="usages('DFF')" href="#" data-transition="slide" style="color:#fff"  >DFF</button>
     <button data-role="button" id="btn_stock" onclick="stockReport()" href="#" data-transition="slide" style="color:#fff"  >Stock Report </button> 
      <button data-role="button" id="reportbtn" onclick="repo('repo')" href="#" data-transition="slide" style="color:#fff"  >Receive And Usage Report </button>
-     <button data-role="button" id="entryAgency" onclick="usages('usages')" href="#" data-transition="slide" style="color:#fff"  > Usage Entry </button> 
+     <button data-role="button" id="entryAgency" onclick="usages('Usages')" href="#" data-transition="slide" style="color:#fff"  > Usage Entry </button> 
      <button data-role="button" id="summaryAgency" onclick="summary_report('summary_report')" href="#" data-transition="slide" style="color:#fff"  >Summary Report</button>  
      <div class="errorChk" style="color:#cc0000;"></div>
         <br/><br/>
@@ -484,7 +495,7 @@
         </div>
         
         <table table width="100%" class="ui-body-d ui-shadow table-stripe ui-responsive" id="beneficiaryCount" style="cell-spacing:0px; "  data-role="table" data-theme="d"  data-mode="display:none">
-            <tr style="background-color:#AAAAAA;">
+        	<tr style="background-color:#AAAAAA;">
                 <td style="color:#FFF; text-align:center; padding:0 20 0 20px; font-weight:1";>Received Qty</td>
                  <td style="color:#fff"><input type="number" id="received" name="received" /> <input type="hidden" id="alcId" name="alcId" /></td>
               </tr>
@@ -495,7 +506,7 @@
                     <input name="recPhoto_path" id="recPhoto_path" value=""  type="hidden">
                     <input name="recPhoto_name" id="recPhoto_name" value=""  type="hidden">
                 </td>
-              </tr>     
+          </tr>     
         </table>  
         </div> 
         <a data-role="button" id="btn_submit_receive" onClick="submit_data_receive();" class="ui-btn" style="background-color:#D42E5C; color:#FFF;  font-weight:1;">Submit</a>
@@ -504,7 +515,74 @@
             <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
     </div>
 </div>
-<!--===============================end Sup======================================-->
+<!--===============================Sup defective======================================-->
+<div data-role="page" data-theme="c" id="defective_page" style="overflow:scroll;">
+    <div data-theme="c" data-role="header" data-position="fixed" >
+        <a data-role="button" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets " ><img src="menu.png" /></a>
+        <a data-role="button" onclick="backClick();" data-rel="back" class="ui-btn-right" data-transition="slide"><img src="back.png" /></a>
+        <h3 style="color:#fff;">POST-IT</h3>
+    </div>
+   <br/>
+   <br/>
+    <div data-role="content">
+   <div id="townSelctdef" style="color:#D42E5C;"></div> 
+    <div class="routselect" style="font-size:18px;">Defective</div>              
+   
+        <table width="100%" class="ui-body-d ui-shadow table-stripe ui-responsive" id="beneficiaryCount" style="cell-spacing:0px;  background-color:#BFBFBF;"  data-role="table" data-theme="d"  data-mode="display:none">
+          <tr>
+            <td><label style="color:#D42E5C;  font-weight:1;">POSM Code</label><!--<div id="posmCodeList" style="width:210px; display:inline-block;"></div>-->
+            <select id="posmCodedef" class="auto_break" name="posmCodedef"  style="width:150px; display:inline-block;"></select>
+            </td>
+            <td style="vertical-align:bottom;">
+                <a data-role="button" id="" onClick="alloDetailsDef();" class="ui-btn" style="background-color:#D42E5C; color:#FFF;  font-weight:1;">Next</a>
+            </td>
+          </tr>
+          </table>  
+          <br />
+        <div class="errorChkP" style="color:#cc0000; background-color:#FFF;"></div>
+        <div id="bufferImagedef" style="text-align:center;"><img src="running.gif" /></div>
+        <div id="allHideDef">
+        <div id="recDataDef"> 
+            <table table width="100%" class="ui-body-d ui-shadow table-stripe ui-responsive" id="beneficiaryCount" style="cell-spacing:0px; color:#D42E5C; background-color:#BFBFBF;"  data-role="table" data-theme="d"  data-mode="display:none">
+            	
+                <tr>
+                    <td><div id="defbrand"></div></td>
+                </tr>
+                <tr>
+                    <td><div id="defposm_type"></div> </td>
+                </tr>
+                
+                <tr>
+               		 <td><div id="defallocation"> </div></td>
+                </tr>
+                <tr>
+               		 <td><div id="defbalance"> </div></td>
+                </tr>
+            </table>
+        </div>
+        
+        <table table width="100%" class="ui-body-d ui-shadow table-stripe ui-responsive" id="beneficiaryCount" style="cell-spacing:0px;"  data-role="table" data-theme="d"  data-mode="display:none">
+            <tr style="background-color:#AAAAAA;">
+                <td style="color:#FFF; text-align:center; padding:20px; font-weight:1">Defective Qty</td>
+                <td><input type="number" id="def_qty" name="def_qty" style="background-color:#FFF;" /><input type="hidden" id="ualcId" name="alcId" /></td>
+              </tr>
+              <tr>
+                <td colspan="2">
+                    <a data-role="button" id="btn_take_pic" onClick="getdefectiveImage();" class="ui-btn" style="background-color:#D42E5C; color:#FFF;  font-weight:1;">Take Picture</a>       
+                    <img src="" width="128" height="128" alt="Image1" id="myImageE" /> 
+                    <input name="defPhoto_path" id="defPhoto_path" value=""  type="hidden">
+                    <input name="defPhoto_name" id="defPhoto_name" value=""  type="hidden">
+                </td>
+              </tr>     
+        </table>  
+        </div>   
+        <a data-role="button" id="btn_submit_defec" onClick="submit_data_defective();" class="ui-btn" style="background-color:#D42E5C; color:#FFF;  font-weight:1;">Submit</a>
+          <div class="sucMsgdef" style="color:#FFF; text-align:center; background-color:#DA335A; padding:30px 0px 30px 0px; border-radius:10px;">Successfully Submitted</div> 
+    <div class="errorChk" style="color:#cc0000; background-color:#FFF;"></div>
+            <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+    </div>
+</div>
+
 <!--===============================page3======================================-->
 
 <div data-role="page" data-theme="c" id="page3" >
@@ -615,7 +693,7 @@
 
 
 <!---------------------------------------------------- page 7------------------------------------------------->
-<div data-role="page" data-theme="c" id="page7" style="overflow:scroll;">
+<!--<div data-role="page" data-theme="c" id="page7" style="overflow:scroll;">
  <div data-theme="c" data-role="header" data-position="fixed" >
         <a data-role="button" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets " ><img src="menu.png" /></a>
         <a data-role="button" onclick="backClick();" data-rel="back" class="ui-btn-right" data-transition="slide"><img src="back.png" /></a>
@@ -647,7 +725,7 @@
       <a data-role="button" id="btn_submit" onClick="execution()" class="ui-btn" style="background-color:#CE295E"> <span class="text-color">Next</span></a>
       </div>
       
-</div>
+</div>-->
 
 <!-------------------------------------------Report------------------------------>
 <div data-role="page" data-theme="c" id="page9" style="overflow:scroll;">
@@ -865,18 +943,31 @@
         
         </div>
     <br/><br/>
-    <div data-role="content" >
+    <div data-role="content" style="overflow:scroll;">
     <div id="outletCodeAA" style="color:#DA335A;"></div>    
         <div id="allHideAudit">
         <table table width="100%" class="ui-body-d ui-shadow table-stripe ui-responsive" id="" style="cell-spacing:0px; "  data-role="table" data-theme="c"  data-mode="display:none">
-        	 <tr style="background-color:#AAAAAA;">
-             <td> <span class="btn-color">Brand</span></td>
-             <td style="width:300px;" >
-            <select id="auditorBrandList" class="auto_break" name="auditorBrandList"  style="width:150px; display:inline-block;"></select>
+        	<tr style="background-color:#AAAAAA;">
+                <td > Board Available <span class="btn-color" style="color:#F00;">* </span></td>
+                 <td>
+                 	<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true" >
+                        <input name="a_board" id="radio-choice-h-6a" value="1"  type="radio" onchange="boardYesNo();">
+                        <label for="radio-choice-h-6a">YES</label>
+                        <input name="a_board" id="radio-choice-h-6b"  value="0" type="radio" onchange="boardYesNo();">
+                        <label for="radio-choice-h-6b">NO</label>
+                    </fieldset>
+                 </td>
+              </tr>
+             
+           
+        	 <tr style="background-color:#AAAAAA;" id="auditBrandShow">
+             <td>Brand<span class="btn-color" style="color:#F00;">* </span></td>
+             <td>
+            <select id="auditorBrandList" class="auto_break" name="auditorBrandList"  style="display:inline-block;"></select>
             </td>
              </tr>
-            <tr style="background-color:#AAAAAA;">
-                <td> <span class="btn-color">POSM Type</span></td>
+            <tr style="background-color:#AAAAAA;" id="auditposmShow">
+                <td>POSM Type<span class="btn-color" style="color:#F00;">* </span></td>
                 <td>
                 	<input type="hidden" id="rowID" name="rowID" />
                 	<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
@@ -888,35 +979,24 @@
                     </fieldset>
                 </td>
               </tr>
-              <tr style="background-color:#AAAAAA;">
-                <td > <span class="btn-color">Board Available</span></td>
-                 <td>
-                 	<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
-                        <input name="a_board" id="radio-choice-h-6a" value="1"  type="radio">
-                        <label for="radio-choice-h-6a">YES</label>
-                        <input name="a_board" id="radio-choice-h-6b"  value="0" type="radio">
-                        <label for="radio-choice-h-6b">NO</label>
-                    </fieldset>
-                 </td>
-              </tr>
-              <tr style="background-color:#AAAAAA;">
-                <td ><span class="btn-color">Height(ft)</span></td>
+              <tr style="background-color:#AAAAAA;" id="auditHeightShow">
+                <td >Height(ft)<span class="btn-color" style="color:#F00;">* </span></td>
                 <td><input type="number" id="a_height" name="a_height" /></td>
               </tr>
-              <tr style="background-color:#AAAAAA;">
-                <td ><span class="btn-color">Length(ft)</span></td>
+              <tr style="background-color:#AAAAAA;" id="auditLengthShow">
+                <td >Length(ft)<span class="btn-color" style="color:#F00;">* </span></td>
                 <td><input type="number" id="a_length" name="a_length" /></td>
               </tr>
-              <tr style="background-color:#AAAAAA;">
-                <td ><span class="btn-color">Total Light</span></td>
+              <tr style="background-color:#AAAAAA;" id="auditLighthShow">
+                <td >Total Light<span class="btn-color" style="color:#F00;">* </span></td>
                 <td><input type="number" id="a_light" name="a_light" /></td>
               </tr>
-              <tr style="background-color:#AAAAAA;">
-                <td ><span class="btn-color">Total Defective Light</span></td>
+              <tr style="background-color:#AAAAAA;" id="auditDefectiveShow">
+                <td >Total Defective Light<span class="btn-color" style="color:#F00;">* </span></td>
                 <td><input type="number" id="a_dLight" name="a_dLight" /></td>
               </tr>
-              <tr style="background-color:#AAAAAA;">
-                <td style="color:fff;"><span class="btn-color">Fascia Status</span></td>
+              <tr style="background-color:#AAAAAA;" id="auditFasciaShow">
+                <td>Fascia Status<span class="btn-color" style="color:#F00;">* </span></td>
                 <td>
                     <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
                         <input name="a_fStatus" id="radio-choice-h-6a" value="Good"  type="radio">
@@ -927,8 +1007,8 @@
                 
                 </td>
               </tr>	
-              <tr style="background-color:#AAAAAA;">
-                <td style="color:fff;"><span class="btn-color">Profile Box Status</span></td>
+              <tr style="background-color:#AAAAAA;" id="auditProfileShow">
+                <td>Profile Box Status<span class="btn-color" style="color:#F00;">* </span></td>
                 <td>
                     <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
                         <input name="a_paStatus" id="radio-choice-h-6a" value="Good"  type="radio">
@@ -939,11 +1019,11 @@
                 
                 </td>
               </tr>	
-              <tr style="background-color:#AAAAAA;">
-                <td style="color:fff;"><span class="btn-color">Store Type</span></td>
+               <tr style="background-color:#AAAAAA;">
+                <td>Store Type<span class="btn-color" style="color:#F00;">* </span></td>
                 <td>
                     <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
-                        <input name="a_storeType" id="radio-choice-h-6a" value="PN"  type="radio">
+                        <input name="a_storeType" id="radio-choice-h-6a" value="PS"  type="radio">
                         <label for="radio-choice-h-6a">PS</label>
                         <input name="a_storeType" id="radio-choice-h-6b"  value="NPS" type="radio">
                         <label for="radio-choice-h-6b">NPS</label>
@@ -953,17 +1033,18 @@
                 
                 </td>
               </tr>
-              <tr style="background-color:#AAAAAA;">
-                <td style="color:fff;"><span class="btn-color">Name of Shopkeeper</span></td>
+       
+               <tr style="background-color:#AAAAAA;">
+                <td>Shopkeeper Name<span class="btn-color" style="color:#F00;">*</span></td>
                 <td><input type="text" id="a_nShopkeeper" name="a_nShopkeeper"/></td>
               </tr>
               <tr>
               <tr style="background-color:#AAAAAA;">
-                <td style="color:fff;"><span class="btn-color">Contact No of Shopkeeper</span></td>
+                <td>Shopkeeper Contact No<span class="btn-color" style="color:#F00;">* </span></td>
                 <td><input type="number" id="a_cNoShopkeeper" name="a_cNoShopkeeper"/></td>
               </tr>
               <tr style="background-color:#AAAAAA;">
-                <td style="color:fff;"><span class="btn-color">City Corp</span></td>
+                <td>City Corp<span class="btn-color" style="color:#F00;">* </span></td>
                  <td><input type="text" id="a_cityCorp" name="a_cityCorp"/></td>
               </tr>
               <tr>
@@ -978,7 +1059,7 @@
                 <td colspan="2">
                 <input name="aud_lat" id="aud_lat"  type="hidden">
                 <input name="aud_long" id="aud_long"  type="hidden">
-        		<a data-role="button" id="btn_area_lat_long" onClick="getLocationInfo();" class="ui-btn" style="background-color:#FFE4C4; color:#D42E5C;  font-weight:1;">Confarm Location</a>
+        		<a data-role="button" id="btn_area_lat_long" onClick="getLocationInfo();" class="ui-btn" style="background-color:#be2752; color:#FFF;  font-weight:1;">Confirm Location</a>
                 </td>
               </tr>    
         </table>
