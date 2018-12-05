@@ -183,38 +183,43 @@
 	}
 			
 	#btn_receive{
-		margin:2px;
+		margin:4px;
 		font-weight:1;
 		background-color:#CE295E;
 	}
 
 	#btn_usages{
-		margin:2px;
+		margin:4px;
 		font-weight:1;
 		background-color:#CE295E;
 	}	
 	#btn_audit{
-		margin:2px;
+		margin:4px;
 		font-weight:1;
 		background-color:#CE295E;
 	}
 	#btn_audit_entry{
-		margin:2px;
+		margin:4px;
 		font-weight:1;
 		background-color:#CE295E;
-	}		
+	}	
+	#reportAuditSub{
+		margin:4px;
+		font-weight:1;
+		background-color:#CE295E;
+	}	
 	#btn_stock{
-	   margin:2px;
+	   margin:4px;
 	   font-weight:1;
 	   background-color:#CE295E;
 	}
 	#btn_dff{
-	   margin:2px;
+	   margin:4px;
 	   font-weight:1;
 	   background-color:#CE295E;
 	}
 	#btn_defective{
-	   margin:2px;
+	   margin:4px;
 	   font-weight:1;
 	   background-color:#CE295E;
 	}
@@ -225,13 +230,17 @@
 	}
 	#entryAgency{
 		
-	    margin:2px;
+	    margin:4px;
 		font-weight:1;
 		background-color:#CE295E;
 	}
-				
+	#stockAgency{
+		margin:4px;
+		font-weight:1;
+		background-color:#CE295E;
+	}			
 	#summaryAgency{
-		margin:2px;
+		margin:4px;
 		font-weight:1;
 		background-color:#CE295E;
 	}
@@ -294,7 +303,28 @@
 	#auditorHead> table tr td{
 		border:1px solid #D42E5C;
 		}
-	
+	#stockAgencyS> table{
+		border-collapse:collapse;
+		}
+	#stockAgencyS> table tr th{
+		background-color:#D42E5C;
+		color:#FFF;
+		font-weight:1;
+		}
+	#stockAgencyS> table tr td{
+		border:1px solid #D42E5C;
+		}
+	#reportAudAgencyS> table{
+		border-collapse:collapse;
+		}
+	#reportAudAgencyS> table tr th{
+		background-color:#D42E5C;
+		color:#FFF;
+		font-weight:1;
+		}
+	#reportAudAgencyS> table tr td{
+		border:1px solid #D42E5C;
+		}
     </style>    
    	
 </head>
@@ -328,7 +358,7 @@
         <br/>
         <br/>
         <br/>
-         <div data-role="footer" data-position="fixed" style="font-size:12px; color:#595959; background-color:#FFF; font-weight:1;" align="center" >20181201</div>
+         <div data-role="footer" data-position="fixed" style="font-size:12px; color:#595959; background-color:#FFF; font-weight:1;" align="center" >20181205</div>
     </div>
 </div>
 <!------------------------------------------MAIN MENU----------------------------------------------------------->       
@@ -349,7 +379,8 @@
     <div id="townList" style="height:0 auto; overflow:scroll;"></div>
     <div id="auditorDiv">
     <input type="text" id="auditOutSearch" name="auditOutSearch" placeholder="Search Outlet Code" style="border:1px solid #595959;"/>    
-     <button data-role="button" id="btn_audit" onclick="auditorOutlet()" href="#" data-transition="slide" style="color:#fff">Search</button> 
+     <button data-role="button" id="btn_audit" onclick="auditorOutlet()" href="#" data-transition="slide" style="color:#fff">Search</button>
+     <button data-role="button" id="reportAuditSub" onclick="reportAuditSub('')" href="#" data-transition="slide" style="color:#fff"  >Report</button> 
          <div id="auditorHead" style="margin-top:10px;">
          	<table width="100%">
             <tr style="background-color:#900; color:#FFF;"><td colspan="2">Outlet Details</td></tr>
@@ -414,20 +445,21 @@
         <a data-role="button" onclick="backClick();" data-rel="back" class="ui-btn-right" data-transition="slide"><img src="back.png" /></a>
         <h3 class="headerc" style="height:42px;"></h3>
     </div>
-    <br /><br />
     <div data-role="content" >
     <div id="cmprepname" style="color:#DA335A; text-align:center;"></div>  
     <div id="cmpreptype" style="color:#DA335A; text-align:center;"></div>
      <div id="cmprepid" style="color:#DA335A; text-align:center;"></div>    
     <div id="townSelct" style="color:#D42E5C;"></div>          
     <button data-role="button" id="btn_receive" onclick="receive('Receive')" href="#" data-transition="slide" style="color:#fff">Receive</button>
-    <button data-role="button" id="btn_usages" onclick="usages('Usages')" href="#" data-transition="slide" style="color:#fff">Usage </button> 
      <button data-role="button" id="btn_defective" onclick="defective()" href="#" data-transition="slide" style="color:#fff"  >Defective</button>
-    <button data-role="button" id="btn_dff" onclick="usages('DFF')" href="#" data-transition="slide" style="color:#fff"  >DFF</button>
-    <button data-role="button" id="btn_stock" onclick="stockReport()" href="#" data-transition="slide" style="color:#fff"  >Stock Report </button> 
+    <button data-role="button" id="btn_usages" onclick="usages('Usages')" href="#" data-transition="slide" style="color:#fff">Usage - Outlet </button> 
+    <button data-role="button" id="btn_dff" onclick="usages('DFF')" href="#" data-transition="slide" style="color:#fff"  >Usage - DFF</button>
      <button data-role="button" id="reportbtn" onclick="repo('repo')" href="#" data-transition="slide" style="color:#fff"  >Receive And Usage Report </button>
-     <button data-role="button" id="entryAgency" onclick="usages('Usages')" href="#" data-transition="slide" style="color:#fff"  > Usage Entry </button> 
-     <button data-role="button" id="summaryAgency" onclick="summary_report('summary_report')" href="#" data-transition="slide" style="color:#fff"  >Summary Report</button>  
+    <button data-role="button" id="btn_stock" onclick="stockReport()" href="#" data-transition="slide" style="color:#fff"  >POSM Summary </button> 
+     <button data-role="button" id="entryAgency" onclick="usages('Usages')" href="#" data-transition="slide" style="color:#fff"  > Usage - Outlet </button> 
+     <button data-role="button" id="summaryAgency" onclick="summary_report('summary_report')" href="#" data-transition="slide" style="color:#fff"  >Usage Report</button> 
+     <button data-role="button" id="stockAgency" onclick="stockAgency('')" href="#" data-transition="slide" style="color:#fff"  >POSM Summary</button> 
+      
      <div class="errorChk" style="color:#cc0000;"></div>
         <br/><br/>
   	<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
@@ -456,9 +488,8 @@
         <h3 style="color:#fff;">POST-IT</h3>
         
         </div>
-    <br/><br/>
-    <div data-role="content" >    
-    <div id="townSelctRec" class="routselect"></div>
+    <div data-role="content" style="color:#D42E5C;">    
+    <div id="townSelctRec"></div>
      <div class="routselect" style="font-size:18px;">Receive</div>        
    		
         <table width="100%" class="ui-body-d ui-shadow table-stripe ui-responsive" style="cell-spacing:0px; background-color:#BFBFBF;" data-role="table" data-theme="c"  data-mode="display:none">
@@ -522,8 +553,6 @@
         <a data-role="button" onclick="backClick();" data-rel="back" class="ui-btn-right" data-transition="slide"><img src="back.png" /></a>
         <h3 style="color:#fff;">POST-IT</h3>
     </div>
-   <br/>
-   <br/>
     <div data-role="content">
    <div id="townSelctdef" style="color:#D42E5C;"></div> 
     <div class="routselect" style="font-size:18px;">Defective</div>              
@@ -591,12 +620,12 @@
         <a data-role="button" onclick="backClick();" data-rel="back" class="ui-btn-right" data-transition="slide"><img src="back.png" /></a>
         <h3 class="headerc" style="font-weight:1;">Select Route</h3>
     </div>
-   	<br/>
-    <br/>
     <div data-role="content" > 
-    <div id="town" style="color:#D42E5C;"></div><br/>  
+    <div id="town" style="color:red;"></div>
      <div id="bufferImageRoute" style="text-align:center;"><img src="running.gif" /></div>
+      
      <div id="routeList"></div>
+     <div class="errorChk" style="color:#cc0000; background-color:#FFF;"></div>
         <br/><br/>
   	
             <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
@@ -610,16 +639,17 @@
         <a data-role="button" onclick="backClick();" data-rel="back" class="ui-btn-right" data-transition="slide"><img src="back.png" /></a>
         <h3 class="headerc">Select Outlet</h3>
     </div>
-    <br/>
-    <br/>
     <div data-role="content" > 
-    <div id="townAbc" style="color:#D42E5C;"></div> 
-    <div id="routeSelect" style="color:#D42E5C;"></div>
-    <div id="bufferImageOutlet" style="text-align:center;"><img src="running.gif" /></div>
+    <div id="townAbc" style="color:red;"></div> 
+    <div id="routeSelect" style="color:green;"></div>
+    <div id="bufferImageOutlet" style="text-align:center;"><img src="running.gif" /></div> 
+     <div class="errorChk" style="color:#cc0000; background-color:#FFF;"></div> 
      <div id="outletList"></div>
+    
         <br/><br/>
   
-            <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+        <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+       <div class="errorChk" style="color:#cc0000; background-color:#FFF;"></div> 
     </div>
 </div>
 <!----------------------------------usage-page5---------------------------------------->
@@ -629,12 +659,10 @@
         <a data-role="button" onclick="backClick();" data-rel="back" class="ui-btn-right" data-transition="slide"><img src="back.png" /></a>
         <h3 style="color:#fff;">POST-IT</h3>
     </div>
-   <br/>
-   <br/>
     <div data-role="content">
-    <div id="townAusa" style="color:#D42E5C;"></div>
-    <div id="routeSelectA" style="color:#D42E5C;"></div>
-    <div id="outletSelect" style="color:#D42E5C;"></div>            
+    <div id="townAusa" style="color:red;"></div>
+    <div id="routeSelectA" style="color:green;"></div>
+    <div id="outletSelect" style="color:blue; margin:0px 0px 4px 0px;"></div>          
    
         <table width="100%" class="ui-body-d ui-shadow table-stripe ui-responsive" id="beneficiaryCount" style="cell-spacing:0px;  background-color:#BFBFBF;"  data-role="table" data-theme="d"  data-mode="display:none">
           <tr>
@@ -754,9 +782,8 @@
         <a data-role="button" onclick="backClick();" data-rel="back" class="ui-btn-right" data-transition="slide"><img src="back.png" /></a>
        <h3 class="headerc">Receive Report</h3>
     </div>
-    <br/><br/>
     <div data-role="content" > 
-    <div id="repIDR" style="color:#DA335A;"></div>
+    <div id="repIDR" style="color:#228B22;"></div>
     <div id="townNameR" style="color:#DA335A;"></div>  
                   
     <ul data-role="listview" data-inset="true">
@@ -774,12 +801,10 @@
     <div data-theme="c" data-role="header" data-position="fixed" >
         <a data-role="button" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets " ><img src="menu.png" /></a>
         <a data-role="button" onclick="backClick();" data-rel="back" class="ui-btn-right" data-transition="slide"><img src="back.png" /></a>
-       <h3 class="headerc">Stock</h3>
+       <h3 class="headerc">POSM Summary</h3>
     </div>
-    <br/>
-    <br/>
     <div data-role="content" > 
-    <div id="repID" style="color:#DA335A;"></div>
+    <div id="repID" style="color:#228B22;"></div>
     <div id="townName" style="color:#DA335A;"></div>  
                    
     <ul data-role="listview" data-inset="true">
@@ -798,10 +823,8 @@
         <a data-role="button" onclick="backClick();" data-rel="back" class="ui-btn-right" data-transition="slide"><img src="back.png" /></a>
        <h3 class="headerc">Usage Report</h3>
     </div>
-    <br/>
-    <br/>
     <div data-role="content" > 
-    <div id="repIDU" style="color:#DA335A;"></div>
+    <div id="repIDU" style="color:#228B22;"></div>
     <div id="townNameU" style="color:#DA335A;"></div> 
                 
     <ul data-role="listview" data-inset="true">
@@ -818,12 +841,10 @@
     <div data-theme="c" data-role="header" data-position="fixed" >
         <a data-role="button" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets " ><img src="menu.png" /></a>
         <a data-role="button" onclick="backClick();" data-rel="back" class="ui-btn-right" data-transition="slide"><img src="back.png" /></a>
-       <h3 class="headerc">Summary Report</h3>
+       <h3 class="headerc">Usage Report</h3>
     </div>
-    <br/>
-    <br/>
     <div data-role="content"> 
-    <div id="repIDA" style="color:#DA335A;"></div>
+    <div id="repIDA" style="color:green;"></div>
     <div id="townNameA" style="color:#DA335A;"></div>
                 
     <ul data-role="listview" data-inset="true">
@@ -840,14 +861,12 @@
     <div data-theme="c" data-role="header" data-position="fixed" >
         <a data-role="button" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets " ><img src="menu.png" /></a>
         <a data-role="button" onclick="backClick();" data-rel="back" class="ui-btn-right" data-transition="slide"><img src="back.png" /></a>
-        <h3 style="color:#fff;">POST-IT</h3>
-        
+        <h3 style="color:#fff;">POST-IT</h3> 
         </div>
-    <br/><br/>
     <div data-role="content" >    
-    <div id="townSelctAgency" style="color:#DA335A;"></div>
-    <div id="routeSelectAbc" style="color:#DA335A;"></div>
-    <div id="outletSelectAbc" style="color:#DA335A;"></div>
+    <div id="townSelctAgency" style="color:red;"></div>
+    <div id="routeSelectAbc" style="color:green;"></div>
+    <div id="outletSelectAbc" style="color:blue; margin:0px 0px 4px 0px;"></div>
      <div class="routselect" style="font-size:18px;">EXICUTION</div> 
                
    
@@ -904,7 +923,7 @@
                 <td><!--<select id="paint"name="paint" required="required"><option value="Yes">Yes</option><option value="No">No</option></select>-->
  
                     <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
-                        <input name="paint" id="radio-choice-h-6a" value="YES"  checked="checked" type="radio">
+                        <input name="paint" id="radio-choice-h-6a" value="YES"  type="radio">
                         <label for="radio-choice-h-6a">YES</label>
                         <input name="paint" id="radio-choice-h-6b"  value="NO" type="radio">
                         <label for="radio-choice-h-6b">NO</label>
@@ -914,7 +933,8 @@
               </tr>
               <tr style="background-color:#AAAAAA;">
                 <td style="color:fff;"><span class="btn-color">City Corp</span></td>
-                <td><input type="text" id="citycor" name="citycor" required="required" /></td>
+                <td><input type="text" id="citycor" name="citycor" required="required" />
+                </td>
               </tr>
               <tr>
                 <td colspan="2">
@@ -1104,8 +1124,45 @@
     <br/><br/><br/>
     <div data-role="footer" data-position="fixed" style="font-size:12px; color:#595959; background-color:#FFF; font-weight:1;" align="center" >20181119.3</div>
 </div>
-
-
+ <!-----------------------------------Agency Stock---------------------->
+<div data-role="page" data-theme="c" id="page16" style="overflow:scroll;">
+    <div data-theme="c" data-role="header" data-position="fixed" >
+        <a data-role="button" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets " ><img src="menu.png" /></a>
+        <a data-role="button" onclick="backClick();" data-rel="back" class="ui-btn-right" data-transition="slide"><img src="back.png" /></a>
+       <h3 class="headerc">POSM Summary</h3>
+    </div>
+    <div data-role="content" > 
+    <div id="repIDAgen" style="color:#228B22;"></div>
+    <div id="townNameAgen" style="color:#DA335A;"></div>  
+                   
+    <ul data-role="listview" data-inset="true">
+    	<li class="ui-field-contain" style="background-color:inherit; padding:0;">
+  		<div id="agencySTRimage" style="text-align:center;"><img src="running.gif" /></div>
+     	<div id="stockAgencyS" style="overflow:scroll;"></div>
+     	</li>
+    </ul>
+     <div class="errorChk" style="color:#cc0000;"></div>
+    </div>
+</div>
+<!-----------------------auditor Report------------------------------->
+<div data-role="page" data-theme="c" id="page17" style="overflow:scroll;">
+    <div data-theme="c" data-role="header" data-position="fixed" >
+        <a data-role="button" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets " ><img src="menu.png" /></a>
+        <a data-role="button" onclick="backClick();" data-rel="back" class="ui-btn-right" data-transition="slide"><img src="back.png" /></a>
+       <h3 class="headerc">Reports</h3>
+    </div>
+    <div data-role="content" > 
+    <div id="repIDAu" style="color:#228B22;"></div> 
+                   
+    <ul data-role="listview" data-inset="true">
+    	<li class="ui-field-contain" style="background-color:inherit; padding:0;">
+  		<div id="agencyAuSTRimage" style="text-align:center;"><img src="running.gif" /></div>
+     	<div id="reportAudAgencyS" style="overflow:scroll;"></div>
+     	</li>
+    </ul>
+     <div class="errorChk" style="color:#cc0000;"></div>
+    </div>
+</div>
 
   <script type="text/javascript" src="phonegap.js"></script>
   
