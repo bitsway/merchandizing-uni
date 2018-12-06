@@ -18,7 +18,7 @@ var a_qty='';
 var routeName='';
 var outlet_code='';
 var outlet_name='';
-//localStorage.rep_type='';
+localStorage.rep_type='';
 
 //---Online
 var apipath="http://w02.yeapps.com/postit/syncmobile_20181205/";
