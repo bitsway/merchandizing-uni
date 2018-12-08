@@ -21,7 +21,7 @@ var outlet_name='';
 localStorage.rep_type='';
 
 //---Online
-var apipath="http://w02.yeapps.com/postit/syncmobile_20181205/";
+var apipath="http://w02.yeapps.com/postit/syncmobile_20181208/";
 //--- local
 //var apipath="http://127.0.0.1:8000/postit/syncmobile/";
 
@@ -388,10 +388,9 @@ function townSelect(){
 			  success: function(result) {
 				var resultArray = result.split('rdrd');
 					if (resultArray[0]=='Success'){	
-						localStorage.posmCodeCmSup=resultArray[1];
 						localStorage.posmCodeAgency=resultArray[2];				
 					//====CM/Sup	
-					var posmCodeCmSup=localStorage.posmCodeCmSup.split('fdfd');
+					/*var posmCodeCmSup=localStorage.posmCodeCmSup.split('fdfd');
 					var posmStr = '<option selected="selected" value="">Select POSM</option>'
 					for (i=0;i<posmCodeCmSup.length;i++){	
 						posmCodeCmSupStr=posmCodeCmSup[i].split('-');								
@@ -406,8 +405,9 @@ function townSelect(){
 					$("#posmCodeUsges").append(localStorage.posmCodeSup).trigger('create');	
 					
 					$("#posmCodedef").empty();
-					$("#posmCodedef").append(localStorage.posmCodeSup).trigger('create');	
+					$("#posmCodedef").append(localStorage.posmCodeSup).trigger('create');	*/
 					//=======Agency
+					if(localStorage.posmCodeAgency!=''){
 					var posmCodeAgency=localStorage.posmCodeAgency.split('fdfd');
 					var posmAgencyStr = '<option selected="selected" value="">Select POSM</option>'
 					for (i=0;i<posmCodeAgency.length;i++){	
@@ -418,16 +418,18 @@ function townSelect(){
 					localStorage.posmCode_agency=posmAgencyStr;
 					$("#posmCodeAgn").empty();
 					$("#posmCodeAgn").append(localStorage.posmCode_agency).trigger('create');	
-						
-						$("#townSelct").html("Town	:		"+localStorage.select_town);
-						$('#townSelctRec').html("Town	:		"+localStorage.select_town);
-						$('#townSelctdef').html("Town	:		"+localStorage.select_town);
-						$('#townSelctAgency').html("Town	:		"+localStorage.select_town);
+					}else{
+						$("#posmCodeAgn").empty();
+						}
+					$("#townSelct").html("Town	:		"+localStorage.select_town);
+					$('#townSelctRec').html("Town	:		"+localStorage.select_town);
+					$('#townSelctdef').html("Town	:		"+localStorage.select_town);
+					$('#townSelctAgency').html("Town	:		"+localStorage.select_town);
+				
 					
-						
-						$(".errorChk").text("");		
-						url="#first_page";					
-						$.mobile.navigate(url);
+					$(".errorChk").text("");		
+					url="#first_page";					
+					$.mobile.navigate(url);
 					}else{
 						$(".errorChk").text("");
 						url="#homePage";					
@@ -449,12 +451,40 @@ function alloDetailsagency(){
 
 function receive(){
 	
-	$(".sucMsgR").hide();
-	$(".errorChk").text("");
-	$("#allHideR").hide();
-	$("#btn_submit_receive").hide();			
-	url="#second_page";					
-	$.mobile.navigate(url);	
+	$.ajax({
+			  url:apipath+'get_posm_sup?select_town='+localStorage.select_town+"&repID="+localStorage.repID,
+			  success: function(result) {
+				var resultArray = result.split('rdrd');
+					if (resultArray[0]=='Success'){	
+						localStorage.posmCodeCmSup=resultArray[1];
+						if(localStorage.posmCodeCmSup!=''){			
+					//====CM/Sup	
+					var posmCodeCmSup=localStorage.posmCodeCmSup.split('fdfd');
+					var posmStr = '<option selected="selected" value="">Select POSM</option>'
+					for (i=0;i<posmCodeCmSup.length;i++){	
+						posmCodeCmSupStr=posmCodeCmSup[i].split('-');								
+						posmStr += '<option value='+posmCodeCmSupStr[1]+'>'+posmCodeCmSupStr[0]+'-'+posmCodeCmSupStr[1]+'</option>'
+					}
+					posmStr =posmStr
+					localStorage.posmCodeSup=posmStr;
+					$("#posmCodeRec").empty();
+					$("#posmCodeRec").append(localStorage.posmCodeSup).trigger('create');
+					}else{
+						$("#posmCodeRec").empty();
+						
+					}
+				}
+			  }
+		});
+					
+	
+		$(".sucMsgR").hide();
+		$(".errorChk").text("");
+		$("#allHideR").hide();
+		$("#btn_submit_receive").hide();			
+		url="#second_page";					
+		$.mobile.navigate(url);	
+	
 }
 
 function alloDetails(){
@@ -467,7 +497,8 @@ function alloDetails(){
 	$("#recDataR").hide();	
 	$(".sucMsgR").hide();
 	var posmCode=$("#posmCodeRec").val();
-	if(posmCode=="" || posmCode=='undefined'){
+	
+	if(posmCode==""|| posmCode==null){
 		$(".errorChkP").text("Select posm Code");
 		$("#recDataR").hide();
 		$("#allHideR").hide();
@@ -675,7 +706,33 @@ function usages(outletSep){
 					$('#routeList').append(localStorage.routeListSup).trigger('create');
 					
 					$("#town").html('Town		:		' + localStorage.select_town.replace('|','-'));
-					$(".errorChk").text("");			
+					$(".errorChk").text("");
+					$.ajax({
+					  url:apipath+'get_posm_sup?select_town='+localStorage.select_town+"&repID="+localStorage.repID,
+					  success: function(result) {
+						var resultArray = result.split('rdrd');
+							if (resultArray[0]=='Success'){	
+								localStorage.posmCodeCMUsage=resultArray[3];			
+							//====CM/Sup	
+							if(localStorage.posmCodeCMUsage!=''){
+							var posmCodeCmSup=localStorage.posmCodeCMUsage.split('fdfd');
+							var posmStr = '<option selected="selected" value="">Select POSM</option>'
+							for (i=0;i<posmCodeCmSup.length;i++){	
+								posmCodeCmSupStr=posmCodeCmSup[i].split('-');								
+								posmStr += '<option value='+posmCodeCmSupStr[1]+'>'+posmCodeCmSupStr[0]+'-'+posmCodeCmSupStr[1]+'</option>'
+							}
+							posmStr =posmStr
+							localStorage.posmCodeSup=posmStr;	
+							
+							$("#posmCodeUsges").empty();
+							$("#posmCodeUsges").append(localStorage.posmCodeSup).trigger('create');	
+							
+								}else{
+									$("#posmCodeUsges").empty();
+									}
+							}
+							}
+						});
 					url="#page3";					
 					$.mobile.navigate(url);					
 					}else{
@@ -1192,7 +1249,7 @@ function alloDetailsU(){
 
 	posmCode=$("#posmCodeUsges").val();
 
-	if (posmCode=='' || posmCode=='undefined'){
+	if (posmCode=='' || posmCode==null){
 		$(".errorChkP").text("Select posm Code");
 		$("#btn_submit_usages").hide();
 		$("#recData").hide();
@@ -1385,7 +1442,7 @@ function alloDetailsAgency(){
 	
 	
 	var posmCode=$("#posmCodeAgn").val();
-	if (posmCode=='' || posmCode=='undefined'){
+	if (posmCode=='' || posmCode==null){
 		$(".errorChkP").text("Select posm Code");
 		$("#btn_submit_Agency").hide();
 		$("#recDataAgency").hide();
@@ -1413,7 +1470,7 @@ function alloDetailsAgency(){
 					
 					$("#agencyposm_type").html("Posm Type	:	"+ posmType);
 					$("#agencybrand").html("Brand	:	"+brand);
-					$("#agencyallocation").html("Stock Qty:	"+allo_qty);
+					$("#agencyallocation").html("Allocation Qty:	"+allo_qty);
 					$("#agencydue").html("Balance Qty:	"+balance_qty);
 					$("#agencyposm_type").val(posmType);
 					$("#agencybrand").val(brand);
@@ -1883,6 +1940,29 @@ function exit() {
 	navigator.app.exitApp();
 }
 function defective(){
+$.ajax({
+	  url:apipath+'get_posm_sup?select_town='+localStorage.select_town+"&repID="+localStorage.repID,
+	  success: function(result) {
+		var resultArray = result.split('rdrd');
+			if (resultArray[0]=='Success'){	
+				localStorage.posmCodeCmSup=resultArray[1];
+				localStorage.posmCodeAgency=resultArray[2];				
+				localStorage.posmCodeCMUsage=resultArray[3];			
+							//====CM/Sup	
+			var posmCodeCmSup=localStorage.posmCodeCMUsage.split('fdfd');
+			var posmStr = '<option selected="selected" value="">Select POSM</option>'
+			for (i=0;i<posmCodeCmSup.length;i++){	
+				posmCodeCmSupStr=posmCodeCmSup[i].split('-');								
+				posmStr += '<option value='+posmCodeCmSupStr[1]+'>'+posmCodeCmSupStr[0]+'-'+posmCodeCmSupStr[1]+'</option>'
+			}
+			posmStr =posmStr
+			localStorage.posmCodeSup=posmStr;	
+			
+			$("#posmCodedef").empty();
+			$("#posmCodedef").append(localStorage.posmCodeSup).trigger('create');	
+				}
+			}
+		});
 	$("#bufferImagedef").hide();
 	$(".sucMsgdef").hide();
 	$(".errorChk").text("");
