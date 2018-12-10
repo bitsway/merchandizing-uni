@@ -21,7 +21,7 @@ var outlet_name='';
 localStorage.rep_type='';
 
 //---Online
-var apipath="http://w02.yeapps.com/postit/syncmobile_20181208/";
+var apipath="http://w02.yeapps.com/postit/syncmobile_20181210/";
 //--- local
 //var apipath="http://127.0.0.1:8000/postit/syncmobile/";
 
@@ -964,9 +964,9 @@ function submit_data_auditor(){
 	a_board=$('input[name=a_board]:checked').val();
 	a_brand=$("#auditorBrandList").val();
 	a_posm_type=$('input[name=a_posm_type]:checked').val();
-	a_nShopkeeper=$("#a_nShopkeeper").val();
-	a_cNoShopkeeper=$("#a_cNoShopkeeper").val();
-	a_taxArea=$("#a_cityCorp").val();
+	a_nShopkeeper=$("#a_nShopkeeper").val().replace('+','').replace('-','').replace('.','').replace('/','').replace('*','').replace(',','');
+	a_cNoShopkeeper=$("#a_cNoShopkeeper").val().replace('+','').replace('-','').replace('.','').replace('/','').replace('*','').replace(',','');
+	a_taxArea=$("#a_cityCorp").val().replace('+','').replace('-','').replace('.','').replace('/','').replace('*','').replace(',','');
 	a_storeType=$('input[name=a_storeType]:checked').val();
 	a_paStatus=$('input[name=a_paStatus]:checked').val();
 	a_fStatus=$('input[name=a_fStatus]:checked').val();
