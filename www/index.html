@@ -965,7 +965,7 @@
         <div id="allHideAudit">
         <table table width="100%" class="ui-body-d ui-shadow table-stripe ui-responsive" id="" style="cell-spacing:0px; "  data-role="table" data-theme="c"  data-mode="display:none">
         	<tr style="background-color:#AAAAAA;">
-                <td > Board Available <span class="btn-color" style="color:#F00;">* </span></td>
+                <td style="color:#FFF;"> Board Available <span class="btn-color" style="color:#F00;">* </span></td>
                  <td>
                  	<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true" >
                         <input name="a_board" id="radio-choice-h-6a" value="1"  type="radio" onchange="boardYesNo();">
@@ -978,13 +978,13 @@
              
            
         	 <tr style="background-color:#AAAAAA;" id="auditBrandShow">
-             <td>Brand<span class="btn-color" style="color:#F00;">* </span></td>
+             <td style="color:#FFF;">Brand<span class="btn-color" style="color:#F00;">* </span></td>
              <td>
             <select id="auditorBrandList" class="auto_break" name="auditorBrandList"  style="display:inline-block;"></select>
             </td>
              </tr>
             <tr style="background-color:#AAAAAA;" id="auditposmShow">
-                <td>POSM Type<span class="btn-color" style="color:#F00;">* </span></td>
+                <td style="color:#FFF;">POSM Type<span class="btn-color" style="color:#F00;">* </span></td>
                 <td>
                 	<input type="hidden" id="rowID" name="rowID" />
                 	<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
@@ -997,23 +997,23 @@
                 </td>
               </tr>
               <tr style="background-color:#AAAAAA;" id="auditHeightShow">
-                <td >Height(ft)<span class="btn-color" style="color:#F00;">* </span></td>
+                <td style="color:#FFF;">Height (Feet)<span class="btn-color" style="color:#F00;">* </span></td>
                 <td><input type="number" id="a_height" name="a_height" /></td>
               </tr>
               <tr style="background-color:#AAAAAA;" id="auditLengthShow">
-                <td >Length(ft)<span class="btn-color" style="color:#F00;">* </span></td>
+                <td style="color:#FFF;">Length (Feet)<span class="btn-color" style="color:#F00;">* </span></td>
                 <td><input type="number" id="a_length" name="a_length" /></td>
               </tr>
               <tr style="background-color:#AAAAAA;" id="auditLighthShow">
-                <td >Total Light<span class="btn-color" style="color:#F00;">* </span></td>
+                <td style="color:#FFF;">Total Light<span class="btn-color" style="color:#F00;">* </span></td>
                 <td><input type="number" id="a_light" name="a_light" /></td>
               </tr>
               <tr style="background-color:#AAAAAA;" id="auditDefectiveShow">
-                <td >Total Defective Light<span class="btn-color" style="color:#F00;">* </span></td>
+                <td style="color:#FFF;">Total Defective Light<span class="btn-color" style="color:#F00;">* </span></td>
                 <td><input type="number" id="a_dLight" name="a_dLight" /></td>
               </tr>
               <tr style="background-color:#AAAAAA;" id="auditFasciaShow">
-                <td>Fascia Status<span class="btn-color" style="color:#F00;">* </span></td>
+                <td style="color:#FFF;">Fascia Status<span class="btn-color" style="color:#F00;">* </span></td>
                 <td>
                     <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
                         <input name="a_fStatus" id="radio-choice-h-6a" value="Good"  type="radio">
@@ -1025,7 +1025,7 @@
                 </td>
               </tr>	
               <tr style="background-color:#AAAAAA;" id="auditProfileShow">
-                <td>Profile Box Status<span class="btn-color" style="color:#F00;">* </span></td>
+                <td style="color:#FFF;">Profile Box Status<span class="btn-color" style="color:#F00;">* </span></td>
                 <td>
                     <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
                         <input name="a_paStatus" id="radio-choice-h-6a" value="Good"  type="radio">
@@ -1037,7 +1037,7 @@
                 </td>
               </tr>	
                <tr style="background-color:#AAAAAA;">
-                <td>Store Type<span class="btn-color" style="color:#F00;">* </span></td>
+                <td style="color:#FFF;">Store Type<span class="btn-color" style="color:#F00;">* </span></td>
                 <td>
                     <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
                         <input name="a_storeType" id="radio-choice-h-6a" value="PS"  type="radio">
@@ -1052,17 +1052,21 @@
               </tr>
        
                <tr style="background-color:#AAAAAA;">
-                <td>Shopkeeper Name<span class="btn-color" style="color:#F00;">*</span></td>
+                <td style="color:#FFF;">Shopkeeper Name<span class="btn-color" style="color:#F00;">*</span></td>
                 <td><input type="text" id="a_nShopkeeper" name="a_nShopkeeper"/></td>
               </tr>
               <tr>
               <tr style="background-color:#AAAAAA;">
-                <td>Shopkeeper Contact No<span class="btn-color" style="color:#F00;">* </span></td>
+                <td style="color:#FFF;">Shopkeeper Contact No<span class="btn-color" style="color:#F00;">* </span></td>
                 <td><input type="number" id="a_cNoShopkeeper" name="a_cNoShopkeeper"/></td>
               </tr>
               <tr style="background-color:#AAAAAA;">
-                <td>City Corp<span class="btn-color" style="color:#F00;">* </span></td>
+                <td style="color:#FFF;">City Corp<span class="btn-color" style="color:#F00;">* </span></td>
                  <td><input type="text" id="a_cityCorp" name="a_cityCorp"/></td>
+              </tr>
+              <tr style="background-color:#AAAAAA;">
+                <td style="color:#FFF;">Remarks</td>
+                 <td><input type="text" id="remarksAudit" name="remarksAudit" maxlength="100"/></td>
               </tr>
               <tr>
                 <td colspan="2">
