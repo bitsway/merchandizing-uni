@@ -2437,6 +2437,18 @@ function posmReportAuditSub(){
 }
 
 function posmAuditorNext(){
+	$("#drugStorePosmQtyShow").hide();
+	$("#drugStorePosmConditionShow").hide();
+	$("#miniSolomonConditionSkinShow").hide();
+	$("#miniSolomonConditionHairShow").hide();
+	$("#skinCareConditionShow").hide();
+	$("#hairCareConditionShow").hide();
+	$("#plugInDispenserConditionShow").hide();
+	$("#megaHangerConditionShow").hide();
+	$("#posmAuditBrandShow").hide();
+	$("#posmAuditposmShow").hide();
+	$("#posmAuditBoardQtyShow").hide();
+	$("#posmAuditBoardConditionShow").hide();
 	$("#btn_submit_posmAudit").show();
 	$("#allHideAuditPosm").show();
 	$('input[name=hairCare]:checked').val("");
