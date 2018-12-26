@@ -239,6 +239,11 @@
 		font-weight:1;
 		background-color:#CE295E;
 	}
+	#posmReportAuditSub{
+		margin:4px;
+		font-weight:1;
+		background-color:#CE295E;
+	}
 	#btn_posmauditReport{
 		margin:4px;
 		font-weight:1;
@@ -341,6 +346,17 @@
 	#reportAudAgencyS> table tr td{
 		border:1px solid #D42E5C;
 		}
+	#reportPosmAudRec> table{
+		border-collapse:collapse;
+		}
+	#reportPosmAudRec> table tr th{
+		background-color:#D42E5C;
+		color:#FFF;
+		font-weight:1;
+		}
+	#reportPosmAudRec> table tr td{
+		border:1px solid #D42E5C;
+		}
 	#posmAuditor> table{
 		margin:4px;
 		border-collapse:collapse;
@@ -406,6 +422,7 @@
     <div id="posmAuditDiv">
      <input type="text" id="posmAuditOutSearch" name="posmAuditOutSearch" placeholder="Search Outlet Code" style="border:1px solid #595959; margin-left:4px;"/>    
      <button data-role="button" id="btn_posmAudit" onclick="posmAuditorOutlet()" href="#" data-transition="slide" style="color:#fff">Search</button>
+     <button data-role="button" id="posmReportAuditSub" onclick="posmReportAuditSub('')" href="#" data-transition="slide" style="color:#fff"  >Report</button>
       <div id="bufferImageOutletposm" style="text-align:center;"><img src="running.gif" /></div>
         <div class="errposmAudit" style="color:#cc0000;" ></div> 
     <!-- <button data-role="button" id="btn_posmauditReport" onclick="('')" href="#" data-transition="slide" style="color:#fff"  >Report</button> -->
@@ -1424,6 +1441,26 @@
             <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
        </div>
  </div>
+ 
+ <!----------------------------PosmReport------------------------------------>
+ <div data-role="page" data-theme="c" id="page20" style="overflow:scroll;">
+    <div data-theme="c" data-role="header" data-position="fixed" >
+        <a data-role="button" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets " ><img src="menu.png" /></a>
+        <a data-role="button" onclick="backClick();" data-rel="back" class="ui-btn-right" data-transition="slide"><img src="back.png" /></a>
+       <h3 class="headerc">Reports</h3>
+    </div>
+    <div data-role="content" > 
+    <div id="repIDPosmAud" style="color:#228B22;"></div> 
+    <div id="repNamePosmAud" style="color:#228B22;"></div>               
+    <ul data-role="listview" data-inset="true">
+    	<li class="ui-field-contain" style="background-color:inherit; padding:0;">
+  		<div id="posmAuditRecordBufferImage" style="text-align:center;"><img src="running.gif" /></div>
+     	<div id="reportPosmAudRec" style="overflow:scroll;"></div>
+     	</li>
+    </ul>
+     <div class="errorChk" style="color:#cc0000;"></div>
+    </div>
+</div>
   <script type="text/javascript" src="phonegap.js"></script>
   
 </body>

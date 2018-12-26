@@ -31,6 +31,7 @@ $(document).ready(function(){
 	$('#bufferImageSync').hide();
 	if (localStorage.rep_type=='CM'){
 		
+		$("#posmReportAuditSub").hide();	
 		$("#posmAuditDiv").hide();
 		$('#townSUP').show();
 		$('#townList').show();
@@ -68,6 +69,7 @@ $(document).ready(function(){
 			
 	}else if (localStorage.rep_type == 'SUPERVISOR'){
 		
+		$("#posmReportAuditSub").hide();	
 		$("#posmAuditDiv").hide();
 		$('#townSUP').show();
 		$('#townList').show();
@@ -109,6 +111,7 @@ $(document).ready(function(){
 		
 	}else if(localStorage.rep_type == 'AGENCY'){
 		
+		$("#posmReportAuditSub").hide();	
 		$("#posmAuditDiv").hide();
 		$('#townSUP').show();
 		$('#townList').show();
@@ -144,6 +147,7 @@ $(document).ready(function(){
 		$.mobile.navigate(url);
 	}else if(localStorage.rep_type == 'AUDITOR'){
 		
+		$("#posmReportAuditSub").hide();	
 		$("#posmAuditDiv").hide();
 		$("#auditorDiv").show();
 		$("#reportAuditSub").show();
@@ -163,6 +167,7 @@ $(document).ready(function(){
 		$.mobile.navigate(url);
 		
 	}else if(localStorage.rep_type == 'DFF'){
+		$("#posmReportAuditSub").show();
 		$("#hairCareConditionShow").hide();
 		$("#skinCareConditionShow").hide();
 		$("#megaHangerConditionShow").hide();
@@ -267,7 +272,8 @@ function syncBasic(){
 					}
 					cmRouteStr +='</ul>'
 					localStorage.route=cmRouteStr;
-					if (localStorage.rep_type=='CM'){	
+					if (localStorage.rep_type=='CM'){
+						$("#posmReportAuditSub").hide();	
 						$("#posmAuditDiv").hide();					
 						$('#townSUP').show();
 						$('#townList').show();
@@ -298,6 +304,7 @@ function syncBasic(){
 						url = "#homePage";						
 						$.mobile.navigate(url);
 					}else if (localStorage.rep_type == 'SUPERVISOR'){
+						$("#posmReportAuditSub").hide();	
 						$("#posmAuditDiv").hide();
 						$('#townSUP').show();
 						$('#townList').show();
@@ -322,6 +329,7 @@ function syncBasic(){
 						$.mobile.navigate(url);
 							
 					}else if(localStorage.rep_type == 'AGENCY'){
+						$("#posmReportAuditSub").hide();	
 						$("#posmAuditDiv").hide();
 						$('#townSUP').show();
 						$('#townList').show();
@@ -346,6 +354,7 @@ function syncBasic(){
 						$.mobile.navigate(url);						
 					}else if(localStorage.rep_type == 'AUDITOR'){
 						
+						$("#posmReportAuditSub").hide();	
 						$("#posmAuditDiv").hide();
 						$("#auditOutSearch").val('');
 						$("#auditorDiv").show();
@@ -366,6 +375,7 @@ function syncBasic(){
 						url = "#homePage";
 						$.mobile.navigate(url);
 					}else{
+						$("#posmReportAuditSub").show();	
 						$('#bufferImageOutletposm').hide();
 						$("#hairCareConditionShow").hide();
 						$("#skinCareConditionShow").hide();
@@ -426,6 +436,7 @@ function menuClick(){
 	$(".errAudit").text("");
 	$("#btn_audit_entry").hide();
 	$("#reportAuditSub").show();
+	$("#posmReportAuditSub").show();	
 	$("#posmAuditor").hide();
 	$("#btn_posm_entry").hide();
 	$("#posmAuditOutSearch").val('');	
@@ -450,6 +461,7 @@ function backClick(){
 	$(".errAudit").text("");
 	$("#btn_audit_entry").hide();
 	$("#reportAuditSub").show();
+	$("#posmReportAuditSub").show();	
 	$("#posmAuditor").hide();
 	$("#btn_posm_entry").hide();
 	$("#posmAuditOutSearch").val('');	
@@ -974,9 +986,11 @@ function posmAuditorOutlet(){
 			if(posmAuditOutSearch==''){
 				$(".errPOSMAudit").text("Please Search Outlet");
 				$("#posmAuditor").hide();
-			
+				$("#posmReportAuditSub").show();
+				$("#btn_posm_entry").hide();
 			}else{
 				$("#posmAuditor").hide();
+				$("#posmReportAuditSub").hide();
 				$('#bufferImageOutletposm').show();	
 				//alert(apipath+"getOutletPosmAuditor?&posmAuditOutSearch="+posmAuditOutSearch);
 				$.ajax({
@@ -1014,6 +1028,7 @@ function posmAuditorOutlet(){
 								$('#posmOutleTown').text(localStorage.posmTown);
 								
 							}else{
+								$("#posmReportAuditSub").hide();
 								$("#btn_posm_entry").hide();
 								$("#posmAuditor").hide();
 								$(".errposmAudit").text("দোকানটি লিষ্টে নাই |");
@@ -2361,6 +2376,66 @@ function reportAuditSub(){
 	url="#page17";				
 	$.mobile.navigate(url);
 }
+
+function posmReportAuditSub(){
+	
+	//alert (apipath+"reports_posmAuditor?&repID="+localStorage.repID)
+	$("#posmAuditRecordBufferImage").show();
+	$.ajax({
+			type: 'POST',
+			url:apipath+"reports_posmAuditor?&repID="+localStorage.repID,
+																																																													
+			success: function(result) {
+				//alert(result);
+				getResult=result.split('||');
+				
+				if(getResult[0]=='Success'){
+				$("#posmAuditRecordBufferImage").hide();				
+				localStorage.posmAuditRec=getResult[1];	
+				
+				var repPosmAud=localStorage.posmAuditRec.split('rdrd');			
+				var cmRouteSTADA='<table id="">';
+				
+					cmRouteSTADA += '<tr style="font-size:12px;"><th>DATE</th><th>Region</th><th>Territory</th><th>Town Code</th><th>Town Name</th><th>Outlet Code</th><th>Outlet Name</th></tr>'
+					for (i=0;i<repPosmAud.length;i++){	
+						PosmAudData=repPosmAud[i].split('|');
+						posmauditdate=PosmAudData[0];
+						posmoutlet_region=PosmAudData[1];
+						posmoutlet_territory=PosmAudData[2];
+						posmtownCode=PosmAudData[3];
+						posmTownName=PosmAudData[4];
+						posmOutletCode=PosmAudData[5];
+						posmOutletName=PosmAudData[6];
+						
+											
+						cmRouteSTADA += '<tr style="font-size:11px;"><td>'+posmauditdate+'</td><td>'+posmoutlet_region+'</td><td>'+posmoutlet_territory+'</td><td>'+posmtownCode+'</td><td style="text-align:center;">'+posmTownName+'</td><td style="text-align:center;">'+posmOutletCode+'</td><td style="text-align:center;">'+posmOutletName+'</td></tr>'
+					
+					}
+					cmRouteSTADA +='</table>'
+					$('#reportPosmAudRec').empty();
+					$('#reportPosmAudRec').append(cmRouteSTADA).trigger('create');
+					
+					var repid=localStorage.repID;
+					var repName=localStorage.repName;
+					$("#repIDPosmAud").html ("Rep ID	:		"+repid);
+					$("#repNamePosmAud").html ("Rep Name	:		"+repName);
+				
+				}else{
+				
+				var repid=localStorage.repID;
+				$("#repIDPosmAud").html ("Rep ID	:		"+repid);
+				$("#posmAuditRecordBufferImage").hide();
+				$(".errorChk").text("No Record In DataBase");
+				}
+		}
+	});
+
+	
+	$(".errorChk").text("");			
+	url="#page20";				
+	$.mobile.navigate(url);
+}
+
 function posmAuditorNext(){
 	$("#btn_submit_posmAudit").show();
 	$("#allHideAuditPosm").show();
