@@ -21,7 +21,7 @@ var outlet_name='';
 localStorage.rep_type='';
 
 //---Online
-var apipath="http://w02.yeapps.com/postit/syncmobile_20181210/";
+var apipath="http://w02.yeapps.com/postit/syncmobile_20181226/";
 //--- local
 //var apipath="http://127.0.0.1:8000/postit/syncmobile/";
 
@@ -30,7 +30,8 @@ url ="";
 $(document).ready(function(){
 	$('#bufferImageSync').hide();
 	if (localStorage.rep_type=='CM'){
-	
+		
+		$("#posmAuditDiv").hide();
 		$('#townSUP').show();
 		$('#townList').show();
 		$("#auditorDiv").hide();
@@ -67,6 +68,7 @@ $(document).ready(function(){
 			
 	}else if (localStorage.rep_type == 'SUPERVISOR'){
 		
+		$("#posmAuditDiv").hide();
 		$('#townSUP').show();
 		$('#townList').show();
 		$("#auditorDiv").hide();
@@ -106,6 +108,8 @@ $(document).ready(function(){
 		$.mobile.navigate(url);
 		
 	}else if(localStorage.rep_type == 'AGENCY'){
+		
+		$("#posmAuditDiv").hide();
 		$('#townSUP').show();
 		$('#townList').show();
 		$("#auditorDiv").hide();
@@ -140,8 +144,43 @@ $(document).ready(function(){
 		$.mobile.navigate(url);
 	}else if(localStorage.rep_type == 'AUDITOR'){
 		
+		$("#posmAuditDiv").hide();
 		$("#auditorDiv").show();
 		$("#reportAuditSub").show();
+		$("#auditorBrandList").empty();
+		$("#auditorBrandList").append(localStorage.auditorBrand).trigger('create');
+		$('#headerName').html('POST-IT');
+		$('#townList').hide();
+		$('#townSUP').hide();
+		$("#btn_defective").hide();
+		$("#btn_dff").hide();
+		$("#stockAgency").hide();
+		$(".errAudit").text("");
+		$("#btn_audit_entry").hide();
+		$("#auditorHead").hide();
+		$("#auditOutletList").hide();
+		url = "#homePage";
+		$.mobile.navigate(url);
+		
+	}else if(localStorage.rep_type == 'DFF'){
+		$("#hairCareConditionShow").hide();
+		$("#skinCareConditionShow").hide();
+		$("#megaHangerConditionShow").hide();
+		$("#posmAuditBrandShow").hide();
+		$("#posmAuditposmShow").hide();
+		$("#posmAuditBoardQtyShow").hide();
+		$("#posmAuditBoardConditionShow").hide();
+		$("#plugInDispenserConditionShow").hide();
+		$("#miniSolomonConditionSkinShow").hide();
+		$("#miniSolomonConditionHairShow").hide()
+		$("#drugStorePosmQtyShow").hide();
+		$("#drugStorePosmConditionShow").hide();
+		$("#btn_posm_entry").hide();
+		$("#posmAuditor").hide();
+		$('#bufferImageOutletposm').hide();
+		$("#posmAuditDiv").show();
+		$("#auditorDiv").hide();
+		$("#reportAuditSub").hide();
 		$("#auditorBrandList").empty();
 		$("#auditorBrandList").append(localStorage.auditorBrand).trigger('create');
 		$('#headerName').html('POST-IT');
@@ -228,7 +267,8 @@ function syncBasic(){
 					}
 					cmRouteStr +='</ul>'
 					localStorage.route=cmRouteStr;
-					if (localStorage.rep_type=='CM'){						
+					if (localStorage.rep_type=='CM'){	
+						$("#posmAuditDiv").hide();					
 						$('#townSUP').show();
 						$('#townList').show();
 						$("#auditorDiv").hide();
@@ -258,6 +298,7 @@ function syncBasic(){
 						url = "#homePage";						
 						$.mobile.navigate(url);
 					}else if (localStorage.rep_type == 'SUPERVISOR'){
+						$("#posmAuditDiv").hide();
 						$('#townSUP').show();
 						$('#townList').show();
 						$("#auditorDiv").hide();
@@ -281,6 +322,7 @@ function syncBasic(){
 						$.mobile.navigate(url);
 							
 					}else if(localStorage.rep_type == 'AGENCY'){
+						$("#posmAuditDiv").hide();
 						$('#townSUP').show();
 						$('#townList').show();
 						$("#auditorDiv").hide();
@@ -302,8 +344,9 @@ function syncBasic(){
 						$("#suprepid").html("ID	:		"+localStorage.repID);
 						url = "#homePage";
 						$.mobile.navigate(url);						
-					}else{
+					}else if(localStorage.rep_type == 'AUDITOR'){
 						
+						$("#posmAuditDiv").hide();
 						$("#auditOutSearch").val('');
 						$("#auditorDiv").show();
 						$("#reportAuditSub").show();
@@ -322,7 +365,43 @@ function syncBasic(){
 						$("#suprepid").html("ID	:		"+localStorage.repID);
 						url = "#homePage";
 						$.mobile.navigate(url);
-					};													
+					}else{
+						$('#bufferImageOutletposm').hide();
+						$("#hairCareConditionShow").hide();
+						$("#skinCareConditionShow").hide();
+						$("#megaHangerConditionShow").hide();
+						$("#posmAuditBrandShow").hide();
+						$("#posmAuditposmShow").hide();
+						$("#posmAuditBoardQtyShow").hide();
+						$("#posmAuditBoardConditionShow").hide();
+						$("#plugInDispenserConditionShow").hide();
+						$("#miniSolomonConditionSkinShow").hide();
+						$("#miniSolomonConditionHairShow").hide()
+						$("#drugStorePosmQtyShow").hide();
+						$("#drugStorePosmConditionShow").hide();
+							
+						$("#btn_posm_entry").hide();
+						$("#posmAuditor").hide();
+						$("#posmAuditDiv").show();
+						$("#auditOutSearch").val('');
+						$("#auditorDiv").hide();
+						$("#reportAuditSub").hide();
+						$('#headerName').html('POST-IT');
+						$('#townList').hide();
+						$('#townSUP').hide();
+						$("#btn_defective").hide();
+						$("#btn_dff").hide();
+						$("#btn_audit_entry").hide();
+						$("#stockAgency").hide();
+						$(".errAudit").text("");
+						$("#auditOutletList").hide();
+						$("#auditorHead").hide();
+						$("#suprepname").html("Name	:		"+localStorage.repName);
+						$("#supreptype").html("Type	:		"+localStorage.rep_type);
+						$("#suprepid").html("ID	:		"+localStorage.repID);
+						url = "#homePage";
+						$.mobile.navigate(url);
+						}													
 				}else{
 					$("#auditorHead").hide();
 					$('#bufferImageSync').hide();						
@@ -343,9 +422,13 @@ function menuClick(){
 	$(".errorChkP").text("");
 	$(".errorChk").text("");
 	$(".sucChk").text("");
+	$(".errPOSMAudit").text("");
 	$(".errAudit").text("");
 	$("#btn_audit_entry").hide();
 	$("#reportAuditSub").show();
+	$("#posmAuditor").hide();
+	$("#btn_posm_entry").hide();
+	$("#posmAuditOutSearch").val('');	
 	
 	
 	if(localStorage.rep_type == ''){
@@ -359,6 +442,7 @@ function menuClick(){
 }
 //----------------back button
 function backClick(){
+	$(".errPOSMAudit").text("");
 	$(".errorChkP").text("");
 	$(".errorChk").text("");
 	$(".sucChk").text("");
@@ -366,6 +450,9 @@ function backClick(){
 	$(".errAudit").text("");
 	$("#btn_audit_entry").hide();
 	$("#reportAuditSub").show();
+	$("#posmAuditor").hide();
+	$("#btn_posm_entry").hide();
+	$("#posmAuditOutSearch").val('');	
 }
 
 //---------
@@ -869,6 +956,72 @@ function auditorOutlet(){
 				},error: function(){
 					$("#auditorHead").hide();
 					$('#auditOutletList').empty();
+					$(".errAudit").text("Please check internet connection");
+				}
+			});
+		}
+	}
+}
+
+function posmAuditorOutlet(){
+		$(".errPOSMAudit").text("");
+		$(".errposmAudit").text("");
+		if (localStorage.synced!='YES'){
+			$(".errorChk").text("Required Sync");
+		}else{
+			var posmAuditOutSearch=$("#posmAuditOutSearch").val();
+			//alert (posmAuditOutSearch);
+			if(posmAuditOutSearch==''){
+				$(".errPOSMAudit").text("Please Search Outlet");
+				$("#posmAuditor").hide();
+			
+			}else{
+				$("#posmAuditor").hide();
+				$('#bufferImageOutletposm').show();	
+				//alert(apipath+"getOutletPosmAuditor?&posmAuditOutSearch="+posmAuditOutSearch);
+				$.ajax({
+				type: 'POST',
+				url:apipath+"getOutletPosmAuditor?&posmAuditOutSearch="+posmAuditOutSearch,
+																																																														
+				success: function(result) {	
+					var syncResultArray = result.split('rdrd');	
+					if(syncResultArray[0]=='Success'){	
+					
+						$('#bufferImageOutletposm').hide();
+						$("#posmAuditor").show();	
+						
+						localStorage.posmOutletCode=syncResultArray[1];
+						localStorage.posmOutletName=syncResultArray[2];
+						localStorage.posmOutletTerritory=syncResultArray[3];
+						localStorage.posmOutletRoute=syncResultArray[4];
+						localStorage.posmTown=syncResultArray[5];
+						localStorage.posmBrand=syncResultArray[6];
+						
+						var auditorBrand=localStorage.posmBrand.split(',');
+						var brandStr = '<option selected="selected" value="">Select Brand</option>'
+						for (i=0;i<auditorBrand.length;i++){	
+							brandStr += '<option value="'+auditorBrand[i]+'">'+auditorBrand[i]+'</option>'
+						}
+						localStorage.auditorPOSMBrand=brandStr;
+						$("#auditorPOSMBrandList").empty();
+						$("#auditorPOSMBrandList").append(localStorage.auditorPOSMBrand).trigger('create');
+						
+						if (localStorage.posmOutletCode !=''){
+								$("#btn_posm_entry").show();
+								$('#posmOutletCode').text(localStorage.posmOutletCode+'|'+localStorage.posmOutletName);
+								$('#posmOutleAddress').text(localStorage.posmOutletTerritory);
+								$('#posmOutleRoute').text(localStorage.posmOutletRoute);
+								$('#posmOutleTown').text(localStorage.posmTown);
+								
+							}else{
+								$("#btn_posm_entry").hide();
+								$("#posmAuditor").hide();
+								$(".errposmAudit").text("দোকানটি লিষ্টে নাই |");
+									
+							}
+					}	
+				},error: function(){
+					$("#posmAuditor").hide();
 					$(".errAudit").text("Please check internet connection");
 				}
 			});
@@ -2207,4 +2360,270 @@ function reportAuditSub(){
 	$(".errorChk").text("");			
 	url="#page17";				
 	$.mobile.navigate(url);
+}
+function posmAuditorNext(){
+	$("#btn_submit_posmAudit").show();
+	$("#allHideAuditPosm").show();
+	$('input[name=hairCare]:checked').val("");
+	$('input[name=skinCare]:checked').val("");
+	$('input[name=drugStorePosm]:checked').val("");
+	$('input[name=miniSolomon]:checked').val("");
+	$('input[name=plugInDispenser]:checked').val("");
+	$('input[name=posmBoard]:checked').val("");
+	$('input[name=megaHanger]:checked').val("");
+	$("#msg_submit_posmAudit").hide();
+	var posmOutletCode=localStorage.posmOutletCode;
+	var posmOutletName=localStorage.posmOutletName;
+	
+	$("#outletCodePosmAudit").html("Outlet	:		"+posmOutletCode+' | '+posmOutletName);
+	
+	url="#page18";				
+	$.mobile.navigate(url);
+	
+}
+function posmboardYesNo(){
+
+	var posmBoard=$('input[name=posmBoard]:checked').val();
+	
+	if(posmBoard=="NO"){
+		$("#posmAuditBrandShow").hide();
+		$("#posmAuditposmShow").hide();
+		$("#posmAuditBoardQtyShow").hide();
+		$("#posmAuditBoardConditionShow").hide();
+		
+
+	}else{
+		$("#posmAuditBrandShow").show();
+		$("#posmAuditposmShow").show();
+		$("#posmAuditBoardQtyShow").show();
+		$("#posmAuditBoardConditionShow").show();
+	
+		}
+		
+}
+function megaHangerYesNo(){
+
+	var megaHanger=$('input[name=megaHanger]:checked').val();
+	
+	if(megaHanger=="NO"){
+		$("#megaHangerConditionShow").hide();
+
+	}else{
+		$("#megaHangerConditionShow").show();
+		
+		}
+}
+function plugInDispenserYesNo(){
+
+	var plugInDispenser=$('input[name=plugInDispenser]:checked').val();
+	
+	if(plugInDispenser=="NO"){
+		$("#plugInDispenserConditionShow").hide();
+
+	}else{
+		$("#plugInDispenserConditionShow").show();
+		
+		}
+}
+function miniSolomonYesNo(){
+
+	var miniSolomon=$('input[name=miniSolomon]:checked').val();
+	
+	if(miniSolomon=="NO"){
+		$("#miniSolomonConditionSkinShow").hide();
+		$("#miniSolomonConditionHairShow").hide();
+		$("#skinCareConditionShow").hide();
+		$("#hairCareConditionShow").hide();
+	}else{
+		$("#miniSolomonConditionSkinShow").show();
+		$("#miniSolomonConditionHairShow").show();
+		}
+}
+function skinCareYesNo(){
+
+	var skinCare=$('input[name=skinCare]:checked').val();
+	
+	if(skinCare=="NO"){
+		$("#skinCareConditionShow").hide();
+
+	}else{
+		$("#skinCareConditionShow").show();
+		
+		}
+}
+function hairCareYesNo(){
+
+	var hairCare=$('input[name=hairCare]:checked').val();
+	
+	if(hairCare=="NO"){
+		$("#hairCareConditionShow").hide();
+
+	}else{
+		$("#hairCareConditionShow").show();
+		
+		}
+}
+function drugStorePosmYesNo(){
+
+	var drugStorePosm=$('input[name=drugStorePosm]:checked').val();
+	
+	if(drugStorePosm=="NO"){
+		$("#drugStorePosmQtyShow").hide();
+		$("#drugStorePosmConditionShow").hide();
+	}else{
+		$("#drugStorePosmQtyShow").show();
+		$("#drugStorePosmConditionShow").show();
+		}
+}
+
+
+
+var posmBoard='';
+var auditorPOSMBrandList='';
+var auditPosm_type='';
+var boardQty='';
+var boardCondition='';
+var megaHanger='';
+var megaHangerCondition='';
+var plugInDispenser='';
+var plugInDispenserCondition='';
+var miniSolomon='';
+var skinCare='';
+var skinCareCondition='';
+var hairCare='';
+var hairCareCondition='';
+var drugStorePosm='';
+var posmQty='';
+var drugStorePosmCondition='';
+
+function submit_data_posmAuditor(){
+	
+	$("#btn_submit_posmAudit").show();
+	$("#msg_submit_posmAudit").hide();
+	var posmAuditOutSearch=$("#posmAuditOutSearch").val().replace('+','').replace('.','').replace('/','').replace('*','').replace(',','');
+	
+	var d = new Date();	
+	var get_time=d.getTime();
+	
+	posmBoard=$('input[name=posmBoard]:checked').val();
+	//alert(typeof posmBoard);
+	auditorPOSMBrandList=$("#auditorPOSMBrandList").val();
+	auditPosm_type=$('input[name=auditPosm_type]:checked').val();
+	boardQty=$("#boardQty").val().replace('+','').replace('-','').replace('.','').replace('/','').replace('*','').replace(',','');
+	boardCondition=$('input[name=boardCondition]:checked').val();
+	megaHanger=$('input[name=megaHanger]:checked').val();
+	megaHangerCondition=$('input[name=megaHangerCondition]:checked').val();
+	plugInDispenser=$('input[name=plugInDispenser]:checked').val();
+	plugInDispenserCondition=$('input[name=plugInDispenserCondition]:checked').val();
+	miniSolomon=$('input[name=miniSolomon]:checked').val();
+	skinCare=$('input[name=skinCare]:checked').val();
+	skinCareCondition=$('input[name=skinCareCondition]:checked').val();
+	hairCare=$('input[name=hairCare]:checked').val();
+	hairCareCondition=$('input[name=hairCareCondition]:checked').val();
+	drugStorePosm=$('input[name=drugStorePosm]:checked').val();
+	posmQty=$("#posmQty").val().replace('+','').replace('-','').replace('.','').replace('/','').replace('*','').replace(',','');
+	drugStorePosmCondition=$('input[name=drugStorePosmCondition]:checked').val();
+	
+	
+
+	if(posmBoard==undefined){
+		$(".errorChk").text("Required POSM Board");
+		$("#btn_submit_posmAudit").show();
+	}else if((auditorPOSMBrandList==undefined || auditorPOSMBrandList=='') && posmBoard=="YES"){
+		$(".errorChk").text("Required Brand");
+		$("#btn_submit_posmAudit").show();
+	}else if((auditPosm_type==undefined || auditPosm_type=='') && posmBoard=="YES"){
+		$(".errorChk").text("Required POSM Type");
+		$("#btn_submit_posmAudit").show();
+	}else if((boardQty==0 || boardQty=='') && posmBoard=="YES"){
+		$(".errorChk").text("Required Board Qty");
+		$("#btn_submit_posmAudit").show();
+	}else if((boardCondition==undefined || boardCondition=='') && posmBoard=="YES"){
+		$(".errorChk").text("Required Board Condition");
+		$("#btn_submit_posmAudit").show();
+	}else if(megaHanger==undefined){
+		$(".errorChk").text("Required Mega Hanger");
+		$("#btn_submit_posmAudit").show();
+	}else if((megaHangerCondition==undefined || megaHangerCondition=='') && megaHanger=="YES"){
+		$(".errorChk").text("Required Mega Hanger Condition");
+		$("#btn_submit_posmAudit").show();
+	}else if(plugInDispenser==undefined){
+		$(".errorChk").text("Required Plug In Dispenser");
+		$("#btn_submit_posmAudit").show();
+	}else if((plugInDispenserCondition==undefined || plugInDispenserCondition=='') && plugInDispenser=="YES"){
+		$(".errorChk").text("Required Plug In Dispenser Condition");
+		$("#btn_submit_posmAudit").show();
+	}else if(miniSolomon==undefined){
+		$(".errorChk").text("Required Mini Solomon");
+		$("#btn_submit_posmAudit").show();
+	}else if((skinCare==undefined || skinCare=='') && miniSolomon=="YES"){
+		$(".errorChk").text("Required Skin Care");
+		$("#btn_submit_posmAudit").show();
+	}else if((skinCareCondition==undefined || skinCareCondition=='') && miniSolomon=="YES" && skinCare=="YES"){
+		$(".errorChk").text("Required Skin Care Condition");
+		$("#btn_submit_posmAudit").show();
+	}else if((hairCare==undefined || hairCare=='') && miniSolomon=="YES"){
+		$(".errorChk").text("Required Hair Care");
+		$("#btn_submit_posmAudit").show();
+	}else if((hairCareCondition==undefined || hairCareCondition=='') && miniSolomon=="YES" && hairCare=="YES"){
+		$(".errorChk").text("Required Hair Care Condition");
+		$("#btn_submit_posmAudit").show();
+	}else if(drugStorePosm==undefined){
+		$(".errorChk").text("Required Drug Store Posm");
+		$("#btn_submit_posmAudit").show();
+	}else if((posmQty==0 || posmQty=='') && drugStorePosm=="YES"){
+		$(".errorChk").text("Required posm Qty");
+		$("#btn_submit_posmAudit").show();
+	}else if((drugStorePosmCondition==undefined || drugStorePosmCondition=='') && drugStorePosm=="YES"){
+		$(".errorChk").text("Required Drug Store Posm Condition");
+		$("#btn_submit_posmAudit").show();
+	}else{
+	
+				
+		//alert(apipath+"submitData_PosmAuditor?&syncCode="+localStorage.sync_code+"&repID="+localStorage.repID+"&repName="+localStorage.repName+"&mobileNo="+localStorage.mobileNo+"&posmBoard="+posmBoard+"&auditorPOSMBrandList="+auditorPOSMBrandList+"&auditPosm_type="+auditPosm_type+"&boardQty="+boardQty+"&boardCondition="+boardCondition+"&megaHanger="+megaHanger+"&megaHangerCondition="+megaHangerCondition+"&plugInDispenser="+plugInDispenser+"&plugInDispenserCondition="+plugInDispenserCondition+"&miniSolomon="+miniSolomon+"&skinCare="+skinCare+"&skinCareCondition="+skinCareCondition+"&hairCare="+hairCare+"&hairCareCondition="+hairCareCondition+"&drugStorePosm="+drugStorePosm+"&posmQty="+posmQty+"&drugStorePosmCondition="+drugStorePosmCondition+"&posmAuditOutSearch="+posmAuditOutSearch);
+		$.ajax({
+			type: 'POST',
+			url:apipath+"submitData_PosmAuditor?&syncCode="+localStorage.sync_code+"&repID="+localStorage.repID+"&repName="+localStorage.repName+"&mobileNo="+localStorage.mobileNo+"&posmBoard="+posmBoard+"&auditorPOSMBrandList="+auditorPOSMBrandList+"&auditPosm_type="+auditPosm_type+"&boardQty="+boardQty+"&boardCondition="+boardCondition+"&megaHanger="+megaHanger+"&megaHangerCondition="+megaHangerCondition+"&plugInDispenser="+plugInDispenser+"&plugInDispenserCondition="+plugInDispenserCondition+"&miniSolomon="+miniSolomon+"&skinCare="+skinCare+"&skinCareCondition="+skinCareCondition+"&hairCare="+hairCare+"&hairCareCondition="+hairCareCondition+"&drugStorePosm="+drugStorePosm+"&posmQty="+posmQty+"&drugStorePosmCondition="+drugStorePosmCondition+"&posmAuditOutSearch="+posmAuditOutSearch,
+																																																													
+			success: function(result) {			
+				if(result=='Success'){
+					
+					
+					$("#auditorPOSMBrandList").val('');	
+					$("#posmAuditOutSearch").val('');	
+					$('input[name=posmBoard]:checked').val('');
+					$('input[name=auditorPOSMBrandList]:checked').val('');
+					$('input[name=auditPosm_type]:checked').val('');
+					$("#boardQty").val('');
+					$('input[name=boardCondition]:checked').val('');
+					$('input[name=megaHanger]:checked').val('');
+					$('input[name=megaHangerCondition]:checked').val('');
+					$('input[name=plugInDispenser]:checked').val('');
+					$('input[name=plugInDispenserCondition]:checked').val('');
+					$('input[name=miniSolomon]:checked').val('');
+					$('input[name=skinCare]:checked').val('');
+					$('input[name=skinCareCondition]:checked').val('');
+					$('input[name=hairCare]:checked').val('');
+					$('input[name=hairCareCondition]:checked').val('');
+					$('input[name=drugStorePosm]:checked').val('');
+					$("#posmQty").val('');
+					$('input[name=drugStorePosmCondition]:checked').val('');
+					
+					$(".errorChk").text("");
+					$("#msg_submit_posmAudit").show();
+					$("#allHideAuditPosm").hide();
+					$("#btn_submit_posmAudit").hide();
+						
+				}else if (result=='Failed'){
+						$(".errorChk").text('Please check internet connection')
+						$("#msg_submit_posmAudit").hide();
+						$("#allHideAuditPosm").show();	
+						$("#btn_submit_posmAudit").show();	
+				}
+				
+			}//end result
+		
+		});//end ajax
+	}
+	
 }

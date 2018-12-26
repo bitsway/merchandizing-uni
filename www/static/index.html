@@ -224,11 +224,27 @@
 	   background-color:#CE295E;
 	}
 	#reportbtn{
-		margin:2px;
+		margin:4px;
 		font-weight:1;
 		background-color:#CE295E;
 	}
 	#entryAgency{
+		
+	    margin:4px;
+		font-weight:1;
+		background-color:#CE295E;
+	}
+	#btn_posmAudit{
+		margin:4px;
+		font-weight:1;
+		background-color:#CE295E;
+	}
+	#btn_posmauditReport{
+		margin:4px;
+		font-weight:1;
+		background-color:#CE295E;
+	}	
+	#btn_posm_entry{
 		
 	    margin:4px;
 		font-weight:1;
@@ -325,6 +341,18 @@
 	#reportAudAgencyS> table tr td{
 		border:1px solid #D42E5C;
 		}
+	#posmAuditor> table{
+		margin:4px;
+		border-collapse:collapse;
+		}
+	#posmAuditor> table tr th{
+		background-color:#D42E5C;
+		color:#FFF;
+		font-weight:1;
+		}
+	#posmAuditor> table tr td{
+		border:1px solid #D42E5C;
+		}
     </style>    
    	
 </head>
@@ -358,7 +386,7 @@
         <br/>
         <br/>
         <br/>
-         <div data-role="footer" data-position="fixed" style="font-size:12px; color:#595959; background-color:#FFF; font-weight:1;" align="center" >20181210</div>
+         <div data-role="footer" data-position="fixed" style="font-size:12px; color:#595959; background-color:#FFF; font-weight:1;" align="center" >20181226</div>
     </div>
 </div>
 <!------------------------------------------MAIN MENU----------------------------------------------------------->       
@@ -375,6 +403,38 @@
     <div id="supreptype" style="color:#DA335A; text-align:center;"></div>
     <div id="suprepid" style="color:#DA335A; text-align:center;"></div>    
     <div id="townList" style="height:0 auto; overflow:scroll;"></div>
+    <div id="posmAuditDiv">
+     <input type="text" id="posmAuditOutSearch" name="posmAuditOutSearch" placeholder="Search Outlet Code" style="border:1px solid #595959; margin-left:4px;"/>    
+     <button data-role="button" id="btn_posmAudit" onclick="posmAuditorOutlet()" href="#" data-transition="slide" style="color:#fff">Search</button>
+      <div id="bufferImageOutletposm" style="text-align:center;"><img src="running.gif" /></div>
+        <div class="errposmAudit" style="color:#cc0000;" ></div> 
+    <!-- <button data-role="button" id="btn_posmauditReport" onclick="('')" href="#" data-transition="slide" style="color:#fff"  >Report</button> -->
+     <div id="posmAuditor" style="margin-top:10px;">
+         	<table width="100%">
+            <tr style="background-color:#900; color:#FFF;"><td colspan="2">Outlet Details</td></tr>
+              <tr>
+                <td>Outlet</td>
+                <td id="posmOutletCode"></td>
+              </tr>
+               <tr>
+                <td>Territory</td>
+                <td id="posmOutleAddress"></td>
+              </tr>
+              <tr>
+                <td>Route</td>
+                <td id="posmOutleRoute"></td>
+              </tr>
+              <tr>
+                <td>Town</td>
+                <td id="posmOutleTown"></td>
+              </tr>
+            </table>
+
+         	
+         </div>
+         <button data-role="button" id="btn_posm_entry" onclick="posmAuditorNext()" href="#" data-transition="slide" style="color:#fff">Next</button>
+        <div class="errPOSMAudit" style="color:#cc0000;" ></div> 
+    </div>
     <div id="auditorDiv">
     <input type="text" id="auditOutSearch" name="auditOutSearch" placeholder="Search Outlet Code" style="border:1px solid #595959;"/>    
      <button data-role="button" id="btn_audit" onclick="auditorOutlet()" href="#" data-transition="slide" style="color:#fff">Search</button>
@@ -965,7 +1025,7 @@
         <div id="allHideAudit">
         <table table width="100%" class="ui-body-d ui-shadow table-stripe ui-responsive" id="" style="cell-spacing:0px; "  data-role="table" data-theme="c"  data-mode="display:none">
         	<tr style="background-color:#AAAAAA;">
-                <td style="color:#FFF;"> Board Available <span class="btn-color" style="color:#F00;">* </span></td>
+                <td style="color:#FFF; padding-top:15px;"> Board Available <span class="btn-color" style="color:#F00;">* </span></td>
                  <td>
                  	<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true" >
                         <input name="a_board" id="radio-choice-h-6a" value="1"  type="radio" onchange="boardYesNo();">
@@ -978,13 +1038,13 @@
              
            
         	 <tr style="background-color:#AAAAAA;" id="auditBrandShow">
-             <td style="color:#FFF;">Brand<span class="btn-color" style="color:#F00;">* </span></td>
+             <td style="color:#FFF; padding-top:15px;">Brand<span class="btn-color" style="color:#F00;">* </span></td>
              <td>
             <select id="auditorBrandList" class="auto_break" name="auditorBrandList"  style="display:inline-block;"></select>
             </td>
              </tr>
             <tr style="background-color:#AAAAAA;" id="auditposmShow">
-                <td style="color:#FFF;">POSM Type<span class="btn-color" style="color:#F00;">* </span></td>
+                <td style="color:#FFF; padding-top:15px;">POSM Type<span class="btn-color" style="color:#F00;">* </span></td>
                 <td>
                 	<input type="hidden" id="rowID" name="rowID" />
                 	<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
@@ -997,23 +1057,23 @@
                 </td>
               </tr>
               <tr style="background-color:#AAAAAA;" id="auditHeightShow">
-                <td style="color:#FFF;">Height (Feet)<span class="btn-color" style="color:#F00;">* </span></td>
+                <td style="color:#FFF; padding-top:15px;">Height (Feet)<span class="btn-color" style="color:#F00;">* </span></td>
                 <td><input type="number" id="a_height" name="a_height" /></td>
               </tr>
               <tr style="background-color:#AAAAAA;" id="auditLengthShow">
-                <td style="color:#FFF;">Length (Feet)<span class="btn-color" style="color:#F00;">* </span></td>
+                <td style="color:#FFF; padding-top:15px;">Length (Feet)<span class="btn-color" style="color:#F00;">* </span></td>
                 <td><input type="number" id="a_length" name="a_length" /></td>
               </tr>
               <tr style="background-color:#AAAAAA;" id="auditLighthShow">
-                <td style="color:#FFF;">Total Light<span class="btn-color" style="color:#F00;">* </span></td>
+                <td style="color:#FFF; padding-top:15px;">Total Light<span class="btn-color" style="color:#F00;">* </span></td>
                 <td><input type="number" id="a_light" name="a_light" /></td>
               </tr>
               <tr style="background-color:#AAAAAA;" id="auditDefectiveShow">
-                <td style="color:#FFF;">Total Defective Light<span class="btn-color" style="color:#F00;">* </span></td>
+                <td style="color:#FFF; padding-top:15px;">Total Defective Light<span class="btn-color" style="color:#F00;">* </span></td>
                 <td><input type="number" id="a_dLight" name="a_dLight" /></td>
               </tr>
               <tr style="background-color:#AAAAAA;" id="auditFasciaShow">
-                <td style="color:#FFF;">Fascia Status<span class="btn-color" style="color:#F00;">* </span></td>
+                <td style="color:#FFF; padding-top:15px;">Fascia Status<span class="btn-color" style="color:#F00;">* </span></td>
                 <td>
                     <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
                         <input name="a_fStatus" id="radio-choice-h-6a" value="Good"  type="radio">
@@ -1025,7 +1085,7 @@
                 </td>
               </tr>	
               <tr style="background-color:#AAAAAA;" id="auditProfileShow">
-                <td style="color:#FFF;">Profile Box Status<span class="btn-color" style="color:#F00;">* </span></td>
+                <td style="color:#FFF; padding-top:15px;">Profile Box Status<span class="btn-color" style="color:#F00;">* </span></td>
                 <td>
                     <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
                         <input name="a_paStatus" id="radio-choice-h-6a" value="Good"  type="radio">
@@ -1037,7 +1097,7 @@
                 </td>
               </tr>	
                <tr style="background-color:#AAAAAA;">
-                <td style="color:#FFF;">Store Type<span class="btn-color" style="color:#F00;">* </span></td>
+                <td style="color:#FFF; padding-top:15px;">Store Type<span class="btn-color" style="color:#F00;">* </span></td>
                 <td>
                     <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
                         <input name="a_storeType" id="radio-choice-h-6a" value="PS"  type="radio">
@@ -1052,20 +1112,20 @@
               </tr>
        
                <tr style="background-color:#AAAAAA;">
-                <td style="color:#FFF;">Shopkeeper Name<span class="btn-color" style="color:#F00;">*</span></td>
+                <td style="color:#FFF; padding-top:15px;">Shopkeeper Name<span class="btn-color" style="color:#F00;">*</span></td>
                 <td><input type="text" id="a_nShopkeeper" name="a_nShopkeeper"/></td>
               </tr>
               <tr>
               <tr style="background-color:#AAAAAA;">
-                <td style="color:#FFF;">Shopkeeper Contact No<span class="btn-color" style="color:#F00;">* </span></td>
+                <td style="color:#FFF; padding-top:15px;">Shopkeeper Contact No<span class="btn-color" style="color:#F00;">* </span></td>
                 <td><input type="number" id="a_cNoShopkeeper" name="a_cNoShopkeeper"/></td>
               </tr>
               <tr style="background-color:#AAAAAA;">
-                <td style="color:#FFF;">City Corp<span class="btn-color" style="color:#F00;">* </span></td>
+                <td style="color:#FFF; padding-top:15px;">City Corp<span class="btn-color" style="color:#F00;">* </span></td>
                  <td><input type="text" id="a_cityCorp" name="a_cityCorp"/></td>
               </tr>
               <tr style="background-color:#AAAAAA;">
-                <td style="color:#FFF;">Remarks</td>
+                <td style="color:#FFF; padding-top:15px;">Remarks</td>
                  <td><input type="text" id="remarksAudit" name="remarksAudit" maxlength="100"/></td>
               </tr>
               <tr>
@@ -1164,7 +1224,206 @@
      <div class="errorChk" style="color:#cc0000;"></div>
     </div>
 </div>
+<!------------------------------POSM Audit----------------------------------------->
+<div data-role="page" data-theme="c" id="page18" style="overflow:scroll;">
+    <div data-theme="c" data-role="header" data-position="fixed" >
+        <a data-role="button" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets " ><img src="menu.png" /></a>
+        <a data-role="button" onclick="backClick();" data-rel="back" class="ui-btn-right" data-transition="slide"><img src="back.png" /></a>
+        <h3 style="color:#fff;">POST-IT</h3>
+        
+        </div>
+    <div data-role="content" style="overflow:scroll;">
+    <div id="outletCodePosmAudit" style="color:#DA335A; margin-bottom:8px;"></div>    
+        <div id="allHideAuditPosm">
+        <table table width="100%" class="ui-body-d ui-shadow table-stripe ui-responsive" id="" style="cell-spacing:0px;"  data-role="table" data-theme="c"  data-mode="display:none">
+        	<tr style="background-color:#a32ba3;">
+                <td style="color:#FFF; padding-top:15px;"> Board Available <span class="btn-color" style="color:#FFF;">* </span></td>
+                 <td>
+                 	<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true" >
+                        <input name="posmBoard" id="radio-choice-h-6a" value="YES"  type="radio" onchange="posmboardYesNo();">
+                        <label for="radio-choice-h-6a">YES</label>
+                        <input name="posmBoard" id="radio-choice-h-6b"  value="NO" type="radio" onchange="posmboardYesNo();">
+                        <label for="radio-choice-h-6b">NO</label>
+                    </fieldset>
+                 </td>
+              </tr>
+        	 <tr style="background-color:#cf4acf;" id="posmAuditBrandShow">
+             <td style="color:#FFF; padding-top:15px;">Brand<span class="btn-color" style="color:#FFF;">* </span></td>
+             <td width="50%;">
+            <select id="auditorPOSMBrandList" class="auto_break" name="auditorPOSMBrandList"  style="display:inline-block;"></select>
+            </td>
+             </tr>
+            <tr style="background-color:#cf4acf;" id="posmAuditposmShow">
+                <td style="color:#FFF; padding-top:15px;">POSM Type<span class="btn-color" style="color:#FFF;">* </span></td>
+                <td>
+                	<input type="hidden" id="rowID" name="rowID" />
+                	<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
+                        <input name="auditPosm_type" id="radio-choice-h-6a" value="SHOPBOARD_BACKLIT"   type="radio">
+ 						<label for="radio-choice-h-6a">Lit</label>
+                        <input name="auditPosm_type" id="radio-choice-h-6b"  value="SHOPBOARD_NONLIT" type="radio">
+                        <label for="radio-choice-h-6b">Non-Lit</label>
+                        
+                    </fieldset>
+                </td>
+              </tr>
+              <tr style="background-color:#cf4acf;" id="posmAuditBoardQtyShow">
+                <td style="color:#FFF; padding-top:15px;">Board Qty<span class="btn-color" style="color:#FFF;">* </span></td>
+                <td width="50%;"><input type="number" id="boardQty" name="boardQty" /></td>
+              </tr>
+              <tr style="background-color:#cf4acf;" id="posmAuditBoardConditionShow">
+                <td style="color:#FFF; padding-top:15px;">Condition<span class="btn-color" style="color:#FFF;">* </span></td>
+                <td>
+                    <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
+                        <input name="boardCondition" id="radio-choice-h-6a" value="Good"  type="radio">
+                        <label for="radio-choice-h-6a">Good</label>
+                        <input name="boardCondition" id="radio-choice-h-6b"  value="Bad" type="radio">
+                        <label for="radio-choice-h-6b">Bad</label>
+                    </fieldset>
+                
+                </td>
+              </tr>
+              <tr style="background-color:#0033CC;">
+                <td style="color:#FFF; padding-top:15px;"> Mega Hanger <span class="btn-color" style="color:#F00;">* </span></td>
+                 <td>
+                 	<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true" >
+                        <input name="megaHanger" id="radio-choice-h-6a" value="YES"  type="radio" onchange="megaHangerYesNo();">
+                        <label for="radio-choice-h-6a">YES</label>
+                        <input name="megaHanger" id="radio-choice-h-6b"  value="NO" type="radio" onchange="megaHangerYesNo();">
+                        <label for="radio-choice-h-6b">NO</label>
+                    </fieldset>
+                 </td>
+              </tr>	
+               <tr style="background-color:#4d79ff;" id="megaHangerConditionShow">
+                <td style="color:#FFF; padding-top:15px;">Condition<span class="btn-color" style="color:#F00;">* </span></td>
+                <td>
+                    <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
+                        <input name="megaHangerCondition" id="radio-choice-h-6a" value="Good"  type="radio">
+                        <label for="radio-choice-h-6a">Good</label>
+                        <input name="megaHangerCondition" id="radio-choice-h-6b"  value="Bad" type="radio">
+                        <label for="radio-choice-h-6b">Bad</label>
+                    </fieldset>
+                
+                </td>
+              </tr>
+              <tr style="background-color:#de8021;">
+                <td style="color:#FFF; padding-top:15px;"> Plug In Dispenser <span class="btn-color" style="color:#FFF;">* </span></td>
+                 <td>
+                 	<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true" >
+                        <input name="plugInDispenser" id="radio-choice-h-6a" value="YES"  type="radio" onchange="plugInDispenserYesNo();">
+                        <label for="radio-choice-h-6a">YES</label>
+                        <input name="plugInDispenser" id="radio-choice-h-6b"  value="NO" type="radio" onchange="plugInDispenserYesNo();">
+                        <label for="radio-choice-h-6b">NO</label>
+                    </fieldset>
+                 </td>
+              </tr>
+              <tr style="background-color:#e8a664;" id="plugInDispenserConditionShow">
+                <td style="color:#FFF; padding-top:15px;">Condition<span class="btn-color" style="color:#FFF;">* </span></td>
+                <td>
+                    <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
+                        <input name="plugInDispenserCondition" id="radio-choice-h-6a" value="Good"  type="radio">
+                        <label for="radio-choice-h-6a">Good</label>
+                        <input name="plugInDispenserCondition" id="radio-choice-h-6b"  value="Bad" type="radio">
+                        <label for="radio-choice-h-6b">Bad</label>
+                    </fieldset>
+                
+                </td>
+              </tr>
+              <tr style="background-color:#3FCBA8;">
+                <td style="color:#FFF; padding-top:15px;"> Mini Solomon <span class="btn-color" style="color:#F00;">* </span></td>
+                 <td>
+                 	<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true" >
+                        <input name="miniSolomon" id="radio-choice-h-6a" value="YES"  type="radio" onchange="miniSolomonYesNo();">
+                        <label for="radio-choice-h-6a">YES</label>
+                        <input name="miniSolomon" id="radio-choice-h-6b"  value="NO" type="radio" onchange="miniSolomonYesNo();">
+                        <label for="radio-choice-h-6b">NO</label>
+                    </fieldset>
+                 </td>
+              </tr>
+               <tr style="background-color:#73d9bf;" id="miniSolomonConditionSkinShow">
+                <td style="color:#FFF; padding-top:15px;">Skin Care<span class="btn-color" style="color:#F00;">* </span></td>
+                <td>
+                    <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
+                        <input name="skinCare" id="radio-choice-h-6a" value="YES"  type="radio" onchange="skinCareYesNo();">
+                        <label for="radio-choice-h-6a">YES</label>
+                        <input name="skinCare" id="radio-choice-h-6b"  value="NO" type="radio" onchange="skinCareYesNo();">
+                        <label for="radio-choice-h-6b">NO</label>
+                    </fieldset>
+                
+                </td>
+              </tr>
+              <tr style="background-color:#73d9bf;" id="skinCareConditionShow">
+                <td style="color:#FFF; padding-top:15px;">Condition<span class="btn-color" style="color:#F00;">* </span></td>
+                <td>
+                    <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
+                        <input name="skinCareCondition" id="radio-choice-h-6a" value="Good"  type="radio">
+                        <label for="radio-choice-h-6a">Good</label>
+                        <input name="skinCareCondition" id="radio-choice-h-6b"  value="Bad" type="radio">
+                        <label for="radio-choice-h-6b">Bad</label>
+                    </fieldset>
+                
+                </td>
+              </tr>
+              <tr style="background-color:#73d9bf;" id="miniSolomonConditionHairShow">
+                <td style="color:#FFF; padding-top:15px;">Hair Care<span class="btn-color" style="color:#F00;">* </span></td>
+                <td>
+                    <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
+                        <input name="hairCare" id="radio-choice-h-6a" value="YES"  type="radio" onchange="hairCareYesNo();">
+                        <label for="radio-choice-h-6a">YES</label>
+                        <input name="hairCare" id="radio-choice-h-6b"  value="NO" type="radio" onchange="hairCareYesNo();">
+                        <label for="radio-choice-h-6b">NO</label>
+                    </fieldset>
+                
+                </td>
+              </tr>
+              <tr style="background-color:#73d9bf;" id="hairCareConditionShow">
+                <td style="color:#FFF; padding-top:15px;">Condition<span class="btn-color" style="color:#F00;">* </span></td>
+                <td>
+                    <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
+                        <input name="hairCareCondition" id="radio-choice-h-6a" value="Good"  type="radio" >
+                        <label for="radio-choice-h-6a">Good</label>
+                        <input name="hairCareCondition" id="radio-choice-h-6b"  value="Bad" type="radio" >
+                        <label for="radio-choice-h-6b">Bad</label>
+                    </fieldset>
+                
+                </td>
+              </tr>
+               <tr style="background-color:#356897;">
+                <td style="color:#FFF; padding-top:15px;"> Drug Store POSM <span class="btn-color" style="color:#F00;">* </span></td>
+                 <td>
+                 	<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true" >
+                        <input name="drugStorePosm" id="radio-choice-h-6a" value="YES"  type="radio" onchange="drugStorePosmYesNo();">
+                        <label for="radio-choice-h-6a">YES</label>
+                        <input name="drugStorePosm" id="radio-choice-h-6b"  value="NO" type="radio" onchange="drugStorePosmYesNo();">
+                        <label for="radio-choice-h-6b">NO</label>
+                    </fieldset>
+                 </td>
+              </tr>
+              <tr style="background-color:#7ba7d1;" id="drugStorePosmQtyShow">
+                <td style="color:#FFF; padding-top:15px;">POSM Qty<span class="btn-color" style="color:#F00;">* </span></td>
+                <td width="50%;"><input type="number" id="posmQty" name="posmQty" /></td>
+              </tr>
+              <tr style="background-color:#7ba7d1;" id="drugStorePosmConditionShow">
+                <td style="color:#FFF; padding-top:15px;">Condition<span class="btn-color" style="color:#F00;">* </span></td>
+                <td>
+                    <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
+                        <input name="drugStorePosmCondition" id="radio-choice-h-6a" value="Good"  type="radio">
+                        <label for="radio-choice-h-6a">Good</label>
+                        <input name="drugStorePosmCondition" id="radio-choice-h-6b"  value="Bad" type="radio">
+                        <label for="radio-choice-h-6b">Bad</label>
+                    </fieldset>
+                
+                </td>
+              </tr>
+        </table>
+        
+        </div>
+        <a data-role="button" id="btn_submit_posmAudit" onClick="submit_data_posmAuditor();" class="ui-btn" style="background-color:#D42E5C; color:#FFF;  font-weight:1;">Submit</a>
+         <div id="msg_submit_posmAudit" style="color:#FFF; text-align:center; background-color:#DA335A; padding:30px 0px 30px 0px; border-radius:10px;">Successfully Submitted</div>
 
+    <div class="errorChk" style="color:#cc0000; background-color:#FFF;"></div>
+            <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+       </div>
+ </div>
   <script type="text/javascript" src="phonegap.js"></script>
   
 </body>
