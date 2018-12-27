@@ -402,7 +402,7 @@
         <br/>
         <br/>
         <br/>
-         <div data-role="footer" data-position="fixed" style="font-size:12px; color:#595959; background-color:#FFF; font-weight:1;" align="center" >20181226</div>
+         <div data-role="footer" data-position="fixed" style="font-size:12px; color:#595959; background-color:#FFF; font-weight:1;" align="center" >20181227</div>
     </div>
 </div>
 <!------------------------------------------MAIN MENU----------------------------------------------------------->       
@@ -1255,13 +1255,8 @@
         <table table width="100%" class="ui-body-d ui-shadow table-stripe ui-responsive" id="" style="cell-spacing:0px;"  data-role="table" data-theme="c"  data-mode="display:none">
         	<tr style="background-color:#a32ba3;">
                 <td style="color:#FFF; padding-top:15px;"> Board Available <span class="btn-color" style="color:#FFF;">* </span></td>
-                 <td>
-                 	<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true" >
-                        <input name="posmBoard" id="radio-choice-h-6a" value="YES"  type="radio" onchange="posmboardYesNo();">
-                        <label for="radio-choice-h-6a">YES</label>
-                        <input name="posmBoard" id="radio-choice-h-6b"  value="NO" type="radio" onchange="posmboardYesNo();">
-                        <label for="radio-choice-h-6b">NO</label>
-                    </fieldset>
+                 <td><div id="boarAvailableCrest"> </div>
+                 	
                  </td>
               </tr>
         	 <tr style="background-color:#cf4acf;" id="posmAuditBrandShow">
@@ -1272,15 +1267,8 @@
              </tr>
             <tr style="background-color:#cf4acf;" id="posmAuditposmShow">
                 <td style="color:#FFF; padding-top:15px;">POSM Type<span class="btn-color" style="color:#FFF;">* </span></td>
-                <td>
-                	<input type="hidden" id="rowID" name="rowID" />
-                	<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
-                        <input name="auditPosm_type" id="radio-choice-h-6a" value="SHOPBOARD_BACKLIT"   type="radio">
- 						<label for="radio-choice-h-6a">Lit</label>
-                        <input name="auditPosm_type" id="radio-choice-h-6b"  value="SHOPBOARD_NONLIT" type="radio">
-                        <label for="radio-choice-h-6b">Non-Lit</label>
-                        
-                    </fieldset>
+                <td><div id="posmConditionCrest"> </div>
+                	
                 </td>
               </tr>
               <tr style="background-color:#cf4acf;" id="posmAuditBoardQtyShow">
@@ -1289,130 +1277,61 @@
               </tr>
               <tr style="background-color:#cf4acf;" id="posmAuditBoardConditionShow">
                 <td style="color:#FFF; padding-top:15px;">Condition<span class="btn-color" style="color:#FFF;">* </span></td>
-                <td>
-                    <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
-                        <input name="boardCondition" id="radio-choice-h-6a" value="Good"  type="radio">
-                        <label for="radio-choice-h-6a">Good</label>
-                        <input name="boardCondition" id="radio-choice-h-6b"  value="Bad" type="radio">
-                        <label for="radio-choice-h-6b">Bad</label>
-                    </fieldset>
-                
+                <td><div id="posmBoardConditionCrest"> </div>
                 </td>
               </tr>
               <tr style="background-color:#0033CC;">
                 <td style="color:#FFF; padding-top:15px;"> Mega Hanger <span class="btn-color" style="color:#F00;">* </span></td>
-                 <td>
-                 	<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true" >
-                        <input name="megaHanger" id="radio-choice-h-6a" value="YES"  type="radio" onchange="megaHangerYesNo();">
-                        <label for="radio-choice-h-6a">YES</label>
-                        <input name="megaHanger" id="radio-choice-h-6b"  value="NO" type="radio" onchange="megaHangerYesNo();">
-                        <label for="radio-choice-h-6b">NO</label>
-                    </fieldset>
+                 <td><div id="posmMegaHangerCrest"></div>
+                 	
                  </td>
               </tr>	
                <tr style="background-color:#4d79ff;" id="megaHangerConditionShow">
                 <td style="color:#FFF; padding-top:15px;">Condition<span class="btn-color" style="color:#F00;">* </span></td>
-                <td>
-                    <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
-                        <input name="megaHangerCondition" id="radio-choice-h-6a" value="Good"  type="radio">
-                        <label for="radio-choice-h-6a">Good</label>
-                        <input name="megaHangerCondition" id="radio-choice-h-6b"  value="Bad" type="radio">
-                        <label for="radio-choice-h-6b">Bad</label>
-                    </fieldset>
-                
+                <td><div id="posmMegaHangerConditionCrest"></div>
                 </td>
               </tr>
               <tr style="background-color:#de8021;">
                 <td style="color:#FFF; padding-top:15px;"> Plug In Dispenser <span class="btn-color" style="color:#FFF;">* </span></td>
-                 <td>
-                 	<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true" >
-                        <input name="plugInDispenser" id="radio-choice-h-6a" value="YES"  type="radio" onchange="plugInDispenserYesNo();">
-                        <label for="radio-choice-h-6a">YES</label>
-                        <input name="plugInDispenser" id="radio-choice-h-6b"  value="NO" type="radio" onchange="plugInDispenserYesNo();">
-                        <label for="radio-choice-h-6b">NO</label>
-                    </fieldset>
+                 <td><div id="posmPlugInDispenserCrest"></div>
+                 	
                  </td>
               </tr>
               <tr style="background-color:#e8a664;" id="plugInDispenserConditionShow">
                 <td style="color:#FFF; padding-top:15px;">Condition<span class="btn-color" style="color:#FFF;">* </span></td>
-                <td>
-                    <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
-                        <input name="plugInDispenserCondition" id="radio-choice-h-6a" value="Good"  type="radio">
-                        <label for="radio-choice-h-6a">Good</label>
-                        <input name="plugInDispenserCondition" id="radio-choice-h-6b"  value="Bad" type="radio">
-                        <label for="radio-choice-h-6b">Bad</label>
-                    </fieldset>
-                
+                <td><div id="plugInDispenserConditionCrest"></div>
                 </td>
               </tr>
               <tr style="background-color:#3FCBA8;">
                 <td style="color:#FFF; padding-top:15px;"> Mini Solomon <span class="btn-color" style="color:#F00;">* </span></td>
-                 <td>
-                 	<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true" >
-                        <input name="miniSolomon" id="radio-choice-h-6a" value="YES"  type="radio" onchange="miniSolomonYesNo();">
-                        <label for="radio-choice-h-6a">YES</label>
-                        <input name="miniSolomon" id="radio-choice-h-6b"  value="NO" type="radio" onchange="miniSolomonYesNo();">
-                        <label for="radio-choice-h-6b">NO</label>
-                    </fieldset>
+                 <td><div id="posmMiniSolomonCrest"></div>
+                 	
                  </td>
               </tr>
                <tr style="background-color:#73d9bf;" id="miniSolomonConditionSkinShow">
                 <td style="color:#FFF; padding-top:15px;">Skin Care<span class="btn-color" style="color:#F00;">* </span></td>
-                <td>
-                    <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
-                        <input name="skinCare" id="radio-choice-h-6a" value="YES"  type="radio" onchange="skinCareYesNo();">
-                        <label for="radio-choice-h-6a">YES</label>
-                        <input name="skinCare" id="radio-choice-h-6b"  value="NO" type="radio" onchange="skinCareYesNo();">
-                        <label for="radio-choice-h-6b">NO</label>
-                    </fieldset>
-                
+                <td><div id="posmMiniSkinCareCrest"></div>
                 </td>
               </tr>
               <tr style="background-color:#73d9bf;" id="skinCareConditionShow">
                 <td style="color:#FFF; padding-top:15px;">Condition<span class="btn-color" style="color:#F00;">* </span></td>
-                <td>
-                    <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
-                        <input name="skinCareCondition" id="radio-choice-h-6a" value="Good"  type="radio">
-                        <label for="radio-choice-h-6a">Good</label>
-                        <input name="skinCareCondition" id="radio-choice-h-6b"  value="Bad" type="radio">
-                        <label for="radio-choice-h-6b">Bad</label>
-                    </fieldset>
-                
+                <td><div id="posmMiniskinCareConditionCrest"></div>
                 </td>
               </tr>
               <tr style="background-color:#73d9bf;" id="miniSolomonConditionHairShow">
                 <td style="color:#FFF; padding-top:15px;">Hair Care<span class="btn-color" style="color:#F00;">* </span></td>
-                <td>
-                    <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
-                        <input name="hairCare" id="radio-choice-h-6a" value="YES"  type="radio" onchange="hairCareYesNo();">
-                        <label for="radio-choice-h-6a">YES</label>
-                        <input name="hairCare" id="radio-choice-h-6b"  value="NO" type="radio" onchange="hairCareYesNo();">
-                        <label for="radio-choice-h-6b">NO</label>
-                    </fieldset>
-                
+                <td><div id="posmMiniHairCareCrest"></div>
                 </td>
               </tr>
               <tr style="background-color:#73d9bf;" id="hairCareConditionShow">
                 <td style="color:#FFF; padding-top:15px;">Condition<span class="btn-color" style="color:#F00;">* </span></td>
-                <td>
-                    <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
-                        <input name="hairCareCondition" id="radio-choice-h-6a" value="Good"  type="radio" >
-                        <label for="radio-choice-h-6a">Good</label>
-                        <input name="hairCareCondition" id="radio-choice-h-6b"  value="Bad" type="radio" >
-                        <label for="radio-choice-h-6b">Bad</label>
-                    </fieldset>
-                
+                <td><div id="posmhairCareConditionCrest"></div>
                 </td>
               </tr>
                <tr style="background-color:#356897;">
                 <td style="color:#FFF; padding-top:15px;"> Drug Store POSM <span class="btn-color" style="color:#F00;">* </span></td>
-                 <td>
-                 	<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true" >
-                        <input name="drugStorePosm" id="radio-choice-h-6a" value="YES"  type="radio" onchange="drugStorePosmYesNo();">
-                        <label for="radio-choice-h-6a">YES</label>
-                        <input name="drugStorePosm" id="radio-choice-h-6b"  value="NO" type="radio" onchange="drugStorePosmYesNo();">
-                        <label for="radio-choice-h-6b">NO</label>
-                    </fieldset>
+                 <td><div id="posmDrugStorePOSMCrest"></div>
+                 	
                  </td>
               </tr>
               <tr style="background-color:#7ba7d1;" id="drugStorePosmQtyShow">
@@ -1421,14 +1340,7 @@
               </tr>
               <tr style="background-color:#7ba7d1;" id="drugStorePosmConditionShow">
                 <td style="color:#FFF; padding-top:15px;">Condition<span class="btn-color" style="color:#F00;">* </span></td>
-                <td>
-                    <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
-                        <input name="drugStorePosmCondition" id="radio-choice-h-6a" value="Good"  type="radio">
-                        <label for="radio-choice-h-6a">Good</label>
-                        <input name="drugStorePosmCondition" id="radio-choice-h-6b"  value="Bad" type="radio">
-                        <label for="radio-choice-h-6b">Bad</label>
-                    </fieldset>
-                
+                <td><div id="posmdrugStorePosmConditionCrest"></div>
                 </td>
               </tr>
         </table>
@@ -1450,7 +1362,7 @@
        <h3 class="headerc">Reports</h3>
     </div>
     <div data-role="content" > 
-    <div id="repIDPosmAud" style="color:#228B22;"></div> 
+    <div id="repIDPosmAud" style="color:#F00;"></div> 
     <div id="repNamePosmAud" style="color:#228B22;"></div>               
     <ul data-role="listview" data-inset="true">
     	<li class="ui-field-contain" style="background-color:inherit; padding:0;">

@@ -18,6 +18,20 @@ var a_qty='';
 var routeName='';
 var outlet_code='';
 var outlet_name='';
+var boardCresteN='';
+var posmCreateN='';
+var posmBoardConditionN='';
+var posmMegaHangerCrestN='';
+var posmMegaHangerConditionCrestN='';
+var posmPlugInDispenserCrestN='';
+var plugInDispenserConditionCrestN='';
+var posmMiniSolomonCrestN='';
+var posmMiniSkinCareCrestN='';
+var posmMiniskinCareConditionCrestN='';
+var posmMiniHairCareCrestN='';
+var posmhairCareConditionCrestN='';
+var posmDrugStorePOSMCrestN='';
+var posmdrugStorePosmConditionCrestN='';
 localStorage.rep_type='';
 
 //---Online
@@ -167,6 +181,11 @@ $(document).ready(function(){
 		$.mobile.navigate(url);
 		
 	}else if(localStorage.rep_type == 'DFF'){
+		
+		
+		//$("#boarAvailableCrest").empty();
+		//$("#boarAvailableCrest").append(boardCresteN).trigger('create');
+		
 		$("#posmReportAuditSub").show();
 		$("#hairCareConditionShow").hide();
 		$("#skinCareConditionShow").hide();
@@ -2437,6 +2456,77 @@ function posmReportAuditSub(){
 }
 
 function posmAuditorNext(){
+	
+	boardCresteN = '<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true" ><input name="posmBoard" id="radio-choice-h-6a" value="YES"  type="radio" onchange="posmboardYesNo();"><label for="radio-choice-h-6a">YES</label><input name="posmBoard" id="radio-choice-h-6b"  value="NO" type="radio" onchange="posmboardYesNo();"><label for="radio-choice-h-6b">NO</label></fieldset>'
+	
+	$("#boarAvailableCrest").empty();
+	$("#boarAvailableCrest").append(boardCresteN).trigger('create');
+	
+	posmCreateN = '<input type="hidden" id="rowID" name="rowID" /><fieldset data-role="controlgroup" data-type="horizontal" data-mini="true"><input name="auditPosm_type" id="radio-choice-h-6a" value="SHOPBOARD_BACKLIT"   type="radio"><label for="radio-choice-h-6a">Lit</label><input name="auditPosm_type" id="radio-choice-h-6b"  value="SHOPBOARD_NONLIT" type="radio"><label for="radio-choice-h-6b">Non-Lit</label></fieldset>'
+	
+	$("#posmConditionCrest").empty();
+	$("#posmConditionCrest").append(posmCreateN).trigger('create');
+	
+	posmBoardConditionN='<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true"><input name="boardCondition" id="radio-choice-h-6a" value="Good"  type="radio"><label for="radio-choice-h-6a">Good</label><input name="boardCondition" id="radio-choice-h-6b"  value="Bad" type="radio"><label for="radio-choice-h-6b">Bad</label></fieldset>';
+	
+	$("#posmBoardConditionCrest").empty();
+	$("#posmBoardConditionCrest").append(posmBoardConditionN).trigger('create');
+	
+	posmMegaHangerCrestN='<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true" ><input name="megaHanger" id="radio-choice-h-6a" value="YES"  type="radio" onchange="megaHangerYesNo();"><label for="radio-choice-h-6a">YES</label><input name="megaHanger" id="radio-choice-h-6b"  value="NO" type="radio" onchange="megaHangerYesNo();"><label for="radio-choice-h-6b">NO</label></fieldset>'
+	
+	$("#posmMegaHangerCrest").empty();
+	$("#posmMegaHangerCrest").append(posmMegaHangerCrestN).trigger('create');
+	
+	posmMegaHangerConditionCrestN='<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true"><input name="megaHangerCondition" id="radio-choice-h-6a" value="Good"  type="radio"><label for="radio-choice-h-6a">Good</label><input name="megaHangerCondition" id="radio-choice-h-6b"  value="Bad" type="radio"><label for="radio-choice-h-6b">Bad</label></fieldset>'
+	
+	$("#posmMegaHangerConditionCrest").empty();
+	$("#posmMegaHangerConditionCrest").append(posmMegaHangerConditionCrestN).trigger('create');
+	
+	posmPlugInDispenserCrestN='<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true" ><input name="plugInDispenser" id="radio-choice-h-6a" value="YES"  type="radio" onchange="plugInDispenserYesNo();"><label for="radio-choice-h-6a">YES</label><input name="plugInDispenser" id="radio-choice-h-6b"  value="NO" type="radio" onchange="plugInDispenserYesNo();"><label for="radio-choice-h-6b">NO</label></fieldset>'
+	
+	$("#posmPlugInDispenserCrest").empty();
+	$("#posmPlugInDispenserCrest").append(posmPlugInDispenserCrestN).trigger('create');
+	
+	plugInDispenserConditionCrestN='<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true"><input name="plugInDispenserCondition" id="radio-choice-h-6a" value="Good"  type="radio"><label for="radio-choice-h-6a">Good</label><input name="plugInDispenserCondition" id="radio-choice-h-6b"  value="Bad" type="radio"><label for="radio-choice-h-6b">Bad</label></fieldset>'
+	
+	$("#plugInDispenserConditionCrest").empty();
+	$("#plugInDispenserConditionCrest").append(plugInDispenserConditionCrestN).trigger('create');
+	
+	posmMiniSolomonCrestN='<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true" ><input name="miniSolomon" id="radio-choice-h-6a" value="YES"  type="radio" onchange="miniSolomonYesNo();"><label for="radio-choice-h-6a">YES</label><input name="miniSolomon" id="radio-choice-h-6b"  value="NO" type="radio" onchange="miniSolomonYesNo();"><label for="radio-choice-h-6b">NO</label></fieldset>'
+	
+	$("#posmMiniSolomonCrest").empty();
+	$("#posmMiniSolomonCrest").append(posmMiniSolomonCrestN).trigger('create');
+	
+	posmMiniSkinCareCrestN='<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true"><input name="skinCare" id="radio-choice-h-6a" value="YES"  type="radio" onchange="skinCareYesNo();"><label for="radio-choice-h-6a">YES</label><input name="skinCare" id="radio-choice-h-6b"  value="NO" type="radio" onchange="skinCareYesNo();"><label for="radio-choice-h-6b">NO</label></fieldset>'
+	
+	$("#posmMiniSkinCareCrest").empty();
+	$("#posmMiniSkinCareCrest").append(posmMiniSkinCareCrestN).trigger('create');
+	
+	posmMiniskinCareConditionCrestN='<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true"><input name="skinCareCondition" id="radio-choice-h-6a" value="Good"  type="radio"><label for="radio-choice-h-6a">Good</label><input name="skinCareCondition" id="radio-choice-h-6b"  value="Bad" type="radio"><label for="radio-choice-h-6b">Bad</label></fieldset>'
+	
+	$("#posmMiniskinCareConditionCrest").empty();
+	$("#posmMiniskinCareConditionCrest").append(posmMiniskinCareConditionCrestN).trigger('create');
+	
+	posmMiniHairCareCrestN='<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true"><input name="hairCare" id="radio-choice-h-6a" value="YES"  type="radio" onchange="hairCareYesNo();"><label for="radio-choice-h-6a">YES</label><input name="hairCare" id="radio-choice-h-6b"  value="NO" type="radio" onchange="hairCareYesNo();"><label for="radio-choice-h-6b">NO</label></fieldset>'
+	
+	$("#posmMiniHairCareCrest").empty();
+	$("#posmMiniHairCareCrest").append(posmMiniHairCareCrestN).trigger('create');
+	
+	posmhairCareConditionCrestN='<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true"><input name="hairCareCondition" id="radio-choice-h-6a" value="Good"  type="radio" ><label for="radio-choice-h-6a">Good</label><input name="hairCareCondition" id="radio-choice-h-6b"  value="Bad" type="radio" ><label for="radio-choice-h-6b">Bad</label></fieldset>'
+	
+	$("#posmhairCareConditionCrest").empty();
+	$("#posmhairCareConditionCrest").append(posmhairCareConditionCrestN).trigger('create');
+	
+	posmDrugStorePOSMCrestN='<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true" ><input name="drugStorePosm" id="radio-choice-h-6a" value="YES"  type="radio" onchange="drugStorePosmYesNo();"><label for="radio-choice-h-6a">YES</label><input name="drugStorePosm" id="radio-choice-h-6b"  value="NO" type="radio" onchange="drugStorePosmYesNo();"><label for="radio-choice-h-6b">NO</label></fieldset>'
+	
+	$("#posmDrugStorePOSMCrest").empty();
+	$("#posmDrugStorePOSMCrest").append(posmDrugStorePOSMCrestN).trigger('create');
+	
+	posmdrugStorePosmConditionCrestN='<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true"><input name="drugStorePosmCondition" id="radio-choice-h-6a" value="Good"  type="radio"><label for="radio-choice-h-6a">Good</label><input name="drugStorePosmCondition" id="radio-choice-h-6b"  value="Bad" type="radio"><label for="radio-choice-h-6b">Bad</label></fieldset>'
+	
+	$("#posmdrugStorePosmConditionCrest").empty();
+	$("#posmdrugStorePosmConditionCrest").append(posmdrugStorePosmConditionCrestN).trigger('create');
+	
 	$("#drugStorePosmQtyShow").hide();
 	$("#drugStorePosmConditionShow").hide();
 	$("#miniSolomonConditionSkinShow").hide();
@@ -2451,13 +2541,7 @@ function posmAuditorNext(){
 	$("#posmAuditBoardConditionShow").hide();
 	$("#btn_submit_posmAudit").show();
 	$("#allHideAuditPosm").show();
-	$('input[name=hairCare]:checked').val("");
-	$('input[name=skinCare]:checked').val("");
-	$('input[name=drugStorePosm]:checked').val("");
-	$('input[name=miniSolomon]:checked').val("");
-	$('input[name=plugInDispenser]:checked').val("");
-	$('input[name=posmBoard]:checked').val("");
-	$('input[name=megaHanger]:checked').val("");
+	
 	$("#msg_submit_posmAudit").hide();
 	var posmOutletCode=localStorage.posmOutletCode;
 	var posmOutletName=localStorage.posmOutletName;
@@ -2471,19 +2555,19 @@ function posmAuditorNext(){
 function posmboardYesNo(){
 
 	var posmBoard=$('input[name=posmBoard]:checked').val();
-	
-	if(posmBoard=="NO"){
-		$("#posmAuditBrandShow").hide();
-		$("#posmAuditposmShow").hide();
-		$("#posmAuditBoardQtyShow").hide();
-		$("#posmAuditBoardConditionShow").hide();
-		
-
-	}else{
+	//alert(posmBoard);
+	if(posmBoard=="YES"){
 		$("#posmAuditBrandShow").show();
 		$("#posmAuditposmShow").show();
 		$("#posmAuditBoardQtyShow").show();
 		$("#posmAuditBoardConditionShow").show();
+		
+
+	}else{
+		$("#posmAuditBrandShow").hide();
+		$("#posmAuditposmShow").hide();
+		$("#posmAuditBoardQtyShow").hide();
+		$("#posmAuditBoardConditionShow").hide();
 	
 		}
 		
@@ -2492,11 +2576,12 @@ function megaHangerYesNo(){
 
 	var megaHanger=$('input[name=megaHanger]:checked').val();
 	
-	if(megaHanger=="NO"){
-		$("#megaHangerConditionShow").hide();
+	if(megaHanger=="YES"){
+		$("#megaHangerConditionShow").show();
+		
 
 	}else{
-		$("#megaHangerConditionShow").show();
+		$("#megaHangerConditionShow").hide();
 		
 		}
 }
@@ -2504,11 +2589,12 @@ function plugInDispenserYesNo(){
 
 	var plugInDispenser=$('input[name=plugInDispenser]:checked').val();
 	
-	if(plugInDispenser=="NO"){
-		$("#plugInDispenserConditionShow").hide();
+	if(plugInDispenser=="YES"){
+		$("#plugInDispenserConditionShow").show();
 
 	}else{
-		$("#plugInDispenserConditionShow").show();
+		
+		$("#plugInDispenserConditionShow").hide();
 		
 		}
 }
@@ -2516,25 +2602,28 @@ function miniSolomonYesNo(){
 
 	var miniSolomon=$('input[name=miniSolomon]:checked').val();
 	
-	if(miniSolomon=="NO"){
+	if(miniSolomon=="YES"){
+		$("#miniSolomonConditionSkinShow").show();
+		$("#miniSolomonConditionHairShow").show();
+		
+	}else{
+		
 		$("#miniSolomonConditionSkinShow").hide();
 		$("#miniSolomonConditionHairShow").hide();
 		$("#skinCareConditionShow").hide();
 		$("#hairCareConditionShow").hide();
-	}else{
-		$("#miniSolomonConditionSkinShow").show();
-		$("#miniSolomonConditionHairShow").show();
 		}
 }
 function skinCareYesNo(){
 
 	var skinCare=$('input[name=skinCare]:checked').val();
 	
-	if(skinCare=="NO"){
-		$("#skinCareConditionShow").hide();
+	if(skinCare=="YES"){
+		$("#skinCareConditionShow").show();
+		
 
 	}else{
-		$("#skinCareConditionShow").show();
+		$("#skinCareConditionShow").hide();
 		
 		}
 }
@@ -2542,11 +2631,12 @@ function hairCareYesNo(){
 
 	var hairCare=$('input[name=hairCare]:checked').val();
 	
-	if(hairCare=="NO"){
-		$("#hairCareConditionShow").hide();
+	if(hairCare=="YES"){
+		$("#hairCareConditionShow").show();
 
 	}else{
-		$("#hairCareConditionShow").show();
+		$("#hairCareConditionShow").hide();
+		
 		
 		}
 }
@@ -2554,12 +2644,12 @@ function drugStorePosmYesNo(){
 
 	var drugStorePosm=$('input[name=drugStorePosm]:checked').val();
 	
-	if(drugStorePosm=="NO"){
-		$("#drugStorePosmQtyShow").hide();
-		$("#drugStorePosmConditionShow").hide();
-	}else{
+	if(drugStorePosm=="YES"){
 		$("#drugStorePosmQtyShow").show();
 		$("#drugStorePosmConditionShow").show();
+	}else{
+		$("#drugStorePosmQtyShow").hide();
+		$("#drugStorePosmConditionShow").hide();
 		}
 }
 
@@ -2613,7 +2703,7 @@ function submit_data_posmAuditor(){
 	
 	
 
-	if(posmBoard==undefined){
+	if(posmBoard==undefined || posmBoard==''){
 		$(".errorChk").text("Required POSM Board");
 		$("#btn_submit_posmAudit").show();
 	}else if((auditorPOSMBrandList==undefined || auditorPOSMBrandList=='') && posmBoard=="YES"){
@@ -2628,19 +2718,19 @@ function submit_data_posmAuditor(){
 	}else if((boardCondition==undefined || boardCondition=='') && posmBoard=="YES"){
 		$(".errorChk").text("Required Board Condition");
 		$("#btn_submit_posmAudit").show();
-	}else if(megaHanger==undefined){
+	}else if(megaHanger==undefined || megaHanger==''){
 		$(".errorChk").text("Required Mega Hanger");
 		$("#btn_submit_posmAudit").show();
 	}else if((megaHangerCondition==undefined || megaHangerCondition=='') && megaHanger=="YES"){
 		$(".errorChk").text("Required Mega Hanger Condition");
 		$("#btn_submit_posmAudit").show();
-	}else if(plugInDispenser==undefined){
+	}else if(plugInDispenser==undefined || plugInDispenser==''){
 		$(".errorChk").text("Required Plug In Dispenser");
 		$("#btn_submit_posmAudit").show();
 	}else if((plugInDispenserCondition==undefined || plugInDispenserCondition=='') && plugInDispenser=="YES"){
 		$(".errorChk").text("Required Plug In Dispenser Condition");
 		$("#btn_submit_posmAudit").show();
-	}else if(miniSolomon==undefined){
+	}else if(miniSolomon==undefined || miniSolomon==''){
 		$(".errorChk").text("Required Mini Solomon");
 		$("#btn_submit_posmAudit").show();
 	}else if((skinCare==undefined || skinCare=='') && miniSolomon=="YES"){
@@ -2655,7 +2745,7 @@ function submit_data_posmAuditor(){
 	}else if((hairCareCondition==undefined || hairCareCondition=='') && miniSolomon=="YES" && hairCare=="YES"){
 		$(".errorChk").text("Required Hair Care Condition");
 		$("#btn_submit_posmAudit").show();
-	}else if(drugStorePosm==undefined){
+	}else if(drugStorePosm==undefined || drugStorePosm==''){
 		$(".errorChk").text("Required Drug Store Posm");
 		$("#btn_submit_posmAudit").show();
 	}else if((posmQty==0 || posmQty=='') && drugStorePosm=="YES"){
@@ -2678,23 +2768,38 @@ function submit_data_posmAuditor(){
 					
 					$("#auditorPOSMBrandList").val('');	
 					$("#posmAuditOutSearch").val('');	
-					$('input[name=posmBoard]:checked').val('');
-					$('input[name=auditorPOSMBrandList]:checked').val('');
-					$('input[name=auditPosm_type]:checked').val('');
 					$("#boardQty").val('');
-					$('input[name=boardCondition]:checked').val('');
-					$('input[name=megaHanger]:checked').val('');
-					$('input[name=megaHangerCondition]:checked').val('');
-					$('input[name=plugInDispenser]:checked').val('');
-					$('input[name=plugInDispenserCondition]:checked').val('');
-					$('input[name=miniSolomon]:checked').val('');
-					$('input[name=skinCare]:checked').val('');
-					$('input[name=skinCareCondition]:checked').val('');
-					$('input[name=hairCare]:checked').val('');
-					$('input[name=hairCareCondition]:checked').val('');
-					$('input[name=drugStorePosm]:checked').val('');
 					$("#posmQty").val('');
-					$('input[name=drugStorePosmCondition]:checked').val('');
+					
+					
+					$("#boarAvailableCrest").empty();
+					$("#boarAvailableCrest").append(boardCresteN).trigger('create');
+					$("#posmConditionCrest").empty();
+					$("#posmConditionCrest").append(posmCreateN).trigger('create');
+					$("#posmBoardConditionCrest").empty();
+					$("#posmBoardConditionCrest").append(posmBoardConditionN).trigger('create');
+					$("#posmMegaHangerCrest").empty();
+					$("#posmMegaHangerCrest").append(posmMegaHangerCrestN).trigger('create');
+					$("#posmMegaHangerConditionCrest").empty();
+					$("#posmMegaHangerConditionCrest").append(posmMegaHangerConditionCrestN).trigger('create');
+					$("#posmPlugInDispenserCrest").empty();
+					$("#posmPlugInDispenserCrest").append(posmPlugInDispenserCrestN).trigger('create');
+					$("#plugInDispenserConditionCrest").empty();
+					$("#plugInDispenserConditionCrest").append(plugInDispenserConditionCrestN).trigger('create');
+					$("#posmMiniSolomonCrest").empty();
+					$("#posmMiniSolomonCrest").append(posmMiniSolomonCrestN).trigger('create');
+					$("#posmMiniSkinCareCrest").empty();
+					$("#posmMiniSkinCareCrest").append(posmMiniSkinCareCrestN).trigger('create');
+					$("#posmMiniskinCareConditionCrest").empty();
+					$("#posmMiniskinCareConditionCrest").append(posmMiniskinCareConditionCrestN).trigger('create');
+					$("#posmMiniHairCareCrest").empty();
+					$("#posmMiniHairCareCrest").append(posmMiniHairCareCrestN).trigger('create');
+					$("#posmhairCareConditionCrest").empty();
+					$("#posmhairCareConditionCrest").append(posmhairCareConditionCrestN).trigger('create');
+					$("#posmDrugStorePOSMCrest").empty();
+					$("#posmDrugStorePOSMCrest").append(posmDrugStorePOSMCrestN).trigger('create');
+					$("#posmdrugStorePosmConditionCrest").empty();
+					$("#posmdrugStorePosmConditionCrest").append(posmdrugStorePosmConditionCrestN).trigger('create');
 					
 					$(".errorChk").text("");
 					$("#msg_submit_posmAudit").show();
