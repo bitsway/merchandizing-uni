@@ -32,10 +32,11 @@ var posmMiniHairCareCrestN='';
 var posmhairCareConditionCrestN='';
 var posmDrugStorePOSMCrestN='';
 var posmdrugStorePosmConditionCrestN='';
+
 localStorage.rep_type='';
 
 //---Online
-var apipath="http://w02.yeapps.com/postit/syncmobile_20181226/";
+var apipath="http://w02.yeapps.com/postit/syncmobile_20190105/";
 //--- local
 //var apipath="http://127.0.0.1:8000/postit/syncmobile/";
 
@@ -1484,7 +1485,6 @@ function alloDetailsU(){
 }
 
 function submit_data_usages(){
-	
 	$("#btn_submit_usages").hide();
 	var d = new Date();	
 	var get_time=d.getTime();
@@ -1494,6 +1494,7 @@ function submit_data_usages(){
 		
 	}else{
 		town=localStorage.town;	
+		
 	}
 	var uposm_type=$("#uposm_type").val();
 	
@@ -1515,7 +1516,7 @@ function submit_data_usages(){
 		$(".errorChk").text("Required Picture");
 		$("#btn_submit_usages").show();	
 	}else{
-				
+			
 		//alert(apipath+"submitData_usages?&syncCode="+localStorage.sync_code+"&repID="+localStorage.repID+"&repName="+localStorage.repName+"&mobileNo="+localStorage.mobileNo+"&town="+town+"&routeName="+rName+"&outlet_code="+outlet_code+"&outlet_name="+outlet_name+"&posmCode="+posmCode+"&uposm_type="+uposm_type+"&ubrand="+ubrand+"&baUsage="+baUsage+"&a_qty="+a_qty+"&alcId="+alcId+"&imageName2="+imageName2);
 		$.ajax({
 			type: 'POST',
@@ -1901,6 +1902,7 @@ function recUsage(){
 				if(getResult[0]=='Success'){
 				$("#bufferImageUsaR").hide();				
 				localStorage.usageReportR=getResult[1];
+				//alert(localStorage.usageReportR);
 				var UsageRpt=localStorage.usageReportR.split('rdrd');			
 				var usatable='<table id="usageRepp">';
 					usatable +='<tr style="font-size:12px;" ><th>Usage_Date</th><th>Outlet_Code</th><th>Outlet_Name</th><th>Brand</th><th>POSM_Type</th><th>POSM_Code</th><th>Usage_Qty</th></tr>'
@@ -2675,7 +2677,7 @@ var drugStorePosmCondition='';
 
 function submit_data_posmAuditor(){
 	
-	$("#btn_submit_posmAudit").show();
+	$("#btn_submit_posmAudit").hide();
 	$("#msg_submit_posmAudit").hide();
 	var posmAuditOutSearch=$("#posmAuditOutSearch").val().replace('+','').replace('.','').replace('/','').replace('*','').replace(',','');
 	
