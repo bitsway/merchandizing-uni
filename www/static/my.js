@@ -1462,15 +1462,15 @@ function onSuccess(position) {
 	$("#aud_lat").val(position.coords.latitude);
 	$("#aud_long").val(position.coords.longitude);
 	$(".errorChk").html("Location Confirmed");
-	$("#btn_submit_audit").show();
+	$("#btn_submit_audit").hide();
 }
 // onError Callback receives a PositionError object
 function onError(error) {
 	$("#auditSubmitLocationBufferImage").hide();
-   $("#aud_lat").val(0);
-   $("#aud_long").val(0);
+   $("#aud_lat").val(1);
+   $("#aud_long").val(1);
    $(".errorChk").html("Failed to Confirmed Location.");
-   $("#btn_submit_audit").hide();
+   $("#btn_submit_audit").show();
 }	
 //----------------------------------------------	
 function outlet(outletIDName){
@@ -1579,12 +1579,10 @@ function submit_data_usages(){
 	var d = new Date();	
 	var get_time=d.getTime();
 
-	if (localStorage.rep_type =='SUPERVISOR'){
-		town=localStorage.select_town.replace('-', '|');
+	
+	town=localStorage.select_town.replace('-', '|');
 		
-	}else{
-		town=localStorage.town;	
-	}
+	
 	var uposm_type=$("#uposm_type").val();
 	
 	var ubrand=$("#ubrand").val();
@@ -1977,17 +1975,13 @@ function recReport(){
 }
 
 function recUsage(){
-	if (localStorage.rep_type == 'CM'){
-		town=localStorage.town;
-	}else{
-		town=localStorage.select_town;
-	}
 	
-	//alert (apipath+"usage_report?&repID="+localStorage.repID+"&repName="+localStorage.repName+"&townName="+town)
+	
+	//alert (apipath+"usage_report?&repID="+localStorage.repID+"&repName="+localStorage.repName+"&townName="+localStorage.select_town)
 	$("#bufferImageUsaR").show();
 	$.ajax({
 			type: 'POST',
-			url:apipath+"usage_report?&repID="+localStorage.repID+"&repName="+localStorage.repName+"&townName="+town,
+			url:apipath+"usage_report?&repID="+localStorage.repID+"&repName="+localStorage.repName+"&townName="+localStorage.select_town,
 																																																													
 			success: function(result) {
 				getResult=result.split('||');
@@ -2016,13 +2010,13 @@ function recUsage(){
 					$('#usageReportR').append(usatable).trigger('create');
 					var townName=town;
 					var repid=localStorage.repID;
-					$("#townNameU").html ("Town	:		"+townName);
+					$("#townNameU").html ("Town	:		"+localStorage.select_town);
 					$("#repIDU").html ("Rep ID	:		"+repid);	
 				
 			}else{
 				var townName=town;
 				var repid=localStorage.repID;
-				$("#townNameU").html ("Town	:		"+townName);
+				$("#townNameU").html ("Town	:		"+localStorage.select_town);
 				$("#repIDU").html ("Rep ID	:		"+repid);
 				$(".errorChk").text("No Record In DataBase");
 				}
@@ -2037,18 +2031,13 @@ function recUsage(){
 
 
 function stockReport(){
-	if (localStorage.rep_type == 'CM'){
-		town=localStorage.town;
-		
-	}else{
-		town=localStorage.select_town;
-	}
+	
 
-	//alert (apipath+"stock_report?&repID="+localStorage.repID+"&repName="+localStorage.repName+"&townName="+town)
+	//alert (apipath+"stock_report?&repID="+localStorage.repID+"&repName="+localStorage.repName+"&townName="+localStorage.select_town)
 	$("#bufferImageStockR").show();
 	$.ajax({
 			type: 'POST',
-			url:apipath+"stock_report?&repID="+localStorage.repID+"&repName="+localStorage.repName+"&townName="+town,
+			url:apipath+"stock_report?&repID="+localStorage.repID+"&repName="+localStorage.repName+"&townName="+localStorage.select_town,
 																																																													
 			success: function(result) {
 				getResult=result.split('||');
@@ -2078,16 +2067,16 @@ function stockReport(){
 					$('#stockReport').empty();
 					$('#stockReport').append(cmRouteSTr).trigger('create');
 					
-					var townName=town;
+					
 					var repid=localStorage.repID;
-					$("#townName").html ("Town	:		"+townName);
+					$("#townName").html ("Town	:		"+localStorage.select_town);
 					$("#repID").html ("Rep ID	:		"+repid);
 				
 			}else{
 				
-				var townName=town;
+				
 				var repid=localStorage.repID;
-				$("#townName").html ("Town	:		"+townName);
+				$("#townName").html ("Town	:		"+localStorage.select_town);
 				$("#repID").html ("Rep ID	:		"+repid);
 				$("#bufferImageStockR").hide();
 				$(".errorChk").text("No Record In DataBase");
