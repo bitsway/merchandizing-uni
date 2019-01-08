@@ -194,17 +194,17 @@
 		background-color:#CE295E;
 	}	
 	#btn_audit{
-		margin:4px;
+		
 		font-weight:1;
 		background-color:#CE295E;
 	}
 	#btn_audit_entry{
-		margin:4px;
+		
 		font-weight:1;
 		background-color:#CE295E;
 	}	
 	#reportAuditSub{
-		margin:4px;
+		
 		font-weight:1;
 		background-color:#CE295E;
 	}	
@@ -235,12 +235,12 @@
 		background-color:#CE295E;
 	}
 	#btn_posmAudit{
-		margin:4px;
+		
 		font-weight:1;
 		background-color:#CE295E;
 	}
 	#posmReportAuditSub{
-		margin:4px;
+		
 		font-weight:1;
 		background-color:#CE295E;
 	}
@@ -251,7 +251,7 @@
 	}	
 	#btn_posm_entry{
 		
-	    margin:4px;
+	    
 		font-weight:1;
 		background-color:#CE295E;
 	}
@@ -358,7 +358,7 @@
 		border:1px solid #D42E5C;
 		}
 	#posmAuditor> table{
-		margin:4px;
+		
 		border-collapse:collapse;
 		}
 	#posmAuditor> table tr th{
@@ -402,7 +402,7 @@
         <br/>
         <br/>
         <br/>
-         <div data-role="footer" data-position="fixed" style="font-size:12px; color:#595959; background-color:#FFF; font-weight:1;" align="center" >20190105</div>
+         <div data-role="footer" data-position="fixed" style="font-size:12px; color:#595959; background-color:#FFF; font-weight:1;" align="center" >20181227</div>
     </div>
 </div>
 <!------------------------------------------MAIN MENU----------------------------------------------------------->       
@@ -420,7 +420,8 @@
     <div id="suprepid" style="color:#DA335A; text-align:center;"></div>    
     <div id="townList" style="height:0 auto; overflow:scroll;"></div>
     <div id="posmAuditDiv">
-     <input type="text" id="posmAuditOutSearch" name="posmAuditOutSearch" placeholder="Search Outlet Code" style="border:1px solid #595959; margin-left:4px;"/>    
+     <div id="townListPosmAuditDFF"  style="color:#096; text-align:center;"></div>
+     <input type="text" id="posmAuditOutSearch" name="posmAuditOutSearch" placeholder="Search Outlet Code" style="border:1px solid #595959;"/>    
      <button data-role="button" id="btn_posmAudit" onclick="posmAuditorOutlet()" href="#" data-transition="slide" style="color:#fff">Search</button>
      <button data-role="button" id="posmReportAuditSub" onclick="posmReportAuditSub('')" href="#" data-transition="slide" style="color:#fff"  >Report</button>
       <div id="bufferImageOutletposm" style="text-align:center;"><img src="running.gif" /></div>
@@ -449,6 +450,8 @@
 
          	
          </div>
+         <br/>
+         <div id="posmOuditOutletList"></div>
          <button data-role="button" id="btn_posm_entry" onclick="posmAuditorNext()" href="#" data-transition="slide" style="color:#fff">Next</button>
         <div class="errPOSMAudit" style="color:#cc0000;" ></div> 
     </div>
@@ -616,6 +619,7 @@
         </table>  
         </div> 
         <a data-role="button" id="btn_submit_receive" onClick="submit_data_receive();" class="ui-btn" style="background-color:#D42E5C; color:#FFF;  font-weight:1;">Submit</a>
+         <div id="receiveSubmitbufferImage" style="text-align:center;"><img src="running.gif" /></div>
          <div class="sucMsgR" style="color:#FFF; text-align:center; background-color:#DA335A; padding:30px 0px 30px 0px; border-radius:10px;">Successfully Submitted</div>
     <div class="errorChk" style="color:#cc0000; background-color:#FFF;"></div>
             <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
@@ -681,6 +685,7 @@
         </table>  
         </div>   
         <a data-role="button" id="btn_submit_defec" onClick="submit_data_defective();" class="ui-btn" style="background-color:#D42E5C; color:#FFF;  font-weight:1;">Submit</a>
+        <div id="defectiveSubmitbufferImage" style="text-align:center;"><img src="running.gif" /></div>
           <div class="sucMsgdef" style="color:#FFF; text-align:center; background-color:#DA335A; padding:30px 0px 30px 0px; border-radius:10px;">Successfully Submitted</div> 
     <div class="errorChk" style="color:#cc0000; background-color:#FFF;"></div>
             <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
@@ -788,6 +793,7 @@
         </table>  
         </div>   
         <a data-role="button" id="btn_submit_usages" onClick="submit_data_usages();" class="ui-btn" style="background-color:#D42E5C; color:#FFF;  font-weight:1;">Submit</a>
+        <div id="usageSubmitbufferImage" style="text-align:center;"><img src="running.gif" /></div>
           <div class="sucMsgU" style="color:#FFF; text-align:center; background-color:#DA335A; padding:30px 0px 30px 0px; border-radius:10px;">Successfully Submitted</div> 
     <div class="errorChk" style="color:#cc0000; background-color:#FFF;"></div>
             <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
@@ -795,40 +801,6 @@
 </div>
 
 
-<!---------------------------------------------------- page 7------------------------------------------------->
-<!--<div data-role="page" data-theme="c" id="page7" style="overflow:scroll;">
- <div data-theme="c" data-role="header" data-position="fixed" >
-        <a data-role="button" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets " ><img src="menu.png" /></a>
-        <a data-role="button" onclick="backClick();" data-rel="back" class="ui-btn-right" data-transition="slide"><img src="back.png" /></a>
-        <h3 class="headerc">Select Outlet</h3>
-    </div>
-    <div data-role="content" >  
-     <div id="outletListAgency"></div> 
-     <div class="sucChk" style="color:#004d00;"></div>
-     <div class="errorChk" style="color:#cc0000;"></div>
-     
-        <br/>
- 	
-    </div>
-    <div id="routeTown" data-role="content">
-    <ul data-role="listview" data-inset="true">
-    	<li class="ui-field-contain" >
-        	<table width="100%" class="ui-body-d ui-shadow table-stripe ui-responsive" id="beneficiaryCount" style="cell-spacing:0px;"  data-role="table" data-theme="d"  data-mode="display:none">
-              <tr>
-                <td > <span class="btn-color"> Route</span></td>
-                <td><input type="text" id="outlet_route_code" name="outlet_route_code" readonly="readonly" /></td>
-              </tr>
-               <tr>
-                <td > <span class="btn-color">Town</span></td>
-                <td><input type="text" id="outlet_town_name" name="outlet_town_name" readonly="readonly" /></td>
-              </tr>  
-            </table>     
-        </li>
-    </ul>
-      <a data-role="button" id="btn_submit" onClick="execution()" class="ui-btn" style="background-color:#CE295E"> <span class="text-color">Next</span></a>
-      </div>
-      
-</div>-->
 
 <!-------------------------------------------Report------------------------------>
 <div data-role="page" data-theme="c" id="page9" style="overflow:scroll;">
@@ -997,12 +969,7 @@
                 <!--<td><input type="text" id="paint" name="paint" required="required"/></td>-->
                 <td><!--<select id="paint"name="paint" required="required"><option value="Yes">Yes</option><option value="No">No</option></select>-->
  
-                    <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
-                        <input name="paint" id="radio-choice-h-6a" value="YES"  type="radio">
-                        <label for="radio-choice-h-6a">YES</label>
-                        <input name="paint" id="radio-choice-h-6b"  value="NO" type="radio">
-                        <label for="radio-choice-h-6b">NO</label>
-                    </fieldset>
+                   <div id="agencyAuditPaintCombo"></div>
                 
                 </td>
               </tr>
@@ -1022,6 +989,7 @@
         </table>  
         </div> 
         <a data-role="button" id="btn_submit_Agency" onClick="submit_data_agency();" class="ui-btn" style="background-color:#D42E5C; color:#FFF;  font-weight:1;">Submit</a>
+        <div id="auditAgencySubmitBufferImage" style="text-align:center;"><img src="running.gif" /></div>
          <div id="sucMsgAgency" style="color:#FFF; text-align:center; background-color:#DA335A; padding:30px 0px 30px 0px; border-radius:10px;">Successfully Submitted</div>
     <div class="errorChk" style="color:#cc0000; background-color:#FFF;"></div>
             <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
@@ -1043,13 +1011,8 @@
         <table table width="100%" class="ui-body-d ui-shadow table-stripe ui-responsive" id="" style="cell-spacing:0px; "  data-role="table" data-theme="c"  data-mode="display:none">
         	<tr style="background-color:#AAAAAA;">
                 <td style="color:#FFF; padding-top:15px;"> Board Available <span class="btn-color" style="color:#F00;">* </span></td>
-                 <td>
-                 	<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true" >
-                        <input name="a_board" id="radio-choice-h-6a" value="1"  type="radio" onchange="boardYesNo();">
-                        <label for="radio-choice-h-6a">YES</label>
-                        <input name="a_board" id="radio-choice-h-6b"  value="0" type="radio" onchange="boardYesNo();">
-                        <label for="radio-choice-h-6b">NO</label>
-                    </fieldset>
+                 <td><div id="auditBoardAvailable"></div>
+                 	
                  </td>
               </tr>
              
@@ -1063,14 +1026,7 @@
             <tr style="background-color:#AAAAAA;" id="auditposmShow">
                 <td style="color:#FFF; padding-top:15px;">POSM Type<span class="btn-color" style="color:#F00;">* </span></td>
                 <td>
-                	<input type="hidden" id="rowID" name="rowID" />
-                	<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
-                        <input name="a_posm_type" id="radio-choice-h-6a" value="SHOPBOARD_BACKLIT"   type="radio">
- 						<label for="radio-choice-h-6a">Lit</label>
-                        <input name="a_posm_type" id="radio-choice-h-6b"  value="SHOPBOARD_NONLIT" type="radio">
-                        <label for="radio-choice-h-6b">Non-Lit</label>
-                        
-                    </fieldset>
+                	<div id="auditPOSMType"></div>
                 </td>
               </tr>
               <tr style="background-color:#AAAAAA;" id="auditHeightShow">
@@ -1092,38 +1048,21 @@
               <tr style="background-color:#AAAAAA;" id="auditFasciaShow">
                 <td style="color:#FFF; padding-top:15px;">Fascia Status<span class="btn-color" style="color:#F00;">* </span></td>
                 <td>
-                    <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
-                        <input name="a_fStatus" id="radio-choice-h-6a" value="Good"  type="radio">
-                        <label for="radio-choice-h-6a">Good</label>
-                        <input name="a_fStatus" id="radio-choice-h-6b"  value="Bad" type="radio">
-                        <label for="radio-choice-h-6b">Bad</label>
-                    </fieldset>
+                    <div id="auditFasciaStatus"></div>
                 
                 </td>
               </tr>	
               <tr style="background-color:#AAAAAA;" id="auditProfileShow">
                 <td style="color:#FFF; padding-top:15px;">Profile Box Status<span class="btn-color" style="color:#F00;">* </span></td>
                 <td>
-                    <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
-                        <input name="a_paStatus" id="radio-choice-h-6a" value="Good"  type="radio">
-                        <label for="radio-choice-h-6a">Good</label>
-                        <input name="a_paStatus" id="radio-choice-h-6b"  value="Bad" type="radio">
-                        <label for="radio-choice-h-6b">Bad</label>
-                    </fieldset>
+                    <div id="auditProfileBoxStatus"></div>
                 
                 </td>
               </tr>	
                <tr style="background-color:#AAAAAA;">
                 <td style="color:#FFF; padding-top:15px;">Store Type<span class="btn-color" style="color:#F00;">* </span></td>
                 <td>
-                    <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
-                        <input name="a_storeType" id="radio-choice-h-6a" value="PS"  type="radio">
-                        <label for="radio-choice-h-6a">PS</label>
-                        <input name="a_storeType" id="radio-choice-h-6b"  value="NPS" type="radio">
-                        <label for="radio-choice-h-6b">NPS</label>
-                        <input name="a_storeType" id="radio-choice-h-6c"  value="DS" type="radio">
-                        <label for="radio-choice-h-6c">DS</label>
-                    </fieldset>
+                    <div id="auditStoreType"></div>
                 
                 </td>
               </tr>
@@ -1158,12 +1097,14 @@
                 <input name="aud_lat" id="aud_lat"  type="hidden">
                 <input name="aud_long" id="aud_long"  type="hidden">
         		<a data-role="button" id="btn_area_lat_long" onClick="getLocationInfo();" class="ui-btn" style="background-color:#be2752; color:#FFF;  font-weight:1;">Confirm Location</a>
+                 <div id="auditSubmitLocationBufferImage" style="text-align:center;"><img src="running.gif" /></div>
                 </td>
               </tr>    
         </table>
         
         </div>
         <a data-role="button" id="btn_submit_audit" onClick="submit_data_auditor();" class="ui-btn" style="background-color:#D42E5C; color:#FFF;  font-weight:1;">Submit</a>
+        <div id="auditSubmitBufferImage" style="text-align:center;"><img src="running.gif" /></div>
          <div id="msg_submit_audit" style="color:#FFF; text-align:center; background-color:#DA335A; padding:30px 0px 30px 0px; border-radius:10px;">Successfully Submitted</div>
 
     <div class="errorChk" style="color:#cc0000; background-color:#FFF;"></div>
@@ -1347,6 +1288,7 @@
         
         </div>
         <a data-role="button" id="btn_submit_posmAudit" onClick="submit_data_posmAuditor();" class="ui-btn" style="background-color:#D42E5C; color:#FFF;  font-weight:1;">Submit</a>
+        <div id="posmAuditSubmitBufferImage" style="text-align:center;"><img src="running.gif" /></div>
          <div id="msg_submit_posmAudit" style="color:#FFF; text-align:center; background-color:#DA335A; padding:30px 0px 30px 0px; border-radius:10px;">Successfully Submitted</div>
 
     <div class="errorChk" style="color:#cc0000; background-color:#FFF;"></div>

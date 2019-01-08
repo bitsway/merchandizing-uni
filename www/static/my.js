@@ -32,11 +32,17 @@ var posmMiniHairCareCrestN='';
 var posmhairCareConditionCrestN='';
 var posmDrugStorePOSMCrestN='';
 var posmdrugStorePosmConditionCrestN='';
+var auditBoardAvailableC='';
+var auditPOSMTypeC='';
+var auditFasciaStatusC='';
+var auditProfileBoxStatusC='';
+var auditStoreTypeC='';
+var agencyAuditPaintComboN='';
 
 localStorage.rep_type='';
 
 //---Online
-var apipath="http://w02.yeapps.com/postit/syncmobile_20190105/";
+var apipath="http://w02.yeapps.com/postit/syncmobile_20190108/";
 //--- local
 //var apipath="http://127.0.0.1:8000/postit/syncmobile/";
 
@@ -259,6 +265,11 @@ function syncBasic(){
 					localStorage.town=syncResultArray[5];
 					localStorage.rep_type=syncResultArray[6];	
 					localStorage.routeList=syncResultArray[7];
+					localStorage.townListPosm=syncResultArray[8].replace("['","").replace("']","").replace("'" ,"").replace("'","").replace("'", "").replace("'" ,"").replace("'","").replace("'", "").replace("'" ,"").replace("'","").replace("'", "").replace("'", "").replace("'" ,"").replace("'","").replace("'", "").replace("'", "").replace("'","").replace("'", "").replace("'", "").replace("'" ,"").replace("'","").replace("'", "").replace("'", "").replace("'","").replace("'", "").replace("'", "").replace("'" ,"").replace("'","").replace("'", "").replace("'", "").replace("'","").replace("'", "").replace("'", "").replace("'" ,"").replace("'","").replace("'", "").replace("'", "").replace("'","").replace("'", "").replace("'", "").replace("'" ,"").replace("'","").replace("'", "").replace("'", "");
+					
+					$('#townListPosmAuditDFF').html("Town Code	:		"+localStorage.townListPosm);
+					
+					
 					$(".errorMsg").html("Sync Successful");
 					$('#syncBasicBtn').show();		
 					if(localStorage.town!=''){
@@ -272,6 +283,7 @@ function syncBasic(){
 						townStr+='<label for="'+townCode+'" id="radioRemove"><input type="radio" name="town_select"  id="'+townCode+'" value="'+townCode+'-'+townName+'">'+townCode+'-'+townName+'</label>'
 					}
 					localStorage.townStr=townStr;
+					
 					$('#townList').empty();
 					$('#townList').append(localStorage.townStr).trigger('create');
 					}else{
@@ -600,7 +612,8 @@ function receive(){
 		$(".sucMsgR").hide();
 		$(".errorChk").text("");
 		$("#allHideR").hide();
-		$("#btn_submit_receive").hide();			
+		$("#btn_submit_receive").hide();
+		$("#receiveSubmitbufferImage").hide();			
 		url="#second_page";					
 		$.mobile.navigate(url);	
 	
@@ -692,7 +705,7 @@ function submit_data_receive(){
 		$(".errorChk").text("Required Picture");
 		$("#btn_submit_receive").show();	
 	}else{
-				
+		$("#receiveSubmitbufferImage").show();			
 		//alert(apipath+"submitData_receive?&syncCode="+localStorage.sync_code+"&repID="+localStorage.repID+"&repName="+localStorage.repName+"&mobileNo="+localStorage.mobileNo+"&select_town="+localStorage.select_town+"&posm_code="+posm_code+"&posm_type="+posm_type+"&brand="+brand+"&dueRec="+dueRec+"&received="+received+"&imageName="+imageName+"&alcId="+alcId);	
 		$.ajax({
 			type: 'POST',
@@ -701,7 +714,7 @@ function submit_data_receive(){
 			success: function(result) {			
 				if(result=='Success'){
 					
-					
+					$("#receiveSubmitbufferImage").hide();
 					$("#received").val("");
 					$("#posm_type").val("");
 					$("#brand").val("");
@@ -969,7 +982,7 @@ function auditorOutlet(){
 									for (i=0;i<outletDetails.length;i++){					
 										outletLi=outletDetails[i].split('|');
 										
-										auditOutletStr += '<p style="margin:0px; padding:0px; background-color:#FFF; border:1px solid #F00;">'+"Outlet:"+outletLi[0]+' | '+"Brand:"+outletLi[3]+' | '+"POSM Type:"+outletLi[4]+' | '+"Height:"+outletLi[5]+' | '+"Length:"+outletLi[6]+' | '+"Total Light:"+outletLi[1]+' | '+"Defective Light:"+outletLi[2]+'</p>'
+										auditOutletStr += '<p style="margin:0px; padding:0px; background-color:#FFF; border:1px solid #F00;">'+"Outlet:"+outletLi[0]+' | '+"Brand:"+outletLi[3]+' | '+"POSM Type:"+outletLi[4]+' | '+"Height:"+outletLi[5]+' | '+"Length:"+outletLi[6]+' | '+"Total Light:"+outletLi[1]+' | '+"Defective Light:"+outletLi[2]+'| '+"Status:"+outletLi[7]+'</p>'
 									}
 									localStorage.auditOutletList=auditOutletStr;		
 									$('#auditOutletList').empty();
@@ -996,6 +1009,7 @@ function auditorOutlet(){
 }
 
 function posmAuditorOutlet(){
+		
 		$(".errPOSMAudit").text("");
 		$(".errposmAudit").text("");
 		if (localStorage.synced!='YES'){
@@ -1005,17 +1019,20 @@ function posmAuditorOutlet(){
 			//alert (posmAuditOutSearch);
 			if(posmAuditOutSearch==''){
 				$(".errPOSMAudit").text("Please Search Outlet");
+				
+				$('#posmOuditOutletList').hide();
 				$("#posmAuditor").hide();
 				$("#posmReportAuditSub").show();
 				$("#btn_posm_entry").hide();
 			}else{
+				
 				$("#posmAuditor").hide();
 				$("#posmReportAuditSub").hide();
 				$('#bufferImageOutletposm').show();	
-				//alert(apipath+"getOutletPosmAuditor?&posmAuditOutSearch="+posmAuditOutSearch);
+				//alert(apipath+"getOutletPosmAuditor?&posmAuditOutSearch="+posmAuditOutSearch+"&repID="+localStorage.repID);
 				$.ajax({
 				type: 'POST',
-				url:apipath+"getOutletPosmAuditor?&posmAuditOutSearch="+posmAuditOutSearch,
+				url:apipath+"getOutletPosmAuditor?&posmAuditOutSearch="+posmAuditOutSearch+"&repID="+localStorage.repID,
 																																																														
 				success: function(result) {	
 					var syncResultArray = result.split('rdrd');	
@@ -1030,6 +1047,8 @@ function posmAuditorOutlet(){
 						localStorage.posmOutletRoute=syncResultArray[4];
 						localStorage.posmTown=syncResultArray[5];
 						localStorage.posmBrand=syncResultArray[6];
+						localStorage.outletDetailsLi=syncResultArray[7];
+						
 						
 						var auditorBrand=localStorage.posmBrand.split(',');
 						var brandStr = '<option selected="selected" value="">Select Brand</option>'
@@ -1040,22 +1059,48 @@ function posmAuditorOutlet(){
 						$("#auditorPOSMBrandList").empty();
 						$("#auditorPOSMBrandList").append(localStorage.auditorPOSMBrand).trigger('create');
 						
-						if (localStorage.posmOutletCode !=''){
-								$("#btn_posm_entry").show();
+						if (localStorage.posmOutletCode==''){
+								$('#posmOuditOutletList').hide();
+								$("#posmReportAuditSub").hide();
+								$("#btn_posm_entry").hide();
+								$("#posmAuditor").hide();
+								$(".errposmAudit").text("দোকানটি লিষ্টে নাই |");								
+							}else{								
+								$('#posmOuditOutletList').show();
 								$('#posmOutletCode').text(localStorage.posmOutletCode+'|'+localStorage.posmOutletName);
 								$('#posmOutleAddress').text(localStorage.posmOutletTerritory);
 								$('#posmOutleRoute').text(localStorage.posmOutletRoute);
 								$('#posmOutleTown').text(localStorage.posmTown);
 								
-							}else{
-								$("#posmReportAuditSub").hide();
-								$("#btn_posm_entry").hide();
-								$("#posmAuditor").hide();
-								$(".errposmAudit").text("দোকানটি লিষ্টে নাই |");
+								if (localStorage.outletDetailsLi ==''){
 									
+									$('#posmOuditOutletList').hide();
+									$("#btn_posm_entry").show();
+									$('#posmOuditOutletList').empty();
+								}else{
+									
+									$('#posmOuditOutletList').show();
+									$("#posmAuditor").show();	
+									$("#btn_posm_entry").hide();
+									
+									var posmOutletDetails = localStorage.outletDetailsLi.split('fdfd');
+									
+									var posmAuditOutletStr='<span style="background-color:#900; color:#FFF; margin:0px; padding:0px; display:block;">Submitted Data</span>';
+										for (i=0;i<posmOutletDetails.length;i++){					
+											posmOutletLi=posmOutletDetails[i].split('|');
+											
+											posmAuditOutletStr += '<p style="margin:0px; padding:0px; background-color:#FFF; border:1px solid #F00;">'+"Board Available:"+posmOutletLi[0]+' | '+"Brand:"+posmOutletLi[1]+' | '+"POSM type:"+posmOutletLi[2]+' | '+"Board Qty:"+posmOutletLi[3]+' | '+"Board Condition:"+posmOutletLi[4]+' | '+"Mega Hanger:"+posmOutletLi[5]+' | '+"Mega Hanger Condition:"+posmOutletLi[6]+' | '+"Plugin Dispenser:"+posmOutletLi[7]+' | '+"Plugin Dispenser Condition:"+posmOutletLi[8]+' | '+"Mini Solomon:"+posmOutletLi[9]+' | '+"Skin Care:"+posmOutletLi[10]+' | '+"Skin Care Condition:"+posmOutletLi[11]+' | '+"Hair Care:"+posmOutletLi[12]+' | '+"Hair Care Condition:"+posmOutletLi[13]+' | '+"Drug Store Posm:"+posmOutletLi[14]+' | '+"POSM Qty:"+posmOutletLi[15]+' | '+"POSM Condition:"+posmOutletLi[16]+'</p>'
+										}
+										//alert(posmAuditOutletStr);
+										localStorage.posmOuditOutletList=posmAuditOutletStr;
+										//alert (localStorage.posmOuditOutletList);		
+										$('#posmOuditOutletList').empty();
+										$('#posmOuditOutletList').append(localStorage.posmOuditOutletList).trigger('create');
+									}
 							}
 					}	
 				},error: function(){
+					$('#posmOuditOutletList').hide();
 					$("#posmAuditor").hide();
 					$(".errAudit").text("Please check internet connection");
 				}
@@ -1090,13 +1135,39 @@ function outletAudit(){
 	$("#msg_submit_audit").hide();
 	$("#auditBrandShow").hide();
 	$("#auditposmShow").hide();
-	$("#auditHeightShow").hide();
-	$("#auditLengthShow").hide();
+	
 	$("#auditLighthShow").hide();
 	$("#auditDefectiveShow").hide();
 	$("#auditFasciaShow").hide();
 	$("#auditProfileShow").hide();
-
+	
+	auditBoardAvailableC='<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true" ><input name="a_board" id="radio-choice-h-6a" value="1"  type="radio" onchange="boardYesNo();"><label for="radio-choice-h-6a">YES</label><input name="a_board" id="radio-choice-h-6b"  value="0" type="radio" onchange="boardYesNo();"><label for="radio-choice-h-6b">NO</label></fieldset>'
+	
+	$("#auditBoardAvailable").empty();
+	$("#auditBoardAvailable").append(auditBoardAvailableC).trigger('create');
+	
+	auditPOSMTypeC='<input type="hidden" id="rowID" name="rowID" /><fieldset data-role="controlgroup" data-type="horizontal" data-mini="true"><input name="a_posm_type" id="radio-choice-h-6a" value="SHOPBOARD_BACKLIT"   type="radio"><label for="radio-choice-h-6a">Lit</label><input name="a_posm_type" id="radio-choice-h-6b"  value="SHOPBOARD_NONLIT" type="radio"><label for="radio-choice-h-6b">Non-Lit</label></fieldset>'
+	
+	$("#auditPOSMType").empty();
+	$("#auditPOSMType").append(auditPOSMTypeC).trigger('create');
+	
+	auditFasciaStatusC='<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true"><input name="a_fStatus" id="radio-choice-h-6a" value="Good"  type="radio"><label for="radio-choice-h-6a">Good</label><input name="a_fStatus" id="radio-choice-h-6b"  value="Bad" type="radio"><label for="radio-choice-h-6b">Bad</label></fieldset>'
+	
+	$("#auditFasciaStatus").empty();
+	$("#auditFasciaStatus").append(auditFasciaStatusC).trigger('create');
+	
+	auditProfileBoxStatusC='<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true"><input name="a_paStatus" id="radio-choice-h-6a" value="Good"  type="radio"><label for="radio-choice-h-6a">Good</label><input name="a_paStatus" id="radio-choice-h-6b"  value="Bad" type="radio"><label for="radio-choice-h-6b">Bad</label></fieldset>'
+	
+	$("#auditProfileBoxStatus").empty();
+	$("#auditProfileBoxStatus").append(auditProfileBoxStatusC).trigger('create');
+	
+	auditStoreTypeC='<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true"><input name="a_storeType" id="radio-choice-h-6a" value="PS"  type="radio"><label for="radio-choice-h-6a">PS</label><input name="a_storeType" id="radio-choice-h-6b"  value="NPS" type="radio"><label for="radio-choice-h-6b">NPS</label><input name="a_storeType" id="radio-choice-h-6c"  value="DS" type="radio"><label for="radio-choice-h-6c">DS</label></fieldset>'
+	
+	$("#auditStoreType").empty();
+	$("#auditStoreType").append(auditStoreTypeC).trigger('create');
+	
+	$("#auditSubmitLocationBufferImage").hide();
+	$("#auditSubmitBufferImage").hide();
 	$("#outletCodeAA").html("Outlet Code	:		"+auditSerach);
 	url="#page15";
 	}
@@ -1110,8 +1181,7 @@ function boardYesNo(){
 	if(a_board==0){
 		$("#auditBrandShow").hide();
 		$("#auditposmShow").hide();
-		$("#auditHeightShow").hide();
-		$("#auditLengthShow").hide();
+		
 		$("#auditLighthShow").hide();
 		$("#auditDefectiveShow").hide();
 		$("#auditFasciaShow").hide();
@@ -1120,8 +1190,7 @@ function boardYesNo(){
 	}else{
 		$("#auditBrandShow").show();
 		$("#auditposmShow").show();
-		$("#auditHeightShow").show();
-		$("#auditLengthShow").show();
+		
 		$("#auditLighthShow").show();
 		$("#auditDefectiveShow").show();
 		$("#auditFasciaShow").show();
@@ -1212,11 +1281,11 @@ function submit_data_auditor(){
 		$(".errorChk").text("Required Board");
 		$("#btn_submit_audit").show();	
 		
-	}else if(a_height=='' && a_board==1 ){
+	}else if(a_height==''){
 		$(".errorChk").text("Required Height Qty");
 		$("#btn_submit_audit").show();
 			
-	}else if(a_length=='' && a_board==1 ){
+	}else if(a_length==''){
 		$(".errorChk").text("Required Length Qty");
 		$("#btn_submit_audit").show();
 			
@@ -1262,7 +1331,7 @@ function submit_data_auditor(){
 	}else{
 	
 				
-		//alert(apipath+"submitData_auditor?&syncCode="+localStorage.sync_code+"&repID="+localStorage.repID+"&repName="+localStorage.repName+"&mobileNo="+localStorage.mobileNo+"&a_brand="+a_brand+"&a_posm_type="+a_posm_type+"&a_board="+a_board+"&a_height="+a_height+"&a_length="+a_length+"&a_light="+a_light+"&a_dLight="+a_dLight+"&a_fStatus="+a_fStatus+"&a_paStatus="+a_paStatus+"&a_storeType="+a_storeType+"&a_nShopkeeper="+a_nShopkeeper+"&a_cNoShopkeeper="+a_cNoShopkeeper+"&a_taxArea="+a_taxArea+"&imageName5="+imageName5+"&aud_lat="+aud_lat+"&aud_long="+aud_long+"&auditSerach="+auditSerach+"&remarksAudit="+remarksAudit);
+	$("#auditSubmitBufferImage").show();	//alert(apipath+"submitData_auditor?&syncCode="+localStorage.sync_code+"&repID="+localStorage.repID+"&repName="+localStorage.repName+"&mobileNo="+localStorage.mobileNo+"&a_brand="+a_brand+"&a_posm_type="+a_posm_type+"&a_board="+a_board+"&a_height="+a_height+"&a_length="+a_length+"&a_light="+a_light+"&a_dLight="+a_dLight+"&a_fStatus="+a_fStatus+"&a_paStatus="+a_paStatus+"&a_storeType="+a_storeType+"&a_nShopkeeper="+a_nShopkeeper+"&a_cNoShopkeeper="+a_cNoShopkeeper+"&a_taxArea="+a_taxArea+"&imageName5="+imageName5+"&aud_lat="+aud_lat+"&aud_long="+aud_long+"&auditSerach="+auditSerach+"&remarksAudit="+remarksAudit);
 		$.ajax({
 			type: 'POST',
 			url:apipath+"submitData_auditor?&syncCode="+localStorage.sync_code+"&repID="+localStorage.repID+"&repName="+localStorage.repName+"&mobileNo="+localStorage.mobileNo+"&a_brand="+a_brand+"&a_posm_type="+a_posm_type+"&a_board="+a_board+"&a_height="+a_height+"&a_length="+a_length+"&a_light="+a_light+"&a_dLight="+a_dLight+"&a_fStatus="+a_fStatus+"&a_paStatus="+a_paStatus+"&a_storeType="+a_storeType+"&a_nShopkeeper="+a_nShopkeeper+"&a_cNoShopkeeper="+a_cNoShopkeeper+"&a_taxArea="+a_taxArea+"&imageName5="+imageName5+"&aud_lat="+aud_lat+"&aud_long="+aud_long+"&auditSerach="+auditSerach+"&remarksAudit="+remarksAudit,
@@ -1270,7 +1339,7 @@ function submit_data_auditor(){
 			success: function(result) {			
 				if(result=='Success'){
 					
-					
+					$("#auditSubmitBufferImage").hide();
 					$("#auditorBrandList").val('');	
 					$('input[name=a_posm_type]:checked').val('');
 					//$('input[name=a_board]:checked').val('');
@@ -1289,6 +1358,16 @@ function submit_data_auditor(){
 					$("#aud_lat").val(0);
 					$("#aud_long").val(0);
 					$("#remarksAudit").val('');
+					$("#auditBoardAvailable").empty();
+					$("#auditBoardAvailable").append(auditBoardAvailableC).trigger('create');
+					$("#auditPOSMType").empty();
+					$("#auditPOSMType").append(auditPOSMTypeC).trigger('create');
+					$("#auditFasciaStatus").empty();
+					$("#auditFasciaStatus").append(auditFasciaStatusC).trigger('create');
+					$("#auditProfileBoxStatus").empty();
+					$("#auditProfileBoxStatus").append(auditProfileBoxStatusC).trigger('create');
+					$("#auditStoreType").empty();
+					$("#auditStoreType").append(auditStoreTypeC).trigger('create');
 					
 					document.getElementById('myImageD').src = '';
 					
@@ -1371,13 +1450,15 @@ function onfail5(r) {
 
 //-----------Location----------------------------------
 
-function getLocationInfo() {	
+function getLocationInfo() {
+	$("#auditSubmitLocationBufferImage").show();	
 	var options = { enableHighAccuracy: true, timeout:30000};	
 	navigator.geolocation.getCurrentPosition(onSuccess, onError, options);				
 	$(".errorChk").html("Confirming location. Please wait.");
 }
 // onSuccess Geolocation
 function onSuccess(position) {
+	$("#auditSubmitLocationBufferImage").hide();
 	$("#aud_lat").val(position.coords.latitude);
 	$("#aud_long").val(position.coords.longitude);
 	$(".errorChk").html("Location Confirmed");
@@ -1385,6 +1466,7 @@ function onSuccess(position) {
 }
 // onError Callback receives a PositionError object
 function onError(error) {
+	$("#auditSubmitLocationBufferImage").hide();
    $("#aud_lat").val(0);
    $("#aud_long").val(0);
    $(".errorChk").html("Failed to Confirmed Location.");
@@ -1405,7 +1487,7 @@ function outlet(outletIDName){
 			$(".sucMsgU").hide();
 			$("#btn_submit_usages").hide();
 			$("#allHide").hide();
-				
+			$("#usageSubmitbufferImage").hide();		
 			if(localStorage.rep_type =='CM'){
 				$("#townAusa").html('Town	:		' + localStorage.select_town.replace('|','-'));	
 				url="#page5";					
@@ -1420,6 +1502,13 @@ function outlet(outletIDName){
 				$("#btn_submit_Agency").hide();
 				$("#recDataAgency").hide();
 				$("#allHideAgency").hide();
+				$("#auditAgencySubmitBufferImage").hide();
+				
+				 agencyAuditPaintComboN='<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true"><input name="paint" id="radio-choice-h-6a" value="YES"  type="radio"><label for="radio-choice-h-6a">YES</label><input name="paint" id="radio-choice-h-6b"  value="NO" type="radio"><label for="radio-choice-h-6b">NO</label></fieldset>'
+				 
+				$("#agencyAuditPaintCombo").empty();
+				$("#agencyAuditPaintCombo").append(agencyAuditPaintComboN).trigger('create');
+
 				url="#page14";					
 				
 			}
@@ -1485,6 +1574,7 @@ function alloDetailsU(){
 }
 
 function submit_data_usages(){
+	
 	$("#btn_submit_usages").hide();
 	var d = new Date();	
 	var get_time=d.getTime();
@@ -1494,7 +1584,6 @@ function submit_data_usages(){
 		
 	}else{
 		town=localStorage.town;	
-		
 	}
 	var uposm_type=$("#uposm_type").val();
 	
@@ -1516,7 +1605,7 @@ function submit_data_usages(){
 		$(".errorChk").text("Required Picture");
 		$("#btn_submit_usages").show();	
 	}else{
-			
+		$("#usageSubmitbufferImage").show();		
 		//alert(apipath+"submitData_usages?&syncCode="+localStorage.sync_code+"&repID="+localStorage.repID+"&repName="+localStorage.repName+"&mobileNo="+localStorage.mobileNo+"&town="+town+"&routeName="+rName+"&outlet_code="+outlet_code+"&outlet_name="+outlet_name+"&posmCode="+posmCode+"&uposm_type="+uposm_type+"&ubrand="+ubrand+"&baUsage="+baUsage+"&a_qty="+a_qty+"&alcId="+alcId+"&imageName2="+imageName2);
 		$.ajax({
 			type: 'POST',
@@ -1525,7 +1614,7 @@ function submit_data_usages(){
 			success: function(result) {			
 				if(result=='Success'){
 					
-						
+					$("#usageSubmitbufferImage").hide();	
 					$("#uposm_type").val("");
 					$("#ubrand").val("");
 					$("#baUsage").val("");
@@ -1717,6 +1806,7 @@ function submit_data_agency(){
 		$("#btn_submit_Agency").show();	
 	}else{
 		
+		$("#auditAgencySubmitBufferImage").show();
 		//alert(apipath+"submitData_agency?&syncCode="+localStorage.sync_code+"&posmCode="+posmCode+"&repID="+localStorage.repID+"&repName="+localStorage.repName+"&mobileNo="+localStorage.mobileNo+"&town="+town+"&routeName="+rName+"&outlet_code="+outlet_code+"&outlet_name="+outlet_name+"&posmType="+posmType+"&brandAgency="+brandAgency+"&balanceAgency="+balanceAgency+"&allocationAgency="+allocationAgency+"&aqty="+aqty+"&aset="+aset+"&alight="+alight+"&apaint="+apaint+"&acity="+acity+"&imageName3="+imageName3);
 		$.ajax({
 			type: 'POST',
@@ -1725,7 +1815,7 @@ function submit_data_agency(){
 			success: function(result) {			
 				if(result=='Success'){
 					
-					
+					$("#auditAgencySubmitBufferImage").hide();
 					$("#aqty").val("");
 					$("#aset").val("");
 					$("#alight").val("");
@@ -1734,6 +1824,8 @@ function submit_data_agency(){
 					$("#agnPhoto_name").val("");
 					$("#agnPhoto_path").val("");
 					
+					$("#agencyAuditPaintCombo").empty();
+					$("#agencyAuditPaintCombo").append(agencyAuditPaintComboN).trigger('create');
 					
 					$("#allHideAgency").hide();
 					$("#sucMsgAgency").show();
@@ -2158,7 +2250,8 @@ $.ajax({
 	$(".sucMsgdef").hide();
 	$(".errorChk").text("");
 	$("#allHideDef").hide();
-	$("#btn_submit_defec").hide();			
+	$("#btn_submit_defec").hide();	
+	$("#defectiveSubmitbufferImage").hide();		
 	url="#defective_page";					
 	$.mobile.navigate(url);	
 }
@@ -2245,7 +2338,7 @@ function submit_data_defective(){
 		$(".errorChk").text("Required Picture");
 		$("#btn_submit_defec").show();	
 	}else{
-				
+		$("#defectiveSubmitbufferImage").show();		
 		//alert(apipath+"submitData_defective?&syncCode="+localStorage.sync_code+"&repID="+localStorage.repID+"&repName="+localStorage.repName+"&mobileNo="+localStorage.mobileNo+"&town="+town+"&posmCode="+posmCode+"&uposm_type="+uposm_type+"&ubrand="+ubrand+"&baUsage="+baUsage+"&a_qty="+a_qty+"&alcId="+alcId+"&imageName6="+imageName6);
 		$.ajax({
 			type: 'POST',
@@ -2253,6 +2346,8 @@ function submit_data_defective(){
 																																																													
 			success: function(result) {			
 				if(result=='Success'){
+					
+					$("#defectiveSubmitbufferImage").hide();
 					$("#uposm_type").val("");
 					$("#ubrand").val("");
 					$("#baUsage").val("");
@@ -2355,7 +2450,7 @@ function reportAuditSub(){
 				
 				var repkRPA=localStorage.stockReporta.split('rdrd');			
 				var cmRouteSTAD='<table id="">';
-					cmRouteSTAD += '<tr style="font-size:12px;"><th>DATE</th><th>Outlet_Code</th><th>Outlet_Name</th><th>BRAND</th><th>POSM_Type</th><th>Board_Qty</th></tr>'
+					cmRouteSTAD += '<tr style="font-size:12px;"><th>DATE</th><th>Outlet_Code</th><th>Outlet_Name</th><th>BRAND</th><th>POSM_Type</th><th>Board_Qty</th><th>Status</th></tr>'
 					for (i=0;i<repkRPA.length;i++){	
 						stockR=repkRPA[i].split('|');
 						auditdate=stockR[0];
@@ -2364,6 +2459,7 @@ function reportAuditSub(){
 						a_brand=stockR[3];
 						a_posm_type=stockR[4];
 						a_board_qty=stockR[5];
+						a_status=stockR[6];
 						
 						if (a_brand=='blank'){
 							a_brand=''
@@ -2372,7 +2468,7 @@ function reportAuditSub(){
 							a_posm_type=''
 							}
 											
-						cmRouteSTAD += '<tr style="font-size:11px;"><td>'+auditdate+'</td><td>'+a_outlet_code+'</td><td>'+a_outlet_name+'</td><td>'+a_brand+'</td><td style="text-align:center;">'+a_posm_type+'</td><td style="text-align:center;">'+a_board_qty+'</td></tr>'
+						cmRouteSTAD += '<tr style="font-size:11px;"><td>'+auditdate+'</td><td>'+a_outlet_code+'</td><td>'+a_outlet_name+'</td><td>'+a_brand+'</td><td style="text-align:center;">'+a_posm_type+'</td><td style="text-align:center;">'+a_board_qty+'</td><td style="text-align:center;">'+a_status+'</td></tr>'
 					
 					}
 					cmRouteSTAD +='</table>'
@@ -2543,7 +2639,7 @@ function posmAuditorNext(){
 	$("#posmAuditBoardConditionShow").hide();
 	$("#btn_submit_posmAudit").show();
 	$("#allHideAuditPosm").show();
-	
+	$("#posmAuditSubmitBufferImage").hide();
 	$("#msg_submit_posmAudit").hide();
 	var posmOutletCode=localStorage.posmOutletCode;
 	var posmOutletName=localStorage.posmOutletName;
@@ -2758,7 +2854,7 @@ function submit_data_posmAuditor(){
 		$("#btn_submit_posmAudit").show();
 	}else{
 	
-				
+		$("#posmAuditSubmitBufferImage").show();		
 		//alert(apipath+"submitData_PosmAuditor?&syncCode="+localStorage.sync_code+"&repID="+localStorage.repID+"&repName="+localStorage.repName+"&mobileNo="+localStorage.mobileNo+"&posmBoard="+posmBoard+"&auditorPOSMBrandList="+auditorPOSMBrandList+"&auditPosm_type="+auditPosm_type+"&boardQty="+boardQty+"&boardCondition="+boardCondition+"&megaHanger="+megaHanger+"&megaHangerCondition="+megaHangerCondition+"&plugInDispenser="+plugInDispenser+"&plugInDispenserCondition="+plugInDispenserCondition+"&miniSolomon="+miniSolomon+"&skinCare="+skinCare+"&skinCareCondition="+skinCareCondition+"&hairCare="+hairCare+"&hairCareCondition="+hairCareCondition+"&drugStorePosm="+drugStorePosm+"&posmQty="+posmQty+"&drugStorePosmCondition="+drugStorePosmCondition+"&posmAuditOutSearch="+posmAuditOutSearch);
 		$.ajax({
 			type: 'POST',
@@ -2767,7 +2863,7 @@ function submit_data_posmAuditor(){
 			success: function(result) {			
 				if(result=='Success'){
 					
-					
+					$("#posmAuditSubmitBufferImage").hide();
 					$("#auditorPOSMBrandList").val('');	
 					$("#posmAuditOutSearch").val('');	
 					$("#boardQty").val('');
