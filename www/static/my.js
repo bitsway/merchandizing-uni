@@ -1462,15 +1462,15 @@ function onSuccess(position) {
 	$("#aud_lat").val(position.coords.latitude);
 	$("#aud_long").val(position.coords.longitude);
 	$(".errorChk").html("Location Confirmed");
-	$("#btn_submit_audit").hide();
+	$("#btn_submit_audit").show();
 }
 // onError Callback receives a PositionError object
 function onError(error) {
 	$("#auditSubmitLocationBufferImage").hide();
-   $("#aud_lat").val(1);
-   $("#aud_long").val(1);
+   $("#aud_lat").val(0);
+   $("#aud_long").val(0);
    $(".errorChk").html("Failed to Confirmed Location.");
-   $("#btn_submit_audit").show();
+   $("#btn_submit_audit").hide();
 }	
 //----------------------------------------------	
 function outlet(outletIDName){
@@ -1487,6 +1487,7 @@ function outlet(outletIDName){
 			$(".sucMsgU").hide();
 			$("#btn_submit_usages").hide();
 			$("#allHide").hide();
+			$("#bufferImageU").hide();
 			$("#usageSubmitbufferImage").hide();		
 			if(localStorage.rep_type =='CM'){
 				$("#townAusa").html('Town	:		' + localStorage.select_town.replace('|','-'));	
@@ -1522,7 +1523,7 @@ function alloDetailsU(){
 	$(".errorChkP").text("");
 	$("#usagesPhoto").val("");
 	$("#imageName2").val("");
-	$("#bufferImageU").hide();
+	
 	$("#recData").hide();	
 	$(".sucMsgU").hide();
 
