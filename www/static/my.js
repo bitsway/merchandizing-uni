@@ -42,7 +42,7 @@ var agencyAuditPaintComboN='';
 localStorage.rep_type='';
 
 //---Online
-var apipath="http://w02.yeapps.com/postit/syncmobile_20190122/";
+var apipath="http://w02.yeapps.com/postit/syncmobile_20190126/";
 //--- local
 //var apipath="http://127.0.0.1:8000/postit/syncmobile/";
 
@@ -989,7 +989,7 @@ function auditorOutlet(){
 									for (i=0;i<outletDetails.length;i++){					
 										outletLi=outletDetails[i].split('|');
 										
-										auditOutletStr += '<p style="margin:0px; padding:0px; background-color:#FFF; border:1px solid #F00;">'+"Outlet:"+outletLi[0]+' | '+"Brand:"+outletLi[3]+' | '+"POSM Type:"+outletLi[4]+' | '+"Height:"+outletLi[5]+' | '+"Length:"+outletLi[6]+' | '+"Total Light:"+outletLi[1]+' | '+"Defective Light:"+outletLi[2]+'| '+"Status:"+outletLi[7]+'</p>'
+										auditOutletStr += '<p style="margin:0px; padding:0px; background-color:#FFF; border:1px solid #F00;">'+"Outlet:"+outletLi[0]+' | '+"Brand:"+outletLi[3]+' | '+"POSM Type:"+outletLi[4]+' | '+"Height:"+outletLi[5]+' | '+"Length:"+outletLi[6]+' | '+"Total Light:"+outletLi[1]+' | '+"Defective Light:"+outletLi[2]+'| '+"Tax_Area:"+outletLi[8]+'| '+"Status:"+outletLi[7]+'</p>'
 									}
 									localStorage.auditOutletList=auditOutletStr;		
 									$('#auditOutletList').empty();
@@ -1056,8 +1056,37 @@ function posmAuditorOutlet(){
 						localStorage.posmTown=syncResultArray[5];
 						localStorage.posmBrand=syncResultArray[6];
 						localStorage.outletDetailsLi=syncResultArray[7];
+						localStorage.outletTaxAreaDFF=syncResultArray[8];
 						
+						//alert (localStorage.outletTaxAreaDFF);
 						
+						if(localStorage.outletTaxAreaDFF!=''){
+							var rectaxStrDFF=localStorage.outletTaxAreaDFF.split('|');
+							var posmStrTaxAreaDFF = '<option selected="selected" value="">Select Tax Area</option>'
+							for (i=0;i<rectaxStrDFF.length;i++){	
+								
+								posmStrTaxAreaDFF += '<option value="'+rectaxStrDFF[i]+'">'+rectaxStrDFF[i]+'</option>'
+							}
+							posmStrTaxAreaDFF =posmStrTaxAreaDFF
+							localStorage.rectaxStrDFF=posmStrTaxAreaDFF;
+							
+							$("#outletTaxAreaDFFListRec").empty();
+							$("#outletTaxAreaDFFListRec").append(localStorage.rectaxStrDFF).trigger('create');	
+						}else{
+								$("#outletTaxAreaDFFListRec").empty();
+								}
+						
+						/*var rectaxStrDFF=localStorage.outletTaxAreaDFF.split('|');
+						var taxStrDFF='<input list="taxArea" name="cityCorp_DFF" id="cityCorp_DFF"><datalist id="taxArea">';
+						for (i=0;i<rectaxStrDFF.length;i++){								
+						taxStrDFF += '<option style="background-color:#FFF; border-top-color:#F03; border-bottom-color:#F03;"(\''+ rectaxStrDFF[i]+'\')"><a>'+ rectaxStrDFF[i]+'</a></option>'
+					}
+						taxStrDFF +='</datalist>';
+						localStorage.outletTaxAreaDFFList=taxStrDFF;
+					
+						$('#outletTaxAreaDFFListRec').empty();
+						$('#outletTaxAreaDFFListRec').append(localStorage.outletTaxAreaDFFList).trigger('create');*/
+							
 						var auditorBrand=localStorage.posmBrand.split(',');
 						var brandStr = '<option selected="selected" value="">Select Brand</option>'
 						for (i=0;i<auditorBrand.length;i++){	
@@ -1097,7 +1126,7 @@ function posmAuditorOutlet(){
 										for (i=0;i<posmOutletDetails.length;i++){					
 											posmOutletLi=posmOutletDetails[i].split('|');
 											
-											posmAuditOutletStr += '<p style="margin:0px; padding:0px; background-color:#FFF; border:1px solid #F00;">'+"Board Available:"+posmOutletLi[0]+' | '+"Brand:"+posmOutletLi[1]+' | '+"POSM type:"+posmOutletLi[2]+' | '+"Board Qty:"+posmOutletLi[3]+' | '+"Board Condition:"+posmOutletLi[4]+' | '+"Mega Hanger:"+posmOutletLi[5]+' | '+"Mega Hanger Condition:"+posmOutletLi[6]+' | '+"Plugin Dispenser:"+posmOutletLi[7]+' | '+"Plugin Dispenser Condition:"+posmOutletLi[8]+' | '+"Mini Solomon:"+posmOutletLi[9]+' | '+"Skin Care:"+posmOutletLi[10]+' | '+"Skin Care Condition:"+posmOutletLi[11]+' | '+"Hair Care:"+posmOutletLi[12]+' | '+"Hair Care Condition:"+posmOutletLi[13]+' | '+"Drug Store Posm:"+posmOutletLi[14]+' | '+"POSM Qty:"+posmOutletLi[15]+' | '+"POSM Condition:"+posmOutletLi[16]+'</p>'
+											posmAuditOutletStr += '<p style="margin:0px; padding:0px; background-color:#FFF; border:1px solid #F00;">'+"Board Available:"+posmOutletLi[0]+' | '+"Brand:"+posmOutletLi[1]+' | '+"POSM type:"+posmOutletLi[2]+' | '+"Board Qty:"+posmOutletLi[3]+' | '+"Board Condition:"+posmOutletLi[4]+' | '+"Mega Hanger:"+posmOutletLi[5]+' | '+"Mega Hanger Condition:"+posmOutletLi[6]+' | '+"Plugin Dispenser:"+posmOutletLi[7]+' | '+"Plugin Dispenser Condition:"+posmOutletLi[8]+' | '+"Mini Solomon:"+posmOutletLi[9]+' | '+"Skin Care:"+posmOutletLi[10]+' | '+"Skin Care Condition:"+posmOutletLi[11]+' | '+"Hair Care:"+posmOutletLi[12]+' | '+"Hair Care Condition:"+posmOutletLi[13]+' | '+"Drug Store Posm:"+posmOutletLi[14]+' | '+"POSM Qty:"+posmOutletLi[15]+' | '+"POSM Condition:"+posmOutletLi[16]+' | '+"Tax Area:"+posmOutletLi[17]+'</p>'
 										}
 										//alert(posmAuditOutletStr);
 										localStorage.posmOuditOutletList=posmAuditOutletStr;
@@ -1761,7 +1790,7 @@ function alloDetailsAgency(){
 						
 					if(localStorage.agencyTaxarea!=''){
 					var posmagencyTaxarea=localStorage.agencyTaxarea.split('fdfd');
-					var posmStrTaxArea = '<option selected="selected" value="">Select Area</option>'
+					var posmStrTaxArea = '<option selected="selected" value="">Select Tax Area</option>'
 					for (i=0;i<posmagencyTaxarea.length;i++){	
 						
 						posmStrTaxArea += '<option value="'+posmagencyTaxarea[i]+'">'+posmagencyTaxarea[i]+'</option>'
@@ -2151,7 +2180,7 @@ function summary_report(){
 				localStorage.usageReportA=getResult[1];
 				var agnRpt=localStorage.usageReportA.split('rdrd');			
 				var agentable='<table id="sumRepp">';
-					agentable +='<tr style="font-size:12px;" ><th>Date</th><th>Outlet_ID</th><th>Outlet_Name</th><th>Brand</th><th>POSM_Type</th><th>POSM_Code</th><th>Usage_Qty</th></tr>'
+					agentable +='<tr style="font-size:12px;" ><th>Date</th><th>Outlet_Code</th><th>Outlet_Name</th><th>Tax_Area</th><th>Brand</th><th>POSM_Type</th><th>POSM_Code</th><th>Usage_Qty</th></tr>'
 					for (i=0;i<agnRpt.length;i++){	
 						agnR=agnRpt[i].split('|');
 						date=agnR[0];
@@ -2161,8 +2190,9 @@ function summary_report(){
 						qty=agnR[4];
 						brand=agnR[5];
 						posmtype=agnR[6];
+						city_cor=agnR[7];
 				
-						agentable += '<tr style="font-size:11px;"><td>'+date+'</td><td>'+outletid+'</td><td>'+outletname+'</td><td>'+brand+'</td><td>'+posmtype+'</td><td>'+posmcode+'</td><td style="text-align:center;">'+qty+'</td></tr>'
+						agentable += '<tr style="font-size:11px;"><td>'+date+'</td><td>'+outletid+'</td><td>'+outletname+'</td><td>'+city_cor+'</td><td>'+brand+'</td><td>'+posmtype+'</td><td>'+posmcode+'</td><td style="text-align:center;">'+qty+'</td></tr>'
 					
 					}
 					agentable +='</table>'
@@ -2487,7 +2517,7 @@ function reportAuditSub(){
 				
 				var repkRPA=localStorage.stockReporta.split('rdrd');			
 				var cmRouteSTAD='<table id="">';
-					cmRouteSTAD += '<tr style="font-size:12px;"><th>DATE</th><th>Outlet_Code</th><th>Outlet_Name</th><th>BRAND</th><th>POSM_Type</th><th>Board_Qty</th><th>Status</th></tr>'
+					cmRouteSTAD += '<tr style="font-size:12px;"><th>DATE</th><th>Outlet_Code</th><th>Outlet_Name</th><th>Tax_Area</th><th>BRAND</th><th>POSM_Type</th><th>Board_Qty</th><th>Status</th></tr>'
 					for (i=0;i<repkRPA.length;i++){	
 						stockR=repkRPA[i].split('|');
 						auditdate=stockR[0];
@@ -2497,7 +2527,7 @@ function reportAuditSub(){
 						a_posm_type=stockR[4];
 						a_board_qty=stockR[5];
 						a_status=stockR[6];
-						
+						a_tax_area=stockR[7];
 						if (a_brand=='blank'){
 							a_brand=''
 						}
@@ -2505,7 +2535,7 @@ function reportAuditSub(){
 							a_posm_type=''
 							}
 											
-						cmRouteSTAD += '<tr style="font-size:11px;"><td>'+auditdate+'</td><td>'+a_outlet_code+'</td><td>'+a_outlet_name+'</td><td>'+a_brand+'</td><td style="text-align:center;">'+a_posm_type+'</td><td style="text-align:center;">'+a_board_qty+'</td><td style="text-align:center;">'+a_status+'</td></tr>'
+						cmRouteSTAD += '<tr style="font-size:11px;"><td>'+auditdate+'</td><td>'+a_outlet_code+'</td><td>'+a_outlet_name+'</td><td>'+a_tax_area+'</td><td>'+a_brand+'</td><td style="text-align:center;">'+a_posm_type+'</td><td style="text-align:center;">'+a_board_qty+'</td><td style="text-align:center;">'+a_status+'</td></tr>'
 					
 					}
 					cmRouteSTAD +='</table>'
@@ -2550,7 +2580,7 @@ function posmReportAuditSub(){
 				var repPosmAud=localStorage.posmAuditRec.split('rdrd');			
 				var cmRouteSTADA='<table id="">';
 				
-					cmRouteSTADA += '<tr style="font-size:12px;"><th>DATE</th><th>Region</th><th>Territory</th><th>Town Code</th><th>Town Name</th><th>Outlet Code</th><th>Outlet Name</th></tr>'
+					cmRouteSTADA += '<tr style="font-size:12px;"><th>DATE</th><th>Region</th><th>Territory</th><th>Town Code</th><th>Town Name</th><th>Tax Area</th><th>Outlet Code</th><th>Outlet Name</th></tr>'
 					for (i=0;i<repPosmAud.length;i++){	
 						PosmAudData=repPosmAud[i].split('|');
 						posmauditdate=PosmAudData[0];
@@ -2560,9 +2590,9 @@ function posmReportAuditSub(){
 						posmTownName=PosmAudData[4];
 						posmOutletCode=PosmAudData[5];
 						posmOutletName=PosmAudData[6];
-						
+						posmTaxarea=PosmAudData[7];
 											
-						cmRouteSTADA += '<tr style="font-size:11px;"><td>'+posmauditdate+'</td><td>'+posmoutlet_region+'</td><td>'+posmoutlet_territory+'</td><td>'+posmtownCode+'</td><td style="text-align:center;">'+posmTownName+'</td><td style="text-align:center;">'+posmOutletCode+'</td><td style="text-align:center;">'+posmOutletName+'</td></tr>'
+						cmRouteSTADA += '<tr style="font-size:11px;"><td>'+posmauditdate+'</td><td>'+posmoutlet_region+'</td><td>'+posmoutlet_territory+'</td><td>'+posmtownCode+'</td><td style="text-align:center;">'+posmTownName+'</td><td style="text-align:center;">'+posmTaxarea+'</td><td style="text-align:center;">'+posmOutletCode+'</td><td style="text-align:center;">'+posmOutletName+'</td></tr>'
 					
 					}
 					cmRouteSTADA +='</table>'
@@ -2807,6 +2837,7 @@ var hairCareCondition='';
 var drugStorePosm='';
 var posmQty='';
 var drugStorePosmCondition='';
+var cityCorp_DFF='';
 
 function submit_data_posmAuditor(){
 	
@@ -2835,7 +2866,7 @@ function submit_data_posmAuditor(){
 	drugStorePosm=$('input[name=drugStorePosm]:checked').val();
 	posmQty=$("#posmQty").val().replace('+','').replace('-','').replace('.','').replace('/','').replace('*','').replace(',','');
 	drugStorePosmCondition=$('input[name=drugStorePosmCondition]:checked').val();
-	
+	cityCorp_DFF=$("#outletTaxAreaDFFListRec").val();
 	
 
 	if(posmBoard==undefined || posmBoard==''){
@@ -2889,13 +2920,16 @@ function submit_data_posmAuditor(){
 	}else if((drugStorePosmCondition==undefined || drugStorePosmCondition=='') && drugStorePosm=="YES"){
 		$(".errorChk").text("Required Drug Store Posm Condition");
 		$("#btn_submit_posmAudit").show();
+	}else if(cityCorp_DFF==''){
+		$(".errorChk").text("Required Tax Area");
+		$("#btn_submit_posmAudit").show();
 	}else{
 	
 		$("#posmAuditSubmitBufferImage").show();		
-		//alert(apipath+"submitData_PosmAuditor?&syncCode="+localStorage.sync_code+"&repID="+localStorage.repID+"&repName="+localStorage.repName+"&mobileNo="+localStorage.mobileNo+"&posmBoard="+posmBoard+"&auditorPOSMBrandList="+auditorPOSMBrandList+"&auditPosm_type="+auditPosm_type+"&boardQty="+boardQty+"&boardCondition="+boardCondition+"&megaHanger="+megaHanger+"&megaHangerCondition="+megaHangerCondition+"&plugInDispenser="+plugInDispenser+"&plugInDispenserCondition="+plugInDispenserCondition+"&miniSolomon="+miniSolomon+"&skinCare="+skinCare+"&skinCareCondition="+skinCareCondition+"&hairCare="+hairCare+"&hairCareCondition="+hairCareCondition+"&drugStorePosm="+drugStorePosm+"&posmQty="+posmQty+"&drugStorePosmCondition="+drugStorePosmCondition+"&posmAuditOutSearch="+posmAuditOutSearch);
+		//alert(apipath+"submitData_PosmAuditor?&syncCode="+localStorage.sync_code+"&repID="+localStorage.repID+"&repName="+localStorage.repName+"&mobileNo="+localStorage.mobileNo+"&posmBoard="+posmBoard+"&auditorPOSMBrandList="+auditorPOSMBrandList+"&auditPosm_type="+auditPosm_type+"&boardQty="+boardQty+"&boardCondition="+boardCondition+"&megaHanger="+megaHanger+"&megaHangerCondition="+megaHangerCondition+"&plugInDispenser="+plugInDispenser+"&plugInDispenserCondition="+plugInDispenserCondition+"&miniSolomon="+miniSolomon+"&skinCare="+skinCare+"&skinCareCondition="+skinCareCondition+"&hairCare="+hairCare+"&hairCareCondition="+hairCareCondition+"&drugStorePosm="+drugStorePosm+"&posmQty="+posmQty+"&drugStorePosmCondition="+drugStorePosmCondition+"&posmAuditOutSearch="+posmAuditOutSearch+"&cityCorp_DFF="+cityCorp_DFF);
 		$.ajax({
 			type: 'POST',
-			url:apipath+"submitData_PosmAuditor?&syncCode="+localStorage.sync_code+"&repID="+localStorage.repID+"&repName="+localStorage.repName+"&mobileNo="+localStorage.mobileNo+"&posmBoard="+posmBoard+"&auditorPOSMBrandList="+auditorPOSMBrandList+"&auditPosm_type="+auditPosm_type+"&boardQty="+boardQty+"&boardCondition="+boardCondition+"&megaHanger="+megaHanger+"&megaHangerCondition="+megaHangerCondition+"&plugInDispenser="+plugInDispenser+"&plugInDispenserCondition="+plugInDispenserCondition+"&miniSolomon="+miniSolomon+"&skinCare="+skinCare+"&skinCareCondition="+skinCareCondition+"&hairCare="+hairCare+"&hairCareCondition="+hairCareCondition+"&drugStorePosm="+drugStorePosm+"&posmQty="+posmQty+"&drugStorePosmCondition="+drugStorePosmCondition+"&posmAuditOutSearch="+posmAuditOutSearch,
+			url:apipath+"submitData_PosmAuditor?&syncCode="+localStorage.sync_code+"&repID="+localStorage.repID+"&repName="+localStorage.repName+"&mobileNo="+localStorage.mobileNo+"&posmBoard="+posmBoard+"&auditorPOSMBrandList="+auditorPOSMBrandList+"&auditPosm_type="+auditPosm_type+"&boardQty="+boardQty+"&boardCondition="+boardCondition+"&megaHanger="+megaHanger+"&megaHangerCondition="+megaHangerCondition+"&plugInDispenser="+plugInDispenser+"&plugInDispenserCondition="+plugInDispenserCondition+"&miniSolomon="+miniSolomon+"&skinCare="+skinCare+"&skinCareCondition="+skinCareCondition+"&hairCare="+hairCare+"&hairCareCondition="+hairCareCondition+"&drugStorePosm="+drugStorePosm+"&posmQty="+posmQty+"&drugStorePosmCondition="+drugStorePosmCondition+"&posmAuditOutSearch="+posmAuditOutSearch+"&cityCorp_DFF="+cityCorp_DFF,
 																																																													
 			success: function(result) {			
 				if(result=='Success'){
@@ -2905,7 +2939,7 @@ function submit_data_posmAuditor(){
 					$("#posmAuditOutSearch").val('');	
 					$("#boardQty").val('');
 					$("#posmQty").val('');
-					
+					$("#cityCorp_DFF").val('');
 					
 					$("#boarAvailableCrest").empty();
 					$("#boarAvailableCrest").append(boardCresteN).trigger('create');
@@ -2935,7 +2969,7 @@ function submit_data_posmAuditor(){
 					$("#posmDrugStorePOSMCrest").append(posmDrugStorePOSMCrestN).trigger('create');
 					$("#posmdrugStorePosmConditionCrest").empty();
 					$("#posmdrugStorePosmConditionCrest").append(posmdrugStorePosmConditionCrestN).trigger('create');
-					
+					$('#outletTaxAreaDFFListRec').empty();
 					$(".errorChk").text("");
 					$("#msg_submit_posmAudit").show();
 					$("#allHideAuditPosm").hide();
