@@ -42,7 +42,7 @@ var agencyAuditPaintComboN='';
 localStorage.rep_type='';
 
 //---Online
-var apipath="http://w02.yeapps.com/postit/syncmobile_20190126/";
+var apipath="http://w02.yeapps.com/postit/syncmobile_20190129/";
 //--- local
 //var apipath="http://127.0.0.1:8000/postit/syncmobile/";
 
@@ -51,7 +51,7 @@ url ="";
 $(document).ready(function(){
 	$('#bufferImageSync').hide();
 	if (localStorage.rep_type=='CM'){
-		
+		$('#dff_Usages_Audit').hide();
 		$("#posmReportAuditSub").hide();	
 		$("#posmAuditDiv").hide();
 		$('#townSUP').show();
@@ -109,6 +109,7 @@ $(document).ready(function(){
 		$("#summaryAgency").hide();
 		$('#btn_receive').show();
 		$('#btn_usages').show();
+		$('#dff_Usages_Audit').hide();
 		$('#btn_stock').show();
 		$('#reportbtn').show();
 		
@@ -146,7 +147,7 @@ $(document).ready(function(){
 		
 		$("#btn_submit_usages").hide();
 		$("#allHide").hide();
-					
+		$('#dff_Usages_Audit').hide();			
 		$('#btn_receive').hide();
 		$('#btn_usages').hide();
 		$('#btn_stock').hide();
@@ -167,6 +168,8 @@ $(document).ready(function(){
 		url = "#homePage";
 		$.mobile.navigate(url);
 	}else if(localStorage.rep_type == 'AUDITOR'){
+		
+		$('#dff_Usages_Audit').hide();
 		$('#bufferImageOutletAudt').hide();
 		$("#posmReportAuditSub").hide();	
 		$("#posmAuditDiv").hide();
@@ -192,7 +195,16 @@ $(document).ready(function(){
 		
 		//$("#boarAvailableCrest").empty();
 		//$("#boarAvailableCrest").append(boardCresteN).trigger('create');
-		
+		$('#stockAgency').hide();
+		$('#summaryAgency').hide();
+		$('#entryAgency').hide();
+		$('#btn_stock').hide();
+		$('#reportbtn').hide();
+		$('#btn_dff').hide();
+		$('#btn_usages').hide();
+		$('#btn_defective').hide();
+		$('#btn_receive').hide();
+		$('#dff_Usages_Audit').show();
 		$("#posmReportAuditSub").show();
 		$("#hairCareConditionShow").hide();
 		$("#skinCareConditionShow").hide();
@@ -215,8 +227,10 @@ $(document).ready(function(){
 		$("#auditorBrandList").empty();
 		$("#auditorBrandList").append(localStorage.auditorBrand).trigger('create');
 		$('#headerName').html('POST-IT');
-		$('#townList').hide();
-		$('#townSUP').hide();
+		$('#townList').show();
+		$('#townList').empty();
+		$('#townList').append(localStorage.townStr).trigger('create');
+		$('#townSUP').show();
 		$("#btn_defective").hide();
 		$("#btn_dff").hide();
 		$("#stockAgency").hide();
@@ -305,6 +319,7 @@ function syncBasic(){
 					cmRouteStr +='</ul>'
 					localStorage.route=cmRouteStr;
 					if (localStorage.rep_type=='CM'){
+						$('#dff_Usages_Audit').hide();
 						$("#posmReportAuditSub").hide();	
 						$("#posmAuditDiv").hide();					
 						$('#townSUP').show();
@@ -336,6 +351,7 @@ function syncBasic(){
 						url = "#homePage";						
 						$.mobile.navigate(url);
 					}else if (localStorage.rep_type == 'SUPERVISOR'){
+						$('#dff_Usages_Audit').hide();
 						$("#posmReportAuditSub").hide();	
 						$("#posmAuditDiv").hide();
 						$('#townSUP').show();
@@ -361,6 +377,7 @@ function syncBasic(){
 						$.mobile.navigate(url);
 							
 					}else if(localStorage.rep_type == 'AGENCY'){
+						$('#dff_Usages_Audit').hide();
 						$("#posmReportAuditSub").hide();	
 						$("#posmAuditDiv").hide();
 						$('#townSUP').show();
@@ -386,6 +403,7 @@ function syncBasic(){
 						$.mobile.navigate(url);						
 					}else if(localStorage.rep_type == 'AUDITOR'){
 						
+						$('#dff_Usages_Audit').hide();
 						$('#bufferImageOutletAudt').hide();
 						$("#posmReportAuditSub").hide();	
 						$("#posmAuditDiv").hide();
@@ -408,6 +426,16 @@ function syncBasic(){
 						url = "#homePage";
 						$.mobile.navigate(url);
 					}else{
+						$('#stockAgency').hide();
+						$('#summaryAgency').hide();
+						$('#entryAgency').hide();
+						$('#btn_stock').hide();
+						$('#reportbtn').hide();
+						$('#btn_dff').hide();
+						$('#btn_usages').hide();
+						$('#btn_defective').hide();
+						$('#btn_receive').hide();
+						$('#dff_Usages_Audit').show();
 						$("#posmReportAuditSub").show();	
 						$('#bufferImageOutletposm').hide();
 						$("#hairCareConditionShow").hide();
@@ -430,8 +458,8 @@ function syncBasic(){
 						$("#auditorDiv").hide();
 						$("#reportAuditSub").hide();
 						$('#headerName').html('POST-IT');
-						$('#townList').hide();
-						$('#townSUP').hide();
+						$('#townList').show();
+						$('#townSUP').show();
 						$("#btn_defective").hide();
 						$("#btn_dff").hide();
 						$("#btn_audit_entry").hide();
@@ -469,7 +497,7 @@ function menuClick(){
 	$(".errAudit").text("");
 	$("#btn_audit_entry").hide();
 	$("#reportAuditSub").show();
-	$("#posmReportAuditSub").show();	
+		
 	$("#posmAuditor").hide();
 	$("#btn_posm_entry").hide();
 	$("#posmAuditOutSearch").val('');	
@@ -494,7 +522,7 @@ function backClick(){
 	$(".errAudit").text("");
 	$("#btn_audit_entry").hide();
 	$("#reportAuditSub").show();
-	$("#posmReportAuditSub").show();	
+		
 	$("#posmAuditor").hide();
 	$("#btn_posm_entry").hide();
 	$("#posmAuditOutSearch").val('');	
@@ -1016,7 +1044,11 @@ function auditorOutlet(){
 	}
 }
 
-function posmAuditorOutlet(){
+
+
+/*function posmAuditorOutlet(){
+	
+		
 		
 		$(".errPOSMAudit").text("");
 		$(".errposmAudit").text("");
@@ -1024,7 +1056,7 @@ function posmAuditorOutlet(){
 			$(".errorChk").text("Required Sync");
 		}else{
 			var posmAuditOutSearch=$("#posmAuditOutSearch").val();
-			//alert (posmAuditOutSearch);
+			alert (posmAuditOutSearch);
 			if(posmAuditOutSearch==''){
 				$(".errPOSMAudit").text("Please Search Outlet");
 				
@@ -1076,16 +1108,7 @@ function posmAuditorOutlet(){
 								$("#outletTaxAreaDFFListRec").empty();
 								}
 						
-						/*var rectaxStrDFF=localStorage.outletTaxAreaDFF.split('|');
-						var taxStrDFF='<input list="taxArea" name="cityCorp_DFF" id="cityCorp_DFF"><datalist id="taxArea">';
-						for (i=0;i<rectaxStrDFF.length;i++){								
-						taxStrDFF += '<option style="background-color:#FFF; border-top-color:#F03; border-bottom-color:#F03;"(\''+ rectaxStrDFF[i]+'\')"><a>'+ rectaxStrDFF[i]+'</a></option>'
-					}
-						taxStrDFF +='</datalist>';
-						localStorage.outletTaxAreaDFFList=taxStrDFF;
-					
-						$('#outletTaxAreaDFFListRec').empty();
-						$('#outletTaxAreaDFFListRec').append(localStorage.outletTaxAreaDFFList).trigger('create');*/
+						
 							
 						var auditorBrand=localStorage.posmBrand.split(',');
 						var brandStr = '<option selected="selected" value="">Select Brand</option>'
@@ -1126,7 +1149,7 @@ function posmAuditorOutlet(){
 										for (i=0;i<posmOutletDetails.length;i++){					
 											posmOutletLi=posmOutletDetails[i].split('|');
 											
-											posmAuditOutletStr += '<p style="margin:0px; padding:0px; background-color:#FFF; border:1px solid #F00;">'+"Board Available:"+posmOutletLi[0]+' | '+"Brand:"+posmOutletLi[1]+' | '+"POSM type:"+posmOutletLi[2]+' | '+"Board Qty:"+posmOutletLi[3]+' | '+"Board Condition:"+posmOutletLi[4]+' | '+"Mega Hanger:"+posmOutletLi[5]+' | '+"Mega Hanger Condition:"+posmOutletLi[6]+' | '+"Plugin Dispenser:"+posmOutletLi[7]+' | '+"Plugin Dispenser Condition:"+posmOutletLi[8]+' | '+"Mini Solomon:"+posmOutletLi[9]+' | '+"Skin Care:"+posmOutletLi[10]+' | '+"Skin Care Condition:"+posmOutletLi[11]+' | '+"Hair Care:"+posmOutletLi[12]+' | '+"Hair Care Condition:"+posmOutletLi[13]+' | '+"Drug Store Posm:"+posmOutletLi[14]+' | '+"POSM Qty:"+posmOutletLi[15]+' | '+"POSM Condition:"+posmOutletLi[16]+' | '+"Tax Area:"+posmOutletLi[17]+'</p>'
+											posmAuditOutletStr += '<p style="margin:0px; padding:0px; background-color:#FFF; border:1px solid #F00;">'+"Board Available : "+posmOutletLi[0]+' | '+"Brand : "+posmOutletLi[1]+' | '+"POSM type : "+posmOutletLi[2]+' | '+"Board Qty : "+posmOutletLi[3]+' | '+"Board Condition : "+posmOutletLi[4]+' | '+"Mega Hanger : "+posmOutletLi[5]+' | '+"Mega Hanger Condition : "+posmOutletLi[6]+' | '+"Plugin Dispenser : "+posmOutletLi[7]+' | '+"Plugin Dispenser Condition : "+posmOutletLi[8]+' | '+"Mini Solomon : "+posmOutletLi[9]+' | '+"Skin Care : "+posmOutletLi[10]+' | '+"Skin Care Condition : "+posmOutletLi[11]+' | '+"Hair Care : "+posmOutletLi[12]+' | '+"Hair Care Condition : "+posmOutletLi[13]+' | '+"Drug Store Posm : "+posmOutletLi[14]+' | '+"POSM Qty : "+posmOutletLi[15]+' | '+"POSM Condition : "+posmOutletLi[16]+' | '+"Tax Area : "+posmOutletLi[17]+'</p>'
 										}
 										//alert(posmAuditOutletStr);
 										localStorage.posmOuditOutletList=posmAuditOutletStr;
@@ -1145,7 +1168,9 @@ function posmAuditorOutlet(){
 			});
 		}
 	}
-}
+	
+
+}*/
 
 function outletAudit(){
 	var auditSerach=$("#auditOutSearch").val();
@@ -1513,13 +1538,129 @@ function onError(error) {
    $(".errorChk").html("Failed to Confirmed Location.");
    $("#btn_submit_audit").hide();
 }	
-//----------------------------------------------	
+//----------------------------------------------
+var outlet_codeDFF='';
 function outlet(outletIDName){
+		$('#dffsubmittedDetailsData').hide();
+		$("#dffsubmitfrom").hide();
 	
 		outletS=outletIDName.split('|');
 		outlet_name=outletS[0]
 		outlet_code=outletS[1]
+		outlet_codeDFF=outletS[1]
 		
+		$(".errPOSMAudit").text("");
+		$(".errposmAudit").text("");
+		if (localStorage.synced!='YES'){
+			$(".errorChk").text("Required Sync");
+		}else{
+			var posmAuditOutSearch=outlet_code
+			//alert (posmAuditOutSearch);
+			if(posmAuditOutSearch==''){
+				$(".errPOSMAudit").text("Please Search Outlet");
+				
+				$('#posmOuditOutletList').hide();
+				$("#posmAuditor").hide();
+				
+				$("#btn_posm_entry").hide();
+			}else{
+				
+				$("#posmAuditor").hide();
+				
+				$('#bufferImageOutletposm').show();	
+				//alert(apipath+"getOutletPosmAuditor?&posmAuditOutSearch="+posmAuditOutSearch+"&repID="+localStorage.repID);
+				$.ajax({
+				type: 'POST',
+				url:apipath+"getOutletPosmAuditor?&posmAuditOutSearch="+posmAuditOutSearch+"&repID="+localStorage.repID+"&town="+localStorage.select_town,
+																																																														
+				success: function(result) {	
+					var syncResultArray = result.split('rdrd');	
+					if(syncResultArray[0]=='Success'){	
+						$('#bufferImageOutletposm').hide();
+						$("#posmAuditor").show();
+						localStorage.posmOutletCode=syncResultArray[1];
+						localStorage.posmOutletName=syncResultArray[2];
+						localStorage.posmOutletTerritory=syncResultArray[3];
+						localStorage.posmOutletRoute=syncResultArray[4];
+						localStorage.posmTown=syncResultArray[5];
+						localStorage.posmBrand=syncResultArray[6];
+						localStorage.outletDetailsLi=syncResultArray[7];
+						localStorage.outletTaxAreaDFF=syncResultArray[8];
+						
+						if(localStorage.outletTaxAreaDFF!=''){
+							var rectaxStrDFF=localStorage.outletTaxAreaDFF.split('|');
+							var posmStrTaxAreaDFF = '<option selected="selected" value="">Select Tax Area</option>'
+							for (i=0;i<rectaxStrDFF.length;i++){	
+								
+								posmStrTaxAreaDFF += '<option value="'+rectaxStrDFF[i]+'">'+rectaxStrDFF[i]+'</option>'
+							}
+							posmStrTaxAreaDFF =posmStrTaxAreaDFF
+							localStorage.rectaxStrDFF=posmStrTaxAreaDFF;
+							
+							$("#outletTaxAreaDFFListRec").empty();
+							$("#outletTaxAreaDFFListRec").append(localStorage.rectaxStrDFF).trigger('create');	
+						}else{
+								$("#outletTaxAreaDFFListRec").empty();
+								}
+						
+						var auditorBrand=localStorage.posmBrand.split(',');
+						var brandStr = '<option selected="selected" value="">Select Brand</option>'
+						for (i=0;i<auditorBrand.length;i++){	
+							brandStr += '<option value="'+auditorBrand[i]+'">'+auditorBrand[i]+'</option>'
+						}
+						localStorage.auditorPOSMBrand=brandStr;
+						$("#auditorPOSMBrandList").empty();
+						$("#auditorPOSMBrandList").append(localStorage.auditorPOSMBrand).trigger('create');
+						
+						if (localStorage.posmOutletCode==''){
+								$('#posmOuditOutletList').hide();
+								$("#posmReportAuditSub").hide();
+								$("#btn_posm_entry").hide();
+								$("#posmAuditor").hide();
+								$(".errposmAudit").text("দোকানটি লিষ্টে নাই |");								
+							}else{								
+								$('#posmOuditOutletList').show();
+								$('#posmOutletCode').text(localStorage.posmOutletCode+'|'+localStorage.posmOutletName);
+								$('#posmOutleAddress').text(localStorage.posmOutletTerritory);
+								$('#posmOutleRoute').text(localStorage.posmOutletRoute);
+								$('#posmOutleTown').text(localStorage.posmTown);
+								
+								if (localStorage.outletDetailsLi ==''){
+									
+									$('#dffsubmittedDetailsData').hide();
+									$("#dffsubmitfrom").show();
+									$('#posmOuditOutletList').empty();
+								}else{
+									
+									$('#dffsubmittedDetailsData').show();
+									$("#posmAuditor").show();	
+									$("#dffsubmitfrom").hide();
+									
+									var posmOutletDetails = localStorage.outletDetailsLi.split('fdfd');
+									
+									var posmAuditOutletStr='<span style="background-color:#900; color:#FFF; margin:0px; padding:0px; display:block;">Submitted Data</span>';
+										for (i=0;i<posmOutletDetails.length;i++){					
+											posmOutletLi=posmOutletDetails[i].split('|');
+											
+											posmAuditOutletStr += '<p style="margin:0px; padding:0px; background-color:#FFF; border:1px solid #F00;">'+"Shop Board Available : "+posmOutletLi[0]+' | '+"Brand : "+posmOutletLi[1]+' | '+"POSM type : "+posmOutletLi[2]+' | '+"Board Qty : "+posmOutletLi[3]+' | '+"Board Condition : "+posmOutletLi[4]+' | '+"Mega Hanger : "+posmOutletLi[5]+' | '+"Mega Hanger Condition : "+posmOutletLi[6]+' | '+"Plugin Dispenser : "+posmOutletLi[7]+' | '+"Plugin Dispenser Condition : "+posmOutletLi[8]+' | '+"Mini Solomon : "+posmOutletLi[9]+' | '+"Skin Care : "+posmOutletLi[10]+' | '+"Skin Care Condition : "+posmOutletLi[11]+' | '+"Hair Care : "+posmOutletLi[12]+' | '+"Hair Care Condition : "+posmOutletLi[13]+' | '+"Drug Store Posm : "+posmOutletLi[14]+' | '+"POSM Qty : "+posmOutletLi[15]+' | '+"POSM Condition : "+posmOutletLi[16]+' | '+"Tax Area : "+posmOutletLi[17]+'</p>'
+										}
+										//alert(posmAuditOutletStr);
+										localStorage.posmOuditOutletList=posmAuditOutletStr;
+										//alert (localStorage.posmOuditOutletList);		
+										$('#dffsubmittedDetailsData').empty();
+										$('#dffsubmittedDetailsData').append(localStorage.posmOuditOutletList).trigger('create');
+									}
+							}
+					}	
+				},error: function(){
+					$('#bufferImageOutletposm').hide();
+					$('#posmOuditOutletList').hide();
+					$("#posmAuditor").hide();
+					$(".errAudit").text("Please check internet connection");
+				}
+			});
+		}
+	}
 		
 			$("#routeSelectA").html('Route	:		' + rName);
 			$("#outletSelect").html('Outlet	:	' + outletIDName);
@@ -1536,6 +1677,108 @@ function outlet(outletIDName){
 			}else if (localStorage.rep_type =='SUPERVISOR'){
 				$("#townAusa").html('Town	:		' + localStorage.select_town.replace('|','-'));
 				url="#page5";
+				
+			}else if (localStorage.rep_type =='DFF'){
+				$("#townDFFAudit").html('Town	:		' + localStorage.select_town.replace('|','-'));
+				$("#routeSelectDFF").html('Route		:		' + rName);
+				$("#outletSelectDFF").html('Outlet		:	' + outletIDName);
+				
+				/*localStorage.auditorPOSMBrand=brandStr;
+				$("#auditorPOSMBrandList").empty();
+				$("#auditorPOSMBrandList").append(localStorage.auditorPOSMBrand).trigger('create');*/
+				
+				boardCresteN = '<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true" ><input name="posmBoard" id="radio-choice-h-6a" value="YES"  type="radio" onchange="posmboardYesNo();"><label for="radio-choice-h-6a">YES</label><input name="posmBoard" id="radio-choice-h-6b"  value="NO" type="radio" onchange="posmboardYesNo();"><label for="radio-choice-h-6b">NO</label></fieldset>'
+	
+				$("#boarAvailableCrest").empty();
+				$("#boarAvailableCrest").append(boardCresteN).trigger('create');
+				
+				posmCreateN = '<input type="hidden" id="rowID" name="rowID" /><fieldset data-role="controlgroup" data-type="horizontal" data-mini="true"><input name="auditPosm_type" id="radio-choice-h-6a" value="SHOPBOARD_BACKLIT"   type="radio"><label for="radio-choice-h-6a">Lit</label><input name="auditPosm_type" id="radio-choice-h-6b"  value="SHOPBOARD_NONLIT" type="radio"><label for="radio-choice-h-6b">Non-Lit</label></fieldset>'
+				
+				$("#posmConditionCrest").empty();
+				$("#posmConditionCrest").append(posmCreateN).trigger('create');
+				
+				posmBoardConditionN='<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true"><input name="boardCondition" id="radio-choice-h-6a" value="Good"  type="radio"><label for="radio-choice-h-6a">Good</label><input name="boardCondition" id="radio-choice-h-6b"  value="Bad" type="radio"><label for="radio-choice-h-6b">Bad</label></fieldset>';
+				
+				$("#posmBoardConditionCrest").empty();
+				$("#posmBoardConditionCrest").append(posmBoardConditionN).trigger('create');
+				
+				posmMegaHangerCrestN='<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true" ><input name="megaHanger" id="radio-choice-h-6a" value="YES"  type="radio" onchange="megaHangerYesNo();"><label for="radio-choice-h-6a">YES</label><input name="megaHanger" id="radio-choice-h-6b"  value="NO" type="radio" onchange="megaHangerYesNo();"><label for="radio-choice-h-6b">NO</label></fieldset>'
+				
+				$("#posmMegaHangerCrest").empty();
+				$("#posmMegaHangerCrest").append(posmMegaHangerCrestN).trigger('create');
+				
+				posmMegaHangerConditionCrestN='<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true"><input name="megaHangerCondition" id="radio-choice-h-6a" value="Good"  type="radio"><label for="radio-choice-h-6a">Good</label><input name="megaHangerCondition" id="radio-choice-h-6b"  value="Bad" type="radio"><label for="radio-choice-h-6b">Bad</label></fieldset>'
+				
+				$("#posmMegaHangerConditionCrest").empty();
+				$("#posmMegaHangerConditionCrest").append(posmMegaHangerConditionCrestN).trigger('create');
+				
+				posmPlugInDispenserCrestN='<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true" ><input name="plugInDispenser" id="radio-choice-h-6a" value="YES"  type="radio" onchange="plugInDispenserYesNo();"><label for="radio-choice-h-6a">YES</label><input name="plugInDispenser" id="radio-choice-h-6b"  value="NO" type="radio" onchange="plugInDispenserYesNo();"><label for="radio-choice-h-6b">NO</label></fieldset>'
+				
+				$("#posmPlugInDispenserCrest").empty();
+				$("#posmPlugInDispenserCrest").append(posmPlugInDispenserCrestN).trigger('create');
+				
+				plugInDispenserConditionCrestN='<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true"><input name="plugInDispenserCondition" id="radio-choice-h-6a" value="Good"  type="radio"><label for="radio-choice-h-6a">Good</label><input name="plugInDispenserCondition" id="radio-choice-h-6b"  value="Bad" type="radio"><label for="radio-choice-h-6b">Bad</label></fieldset>'
+				
+				$("#plugInDispenserConditionCrest").empty();
+				$("#plugInDispenserConditionCrest").append(plugInDispenserConditionCrestN).trigger('create');
+				
+				posmMiniSolomonCrestN='<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true" ><input name="miniSolomon" id="radio-choice-h-6a" value="YES"  type="radio" onchange="miniSolomonYesNo();"><label for="radio-choice-h-6a">YES</label><input name="miniSolomon" id="radio-choice-h-6b"  value="NO" type="radio" onchange="miniSolomonYesNo();"><label for="radio-choice-h-6b">NO</label></fieldset>'
+				
+				$("#posmMiniSolomonCrest").empty();
+				$("#posmMiniSolomonCrest").append(posmMiniSolomonCrestN).trigger('create');
+				
+				posmMiniSkinCareCrestN='<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true"><input name="skinCare" id="radio-choice-h-6a" value="YES"  type="radio" onchange="skinCareYesNo();"><label for="radio-choice-h-6a">YES</label><input name="skinCare" id="radio-choice-h-6b"  value="NO" type="radio" onchange="skinCareYesNo();"><label for="radio-choice-h-6b">NO</label></fieldset>'
+				
+				$("#posmMiniSkinCareCrest").empty();
+				$("#posmMiniSkinCareCrest").append(posmMiniSkinCareCrestN).trigger('create');
+				
+				posmMiniskinCareConditionCrestN='<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true"><input name="skinCareCondition" id="radio-choice-h-6a" value="Good"  type="radio"><label for="radio-choice-h-6a">Good</label><input name="skinCareCondition" id="radio-choice-h-6b"  value="Bad" type="radio"><label for="radio-choice-h-6b">Bad</label></fieldset>'
+				
+				$("#posmMiniskinCareConditionCrest").empty();
+				$("#posmMiniskinCareConditionCrest").append(posmMiniskinCareConditionCrestN).trigger('create');
+				
+				posmMiniHairCareCrestN='<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true"><input name="hairCare" id="radio-choice-h-6a" value="YES"  type="radio" onchange="hairCareYesNo();"><label for="radio-choice-h-6a">YES</label><input name="hairCare" id="radio-choice-h-6b"  value="NO" type="radio" onchange="hairCareYesNo();"><label for="radio-choice-h-6b">NO</label></fieldset>'
+				
+				$("#posmMiniHairCareCrest").empty();
+				$("#posmMiniHairCareCrest").append(posmMiniHairCareCrestN).trigger('create');
+				
+				posmhairCareConditionCrestN='<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true"><input name="hairCareCondition" id="radio-choice-h-6a" value="Good"  type="radio" ><label for="radio-choice-h-6a">Good</label><input name="hairCareCondition" id="radio-choice-h-6b"  value="Bad" type="radio" ><label for="radio-choice-h-6b">Bad</label></fieldset>'
+				
+				$("#posmhairCareConditionCrest").empty();
+				$("#posmhairCareConditionCrest").append(posmhairCareConditionCrestN).trigger('create');
+				
+				posmDrugStorePOSMCrestN='<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true" ><input name="drugStorePosm" id="radio-choice-h-6a" value="YES"  type="radio" onchange="drugStorePosmYesNo();"><label for="radio-choice-h-6a">YES</label><input name="drugStorePosm" id="radio-choice-h-6b"  value="NO" type="radio" onchange="drugStorePosmYesNo();"><label for="radio-choice-h-6b">NO</label></fieldset>'
+				
+				$("#posmDrugStorePOSMCrest").empty();
+				$("#posmDrugStorePOSMCrest").append(posmDrugStorePOSMCrestN).trigger('create');
+				
+				posmdrugStorePosmConditionCrestN='<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true"><input name="drugStorePosmCondition" id="radio-choice-h-6a" value="Good"  type="radio"><label for="radio-choice-h-6a">Good</label><input name="drugStorePosmCondition" id="radio-choice-h-6b"  value="Bad" type="radio"><label for="radio-choice-h-6b">Bad</label></fieldset>'
+				
+				$("#posmdrugStorePosmConditionCrest").empty();
+				$("#posmdrugStorePosmConditionCrest").append(posmdrugStorePosmConditionCrestN).trigger('create');
+				
+				$("#drugStorePosmQtyShow").hide();
+				$("#drugStorePosmConditionShow").hide();
+				$("#miniSolomonConditionSkinShow").hide();
+				$("#miniSolomonConditionHairShow").hide();
+				$("#skinCareConditionShow").hide();
+				$("#hairCareConditionShow").hide();
+				$("#plugInDispenserConditionShow").hide();
+				$("#megaHangerConditionShow").hide();
+				$("#posmAuditBrandShow").hide();
+				$("#posmAuditposmShow").hide();
+				$("#posmAuditBoardQtyShow").hide();
+				$("#posmAuditBoardConditionShow").hide();
+				$("#btn_submit_posmAudit").show();
+				$("#submit_data_posmAuditor_Save").show();
+				$("#allHideAuditPosm").show();
+				$("#posmAuditSubmitBufferImage").hide();
+				$("#msg_submit_posmAudit").hide();
+				$("#msg_Save_posmAudit").hide();
+				
+				
+				url="#page18";				
+				
 			}else{
 				$("#routeSelectAbc").html('Route		:		' + rName);
 				$("#outletSelectAbc").html('Outlet		:	' + outletIDName);
@@ -2705,9 +2948,11 @@ function posmAuditorNext(){
 	$("#posmAuditBoardQtyShow").hide();
 	$("#posmAuditBoardConditionShow").hide();
 	$("#btn_submit_posmAudit").show();
+	$("#submit_data_posmAuditor_Save").show();
 	$("#allHideAuditPosm").show();
 	$("#posmAuditSubmitBufferImage").hide();
 	$("#msg_submit_posmAudit").hide();
+	$("#msg_Save_posmAudit").hide();
 	var posmOutletCode=localStorage.posmOutletCode;
 	var posmOutletName=localStorage.posmOutletName;
 	
@@ -2841,9 +3086,13 @@ var cityCorp_DFF='';
 
 function submit_data_posmAuditor(){
 	
+	
+	$("#submit_data_posmAuditor_Save").hide();
 	$("#btn_submit_posmAudit").hide();
 	$("#msg_submit_posmAudit").hide();
-	var posmAuditOutSearch=$("#posmAuditOutSearch").val().replace('+','').replace('.','').replace('/','').replace('*','').replace(',','');
+	$("#msg_Save_posmAudit").hide();
+	var posmAuditOutSearch=outlet_codeDFF
+	
 	
 	var d = new Date();	
 	var get_time=d.getTime();
@@ -2872,57 +3121,75 @@ function submit_data_posmAuditor(){
 	if(posmBoard==undefined || posmBoard==''){
 		$(".errorChk").text("Required POSM Board");
 		$("#btn_submit_posmAudit").show();
+		$("#submit_data_posmAuditor_Save").show();
 	}else if((auditorPOSMBrandList==undefined || auditorPOSMBrandList=='') && posmBoard=="YES"){
 		$(".errorChk").text("Required Brand");
 		$("#btn_submit_posmAudit").show();
+		$("#submit_data_posmAuditor_Save").show();
 	}else if((auditPosm_type==undefined || auditPosm_type=='') && posmBoard=="YES"){
 		$(".errorChk").text("Required POSM Type");
 		$("#btn_submit_posmAudit").show();
+		$("#submit_data_posmAuditor_Save").show();
 	}else if((boardQty==0 || boardQty=='') && posmBoard=="YES"){
 		$(".errorChk").text("Required Board Qty");
 		$("#btn_submit_posmAudit").show();
+		$("#submit_data_posmAuditor_Save").show();
 	}else if((boardCondition==undefined || boardCondition=='') && posmBoard=="YES"){
 		$(".errorChk").text("Required Board Condition");
 		$("#btn_submit_posmAudit").show();
+		$("#submit_data_posmAuditor_Save").show();
 	}else if(megaHanger==undefined || megaHanger==''){
 		$(".errorChk").text("Required Mega Hanger");
 		$("#btn_submit_posmAudit").show();
+		$("#submit_data_posmAuditor_Save").show();
 	}else if((megaHangerCondition==undefined || megaHangerCondition=='') && megaHanger=="YES"){
 		$(".errorChk").text("Required Mega Hanger Condition");
 		$("#btn_submit_posmAudit").show();
+		$("#submit_data_posmAuditor_Save").show();
 	}else if(plugInDispenser==undefined || plugInDispenser==''){
 		$(".errorChk").text("Required Plug In Dispenser");
 		$("#btn_submit_posmAudit").show();
+		$("#submit_data_posmAuditor_Save").show();
 	}else if((plugInDispenserCondition==undefined || plugInDispenserCondition=='') && plugInDispenser=="YES"){
 		$(".errorChk").text("Required Plug In Dispenser Condition");
 		$("#btn_submit_posmAudit").show();
+		$("#submit_data_posmAuditor_Save").show();
 	}else if(miniSolomon==undefined || miniSolomon==''){
 		$(".errorChk").text("Required Mini Solomon");
 		$("#btn_submit_posmAudit").show();
+		$("#submit_data_posmAuditor_Save").show();
 	}else if((skinCare==undefined || skinCare=='') && miniSolomon=="YES"){
 		$(".errorChk").text("Required Skin Care");
 		$("#btn_submit_posmAudit").show();
+		$("#submit_data_posmAuditor_Save").show();
 	}else if((skinCareCondition==undefined || skinCareCondition=='') && miniSolomon=="YES" && skinCare=="YES"){
 		$(".errorChk").text("Required Skin Care Condition");
 		$("#btn_submit_posmAudit").show();
+		$("#submit_data_posmAuditor_Save").show();
 	}else if((hairCare==undefined || hairCare=='') && miniSolomon=="YES"){
 		$(".errorChk").text("Required Hair Care");
 		$("#btn_submit_posmAudit").show();
+		$("#submit_data_posmAuditor_Save").show();
 	}else if((hairCareCondition==undefined || hairCareCondition=='') && miniSolomon=="YES" && hairCare=="YES"){
 		$(".errorChk").text("Required Hair Care Condition");
 		$("#btn_submit_posmAudit").show();
+		$("#submit_data_posmAuditor_Save").show();
 	}else if(drugStorePosm==undefined || drugStorePosm==''){
 		$(".errorChk").text("Required Drug Store Posm");
 		$("#btn_submit_posmAudit").show();
+		$("#submit_data_posmAuditor_Save").show();
 	}else if((posmQty==0 || posmQty=='') && drugStorePosm=="YES"){
 		$(".errorChk").text("Required posm Qty");
 		$("#btn_submit_posmAudit").show();
+		$("#submit_data_posmAuditor_Save").show();
 	}else if((drugStorePosmCondition==undefined || drugStorePosmCondition=='') && drugStorePosm=="YES"){
 		$(".errorChk").text("Required Drug Store Posm Condition");
 		$("#btn_submit_posmAudit").show();
+		$("#submit_data_posmAuditor_Save").show();
 	}else if(cityCorp_DFF==''){
 		$(".errorChk").text("Required Tax Area");
 		$("#btn_submit_posmAudit").show();
+		$("#submit_data_posmAuditor_Save").show();
 	}else{
 	
 		$("#posmAuditSubmitBufferImage").show();		
@@ -2970,10 +3237,12 @@ function submit_data_posmAuditor(){
 					$("#posmdrugStorePosmConditionCrest").empty();
 					$("#posmdrugStorePosmConditionCrest").append(posmdrugStorePosmConditionCrestN).trigger('create');
 					$('#outletTaxAreaDFFListRec').empty();
+					
 					$(".errorChk").text("");
 					$("#msg_submit_posmAudit").show();
 					$("#allHideAuditPosm").hide();
 					$("#btn_submit_posmAudit").hide();
+					$("#submit_data_posmAuditor_Save").hide();
 						
 				}else if (result=='Failed'){
 						$("#posmAuditSubmitBufferImage").hide();
@@ -2981,6 +3250,7 @@ function submit_data_posmAuditor(){
 						$("#msg_submit_posmAudit").hide();
 						$("#allHideAuditPosm").show();	
 						$("#btn_submit_posmAudit").show();	
+						$("#submit_data_posmAuditor_Save").show();
 				}
 				
 			}//end result
@@ -2988,4 +3258,189 @@ function submit_data_posmAuditor(){
 		});//end ajax
 	}
 	
+}
+
+<!----------------------------------------------- Save ----------------------------------------------------------------->
+
+var posmBoard='';
+var auditorPOSMBrandList='';
+var auditPosm_type='';
+var boardQty='';
+var boardCondition='';
+var megaHanger='';
+var megaHangerCondition='';
+var plugInDispenser='';
+var plugInDispenserCondition='';
+var miniSolomon='';
+var skinCare='';
+var skinCareCondition='';
+var hairCare='';
+var hairCareCondition='';
+var drugStorePosm='';
+var posmQty='';
+var drugStorePosmCondition='';
+var cityCorp_DFF='';
+
+function submit_data_posmAuditor_Save(){
+	
+	$("#submit_data_posmAuditor_Save").hide();
+	$("#btn_submit_posmAudit").hide();
+	$("#msg_submit_posmAudit").hide();
+	$("#msg_Save_posmAudit").hide();
+	var posmAuditOutSearch=outlet_codeDFF
+	
+	var d = new Date();	
+	var get_time=d.getTime();
+	
+	posmBoard=$('input[name=posmBoard]:checked').val();
+	//alert(typeof posmBoard);
+	auditorPOSMBrandList=$("#auditorPOSMBrandList").val();
+	auditPosm_type=$('input[name=auditPosm_type]:checked').val();
+	boardQty=$("#boardQty").val().replace('+','').replace('-','').replace('.','').replace('/','').replace('*','').replace(',','');
+	boardCondition=$('input[name=boardCondition]:checked').val();
+	megaHanger=$('input[name=megaHanger]:checked').val();
+	megaHangerCondition=$('input[name=megaHangerCondition]:checked').val();
+	plugInDispenser=$('input[name=plugInDispenser]:checked').val();
+	plugInDispenserCondition=$('input[name=plugInDispenserCondition]:checked').val();
+	miniSolomon=$('input[name=miniSolomon]:checked').val();
+	skinCare=$('input[name=skinCare]:checked').val();
+	skinCareCondition=$('input[name=skinCareCondition]:checked').val();
+	hairCare=$('input[name=hairCare]:checked').val();
+	hairCareCondition=$('input[name=hairCareCondition]:checked').val();
+	drugStorePosm=$('input[name=drugStorePosm]:checked').val();
+	posmQty=$("#posmQty").val().replace('+','').replace('-','').replace('.','').replace('/','').replace('*','').replace(',','');
+	drugStorePosmCondition=$('input[name=drugStorePosmCondition]:checked').val();
+	cityCorp_DFF=$("#outletTaxAreaDFFListRec").val();
+	
+
+	if(posmBoard==undefined || posmBoard==''){
+		$(".errorChk").text("Required POSM Board");
+		$("#btn_submit_posmAudit").show();
+		$("#submit_data_posmAuditor_Save").show();
+	}else if((auditorPOSMBrandList==undefined || auditorPOSMBrandList=='') && posmBoard=="YES"){
+		$(".errorChk").text("Required Brand");
+		$("#btn_submit_posmAudit").show();
+		$("#submit_data_posmAuditor_Save").show();
+	}else if((auditPosm_type==undefined || auditPosm_type=='') && posmBoard=="YES"){
+		$(".errorChk").text("Required POSM Type");
+		$("#btn_submit_posmAudit").show();
+		$("#submit_data_posmAuditor_Save").show();
+	}else if((boardQty==0 || boardQty=='') && posmBoard=="YES"){
+		$(".errorChk").text("Required Board Qty");
+		$("#btn_submit_posmAudit").show();
+		$("#submit_data_posmAuditor_Save").show();
+	}else if((boardCondition==undefined || boardCondition=='') && posmBoard=="YES"){
+		$(".errorChk").text("Required Board Condition");
+		$("#btn_submit_posmAudit").show();
+		$("#submit_data_posmAuditor_Save").show();
+	}else if(megaHanger==undefined || megaHanger==''){
+		$(".errorChk").text("Required Mega Hanger");
+		$("#btn_submit_posmAudit").show();
+		$("#submit_data_posmAuditor_Save").show();
+	}else if((megaHangerCondition==undefined || megaHangerCondition=='') && megaHanger=="YES"){
+		$(".errorChk").text("Required Mega Hanger Condition");
+		$("#btn_submit_posmAudit").show();
+		$("#submit_data_posmAuditor_Save").show();
+	}else if(plugInDispenser==undefined || plugInDispenser==''){
+		$(".errorChk").text("Required Plug In Dispenser");
+		$("#btn_submit_posmAudit").show();
+		$("#submit_data_posmAuditor_Save").show();
+	}else if((plugInDispenserCondition==undefined || plugInDispenserCondition=='') && plugInDispenser=="YES"){
+		$(".errorChk").text("Required Plug In Dispenser Condition");
+		$("#btn_submit_posmAudit").show();
+		$("#submit_data_posmAuditor_Save").show();
+	}else if(miniSolomon==undefined || miniSolomon==''){
+		$(".errorChk").text("Required Mini Solomon");
+		$("#btn_submit_posmAudit").show();
+		$("#submit_data_posmAuditor_Save").show();
+	}else if((skinCare==undefined || skinCare=='') && miniSolomon=="YES"){
+		$(".errorChk").text("Required Skin Care");
+		$("#btn_submit_posmAudit").show();
+		$("#submit_data_posmAuditor_Save").show();
+	}else if((skinCareCondition==undefined || skinCareCondition=='') && miniSolomon=="YES" && skinCare=="YES"){
+		$(".errorChk").text("Required Skin Care Condition");
+		$("#btn_submit_posmAudit").show();
+		$("#submit_data_posmAuditor_Save").show();
+	}else if((hairCare==undefined || hairCare=='') && miniSolomon=="YES"){
+		$(".errorChk").text("Required Hair Care");
+		$("#btn_submit_posmAudit").show();
+		$("#submit_data_posmAuditor_Save").show();
+	}else if((hairCareCondition==undefined || hairCareCondition=='') && miniSolomon=="YES" && hairCare=="YES"){
+		$(".errorChk").text("Required Hair Care Condition");
+		$("#btn_submit_posmAudit").show();
+		$("#submit_data_posmAuditor_Save").show();
+	}else if(drugStorePosm==undefined || drugStorePosm==''){
+		$(".errorChk").text("Required Drug Store Posm");
+		$("#btn_submit_posmAudit").show();
+		$("#submit_data_posmAuditor_Save").show();
+	}else if((posmQty==0 || posmQty=='') && drugStorePosm=="YES"){
+		$(".errorChk").text("Required posm Qty");
+		$("#btn_submit_posmAudit").show();
+		$("#submit_data_posmAuditor_Save").show();
+	}else if((drugStorePosmCondition==undefined || drugStorePosmCondition=='') && drugStorePosm=="YES"){
+		$(".errorChk").text("Required Drug Store Posm Condition");
+		$("#btn_submit_posmAudit").show();
+		$("#submit_data_posmAuditor_Save").show();
+	}else if(cityCorp_DFF==''){
+		$(".errorChk").text("Required Tax Area");
+		$("#btn_submit_posmAudit").show();
+		$("#submit_data_posmAuditor_Save").show();
+	}else{
+	
+		$("#posmAuditSubmitBufferImage").show();
+		
+	if (localStorage.saveDataDFF==undefined){		
+		localStorage.saveDataDFF +="rdrd"+localStorage.repID+"fdfd"+localStorage.repName+"fdfd"+localStorage.mobileNo+"fdfd"+posmBoard+"fdfd"+auditorPOSMBrandList+"fdfd"+auditPosm_type+"fdfd"+boardQty+"fdfd"+boardCondition+"fdfd"+megaHanger+"fdfd"+megaHangerCondition+"fdfd"+plugInDispenser+"fdfd"+plugInDispenserCondition+"fdfd"+miniSolomon+"fdfd"+skinCare+"fdfd"+skinCareCondition+"fdfd"+hairCare+"fdfd"+hairCareCondition+"fdfd"+drugStorePosm+"fdfd"+posmQty+"fdfd"+drugStorePosmCondition+"fdfd"+posmAuditOutSearch+"fdfd"+cityCorp_DFF;
+	}
+	
+	
+
+					$("#posmAuditSubmitBufferImage").hide();
+					$("#boarAvailableCrest").append(boardCresteN).trigger('create');
+					$("#posmConditionCrest").append(posmCreateN).trigger('create');
+					$("#posmBoardConditionCrest").append(posmBoardConditionN).trigger('create');
+					$("#posmMegaHangerCrest").append(posmMegaHangerCrestN).trigger('create');
+					$("#posmMegaHangerConditionCrest").append(posmMegaHangerConditionCrestN).trigger('create');
+					$("#posmPlugInDispenserCrest").append(posmPlugInDispenserCrestN).trigger('create');
+					$("#plugInDispenserConditionCrest").append(plugInDispenserConditionCrestN).trigger('create');
+					$("#posmMiniSolomonCrest").append(posmMiniSolomonCrestN).trigger('create');
+					$("#posmMiniSkinCareCrest").append(posmMiniSkinCareCrestN).trigger('create');
+					$("#posmMiniskinCareConditionCrest").append(posmMiniskinCareConditionCrestN).trigger('create');
+					$("#posmMiniHairCareCrest").append(posmMiniHairCareCrestN).trigger('create');
+					$("#posmhairCareConditionCrest").append(posmhairCareConditionCrestN).trigger('create');
+					$("#posmDrugStorePOSMCrest").append(posmDrugStorePOSMCrestN).trigger('create');
+					$("#posmdrugStorePosmConditionCrest").append(posmdrugStorePosmConditionCrestN).trigger('create');
+					
+					
+					$(".errorChk").text("");
+					$("#msg_Save_posmAudit").show();
+					$("#allHideAuditPosm").hide();
+					$("#btn_submit_posmAudit").hide();
+					$("#submit_data_posmAuditor_Save").hide();
+				
+	}
+	
+}
+function posmSaveAuditSub(){
+	
+	if (localStorage.saveDataDFF !=''){
+			
+		var saveDataDFF = localStorage.saveDataDFF;
+		
+		var saveDataDFFStr='<span style="background-color:#900; color:#FFF; margin:0px; padding:0px; display:block;">Save Outlet</span>';
+			for (i=0;i<saveDataDFF.length;i++){					
+				outletSaveLi=saveDataDFF[i].split('fdfd');
+				
+				saveDataDFFStr += '<p style="margin:0px; padding:0px; background-color:#FFF; border:1px solid #F00;">'+"Outlet:"+outletSaveLi[1]+' | '+"Brand:"+outletSaveLi[15]+' | '+"POSM Type:"+outletSaveLi[16]+' | '+"Height:"+outletSaveLi[17]+' | '+"Length:"+outletSaveLi[18]+' | '+"Total Light:"+outletSaveLi[19]+' | '+"Outlet Code :"+outletSaveLi[20]+'| '+"Tax_Area:"+outletSaveLi[21]+'</p>'
+			}
+			localStorage.saveDataDFFS=saveDataDFFStr;		
+			$('#saveDataDFFSList').empty();
+			$('#saveDataDFFSList').append(localStorage.saveDataDFFS).trigger('create');
+	}else{
+		$('#saveDataDFFSList').empty();
+		
+	}
+	
+	url="#saveDFF";				
+	$.mobile.navigate(url);
 }

@@ -192,7 +192,12 @@
 		margin:4px;
 		font-weight:1;
 		background-color:#CE295E;
-	}	
+	}
+	#dff_Usages_Audit{
+		
+		font-weight:1;
+		background-color:#CE295E;
+	}
 	#btn_audit{
 		
 		font-weight:1;
@@ -240,6 +245,11 @@
 		background-color:#CE295E;
 	}
 	#posmReportAuditSub{
+		
+		font-weight:1;
+		background-color:#CE295E;
+	}
+	#posmSaveAuditSub{
 		
 		font-weight:1;
 		background-color:#CE295E;
@@ -402,7 +412,7 @@
         <br/>
         <br/>
         <br/>
-         <div data-role="footer" data-position="fixed" style="font-size:12px; color:#595959; background-color:#FFF; font-weight:1;" align="center" >20190126</div>
+         <div data-role="footer" data-position="fixed" style="font-size:12px; color:#595959; background-color:#FFF; font-weight:1;" align="center" >20190129</div>
     </div>
 </div>
 <!------------------------------------------MAIN MENU----------------------------------------------------------->       
@@ -419,42 +429,7 @@
     <div id="supreptype" style="color:#DA335A; text-align:center;"></div>
     <div id="suprepid" style="color:#DA335A; text-align:center;"></div>    
     <div id="townList" style="height:0 auto; overflow:scroll;"></div>
-    <div id="posmAuditDiv">
-     <div id="townListPosmAuditDFF"  style="color:#096; text-align:center;"></div>
-     <input type="text" id="posmAuditOutSearch" name="posmAuditOutSearch" placeholder="Search Outlet Code" style="border:1px solid #595959;"/>    
-     <button data-role="button" id="btn_posmAudit" onclick="posmAuditorOutlet()" href="#" data-transition="slide" style="color:#fff">Search</button>
-     <button data-role="button" id="posmReportAuditSub" onclick="posmReportAuditSub('')" href="#" data-transition="slide" style="color:#fff"  >Report</button>
-      <div id="bufferImageOutletposm" style="text-align:center;"><img src="running.gif" /></div>
-        <div class="errposmAudit" style="color:#cc0000;" ></div> 
-    <!-- <button data-role="button" id="btn_posmauditReport" onclick="('')" href="#" data-transition="slide" style="color:#fff"  >Report</button> -->
-     <div id="posmAuditor" style="margin-top:10px;">
-         	<table width="100%">
-            <tr style="background-color:#900; color:#FFF;"><td colspan="2">Outlet Details</td></tr>
-              <tr>
-                <td>Outlet</td>
-                <td id="posmOutletCode"></td>
-              </tr>
-               <tr>
-                <td>Territory</td>
-                <td id="posmOutleAddress"></td>
-              </tr>
-              <tr>
-                <td>Route</td>
-                <td id="posmOutleRoute"></td>
-              </tr>
-              <tr>
-                <td>Town</td>
-                <td id="posmOutleTown"></td>
-              </tr>
-            </table>
-
-         	
-         </div>
-         <br/>
-         <div id="posmOuditOutletList"></div>
-         <button data-role="button" id="btn_posm_entry" onclick="posmAuditorNext()" href="#" data-transition="slide" style="color:#fff">Next</button>
-        <div class="errPOSMAudit" style="color:#cc0000;" ></div> 
-    </div>
+    
     <div id="auditorDiv">
     <input type="text" id="auditOutSearch" name="auditOutSearch" placeholder="Search Outlet Code" style="border:1px solid #595959;"/>    
      <button data-role="button" id="btn_audit" onclick="auditorOutlet()" href="#" data-transition="slide" style="color:#fff">Search</button>
@@ -537,7 +512,9 @@
     <button data-role="button" id="btn_stock" onclick="stockReport()" href="#" data-transition="slide" style="color:#fff"  >POSM Summary </button> 
      <button data-role="button" id="entryAgency" onclick="usages('Usages')" href="#" data-transition="slide" style="color:#fff"  > Usage - Outlet </button> 
      <button data-role="button" id="summaryAgency" onclick="summary_report('summary_report')" href="#" data-transition="slide" style="color:#fff"  >Usage Report</button> 
-     <button data-role="button" id="stockAgency" onclick="stockAgency('')" href="#" data-transition="slide" style="color:#fff"  >POSM Summary</button> 
+     <button data-role="button" id="stockAgency" onclick="stockAgency('')" href="#" data-transition="slide" style="color:#fff"  >POSM Summary</button>
+      <button data-role="button" id="dff_Usages_Audit" onclick="usages('Usages')" href="#" data-transition="slide" style="color:#fff">Next </button> 
+      <button data-role="button" id="posmReportAuditSub" onclick="posmReportAuditSub('')" href="#" data-transition="slide" style="color:#fff"  >Report</button>
       
      <div class="errorChk" style="color:#cc0000;"></div>
         <br/><br/>
@@ -1104,7 +1081,7 @@
                 <td colspan="2">
                 <input name="aud_lat" id="aud_lat"  type="hidden">
                 <input name="aud_long" id="aud_long"  type="hidden">
-        		<a data-role="button" id="btn_area_lat_long" onClick="getLocationInfo();" class="ui-btn" style="background-color:#be2752; color:#FFF;  font-weight:1;">Confirm Location</a>
+        		<a data-role="button" id="btn_area_lat_long" onClick="getLocationInfo();" class="ui-btn" style="background-color:#be2752; color:#FFF; font-style:!important; font-weight:1;">Confirm Location</a>
                  <div id="auditSubmitLocationBufferImage" style="text-align:center;"><img src="running.gif" /></div>
                 </td>
               </tr>    
@@ -1196,10 +1173,13 @@
         <a data-role="button" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets " ><img src="menu.png" /></a>
         <a data-role="button" onclick="backClick();" data-rel="back" class="ui-btn-right" data-transition="slide"><img src="back.png" /></a>
         <h3 style="color:#fff;">POST-IT</h3>
-        
         </div>
     <div data-role="content" style="overflow:scroll;">
-    <div id="outletCodePosmAudit" style="color:#DA335A; margin-bottom:8px;"></div>    
+   	<div id="townDFFAudit" style="color:red;"></div>
+    <div id="routeSelectDFF" style="color:green;"></div>
+    <div id="outletSelectDFF" style="color:blue; margin:0px 0px 4px 0px;"></div>
+    <div id="bufferImageOutletposm" style="text-align:center;"><img src="running.gif" /></div> 
+    <div id="dffsubmitfrom">   
         <div id="allHideAuditPosm">
         <table table width="100%" class="ui-body-d ui-shadow table-stripe ui-responsive" id="" style="cell-spacing:0px;"  data-role="table" data-theme="c"  data-mode="display:none">
         	<tr style="background-color:#a32ba3;">
@@ -1302,8 +1282,13 @@
         
         </div>
         <a data-role="button" id="btn_submit_posmAudit" onClick="submit_data_posmAuditor();" class="ui-btn" style="background-color:#D42E5C; color:#FFF;  font-weight:1;">Submit</a>
+        <!--<a data-role="button" id="submit_data_posmAuditor_Save" onClick="submit_data_posmAuditor_Save();" class="ui-btn" style="background-color:#808080; color:#FFF;  font-weight:1;">Save</a>-->
         <div id="posmAuditSubmitBufferImage" style="text-align:center;"><img src="running.gif" /></div>
          <div id="msg_submit_posmAudit" style="color:#FFF; text-align:center; background-color:#DA335A; padding:30px 0px 30px 0px; border-radius:10px;">Successfully Submitted</div>
+         <!--<div id="msg_Save_posmAudit" style="color:#FFF; text-align:center; background-color:#808080; padding:30px 0px 30px 0px; border-radius:10px;">Save Successfully</div>-->
+         </div>
+         
+         <div id="dffsubmittedDetailsData"></div>
 
     <div class="errorChk" style="color:#cc0000; background-color:#FFF;"></div>
             <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
@@ -1327,6 +1312,70 @@
      	</li>
     </ul>
      <div class="errorChk" style="color:#cc0000;"></div>
+    </div>
+</div>
+<!----------------------------Save DFF------------------------------------>
+ <div data-role="page" data-theme="c" id="saveDFF" style="overflow:scroll;">
+    <div data-theme="c" data-role="header" data-position="fixed" >
+        <a data-role="button" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets " ><img src="menu.png" /></a>
+        <a data-role="button" onclick="backClick();" data-rel="back" class="ui-btn-right" data-transition="slide"><img src="back.png" /></a>
+       <h3 class="headerc">Save Outlet</h3>
+    </div>
+    <div data-role="content" > 
+    <div id="" style="color:#228B22; margin-bottom:8px;">Save Outlet List :</div>
+    <div id="saveDataDFFSList"> </div>
+    
+     <div class="errorChk" style="color:#cc0000;"></div>
+    </div>
+</div>
+<!---------------------------- DFF Details Page------------------------------------>
+ <div data-role="page" data-theme="c" id="dffDetailsPage" style="overflow:scroll;">
+    <div data-theme="c" data-role="header" data-position="fixed" >
+        <a data-role="button" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets " ><img src="menu.png" /></a>
+        <a data-role="button" onclick="backClick();" data-rel="back" class="ui-btn-right" data-transition="slide"><img src="back.png" /></a>
+       <h3 class="headerc">POST-IT</h3>
+    </div>
+    <div data-role="content" > 
+    <div id="townDFFAudit" style="color:red;"></div>
+    <div id="routeSelectDFF" style="color:green;"></div>
+    <div id="outletSelectDFF" style="color:blue; margin:0px 0px 4px 0px;"></div>
+    <div id="posmAuditDiv">
+    <!-- <div id="townListPosmAuditDFF"  style="color:#096; text-align:center;"></div>-->
+     <input type="text" id="posmAuditOutSearch" name="posmAuditOutSearch" placeholder="Search Outlet Code" style="border:1px solid #595959;"/>    
+     <button data-role="button" id="btn_posmAudit" onclick="posmAuditorOutlet()" href="#" data-transition="slide" style="color:#fff">Search</button>
+     <button data-role="button" id="posmReportAuditSub" onclick="posmReportAuditSub('')" href="#" data-transition="slide" style="color:#fff"  >Report</button>
+     <button data-role="button" id="posmSaveAuditSub" onclick="posmSaveAuditSub('')" href="#" data-transition="slide" style="color:#fff"  >Save Outlet</button>
+      <div id="bufferImageOutletposm" style="text-align:center;"><img src="running.gif" /></div>
+        <div class="errposmAudit" style="color:#cc0000;" ></div> 
+    <!-- <button data-role="button" id="btn_posmauditReport" onclick="('')" href="#" data-transition="slide" style="color:#fff"  >Report</button> -->
+     <div id="posmAuditor" style="margin-top:10px;">
+         	<table width="100%">
+            <tr style="background-color:#900; color:#FFF;"><td colspan="2">Outlet Details</td></tr>
+              <tr>
+                <td>Outlet</td>
+                <td id="posmOutletCode"></td>
+              </tr>
+               <tr>
+                <td>Territory</td>
+                <td id="posmOutleAddress"></td>
+              </tr>
+              <tr>
+                <td>Route</td>
+                <td id="posmOutleRoute"></td>
+              </tr>
+              <tr>
+                <td>Town</td>
+                <td id="posmOutleTown"></td>
+              </tr>
+            </table>
+
+         	
+         </div>
+         <br/>
+         <div id="posmOuditOutletList"></div>
+         <button data-role="button" id="btn_posm_entry" onclick="posmAuditorNext()" href="#" data-transition="slide" style="color:#fff">Next</button>
+        <div class="errPOSMAudit" style="color:#cc0000;" ></div> 
+    </div>
     </div>
 </div>
   <script type="text/javascript" src="phonegap.js"></script>
