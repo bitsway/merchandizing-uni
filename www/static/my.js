@@ -501,6 +501,21 @@ function syncBasic(){
 	}//-----/field			
 }
 
+function syncValueClean(){
+	
+	localStorage.synced="NO"
+	$("#mobile").val("");
+	$("#password").val("");
+	localStorage.repID=""				
+	localStorage.repName=""
+	localStorage.mobileNo=""
+	localStorage.town=""
+	localStorage.rep_type=""	
+	localStorage.routeList=""
+	$(".errorMsg").text("");
+	url = "#pagesync";
+	$.mobile.navigate(url);
+	}
 	
 function menuClick(){
 	$('#menuBufferingImage').hide();
