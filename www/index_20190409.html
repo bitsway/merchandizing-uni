@@ -19,8 +19,6 @@
 			$(".sucMsgR").hide();
 			$("#bufferImageR").hide();
 			$("#recData").hide();
-			
-			<!--$(".ui-input-search>input").attr('placeholder',"asad");-->
 							
 		});
 		
@@ -185,13 +183,13 @@
 	}
 			
 	#btn_receive{
-		
+		margin:4px;
 		font-weight:1;
 		background-color:#CE295E;
 	}
 
 	#btn_usages{
-		
+		margin:4px;
 		font-weight:1;
 		background-color:#CE295E;
 	}
@@ -216,33 +214,28 @@
 		background-color:#CE295E;
 	}	
 	#btn_stock{
-	  
+	   margin:4px;
 	   font-weight:1;
 	   background-color:#CE295E;
 	}
 	#btn_dff{
-	   
+	   margin:4px;
 	   font-weight:1;
 	   background-color:#CE295E;
 	}
 	#btn_defective{
-	   
+	   margin:4px;
 	   font-weight:1;
 	   background-color:#CE295E;
 	}
 	#reportbtn{
-		
-		font-weight:1;
-		background-color:#CE295E;
-	}
-	#reportbtnAgency{
-		
+		margin:4px;
 		font-weight:1;
 		background-color:#CE295E;
 	}
 	#entryAgency{
 		
-	    
+	    margin:4px;
 		font-weight:1;
 		background-color:#CE295E;
 	}
@@ -262,7 +255,7 @@
 		background-color:#CE295E;
 	}
 	#btn_posmauditReport{
-		
+		margin:4px;
 		font-weight:1;
 		background-color:#CE295E;
 	}	
@@ -273,12 +266,12 @@
 		background-color:#CE295E;
 	}
 	#stockAgency{
-		
+		margin:4px;
 		font-weight:1;
 		background-color:#CE295E;
 	}			
 	#summaryAgency{
-		
+		margin:4px;
 		font-weight:1;
 		background-color:#CE295E;
 	}
@@ -399,27 +392,19 @@
     </div>
     <div data-role="content">
         <div class="errorMsg"></div>
-       <!-- <ul data-role="listview" class="list" data-filter="true" data-inset="true" style="height:450px; overflow:scroll;">
-        	<li style="background-color:#FFF; border-top-color:#F03; border-bottom-color:#F03;">qwqw</li>
-            <li style="background-color:#FFF; border-top-color:#F03; border-bottom-color:#F03;">acv</li>
-            <li style="background-color:#FFF; border-top-color:#F03; border-bottom-color:#F03;">asasas</li>
-        </ul>-->
         <ul data-role="listview" data-inset="true" data-theme="c">
             <li class="ui-field-contain">
                 <label > Mobile No</label>
-                <input name="mobile" id="mobile" type="number" placeholder="Mobile Number"/>
+                <input name="mobile" id="mobile" type="number" />
             </li>
             <li class="ui-field-contain">
                 <label >Password </label>
-                <input type="password" name="password" id="password" placeholder="Password"/>
+                <input type="password" name="password" id="password" />
             </li>
         </ul>
         <a data-role="button" href="#" id="syncBasicBtn" onclick="syncBasic()" data-theme="c" data-transition="slide" >Sync</a>
         <br/><br/>
         <div id="bufferImageSync" style="text-align:center;"><img src="running.gif" /></div>
-        <div>
-        
-        </div>
 		<div id="#syncData"></div>
         <br/>
         <br/>
@@ -441,7 +426,7 @@
     </div>
     <div data-role="content">
     <div id="suprepname" style="color:#DA335A; text-align:center;"></div>  
-    <!--<div id="supreptype" style="color:#DA335A; text-align:center;"></div>-->
+    <div id="supreptype" style="color:#DA335A; text-align:center;"></div>
     <div id="suprepid" style="color:#DA335A; text-align:center;"></div>    
     <div id="townList" style="height:0 auto; overflow:scroll;"></div>
     
@@ -482,8 +467,7 @@
            <br/>
        	<button data-role="button" id="btn_audit_entry" onclick="outletAudit()" href="#" data-transition="slide" style="color:#fff">Next</button>   
       </div>
-    <!--<button data-role="button" id="townSUP" onclick="townSelect()" href="#" data-transition="slide" style="background-color:#CE295E; " ><span class="text-color">Next</span></button>-->
-     <div id="bufferImageSelectTown" style="text-align:center;"><img src="running.gif" /></div>
+    <button data-role="button" id="townSUP" onclick="townSelect()" href="#" data-transition="slide" style="background-color:#CE295E; " ><span class="text-color">Next</span></button>
 	<br/> <br/>      
     <div class="errorChk" style="color:#cc0000;" ></div>       
     </div>
@@ -511,29 +495,27 @@
 <!-- ------------------------------------first_page--------------------------------- -->
 <div data-role="page" data-theme="c" id="first_page" >
 	<div data-theme="c" data-role="header" data-position="fixed" >
-        <a data-role="button" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets " ><img src="Home.png" /></a>
+        <a data-role="button" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets " ><img src="menu.png" /></a>
         <a data-role="button" onclick="backClick();" data-rel="back" class="ui-btn-right" data-transition="slide"><img src="back.png" /></a>
-        <h3 class="headerc"></h3>
+        <h3 class="headerc" style="height:42px;"></h3>
     </div>
     <div data-role="content" >
     <div id="cmprepname" style="color:#DA335A; text-align:center;"></div>  
     <div id="cmpreptype" style="color:#DA335A; text-align:center;"></div>
      <div id="cmprepid" style="color:#DA335A; text-align:center;"></div>    
-    <div id="townSelct" style="color:#D42E5C;"></div>    
-          
-    <button data-role="button" id="btn_receive" onclick="receive('Receive')" href="#" data-transition="slide" style="color:#fff"><img src="logo.png"/><br>Receive</button>
-     <button data-role="button" id="btn_defective" onclick="defective()" href="#" data-transition="slide" style="color:#fff"><img src="logo.png"/><br>Defective</button>
-    <button data-role="button" id="btn_usages" onclick="usages('Usages')" href="#" data-transition="slide" style="color:#fff"><img src="logo.png"/><br>Usage </button> 
-   <!-- <button data-role="button" id="btn_dff" onclick="usages('DFF')" href="#" data-transition="slide" style="color:#fff"  >Usage - DFF</button>-->
-     <button data-role="button" id="reportbtn" onclick="repo('repo')" href="#" data-transition="slide" style="color:#fff"><img src="logo.png"/><br>Reports </button>
-     
-    
-     <button data-role="button" id="entryAgency" onclick="usages('Usages')" href="#" data-transition="slide" style="color:#fff"><img src="logo.png"/><br>Usage </button> 
-      <button data-role="button" id="reportbtnAgency" onclick="repoAgency()" href="#" data-transition="slide" style="color:#fff"><img src="logo.png"/><br>Reports </button>
-    
-      <button data-role="button" id="dff_Usages_Audit" onclick="usages('Usages')" href="#" data-transition="slide" style="color:#fff"><img src="logo.png"/><br>Next </button> 
-      <button data-role="button" id="posmReportAuditSub" onclick="posmReportAuditSub('')" href="#" data-transition="slide" style="color:#fff"  ><img src="logo.png"/><br>Report</button>
-      <div id="menuBufferingImage" style="text-align:center;"><img src="running.gif" /></div>
+    <div id="townSelct" style="color:#D42E5C;"></div>          
+    <button data-role="button" id="btn_receive" onclick="receive('Receive')" href="#" data-transition="slide" style="color:#fff">Receive</button>
+     <button data-role="button" id="btn_defective" onclick="defective()" href="#" data-transition="slide" style="color:#fff"  >Defective</button>
+    <button data-role="button" id="btn_usages" onclick="usages('Usages')" href="#" data-transition="slide" style="color:#fff">Usage - Outlet </button> 
+    <button data-role="button" id="btn_dff" onclick="usages('DFF')" href="#" data-transition="slide" style="color:#fff"  >Usage - DFF</button>
+     <button data-role="button" id="reportbtn" onclick="repo('repo')" href="#" data-transition="slide" style="color:#fff"  >Receive And Usage Report </button>
+    <button data-role="button" id="btn_stock" onclick="stockReport()" href="#" data-transition="slide" style="color:#fff"  >POSM Summary </button> 
+     <button data-role="button" id="entryAgency" onclick="usages('Usages')" href="#" data-transition="slide" style="color:#fff"  > Usage - Outlet </button> 
+     <button data-role="button" id="summaryAgency" onclick="summary_report('summary_report')" href="#" data-transition="slide" style="color:#fff"  >Usage Report</button> 
+     <button data-role="button" id="stockAgency" onclick="stockAgency('')" href="#" data-transition="slide" style="color:#fff"  >POSM Summary</button>
+      <button data-role="button" id="dff_Usages_Audit" onclick="usages('Usages')" href="#" data-transition="slide" style="color:#fff">Next </button> 
+      <button data-role="button" id="posmReportAuditSub" onclick="posmReportAuditSub('')" href="#" data-transition="slide" style="color:#fff"  >Report</button>
+      
      <div class="errorChk" style="color:#cc0000;"></div>
         <br/><br/>
   	<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
@@ -557,7 +539,7 @@
 <!-----------------------------second_page--------------------------------->	
 <div data-role="page" data-theme="c" id="second_page" style="overflow:scroll;">
     <div data-theme="c" data-role="header" data-position="fixed" >
-        <a data-role="button" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets " ><img src="Home.png" /></a>
+        <a data-role="button" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets " ><img src="menu.png" /></a>
         <a data-role="button" onclick="backClick();" data-rel="back" class="ui-btn-right" data-transition="slide"><img src="back.png" /></a>
         <h3 style="color:#fff;">POST-IT</h3>
         
@@ -569,11 +551,11 @@
         <table width="100%" class="ui-body-d ui-shadow table-stripe ui-responsive" style="cell-spacing:0px; background-color:#BFBFBF;" data-role="table" data-theme="c"  data-mode="display:none">
           <tr >
             <td ><label style="color:#D42E5C;  font-weight:1;">POSM Code</label><!--<div id="posmCodeRec" style="width:210px; display:inline-block;"></div>-->
-            <select id="posmCodeRec" class="auto_break" name="posmCodeRec" onClick="alloDetails();"></select>
+            <select id="posmCodeRec" class="auto_break" name="posmCodeRec" style=""></select>
             </td>
-           <!-- <td style="vertical-align:bottom;">
+            <td style="vertical-align:bottom;">
                 <a data-role="button" id="" onClick="alloDetails();" class="ui-btn" style="background-color:#D42E5C; color:#FFF;  font-weight:1;">Next</a>
-            </td>-->
+            </td>
           </tr>
           </table>  
           <br />
@@ -616,7 +598,7 @@
         </div> 
         <a data-role="button" id="btn_submit_receive" onClick="submit_data_receive();" class="ui-btn" style="background-color:#D42E5C; color:#FFF;  font-weight:1;">Submit</a>
          <div id="receiveSubmitbufferImage" style="text-align:center;"><img src="running.gif" /></div>
-         <div class="sucMsgR" style="color:#030; font-size:20px; text-align:center; padding:30px 0px 30px 0px; border-radius:10px;"><img src="submitLogo.png"/>Submitted Successfully </div>
+         <div class="sucMsgR" style="color:#FFF; text-align:center; background-color:#DA335A; padding:30px 0px 30px 0px; border-radius:10px;">Successfully Submitted</div>
     <div class="errorChk" style="color:#cc0000; background-color:#FFF;"></div>
             <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
     </div>
@@ -624,7 +606,7 @@
 <!--===============================Sup defective======================================-->
 <div data-role="page" data-theme="c" id="defective_page" style="overflow:scroll;">
     <div data-theme="c" data-role="header" data-position="fixed" >
-        <a data-role="button" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets " ><img src="Home.png" /></a>
+        <a data-role="button" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets " ><img src="menu.png" /></a>
         <a data-role="button" onclick="backClick();" data-rel="back" class="ui-btn-right" data-transition="slide"><img src="back.png" /></a>
         <h3 style="color:#fff;">POST-IT</h3>
     </div>
@@ -635,12 +617,11 @@
         <table width="100%" class="ui-body-d ui-shadow table-stripe ui-responsive" id="beneficiaryCount" style="cell-spacing:0px;  background-color:#BFBFBF;"  data-role="table" data-theme="d"  data-mode="display:none">
           <tr>
             <td><label style="color:#D42E5C;  font-weight:1;">POSM Code</label><!--<div id="posmCodeList" style="width:210px; display:inline-block;"></div>-->
-            <select id="posmCodedef" class="auto_break" name="posmCodedef" onClick="alloDetailsDef();"></select>
-            
+            <select id="posmCodedef" class="auto_break" name="posmCodedef"  style="width:150px; display:inline-block;"></select>
             </td>
-            <!--<td style="vertical-align:bottom;">
+            <td style="vertical-align:bottom;">
                 <a data-role="button" id="" onClick="alloDetailsDef();" class="ui-btn" style="background-color:#D42E5C; color:#FFF;  font-weight:1;">Next</a>
-            </td>-->
+            </td>
           </tr>
           </table>  
           <br />
@@ -683,7 +664,7 @@
         </div>   
         <a data-role="button" id="btn_submit_defec" onClick="submit_data_defective();" class="ui-btn" style="background-color:#D42E5C; color:#FFF;  font-weight:1;">Submit</a>
         <div id="defectiveSubmitbufferImage" style="text-align:center;"><img src="running.gif" /></div>
-          <div class="sucMsgdef" style="color:#030; font-size:20px; text-align:center; padding:30px 0px 30px 0px; border-radius:10px;"><img src="submitLogo.png"/>Submitted Successfully</div> 
+          <div class="sucMsgdef" style="color:#FFF; text-align:center; background-color:#DA335A; padding:30px 0px 30px 0px; border-radius:10px;">Successfully Submitted</div> 
     <div class="errorChk" style="color:#cc0000; background-color:#FFF;"></div>
             <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
     </div>
@@ -693,7 +674,7 @@
 
 <div data-role="page" data-theme="c" id="page3" >
     <div data-theme="c" data-role="header" data-position="fixed" >
-        <a data-role="button" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets " ><img src="Home.png" /></a>
+        <a data-role="button" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets " ><img src="menu.png" /></a>
         <a data-role="button" onclick="backClick();" data-rel="back" class="ui-btn-right" data-transition="slide"><img src="back.png" /></a>
         <h3 class="headerc" style="font-weight:1;">Select Route</h3>
     </div>
@@ -712,14 +693,14 @@
 
 <div data-role="page" data-theme="c" id="page4" >
  <div data-theme="c" data-role="header" data-position="fixed" >
-        <a data-role="button" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets " ><img src="Home.png" /></a>
+        <a data-role="button" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets " ><img src="menu.png" /></a>
         <a data-role="button" onclick="backClick();" data-rel="back" class="ui-btn-right" data-transition="slide"><img src="back.png" /></a>
         <h3 class="headerc">Select Outlet</h3>
     </div>
     <div data-role="content" > 
     <div id="townAbc" style="color:red;"></div> 
     <div id="routeSelect" style="color:green;"></div>
-   <!-- <div id="bufferImageOutlet" style="text-align:center;"><img src="running.gif" /></div> -->
+    <div id="bufferImageOutlet" style="text-align:center;"><img src="running.gif" /></div> 
      <div class="errorChk" style="color:#cc0000; background-color:#FFF;"></div> 
      <div id="outletList"></div>
     
@@ -732,7 +713,7 @@
 <!----------------------------------usage-page5---------------------------------------->
 <div data-role="page" data-theme="c" id="page5" style="overflow:scroll;">
     <div data-theme="c" data-role="header" data-position="fixed" >
-        <a data-role="button" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets " ><img src="Home.png" /></a>
+        <a data-role="button" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets " ><img src="menu.png" /></a>
         <a data-role="button" onclick="backClick();" data-rel="back" class="ui-btn-right" data-transition="slide"><img src="back.png" /></a>
         <h3 style="color:#fff;">POST-IT</h3>
     </div>
@@ -744,12 +725,12 @@
         <table width="100%" class="ui-body-d ui-shadow table-stripe ui-responsive" id="beneficiaryCount" style="cell-spacing:0px;  background-color:#BFBFBF;"  data-role="table" data-theme="d"  data-mode="display:none">
           <tr>
             <td><label style="color:#D42E5C;  font-weight:1;">POSM Code</label><!--<div id="posmCodeList" style="width:210px; display:inline-block;"></div>-->
-            <select id="posmCodeUsges" class="auto_break" name="posmCodeUsges" onClick="alloDetailsU();"></select>
+            <select id="posmCodeUsges" class="auto_break" name="posmCodeUsges"  style="width:150px; display:inline-block;"></select>
             </td>
-            <!--<td style="vertical-align:bottom;">
+            <td style="vertical-align:bottom;">
                 <a data-role="button" id="" onClick="alloDetailsU();" class="ui-btn" style="background-color:#D42E5C; color:#FFF;  font-weight:1;">Next</a>
               
-            </td>-->
+            </td>
           </tr>
           </table>
           <div id="bufferImageU" style="text-align:center;"><img src="running.gif" /></div>  
@@ -793,7 +774,7 @@
         </div>   
         <a data-role="button" id="btn_submit_usages" onClick="submit_data_usages();" class="ui-btn" style="background-color:#D42E5C; color:#FFF;  font-weight:1;">Submit</a>
         <div id="usageSubmitbufferImage" style="text-align:center;"><img src="running.gif" /></div>
-          <div class="sucMsgU" style="color:#030; font-size:20px; text-align:center; padding:30px 0px 30px 0px; border-radius:10px;"><img src="submitLogo.png"/>Submitted Successfully</div> 
+          <div class="sucMsgU" style="color:#FFF; text-align:center; background-color:#DA335A; padding:30px 0px 30px 0px; border-radius:10px;">Successfully Submitted</div> 
     <div class="errorChk" style="color:#cc0000; background-color:#FFF;"></div>
             <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
     </div>
@@ -804,15 +785,14 @@
 <!-------------------------------------------Report------------------------------>
 <div data-role="page" data-theme="c" id="page9" style="overflow:scroll;">
     <div data-theme="c" data-role="header" data-position="fixed" >
-        <a data-role="button" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets " ><img src="Home.png" /></a>
+        <a data-role="button" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets " ><img src="menu.png" /></a>
         <a data-role="button" onclick="backClick();" data-rel="back" class="ui-btn-right" data-transition="slide"><img src="back.png" /></a>
-       <h3 class="headerc">Reports</h3>
+       <h3 class="headerc">Report</h3>
     </div>
     <br/><br/>
     <div data-role="content" > 
-     <button data-role="button" id="btn_stock" onclick="stockReport()" href="#" class="ui-btn" data-transition="slide" style="color:#fff"  >POSM Summary </button>
-     <button data-role="button" id="recReport" onClick="recReport('recReport');" class="ui-btn" style="background-color:#CE295E" > <span class="text-color">Receive And Defective Details</span></button>
-     <button data-role="button" id="recUsage" onClick="recUsage('recUsage');" class="ui-btn" style="background-color:#CE295E" > <span class="text-color">Usage Details</span></button>
+     <button data-role="button" id="recReport" onClick="recReport('recReport');" class="ui-btn" style="background-color:#CE295E" > <span class="text-color">Receive Report</span></button>
+     <button data-role="button" id="recUsage" onClick="recUsage('recUsage');" class="ui-btn" style="background-color:#CE295E" > <span class="text-color">Usage Report</span></button>
      
      <div class="sucChk" style="color:#004d00;"></div>
      <div class="errorChk" style="color:#cc0000;"></div>
@@ -822,32 +802,10 @@
             <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
     </div>
 </div>
-
-<!-------------------------------------------Report------------------------------>
-<div data-role="page" data-theme="c" id="reportPageA9" style="overflow:scroll;">
-    <div data-theme="c" data-role="header" data-position="fixed" >
-        <a data-role="button" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets " ><img src="Home.png" /></a>
-        <a data-role="button" onclick="backClick();" data-rel="back" class="ui-btn-right" data-transition="slide"><img src="back.png" /></a>
-       <h3 class="headerc">Reports</h3>
-    </div>
-    <br/><br/>
-    <div data-role="content" > 
-      <button data-role="button" id="summaryAgency" onclick="summary_report('summary_report')" href="#" data-transition="slide" style="color:#fff"  ><img src="logo.png"/><br>Usage Details</button> 
-     <button data-role="button" id="stockAgency" onclick="stockAgency('')" href="#" data-transition="slide" style="color:#fff"><img src="logo.png"/><br>POSM Summary</button>
-     
-     <div class="sucChk" style="color:#004d00;"></div>
-     <div class="errorChk" style="color:#cc0000;"></div>
-     
-        <br/><br/>
-  
-            <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-    </div>
-</div>
-
 <!--------------------------------Report Viev page10----------------------->
 <div data-role="page" data-theme="c" id="page10" style="overflow:scroll;">
     <div data-theme="c" data-role="header" data-position="fixed" >
-        <a data-role="button" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets " ><img src="Home.png" /></a>
+        <a data-role="button" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets " ><img src="menu.png" /></a>
         <a data-role="button" onclick="backClick();" data-rel="back" class="ui-btn-right" data-transition="slide"><img src="back.png" /></a>
        <h3 class="headerc">Receive Report</h3>
     </div>
@@ -868,7 +826,7 @@
 <!--------------------------stock report-------------------------->
 <div data-role="page" data-theme="c" id="page11" style="overflow:scroll;">
     <div data-theme="c" data-role="header" data-position="fixed" >
-        <a data-role="button" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets " ><img src="Home.png" /></a>
+        <a data-role="button" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets " ><img src="menu.png" /></a>
         <a data-role="button" onclick="backClick();" data-rel="back" class="ui-btn-right" data-transition="slide"><img src="back.png" /></a>
        <h3 class="headerc">POSM Summary</h3>
     </div>
@@ -888,9 +846,9 @@
 <!--------------------------------------------------------------->
 <div data-role="page" data-theme="c" id="page12" style="overflow:scroll;">
     <div data-theme="c" data-role="header" data-position="fixed" >
-        <a data-role="button" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets " ><img src="Home.png" /></a>
+        <a data-role="button" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets " ><img src="menu.png" /></a>
         <a data-role="button" onclick="backClick();" data-rel="back" class="ui-btn-right" data-transition="slide"><img src="back.png" /></a>
-       <h3 class="headerc">Usage Details</h3>
+       <h3 class="headerc">Usage Report</h3>
     </div>
     <div data-role="content" > 
     <div id="repIDU" style="color:#228B22;"></div>
@@ -908,9 +866,9 @@
 <!-------------Agency Report------------------------------------------------------------>
 <div data-role="page" data-theme="c" id="page13" style="overflow:scroll;">
     <div data-theme="c" data-role="header" data-position="fixed" >
-        <a data-role="button" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets " ><img src="Home.png" /></a>
+        <a data-role="button" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets " ><img src="menu.png" /></a>
         <a data-role="button" onclick="backClick();" data-rel="back" class="ui-btn-right" data-transition="slide"><img src="back.png" /></a>
-       <h3 class="headerc">Usage Details</h3>
+       <h3 class="headerc">Usage Report</h3>
     </div>
     <div data-role="content"> 
     <div id="repIDA" style="color:green;"></div>
@@ -928,7 +886,7 @@
 <!----------------------Agncy Combo------------------------------->
 <div data-role="page" data-theme="c" id="page14" style="overflow:scroll;">
     <div data-theme="c" data-role="header" data-position="fixed" >
-        <a data-role="button" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets " ><img src="Home.png" /></a>
+        <a data-role="button" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets " ><img src="menu.png" /></a>
         <a data-role="button" onclick="backClick();" data-rel="back" class="ui-btn-right" data-transition="slide"><img src="back.png" /></a>
         <h3 style="color:#fff;">POST-IT</h3> 
         </div>
@@ -942,11 +900,11 @@
         <table width="100%" class="ui-body-d ui-shadow table-stripe ui-responsive" id="beneficiaryCount" style="cell-spacing:0px; background-color:#BFBFBF;"  data-role="table" data-theme="d"  data-mode="display:none">
           <tr>
             <td><label style="color:#D42E5C;  font-weight:1;">POSM Code</label><!--<div id="posmCodeAgn" style="width:210px; display:inline-block;"></div>-->
-            <select id="posmCodeAgn" class="auto_break" name="posmCodeAgn" onClick="alloDetailsAgency();"></select>
+            <select id="posmCodeAgn" class="auto_break" name="posmCodeAgn"  style="width:150px; display:inline-block;"></select>
             </td>
-            <!--<td style="vertical-align:bottom;">
+            <td style="vertical-align:bottom;">
                 <a data-role="button" id="" onClick="alloDetailsAgency();" class="ui-btn" style="background-color:#D42E5C; color:#FFF;  font-weight:1;">Next</a>
-            </td>-->
+            </td>
           </tr>
           </table>  
           <br />
@@ -997,7 +955,7 @@
               </tr>
               <tr style="background-color:#AAAAAA;">
                <td><label style="color:#FFF;  font-weight:1;">Tax Area<span style="color:#F00;">*</span></label></td><!--<div id="posmCodeAgn" style="width:210px; display:inline-block;"></div>-->
-            <td><select id="taxAreaComboSelect" class="auto_break" name="taxAreaComboSelect"></select>
+            <td><select id="taxAreaComboSelect" class="auto_break" name="taxAreaComboSelect"  style="width:150px; display:inline-block;"></select>
             </td>
                 <!--<td style="color:fff;"><span class="btn-color">City Corp</span></td>
                 <td><input type="text" id="citycor" name="citycor" required="required" />-->
@@ -1015,7 +973,7 @@
         </div> 
         <a data-role="button" id="btn_submit_Agency" onClick="submit_data_agency();" class="ui-btn" style="background-color:#D42E5C; color:#FFF;  font-weight:1;">Submit</a>
         <div id="auditAgencySubmitBufferImage" style="text-align:center;"><img src="running.gif" /></div>
-         <div id="sucMsgAgency" style="color:#030; font-size:20px; text-align:center; padding:30px 0px 30px 0px; border-radius:10px;"><img src="submitLogo.png"/>Submitted Successfully</div>
+         <div id="sucMsgAgency" style="color:#FFF; text-align:center; background-color:#DA335A; padding:30px 0px 30px 0px; border-radius:10px;">Successfully Submitted</div>
     <div class="errorChk" style="color:#cc0000; background-color:#FFF;"></div>
             <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
     </div>
@@ -1025,7 +983,7 @@
 <!---------------------------------------------audit-------------------------------------------------------->
 <div data-role="page" data-theme="c" id="page15" style="overflow:scroll;">
     <div data-theme="c" data-role="header" data-position="fixed" >
-        <a data-role="button" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets " ><img src="Home.png" /></a>
+        <a data-role="button" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets " ><img src="menu.png" /></a>
         <a data-role="button" onclick="backClick();" data-rel="back" class="ui-btn-right" data-transition="slide"><img src="back.png" /></a>
         <h3 style="color:#fff;">POST-IT</h3>
         
@@ -1132,7 +1090,7 @@
         </div>
         <a data-role="button" id="btn_submit_audit" onClick="submit_data_auditor();" class="ui-btn" style="background-color:#D42E5C; color:#FFF;  font-weight:1;">Submit</a>
         <div id="auditSubmitBufferImage" style="text-align:center;"><img src="running.gif" /></div>
-         <div id="msg_submit_audit" style="color:#030; font-size:20px; text-align:center; padding:30px 0px 30px 0px; border-radius:10px;"><img src="submitLogo.png"/>Submitted Successfully</div>
+         <div id="msg_submit_audit" style="color:#FFF; text-align:center; background-color:#DA335A; padding:30px 0px 30px 0px; border-radius:10px;">Successfully Submitted</div>
 
     <div class="errorChk" style="color:#cc0000; background-color:#FFF;"></div>
             <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
@@ -1143,7 +1101,7 @@
  <!-----------------------------------common Page for all---------------------->
 <div data-role="page" data-theme="c" id="allUser" style="overflow:scroll" >
     <div data-theme="c" data-role="header" data-position="fixed" >
-        <a data-role="button" href="#leftpanel2" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets " ><img src="Home.png"></a>
+        <a data-role="button" href="#leftpanel2" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets " ><img src="menu.png"></a>
         
         <a data-role="button" onClick="exit();" ><img src="exit.png"/> </a>
         
@@ -1173,7 +1131,7 @@
  <!-----------------------------------Agency Stock---------------------->
 <div data-role="page" data-theme="c" id="page16" style="overflow:scroll;">
     <div data-theme="c" data-role="header" data-position="fixed" >
-        <a data-role="button" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets " ><img src="Home.png" /></a>
+        <a data-role="button" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets " ><img src="menu.png" /></a>
         <a data-role="button" onclick="backClick();" data-rel="back" class="ui-btn-right" data-transition="slide"><img src="back.png" /></a>
        <h3 class="headerc">POSM Summary</h3>
     </div>
@@ -1193,7 +1151,7 @@
 <!-----------------------auditor Report------------------------------->
 <div data-role="page" data-theme="c" id="page17" style="overflow:scroll;">
     <div data-theme="c" data-role="header" data-position="fixed" >
-        <a data-role="button" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets " ><img src="Home.png" /></a>
+        <a data-role="button" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets " ><img src="menu.png" /></a>
         <a data-role="button" onclick="backClick();" data-rel="back" class="ui-btn-right" data-transition="slide"><img src="back.png" /></a>
        <h3 class="headerc">Reports</h3>
     </div>
@@ -1212,7 +1170,7 @@
 <!------------------------------POSM Audit----------------------------------------->
 <div data-role="page" data-theme="c" id="page18" style="overflow:scroll;">
     <div data-theme="c" data-role="header" data-position="fixed" >
-        <a data-role="button" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets " ><img src="Home.png" /></a>
+        <a data-role="button" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets " ><img src="menu.png" /></a>
         <a data-role="button" onclick="backClick();" data-rel="back" class="ui-btn-right" data-transition="slide"><img src="back.png" /></a>
         <h3 style="color:#fff;">POST-IT</h3>
         </div>
@@ -1326,7 +1284,7 @@
         <a data-role="button" id="btn_submit_posmAudit" onClick="submit_data_posmAuditor();" class="ui-btn" style="background-color:#D42E5C; color:#FFF;  font-weight:1;">Submit</a>
         <!--<a data-role="button" id="submit_data_posmAuditor_Save" onClick="submit_data_posmAuditor_Save();" class="ui-btn" style="background-color:#808080; color:#FFF;  font-weight:1;">Save</a>-->
         <div id="posmAuditSubmitBufferImage" style="text-align:center;"><img src="running.gif" /></div>
-         <div id="msg_submit_posmAudit" style="color:#030; font-size:20px; text-align:center; padding:30px 0px 30px 0px; border-radius:10px;"><img src="submitLogo.png"/>Submitted Successfully</div>
+         <div id="msg_submit_posmAudit" style="color:#FFF; text-align:center; background-color:#DA335A; padding:30px 0px 30px 0px; border-radius:10px;">Successfully Submitted</div>
          <!--<div id="msg_Save_posmAudit" style="color:#FFF; text-align:center; background-color:#808080; padding:30px 0px 30px 0px; border-radius:10px;">Save Successfully</div>-->
          </div>
          
@@ -1340,7 +1298,7 @@
  <!----------------------------PosmReport------------------------------------>
  <div data-role="page" data-theme="c" id="page20" style="overflow:scroll;">
     <div data-theme="c" data-role="header" data-position="fixed" >
-        <a data-role="button" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets " ><img src="Home.png" /></a>
+        <a data-role="button" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets " ><img src="menu.png" /></a>
         <a data-role="button" onclick="backClick();" data-rel="back" class="ui-btn-right" data-transition="slide"><img src="back.png" /></a>
        <h3 class="headerc">Reports</h3>
     </div>
@@ -1359,7 +1317,7 @@
 <!----------------------------Save DFF------------------------------------>
  <div data-role="page" data-theme="c" id="saveDFF" style="overflow:scroll;">
     <div data-theme="c" data-role="header" data-position="fixed" >
-        <a data-role="button" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets " ><img src="Home.png" /></a>
+        <a data-role="button" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets " ><img src="menu.png" /></a>
         <a data-role="button" onclick="backClick();" data-rel="back" class="ui-btn-right" data-transition="slide"><img src="back.png" /></a>
        <h3 class="headerc">Save Outlet</h3>
     </div>
@@ -1373,7 +1331,7 @@
 <!---------------------------- DFF Details Page------------------------------------>
  <div data-role="page" data-theme="c" id="dffDetailsPage" style="overflow:scroll;">
     <div data-theme="c" data-role="header" data-position="fixed" >
-        <a data-role="button" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets " ><img src="Home.png" /></a>
+        <a data-role="button" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets " ><img src="menu.png" /></a>
         <a data-role="button" onclick="backClick();" data-rel="back" class="ui-btn-right" data-transition="slide"><img src="back.png" /></a>
        <h3 class="headerc">POST-IT</h3>
     </div>

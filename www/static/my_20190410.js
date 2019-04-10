@@ -39,10 +39,10 @@ var auditProfileBoxStatusC='';
 var auditStoreTypeC='';
 var agencyAuditPaintComboN='';
 
-//localStorage.rep_type='';
+localStorage.rep_type='';
 
 //---Online
-var apipath="http://w02.yeapps.com/postit/syncmobile_20190410/";
+var apipath="http://w02.yeapps.com/postit/syncmobile_20190129/";
 //--- local
 //var apipath="http://127.0.0.1:8000/postit/syncmobile/";
 
@@ -50,7 +50,6 @@ url ="";
 
 $(document).ready(function(){
 	$('#bufferImageSync').hide();
-	$("#bufferImageSelectTown").hide();
 	if (localStorage.rep_type=='CM'){
 		$('#dff_Usages_Audit').hide();
 		$("#posmReportAuditSub").hide();	
@@ -64,7 +63,6 @@ $(document).ready(function(){
 		$("#btn_submit_usages").hide();
 		$("#allHide").hide();
 		$("#stockAgency").hide();
-		$("#reportbtnAgency").hide();
 		$("#reportAuditSub").hide();
 		$("#entryAgency").hide();
 		$("#summaryAgency").hide();
@@ -107,7 +105,6 @@ $(document).ready(function(){
 		$("#btn_submit_usages").hide();
 		$("#allHide").hide();
 		$("#stockAgency").hide();
-		$("#reportbtnAgency").hide();
 		$("#entryAgency").hide();
 		$("#summaryAgency").hide();
 		$('#btn_receive').show();
@@ -136,7 +133,6 @@ $(document).ready(function(){
 		
 	}else if(localStorage.rep_type == 'AGENCY'){
 		
-		$("#reportbtnAgency").show();
 		$("#posmReportAuditSub").hide();	
 		$("#posmAuditDiv").hide();
 		$('#townSUP').show();
@@ -187,7 +183,6 @@ $(document).ready(function(){
 		$("#btn_defective").hide();
 		$("#btn_dff").hide();
 		$("#stockAgency").hide();
-		$("#reportbtnAgency").hide();
 		$(".errAudit").text("");
 		$("#btn_audit_entry").hide();
 		$("#auditorHead").hide();
@@ -201,7 +196,6 @@ $(document).ready(function(){
 		//$("#boarAvailableCrest").empty();
 		//$("#boarAvailableCrest").append(boardCresteN).trigger('create');
 		$('#stockAgency').hide();
-		$("#reportbtnAgency").hide();
 		$('#summaryAgency').hide();
 		$('#entryAgency').hide();
 		$('#btn_stock').hide();
@@ -240,7 +234,6 @@ $(document).ready(function(){
 		$("#btn_defective").hide();
 		$("#btn_dff").hide();
 		$("#stockAgency").hide();
-		$("#reportbtnAgency").hide();
 		$(".errAudit").text("");
 		$("#btn_audit_entry").hide();
 		$("#auditorHead").hide();
@@ -257,7 +250,6 @@ $(document).ready(function(){
 
 
 function syncBasic(){
-	$("#bufferImageSelectTown").hide();
 	$(".errorChk").html("");
 	var mobile=$("#mobile").val();
 	var password=$("#password").val();
@@ -302,7 +294,7 @@ function syncBasic(){
 						townCode=townLi[0];
 						townName=townLi[1];
 						
-						townStr+='<label for="'+townCode+'" id="radioRemove"><input type="radio" name="town_select" onclick="townSelect()" id="'+townCode+'" value="'+townCode+'-'+townName+'">'+townCode+'-'+townName+'</label>'
+						townStr+='<label for="'+townCode+'" id="radioRemove"><input type="radio" name="town_select"  id="'+townCode+'" value="'+townCode+'-'+townName+'">'+townCode+'-'+townName+'</label>'
 					}
 					localStorage.townStr=townStr;
 					
@@ -338,7 +330,6 @@ function syncBasic(){
 						
 						$("#entryAgency").hide();
 						$("#stockAgency").hide();
-						$("#reportbtnAgency").hide();
 						$("#summaryAgency").hide();
 						$("#btn_receive").hide();
 						$("#btn_defective").hide();
@@ -377,7 +368,6 @@ function syncBasic(){
 						
 						$("#entryAgency").hide();
 						$("#stockAgency").hide();
-						$("#reportbtnAgency").hide();
 						$("#summaryAgency").hide();
 						
 						$("#suprepname").html("Name	:		"+localStorage.repName);
@@ -399,7 +389,6 @@ function syncBasic(){
 						$("#btn_dff").hide();
 						$("#entryAgency").show();
 						$("#stockAgency").show();
-						$("#reportbtnAgency").show();
 						$("#summaryAgency").show();
 												
 						$('#btn_receive').hide();
@@ -428,7 +417,6 @@ function syncBasic(){
 						$("#btn_dff").hide();
 						$("#btn_audit_entry").hide();
 						$("#stockAgency").hide();
-						$("#reportbtnAgency").hide();
 						$(".errAudit").text("");
 						$("#auditOutletList").hide();
 						$("#auditorHead").hide();
@@ -439,7 +427,6 @@ function syncBasic(){
 						$.mobile.navigate(url);
 					}else{
 						$('#stockAgency').hide();
-						$("#reportbtnAgency").hide();
 						$('#summaryAgency').hide();
 						$('#entryAgency').hide();
 						$('#btn_stock').hide();
@@ -477,7 +464,6 @@ function syncBasic(){
 						$("#btn_dff").hide();
 						$("#btn_audit_entry").hide();
 						$("#stockAgency").hide();
-						$("#reportbtnAgency").hide();
 						$(".errAudit").text("");
 						$("#auditOutletList").hide();
 						$("#auditorHead").hide();
@@ -503,7 +489,6 @@ function syncBasic(){
 
 	
 function menuClick(){
-	$('#menuBufferingImage').hide();
 	$(".sucChkR").text("");
 	$(".errorChkP").text("");
 	$(".errorChk").text("");
@@ -540,15 +525,11 @@ function backClick(){
 		
 	$("#posmAuditor").hide();
 	$("#btn_posm_entry").hide();
-	$("#posmAuditOutSearch").val('');
-	$('#menuBufferingImage').hide();
-	$('#bufferImageRoute').hide();
-		
+	$("#posmAuditOutSearch").val('');	
 }
 
 //---------
 function townSelect(){
-	$('#menuBufferingImage').hide();
 	$("#cmprepname").text("");
 	$("#cmpreptype").text("");
 	$("#cmprepid").text("");
@@ -560,7 +541,6 @@ function townSelect(){
 		if($("#townList").find("input[name='town_select']:checked").length==0){
 			$(".errorChk").text("Select Town");
 		}else{
-			$("#bufferImageSelectTown").show();
 			localStorage.select_town=$("input[name='town_select']:checked").val();
 			//alert (apipath+'get_posm_sup?select_town='+localStorage.select_town+"&repID="+localStorage.repID)
 			$.ajax({
@@ -568,8 +548,7 @@ function townSelect(){
 			  success: function(result) {
 				var resultArray = result.split('rdrd');
 					if (resultArray[0]=='Success'){	
-						
-						$("#bufferImageSelectTown").hide();
+					
 						localStorage.posmCodeAgency=resultArray[2];	
 						localStorage.agencyTaxarea=resultArray[4];
 						//alert (localStorage.agencyTaxarea);			
@@ -620,13 +599,12 @@ function alloDetailsagency(){
 }
 
 function receive(){
-	$('#menuBufferingImage').hide();
+	
 	$.ajax({
 			  url:apipath+'get_posm_sup?select_town='+localStorage.select_town+"&repID="+localStorage.repID,
 			  success: function(result) {
 				var resultArray = result.split('rdrd');
-					if (resultArray[0]=='Success'){
-						$('#menuBufferingImage').show();	
+					if (resultArray[0]=='Success'){	
 						localStorage.posmCodeCmSup=resultArray[1];
 						if(localStorage.posmCodeCmSup!=''){			
 					//====CM/Sup	
@@ -854,22 +832,17 @@ function onfail(r) {
 /*================usagepage3=================*/
 var outletSeperator='';
 function usages(outletSep){
-	/*$(".ui-input-search").attr(placeholder,"asad");*/
-	
 	outletSeperator=outletSep;
 	/*if (localStorage.rep_type!='CM'){	*/
-	$('#bufferImageRoute').hide();
-	$('#menuBufferingImage').show();	
-		//$('#bufferImageOutlet').show();	
+		$('#bufferImageRoute').show();	
 		$.ajax({
 			type: 'POST',
 			url:apipath+"getRoute?&townCodeName="+localStorage.select_town,
 																																																													
 			success: function(result) {	
 				var resultArray = result.split('rdrd');	
-				if(resultArray[0]=='Success'){
-					$('#menuBufferingImage').hide();	
-					//$('#bufferImageOutlet').hide();			
+				if(resultArray[0]=='Success'){	
+					$('#bufferImageRoute').hide();			
 					localStorage.routeListSupALL=resultArray[1];
 					if(localStorage.routeListSupALL!=''){
 					var routeListSupALL=localStorage.routeListSupALL.split('||');
@@ -882,7 +855,7 @@ function usages(outletSep){
 					
 					$('#routeList').empty();
 					$('#routeList').append(localStorage.routeListSup).trigger('create');
-					/*$(".placeholder").attr('placeholder',"asad");*/
+					
 					$("#town").html('Town		:		' + localStorage.select_town.replace('|','-'));
 					$(".errorChk").text("");
 					$.ajax({
@@ -930,19 +903,16 @@ var rName='';
 function sRoute(routeName){
 	
 	rName=routeName;
-			
 			//alert(apipath+"getOutlet?&routeName="+rName+"&townCode="+localStorage.select_town+"&outletSeperator="+outletSeperator);
-			//$('#bufferImageOutlet').show();	
-			$('#bufferImageRoute').show();
+			$('#bufferImageOutlet').show();	
 			$.ajax({
 			type: 'POST',
 			url:apipath+"getOutlet?&routeName="+rName+"&townCode="+localStorage.select_town+"&outletSeperator="+outletSeperator,
 																																																													
 			success: function(result) {	
 				var syncResultArray = result.split('|||');	
-				if(syncResultArray[0]=='Success'){
-					$('#bufferImageRoute').hide();		
-					//$('#bufferImageOutlet').hide();			
+				if(syncResultArray[0]=='Success'){		
+					$('#bufferImageOutlet').hide();			
 					localStorage.outletLi=syncResultArray[1];
 					if(	localStorage.outletLi!=''){
 					var outletListaAll=localStorage.outletLi.split('rdrd');
@@ -2259,13 +2229,6 @@ function repo(){
 	$.mobile.navigate(url);	
 }
 
-function repoAgency(){
-	
-	$(".errorChk").text("");			
-	url="#reportPageA9";				
-	$.mobile.navigate(url);	
-}
-
 function recReport(){
 	if (localStorage.rep_type == 'CM'){
 		town=localStorage.town;
@@ -2287,7 +2250,7 @@ function recReport(){
 				
 				var ReceiveRpt=localStorage.receiveReportR.split('rdrd');					
 				var rectable='<table id="reccRepp">';
-					rectable += '<tr style="font-size:12px;" ><th>Date and Time</th><th>Brand</th><th>POSM Type</th><th>POSM Code</th><th>Receive Qty</th><th>Defective Qty</th><th>Stock</th></tr>'
+					rectable += '<tr style="font-size:12px;" ><th>Rec_Date</th><th>Brand</th><th>POSM_Type</th><th>POSM_Code</th><th>Rec_Qty</th><th>Defective_Qty</th><th>Stock</th></tr>'
 					for (i=0;i<ReceiveRpt.length;i++){	
 						recordR=ReceiveRpt[i].split('|');
 						dateR=recordR[0];
@@ -2343,7 +2306,7 @@ function recUsage(){
 				//alert(localStorage.usageReportR);
 				var UsageRpt=localStorage.usageReportR.split('rdrd');			
 				var usatable='<table id="usageRepp">';
-					usatable +='<tr style="font-size:12px;" ><th>Date and Time</th><th>Outlet Code</th><th>Outlet Name</th><th>Brand</th><th>POSM Type</th><th>POSM Code</th><th>Usage Qty</th></tr>'
+					usatable +='<tr style="font-size:12px;" ><th>Usage_Date</th><th>Outlet_Code</th><th>Outlet_Name</th><th>Brand</th><th>POSM_Type</th><th>POSM_Code</th><th>Usage_Qty</th></tr>'
 					for (i=0;i<UsageRpt.length;i++){	
 						usageR=UsageRpt[i].split('|');
 						dateU=usageR[0];
@@ -2401,7 +2364,7 @@ function stockReport(){
 				
 				var stockRPT=localStorage.stockReport.split('rdrd');			
 				var cmRouteSTr='<table id="stockRepp">';
-					cmRouteSTr += '<tr style="font-size:12px;"><th>Brand</th><th>POSM Type</th><th>POSM Code</th><th>Allocation</th><th>Receive</th><th>Defective</th><th>Usage</th><th>Stock</th></tr>'
+					cmRouteSTr += '<tr style="font-size:12px;"><th>Brand</th><th>POSM_Type</th><th>POSM_Code</th><th>Allocation</th><th>Receive</th><th>Defective</th><th>Usage</th><th>Stock</th></tr>'
 					for (i=0;i<stockRPT.length;i++){	
 						stockR=stockRPT[i].split('|');
 						brand=stockR[0];
@@ -2444,12 +2407,10 @@ function stockReport(){
 }
 
 function summary_report(){
-	
 	var posmCode=$("#posmCodeAgency").val();
 	var town=localStorage.select_town.replace('-', '|');
 	
 	//alert (apipath+"agency_report?&repID="+localStorage.repID+"&repName="+localStorage.repName+"&townName="+town)
-	$('#menuBufferingImage').show();
 	$("#bufferImageAgencyA").show();
 	$.ajax({
 			type: 'POST',
@@ -2458,12 +2419,11 @@ function summary_report(){
 			success: function(result) {
 				getResult=result.split('||');
 				if(getResult[0]=='Success'){
-				$('#menuBufferingImage').hide();
 				$("#bufferImageAgencyA").hide();				
 				localStorage.usageReportA=getResult[1];
 				var agnRpt=localStorage.usageReportA.split('rdrd');			
 				var agentable='<table id="sumRepp">';
-					agentable +='<tr style="font-size:12px;" ><th>Date and Time</th><th>Outlet Code</th><th>Outlet Name</th><th>Tax Area</th><th>Brand</th><th>POSM Type</th><th>POSM Code</th><th>Usage Qty</th></tr>'
+					agentable +='<tr style="font-size:12px;" ><th>Date</th><th>Outlet_Code</th><th>Outlet_Name</th><th>Tax_Area</th><th>Brand</th><th>POSM_Type</th><th>POSM_Code</th><th>Usage_Qty</th></tr>'
 					for (i=0;i<agnRpt.length;i++){	
 						agnR=agnRpt[i].split('|');
 						date=agnR[0];
@@ -2512,7 +2472,6 @@ function stockAgency(){
 	town=localStorage.select_town;
 	
 	//alert (apipath+"stock_RAgency?&repID="+localStorage.repID+"&repName="+localStorage.repName+"&townName="+town)
-	$('#menuBufferingImage').show();
 	$("#agencySTRimage").show();
 	$.ajax({
 			type: 'POST',
@@ -2522,7 +2481,6 @@ function stockAgency(){
 				getResult=result.split('||');
 				
 				if(getResult[0]=='Success'){
-				$('#menuBufferingImage').hide();
 				$("#agencySTRimage").hide();				
 				localStorage.stockReportA=getResult[1];	
 				
@@ -2572,13 +2530,11 @@ function exit() {
 	navigator.app.exitApp();
 }
 function defective(){
-	$('#menuBufferingImage').show();
 $.ajax({
 	  url:apipath+'get_posm_sup?select_town='+localStorage.select_town+"&repID="+localStorage.repID,
 	  success: function(result) {
 		var resultArray = result.split('rdrd');
 			if (resultArray[0]=='Success'){	
-			$('#menuBufferingImage').hide();
 				localStorage.posmCodeCmSup=resultArray[1];
 				localStorage.posmCodeAgency=resultArray[2];				
 				localStorage.posmCodeCMUsage=resultArray[3];			
@@ -2804,7 +2760,7 @@ function reportAuditSub(){
 				
 				var repkRPA=localStorage.stockReporta.split('rdrd');			
 				var cmRouteSTAD='<table id="">';
-					cmRouteSTAD += '<tr style="font-size:12px;"><th>DATE</th><th>Outlet Code</th><th>Outlet Name</th><th>Tax Area</th><th>BRAND</th><th>POSM Type</th><th>Board Qty</th><th>Status</th></tr>'
+					cmRouteSTAD += '<tr style="font-size:12px;"><th>DATE</th><th>Outlet_Code</th><th>Outlet_Name</th><th>Tax_Area</th><th>BRAND</th><th>POSM_Type</th><th>Board_Qty</th><th>Status</th></tr>'
 					for (i=0;i<repkRPA.length;i++){	
 						stockR=repkRPA[i].split('|');
 						auditdate=stockR[0];
@@ -2849,7 +2805,7 @@ function reportAuditSub(){
 }
 
 function posmReportAuditSub(){
-	$('#reportPosmAudRec').empty();
+	
 	//alert (apipath+"reports_posmAuditor?&repID="+localStorage.repID)
 	$("#posmAuditRecordBufferImage").show();
 	$.ajax({
@@ -2867,7 +2823,7 @@ function posmReportAuditSub(){
 				var repPosmAud=localStorage.posmAuditRec.split('rdrd');			
 				var cmRouteSTADA='<table id="">';
 				
-					cmRouteSTADA += '<tr style="font-size:12px;"><th>Date and Time </th><th>Region</th><th>Territory</th><th>Town Code</th><th>Town Name</th><th>Tax Area</th><th>Outlet Code</th><th>Outlet Name</th></tr>'
+					cmRouteSTADA += '<tr style="font-size:12px;"><th>DATE</th><th>Region</th><th>Territory</th><th>Town Code</th><th>Town Name</th><th>Tax Area</th><th>Outlet Code</th><th>Outlet Name</th></tr>'
 					for (i=0;i<repPosmAud.length;i++){	
 						PosmAudData=repPosmAud[i].split('|');
 						posmauditdate=PosmAudData[0];
