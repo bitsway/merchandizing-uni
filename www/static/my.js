@@ -81,8 +81,8 @@ $(document).ready(function(){
 		$('#townList').empty();
 		$('#townList').append(localStorage.townStr).trigger('create');
 					
-		$("#posmCodeUsges").empty();
-		$("#posmCodeUsges").append(localStorage.posmCodeSup).trigger('create');	
+		$("#usagePOSMSelect").empty();
+		$("#usagePOSMSelect").append(localStorage.posmCodeSup).trigger('create');	
 		
 		$('#routeList').empty();
 		$('#routeList').append(localStorage.route).trigger('create');
@@ -91,7 +91,7 @@ $(document).ready(function(){
 		$('#outletList').append(localStorage.outletList).trigger('create');
 		
 		/*url = "#homePage";
-		$.mobile.navigate(url);	*/
+		$.mobile.navigate(url);*/	
 			
 	}else if (localStorage.rep_type == 'SUPERVISOR'){
 		
@@ -122,11 +122,11 @@ $(document).ready(function(){
 		$('#townList').empty();
 		$('#townList').append(localStorage.townStr).trigger('create');
 		
-		$("#posmCodeRec").empty();
-		$("#posmCodeRec").append(localStorage.posmCodeSup).trigger('create');	
+		$("#receivePOSMSelect").empty();
+		$("#receivePOSMSelect").append(localStorage.posmCodeSup).trigger('create');	
 		
-		$("#posmCodeUsges").empty();
-		$("#posmCodeUsges").append(localStorage.posmCodeSup).trigger('create');	
+		$("#usagePOSMSelect").empty();
+		$("#usagePOSMSelect").append(localStorage.posmCodeSup).trigger('create');	
 					
 		$('#routeList').empty();
 		$('#routeList').append(localStorage.routeListSup).trigger('create');
@@ -163,8 +163,8 @@ $(document).ready(function(){
 		$('#townList').empty();
 		$('#townList').append(localStorage.townStr).trigger('create');
 
-		$("#posmCodeAgn").empty();
-		$("#posmCodeAgn").append(localStorage.posmCode_agency).trigger('create');	
+		$("#agencyPOSMrec").empty();
+		$("#agencyPOSMrec").append(localStorage.posmCode_agency).trigger('create');	
 		
 		$('#routeList').empty();
 		$('#routeList').append(localStorage.routeListSup).trigger('create');
@@ -264,9 +264,12 @@ function syncBasic(){
 	$(".errorChk").html("");
 	var mobile=$("#mobile").val();
 	var password=$("#password").val();
+	//alert(mobile+'===='+password);
 	if (mobile=="" || password==""){
 		$('#bufferImageSync').hide();
 		$(".errorMsg").html("Required mobile no and password");	
+		url = "#pagesync";
+		$.mobile.navigate(url);
 	}else{
 		$('#bufferImageSync').show();	
 		$('#syncBasicBtn').hide();	
@@ -362,8 +365,8 @@ function syncBasic(){
 						$("#suprepname").html("Name	:		"+localStorage.repName);
 						$("#supreptype").html("Type	:		"+localStorage.rep_type);
 						$("#suprepid").html("ID	:		"+localStorage.repID);
-						url = "#homePage";						
-						$.mobile.navigate(url);
+						/*url = "#homePage";						
+						$.mobile.navigate(url);*/
 					}else if (localStorage.rep_type == 'SUPERVISOR'){
 						$('#dff_Usages_Audit').hide();
 						$("#posmReportAuditSub").hide();	
@@ -388,8 +391,8 @@ function syncBasic(){
 						$("#suprepname").html("Name	:		"+localStorage.repName);
 						$("#supreptype").html("Type	:		"+localStorage.rep_type);
 						$("#suprepid").html("ID	:		"+localStorage.repID);
-						url = "#homePage";
-						$.mobile.navigate(url);
+						/*url = "#homePage";
+						$.mobile.navigate(url);*/
 							
 					}else if(localStorage.rep_type == 'AGENCY'){
 						$('#dff_Usages_Audit').hide();
@@ -415,8 +418,8 @@ function syncBasic(){
 						$("#suprepname").html("Name	:		"+localStorage.repName);
 						$("#supreptype").html("Type	:		"+localStorage.rep_type);
 						$("#suprepid").html("ID	:		"+localStorage.repID);
-						url = "#homePage";
-						$.mobile.navigate(url);						
+						/*url = "#homePage";
+						$.mobile.navigate(url);	*/					
 					}else if(localStorage.rep_type == 'AUDITOR'){
 						
 						$('#dff_Usages_Audit').hide();
@@ -440,8 +443,8 @@ function syncBasic(){
 						$("#suprepname").html("Name	:		"+localStorage.repName);
 						$("#supreptype").html("Type	:		"+localStorage.rep_type);
 						$("#suprepid").html("ID	:		"+localStorage.repID);
-						url = "#homePage";
-						$.mobile.navigate(url);
+						/*url = "#homePage";
+						$.mobile.navigate(url);*/
 					}else{
 						$('#stockAgency').hide();
 						$("#reportbtnAgency").hide();
@@ -489,10 +492,14 @@ function syncBasic(){
 						$("#suprepname").html("Name	:		"+localStorage.repName);
 						$("#supreptype").html("Type	:		"+localStorage.rep_type);
 						$("#suprepid").html("ID	:		"+localStorage.repID);
-						url = "#homePage";
-						$.mobile.navigate(url);
-						}													
+						/*url = "#homePage";
+						$.mobile.navigate(url);*/	
+						}	
+					url = "#homePage";
+					$.mobile.navigate(url);											
 				}else{
+					url = "#pagesync";
+					$.mobile.navigate(url);
 					$("#auditorHead").hide();
 					$('#bufferImageSync').hide();						
 					$(".errorMsg").html("Sync Failed. Authorization Error.");
@@ -509,8 +516,8 @@ function syncBasic(){
 function syncValueClean(){
 	
 	localStorage.synced="NO"
-	$("#mobile").val("");
-	$("#password").val("");
+	/*$("#mobile").val("");
+	$("#password").val("");*/
 	localStorage.repID=""				
 	localStorage.repName=""
 	localStorage.mobileNo=""
@@ -599,17 +606,18 @@ function townSelect(){
 					//=======Agency
 					if(localStorage.posmCodeAgency!=''){
 					var posmCodeAgency=localStorage.posmCodeAgency.split('fdfd');
-					var posmAgencyStr = '<option selected="selected" value="">Select POSM</option>'
+					var posmAgencyStr = '<select id="posmCodeAgn" class="auto_break" name="posmCodeAgn" onchange="alloDetailsAgency();"><option selected="selected" value="">Select POSM</option>'
 					for (i=0;i<posmCodeAgency.length;i++){	
 						posmCodeAgencyStr=posmCodeAgency[i].split('-');								
 						posmAgencyStr += '<option value='+posmCodeAgencyStr[1]+'>'+posmCodeAgencyStr[0]+'-'+posmCodeAgencyStr[1]+'</option>'
 					}
+					posmAgencyStr+='</select>'
 					posmAgencyStr =posmAgencyStr
 					localStorage.posmCode_agency=posmAgencyStr;
-					$("#posmCodeAgn").empty();
-					$("#posmCodeAgn").append(localStorage.posmCode_agency).trigger('create');	
+					$("#agencyPOSMrec").empty();
+					$("#agencyPOSMrec").append(localStorage.posmCode_agency).trigger('create');	
 					}else{
-						$("#posmCodeAgn").empty();
+						$("#agencyPOSMrec").empty();
 						}
 					$("#townSelct").html("Town	:		"+localStorage.select_town);
 					$('#townSelctRec').html("Town	:		"+localStorage.select_town);
@@ -651,17 +659,20 @@ function receive(){
 						if(localStorage.posmCodeCmSup!=''){			
 					//====CM/Sup	
 					var posmCodeCmSup=localStorage.posmCodeCmSup.split('fdfd');
-					var posmStr = '<option selected="selected" value="">Select POSM</option>'
+					var posmStrRec = '<select id="posmCodeRec" class="auto_break" name="posmCodeRec" onchange="alloDetails();"><option selected="selected" value="">Select POSM</option>'
+           
 					for (i=0;i<posmCodeCmSup.length;i++){	
 						posmCodeCmSupStr=posmCodeCmSup[i].split('-');								
-						posmStr += '<option value='+posmCodeCmSupStr[1]+'>'+posmCodeCmSupStr[0]+'-'+posmCodeCmSupStr[1]+'</option>'
+						posmStrRec += '<option value='+posmCodeCmSupStr[1]+'>'+posmCodeCmSupStr[0]+'-'+posmCodeCmSupStr[1]+'</option>'
 					}
-					posmStr =posmStr
-					localStorage.posmCodeSup=posmStr;
-					$("#posmCodeRec").empty();
-					$("#posmCodeRec").append(localStorage.posmCodeSup).trigger('create');
+					 posmStrRec +='</select>'
+					posmStrRec =posmStrRec
+					localStorage.posmCodeSup=posmStrRec;
+					//alert(localStorage.posmCodeSup);
+					$("#receivePOSMSelect").empty();
+					$("#receivePOSMSelect").append(localStorage.posmCodeSup).trigger('create');
 					}else{
-						$("#posmCodeRec").empty();
+						$("#receivePOSMSelect").empty();
 						
 					}
 				}
@@ -774,6 +785,8 @@ function submit_data_receive(){
 			success: function(result) {			
 				if(result=='Success'){
 					
+					$("#receivePOSMSelect").empty();
+					$("#receivePOSMSelect").append(localStorage.posmCodeSup).trigger('create');	
 					$("#receiveSubmitbufferImage").hide();
 					$("#received").val("");
 					$("#posm_type").val("");
@@ -789,6 +802,7 @@ function submit_data_receive(){
 					$(".sucMsgR").show();
 					$("#allHideR").hide();
 					$("#btn_submit_receive").hide();
+					
 					
 					
 					
@@ -915,19 +929,20 @@ function usages(outletSep){
 							//====CM/Sup	
 							if(localStorage.posmCodeCMUsage!=''){
 							var posmCodeCmSup=localStorage.posmCodeCMUsage.split('fdfd');
-							var posmStr = '<option selected="selected" value="">Select POSM</option>'
+							var posmStr = '<select id="posmCodeUsges" class="auto_break" name="posmCodeUsges" onchange="alloDetailsU();"><option selected="selected" value="">Select POSM</option>'
 							for (i=0;i<posmCodeCmSup.length;i++){	
 								posmCodeCmSupStr=posmCodeCmSup[i].split('-');								
 								posmStr += '<option value='+posmCodeCmSupStr[1]+'>'+posmCodeCmSupStr[0]+'-'+posmCodeCmSupStr[1]+'</option>'
 							}
+							posmStr+='</select>'
 							posmStr =posmStr
 							localStorage.posmCodeSup=posmStr;	
 							
-							$("#posmCodeUsges").empty();
-							$("#posmCodeUsges").append(localStorage.posmCodeSup).trigger('create');	
+							$("#usagePOSMSelect").empty();
+							$("#usagePOSMSelect").append(localStorage.posmCodeSup).trigger('create');	
 							
 								}else{
-									$("#posmCodeUsges").empty();
+									$("#usagePOSMSelect").empty();
 									}
 							}
 							}
@@ -1035,6 +1050,7 @@ function auditorOutlet(){
 						
 						var recTaxArea=localStorage.auditTaxArea.split('|');
 						var taxStr='<input list="taxArea" name="a_cityCorp" id="a_cityCorp"><datalist id="taxArea">';
+						
 						for (i=0;i<recTaxArea.length;i++){								
 						taxStr += '<option style="background-color:#FFF; border-top-color:#F03; border-bottom-color:#F03;"(\''+ recTaxArea[i]+'\')"><a>'+ recTaxArea[i]+'</a></option>'
 					}
@@ -1640,18 +1656,19 @@ function outlet(outletIDName){
 						
 						if(localStorage.outletTaxAreaDFF!=''){
 							var rectaxStrDFF=localStorage.outletTaxAreaDFF.split('|');
-							var posmStrTaxAreaDFF = '<option selected="selected" value="">Select Tax Area</option>'
+							var posmStrTaxAreaDFF = '<select id="outletTaxAreaDFFListRec" class="auto_break" name="outletTaxAreaDFFListRec"  style="width:150px; display:inline-block;"><option selected="selected" value="">Select Tax Area</option>'
 							for (i=0;i<rectaxStrDFF.length;i++){	
 								
 								posmStrTaxAreaDFF += '<option value="'+rectaxStrDFF[i]+'">'+rectaxStrDFF[i]+'</option>'
 							}
+							posmStrTaxAreaDFF+='</select>'
 							posmStrTaxAreaDFF =posmStrTaxAreaDFF
 							localStorage.rectaxStrDFF=posmStrTaxAreaDFF;
 							
-							$("#outletTaxAreaDFFListRec").empty();
-							$("#outletTaxAreaDFFListRec").append(localStorage.rectaxStrDFF).trigger('create');	
+							$("#TaxAreaDFFRec").empty();
+							$("#TaxAreaDFFRec").append(localStorage.rectaxStrDFF).trigger('create');	
 						}else{
-								$("#outletTaxAreaDFFListRec").empty();
+								$("#TaxAreaDFFRec").empty();
 								}
 						
 						var auditorBrand=localStorage.posmBrand.split(',');
@@ -1949,6 +1966,8 @@ function submit_data_usages(){
 			success: function(result) {			
 				if(result=='Success'){
 					
+					$("#usagePOSMSelect").empty();
+					$("#usagePOSMSelect").append(localStorage.posmCodeSup).trigger('create');
 					$("#usageSubmitbufferImage").hide();	
 					$("#uposm_type").val("");
 					$("#ubrand").val("");
@@ -2084,18 +2103,19 @@ function alloDetailsAgency(){
 						
 					if(localStorage.agencyTaxarea!=''){
 					var posmagencyTaxarea=localStorage.agencyTaxarea.split('fdfd');
-					var posmStrTaxArea = '<option selected="selected" value="">Select Tax Area</option>'
+					var posmStrTaxArea = '<select id="taxAreaComboSelect" class="auto_break" name="taxAreaComboSelect"><option selected="selected" value="">Select Tax Area</option>'
 					for (i=0;i<posmagencyTaxarea.length;i++){	
 						
 						posmStrTaxArea += '<option value="'+posmagencyTaxarea[i]+'">'+posmagencyTaxarea[i]+'</option>'
 					}
+					posmStrTaxArea+='</select>'
 					posmStrTaxArea =posmStrTaxArea
 					localStorage.posmagencyTaxarea=posmStrTaxArea;
 					
-					$("#taxAreaComboSelect").empty();
-					$("#taxAreaComboSelect").append(localStorage.posmagencyTaxarea).trigger('create');	
+					$("#taxAreaComboSelectRec").empty();
+					$("#taxAreaComboSelectRec").append(localStorage.posmagencyTaxarea).trigger('create');	
 					}else{
-						$("#taxAreaComboSelect").empty();
+						$("#taxAreaComboSelectRec").empty();
 						}
 						
 					var posmType=resultArray[1];	
@@ -2174,7 +2194,10 @@ function submit_data_agency(){
 			success: function(result) {			
 				if(result=='Success'){
 					
-					
+					$("#agencyPOSMrec").empty();
+					$("#agencyPOSMrec").append(localStorage.posmCode_agency).trigger('create');
+					$("#taxAreaComboSelectRec").empty();
+					$("#taxAreaComboSelectRec").append(localStorage.posmagencyTaxarea).trigger('create');
 					$("#auditAgencySubmitBufferImage").hide();
 					$("#aqty").val("");
 					$("#aset").val("");
@@ -2605,16 +2628,17 @@ $.ajax({
 				localStorage.posmCodeCMUsage=resultArray[3];			
 							//====CM/Sup	
 			var posmCodeCmSup=localStorage.posmCodeCMUsage.split('fdfd');
-			var posmStr = '<option selected="selected" value="">Select POSM</option>'
+			var posmStr = '<select id="posmCodedef" class="auto_break" name="posmCodedef" onchange="alloDetailsDef();"><option selected="selected" value="">Select POSM</option>'
 			for (i=0;i<posmCodeCmSup.length;i++){	
 				posmCodeCmSupStr=posmCodeCmSup[i].split('-');								
 				posmStr += '<option value='+posmCodeCmSupStr[1]+'>'+posmCodeCmSupStr[0]+'-'+posmCodeCmSupStr[1]+'</option>'
 			}
+			posmStr +='</select>'
 			posmStr =posmStr
 			localStorage.posmCodeSup=posmStr;	
 			
-			$("#posmCodedef").empty();
-			$("#posmCodedef").append(localStorage.posmCodeSup).trigger('create');	
+			$("#defectivePOSMSelect").empty();
+			$("#defectivePOSMSelect").append(localStorage.posmCodeSup).trigger('create');	
 				}
 			}
 		});
@@ -2720,6 +2744,8 @@ function submit_data_defective(){
 			success: function(result) {			
 				if(result=='Success'){
 					
+					$("#defectivePOSMSelect").empty();
+					$("#defectivePOSMSelect").append(localStorage.posmCodeSup).trigger('create');
 					$("#defectiveSubmitbufferImage").hide();
 					$("#uposm_type").val("");
 					$("#ubrand").val("");
@@ -3301,7 +3327,8 @@ function submit_data_posmAuditor(){
 					$("#posmDrugStorePOSMCrest").append(posmDrugStorePOSMCrestN).trigger('create');
 					$("#posmdrugStorePosmConditionCrest").empty();
 					$("#posmdrugStorePosmConditionCrest").append(posmdrugStorePosmConditionCrestN).trigger('create');
-					$('#outletTaxAreaDFFListRec').empty();
+					$('#TaxAreaDFFRec').empty();
+					$("#TaxAreaDFFRec").append(localStorage.rectaxStrDFF).trigger('create');
 					
 					$(".errorChk").text("");
 					$("#msg_submit_posmAudit").show();
