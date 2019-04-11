@@ -51,6 +51,9 @@ url ="";
 $(document).ready(function(){
 	$('#bufferImageSync').hide();
 	$("#bufferImageSelectTown").hide();
+	
+	/*if (localStorage.synced=="NO"){*/
+	
 	if (localStorage.rep_type=='CM'){
 		$('#dff_Usages_Audit').hide();
 		$("#posmReportAuditSub").hide();	
@@ -87,8 +90,8 @@ $(document).ready(function(){
 		$('#outletList').empty();
 		$('#outletList').append(localStorage.outletList).trigger('create');
 		
-		url = "#homePage";
-		$.mobile.navigate(url);	
+		/*url = "#homePage";
+		$.mobile.navigate(url);	*/
 			
 	}else if (localStorage.rep_type == 'SUPERVISOR'){
 		
@@ -131,8 +134,8 @@ $(document).ready(function(){
 		$('#outletList').empty();
 		$('#outletList').append(localStorage.outletList).trigger('create');
 		
-		url = "#homePage";
-		$.mobile.navigate(url);
+		/*url = "#homePage";
+		$.mobile.navigate(url);*/
 		
 	}else if(localStorage.rep_type == 'AGENCY'){
 		
@@ -169,8 +172,8 @@ $(document).ready(function(){
 		$('#outletList').empty();
 		$('#outletList').append(localStorage.outletList).trigger('create');
 		
-		url = "#homePage";
-		$.mobile.navigate(url);
+		/*url = "#homePage";
+		$.mobile.navigate(url);*/
 	}else if(localStorage.rep_type == 'AUDITOR'){
 		
 		$('#dff_Usages_Audit').hide();
@@ -192,8 +195,8 @@ $(document).ready(function(){
 		$("#btn_audit_entry").hide();
 		$("#auditorHead").hide();
 		$("#auditOutletList").hide();
-		url = "#homePage";
-		$.mobile.navigate(url);
+		/*url = "#homePage";
+		$.mobile.navigate(url);*/
 		
 	}else if(localStorage.rep_type == 'DFF'){
 		
@@ -245,8 +248,8 @@ $(document).ready(function(){
 		$("#btn_audit_entry").hide();
 		$("#auditorHead").hide();
 		$("#auditOutletList").hide();
-		url = "#homePage";
-		$.mobile.navigate(url);
+		/*url = "#homePage";
+		$.mobile.navigate(url);*/
 	}else{
 		$(".errorChk").text('');
 		url = "#pagesync";	
@@ -266,7 +269,8 @@ function syncBasic(){
 		$(".errorMsg").html("Required mobile no and password");	
 	}else{
 		$('#bufferImageSync').show();	
-		$('#syncBasicBtn').hide();			 
+		$('#syncBasicBtn').hide();	
+		localStorage.synced="NO"		 
 		$(".errorMsg").html("Sync in progress. Please wait...");
 		if(localStorage.sync_code==undefined || localStorage.sync_code==""){
 			localStorage.sync_code=0;
@@ -280,6 +284,7 @@ function syncBasic(){
 				if (localStorage.synced=='YES'){
 					
 					$('#bufferImageSync').hide();	
+					localStorage.synced="YES"
 					localStorage.sync_code=syncResultArray[1];										
 					localStorage.repID=syncResultArray[2];					
 					localStorage.repName=syncResultArray[3];
@@ -784,6 +789,7 @@ function submit_data_receive(){
 					$(".sucMsgR").show();
 					$("#allHideR").hide();
 					$("#btn_submit_receive").hide();
+					
 					
 					
 					uploadPhotoRec(imagePathA, imageName);
@@ -2543,7 +2549,7 @@ function stockAgency(){
 				
 				var stockRPA=localStorage.stockReportA.split('rdrd');			
 				var cmRouteSTA='<table id="stockAgnP">';
-					cmRouteSTA += '<tr style="font-size:12px;"><th>Brand</th><th>POSM_Type</th><th>POSM_Code</th><th>Allocation</th><th>Usage</th><th>Stock</th></tr>'
+					cmRouteSTA += '<tr style="font-size:12px;"><th>Brand</th><th>POSM Type</th><th>POSM Code</th><th>Allocation</th><th>Usage</th><th>Stock</th></tr>'
 					for (i=0;i<stockRPA.length;i++){	
 						stockR=stockRPA[i].split('|');
 						brand=stockR[0];
