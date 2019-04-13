@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8" />
@@ -392,57 +392,88 @@
 
 <body >
 <!-- ------------------- sync page---------------------------------------------------------------------------------------- -->
-<div data-theme="c" data-role="page" id="pagesync" style="overflow:scroll">
-    <div data-theme="c" data-role="header" data-position="fixed">
-    	<h3 class="headerc">POST-IT</h3>
-    </div>
-    <div data-role="content">
-        <div class="errorMsg"></div>
-        <ul data-role="listview" data-inset="true" data-theme="c">
-            <li class="ui-field-contain">
-            <label > Mobile No</label>
-            <input name="mobile" id="mobile" type="number" placeholder="Mobile Number"/>
-            </li>
-            <li class="ui-field-contain">
-            <label >Password </label>
-            <input type="password" name="password" id="password" placeholder="Password"/>
-            </li>
-        </ul>
-        <a data-role="button" href="#" id="syncBasicBtn" onclick="syncBasic()" data-theme="c" data-transition="slide" >Sync</a>
-        <br/><br/>
-        <div id="bufferImageSync" style="text-align:center;"><img src="running.gif"/></div>
-        <div id="#syncData"></div>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <div data-role="footer" data-position="fixed" style="font-size:12px; color:#595959; background-color:#FFF; font-weight:1;" align="center">20190411.11</div>
-    </div>
-</div>
-<!------------------------------------------MAIN MENU----------------------------------------------------------->       
-<div data-role="page" data-theme="c" id="homePage" style="overflow:scroll" >
-    <div data-theme="c" data-role="header" data-position="fixed" >
-    <a data-role="button" href="#leftpanel" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets " ><img src="menu.png"></a>
-    <a data-role="button" onClick="exit();" ><img src="exit.png"/> </a>
+<div data-theme="c" data-role="page" id="homePage" >       
+           <div data-role="panel" id="routePanel" data-display="overlay" style="width:60%;">
+				<!-- panel content goes here -->
+				<center><img  src="POST_IT_OK-2.jpg" alt="MARICO" /></center><br>
+				<!--<font style="color:#007D7D; font-size:25px;">MARICO UTSHOB</font>-->
+				<br><br><br>
+				
+				  <ul data-role="listview">							
+                    <!--<div style="background:#008A8A; height:1px"></div>
+                    	<li id="link_route"><a onClick="check_route()"><img src="visit_plan.png"></a></li>
+                    <div style="background:#008A8A; height:1px"></div>
+                    </br></br></br>-->
+                    <div style="background:#008A8A; height:1px"></div>
+                    	<li><a onClick="syncValueClean()" ><img src="sync.png"></a></li>
+                    <div style="background:#008A8A; height:1px"></div>
+                    <!--<li><a onClick="clear_autho()" href="#login">Clear Authorization</a></li>
+                    <div style="background:#008A8A; height:1px"></div>-->
+                </ul>
+                <br>
+				<div style="margin:100%;"></div>
+				<img src="logo_gp_p_1.png" alt="GrameenPhone" />
+				
+			</div><!-- /panel -->
+            
+             <div data-theme="c" data-role="header" data-position="fixed"  > 
+			
+			    <a style="height:18px;"  href="#routePanel"  ><img src="header_logo.png"  ></a>
+                <a style="height:18px;" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-right " onClick="exit()" ><img src="exit.png"> </a>
+                <!--<a data-role="button" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-right ui-icon-power ui-btn-icon-notext " onClick="exit()" ><img src="exit.png"> </a>-->
+                <h3>Home</h3>
+            </div>
+			
+			<div data-role="content" align="center" style="height:90%;" >
+            	<br><br>
+				
+				<font color="#CCFFCC" face="Arial, Helvetica, sans-serif" size="-1">
+                <a data-role="button" onClick="attandance()" ><strong style="font-size:24px;">Attendance</strong></a>       
+				<a data-role="button" onClick="marketPJP_check()" ><img src="market_pjp.png"></a>
+               <a data-role="button" onClick="chkNotice(1)" ><img src="notice_icon.png"></a>               	
+               <!--<a data-role="button" onClick="competitor_info()" >COMPETITOR INFO</a>-->				
+                </font>
+                <br/>
+                <div align="right"  style="color:#A4C5D9; width:100%; ">Version:20190413</div>
+                <div class="errMsg" style="color:#cc0000"></div>
+                <br/><br/><br/>                
+                <!--<div id="versionDiv" style="color:#006291; height:30px; text-align:center; padding:5px; background-color:#FFFFF4; font-size:12px; border-radius:3px;"><a href="http://im-gp.com/d/maricoaudit/" target="new">New Version Available</a></div>-->                
+                
+            </div>
+        </div>    
+     <!--======================Menu page end==================-->   
     
-    <h3 class="headerc" id="headerName">Select Town</h3>
-    </div>
-     <div data-role="content">Hi POST-IT</div>
-        <div data-role="panel" id="leftpanel" data-position="left" data-display="overlay" data-theme="c" style="background-color:#D42E5C;">
-        <div align="center"></div>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <ul data-role="listview" >
-        	<li><a data-role="button" class="ui-btn" onclick="syncValueClean()" style="background-color:#fff" ><center><img src="sync.png" /></center></a></li>	  
-        </ul>
-    </div>
-</div>
+      <!--  ================= login page=================  -->        
+        <div data-theme="c" data-role="page" id="pagesync" >
+        	
+            <div data-theme="c" data-role="header" data-position="fixed" >
+			
+			   <a style="height:18px;"   onClick="menu_page()"  class="ui-btn-left ui-btn-icon-notext"><img src="menu.png"></a>
+               <a style="height:18px;" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-right" onClick="exit()" ><img src="exit.png"> </a>
+                <h3>POST-IT</h3>
+            </div>
+			
+			<div data-role="content" style="height:90%; position:relative;" >    
+               </br></br>
+				<font color="#CCFFCC" face="Arial, Helvetica, sans-serif" size="-1"> 
+				<input type="text" name="mobile" id="mobile" placeholder="Mobile Number" value="">
+				<input type="password" name="password" id="password" placeholder="Password" value="" >
+                </font>                
+				
+                
+                <a id="syncBasicBtn" data-role="button"  onClick="syncBasic()" >Sync</a>		
+                <div id="bufferImageSync" ><img height="40px" width="40px" src="running.gif"></div>
+                </br></br>
+                
+                <!-- <a id="loginButton" data-role="button"  onClick="clear_autho()" >Clear Authorization</a>-->			
+				<div class="errorMsg" style="color:#cc0000"></div>
+				
+					   
+            </div>
+			
+		
+			<!--<div align="right"  style="color:#A4C5D9; width:100%; ">Version:00010;20160502.1</div>-->
+        </div><!--/login page-->
 <script type="text/javascript" src="phonegap.js"></script>
   
 </body>
