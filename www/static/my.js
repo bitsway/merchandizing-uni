@@ -301,7 +301,7 @@ function syncBasic(){
 					if(localStorage.town!=''){
 					var townlist=localStorage.town.split('fdfd');					
 					var townStr='';
-					for (i=0;i<townlist.length;i++){
+					/*for (i=0;i<townlist.length;i++){
 						townLi=townlist[i].split('|');						
 						townCode=townLi[0];
 						townName=townLi[1];
@@ -309,6 +309,22 @@ function syncBasic(){
 						townStr+='<label for="'+townCode+'" id="radioRemove"><input type="radio" name="town_select" onclick="townSelect()" id="'+townCode+'" value="'+townCode+'-'+townName+'">'+townCode+'-'+townName+'</label>'
 					}
 					localStorage.townStr=townStr;
+					*/
+					
+
+					var townStr='<ul data-role="listview" data-inset="true" >';	 
+					for (i=0;i<townlist.length;i++){
+						townLi=townlist[i].split('|');	
+		
+						townCode=townLi[0];
+						townName=townLi[1];
+						//onclick="sRoute(\''+cmRoute[i]+'\')"		
+						townStr += '<li id="town_select" style="background-color:#FFF; border-top-color:#F03; border-bottom-color:#F03;" onclick="townSelect(\''+ townCode+'-'+ townName+'\')">'+ townCode+'-'+ townName+'</li>'
+						
+					}
+					townStr +='</ul>';
+					localStorage.townStr=townStr;
+					
 					
 					$('#townList').empty();
 					$('#townList').append(localStorage.townStr).trigger('create');
@@ -523,6 +539,7 @@ function syncValueClean(){
 	
 function menuClick(){
 	$('#menuBufferingImage').hide();
+	$(".errorMsg").text("");
 	$(".sucChkR").text("");
 	$(".errorChkP").text("");
 	$(".errorChk").text("");
@@ -537,7 +554,8 @@ function menuClick(){
 	$("#posmAuditOutSearch").val('');	
 	
 	
-	if(localStorage.rep_type == ''){
+	if(localStorage.synced != 'YES'){
+		$(".errorMsg").html("Required Sync");
 		url = "#pagesync";
 		$.mobile.navigate(url);
 	}else{
@@ -566,7 +584,8 @@ function backClick(){
 }
 
 //---------
-function townSelect(){
+function townSelect(town){
+
 	$('#menuBufferingImage').hide();
 	$("#cmprepname").text("");
 	$("#cmpreptype").text("");
@@ -576,11 +595,13 @@ function townSelect(){
 		$(".errorChk").text("Required Sync");
 	}else{
 		
-		if($("#townList").find("input[name='town_select']:checked").length==0){
+		/*if($("#townList").find("input[name='town_select']:checked").length==0){
 			$(".errorChk").text("Select Town");
 		}else{
-			$("#bufferImageSelectTown").show();
-			localStorage.select_town=$("input[name='town_select']:checked").val();
+			$("#bufferImageSelectTown").show();*/
+			//localStorage.select_town=$("input[name='town_select']:checked").val();
+			localStorage.select_town=town;
+			
 			//alert (apipath+'get_posm_sup?select_town='+localStorage.select_town+"&repID="+localStorage.repID)
 			$.ajax({
 			  url:apipath+'get_posm_sup?select_town='+localStorage.select_town+"&repID="+localStorage.repID,
@@ -629,7 +650,7 @@ function townSelect(){
 					}
 				}
 			  });
-		}
+		//}
 	}
 }
 
@@ -651,7 +672,7 @@ function receive(){
 						if(localStorage.posmCodeCmSup!=''){			
 					//====CM/Sup	
 					var posmCodeCmSup=localStorage.posmCodeCmSup.split('fdfd');
-					var posmStrRec = '<select id="posmCodeRec" class="auto_break" name="posmCodeRec" onchange="alloDetails();"><option selected="selected" value="">Select POSM</option>'
+					var posmStrRec = '<select style="background:none;" id="posmCodeRec" class="auto_break" name="posmCodeRec" onchange="alloDetails();"><option selected="selected" value="">Select POSM</option>'
            
 					for (i=0;i<posmCodeCmSup.length;i++){	
 						posmCodeCmSupStr=posmCodeCmSup[i].split('-');								
