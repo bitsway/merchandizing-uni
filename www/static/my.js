@@ -42,7 +42,7 @@ var agencyAuditPaintComboN='';
 //localStorage.rep_type='';
 
 //---Online
-var apipath="http://w02.yeapps.com/postit/syncmobile_20190410/";
+var apipath="http://w02.yeapps.com/postit/syncmobile_20190430/";
 //--- local
 //var apipath="http://127.0.0.1:8000/postit/syncmobile/";
 
@@ -521,6 +521,103 @@ function syncBasic(){
 	}//-----/field			
 }
 
+function attandance(){
+	$(".errMsg").html("");
+	$("input:radio").removeAttr('checked');
+	
+	var d = new Date();
+	var days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+	
+	var today = new Date();
+	var dd = today.getDate();
+	var allM = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+	var mm=allM[today.getMonth()];
+	var yyyy=today.getFullYear();
+	
+	document.getElementById("currentDate").innerHTML =  dd +' '+ mm +' '+yyyy +' | '+ days[d.getDay()];	
+	
+	$.mobile.navigate("#salfiePage");
+	}
+
+
+function salfie_next_page(){
+		$(".successMsg").html("");
+		$(".errMsg").html("");				
+		var attendance=$("input[name='attendance']:checked").val();				
+		if (attendance=="" || attendance==undefined){
+			$(".errMsg").html("Check Attendance Type");		
+		}else{		
+			var salfie_image_name=$("#salfie_image_name_hidden").val();
+			var salfie_image_path=$("#salfie_image_div_hidden").val();					
+			
+			if (salfie_image_path.length < 10){				
+					var url = "#salfiePage";
+					$.mobile.navigate(url);
+			}else{															
+				
+				//alert(apipath+'syncAttendanceData?select_town='+localStorage.select_town+"&repID="+localStorage.repID+'&salfie_data='+salfie_image_name+'&attendance='+encodeURIComponent(attendance));
+				
+				$.ajax({
+				//type: 'POST',
+				url: apipath+'syncAttendanceData?select_town='+localStorage.select_town+"&repID="+localStorage.repID+'&salfie_data='+salfie_image_name+'&attendance='+encodeURIComponent(attendance),
+				 success: function(result) {	
+						
+						if (result==''){
+							alert ('Sorry Network not available');
+						}else if(result=='Success'){
+							localStorage.attendanceType=attendance;
+							
+							if (localStorage.attendanceType=="Day Start"){
+								localStorage.attendanceFlag=1;								
+							}else{
+								localStorage.attendanceFlag=0;
+								localStorage.attendanceType="";
+							}
+							//alert(localStorage.attendanceFlag);	
+							//localStorage.selfie_flag=1;
+							$(".successMsg").text("Submitted Successfully");													
+							upload_salfie()
+							
+							
+							/*if (localStorage.attendanceFlag==1){ // Faisal
+								$.mobile.navigate("#routePage");	
+							}*/
+									
+						}else if(result=='Already Exists'){
+							$(".errMsg").html('Already Exists'); // Faisal
+							//$.mobile.navigate("#salfiePage");// Faisal
+							//$.mobile.navigate("#routePage");												
+						}else{
+							$(".errMsg").html(result);						
+						}
+				 	}
+				 })				
+			}
+		}
+}
+
+function get_salfie() {
+	var tempTime = $.now();
+	salfie_image_name=tempTime.toString()+"_"+localStorage.mobileNo+"_salfie.jpg";
+	$("#salfie_image_name_hidden").val(salfie_image_name);
+	$("#salfie_image_div_hidden").val(salfie_image_name);
+	navigator.camera.getPicture(onSuccessSalfie, onFailSalfie, { quality: 60,
+		targetWidth: 350,
+		destinationType: Camera.DestinationType.FILE_URI , correctOrientation: true });
+}
+
+function onSuccessSalfie(imageURI) {
+	var image = document.getElementById('salfie_image_div');
+    image.src = imageURI;
+    var hidden_path="salfie_image_div_hidden";
+	$("#"+hidden_path).val(imageURI);
+}
+
+function onFailSalfie(message) {
+	imagePathA="";
+    alert('Failed because: ' + message);
+}
+
 function syncValueClean(){
 	
 	localStorage.synced="NO"
@@ -594,7 +691,7 @@ function townSelect(town){
 	if (localStorage.synced!='YES'){
 		$(".errorChk").text("Required Sync");
 	}else{
-		
+		$("#bufferImageSelectTown").show();
 		/*if($("#townList").find("input[name='town_select']:checked").length==0){
 			$(".errorChk").text("Select Town");
 		}else{
@@ -612,9 +709,19 @@ function townSelect(town){
 						$("#bufferImageSelectTown").hide();
 						localStorage.posmCodeAgency=resultArray[2];	
 						localStorage.agencyTaxarea=resultArray[4];
-						//alert (localStorage.agencyTaxarea);			
-					//====agency taxArea
+						localStorage.posmAll=resultArray[5];
 					
+						var recPOSMcode=localStorage.posmAll.split('fdfd');
+						var posmAllStr='<input list="posmAllRec" name="selectPOSM" id="selectPOSM"><datalist id="posmAllRec">';
+						
+						for (i=0;i<recPOSMcode.length;i++){								
+						posmAllStr += '<option style="background-color:#FFF; border-top-color:#F03; border-bottom-color:#F03;"(\''+ recPOSMcode[i]+'\')"><a>'+ recPOSMcode[i]+'</a></option>'
+					}
+						posmAllStr +='</datalist>';
+						localStorage.posmAllStr=posmAllStr;
+					
+						$('#posmAllStrListAllRec').empty();
+						$('#posmAllStrListAllRec').append(localStorage.posmAllStr).trigger('create');
 						
 					//=======Agency
 					if(localStorage.posmCodeAgency!=''){
@@ -739,12 +846,13 @@ function alloDetails(){
 				var a_qty=resultArray[3];
 				var due_qty=resultArray[4];
 				var alc_id=resultArray[5];
-					
+				var balance_qty=resultArray[6];
 				
 				$("#posm_type").html("Posm Type	:	"+posmType);
 				$("#brand").html("Brand			:	"+brand);
 				$("#allocation").html("Allocation Qty	:	"+a_qty);
 				$("#due").html("Due Qty	:	"+due_qty);
+				$("#balance_qty").html("Balance Qty	:	"+balance_qty);
 				
 				$("#posm_type").val(posmType);
 				$("#brand").val(brand);
@@ -778,22 +886,104 @@ function submit_data_receive(){
 	imagePathA=$("#recPhoto_path").val();
 	var alcId=$("#alcId").val();
 	
+	var regg = /^[0-9]*$/;
+	var def_qty=$("#def_qty").val().replace('+','').replace('-','').replace('.','').replace('/','').replace('*','').replace(',','');
 	
-	if(received=='' || received==0){
+	imageName6=$("#defPhoto_name").val();
+	imagePathE=$("#defPhoto_path").val();
+	
+	//alert(received);
+	/*var rec_flag=false;
+	
+	if (Number(received)==0){
+		$(".errorChk").text("Receive Qty must Number");
+		$("#btn_submit_receive").show();
+	}else{
+		if(imageName==''){
+			$(".errorChk").text("Required Receive Picture");
+			$("#btn_submit_receive").show();
+			
+			}else{
+				rec_flag=true;
+				$(".errorChk").text("Receive Image Upload Successfully");
+				}
+	}
+	
+	//alert (a_qty);
+	var def_flag=false;
+	if (Number(a_qty)==0){
+		$(".errorChk").text("Def Qty must Number");
+		$("#btn_submit_receive").show();
+	}else{
+		if(imageName6==''){
+			$(".errorChk").text("Required Defective Picture");
+			$("#btn_submit_receive").show();
+			
+			}else{
+				def_flag=true;
+				$(".errorChk").text("Defective Image Upload Successfully");
+				}
+	}*/
+	
+	/*if (rec_flag==false && def_flag==false){
+		$(".errorChk").text("Required Qty");
+		$("#btn_submit_receive").show();
+	}else{*/
+	if (received==''){
+		received=0;
+		}
+	if(def_qty==''){
+		def_qty=0;
+		}
+	
+	if (received==0 && def_qty==0){
+		
+		$(".errorChk").text("Required Qty");
+		$("#btn_submit_receive").show();
+	}else if(!reg.test(received)){
+		$(".errorChk").text("Receive Qty must Number");
+		$("#btn_submit_receive").show();
+	}else if(received!=0 && imageName==''){
+		$(".errorChk").text("Required Receive Image");
+		$("#btn_submit_receive").show();
+	}else if(!regg.test(def_qty)){
+		$(".errorChk").text("Defective Qty must Number");
+		$("#btn_submit_receive").show();
+	}else if(def_qty!=0 && imageName6==''){
+		
+		$(".errorChk").text("Required Defective Image");
+		$("#btn_submit_receive").show();
+	}else{
+	
+	
+	/*if(received=='' || received==0){
 		$(".errorChk").text("Required Receive Qty");
 		$("#btn_submit_receive").show();
-	}else if (!reg.test(received)){
+	}else*/ 
+	/*if (!reg.test(received)){
 		$(".errorChk").text("Qty must Number");
 		$("#btn_submit_receive").show();
-	}else if (imageName==''){
-		$(".errorChk").text("Required Picture");
+	}else if ((received != '' || received!=0) && imageName == ''){
+		$(".errorChk").text("Required Receive Picture");
+		$("#btn_submit_receive").show();
+	}else if(!regg.test(a_qty)){
+		$(".errorChk").text("Qty must Number");
+		$("#btn_submit_receive").show();*/
+	/*}else if(a_qty=='' || a_qty==0){
+		$(".errorChk").text("Required Defective Qty");
+		$("#btn_submit_receive").show();*/
+	/*}else if((a_qty != '' || a_qty==0) && imageName6 == ''){
+		$(".errorChk").text("Required Defective Picture");
+		$("#btn_submit_receive").show();
+	}else if(a_qty != '' || a_qty!=0 || received=='' || received==0){
+		$(".errorChk").text("Required Qty");
 		$("#btn_submit_receive").show();	
-	}else{
+	}else{*/
 		$("#receiveSubmitbufferImage").show();			
-		//alert(apipath+"submitData_receive?&syncCode="+localStorage.sync_code+"&repID="+localStorage.repID+"&repName="+localStorage.repName+"&mobileNo="+localStorage.mobileNo+"&select_town="+localStorage.select_town+"&posm_code="+posm_code+"&posm_type="+posm_type+"&brand="+brand+"&dueRec="+dueRec+"&received="+received+"&imageName="+imageName+"&alcId="+alcId);	
+		//alert(apipath+"submitData_receive?&syncCode="+localStorage.sync_code+"&repID="+localStorage.repID+"&repName="+localStorage.repName+"&mobileNo="+localStorage.mobileNo+"&select_town="+localStorage.select_town+"&posm_code="+posm_code+"&posm_type="+posm_type+"&brand="+brand+"&dueRec="+dueRec+"&received="+received+"&imageName="+imageName+"&alcId="+alcId+"&def_qty="+def_qty+"&imageName6="+imageName6);	
 		$.ajax({
 			type: 'POST',
-			url:apipath+"submitData_receive?&syncCode="+localStorage.sync_code+"&repID="+localStorage.repID+"&repName="+localStorage.repName+"&mobileNo="+localStorage.mobileNo+"&select_town="+localStorage.select_town+"&posm_code="+posm_code+"&posm_type="+posm_type+"&brand="+brand+"&dueRec="+dueRec+"&received="+received+"&imageName="+imageName+"&alcId="+alcId,
+			url:apipath+"submitData_receive?&syncCode="+localStorage.sync_code+"&repID="+localStorage.repID+"&repName="+localStorage.repName+"&mobileNo="+localStorage.mobileNo+"&select_town="+localStorage.select_town+"&posm_code="+posm_code+"&posm_type="+posm_type+"&brand="+brand+"&dueRec="+dueRec+"&received="+received+"&imageName="+imageName+"&alcId="+alcId+"&def_qty="+def_qty+"&imageName6="+imageName6,
 																																																													
 			success: function(result) {			
 				if(result=='Success'){
@@ -802,6 +992,7 @@ function submit_data_receive(){
 					$("#receivePOSMSelect").append(localStorage.posmCodeSup).trigger('create');	
 					$("#receiveSubmitbufferImage").hide();
 					$("#received").val("");
+					$("#def_qty").val("");
 					$("#posm_type").val("");
 					$("#brand").val("");
 					$("#dueRec").val("");
@@ -809,7 +1000,11 @@ function submit_data_receive(){
 					$("#recPhoto_name").val("");
 					$("#recPhoto_path").val("");
 					
+					$("#defPhoto_name").val("");
+					$("#defPhoto_path").val("");
+					
 					document.getElementById('myImageA').src = '';
+					document.getElementById('myImageE').src = '';
 									
 					$(".errorChk").text("");
 					$(".sucMsgR").show();
@@ -820,17 +1015,23 @@ function submit_data_receive(){
 					
 					
 					uploadPhotoRec(imagePathA, imageName);
+					uploadPhotoDefective(imagePathE, imageName6);
 					
 					$(".sucMsgR").text('Successfully Submitted');
 						
 					url="#second_page";					
-					$.mobile.navigate(url);	
+					$.mobile.navigate(url);
 					/*setTimeout(function(){
 						location.reload();
 					},500);*/	
 				}else if (result=='Faild'){
 						$("#receiveSubmitbufferImage").hide();
 						$(".errorChk").text("Can't Receive more than Due Qty");
+						$("#allHideR").show();
+						$("#btn_submit_receive").show();
+				}else if (result=='Faild2'){
+						$("#receiveSubmitbufferImage").hide();
+						$(".errorChk").text("Can't Defective more than Balance Qty");
 						$("#allHideR").show();
 						$("#btn_submit_receive").show();
 				}else{
@@ -842,7 +1043,7 @@ function submit_data_receive(){
 				}
 				
 			}//end result
-		});//end ajax	
+		});//end ajax*/	
 		
 	}
 }
@@ -2388,13 +2589,15 @@ function recReport(){
 }
 
 function recUsage(){
+	$('#usageReportR').empty();
+	var fr_date=$("#fr_date").val();
+	var to_date=$("#to_date").val();
 	
-	
-	//alert (apipath+"usage_report?&repID="+localStorage.repID+"&repName="+localStorage.repName+"&townName="+localStorage.select_town)
+	//alert (apipath+"usage_report?&repID="+localStorage.repID+"&repName="+localStorage.repName+"&townName="+localStorage.select_town+"&fr_date="+fr_date+"&to_date="+to_date)
 	$("#bufferImageUsaR").show();
 	$.ajax({
 			type: 'POST',
-			url:apipath+"usage_report?&repID="+localStorage.repID+"&repName="+localStorage.repName+"&townName="+localStorage.select_town,
+			url:apipath+"usage_report?&repID="+localStorage.repID+"&repName="+localStorage.repName+"&townName="+localStorage.select_town+"&fr_date="+fr_date+"&to_date="+to_date,
 																																																													
 			success: function(result) {
 				getResult=result.split('||');
@@ -2425,7 +2628,9 @@ function recUsage(){
 					var repid=localStorage.repID;
 					$("#townNameU").html ("Town	:		"+localStorage.select_town);
 					$("#repIDU").html ("Rep ID	:		"+repid);	
-				
+				}else if(getResult[0]=='failed'){
+					$("#bufferImageUsaR").hide();
+					$(".errorChk").text(getResult[1]);
 			}else{
 				$("#bufferImageUsaR").hide();
 				var townName=town;
@@ -2446,12 +2651,13 @@ function recUsage(){
 
 function stockReport(){
 	
-
-	//alert (apipath+"stock_report?&repID="+localStorage.repID+"&repName="+localStorage.repName+"&townName="+localStorage.select_town)
+	var selectPOSM=$("#selectPOSM").val();
+	
+	//alert (apipath+"stock_report?&repID="+localStorage.repID+"&repName="+localStorage.repName+"&townName="+localStorage.select_town+"&selectPOSM="+selectPOSM)
 	$("#bufferImageStockR").show();
 	$.ajax({
 			type: 'POST',
-			url:apipath+"stock_report?&repID="+localStorage.repID+"&repName="+localStorage.repName+"&townName="+localStorage.select_town,
+			url:apipath+"stock_report?&repID="+localStorage.repID+"&repName="+localStorage.repName+"&townName="+localStorage.select_town+"&selectPOSM="+selectPOSM,
 																																																													
 			success: function(result) {
 				getResult=result.split('||');
@@ -2480,7 +2686,8 @@ function stockReport(){
 					cmRouteSTr +='</table>'
 					$('#stockReport').empty();
 					$('#stockReport').append(cmRouteSTr).trigger('create');
-					
+					$('#posmAllStrListAllRec').empty();
+					$('#posmAllStrListAllRec').append(localStorage.posmAllStr).trigger('create');
 					
 					var repid=localStorage.repID;
 					$("#townName").html ("Town	:		"+localStorage.select_town);
