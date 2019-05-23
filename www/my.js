@@ -42,7 +42,7 @@ var agencyAuditPaintComboN='';
 //localStorage.rep_type='';
 
 //---Online
-var apipath="http://w02.yeapps.com/postit/syncmobile_20190522/";
+var apipath="http://w02.yeapps.com/postit/syncmobile_20190523/";
 var apipath_image="http://w02.yeapps.com/postit/";
 
 //--- local
@@ -527,6 +527,7 @@ function syncBasic(){
 }
 
 function attandance(){
+	$("#attandanceButton").hide();
 	$(".errMsg").html("");
 	$("input:radio").removeAttr('checked');
 	
@@ -541,6 +542,7 @@ function attandance(){
 	
 	document.getElementById("currentDate").innerHTML =  dd +' '+ mm +' '+yyyy +' | '+ days[d.getDay()];	
 	$("#bufferImageAtendance").hide();
+	
 	$.mobile.navigate("#salfiePage");
 	}
 
@@ -620,26 +622,27 @@ function salfie_next_page(){
 }
 
 function getLocationInfoSelfe(){
-	//$("#bufferImageAtendance").show();	
+	
+	$("#bufferImageAtendance").show();	
 	var options = { enableHighAccuracy: true, timeout:30000};	
 	navigator.geolocation.getCurrentPosition(onSuccessSelfie, onErrorSelfie, options);				
-	//$(".errMsg").html("Confirming location. Please wait.");
+	$(".errMsg").html("Confirming location. Please wait.");
 }
 // onSuccess Geolocation
 function onSuccessSelfie(position) {
 	$("#bufferImageAtendance").hide();	
 	$("#selfie_lat").val(position.coords.latitude);
 	$("#selfie_long").val(position.coords.longitude);
-	//$(".errMsg").html("Location Confirmed");
-	//$("#btn_submit_audit").show();
+	$(".errMsg").html("Location Confirmed");
+	$("#attandanceButton").show();
 }
 // onError Callback receives a PositionError object
 function onErrorSelfie(error) {
 	$("#bufferImageAtendance").hide();	
-   $("#selfie_lat").val(1);
-   $("#selfie_long").val(1);
-  // $(".errMsg").html("Failed to Confirmed Location.");
-  // $("#btn_submit_audit").hide();
+   $("#selfie_lat").val(0);
+   $("#selfie_long").val(0);
+  $(".errMsg").html("Failed to Confirmed Location.");
+  $("#attandanceButton").show();
 }	
 
 
