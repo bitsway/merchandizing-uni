@@ -55,7 +55,8 @@ url ="";
 $(document).ready(function(){
 	$('#bufferImageSync').hide();
 	$("#bufferImageSelectTown").hide();
-	
+	$("#attandanceButton").hide();
+	$("#bufferImageAtendanceLocation").hide();
 	/*if (localStorage.synced=="NO"){*/
 	
 	//$("#routeList").next().css("background-color", "yellow");
@@ -528,15 +529,12 @@ function syncBasic(){
 }
 
 function attandance(){
-	$("#attandanceButton").hide();
+	
 	$(".successMsg").html("");
 	$(".errMsg").html("");
 	$("input:radio").removeAttr('checked');
 	
-	attendanceTypeC='<fieldset data-role="controlgroup" data-mini="true"> <input name="attendance" id="1" value="Day Start" type="radio" ><label for="1">Day Start</label>  <input name="attendance" id="2" value="Day End" type="radio"><label for="2">Day End</label></fieldset>'
 	
-	$("#attendanceTypeCA").empty();
-	$("#attendanceTypeCA").append(attendanceTypeC).trigger('create');
 	
 	var d = new Date();
 	var days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
@@ -597,8 +595,7 @@ function salfie_next_page(){
 							$("#attandanceButton").hide();
 							$("#bufferImageAtendance").hide();
 							$("#salfie_data").val("");
-							$("#attendanceTypeCA").empty();
-							$("#attendanceTypeCA").append(attendanceTypeC).trigger('create');
+							
 							
 							/*localStorage.attendanceType=attendance;
 							
@@ -633,15 +630,15 @@ function salfie_next_page(){
 }
 
 function getLocationInfoSelfe(){
-	
-	$("#bufferImageAtendance").show();	
+	 $("#attandanceButton").hide();
+	$("#bufferImageAtendanceLocation").show();	
 	var options = { enableHighAccuracy: true, timeout:30000};	
 	navigator.geolocation.getCurrentPosition(onSuccessSelfie, onErrorSelfie, options);				
 	$(".errMsg").html("Confirming location. Please wait.");
 }
 // onSuccess Geolocation
 function onSuccessSelfie(position) {
-	$("#bufferImageAtendance").hide();	
+	$("#bufferImageAtendanceLocation").hide();	
 	$("#selfie_lat").val(position.coords.latitude);
 	$("#selfie_long").val(position.coords.longitude);
 	$(".errMsg").html("Location Confirmed");
@@ -649,7 +646,7 @@ function onSuccessSelfie(position) {
 }
 // onError Callback receives a PositionError object
 function onErrorSelfie(error) {
-	$("#bufferImageAtendance").hide();	
+	$("#bufferImageAtendanceLocation").hide();	
    $("#selfie_lat").val(0);
    $("#selfie_long").val(0);
   $(".errMsg").html("Failed to Confirmed Location.");
@@ -911,7 +908,7 @@ function alloDetails(){
 				var imageRec=resultArray[7];
 				
 				
-				var imageRec = '<img height="100px"  src="'+apipath_image+'static/images/alc_image/'+imageRec+'" alt="Receive Image" />';
+				var imageRec = '<img height="100px"  src="'+apipath_image+'static/images/alc_image/'+imageRec+'" alt="Receive Image"/>';
 				
 				$("#imageReceive").empty();
 				$("#imageReceive").append(imageRec).trigger('create');
