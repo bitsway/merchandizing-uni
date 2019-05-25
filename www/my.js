@@ -38,11 +38,12 @@ var auditFasciaStatusC='';
 var auditProfileBoxStatusC='';
 var auditStoreTypeC='';
 var agencyAuditPaintComboN='';
+var attendanceTypeC='';
 
 //localStorage.rep_type='';
 
 //---Online
-var apipath="http://w02.yeapps.com/postit/syncmobile_20190523/";
+var apipath="http://w02.yeapps.com/postit/syncmobile_20190525/";
 var apipath_image="http://w02.yeapps.com/postit/";
 
 //--- local
@@ -528,8 +529,14 @@ function syncBasic(){
 
 function attandance(){
 	$("#attandanceButton").hide();
+	$(".successMsg").html("");
 	$(".errMsg").html("");
 	$("input:radio").removeAttr('checked');
+	
+	attendanceTypeC='<fieldset data-role="controlgroup" data-mini="true"> <input name="attendance" id="1" value="Day Start" type="radio" ><label for="1">Day Start</label>  <input name="attendance" id="2" value="Day End" type="radio"><label for="2">Day End</label></fieldset>'
+	
+	$("#attendanceTypeCA").empty();
+	$("#attendanceTypeCA").append(attendanceTypeC).trigger('create');
 	
 	var d = new Date();
 	var days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
@@ -559,10 +566,11 @@ function salfie_next_page(){
 		 //alert(selfie_lat+"-"+selfie_long);
 		if (attendance=="" || attendance==undefined){
 			$(".errMsg").html("Check Attendance Type");
+			$("#attandanceButton").show();
 			
 		}else if((attendance!="" || attendance!=undefined) && salfie_image_name==''){
-		
-		$(".errMsg").text("Required Salfie");
+			$("#attandanceButton").show();
+			$(".errMsg").text("Required Salfie");
 		
 		/*}else if (selfie_lat==0 || selfie_lat==undefined|| selfie_long==0 || selfie_long==undefined){
 			$(".errMsg").html("Required Location");*/
@@ -586,8 +594,11 @@ function salfie_next_page(){
 						if (result==''){
 							alert ('Sorry Network not available');
 						}else if(result=='Success'){
+							$("#attandanceButton").hide();
 							$("#bufferImageAtendance").hide();
 							$("#salfie_data").val("");
+							$("#attendanceTypeCA").empty();
+							$("#attendanceTypeCA").append(attendanceTypeC).trigger('create');
 							
 							/*localStorage.attendanceType=attendance;
 							
