@@ -520,8 +520,6 @@
         	
             <div data-theme="c" data-role="header" data-position="fixed" style="background-image:url(iconsandbackgrounds/Background2.png); border-bottom:1px solid #999;">
 			
-			   <!--<a style="height:18px;"   onClick="menuClick()"  class="ui-btn-left ui-btn-icon-notext" id="menuLogo"><img src="menu.png"></a>
-               <a style="height:18px;" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-right" id="menuLogo" onClick="exit()" ><img src="exit.png"> </a>-->
                <a style="height:18px; background:none; border:none;"  onClick="menuClick()"  id="menuLogo"><img src="iconsandbackgrounds/Option_Icon_1.png"></a>
                 <a style="height:18px;background:none; border:none; margin-top:-3px;" id="menuLogo" onClick="exit()" ><img src="iconsandbackgrounds/Power_Icon2.png"> </a>
                 <h3 style=" color:#FFF;">POST-IT</h3>
@@ -533,21 +531,18 @@
 				<input type="number" name="mobile" id="mobile" placeholder="Mobile Number" value="" style="border:1px solid#666; height:40px">
 				<input type="password" name="password" id="password" placeholder="Password" value="" style="border:1px solid#666; height:40px">
                 </font>                
-				
-                
                 <a id="syncBasicBtn" data-role="button"  onClick="syncBasic()" style=" background:linear-gradient(to top, #999 -50%, #ffffff 100%); color:#000000; font-weight:1;"><strong style="font-size:18px;">Sync</strong></a>
                  </br></br></br></br>
                 <div id="bufferImageSync" style="text-align:center;"><img height="40px" width="40px" src="running.gif"></div>
                 </br></br>
-                
-                <!-- <a id="loginButton" data-role="button"  onClick="clear_autho()" >Clear Authorization</a>-->			
+              		
 				<div class="errorMsg" style="color:#FFF"></div>
 				
 			 
             </div>
 			
 		
-			 <div data-role="footer" data-position="fixed" style="font-size:12px; color:#fff; background-color:#9B1042; font-weight:1;" align="center">20190525.1</div>
+			 <div data-role="footer" data-position="fixed" style="font-size:12px; color:#fff; background-color:#9B1042; font-weight:1;" align="center">20190527</div>
         </div>
  <!-- ============================salfie  page Start============================-->
     
@@ -580,14 +575,13 @@
                 <img id="salfie_image_div" height="100px" width="100px"  src="" alt="Image" style="color:#FFF;"/>
                     <input type="hidden" name="salfie_image_div_hidden" id="salfie_image_div_hidden" value="" >
                     <input type="hidden" name="salfie_image_name_hidden" id="salfie_image_name_hidden" value="" >
-				
-				<!--<a data-role="button" onClick="outlet_next_page();getlocationand_askhelp();" >Next</a>-->
+                    
                  <input name="selfie_lat" id="selfie_lat"  type="hidden">
                 <input name="selfie_long" id="selfie_long"  type="hidden">
                 <a data-role="button" id="attandanceButton" onClick="salfie_next_page();" class="ui-btn" style="background:linear-gradient(to top, #999 -50%, #ffffff 100%); color:#000000;  font-weight:1;">Submit</a>
 				
 				<br/>
-                <div id="bufferImageAtendance" style="text-align:center;"><img height="40px" width="40px" src="running.gif"></div>
+                <!--<div id="bufferImageAtendance" style="text-align:center;"><img height="40px" width="40px" src="running.gif"></div>-->
                  <div id="bufferImageAtendanceLocation" style="text-align:center;"><img height="40px" width="40px" src="running.gif"></div>
                <div class="successMsg" style="color:#FFF;"></div>
                 <div class="errMsg" style="color:#FFF;"></div>

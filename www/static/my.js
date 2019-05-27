@@ -38,21 +38,29 @@ var auditFasciaStatusC='';
 var auditProfileBoxStatusC='';
 var auditStoreTypeC='';
 var agencyAuditPaintComboN='';
+var attendanceTypeC='';
 
 //localStorage.rep_type='';
 
 //---Online
-var apipath="http://w02.yeapps.com/postit/syncmobile_20190430/";
+var apipath="http://w02.yeapps.com/postit/syncmobile_20190527/";
+var apipath_image="http://w02.yeapps.com/postit/";
+
 //--- local
 //var apipath="http://127.0.0.1:8000/postit/syncmobile/";
+//var apipath_image="http://127.0.0.1:8000/postit/";
 
 url ="";
 
 $(document).ready(function(){
 	$('#bufferImageSync').hide();
 	$("#bufferImageSelectTown").hide();
+	$("#attandanceButton").hide();
+	$("#bufferImageAtendanceLocation").hide();
 	
 	/*if (localStorage.synced=="NO"){*/
+	
+	//$("#routeList").next().css("background-color", "yellow");
 	
 	if (localStorage.rep_type=='CM'){
 		$('#dff_Usages_Audit').hide();
@@ -72,7 +80,7 @@ $(document).ready(function(){
 		$("#entryAgency").hide();
 		$("#summaryAgency").hide();
 					
-		$("#btn_receive").hide();
+		$("#btn_receive").show();
 		$("#townSelct").show();
 		
 		var townCName=localStorage.town.replace('|', '-');
@@ -260,6 +268,7 @@ $(document).ready(function(){
 
 
 function syncBasic(){
+	
 	$("#bufferImageSelectTown").hide();
 	$(".errorChk").html("");
 	var mobile=$("#mobile").val();
@@ -360,7 +369,7 @@ function syncBasic(){
 						$("#stockAgency").hide();
 						$("#reportbtnAgency").hide();
 						$("#summaryAgency").hide();
-						$("#btn_receive").hide();
+						$("#btn_receive").show();
 						$("#btn_defective").hide();
 						$("#btn_dff").show();
 						$('#btn_usages').show();
@@ -522,8 +531,12 @@ function syncBasic(){
 }
 
 function attandance(){
+	
+	$(".successMsg").html("");
 	$(".errMsg").html("");
 	$("input:radio").removeAttr('checked');
+	
+	
 	
 	var d = new Date();
 	var days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
@@ -536,16 +549,32 @@ function attandance(){
 	
 	document.getElementById("currentDate").innerHTML =  dd +' '+ mm +' '+yyyy +' | '+ days[d.getDay()];	
 	
+	
 	$.mobile.navigate("#salfiePage");
 	}
 
 
 function salfie_next_page(){
+		
 		$(".successMsg").html("");
-		$(".errMsg").html("");				
-		var attendance=$("input[name='attendance']:checked").val();				
+		$(".errMsg").html("");
+		var salfie_image_name=$("#salfie_image_name_hidden").val();				
+		var attendance=$("input[name='attendance']:checked").val();
+		
+		selfie_lat=$("#selfie_lat").val();
+		selfie_long=$("#selfie_long").val();
+		 //alert(selfie_lat+"-"+selfie_long);
 		if (attendance=="" || attendance==undefined){
-			$(".errMsg").html("Check Attendance Type");		
+			$(".errMsg").html("Check Attendance Type");
+			$("#attandanceButton").show();
+			
+		}else if((attendance!="" || attendance!=undefined) && salfie_image_name==''){
+			$("#attandanceButton").show();
+			$(".errMsg").text("Required Salfie");
+		
+		/*}else if (selfie_lat==0 || selfie_lat==undefined|| selfie_long==0 || selfie_long==undefined){
+			$(".errMsg").html("Required Location");*/
+		
 		}else{		
 			var salfie_image_name=$("#salfie_image_name_hidden").val();
 			var salfie_image_path=$("#salfie_image_div_hidden").val();					
@@ -554,25 +583,30 @@ function salfie_next_page(){
 					var url = "#salfiePage";
 					$.mobile.navigate(url);
 			}else{															
-				
-				//alert(apipath+'syncAttendanceData?select_town='+localStorage.select_town+"&repID="+localStorage.repID+'&salfie_data='+salfie_image_name+'&attendance='+encodeURIComponent(attendance));
+				$("#bufferImageAtendanceLocation").show();
+				//alert(apipath+'syncAttendanceData?select_town='+localStorage.select_town+"&repID="+localStorage.repID+'&salfie_data='+salfie_image_name+'&attendance='+encodeURIComponent(attendance)+'&selfie_lat='+selfie_lat+'&selfie_long='+selfie_long);
 				
 				$.ajax({
 				//type: 'POST',
-				url: apipath+'syncAttendanceData?select_town='+localStorage.select_town+"&repID="+localStorage.repID+'&salfie_data='+salfie_image_name+'&attendance='+encodeURIComponent(attendance),
+				url: apipath+'syncAttendanceData?select_town='+localStorage.select_town+"&repID="+localStorage.repID+'&salfie_data='+salfie_image_name+'&attendance='+encodeURIComponent(attendance)+'&selfie_lat='+selfie_lat+'&selfie_long='+selfie_long,
 				 success: function(result) {	
 						
 						if (result==''){
 							alert ('Sorry Network not available');
 						}else if(result=='Success'){
-							localStorage.attendanceType=attendance;
+							$("#attandanceButton").hide();
+							$("#bufferImageAtendanceLocation").hide();
+							$("#salfie_data").val("");
+							
+							
+							/*localStorage.attendanceType=attendance;
 							
 							if (localStorage.attendanceType=="Day Start"){
 								localStorage.attendanceFlag=1;								
 							}else{
 								localStorage.attendanceFlag=0;
 								localStorage.attendanceType="";
-							}
+							}*/
 							//alert(localStorage.attendanceFlag);	
 							//localStorage.selfie_flag=1;
 							$(".successMsg").text("Submitted Successfully");													
@@ -584,6 +618,7 @@ function salfie_next_page(){
 							}*/
 									
 						}else if(result=='Already Exists'){
+							$("#bufferImageAtendanceLocation").hide();
 							$(".errMsg").html('Already Exists'); // Faisal
 							//$.mobile.navigate("#salfiePage");// Faisal
 							//$.mobile.navigate("#routePage");												
@@ -595,6 +630,34 @@ function salfie_next_page(){
 			}
 		}
 }
+
+function getLocationInfoSelfe(){
+	
+	$("#attandanceButton").hide();
+	$("#bufferImageAtendanceLocation").show();
+	var options = { enableHighAccuracy: true, timeout:30000};	
+	navigator.geolocation.getCurrentPosition(onSuccessSelfie, onErrorSelfie, options);				
+	$(".errMsg").html("Confirming location. Please wait.");
+}
+// onSuccess Geolocation
+function onSuccessSelfie(position) {
+	
+	$("#bufferImageAtendanceLocation").hide();
+	$("#selfie_lat").val(position.coords.latitude);
+	$("#selfie_long").val(position.coords.longitude);
+	$(".errMsg").html("Location Confirmed");
+	$("#attandanceButton").show();
+}
+// onError Callback receives a PositionError object
+function onErrorSelfie(error) {
+	
+	$("#bufferImageAtendanceLocation").hide();
+    $("#selfie_lat").val(0);
+    $("#selfie_long").val(0);
+    $(".errMsg").html("Failed to Confirmed Location.");
+    $("#attandanceButton").show();
+}	
+
 
 function get_salfie() {
 	var tempTime = $.now();
@@ -847,6 +910,15 @@ function alloDetails(){
 				var due_qty=resultArray[4];
 				var alc_id=resultArray[5];
 				var balance_qty=resultArray[6];
+				var imageRec=resultArray[7];
+				var inagUrl=apipath_image+'static/images/alc_image/'+imageRec;
+				
+				var imageRec = '<img height="100px"  src="'+inagUrl+'"  alt="Receive Image"/>';
+				
+				$("#imageReceive").empty();
+				$("#imageReceive").append(imageRec).trigger('create');
+				
+				//$("#imageReceive").val(imageRec);
 				
 				$("#posm_type").html("Posm Type	:	"+posmType);
 				$("#brand").html("Brand			:	"+brand);
@@ -2126,11 +2198,17 @@ function alloDetailsU(){
 					var a_qty=resultArray[3];
 					var balance_qty=resultArray[4];
 					var alc_id=resultArray[5];
+					var imageUsage=resultArray[6];
+					var inagUrl=apipath_image+'static/images/alc_image/'+imageUsage;
 					
+					var imageUsa = '<img height="100px"  src="'+inagUrl+'" alt="Execution Image" />';
+					
+					$("#imageExecution").empty();
+					$("#imageExecution").append(imageUsa).trigger('create');
 					
 					$("#uposm_type").html("Posm Type	:	"+ posmType);
 					$("#ubrand").html("Brand	:	"+brand);
-					$("#uallocation").html("Stock Qty:	"+a_qty);
+					$("#uallocation").html("Received Qty:	"+a_qty);
 					$("#balance").html("Balance Qty:	"+balance_qty);
 					$("#uposm_type").val(posmType);
 					$("#ubrand").val(brand);
@@ -2340,7 +2418,11 @@ function alloDetailsAgency(){
 					var brand=resultArray[2];
 					var allo_qty=resultArray[3];
 					var balance_qty=resultArray[4];
+					var imageAgn=resultArray[5];
 					
+					var imageAgency = '<img height="100px"  src="'+apipath_image+'static/images/alc_image/'+imageAgn+'" alt="Execution Image" />';
+					$("#imageExecutionAgency").empty();
+					$("#imageExecutionAgency").append(imageAgency).trigger('create');
 					
 					
 					$("#agencyposm_type").html("Posm Type	:	"+ posmType);
@@ -2508,13 +2590,13 @@ function onfail3(r) {
 }
 
 function repo(){
-	if (localStorage.rep_type == 'CM'){
+	/*if (localStorage.rep_type == 'CM'){
 		$("#recReport").hide();
 		
 	}else{
 		$("#recReport").show();
 		$("#allHide").show();
-	}
+	}*/
 	
 	$(".errorChk").text("");			
 	url="#page9";				
