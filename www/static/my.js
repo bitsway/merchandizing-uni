@@ -63,6 +63,7 @@ $(document).ready(function(){
 	//$("#routeList").next().css("background-color", "yellow");
 	
 	if (localStorage.rep_type=='CM'){
+		$('#attendanceButtonShow').show();
 		$('#dff_Usages_Audit').hide();
 		$("#posmReportAuditSub").hide();	
 		$("#posmAuditDiv").hide();
@@ -103,7 +104,8 @@ $(document).ready(function(){
 			
 	}else if (localStorage.rep_type == 'SUPERVISOR'){
 		
-		$("#posmReportAuditSub").hide();	
+		$("#posmReportAuditSub").hide();
+		$('#attendanceButtonShow').show();	
 		$("#posmAuditDiv").hide();
 		$('#townSUP').show();
 		$('#townList').show();
@@ -148,6 +150,7 @@ $(document).ready(function(){
 	}else if(localStorage.rep_type == 'AGENCY'){
 		
 		$("#reportbtnAgency").show();
+		$('#attendanceButtonShow').hide();
 		$("#posmReportAuditSub").hide();	
 		$("#posmAuditDiv").hide();
 		$('#townSUP').show();
@@ -185,6 +188,7 @@ $(document).ready(function(){
 	}else if(localStorage.rep_type == 'AUDITOR'){
 		
 		$('#dff_Usages_Audit').hide();
+		$('#attendanceButtonShow').hide();
 		$('#bufferImageOutletAudt').hide();
 		$("#posmReportAuditSub").hide();	
 		$("#posmAuditDiv").hide();
@@ -212,6 +216,7 @@ $(document).ready(function(){
 		//$("#boarAvailableCrest").empty();
 		//$("#boarAvailableCrest").append(boardCresteN).trigger('create');
 		$('#stockAgency').hide();
+		$('#attendanceButtonShow').hide();
 		$("#reportbtnAgency").hide();
 		$('#summaryAgency').hide();
 		$('#entryAgency').hide();
@@ -356,6 +361,7 @@ function syncBasic(){
 					cmRouteStr +='</ul>'
 					localStorage.route=cmRouteStr;
 					if (localStorage.rep_type=='CM'){
+						$('#attendanceButtonShow').show();
 						$('#dff_Usages_Audit').hide();
 						$("#posmReportAuditSub").hide();	
 						$("#posmAuditDiv").hide();					
@@ -390,6 +396,7 @@ function syncBasic(){
 						$.mobile.navigate(url);
 					}else if (localStorage.rep_type == 'SUPERVISOR'){
 						$('#dff_Usages_Audit').hide();
+						$('#attendanceButtonShow').show();
 						$("#posmReportAuditSub").hide();	
 						$("#posmAuditDiv").hide();
 						$('#townSUP').show();
@@ -416,6 +423,7 @@ function syncBasic(){
 						$.mobile.navigate(url);
 							
 					}else if(localStorage.rep_type == 'AGENCY'){
+						$('#attendanceButtonShow').hide();
 						$('#dff_Usages_Audit').hide();
 						$("#posmReportAuditSub").hide();	
 						$("#posmAuditDiv").hide();
@@ -443,6 +451,7 @@ function syncBasic(){
 						$.mobile.navigate(url);						
 					}else if(localStorage.rep_type == 'AUDITOR'){
 						
+						$('#attendanceButtonShow').hide();
 						$('#dff_Usages_Audit').hide();
 						$('#bufferImageOutletAudt').hide();
 						$("#posmReportAuditSub").hide();	
@@ -467,6 +476,7 @@ function syncBasic(){
 						url = "#homePage";
 						$.mobile.navigate(url);
 					}else{
+						$('#attendanceButtonShow').hide();
 						$('#stockAgency').hide();
 						$("#reportbtnAgency").hide();
 						$('#summaryAgency').hide();
