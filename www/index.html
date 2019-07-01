@@ -28,418 +28,150 @@
 			$(".errorChk").text("");
 			$.mobile.navigate("#pagesync");
 		}*/
-	
+	$("body").fixedtoolbar({tapToggle:false});
 	</script>
  <style>	
-	
-    .reqField{ 
-	color:#FF0000;
-	}
-	
-    .errorChk{ 
-	color:#FF0000; text-shadow:none;
-	}
-	
-	.errorMsg{ 
-	color:#FF0000; text-shadow:none;
-	}
-	
-    .auto_break{
-		word-wrap:break-word!important;
-		white-space:normal!important;
-	}
-		
-	.tbl_bro_color{
-		border:1px solid #B8DCDC;
-	}	
-	
-	#townSelct {
-		
-		text-align: center;
-		font-size: 18px;
-		
-	}
-		
-	.routselect{
-		font-weight: bold;
-		padding: 8px;
-		text-align: center;
-		margin: 2px 0px;
-		color: #000;
-		font-size: 14px;
-		border: 1px solid #CE295E;
-		border-radius: 5px;
-		background-color: #fff;
-	}
-	
-	.ui-btn {
-		border-radius: 8px;
-     		
-	}
-		
-	.headerc {
-		color:#ffffff;
+	#targetVSach> table{
+		border-collapse:collapse;
+		}
+	#targetVSach> table tr th{
+		background-color:#0063C6;
+		color:#FFF;
 		font-weight:1;
-	}
-	
-	
-	/*.ui-overlay-c, .ui-page-theme-c, .ui-page-theme-c .ui-panel-wrapper{
-		background-color:#fff;
-	}
-		
-	.ui-bar-c, .ui-page-theme-c .ui-bar-inherit, html .ui-bar-c .ui-bar-inherit, html .ui-body-c .ui-bar-inherit, html      body .ui-group-theme-c .ui-bar-inherit {
-		background-color:#CE295E;
-		border-color: transparent;
-	}*/
-	
+		border:1px solid #0063C6;
+		}
+	#targetVSach> table tr td{
+		background-color:#FFF;
+		color:#00376F;
+		border:1px solid #0063C6;
+		}
 	#syncBasicBtn{
 		background-color:#FFF;
 		font-weight:1;
 		font-family:'Montserrat',sans-serif;
 		color:#D42E5C;
 	}
-						
-	/*.ui-body-c, .ui-page-theme-c .ui-body-inherit, html .ui-bar-c .ui-body-inherit, html .ui-body-c .ui-body-inherit, html body .ui-group-theme-c .ui-body-inherit, html .ui-panel-page-container-c {
-		background-color:#BFBFBF;
-		color:#000;
-	}
-	
-		.ui-page-theme-c .ui-btn:active, html .ui-bar-c .ui-btn:active, html .ui-body-c .ui-btn:active, html body      	        .ui-group-theme-c .ui-btn:active, html head + body .ui-btn.ui-btn-c:active { 
-		background-color:#CE295E;
-		border-color:transparent;
-	}
-	
-	.ui-page-theme-c .ui-btn:hover, html .ui-bar-c .ui-btn:hover, html .ui-body-c .ui-btn:hover, html body .ui-group-theme-c .ui-btn:hover, html head + body .ui-btn.ui-btn-c:hover {
-		background-color: #FFFFFF;
-		border-color:transparent;
-	}
-		
-	.ui-page-theme-c .ui-btn, html .ui-bar-c .ui-btn, html .ui-body-c .ui-btn, html body .ui-group-theme-c .ui-btn, html head + body .ui-btn.ui-btn-c{
-		background-color:#82888a;
-		border-color:transparent;
+	#leaveViewTable> table{
+		border-collapse:collapse;
+		}
+	#leaveViewTable> table tr th{
+		background-color:#0063C6;
 		color:#FFF;
-	}
-		
-	.ui-input-text input, .ui-input-search input {
-		background-color:#fff;
-	}
+		font-weight:1;
+		border:1px solid #0063C6;
+		}
+	#leaveViewTable> table tr td{
+		background-color:#FFF;
+		color:#00376F;
+		border:1px solid #0063C6;
+		}
 	
-	.ui-page-theme-c .ui-btn:hover, html .ui-bar-c .ui-btn:hover, html .ui-body-c .ui-btn:hover, html body .ui-group-theme-c     .ui-btn:, html head + body .ui-btn.ui-btn-c:hover {
-		background-color:#fff;
-		color:#000;
-	}*/
-	
-	.btn-color{
-		color:#000;
-	}
-			
-	/*.ui-page-theme-c .ui-btn, html .ui-bar-c .ui-btn, html .ui-body-c .ui-btn, html body .ui-group-theme-c .ui-btn, html 		     head + body .ui-btn.ui-btn-c {
-		background-color: #fff;
-		color: #151414;
-		border: 1px solid #D42E5C;
-	}*/
-	
-	#entry{
-	font-weight:1;
-	color:#fff;
-	background-color:#CE295E;
-	}
-	
-
-	#summary_report{
-	color:#fff;
-	background-color:#CE295E;
-	}
-	
-	.sync-img img{
-	background-color:#D42E5C;
-    border-radius: 50% !important;
-	}
-	
-	.sync_header{
-	background-color:#000;
-	}
-	
-	.header{
-		background-color:#595959;
-	}
-	
-	.sync_header{
-		background-color:#595959;
-	}
-
-	.sync_box{
-		background-color:#595959;
-	}
-		
-	.text-color{
-		color:#fff;
-		font-weight:1;
-	}
-			
-	/*.ui-bar-c, .ui-page-theme-c .ui-bar-inherit, html .ui-bar-c .ui-bar-inherit, html .ui-body-c .ui-bar-inherit, html body 					    .ui-group-theme-c .ui-bar-inherit{
-		background-color:#595959;
-	}*/
-	
-	#btn_receive{
-		
-		font-weight:1;
-		background-color:#FFF;
-	}
-
-	#btn_usages{
-		
-		font-weight:1;
-		background-color:#FFF;
-	}
-	#dff_Usages_Audit{
-		
-		font-weight:1;
-		background-color:#FFF;
-	}
-	#btn_audit{
-		
-		font-weight:1;
-		background-color:#FFF;
-	}
-	#btn_audit_entry{
-		
-		font-weight:1;
-		background-color:#FFF;
-	}	
-	#reportAuditSub{
-		
-		font-weight:1;
-		background-color:#FFF;
-	}	
-	#btn_stock{
-	  
-	   font-weight:1;
-	   background-color:#FFF;
-	}
-	#btn_dff{
-	   
-	   font-weight:1;
-	   background-color:#FFF;
-	}
-	#btn_defective{
-	   
-	   font-weight:1;
-	   background-color:#FFF;
-	}
-	#reportbtn{
-		
-		font-weight:1;
-		background-color:#FFF;
-	}
-	#reportbtnAgency{
-		
-		font-weight:1;
-		background-color:#FFF;
-	}
-	#entryAgency{
-		
-	    
-		font-weight:1;
-		background-color:#FFF;
-	}
-	#btn_posmAudit{
-		
-		font-weight:1;
-		background-color:#FFF;
-	}
-	#posmReportAuditSub{
-		
-		font-weight:1;
-		background-color:#FFF;
-	}
-	#posmSaveAuditSub{
-		
-		font-weight:1;
-		background-color:#FFF;
-	}
-	#btn_posmauditReport{
-		
-		font-weight:1;
-		background-color:#FFF;
-	}	
-	#btn_posm_entry{
-		
-	    
-		font-weight:1;
-		background-color:#FFF;
-	}
-	#stockAgency{
-		
-		font-weight:1;
-		background-color:#FFF;
-	}			
-	#summaryAgency{
-		
-		font-weight:1;
-		background-color:#FFF;
-	}
-	
+	.headerc{
+		color:#5BADFF;
+		}
 	#stockReport> table{
 		border-collapse:collapse;
 		}
 	#stockReport> table tr th{
 		background-color:#FFF;
-		color:#F00;
+		color:#00376F;
 		font-weight:1;
 		}
 	#stockReport> table tr td{
 		background-color:#FFF;
-		color:#F00;
-		border:1px solid #D42E5C;
+		color:#00376F;
+		border:1px solid #0080FF;
 		}
+	#usageReportR> table{
+		border-collapse:collapse;
+		}
+	#usageReportR> table tr th{
+		background-color:#FFF;
+		color:#00376F;
+		font-weight:1;
+		}
+	#usageReportR> table tr td{
+		background-color:#FFF;
+		color:#00376F;
+		border:1px solid #0080FF;
+		}	
 		
 	#receiveReportR> table{
 		border-collapse:collapse;
 		}
 	#receiveReportR> table tr th{
 		background-color:#FFF;
-		color:#D42E5C;
+		color:#00376F;
 		font-weight:1;
 		}
 	#receiveReportR> table tr td{
 		background-color:#FFF;
-		color:#D42E5C;
-		border:1px solid #D42E5C;
+		color:#00376F;
+		border:1px solid #0080FF;
 		}
-	
-	#usageReportR> table{
-		border-collapse:collapse;
-		}
-	#usageReportR> table tr th{
-		background-color:#FFF;
-		color:#F00;
-		font-weight:1;
-		}
-	#usageReportR> table tr td{
-		background-color:#FFF;
-		color:#F00;
-		border:1px solid #D42E5C;
-		}
-
-	#usageReportAgency> table{
-		border-collapse:collapse;
-		}
-	#usageReportAgency> table tr th{
-		background-color:#FFF;
-		color:#D42E5C;
-		font-weight:1;
-		}
-	#usageReportAgency> table tr td{
-		color:#FFF;
-		border:1px solid #D42E5C;
-		}
-	#auditorHead> table{
-		border-collapse:collapse;
-		}
-	#auditorHead> table tr th{
-		background-color:#D42E5C;
-		color:#FFF;
-		font-weight:1;
-		}
-	#auditorHead> table tr td{
-		border:1px solid #D42E5C;
-		}
-	#stockAgencyS> table{
-		border-collapse:collapse;
-		}
-	#stockAgencyS> table tr th{
-		background-color:#FFF;
-		color:#D42E5C;
-		font-weight:1;
-		}
-	#stockAgencyS> table tr td{
-		color:#FFF;
-		border:1px solid #D42E5C;
-		}
-	#reportAudAgencyS> table{
-		border-collapse:collapse;
-		}
-	#reportAudAgencyS> table tr th{
-		background-color:#D42E5C;
-		color:#FFF;
-		font-weight:1;
-		}
-	#reportAudAgencyS> table tr td{
-		color:#FFF;
-		border:1px solid #D42E5C;
-		}
-	#reportPosmAudRec> table{
-		border-collapse:collapse;
-		}
-	#reportPosmAudRec> table tr th{
-		background-color:#D42E5C;
-		color:#FFF;
-		font-weight:1;
-		}
-	#reportPosmAudRec> table tr td{
-		color:#FFF;
-		border:1px solid #D42E5C;
-		}
-	#posmAuditor> table{
 		
-		border-collapse:collapse;
+	#btn_submit_AddMore{
+		color:#fff;
+		border:1px solid #0080FF;
 		}
-	#posmAuditor> table tr th{
-		background-color:#D42E5C;
-		color:#FFF;
-		font-weight:1;
-		}
-	#posmAuditor> table tr td{
-		border:1px solid #D42E5C;
-		}
-	#menuLogo{
-		background-color:#FFF;}
-		
-	
+	.hoverButton {
+	  background-color: #5BADFF; /* Green */
+	  border: none;
+	  color: white;
+	  padding: 16px 32px;
+	  text-align: center;
+	  text-decoration: none;
+	  display: inline-block;
+	  font-size: 16px;
+	  margin: 0px;
+	  -webkit-transition-duration: 0.4s; /* Safari */
+	  transition-duration: 0.4s;
+	  
+	}
+	.hoverButton:hover {
+  background-color:#003D79; /* Green */
+  color: white;
+}
     </style>    
    	
 </head>
 
 <body >
 <!-- ------------------- home page---------------------------------------------------------------------------------------- -->
-<div data-theme="c" data-role="page" id="homePage" style="overflow:scroll; background-image:url(iconsandbackgrounds/Background2.png)">       
-           <div data-role="panel" id="routePanel" data-display="overlay" style="width:70%; height:50%;background-image:url(iconsandbackgrounds/Background3.png)">
-				<!-- panel content goes here -->
-				<center><img  src="iconsandbackgrounds/postit_logo.png" alt="Post-it" /></center><br>
-				<!--<font style="color:#007D7D; font-size:25px;">MARICO UTSHOB</font>-->
-				<br><br><br>
-				
-				  <ul data-role="listview">							
-                    <!--<div style="background:#008A8A; height:1px"></div>
-                    	<li id="link_route"><a onClick="check_route()"><img src="visit_plan.png"></a></li>
-                    <div style="background:#008A8A; height:1px"></div>
-                    </br></br></br>-->
-                    <div style="background-color:#FFF;">
-                    <a data-role="button"  href="#pagesync" style=" background:linear-gradient(to top, #999 -50%, #ffffff 100%); color:#000000; font-weight:1;"><strong style="font-size:24px;">Sync</strong></a>
-                    	<!--<a href="#pagesync"><center><img src="iconsandbackgrounds/sync_image.png"></center></a>-->
-                    </div>
-                    <!--<li><a onClick="clear_autho()" href="#login">Clear Authorization</a></li>
-                    <div style="background:#008A8A; height:1px"></div>-->
-                </ul>
-                <br>
-				<div style="margin:100%;"></div>
-				
-				
-			</div><!-- /panel -->
-            
-             <div data-theme="c" data-role="header" data-position="fixed"  style="background-image:url(iconsandbackgrounds/Background2.png); border-bottom:1px solid #999; "> 
-			
-			    <a style="height:18px; background:none; border:none;"  href="#routePanel"  id="menuLogo"><img src="iconsandbackgrounds/Option_Icon_1.png"></a>
-                <a style="height:18px;background:none; border:none; margin-top:-3px;" id="menuLogo" onClick="exit()" ><img src="iconsandbackgrounds/Power_Icon2.png"> </a>
-                <!--<a data-role="button" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-right ui-icon-power ui-btn-icon-notext " onClick="exit()" ><img src="exit.png"> </a>-->
-                <h3 style="color:#FFF;">Select Town</h3>
+     
+
+ <div data-theme="d" data-role="page" id="homePage">
+		<div data-theme="d" data-role="header" data-position="fixed" style="border:none;">
+			   <a data-role="button" id="menuLogo" onClick="syncValueClean();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets" style="border:none;"><img src="menu.png" /></a>
+               <a style="background:none; border:none;" id="menuLogo" onClick="exit()" ><img src="exit.png"> </a>
+       
+                <h3 class="headerc">Select Town</h3>
+                
             </div>
-            
-			<div data-role="content">
-    <div id="suprepname" style="color:#FFF; text-align:center;"></div>  
-    <!--<div id="supreptype" style="color:#DA335A; text-align:center;"></div>-->
-    <div id="suprepid" style="color:#FFF; text-align:center;"></div>    
+              
+    <div data-role="panel" id="routePanel" data-display="overlay" style="width:70%; height:50%;background-image:url(iconsandbackgrounds/Background3.png)">
+    <!-- panel content goes here -->
+    <center><img  src="iconsandbackgrounds/postit_logo.png" alt="Post-it" /></center><br>
+    
+    <br><br>
+    
+    <ul data-role="listview">							
+    
+    <div style="background-color:#FFF;">
+    <a data-role="button"  href="#pagesync" style=" background:linear-gradient(to top, #999 -50%, #ffffff 100%); color:#000000; font-weight:1;"><strong style="font-size:24px;">Sync</strong></a>
+    
+    </div>
+    
+    </ul>
+    <br>
+    <div style="margin:100%;"></div>
+    
+    
+    </div><!-- /panel -->
+     </br>
+    <div><center><img  src="UBL_Logo.JPG" alt="Post-it" style="height:60px; width:60px;"/></center></div>
+    <div data-role="content"> 
+    
     <div id="townList" style="height:0 auto; overflow:scroll;"></div>
      <br/> <br/>
      
@@ -475,27 +207,6 @@
                 
             </table>
          
-         	<!--<table width="100%">
-            <tr style="background-color:#900; color:#FFF;"><td colspan="2">Outlet Details</td></tr>
-              <tr>
-                <td>Outlet</td>
-                <td id="oCode"></td>
-              </tr>
-               <tr>
-                <td>Address</td>
-                <td id="oAddress"></td>
-              </tr>
-              <tr>
-                <td>Route</td>
-                <td id="oRoute"></td>
-              </tr>
-              <tr>
-                <td>Town</td>
-                <td id="oTown"></td>
-              </tr>
-            </table>-->
-
-         	
          </div>
          
          <br/>
@@ -506,115 +217,292 @@
            <br/>
        	<button data-role="button" id="btn_audit_entry" onclick="outletAudit()" href="#" data-transition="slide" style=" background:linear-gradient(to top, #999 -50%, #ffffff 100%); color:#000000; font-weight:1;"><strong style="font-size:18px;"> Next </strong></button>   
       </div>
-      	<button data-role="button" id="attendanceButtonShow" onClick="attandance(); getLocationInfoSelfe();" style=" background:linear-gradient(to top, #999 -50%, #ffffff 100%); color:#000000; font-weight:1;"><strong style="font-size:24px;">Attendance</strong></button>   
-    <!--<button data-role="button" id="townSUP" onclick="townSelect()" href="#" data-transition="slide" style="background-color:#CE295E; " ><span class="text-color">Next</span></button>-->
      <div id="bufferImageSelectTown" style="text-align:center;"><img src="running.gif" /></div>
 	<br/> <br/>      
-    <div class="errorChk" style="color:#FFF;" ></div>       
+    <div class="errorChk" style="color:#FFF;" ></div>  
+    <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>     
+    </div>
+     <div data-theme="d" data-role="footer" data-position="fixed" style=" background-color:#fff; border:none;">
+   
+    <a data-role="button" id="menuLogo" onclick="goSelfiePage();" class="ui-btn" data-transition="slide" style=" border:none;"><img src="back.png"/></a> 
+    
+   
+    <h3 style="color:#FFF;"></h3>
+    
     </div>
  </div>    
+ 
+ <!--======================supHome==================-->   
+ 
+ <div data-theme="d" data-role="page" id="supHome">
+ <div><img  src="UBL_Logo.JPG" alt="Post-it" style="height:60px; width:60px; padding:10px 0px 0px 10px;"/></div>
+ 
+    <div data-role="content"> 
+     <div style="font-size:24px; text-align:center; color:#0080FF; font-weight:bold; margin-bottom:6px;">Dashboard</div>
+     <div id="townSelct" style="color:#5BADFF; text-align:center;"></div>
+     <table align="center">
+     <tr>
+     <td>     
+    <button data-role="button" id="btn_receive" onclick="receiveAndIssu();" href="#" data-transition="slide" style="color:#0080FF;background: linear-gradient(to top, #fff -50%, #fff 50%); font-weight:1;"><img src="inventory.jpg"/><br>Inventory</button>
+   	</td>
+    <td>
+    <button data-role="button" id="supervisionCallBtn" onclick="usages('Usages');" href="#" data-transition="slide" style="color:#0080FF;background: linear-gradient(to top, #fff -50%, #fff 50%); font-weight:1;"><img src="supCall.jpg"/><br>Supervision Call</button>
+     
+    </td>
+    </tr>
+    </table>   
+    
+	<!--<div id="menuBufferingImage" style="text-align:center;"><img src="running.gif" /></div>-->
+    <div class="errorChk" style="color:#FFF;" ></div>   
+    <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>    
+    </div>
+     <div data-theme="d" data-role="footer" data-position="fixed" style=" background-color:#fff; border:none;">
+        <a data-role="button" id="menuLogo" onclick="backClick();" data-rel="back" class="ui-btn" data-transition="slide" style="background:linear-gradient(to top, #00468C -50%, #409FFF 100%); color:#fff; font-weight:1; border-radius:4px;">Back</a>
+         
+         <a data-role="button" id="" onclick="leaveManageSUP();" data-iconpos="left" class="ui-btn-right" style="background:linear-gradient(to top, #00468C -50%, #409FFF 100%); color:#fff; font-weight:1; border-radius:4px;">Leave Mgmt</a>
+      
+       
+     </div>
+ </div>    
      <!--======================home page end==================-->   
+ <div data-theme="c" data-role="page" id="pagesync" style=" background-color:#FFF;">
+    </br></br></br></br></br>
+    <div><center><img  src="UBL_Logo.JPG" alt="Post-it" style="height:60px; width:60px;"/></center></div>
+    <div data-role="content" style="height:90%; position:relative;" >    
     
-      <!--  ================= login page=================  -->        
-        <div data-theme="c" data-role="page" id="pagesync" style="background-image:url(iconsandbackgrounds/Background2.png)">
-        	
-            <div data-theme="c" data-role="header" data-position="fixed" style="background-image:url(iconsandbackgrounds/Background2.png); border-bottom:1px solid #999;">
-			
-               <a style="height:18px; background:none; border:none;"  onClick="menuClick()"  id="menuLogo"><img src="iconsandbackgrounds/Option_Icon_1.png"></a>
-                <a style="height:18px;background:none; border:none; margin-top:-3px;" id="menuLogo" onClick="exit()" ><img src="iconsandbackgrounds/Power_Icon2.png"> </a>
-                <h3 style=" color:#FFF;">POST-IT</h3>
-            </div>
-			
-			<div data-role="content" style="height:90%; position:relative;" >    
-               </br></br>
-				<font color="#CCFFCC" face="Arial, Helvetica, sans-serif" size="-1"> 
-				<input type="number" name="mobile" id="mobile" placeholder="Mobile Number" value="" style="border:1px solid#666; height:40px">
-				<input type="password" name="password" id="password" placeholder="Password" value="" style="border:1px solid#666; height:40px">
-                </font>                
-                <a id="syncBasicBtn" data-role="button"  onClick="syncBasic()" style=" background:linear-gradient(to top, #999 -50%, #ffffff 100%); color:#000000; font-weight:1;"><strong style="font-size:18px;">Sync</strong></a>
-                 </br></br></br></br>
-                <div id="bufferImageSync" style="text-align:center;"><img height="40px" width="40px" src="running.gif"></div>
-                </br></br>
-              		
-				<div class="errorMsg" style="color:#FFF"></div>
-				
-			 
-            </div>
-			
-		
-			 <div data-role="footer" data-position="fixed" style="font-size:12px; color:#fff; background-color:#9B1042; font-weight:1;" align="center">20190527</div>
-        </div>
- <!-- ============================salfie  page Start============================-->
+    <font color="#CCFFCC" face="Arial, Helvetica, sans-serif" size="-1"> 
+        <input type="number" name="mobile" id="mobile" placeholder="Mobile Number" value="" style="border:1px solid#666; height:40px">
+        <input type="password" name="password" id="password" placeholder="Password" value="" style="border:1px solid#666; height:40px">
+    </font>                
+    <a id="syncBasicBtn" data-role="button"  onClick="syncBasic(); getLocationInfoSelfe();" style="background:linear-gradient(to top, #00468C -50%, #409FFF 100%); color:#fff; border-radius:4px; font-size:18px; width:100px; margin-left:100px;"><strong style="font-size:18px;">LOG IN</strong></a>
+    </br></br>
+    <div id="bufferImageSync" style="text-align:center;"><img height="40px" width="40px" src="running.gif"></div>
+    </br>
     
-    <div data-theme="d" data-role="page" id="salfiePage" style="background-image:url(iconsandbackgrounds/Background2.png); background-repeat: no-repeat;">
-		<div data-theme="d" data-role="header" data-position="fixed" style="background-image:url(iconsandbackgrounds/Background2.png); border-bottom:1px solid #999;">
-			   <a data-role="button" id="menuLogo" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets " ><img src="Home.png" /></a>
-        <a data-role="button" id="menuLogo" onclick="backClick();" data-rel="back" class="ui-btn-right" data-transition="slide"><img src="back.png" /></a>
-                <h3 class="headerc">Selfie</h3>
+    <div class="errorMsg" style="color:#F00;"></div>
+    <div data-role="" data-position="fixed" style="font-size:12px; color:#7A7A7A; background-color:#FFF; font-weight:1;" align="center">2019-07-01</div>
+    
+    </div>
+    
+    </div>
+    
+<!--======================Merchandizing Tools==================-->   
+ 
+<div data-theme="d" data-role="page" id="merchandizingTools" style="overflow:scroll;">
+		<div data-theme="d" data-role="header" data-position="fixed" style="border:none;">
+			   <a data-role="button" id="menuLogo" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets" style="border:none;"><img src="Home.png" /></a>
+       
+                <h3 class="headerc">Tools</h3>
             </div>
-		    
-			<div  data-role="content">		  		  
-		  	<br/>
-            <div id="currentDate" style="text-align:center; font-size:20px; font-weight:bold; color:#FFF;"></div>
+            </br>
+     <div><center><img  src="UBL_Logo.JPG" alt="Post-it" style="height:60px; width:60px;"/></center></div>
+    <div data-role="content" style="overflow:scroll;">
+    
+        <table table width="100%" class="ui-body-d ui-shadow table-stripe ui-responsive" id="" style="cell-spacing:0px; background:linear-gradient(to top, #00468C -50%, #409FFF 100%); color:#fff; font-weight:1; border-radius:4px;"  data-role="table" data-theme="c"  data-mode="display:none">
+        
+            <tr style="background:linear-gradient(to top, #00468C -50%, #409FFF 100%);">
+                <td>
+                <div id="csmListToolsRecRec" style="color:#fff;"></div>
+                
+                </td>
+                 
+            </tr>
+            <tr style="background:linear-gradient(to top, #00468C -50%, #409FFF 100%);">
+            	<td>
+                <div id="cmToolsRecRec" style="color:#fff;"></div>
+                
+                </td>
+            </tr>
             
-             
-            <ul data-role="listview" data-inset="true" data-mini="true">               
-                <li style="background-color:#F2F2F2;">Attendance Type</li>                
-                <li class="ui-field-contain" style="background:linear-gradient(to top, #999 -50%, #ffffff 100%); color:#000000; font-weight:1;">
-                   <fieldset data-role="controlgroup" data-mini="true">
-                        <input name="attendance" id="1" value="Day Start" type="radio" >
-                        <label for="1">Day Start</label>
-                        <input name="attendance" id="2" value="Day End" type="radio">
-                        <label for="2">Day End</label>                                                              
-                    </fieldset>
-                   
-                  </li>
-              </ul>           
-              <br/>
-              <a data-role="button" href="#" onClick="get_salfie();" style="background:linear-gradient(to top, #999 -50%, #ffffff 100%); color:#000000; font-weight:1;">Take Selfie </a>
-                <img id="salfie_image_div" height="100px" width="100px"  src="" alt="Image" style="color:#FFF;"/>
-                    <input type="hidden" name="salfie_image_div_hidden" id="salfie_image_div_hidden" value="" >
-                    <input type="hidden" name="salfie_image_name_hidden" id="salfie_image_name_hidden" value="" >
-                    
-                 <input name="selfie_lat" id="selfie_lat"  type="hidden">
-                <input name="selfie_long" id="selfie_long"  type="hidden">
-                <a data-role="button" id="attandanceButton" onClick="salfie_next_page();" class="ui-btn" style="background:linear-gradient(to top, #999 -50%, #ffffff 100%); color:#000000;  font-weight:1;">Submit</a>
-				
-				<br/>
-                <!--<div id="bufferImageAtendance" style="text-align:center;"><img height="40px" width="40px" src="running.gif"></div>-->
-                 <div id="bufferImageAtendanceLocation" style="text-align:center;"><img height="40px" width="40px" src="running.gif"></div>
-               <div class="successMsg" style="color:#FFF;"></div>
-                <div class="errMsg" style="color:#FFF;"></div>
-				<br/><br/></br></br></br></br></br></br><br/><br/><br/>
-				
-	  </div>
-
+        </table>
+        
+         <table width="100%" class="ui-body-d ui-shadow table-stripe ui-responsive" id="beneficiaryCount" style="cell-spacing:0px; background:linear-gradient(to top, #00468C -50%, #409FFF 100%); color:#fff; font-weight:1; border-radius:4px;"  data-role="table" data-theme="d"  data-mode="display:none">
+        	<tr style="background:linear-gradient(to top, #00468C -50%, #409FFF 100%);">
+            
+                <td style="width:50%; vertical-align:middle; color:#FFF;";>Tool Qty :</td>
+                 <td style="padding:0px 6px 0px 0px; width:50%;"><input type="number" id="toolqty" name="toolqty" style="background-color:#fff; color:#000;"/></td>
+                 
+              </tr>
+         </table>
+        <a data-role="button" id="cmToolsSubmitBut" onClick="cmToolsSubmit();" class="ui-btn" style="background:linear-gradient(to top, #00468C -50%, #409FFF 100%); color:#fff; font-weight:1; border-radius:4px; font-size:18px;">SUBMIT</a>
+     <div id="toolSubmitbufferImage" style="text-align:center;"><img src="running.gif" /></div>
+     <div class="sucMsgTools" style="color:#5BADFF; font-size:20px; text-align:center; padding:30px 0px 30px 0px; border-radius:10px;"><!--<img src="submitLogo.png"/>-->Submitted Successfully</div> 
+    <div class="errorChk" style="color:#F00;"></div>
+            <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+    </div>
+    <div data-theme="d" data-role="footer" data-position="fixed" style=" background-color:#fff; border:none;">
+        <!--<a data-role="button" id="menuLogo" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets " style="background-color:#0080FF; color:#fff; font-weight:1; font-size:14px; height:15px; width:40px;">Home</a>-->
+        <a data-role="button" id="menuLogo" onclick="backClick();" data-rel="back" class="ui-btn" data-transition="slide" style="border:none;"><img src="back.png"/></a>
+        
+     	
 	</div>
+</div> 
+
+<!----------------------------------TargetSetCM--------------------------------------------->
+
+<div data-theme="d" data-role="page" id="targetSetCM" style="overflow:scroll;">
+		<div data-theme="d" data-role="header" data-position="fixed" style="border:none;">
+			   <a data-role="button" id="menuLogo" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets" style="border:none;"><img src="Home.png" /></a>
+       
+                <h3 class="headerc">CM Target</h3>
+            </div>
+            </br>
+     <div><center><img  src="UBL_Logo.JPG" alt="Post-it" style="height:60px; width:60px;"/></center></div>
+    <div data-role="content" style="overflow:scroll;">
+    	<table table width="100%" class="ui-body-d ui-shadow table-stripe ui-responsive" id="" style="cell-spacing:0px; background:linear-gradient(to top, #00468C -50%, #409FFF 100%); color:#fff; font-weight:1; border-radius:4px;"  data-role="table" data-theme="c"  data-mode="display:none">
+            <tr style="background:linear-gradient(to top, #00468C -50%, #409FFF 100%);">
+            	<td>
+                <div id="csmListTargetRecRec" style="color:#fff;"></div>
+                
+                </td>
+            </tr>
+            
+        </table>
+        <table table width="100%" class="ui-body-d ui-shadow table-stripe ui-responsive" id="" style="cell-spacing:0px; background:linear-gradient(to top, #00468C -50%, #409FFF 100%); color:#fff; font-weight:1; border-radius:4px;" data-role="table" data-theme="c"  data-mode="display:none">
+        
+            <tr style="background:linear-gradient(to top, #00468C -50%, #409FFF 100%); ">
+                 <td>
+                <div id="targetPOSMSelect" style="color:#fff;"></div>
+                
+                </td>
+            </tr>
+        </table>
+        <div id="bufferImageTarget" style="text-align:center;"><img src="running.gif" /></div>
+        <div id="allHideTarget" style="margin:0px;">
+        <div id="recDataTarget"> 
+    <table table width="100%" class="ui-body-d ui-shadow table-stripe ui-responsive" style="cell-spacing:0px; background:linear-gradient(to top, #00468C -50%, #409FFF 100%); color:#fff; font-weight:1; border-radius:4px;"  data-role="table" data-theme="c"  data-mode="display:none">
+        <tr >
+        	<td style="margin:0px; padding:0px; line-height: 1em;"><div id="imageTarget" style=" text-align:center;"></div></td>
+        </tr>
+    
+        <tr >
+        	<td style="margin:0px; line-height: 1em;"><div id="brandT" style="background:linear-gradient(to top, #00468C -50%, #409FFF 100%); color:#fff; font-weight:1; border-radius:4px;"></div></td>
+        </tr>
+        <tr>
+        	<td style="margin:0px; line-height: 1em;"><div id="posm_typeT" style="background:linear-gradient(to top, #00468C -50%, #409FFF 100%); color:#fff; font-weight:1; border-radius:4px;"></div> </td>
+        </tr>
+        <tr>
+        	<td style="margin:0px; line-height: 1em;"><div id="allocationT" style="background:linear-gradient(to top, #00468C -50%, #409FFF 100%); color:#fff; font-weight:1; border-radius:4px;"> </div></td>
+        </tr>
+        <tr>
+        	<td style="margin:0px; line-height: 1em;"><div id="dueTarget" style="background:linear-gradient(to top, #00468C -50%, #409FFF 100%); color:#fff; font-weight:1; border-radius:4px;"></div></td>
+        </tr>
+        <tr>
+        	<td style="margin:0px; line-height: 1em;"><div id="balanceT" style="background:linear-gradient(to top, #00468C -50%, #409FFF 100%); color:#fff; font-weight:1; border-radius:4px;"></div></td>
+        </tr>
+    </table>
+    <table width="100%">
+        <tr align="left" class="" style="background:linear-gradient(to top, #00468C -50%, #409FFF 100%); color:#fff; font-weight:1; border-radius:4px;">  
+            <td style="text-align:center;">Target Qty</td>
+            <td style="text-align:center;">Date</td>
+            <td></td>
+        </tr> 
+          
+        <tr  align="left" class="blackCat"  style="background:linear-gradient(to top, #00468C -50%, #409FFF 100%); color:#fff; font-weight:1; border-radius:4px; font-size:11px;">
+            <td style="background:linear-gradient(to top, #00468C -50%, #409FFF 100%); "><input type="number" id="targetQty" name="targetQty" style="background-color:#FFF; color:#000;"/><input type="hidden" id="alc_idT" name="alc_idT" /></td> 
+            <td style="background:linear-gradient(to top, #00468C -50%, #409FFF 100%); "><input type="date" id="targetDate" name="targetDate" style="background-color:#FFF; color:#000;"/></td>
+             <td> <input type="submit" name="btn_submit"  id="btn_submit_AddMore" value="Add" onClick="submitData_TargetList()" style="background:linear-gradient(to top, #00468C -50%, #409FFF 100%); color:#fff; border-radius:4px;"/></td>
+        </tr> 
+    
+    </table> 
+    <table width="100%" border="1" cellpadding="1" cellspacing="1" id="target_table" class="sample_border">
+    </table> 
+        </div>
+        </div>
+        
+        <br/><br/>
+        <a data-role="button" id="submitDataTarget" onClick="submitDataTargetCM();" class="ui-btn" style="background:linear-gradient(to top, #00468C -50%, #409FFF 100%); color:#fff; font-weight:1; border-radius:4px; font-size:18px;">SUBMIT</a>
+        
+     <div id="TargetSubmitbufferImage" style="text-align:center;"><img src="running.gif" /></div>
+     <div class="sucMsgTarget" style="color:#5BADFF; font-size:20px; text-align:center; padding:30px 0px 30px 0px; border-radius:10px;"><!--<img src="submitLogo.png"/>-->Submitted Successfully</div> 	
+    <div class="errorChk" style="color:#F00;"></div>
+            <br/><br/><br/><br/><br/><br/><br/><br/>
+    </div>
+    <div data-theme="d" data-role="footer" data-position="fixed" style=" background-color:#fff; border:none;">
+        <!--<a data-role="button" id="menuLogo" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets " style="background-color:#0080FF; color:#fff; font-weight:1; font-size:14px; height:15px; width:40px;">Home</a>-->
+        <a data-role="button" id="menuLogo" onclick="backClick();" data-rel="back" class="ui-btn" data-transition="slide" style="border:none;"><img src="back.png"/></a>
+        
+     	
+	</div>
+</div>
+
+<!-- ============================salfie  page Start============================-->
+	<div data-theme="d" data-role="page" id="salfiePage">
+		<div data-theme="d" data-role="header" data-position="fixed" style="border:none;">
+			   <!--<a data-role="button" id="menuLogo" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets" style="border:none;"><img src="Home.png" /></a>-->
+       
+                <h3 class="headerc">Attendance</h3>
+            </div>
+            </br>
+     <div><center><img  src="UBL_Logo.JPG" alt="Post-it" style="height:60px; width:60px;"/></center></div>
+    <div data-role="content"> 
+   <!-- <div style="font-size:18px; text-align:center; color:#0080FF; font-weight:bold;">Attendance</div>-->
+     
+    <div id="currentDate" style="text-align:center; font-size:20px; font-weight:bold; color:#FFF;"></div>
+    <a data-role="button" href="#" onClick="get_salfie();" style="background:linear-gradient(to top, #00468C -50%, #409FFF 100%); color:#fff; font-weight:1; border-radius:4px;">Take Selfie </a>
+    <img id="salfie_image_div" height="100px" width="100px"  src="" alt="Image" style="color:#FFF;"/>
+    <input type="hidden" name="salfie_image_div_hidden" id="salfie_image_div_hidden" value="" >
+    <input type="hidden" name="salfie_image_name_hidden" id="salfie_image_name_hidden" value="" >
+    
+    <input name="selfie_lat" id="selfie_lat"  type="hidden">
+    <input name="selfie_long" id="selfie_long"  type="hidden">
+    <input type="hidden" name="attendance" id="attendance" value="Day Start">
+    <a data-role="button" id="attandanceButton" onClick="salfie_next_page();" class="ui-btn" style="background:linear-gradient(to top, #00468C -50%, #409FFF 100%); color:#fff; font-weight:1; border-radius:4px;">SUBMIT</a>
+    
+    <br/>
+    <div id="bufferImageAtendanceLocation" style="text-align:center;"><img height="40px" width="40px" src="running.gif"></div>
+     <div class="successMsgATT" style="color:#5BADFF; font-size:20px; text-align:center; padding:30px 0px 30px 0px; border-radius:10px;"><!--<img src="submitLogo.png"/>-->Submitted Successfully</div>
+    <div class="errMsg" style="color:#f00;"></div>
+    <br/><br/></br></br></br><br/><br/><br/>
+    
+    </div>
+    <div data-theme="d" data-role="footer" data-position="fixed" style=" background-color:#fff; border:none;">
+     	
+        <a data-role="button" id="menuLogo" onclick="goSyncPage();" class="ui-btn" data-transition="slide" style="border:none;"><img src="back.png"/></a>
+         
+         <a data-role="button" id="" onclick="goHomePage();" data-iconpos="left" class="ui-btn-right" style=" border:none;"><img src="next.png"/></a>
+      
+     </div>
+    
+    </div>
         
     <!--=====================salfie  page end=========================--> 
 <!-- ------------------------------------first_page--------------------------------- -->
-<div data-role="page" data-theme="c" id="first_page" style="background-image:url(iconsandbackgrounds/Background2.png); background-repeat: no-repeat;">
-	<div data-theme="c" data-role="header" data-position="fixed" style="background-image:url(iconsandbackgrounds/Background2.png); border-bottom:1px solid #999;">
-        <a data-role="button" id="menuLogo" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets " ><img src="Home.png" /></a>
-        <a data-role="button" id="menuLogo" onclick="backClick();" data-rel="back" class="ui-btn-right" data-transition="slide"><img src="back.png" /></a>
-        
-        <!--<a style="height:18px; background:none; border:none;"  id="menuLogo" onClick="menuClick();"><img src="iconsandbackgrounds/Option_Icon_1.png"></a>
-        <a data-rel="back" style="height:18px;background:none; border:none; margin-top:-3px;" id="menuLogo" onClick="backClick()" ><img src="iconsandbackgrounds/Back_Icon_1.png"> </a>-->
-        
-        <h3 class="headerc"></h3>
-    </div>
-    <div data-role="content" >
-    <div id="cmprepname" style="color:#DA335A; text-align:center;"></div>  
-    <div id="cmpreptype" style="color:#DA335A; text-align:center;"></div>
-     <div id="cmprepid" style="color:#DA335A; text-align:center;"></div>    
-    <div id="townSelct" style="color:#FFF;"></div>    
-          
-    <button data-role="button" id="btn_receive" onclick="receive('Receive')" href="#" data-transition="slide" style="color:#D42E5C;background: linear-gradient(to top, #CCC -50%, #ffffff 50%);"><img src="iconsandbackgrounds/receive.jpg"/><br>Receive</button>
-    <!-- <button data-role="button" id="btn_defective" onclick="defective()" href="#" data-transition="slide" style="color:#D42E5C;background: linear-gradient(to top, #CCC -50%, #ffffff 50%);"><img src="iconsandbackgrounds/defective_2.png"/><br>Defective</button>-->
-    <button data-role="button" id="btn_usages" onclick="usages('Usages')" href="#" data-transition="slide" style="color:#D42E5C;background: linear-gradient(to top, #CCC -50%, #ffffff 50%);"><img src="iconsandbackgrounds/usage.png"/><br>Execution</button> 
-   <!-- <button data-role="button" id="btn_dff" onclick="usages('DFF')" href="#" data-transition="slide" style="color:#fff"  >Usage - DFF</button>-->
-     <button data-role="button" id="reportbtn" onclick="repo('repo')" href="#" data-transition="slide" style="color:#D42E5C;background: linear-gradient(to top, #CCC -50%, #ffffff 50%);"><img src="iconsandbackgrounds/report.png"/><br>Reports </button>
+<div data-role="page" data-theme="d" id="first_page" style=" background-color:#fff; overflow:scroll;">
+	</br>
+    <div><center><img  src="UBL_Logo.JPG" alt="Post-it" style="height:60px; width:60px;"/></center></div>
+    <div data-role="content" style="position:relative; overflow:scroll;" >
+     <div id="townSelct" style="color:#5BADFF; text-align:center;"></div>
+     <table align="center">
+     <tr>
+     <td>     
+    <button data-role="button" id="btn_receive" onclick="receiveAndIssu();" href="#" data-transition="slide" style="color:#0080FF;background: linear-gradient(to top, #fff -50%, #fff 50%); font-weight:1;"><img src="inventory.jpg"/><br>Inventory</button>
+   	</td>
+    <td>
+    <button data-role="button" id="btn_usages" onclick="usages('Usages');" href="#" data-transition="slide" style="color:#0080FF;background: linear-gradient(to top, #fff -50%, #fff 50%); font-weight:1;"><img src="visite.jpg"/><br>Outlet Visit</button> 
+  </td>
+  </tr>
+  <tr>
+  <td>
+  <button data-role="button" id="summarytbtn" onclick="summaryCM();" href="#" data-transition="slide" style="color:#0080FF;background: linear-gradient(to top, #fff -50%, #fff 50%); font-weight:1;"><img src="summery.jpg"/><br>Summary</button>
      
+    </td>
+    <td>
+    <button data-role="button" id="leavebtn" onclick="leave();" href="#" data-transition="slide" style="color:#0080FF;background: linear-gradient(to top, #fff -50%, #fff 50%); font-weight:1;"><img src="leave.jpg"/><br>Leave</button>
+     
+    </td>
+    </tr>
+    <tr>
+  <td>
+  <button data-role="button" id="reportbtn" onclick="repo('repo');" href="#" data-transition="slide" style="color:#0080FF;background: linear-gradient(to top, #fff -50%, #fff 50%); font-weight:1;"><img src="summery.jpg"/><br>Reports</button>
+     
+    </td>
+    <td>
+    <button data-role="button" id="leavebtn" onclick="" href="#" data-transition="slide" style="color:#0080FF;background: linear-gradient(to top, #fff -50%, #fff 50%); font-weight:1;"><img src="leave.jpg"/><br>Notice</button>
+     
+    </td>
+    </tr>
+    </table>   
     
      <button data-role="button" id="entryAgency" onclick="usages('Usages')" href="#" data-transition="slide" style="color:#D42E5C;background: linear-gradient(to top, #CCC -50%, #ffffff 50%);"><img src="iconsandbackgrounds/Usage_Icon_no_2.png"/><br>Execution </button> 
       <button data-role="button" id="reportbtnAgency" onclick="repoAgency()" href="#" data-transition="slide" style="color:#D42E5C;background: linear-gradient(to top, #CCC -50%, #ffffff 50%);"><img src="iconsandbackgrounds/report_icon_no_2.png"/><br>Reports </button>
@@ -630,237 +518,206 @@
         <ul data-role="listview" >
           <li><a data-role="button" class="ui-btn sync-img" onclick="syncPage();" style="background-color:#fff" ><center><img src="sync.png" /></center></a></li>		  
         </ul>
-        
     </div>
+     <div data-theme="d" data-role="footer" data-position="fixed" style=" background-color:#fff; border:none;">
+        <!--<a data-role="button" id="menuLogo" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets " style="background-color:#0080FF; color:#fff; font-weight:1; font-size:14px; height:15px; width:40px;">Home</a>-->
+         <a data-role="button" id="menuLogo" onclick="backClick();" data-rel="back" class="ui-btn" data-transition="slide" style="border:none;"><img src="back.png"/></a>
+       
+        
+     </div>
     
 </div>
-                     
+
+ <!--=====================receiveAndissuPage=========================--> 
+<div data-theme="d" data-role="page" id="receiveAndissuPage">
+		<div data-theme="d" data-role="header" data-position="fixed" style="border:none;">
+			   <a data-role="button" id="menuLogo" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets" style="border:none;"><img src="Home.png" /></a>
+       
+               
+      </div>
+      </br> </br>
+     <div><center><img  src="UBL_Logo.JPG" alt="Post-it" style="height:60px; width:60px;"/></center></div>
+    <div data-role="content"> 
+    <div style="font-size:18px; text-align:center; color:#0080FF; font-weight:bold; margin-bottom:6px;">Inventory</div>		  		  
+   
+    <div id="currentDate" style="text-align:center; font-size:20px; font-weight:bold; color:#FFF;"></div>
+   
+    <button data-role="button" id="" onclick="receive('Receive')" href="#" data-transition="slide" style="background:linear-gradient(to top, #00468C -50%, #409FFF 100%); color:#fff; font-weight:1; border-radius:4px;">Receive </button> 
+    
+    <!--<a data-role="button" id="" onclick="issue('Receive');" class="ui-btn" style="background:linear-gradient(to top, #5BADFF -50%, #5BADFF 100%); color:#fff;  font-weight:1; border-radius:4px;">Issu & Allocation</a>-->
+    <button data-role="button" id="btn_stockSup" onclick="stockReport();" href="#" class="ui-btn" data-transition="slide" style="background:linear-gradient(to top, #00468C -50%, #409FFF 100%); color:#fff; font-weight:1; border-radius:4px;">On Hand Stock</button> 
+    <button data-role="button" id="merchandizingToolsSup" onclick="merchandizingToolsSup();" href="#" data-transition="slide" style="background:linear-gradient(to top, #00468C -50%, #409FFF 100%); color:#fff; font-weight:1; border-radius:4px;">Merchandizing Tool </button> 
+    <button data-role="button" id="allocationSup" onclick="targetSetCMGo();" href="#" data-transition="slide" style="background:linear-gradient(to top, #00468C -50%, #409FFF 100%); color:#fff; font-weight:1; border-radius:4px;">CM Target </button> 
+   
+   
+    </div>
+    <div data-theme="d" data-role="footer" data-position="fixed" style=" background-color:#fff; border:none;">
+        <!--<a data-role="button" id="menuLogo" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets " style="background-color:#0080FF; color:#fff; font-weight:1; font-size:14px; height:15px; width:40px;">Home</a>-->
+        <a data-role="button" id="menuLogo" onclick="backClick();" data-rel="back" class="ui-btn" data-transition="slide" style="border:none;"><img src="back.png"/></a>
+        
+        <h3 style="color:#FFF;"></h3>
+        
+     </div>
+    
+    </div>                  
 <!-----------------------------second_page--------------------------------->	
-<div data-role="page" data-theme="d" id="second_page" style=" overflow:scroll; background-image:url(iconsandbackgrounds/Background2.png); background-repeat: no-repeat;">
-    <div data-theme="d" data-role="header" data-position="fixed" style="background-image:url(iconsandbackgrounds/Background2.png); border-bottom:1px solid #999;">
-        <a data-role="button" id="menuLogo" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets " ><img src="Home.png" /></a>
-        <a data-role="button" id="menuLogo" onclick="backClick();" data-rel="back" class="ui-btn-right" data-transition="slide"><img src="back.png" /></a>
-        <!--<a style="height:18px; background:none; border:none;"  id="menuLogo" onClick="menuClick();"><img src="iconsandbackgrounds/Option_Icon_1.png"></a>
-        <a data-rel="back" style="height:18px;background:none; border:none; margin-top:-3px;" id="menuLogo" onClick="backClick()" ><img src="iconsandbackgrounds/Back_Icon_1.png"> </a>-->
-        
-        <h3 style="color:#FFF;">POST-IT</h3>
-        
-        </div>
-    <div data-role="content" style="color:#D42E5C; background-image:url(iconsandbackgrounds/Background2.png);">    
-    <div id="townSelctRec" style="color:#FFF;"></div>
-     <div class="routselect" style="font-size:18px; font:CaviarDreamsItalic;">Receive & Defective</div>        
-   		
-        <table width="100%" class="ui-body-d ui-shadow table-stripe ui-responsive" style="cell-spacing:0px; background-color:#FFFFFF; border-radius:6px 6px 0px 0px;" data-role="table" data-theme="c"  data-mode="display:none">
-          <tr >
-            <td><!--<div id="posmCodeRec" style="width:210px; display:inline-block;"></div>-->
-            <div id="receivePOSMSelect">
-            
+
+<div data-theme="d" data-role="page" id="second_page" style="overflow:scroll;">
+		<div data-theme="d" data-role="header" data-position="fixed" style="border:none;">
+			   <a data-role="button" id="menuLogo" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets" style="border:none;"><img src="Home.png" /></a>
+       
+                <h3 class="headerc">Receive</h3>
             </div>
+     
+    <div data-role="content" style="overflow:scroll;">
+    <div><center><img  src="UBL_Logo.JPG" alt="Post-it" style="height:60px; width:60px;"/></center></div>
+    <div style="font-size:18px; text-align:center; color:#0080FF; font-weight:bold; margin-bottom:6px;">Inventory</div>	
+    
+    <div id="townSelctRec" style="color:#0080FF; text-align:center;"></div>
+             
+   		
+    <table width="100%" class="ui-body-d ui-shadow table-stripe ui-responsive" style="cell-spacing:0px; background:linear-gradient(to top, #00468C -50%, #409FFF 100%); color:#fff; font-weight:1; border-radius:4px;" data-role="table" data-theme="d"  data-mode="display:none">
+        <tr >
+            <td>
+            	<div id="receivePOSMSelect" style="color:#fff;"></div>
             </td>
-           <!-- <td style="vertical-align:bottom;">
-                <a data-role="button" id="" onClick="alloDetails();" class="ui-btn" style="background-color:#D42E5C; color:#FFF;  font-weight:1;">Next</a>
-            </td>-->
-          </tr>
-          </table>  
+        </tr>
+    </table>  
          
         <div class="errorChkP" style="color:#cc0000; background-color:#FFF;"></div>
         <div id="bufferImageR" style="text-align:center;"><img src="running.gif" /></div>
         <div id="allHideR" style="margin:0px;">
         <div id="recDataR"> 
-            <table table width="100%" class="ui-body-d ui-shadow table-stripe ui-responsive" style="cell-spacing:0px; color:#000000; background-color:#FFFFFF; font-size:14px;"  data-role="table" data-theme="c"  data-mode="display:none">
-                <tr >
-                    <td style="margin:0px; padding:0px; line-height: 1em;"><div id="imageReceive" style=" text-align:center;"></div></td>
-                </tr>
-               
-            	<tr >
-                    <td style="margin:0px; line-height: 1em;"><div id="brand" style="font-family:CaviarDreams;background: linear-gradient(to top, #C8C8C8 -50%, #ffffff 50%);"></div></td>
-                </tr>
-                <tr>
-                    <td style="margin:0px; line-height: 1em;"><div id="posm_type" style="background: linear-gradient(to top, #C8C8C8 -50%, #ffffff 50%);"></div> </td>
-                </tr>
-                <tr>
-               		 <td style="margin:0px; line-height: 1em;"><div id="allocation" style="background: linear-gradient(to top, #C8C8C8 -50%, #ffffff 50%);"> </div></td>
-                </tr>
-                <tr>
-               		 <td style="margin:0px; line-height: 1em;"><div id="due" style="background: linear-gradient(to top, #C8C8C8 -50%, #ffffff 50%);"></div></td>
-                </tr>
-                <tr>
-               		 <td style="margin:0px; line-height: 1em;"><div id="balance_qty" style="background: linear-gradient(to top, #C8C8C8 -50%, #ffffff 50%);"></div></td>
-                </tr>
-            </table>
+    <table table width="100%" class="ui-body-d ui-shadow table-stripe ui-responsive" style="cell-spacing:0px; background:linear-gradient(to top, #00468C -50%, #409FFF 100%); color:#fff; font-weight:1; border-radius:4px;"  data-role="table" data-theme="c"  data-mode="display:none">
+        <tr >
+        	<td style="margin:0px; padding:0px; line-height: 1em;"><div id="imageReceive" style=" text-align:center;"></div></td>
+        </tr>
+    
+        <tr >
+        	<td style="margin:0px; line-height: 1em;"><div id="brand" style="background:linear-gradient(to top, #00468C -50%, #409FFF 100%); color:#fff; font-weight:1; border-radius:4px;"></div></td>
+        </tr>
+        <tr>
+        	<td style="margin:0px; line-height: 1em;"><div id="posm_type" style="background:linear-gradient(to top, #00468C -50%, #409FFF 100%); color:#fff; font-weight:1; border-radius:4px;"></div> </td>
+        </tr>
+        <tr>
+        	<td style="margin:0px; line-height: 1em;"><div id="allocation" style="background:linear-gradient(to top, #00468C -50%, #409FFF 100%); color:#fff; font-weight:1; border-radius:4px;"> </div></td>
+        </tr>
+        <tr>
+        	<td style="margin:0px; line-height: 1em;"><div id="due" style="background:linear-gradient(to top, #00468C -50%, #409FFF 100%); color:#fff; font-weight:1; border-radius:4px;"></div></td>
+        </tr>
+        <tr>
+        	<td style="margin:0px; line-height: 1em;"><div id="balance_qty" style="background:linear-gradient(to top, #00468C -50%, #409FFF 100%); color:#fff; font-weight:1; border-radius:4px;"></div></td>
+        </tr>
+    </table>
+    <table width="100%" style="background:linear-gradient(to top, #00468C -50%, #409FFF 100%); color:#fff; font-weight:1; border-radius:4px;">
+        <tr align="left" class="">  
+            <td >Receive Qty</td>
+            <td >Defective Qty</td>
+            <td ></td>
+        </tr>    
+        <tr  align="left" class="blackCat"  style="vertical-align:middle; font-size:11px; ">
+            <td style="background:linear-gradient(to top, #00468C -50%, #409FFF 100%);"><input type="number" id="receiveQty" name="receiveQty" style="background-color:#FFF; color:#000;"/><input type="hidden" id="alcId" name="alcId" /></td> 
+            <td style="background:linear-gradient(to top, #00468C -50%, #409FFF 100%);"><input type="number" id="damageQty" name="damageQty" style="background-color:#FFF; color:#000;"/></td>
+            <td> <input type="submit" name="btn_submit"  id="btn_submit_AddMore" value="Add" onClick="submitData_ReceiveList()" style="background:linear-gradient(to top, #00468C -50%, #409FFF 100%); color:#fff; border-radius:4px;"/></td>
+        </tr> 
+    
+    </table> 
+    <table width="100%" border="1" cellpadding="1" cellspacing="1" id="med_table" class="sample_border">
+    </table>
         </div>
-        
-        <table width="100%" class="ui-body-d ui-shadow table-stripe ui-responsive" id="beneficiaryCount" style="cell-spacing:0px; color:#000000;"  data-role="table" data-theme="d"  data-mode="display:none">
-        	<tr style="background: linear-gradient(to top, #C8C8C8 -50%, #ffffff 50%);">
-                 <td style="width:50%; vertical-align:middle;";>Received Qty :</td>
-                 <td style="padding:padding:0px 6px 0px 0px; width:50%;"><input type="number" id="received" name="received" style="background-color:#C0C0C0; color:#004000;"/> <input type="hidden" id="alcId" name="alcId" /></td>
-                 
-              </tr>
-              <tr style="background: linear-gradient(to top, #C8C8C8 -50%, #ffffff 50%);">
+       <table width="100%" class="ui-body-d ui-shadow table-stripe ui-responsive" id="beneficiaryCount" style="cell-spacing:0px; color:#FFF;"  data-role="table" data-theme="d"  data-mode="display:none">
+              <tr style="background: linear-gradient(to top, #fff -50%, #fff 50%);">
                 	<td colspan="2">
-                    	<a data-role="button" id="btn_take_pic" onClick="getReceiveImage();" class="ui-btn" style="background:linear-gradient(to top, #999 -50%, #ffffff 100%); color:#000000; font-weight:1;">Received Picture</a>       
+                    	<a data-role="button" id="btn_take_pic" onClick="getReceiveImage();" class="ui-btn" style="background:linear-gradient(to top, #00468C -50%, #409FFF 100%); color:#fff; font-weight:1; border-radius:4px;">Picture</a>       
                         <img src="" width="128" height="128" alt="Image" id="myImageA"/>       
                         <input name="recPhoto_path" id="recPhoto_path" value=""  type="hidden">
                         <input name="recPhoto_name" id="recPhoto_name" value=""  type="hidden">
                     </td>
               </tr>     
-        </table>  
-         <table  width="100%" class="ui-body-d ui-shadow table-stripe ui-responsive" id="beneficiaryCount" style="cell-spacing:0px; color:#000000;"  data-role="table" data-theme="d"  data-mode="display:none">
-            <tr style="background: linear-gradient(to top, #C8C8C8 -50%, #ffffff 50%);">
-                <td style="width:50%; vertical-align:middle;";>Defective Qty :</td>
-                <td style="padding:padding:0px 6px 0px 0px; width:50%;"><input type="number" id="def_qty" name="def_qty" style="background-color:#C0C0C0; color:#F00;"/><input type="hidden" id="ualcId" name="alcId" /></td>
-              </tr>
-              <tr style="background: linear-gradient(to top, #C8C8C8 -50%, #ffffff 50%);">
-                <td colspan="2" style="border-radius:0px 0px 6px 6px;">
-                    <a  data-role="button" id="btn_take_pic" onClick="getdefectiveImage();" class="ui-btn" style="background:linear-gradient(to top, #999 -50%, #ffffff 100%); color:#000000; font-weight:1;">Defective Picture</a>       
-                    <img src="" width="128" height="128" alt="Image" id="myImageE"/> 
-                    <input name="defPhoto_path" id="defPhoto_path" value=""  type="hidden">
-                    <input name="defPhoto_name" id="defPhoto_name" value=""  type="hidden">
-                </td>
-              </tr>     
-        </table>  
+        </table>
         </div> 
-        <a data-role="button" id="btn_submit_receive" onClick="submit_data_receive();" class="ui-btn" style="background:linear-gradient(to top, #999 -50%, #ffffff 100%); color:#000000;  font-weight:1;">Submit</a>
-         <div id="receiveSubmitbufferImage" style="text-align:center;"><img src="running.gif" /></div>
-         <div class="sucMsgR" style="color:#FFF; font-size:20px; text-align:center; padding:30px 0px 30px 0px; border-radius:10px;"><!--<img src="submitLogo.png"/>-->Submitted Successfully </div>
-    <div class="errorChk" style="color:#FFF;"></div>
-
-    </div>
-</div>
-<!--===============================Sup defective======================================-->
-<div data-role="page" data-theme="c" id="defective_page" style="overflow:scroll; background-image:url(iconsandbackgrounds/Background2.png);">
-    <div data-theme="c" data-role="header" data-position="fixed" style="background-image:url(iconsandbackgrounds/Background2.png); border-bottom:1px solid #999;">
-        <a data-role="button" id="menuLogo" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets " ><img src="Home.png" /></a>
-        <a data-role="button" id="menuLogo" onclick="backClick();" data-rel="back" class="ui-btn-right" data-transition="slide"><img src="back.png" /></a>
-        <h3 style="color:#fff;">POST-IT</h3>
-    </div>
-    <div data-role="content">
-   <div id="townSelctdef" style="color:#FFF;"></div> 
-    <div class="routselect" style="font-size:18px;">Defective</div>              
    
-        <table width="100%" class="ui-body-d ui-shadow table-stripe ui-responsive" id="beneficiaryCount" style="cell-spacing:0px;  background-color:#BFBFBF; border-radius:6px 6px 0px 0px;""  data-role="table" data-theme="d"  data-mode="display:none">
-          <tr>
-            <td><!--<label style="color:#D42E5C;  font-weight:1;">POSM Code</label>--><!--<div id="posmCodeList" style="width:210px; display:inline-block;"></div>-->
+     <br/>
+        <a data-role="button" id="btn_submit_receive" onClick="submit_data_receive();" class="ui-btn" style="background:linear-gradient(to top, #00468C -50%, #409FFF 100%); color:#fff; font-weight:1; border-radius:4px; font-size:18px;">Receive</a>
+         <div id="receiveSubmitbufferImage" style="text-align:center;"><img src="running.gif" /></div>
+         <div class="sucMsgR" style="color:#005E2F; font-size:20px; text-align:center; padding:30px 0px 30px 0px; border-radius:10px;"><!--<img src="submitLogo.png"/>-->Submitted Successfully </div>
+    <div class="errorChk" style="color:#F00;"></div>
             
-             <div id="defectivePOSMSelect">
-            
-            </div>
-            </td>
-            <!--<td style="vertical-align:bottom;">
-                <a data-role="button" id="" onClick="alloDetailsDef();" class="ui-btn" style="background-color:#D42E5C; color:#FFF;  font-weight:1;">Next</a>
-            </td>-->
-          </tr>
-          </table>  
-          
-        <div class="errorChkP" style="color:#FFF;"></div>
-        <div id="bufferImagedef" style="text-align:center;"><img src="running.gif" /></div>
-        <div id="allHideDef">
-        <div id="recDataDef"> 
-            <table table width="100%" class="ui-body-d ui-shadow table-stripe ui-responsive" id="beneficiaryCount" style="cell-spacing:0px; color:#D42E5C; background-color:#BFBFBF;"  data-role="table" data-theme="d"  data-mode="display:none">
-            	
-                <tr>
-                    <td><div id="defbrand"></div></td>
-                </tr>
-                <tr>
-                    <td><div id="defposm_type"></div> </td>
-                </tr>
-                
-                <tr>
-               		 <td><div id="defallocation"> </div></td>
-                </tr>
-                <tr>
-               		 <td><div id="defbalance"> </div></td>
-                </tr>
-            </table>
-        </div>
-        
-        <table table width="100%" class="ui-body-d ui-shadow table-stripe ui-responsive" id="beneficiaryCount" style="cell-spacing:0px;"  data-role="table" data-theme="d"  data-mode="display:none">
-            <tr style="background-color:#AAAAAA;">
-                <td style="color:#FFF; text-align:center; padding:20px; font-weight:1; width:50%;">Defective Qty</td>
-                <td width:50%;><input type="number" id="def_qty" name="def_qty" style="background-color:#FFF;" /><input type="hidden" id="ualcId" name="alcId" /></td>
-              </tr>
-              <tr>
-                <td colspan="2" style="border-radius:0px 0px 6px 6px; background-color:#999999;">
-                    <a data-role="button" id="btn_take_pic" onClick="getdefectiveImage();" class="ui-btn" style="background-color:#FFF; color:#D42E5C;  font-weight:1;">Take Picture</a>       
-                    <img src="" width="128" height="128" alt="Image1" id="myImageE" style="color:#FFF;"/> 
-                    <input name="defPhoto_path" id="defPhoto_path" value=""  type="hidden">
-                    <input name="defPhoto_name" id="defPhoto_name" value=""  type="hidden">
-                </td>
-              </tr>     
-        </table>  
-        </div>   
-        <a data-role="button" id="btn_submit_defec" onClick="submit_data_defective();" class="ui-btn" style="background-color:#FFF; color:#D42E5C;  font-weight:1;">Submit</a>
-        <div id="defectiveSubmitbufferImage" style="text-align:center;"><img src="running.gif" /></div>
-          <div class="sucMsgdef" style="color:#FFF; font-size:20px; text-align:center; padding:30px 0px 30px 0px; border-radius:10px;"><!--<img src="submitLogo.png"/>-->Submitted Successfully</div> 
-    <div class="errorChk" style="color:#FFF;"></div>
-            <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-    </div>
+   </div>
+   <!--  <div data-theme="d" data-role="footer" data-position="fixed" style=" background-color:#fff; border:none;">-->
+        <a data-role="button" id="menuLogo" onclick="backClick();" data-rel="back" class="ui-btn" data-transition="slide" style="border:none; float:left;"><img src="back.png"/></a>
+	
 </div>
+
 
 <!--===============================page3======================================-->
 
-<div data-role="page" data-theme="d" id="page3" style="background-image:url(iconsandbackgrounds/Background2.png);">
-    <div data-theme="d" data-role="header" data-position="fixed" style="background-image:url(iconsandbackgrounds/Background2.png); border-bottom:1px solid #999;">
-        <a data-role="button" id="menuLogo" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets " ><img src="Home.png" /></a>
-        <a data-role="button" id="menuLogo" onclick="backClick();" data-rel="back" class="ui-btn-right" data-transition="slide"><img src="back.png" /></a>
-        <h3 class="headerc" style="font-weight:1;">Select Route</h3>
-    </div>
-    <div data-role="content" > 
-    <div id="town" style="color:#FFF;"></div>
+<div data-theme="d" data-role="page" id="page3">
+		<div data-theme="d" data-role="header" data-position="fixed" style="border:none;">
+			   <a data-role="button" id="menuLogo" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets" style="border:none;"><img src="Home.png" /></a>
+       
+                <h3 class="headerc">Select Route</h3>
+            </div>
+            </br>
+     <div><center><img  src="UBL_Logo.JPG" alt="Post-it" style="height:60px; width:60px;"/></center></div>
+    <div data-role="content">
+    <div id="town" style="color:#5BADFF;"></div>
      <div id="bufferImageRoute" style="text-align:center;"><img src="running.gif" /></div>
       
      <div id="routeList" style="background-color:#FFF; color:#000;"></div>
      <div class="errorChk" style="color:#cc0000; background-color:#FFF;"></div>
-        <br/><br/>
-  	
-            <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
     </div>
+     <div data-theme="d" data-role="footer" data-position="fixed" style=" background-color:#fff; border:none;">
+        <!--<a data-role="button" id="menuLogo" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets " style="background-color:#0080FF; color:#fff; font-weight:1; font-size:14px; height:15px; width:40px;">Home</a>-->
+        <a data-role="button" id="menuLogo" onclick="backClick();" data-rel="back" class="ui-btn" data-transition="slide" style="border:none;"><img src="back.png"/></a>
+        
+     </div>
 </div>
 <!-------------------------------------usage-page4------------------------------------------->
 
-<div data-role="page" data-theme="d" id="page4" style="background-image:url(iconsandbackgrounds/Background2.png);">
- <div data-theme="d" data-role="header" data-position="fixed" style="background-image:url(iconsandbackgrounds/Background2.png); border-bottom:1px solid #999;">
-        <a data-role="button" id="menuLogo" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets " ><img src="Home.png" /></a>
-        <a data-role="button" id="menuLogo" onclick="backClick();" data-rel="back" class="ui-btn-right" data-transition="slide"><img src="back.png" /></a>
-        <h3 class="headerc">Select Outlet</h3>
-    </div>
-    <div data-role="content" > 
-    <div id="townAbc" style="color:#FFF;"></div> 
-    <div id="routeSelect" style="color:#FFF;"></div>
+<div data-theme="d" data-role="page" id="page4">
+		<div data-theme="d" data-role="header" data-position="fixed" style="border:none;">
+			   <a data-role="button" id="menuLogo" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets" style="border:none;"><img src="Home.png" /></a>
+       
+                <h3 class="headerc">Select Outlet</h3>
+            </div>
+            </br>
+     <div><center><img  src="UBL_Logo.JPG" alt="Post-it" style="height:60px; width:60px;"/></center></div>
+    <div data-role="content">
+    
+    <div id="townAbc" style="color:#5BADFF;"></div> 
+    <div id="routeSelect" style="color:#5BADFF;"></div>
    <!-- <div id="bufferImageOutlet" style="text-align:center;"><img src="running.gif" /></div> -->
      <div class="errorChk" style="color:#cc0000; background-color:#FFF;"></div> 
      <div id="outletList" style="background-color:#FFF; color:#000;"></div>
-    
-        <br/><br/>
-  
-        <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
        <div class="errorChk" style="color:#cc0000; background-color:#FFF;"></div> 
     </div>
+    <div data-theme="d" data-role="footer" data-position="fixed" style=" background-color:#fff; border:none;">
+        <!--<a data-role="button" id="menuLogo" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets " style="background-color:#0080FF; color:#fff; font-weight:1; font-size:14px; height:15px; width:40px;">Home</a>-->
+       <a data-role="button" id="menuLogo" onclick="backClick();" data-rel="back" class="ui-btn" data-transition="slide" style="border:none;"><img src="back.png"/></a>
+        
+     </div>
 </div>
 <!----------------------------------usage-page5---------------------------------------->
-<div data-role="page" data-theme="d" id="page5" style="overflow:scroll; background-image:url(iconsandbackgrounds/Background2.png);">
-    <div data-theme="d" data-role="header" data-position="fixed" style="background-image:url(iconsandbackgrounds/Background2.png); border-bottom:1px solid #999;">
-        <a data-role="button" id="menuLogo" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets " ><img src="Home.png" /></a>
-        <a data-role="button" id="menuLogo" onclick="backClick();" data-rel="back" class="ui-btn-right" data-transition="slide"><img src="back.png" /></a>
-        <h3 style="color:#fff;">POST-IT</h3>
-    </div>
-    <div data-role="content">
-    <div id="townAusa" style="color:#FFF;"></div>
-    <div id="routeSelectA" style="color:#FFF;"></div>
-    <div id="outletSelect" style="color:#FFF; margin:0px 0px 2px 0px;"></div>          
+<div data-theme="d" data-role="page" id="page5" style="overflow:scroll;">
+		<div data-theme="d" data-role="header" data-position="fixed" style="border:none;">
+			   <a data-role="button" id="menuLogo" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets" style="border:none;"><img src="Home.png" /></a>
+       
+                <h3 class="headerc">POSM Execution</h3>
+            </div>
+            </br>
+     <div><center><img  src="UBL_Logo.JPG" alt="Post-it" style="height:60px; width:60px;"/></center></div>
+    <div data-role="content" style="overflow:scroll;">
+    <div id="townAusa" style="color:#5BADFF;"></div>
+    <div id="routeSelectA" style="color:#5BADFF;"></div>
+    <div id="outletSelect" style="color:#5BADFF; margin:0px 0px 2px 0px;"></div>      
    
-       <table width="100%" class="ui-body-d ui-shadow table-stripe ui-responsive" style="cell-spacing:0px; background-color:#FFFFFF; border-radius:6px 6px 0px 0px; color:#D42E5C;" data-role="table" data-theme="c"  data-mode="display:none">
-          <tr>
-            <td><!--<label style="color:#FFF;  font-weight:1;">POSM Code</label>---><!--<div id="posmCodeList" style="width:210px; display:inline-block;"></div>-->
-            
-            <div id="usagePOSMSelect">
-            
+      <table width="100%" class="ui-body-d ui-shadow table-stripe ui-responsive" style="cell-spacing:0px; background:linear-gradient(to top, #00468C -50%, #409FFF 100%); color:#fff; font-weight:1; border-radius:4px;" data-role="table" data-theme="d"  data-mode="display:none">
+          <tr >
+            <td>
+            <div id="usagePOSMSelect" style="color:#fff;">
             </div>
             </td>
-            <!--<td style="vertical-align:bottom;">
-                <a data-role="button" id="" onClick="alloDetailsU();" class="ui-btn" style="background-color:#D42E5C; color:#FFF;  font-weight:1;">Next</a>
-              
-            </td>-->
           </tr>
           </table>
           <div id="bufferImageU" style="text-align:center;"><img src="running.gif" /></div>  
@@ -869,36 +726,36 @@
         <div id="bufferImage" style="text-align:center;"><img src="running.gif" /></div>
         <div id="allHide">
         <div id="recData"> 
-        <table table width="100%" class="ui-body-d ui-shadow table-stripe ui-responsive" style="cell-spacing:0px; color:#000000; background-color:#FFFFFF; font-size:14px;"  data-role="table" data-theme="c"  data-mode="display:none">
+        <table table width="100%" class="ui-body-d ui-shadow table-stripe ui-responsive" style="cell-spacing:0px; background:linear-gradient(to top, #00468C -50%, #409FFF 100%); color:#fff; font-weight:1; border-radius:4px;"  data-role="table" data-theme="c"  data-mode="display:none">
             	 <tr >
                     <td style="margin:0px; padding:0px; line-height: 1em;"><div id="imageExecution" style=" text-align:center;"></div></td>
                 </tr>
             	<tr>
-                    <td style="margin:0px; line-height: 1em;"><div id="ubrand" style="font-family:CaviarDreams;background: linear-gradient(to top, #C8C8C8 -50%, #ffffff 50%);"></div></td>
+                    <td style="margin:0px; line-height: 1em;"><div id="ubrand" style="background:linear-gradient(to top, #00468C -50%, #409FFF 100%); color:#fff; font-weight:1; border-radius:4px;"></div></td>
                 </tr>
                 <tr>
-                    <td style="margin:0px; line-height: 1em;"><div id="uposm_type" style="background: linear-gradient(to top, #C8C8C8 -50%, #ffffff 50%);"></div> </td>
+                    <td style="margin:0px; line-height: 1em;"><div id="uposm_type" style="background:linear-gradient(to top, #00468C -50%, #409FFF 100%); color:#fff; font-weight:1; border-radius:4px;"></div> </td>
                 </tr>
                 <tr>
-               		 <td style="margin:0px; line-height: 1em;"><div id="uallocation" style="background: linear-gradient(to top, #C8C8C8 -50%, #ffffff 50%);"> </div></td>
+               		 <td style="margin:0px; line-height: 1em;"><div id="uallocation" style="background:linear-gradient(to top, #00468C -50%, #409FFF 100%); color:#fff; font-weight:1; border-radius:4px;"> </div></td>
                 </tr>
                 <tr>
-               		 <td style="margin:0px; line-height: 1em;"><div id="balance" style="background: linear-gradient(to top, #C8C8C8 -50%, #ffffff 50%);"></div></td>
+               		 <td style="margin:0px; line-height: 1em;"><div id="balance" style="background:linear-gradient(to top, #00468C -50%, #409FFF 100%); color:#fff; font-weight:1; border-radius:4px;"></div></td>
                 </tr>
                
             </table>
         </div>
         
         <table width="100%" class="ui-body-d ui-shadow table-stripe ui-responsive" id="beneficiaryCount" style="cell-spacing:0px; color:#000000; border-radius:0px 0px 6px 6px;"  data-role="table" data-theme="d"  data-mode="display:none">
-        	<tr style="background: linear-gradient(to top, #C8C8C8 -50%, #ffffff 50%);">
-                 <td style="width:50%; vertical-align:middle;";>Execution Qty :</td>
-                 <td style="padding:0px 6px 0px 0px; width:50%;"><input type="number" id="qty" name="qty" style="background-color:#C0C0C0; color:#004000;"/> <input type="hidden" id="alcId" name="alcId" /></td>
+        	<tr style="background: linear-gradient(to top, #5BADFF -50%, #5BADFF 50%);">
+                 <td style="width:50%; vertical-align:middle; color:#FFF;";>Execution Qty :</td>
+                 <td style="padding:0px 6px 0px 0px; width:50%;"><input type="number" id="qty" name="qty" style="background-color:#fff; color:#000;"/> <input type="hidden" id="ualcId" name="ualcId" /></td>
                  
               </tr>
-              <tr style="background: linear-gradient(to top, #C8C8C8 -50%, #ffffff 50%);">
+              <tr style="background: linear-gradient(to top, #5BADFF -50%, #5BADFF 50%);">
                 	<td colspan="2" style="border-radius:0px 0px 6px 6px;">
-                    	<a data-role="button" id="btn_take_pic" onClick="getUsagesImage();" class="ui-btn" style="background:linear-gradient(to top, #999 -50%, #ffffff 100%); color:#000000; font-weight:1;">Take Picture</a>       
-                        <img src="" width="128" height="128" alt="Image" id="myImageB"/>       
+                    	<a data-role="button" id="btn_take_pic" onClick="getUsagesImage();" class="ui-btn" style="background:linear-gradient(to top, #00468C -50%, #409FFF 100%); color:#fff; font-weight:1; border-radius:4px;">Take Picture</a>       
+                        <img src="" width="128" height="128" alt="Image" id="myImageB" style="color:#FFF;"/>       
                         <input name="usePhoto_path" id="usePhoto_path" value=""  type="hidden">
                         <input name="usePhoto_name" id="usePhoto_name" value=""  type="hidden">
                     </td>
@@ -906,54 +763,361 @@
         </table>  
             
         </div>   
-        <a data-role="button" id="btn_submit_usages" onClick="submit_data_usages();" class="ui-btn" style="background:linear-gradient(to top, #999 -50%, #ffffff 100%); color:#000000;  font-weight:1;">Submit</a>
+       
+        <a data-role="button" id="btn_submit_usages" onClick="submit_data_usages();" class="ui-btn" style="background:linear-gradient(to top, #00468C -50%, #409FFF 100%); color:#fff; font-weight:1; border-radius:4px; font-size:18px;">SUBMIT</a>
         <div id="usageSubmitbufferImage" style="text-align:center;"><img src="running.gif" /></div>
-          <div class="sucMsgU" style="color:#FFF; font-size:20px; text-align:center; padding:30px 0px 30px 0px; border-radius:10px;"><!--<img src="submitLogo.png"/>-->Submitted Successfully</div> 
-    <div class="errorChk" style="color:#FFF;"></div>
+          <div class="sucMsgU" style="color:#5BADFF; font-size:20px; text-align:center; padding:30px 0px 30px 0px; border-radius:10px;"><!--<img src="submitLogo.png"/>-->Submitted Successfully</div> 
+    <div class="errorChk" style="color:#F00;"></div>
+           
+   </div>
+    <!-- <div data-theme="d" data-role="footer" data-position="fixed" style=" background-color:#fff; border:none;">-->
+        <a data-role="button" id="menuLogo" onclick="backClick();" data-rel="back" class="ui-btn" data-transition="slide" style="border:none; float:left;"><img src="back.png"/></a>
+        
+</div>
+
+<!------------------------------------------jointCall---------------------------------------------->
+<div data-theme="d" data-role="page" id="jointCall" style="overflow:scroll;">
+		<div data-theme="d" data-role="header" data-position="fixed" style="border:none;">
+			   <a data-role="button" id="menuLogo" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets" style="border:none;"><img src="Home.png" /></a>
+       
+                <h3 class="headerc">Joint Call</h3>
+            </div>
+    <div data-role="content" style="overflow:scroll;">
+     <div><center><img  src="UBL_Logo.JPG" alt="Post-it" style="height:60px; width:60px;"/></center></div>
+      <div style="font-size:18px; text-align:center; color:#0080FF; font-weight:bold; margin-bottom:6px;">Outlet Call</div>
+    <div id="townJoinCall" style="color:#5BADFF;"></div>
+    <div id="routeJoinCallShow" style="color:#5BADFF;"></div>
+    <div id="outletJoinCallShow" style="color:#5BADFF; margin:0px 0px 2px 0px;"></div>     
+        
+        <table width="100%" class="ui-body-d ui-shadow table-stripe ui-responsive" id="beneficiaryCount" style="cell-spacing:0px; color:#000000; border-radius:6px;"  data-role="table" data-theme="d"  data-mode="display:none">
+              <tr>
+                	<td colspan="2" style="border-radius:0px 0px 6px 6px;">
+                    	<a data-role="button" id="btn_take_pic" onClick="getShopeForntImage();" class="ui-btn" style="background:linear-gradient(to top, #00468C -50%, #409FFF 100%); color:#fff; font-weight:1; border-radius:4px;">Shope Fornt Picture</a>       
+                        <img src="" width="128" height="128" alt="Image" id="ShopeForntImageA" style="color:#FFF;"/>       
+                        <input name="shopeFornt_path" id="shopeFornt_path" value=""  type="hidden">
+                        <input name="shopeFornt_name" id="shopeFornt_name" value=""  type="hidden">
+                    </td>
+              </tr>     
+        </table> 
+    <div class="errorChk" style="color:#F00;"></div>
             <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-    </div>
+   </div>
+    <div data-theme="d" data-role="footer" data-position="fixed" style=" background-color:#fff; border:none;">
+        <a data-role="button" id="menuLogo" onclick="backClick();" data-rel="back" class="ui-btn" data-transition="slide" style="background:linear-gradient(to top, #00468C -50%, #409FFF 100%); color:#fff; font-weight:1; border-radius:4px;">Back</a>
+         
+         <a data-role="button" id="" onclick="fixwedDisplayGo();" data-iconpos="left" class="ui-btn-right" style="background:linear-gradient(to top, #00468C -50%, #409FFF 100%); color:#fff; font-weight:1; border-radius:4px;">Next</a>
+      
+     </div>
 </div>
 
 
+<!--------------------------------------------fixwedDisplay---------------------------------->
+<div data-theme="d" data-role="page" id="fixwedDisplay" style="overflow:scroll;">
+		<div data-theme="d" data-role="header" data-position="fixed" style="border:none;">
+			   <a data-role="button" id="menuLogo" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets" style="border:none;"><img src="Home.png" /></a>
+       
+                <h3 class="headerc">Joint Call</h3>
+            </div>
+    <div data-role="content" style="overflow:scroll;">
+     <div><center><img  src="UBL_Logo.JPG" alt="Post-it" style="height:60px; width:60px;"/></center></div>
+      <div style="font-size:18px; text-align:center; color:#0080FF; font-weight:bold; margin-bottom:6px;">Outlet Call</div>
+   <!-- <div id="townFXDis" style="color:#5BADFF;"></div>
+    <div id="routeFXDis" style="color:#5BADFF;"></div>
+    <div id="outletFXDis" style="color:#5BADFF; margin:0px 0px 2px 0px;"></div>-->    
+        <div style="font-size:18px; text-align:center; color:#0080FF; font-weight:bold; margin-bottom:6px;">Fixed Display Picture </div> 
+        <table width="100%" class="ui-body-d ui-shadow table-stripe ui-responsive" id="beneficiaryCount" style="cell-spacing:0px; color:#000000; border-radius:6px;"  data-role="table" data-theme="d"  data-mode="display:none">
+              <tr>
+                	<td colspan="2" style="border-radius:0px 0px 6px 6px;">
+                    	<a data-role="button" id="btn_take_pic" onClick="getUsagesImage.....();" class="ui-btn" style="background:linear-gradient(to top, #00468C -50%, #409FFF 100%); color:#fff; font-weight:1; border-radius:4px;">Before Picture</a>       
+                        <img src="" width="128" height="128" alt="Image" id="myImageB" style="color:#FFF;"/>       
+                        <input name="usePhoto_path" id="usePhoto_path" value=""  type="hidden">
+                        <input name="usePhoto_name" id="usePhoto_name" value=""  type="hidden">
+                    </td>
+              </tr>     
+        </table> 
+       
+        <table width="100%" class="ui-body-d ui-shadow table-stripe ui-responsive" id="beneficiaryCount" style="cell-spacing:0px; color:#000000; border-radius:6px;"  data-role="table" data-theme="d"  data-mode="display:none">
+              <tr>
+                	<td colspan="2" style="border-radius:0px 0px 6px 6px;">
+                    	<a data-role="button" id="btn_take_pic" onClick="getUsagesImage.....();" class="ui-btn" style="background:linear-gradient(to top, #00468C -50%, #409FFF 100%); color:#fff; font-weight:1; border-radius:4px;">After Picture</a>       
+                        <img src="" width="128" height="128" alt="Image" id="myImageB" style="color:#FFF;"/>       
+                        <input name="usePhoto_path" id="usePhoto_path" value=""  type="hidden">
+                        <input name="usePhoto_name" id="usePhoto_name" value=""  type="hidden">
+                    </td>
+              </tr>     
+        </table>  
+         
+    <div class="errorChk" style="color:#F00;"></div>
+            <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+   </div>
+    <div data-theme="d" data-role="footer" data-position="fixed" style=" background-color:#fff; border:none;">
+        <a data-role="button" id="menuLogo" onclick="backClick();" data-rel="back" class="ui-btn" data-transition="slide" style="background:linear-gradient(to top, #00468C -50%, #409FFF 100%); color:#fff; font-weight:1; border-radius:4px;">Back</a>
+         
+         <a data-role="button" id="" onclick="joinCallFiexDisplay();" data-iconpos="left" class="ui-btn-right" style="background:linear-gradient(to top, #00468C -50%, #409FFF 100%); color:#fff; font-weight:1; border-radius:4px;">Next</a>
+      
+     </div>
+</div>
+<!------------------------------------------joinCallFxDisplay---------------------------------------------->
+<div data-theme="d" data-role="page" id="joinCallFxDisplay" style="overflow:scroll;">
+		<div data-theme="d" data-role="header" data-position="fixed" style="border:none;">
+			   <a data-role="button" id="menuLogo" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets" style="border:none;"><img src="Home.png" /></a>
+       
+                <h3 class="headerc">Joint Call</h3>
+            </div>
+    <div data-role="content" style="overflow:scroll;">
+     <div><center><img  src="UBL_Logo.JPG" alt="Post-it" style="height:60px; width:60px;"/></center></div>
+      <div style="font-size:18px; text-align:center; color:#0080FF; font-weight:bold; margin-bottom:6px;">Outlet Call</div>
+   <!-- <div id="townJoinCallShow" style="color:#5BADFF;"></div>
+    <div id="routeJoinCa" style="color:#5BADFF;"></div>
+    <div id="outletJoinCa" style="color:#5BADFF; margin:0px 0px 2px 0px;"></div> -->    
+        
+        <table table width="100%" class="ui-body-d ui-shadow table-stripe ui-responsive" id="" style="cell-spacing:0px; font-size:12px;"  data-role="table" data-theme="c"  data-mode="display:none">
+        	<tr style="background-color:#fff;">
+                <td style="color:#0080FF; background-color:#FFF; padding-top:15px;"> Did CM rightly placesd planogram?</td>
+                 <td><div id="joinCallQueNo1Show"></div>
+                 	
+                 </td>
+             </tr>
+             <tr style="background-color:#fff;">
+                <td style="color:#0080FF; background-color:#FFF; padding-top:15px;"> Is display at eyelevel/Hotspol?</td>
+                 <td ><div id="joinCallQueNo2Show"></div>
+                 	
+                 </td>
+              </tr>
+              <tr style="background-color:#fff;">
+                <td style="color:#0080FF; background-color:#FFF; padding-top:15px;"> Did CM cleaned the planogram?</td>
+                 <td ><div id="joinCallQueNo3Show"></div>
+                 	
+                 </td>
+              </tr>
+              <tr style="background-color:#fff;">
+                <td style="color:#0080FF; background-color:#FFF; padding-top:15px;"> Did CM rightly executed?</td>
+                 <td ><div id="joinCallQueNo4Show"></div>
+                 	
+                 </td>
+              </tr>
+              
+          </table>
+        <a data-role="button" id="" onClick="" class="ui-btn" style="background:linear-gradient(to top, #00468C -50%, #409FFF 100%); color:#fff; font-weight:1; border-radius:4px;">SUBMIT</a>
+        <!--<div id="usageSubmitbufferImage" style="text-align:center;"><img src="running.gif" /></div>-->
+          <div class="sucMsgU" style="color:#5BADFF; font-size:20px; text-align:center; padding:30px 0px 30px 0px; border-radius:10px;"><!--<img src="submitLogo.png"/>-->Submitted Successfully</div> 
+    <div class="errorChk" style="color:#F00;"></div>
+            <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+   </div>
+    <div data-theme="d" data-role="footer" data-position="fixed" style=" background-color:#fff; border:none;">
+        <a data-role="button" id="menuLogo" onclick="backClick();" data-rel="back" class="ui-btn" data-transition="slide" style="background:linear-gradient(to top, #00468C -50%, #409FFF 100%); color:#fff; font-weight:1; border-radius:4px;">Back</a>
+         
+         <!--<a data-role="button" id="" onclick="joinCallFiexDisplay();" data-iconpos="left" class="ui-btn-right" style=" background-color:#178BFF; color:#fff;">Next</a>
+      -->
+     </div>
+</div>
+
 
 <!-------------------------------------------Report------------------------------>
-<div data-role="page" data-theme="c" id="page9" style="overflow:scroll; background-image:url(iconsandbackgrounds/Background2.png);">
-    <div data-theme="c" data-role="header" data-position="fixed" style="background-image:url(iconsandbackgrounds/Background2.png);border-bottom:1px solid #999;">
-        <a data-role="button" id="menuLogo" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets " ><img src="Home.png" /></a>
-        <a data-role="button" id="menuLogo" onclick="backClick();" data-rel="back" class="ui-btn-right" data-transition="slide"><img src="back.png" /></a>
-       <h3 class="headerc">Reports</h3>
-    </div>
-    
-    <div data-role="content" > 
+<div data-theme="d" data-role="page" id="page9">
+		<div data-theme="d" data-role="header" data-position="fixed" style="border:none;">
+			   <a data-role="button" id="menuLogo" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets" style="border:none;"><img src="Home.png" /></a>
+       
+                <h3 class="headerc">Execution Reports</h3>
+            </div>
+            </br>
+     <div><center><img  src="UBL_Logo.JPG" alt="Post-it" style="height:60px; width:60px;"/></center></div>
+    <div data-role="content">
+     
     <table table width="100%" class="ui-body-d ui-shadow table-stripe ui-responsive" id="beneficiaryCount" style="cell-spacing:0px;"  data-role="table" data-theme="d"  data-mode="display:none">
             <tr>
-                <td style="color:#FFF; width:40%; padding:20px 0px 0px 0px;">From Date</td>
-                <td style="color:#FFF; width:10%; padding:20px 0px 0px 0px;">:</td>
-                <td style="width:50%;"><input type="date" id="fr_date" name="fr_date" style="background-color:#FFF;" /></td>
+                <td style="color:#00376F; width:40%; padding:20px 0px 0px 10px;">From Date</td>
+                <td style="color:#00376F; width:10%; padding:20px 0px 0px 0px;">:</td>
+                <td style="width:50%; color:#00376F;"><input type="date" id="fr_date" name="fr_date" style="background-color:#FFF;" /></td>
              </tr>
              <tr>
-                <td style="color:#FFF; width:40%; padding:20px 0px 0px 0px;">To Date</td>
-                <td style="color:#FFF; width:10%; padding:20px 0px 0px 0px;">:</td>
-                <td style="width:50%;"><input type="date" id="to_date" name="to_date" style="background-color:#FFF;" /></td>
+                <td style="color:#00376F; width:40%; padding:20px 0px 0px 10px;">To Date</td>
+                <td style="color:#00376F; width:10%; padding:20px 0px 0px 0px;">:</td>
+                <td style="width:50%; color:#00376F;"><input type="date" id="to_date" name="to_date" style="background-color:#FFF;" /></td>
               </tr>
                <tr>
-               <td style="color:#FFF; width:40%; padding:20px 0px 0px 0px;">POSM Code</td>
-                <td style="color:#FFF; width:10%; padding:20px 0px 0px 0px;">:</td>
-                 <td style="width:50%;"> <div id="posmAllStrListAllRec"></div>
+               <td style="color:#00376F; width:40%; padding:20px 0px 0px 10px;">POSM Code</td>
+                <td style="color:#00376F; width:10%; padding:20px 0px 0px 0px;">:</td>
+                 <td style="width:50%; color:#00376F;"> <div id="posmAllStrListAllRec"></div>
                  
                  </td>
               </tr>
         </table> 
-     <button data-role="button" id="btn_stock" onclick="stockReport()" href="#" class="ui-btn" data-transition="slide" style=" background:linear-gradient(to top, #999 -50%, #ffffff 100%); color:#000000; font-weight:1;"><strong style="font-size:18px;">POSM Summary </strong></button>
-     <button data-role="button" id="recReport" onClick="recReport('recReport');" class="ui-btn" data-transition="slide" style=" background:linear-gradient(to top, #999 -50%, #ffffff 100%); color:#000000; font-weight:1;"><strong style="font-size:18px;">Receive And Defective Details</strong></button>
-     <button data-role="button" id="recUsage" onClick="recUsage('recUsage');" class="ui-btn" data-transition="slide" style=" background:linear-gradient(to top, #999 -50%, #ffffff 100%); color:#000000; font-weight:1;"><strong style="font-size:18px;">Execution Details</strong></button>
+     <button data-role="button" id="btn_stock" onclick="stockReport()" href="#" class="ui-btn" data-transition="slide" style=" background:linear-gradient(to top, #5BADFF -50%, #5BADFF 100%); color:#FFF; font-weight:1;"><strong style="font-size:18px;">POSM Summary </strong></button>
+     <button data-role="button" id="recReport" onClick="recReport('recReport');" class="ui-btn" data-transition="slide" style=" background:linear-gradient(to top, #5BADFF -50%, #5BADFF 100%); color:#FFF; font-weight:1;"><strong style="font-size:18px;">Receive And Defective Details</strong></button>
+     <button data-role="button" id="recUsage" onClick="recUsage('recUsage');" class="ui-btn" data-transition="slide" style=" background:linear-gradient(to top, #5BADFF -50%, #5BADFF 100%); color:#FFF; font-weight:1;"><strong style="font-size:18px;">Execution Details</strong></button>
+    
+    
+     
+     
      
      <div class="sucChk" style="color:#004d00;"></div>
      <div class="errorChk" style="color:#cc0000;"></div>
+    </div>
+    <div data-theme="d" data-role="footer" data-position="fixed" style=" background-color:#fff; border:none;">
+        <a data-role="button" id="menuLogo" onclick="backClick();" data-rel="back" class="ui-btn" data-transition="slide" style="border:none;"><img src="back.png"/></a>
+        
+    </div>
+</div>
+
+<!-------------------------------------------Summary------------------------------>
+<div data-theme="d" data-role="page" id="pageSummary">
+		<div data-theme="d" data-role="header" data-position="fixed" style="border:none;">
+			   <a data-role="button" id="menuLogo" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets" style="border:none;"><img src="Home.png" /></a>
+       
+                <h3 class="headerc">Summary</h3>
+            </div>
+            </br>
+    
+    <div data-role="content">
+     <div><center><img  src="UBL_Logo.JPG" alt="Post-it" style="height:60px; width:60px;"/></center></div>
+      <div id="cmIDNameSummmary" style="color:#00376F; text-align:center;"></div>
+     </br> 
+    
+     <table table width="100%" class="ui-body-d ui-shadow table-stripe ui-responsive" id="" style="cell-spacing:0px;"  data-role="table" data-theme="c"  data-mode="display:none">
+        	<tr style="background-color:#FFF;">
+                 <td style="width:50%;">
+                	<a data-role="button" id="" onClick="psVisitSumB();" class="hoverButton" style="font-size:14px;  padding: 4px 8px;">PS VISIT <br/> SUMMARY</a>
+                 	
+                 </td>
+                 <td style="width:50%;">
+                	<a data-role="button" id="" onClick="psInsSumB();" class="hoverButton" style="font-size:14px; padding: 4px 8px;">POSM INSTALLATION <br/> SUMMARY</a>
+                 	
+                 </td>
+              </tr>
+         </table>
+    
      
-        <br/><br/>
-  
-            <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+    <div id="bufferImageTARvsACH" style="text-align:center;"><img src="running.gif" /></div>
+     <div id="targetVSach">
+      
+     </div>
+     <div id="psInstallSummary">
+      <table width="100%" style="font-size:18px;">
+        <tr align="left" class="" style="background-color:#379CDB; color:#fff;">  
+            <td >Day Summary <br/> Target : 50 <br/> ACH : 10 <br/> Remain : 40 <br/> SR : 80%</td>
+            <td >MTD Summary <br/> Target : 100 <br/> ACH : 45 <br/> Remain : 55 <br/> SR : 45%</td>
+             
+        </tr>  
+        </table>
+     </div>
+     
+     
+     <div class="sucChk" style="color:#004d00;"></div>
+     <div class="errorChk" style="color:#cc0000;"></div>
+    </div>
+    <div data-theme="d" data-role="footer" data-position="fixed" style=" background-color:#fff; border:none;">
+         <a data-role="button" id="menuLogo" onclick="backClick();" data-rel="back" class="ui-btn" data-transition="slide" style="border:none;"><img src="back.png"/></a>
+        <a data-role="button" id="" onclick="dayCloseFunc();" data-iconpos="left" class="ui-btn-right" style=" border:none;"><img src="next.png"/></a>
+    </div>
+</div>
+<!-------------------------------------Day Close-------------------------->
+<div data-role="page" data-theme="d" id="dayClose" style=" background-color:#FFF;">
+    </br>
+    <div><center><img  src="UBL_Logo.JPG" alt="Post-it" style="height:60px; width:60px;"/></center></div>
+    <div data-role="content" > 
+    <div style="font-size:18px; text-align:center; color:#0080FF; font-weight:bold;">Summary</div>
+    
+    <a data-role="button" id="" onClick="exit();" class="ui-btn" style="background:linear-gradient(to top, #5BADFF -50%, #5BADFF 100%); color:#fff; border-radius:6px; font-size:22px;">Day Close</a>
+    
+     <div class="errorChk" style="color:#fff;"></div>
+      <div data-theme="d" data-role="footer" data-position="fixed" style=" background-color:#fff; border:none;">
+        <a data-role="button" id="menuLogo" onclick="backClick();" data-rel="back" data-iconpos="left" class="ui-btn" data-transition="slide" style=" border:none;"><img src="back.png"/></a>
+        
+        
+    	
+    </div>
+    </div>
+</div>
+
+<!-------------------------------------------Leave Home------------------------------>
+<div data-theme="d" data-role="page" id="leaveHome">
+		<div data-theme="d" data-role="header" data-position="fixed" style="border:none;">
+			   <a data-role="button" id="menuLogo" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets" style="border:none;"><img src="Home.png" /></a>
+       
+                <h3 class="headerc">Leave</h3>
+            </div>
+            </br>
+     
+    <div data-role="content">
+    <div><center><img  src="UBL_Logo.JPG" alt="Post-it" style="height:60px; width:60px;"/></center></div>
+     </br>
+     <div id="cmIDName" style="color:#00376F; text-align:center;"></div>
+    <table table width="100%" class="ui-body-d ui-shadow table-stripe ui-responsive" id="" style="cell-spacing:0px; margin-left:4px;;"  data-role="table" data-theme="c"  data-mode="display:none">
+        	<tr style="background-color:#FFF; text-align:center;">
+                 <td>
+                	<a data-role="button" id="" onClick="anualLeave();" class="hoverButton">Anual Leave</a>
+                 	
+                 </td>
+                 <td>
+                	<a data-role="button" id="" onClick="sickLeave();" class="hoverButton" style="padding: 16px 24px;">Sick Leave</a>
+                 	
+                 </td>
+              </tr>
+         </table>
+    
+     <div id="bufferImageanualLeave" style="text-align:center;"><img src="running.gif" /></div>
+     <div id="anualLeaveDiv">
+     <table table width="100%" class="ui-body-d ui-shadow table-stripe ui-responsive" id="beneficiaryCount" style="cell-spacing:0px; color:#FFF; background-color:#5BADFF; border-radius:10px 10px 0px 0px;"  data-role="table" data-theme="d"  data-mode="display:none">
+            	
+                <tr>
+                    <td><div id="allocated_leave" style="text-align:center;"></div></td>
+                </tr>
+                <tr>
+                    <td><div id="leave_taken" style="text-align:center;"></div> </td>
+                </tr>
+                
+                <tr>
+               		 <td><div id="leave_reamin" style="text-align:center;"> </div></td>
+                </tr>
+                
+            </table>
+            <table table width="100%" class="ui-body-d ui-shadow table-stripe ui-responsive" id="beneficiaryCount" style="cell-spacing:0px;"  data-role="table" data-theme="d"  data-mode="display:none">
+            <tr>
+                <td style="color:#00376F; width:40%; padding:20px 0px 0px 10px;">From Date</td>
+                <td style="color:#00376F; width:10%; padding:20px 0px 0px 0px;">:</td>
+                <td style="width:50%; color:#00376F;"><input type="date" id="fr_dateLeave" name="fr_dateLeave" style="background-color:#FFF;" /></td>
+             </tr>
+             <tr>
+                <td style="color:#00376F; width:40%; padding:20px 0px 0px 10px;">To Date</td>
+                <td style="color:#00376F; width:10%; padding:20px 0px 0px 0px;">:</td>
+                <td style="width:50%; color:#00376F;"><input type="date" id="to_dateLeave" name="to_dateLeave" style="background-color:#FFF;" /><input name="anual_leave" id="anual_leave" value="Anual_Leave"  type="hidden"></td>
+              </tr>
+        </table> 
+     
+    <button data-role="button" id="recReport" onClick="anualLeaveSub();" class="ui-btn" data-transition="slide" style=" background:linear-gradient(to top, #5BADFF -50%, #5BADFF 100%); color:#FFF; font-weight:1; border-radius: 0px 0px 10px 10px;"><strong style="font-size:18px;">Anual Leave</strong></button>
+    <div id="bufferImageLeaveR" style="text-align:center;"><img src="running.gif" /></div>
+    </div>
+    <div id="sickLeaveDiv">
+     <table table width="100%" class="ui-body-d ui-shadow table-stripe ui-responsive" id="beneficiaryCount" style="cell-spacing:0px; color:#FFF; background-color:#5BADFF; border-radius: 10px 10px 0px 0px;"  data-role="table" data-theme="d"  data-mode="display:none">
+            	
+                <tr>
+                    <td><div id="leave_takenSick" style="text-align:center;"></div> </td>
+                </tr>
+                
+            </table>
+    <table table width="100%" class="ui-body-d ui-shadow table-stripe ui-responsive" id="beneficiaryCount" style="cell-spacing:0px;"  data-role="table" data-theme="d"  data-mode="display:none">
+            <tr>
+                <td style="color:#00376F; width:40%; padding:20px 0px 0px 10px;">From Date</td>
+                <td style="color:#00376F; width:10%; padding:20px 0px 0px 0px;">:</td>
+                <td style="width:50%; color:#00376F;"><input type="date" id="fr_dateLeaveS" name="fr_dateLeaveS" style="background-color:#FFF;" /></td>
+             </tr>
+             <tr>
+                <td style="color:#00376F; width:40%; padding:20px 0px 0px 10px;">To Date</td>
+                <td style="color:#00376F; width:10%; padding:20px 0px 0px 0px;">:</td>
+                <td style="width:50%; color:#00376F;"><input type="date" id="to_dateLeaveS" name="to_dateLeaveS" style="background-color:#FFF;" /><input name="sick_leave" id="sick_leave" value="Sick_Leave"  type="hidden"></td>
+              </tr>
+        </table> 
+    <button data-role="button" id="recReport" onClick="sickLeaveSub();" class="ui-btn" data-transition="slide" style=" background:linear-gradient(to top, #5BADFF -50%, #5BADFF 100%); color:#FFF; font-weight:1; border-radius: 0px 0px 10px 10px;"><strong style="font-size:18px;">Sick Leave</strong></button>
+     <div id="bufferImageLeaveS" style="text-align:center;"><img src="running.gif" /></div>
+    </div>
+    </br>
+     <div class="sucChk" style="color:#004d00; text-align:center;"></div>
+     <div class="errorChk" style="color:#cc0000;"></div>
+    </div>
+    <div data-theme="d" data-role="footer" data-position="fixed" style=" background-color:#fff; border:none;">
+        <a data-role="button" id="menuLogo" onclick="backClick();" data-rel="back" class="ui-btn" data-transition="slide" style="border:none;"><img src="back.png"/></a>
+       
     </div>
 </div>
 
@@ -979,15 +1143,17 @@
 </div>
 
 <!--------------------------------Report Viev page10----------------------->
-<div data-role="page" data-theme="c" id="page10" style="overflow:scroll; background-image:url(iconsandbackgrounds/Background2.png);">
-    <div data-theme="c" data-role="header" data-position="fixed" style="background-image:url(iconsandbackgrounds/Background2.png);border-bottom:1px solid #999;">
-        <a data-role="button" id="menuLogo" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets " ><img src="Home.png" /></a>
-        <a data-role="button" id="menuLogo" onclick="backClick();" data-rel="back" class="ui-btn-right" data-transition="slide"><img src="back.png" /></a>
-       <h3 class="headerc">Reports</h3>
-    </div>
-    <div data-role="content" > 
-    <div id="repIDR" style="color:#FFF;"></div>
-    <div id="townNameR" style="color:#FFF;"></div>  
+<div data-theme="d" data-role="page" id="page10">
+		<div data-theme="d" data-role="header" data-position="fixed" style="border:none;">
+			   <a data-role="button" id="menuLogo" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets" style="border:none;"><img src="Home.png" /></a>
+       
+                <h3 class="headerc">Receive Reports</h3>
+            </div>
+            </br>
+     <div><center><img  src="UBL_Logo.JPG" alt="Post-it" style="height:60px; width:60px;"/></center></div>
+    <div data-role="content">
+    <div id="repIDR" style="color:#00376F;"></div>
+    <div id="townNameR" style="color:#00376F;"></div>  
                   
     <ul data-role="listview" data-inset="true">
     	<li class="ui-field-contain" style="background-color:inherit; padding:0;">
@@ -997,18 +1163,25 @@
     </ul>
      <div class="errorChk" style="color:#FFF;"></div>
     </div>
+    <div data-theme="d" data-role="footer" data-position="fixed" style=" background-color:#fff; border:none;">
+        <a data-role="button" id="menuLogo" onclick="backClick();" data-rel="back" class="ui-btn" data-transition="slide" style="border:none;"><img src="back.png"/></a>
+        
+    </div>
 </div>
 
 <!--------------------------stock report-------------------------->
-<div data-role="page" data-theme="c" id="page11" style="overflow:scroll; background-image:url(iconsandbackgrounds/Background2.png);">
-    <div data-theme="c" data-role="header" data-position="fixed" style="background-image:url(iconsandbackgrounds/Background2.png);border-bottom:1px solid #999;">
-        <a data-role="button" id="menuLogo" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets " ><img src="Home.png" /></a>
-        <a data-role="button" id="menuLogo" onclick="backClick();" data-rel="back" class="ui-btn-right" data-transition="slide"><img src="back.png" /></a>
-       <h3 class="headerc">POSM Summary</h3>
-    </div>
-    <div data-role="content" > 
-    <div id="repID" style="color:#FFF;"></div>
-    <div id="townName" style="color:#FFF;"></div>  
+
+<div data-theme="d" data-role="page" id="page11" style=" overflow:scroll;">
+		<div data-theme="d" data-role="header" data-position="fixed" style="border:none;">
+			   <a data-role="button" id="menuLogo" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets" style="border:none;"><img src="Home.png" /></a>
+       
+                <h3 class="headerc">POSM Summary</h3>
+            </div>
+            </br>
+     <div><center><img  src="UBL_Logo.JPG" alt="Post-it" style="height:60px; width:60px;"/></center></div>
+    <div data-role="content" style=" overflow:scroll;">
+    <div id="repID" style="color:#00376F; "></div>
+    <div id="townName" style="color:#00376F;"></div>  
                    
     <ul data-role="listview" data-inset="true">
     	<li class="ui-field-contain" style="background-color:inherit; padding:0;">
@@ -1018,17 +1191,24 @@
     </ul>
      <div class="errorChk" style="color:#cc0000;"></div>
     </div>
+     <div data-theme="d" data-role="footer" data-position="fixed" style=" background-color:#fff; border:none;">
+        <a data-role="button" id="menuLogo" onclick="backClick();" data-rel="back" class="ui-btn" data-transition="slide" style="border:none;"><img src="back.png"/></a>
+        
+    </div>
 </div>
 <!--------------------------------------------------------------->
-<div data-role="page" data-theme="c" id="page12" style="overflow:scroll; background-image:url(iconsandbackgrounds/Background2.png);">
-    <div data-theme="c" data-role="header" data-position="fixed"  style="background-image:url(iconsandbackgrounds/Background2.png);border-bottom:1px solid #999;">
-        <a data-role="button" id="menuLogo" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets " ><img src="Home.png" /></a>
-        <a data-role="button" id="menuLogo" onclick="backClick();" data-rel="back" class="ui-btn-right" data-transition="slide"><img src="back.png" /></a>
-       <h3 class="headerc">Execution Details</h3>
-    </div>
+<div data-theme="d" data-role="page" id="page12">
+		<div data-theme="d" data-role="header" data-position="fixed" style="border:none;">
+			   <a data-role="button" id="menuLogo" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets" style="border:none;"><img src="Home.png" /></a>
+       
+      <h3 class="headerc">Execution Details</h3>
+      </div>
+            </br>
+     <div><center><img  src="UBL_Logo.JPG" alt="Post-it" style="height:60px; width:60px;"/></center></div>
+    
     <div data-role="content" > 
-    <div id="repIDU" style="color:#FFF;"></div>
-    <div id="townNameU" style="color:#FFF;"></div> 
+    <div id="repIDU" style="color:#00376F;"></div>
+    <div id="townNameU" style="color:#00376F;"></div> 
                 
     <ul data-role="listview" data-inset="true">
     	<li class="ui-field-contain" style="background-color:inherit; padding:0;">  
@@ -1037,6 +1217,10 @@
      	</li>
     </ul> 
      <div class="errorChk" style="color:#fff;"></div>
+    </div>
+    <div data-theme="d" data-role="footer" data-position="fixed" style=" background-color:#fff; border:none;">
+        <a data-role="button" id="menuLogo" onclick="backClick();" data-rel="back" class="ui-btn" data-transition="slide" style="border:none;"><img src="back.png"/></a>
+        
     </div>
 </div>
 <!-------------Agency Report------------------------------------------------------------>
@@ -1285,38 +1469,29 @@
             <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
        </div>
  </div>
+ <!----------------------------------------------leaveMageSUP--------------------------------------------------->
+<div data-theme="d" data-role="page" id="leaveMageSUP" style="overflow:scroll;">
+		<div data-theme="d" data-role="header" data-position="fixed" style="border:none;">
+			   <a data-role="button" id="menuLogo" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets" style="border:none;"><img src="Home.png" /></a>
+       
+                <h3 class="headerc">Leave Manage</h3>
+            </div>
+     
+    <div data-role="content" style="overflow:scroll;">
+    <div><center><img  src="UBL_Logo.JPG" alt="Post-it" style="height:60px; width:60px;"/></center></div>
+   	</br>
+    
+    <div id="leaveViewTable" style="overflow:scroll;"></div>
+     <div class="errorChk" style="color:#000;"></div>
+   
+    </div>
+     <div data-theme="d" data-role="footer" data-position="fixed" style=" background-color:#fff; border:none;">
+        <a data-role="button" id="menuLogo" onclick="backClick();" data-rel="back" class="ui-btn" data-transition="slide" style="border:none;"><img src="back.png"/></a>
+        
+     	
+	</div>
+</div>
  
- 
- <!-----------------------------------common Page for all---------------------->
-<!--<div data-role="page" data-theme="c" id="allUser" style="overflow:scroll" >
-    <div data-theme="c" data-role="header" data-position="fixed" >
-        <a data-role="button" href="#leftpanel2" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets " ><img src="Home.png"></a>
-        
-        <a data-role="button" onClick="exit();" ><img src="exit.png"/> </a>
-        
-        <h3 class="headerc" id="headerName">POST-IT</h3>
-    </div>
-    <br/>
-    <br/>
-    <div data-role="content">
- 		<div style="color:#FFF; text-align:center; background-color:#DA335A; padding:30px 0px 30px 0px; border-radius:10px;"><h3>Welcome To POST-IT</h3> <br/>Required Sync</div>
-    </div>
-    <div data-role="panel" id="leftpanel2" data-position="left" data-display="overlay" data-theme="c" style="background-color:#CE295E;">
-        <div align="center"></div>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <ul data-role="listview" >
-          <li><a data-role="button" class="ui-btn sync-img" href="#pagesync"  style="background-color:#fff" ><center><img src="sync.png" /></center></a></li>		  
-        </ul>
-        
-    </div>
-    <br/><br/><br/>
-    <div data-role="footer" data-position="fixed" style="font-size:12px; color:#595959; background-color:#FFF; font-weight:1;" align="center" >20181119.3</div>
-</div>-->
  <!-----------------------------------Agency Stock---------------------->
 <div data-role="page" data-theme="c" id="page16" style="overflow:scroll; background-image:url(iconsandbackgrounds/Background2.png);">
     <div data-theme="c" data-role="header" data-position="fixed" style="background-image:url(iconsandbackgrounds/Background2.png);border-bottom:1px solid #999;">
@@ -1569,6 +1744,82 @@
     </div>
     </div>
 </div>
+
+<!-----------------------------Issue PAge--------------------------------->	
+<div data-role="page" data-theme="d" id="isseePage" style=" overflow:scroll; background-color:#fff;">
+    </br>
+     <div><center><img  src="UBL_Logo.JPG" alt="Post-it" style="height:60px; width:60px;"/></center></div>
+    <div data-role="content" style=" overflow:scroll; color:#0080FF; background-color:#fff;">
+    <div style="font-size:18px; text-align:center; color:#0080FF; font-weight:bold; margin-bottom:6px;">Inventory</div>	
+    
+    <div id="townSelctRec" style="color:#0080FF; text-align:center;"></div>
+     <div style="font-size:18px; color:#fff; background-color:#5BADFF; text-align:center; margin-bottom:6px;">Issue & Allocation</div>        
+   		
+        <table width="100%" class="ui-body-d ui-shadow table-stripe ui-responsive" style="cell-spacing:0px; background-color:#5BADFF; border-radius:6px 6px 0px 0px;" data-role="table" data-theme="d"  data-mode="display:none">
+          <tr >
+            <td>
+            <div id="issuPOSMSelect" style="color:#fff;">
+            
+            </div>
+            </td>
+          </tr>
+          </table>  
+         
+        <div class="errorChkP" style="color:#cc0000; background-color:#FFF;"></div>
+        <div id="bufferImageIssu" style="text-align:center;"><img src="running.gif" /></div>
+        <div id="allHideIssue" style="margin:0px;">
+        <div id="recDataIssue"> 
+            <table table width="100%" class="ui-body-d ui-shadow table-stripe ui-responsive" style="cell-spacing:0px; color:#FFF; background-color:#5BADFF; font-size:14px;"  data-role="table" data-theme="c"  data-mode="display:none">
+                <tr >
+                    <td style="margin:0px; padding:0px; line-height: 1em;"><div id="imageIssu" style=" text-align:center;"></div></td>
+                </tr>
+               
+            	<tr >
+                    <td style="margin:0px; line-height: 1em;"><div id="brandIssu" style="font-family:CaviarDreams;background: linear-gradient(to top, #5BADFF -50%, #5BADFF 50%);"></div></td>
+                </tr>
+                <tr>
+                    <td style="margin:0px; line-height: 1em;"><div id="posm_typeIssu" style="background: linear-gradient(to top, #5BADFF -50%, #5BADFF 50%);"></div> </td>
+                </tr>
+                <tr>
+               		 <td style="margin:0px; line-height: 1em;"><div id="allocationIssu" style="background: linear-gradient(to top, #5BADFF -50%, #5BADFF 50%);"> </div></td>
+                </tr>
+               	 <tr>
+               		 <td style="margin:0px; line-height: 1em;"><div id="issuAchevement" style="background: linear-gradient(to top, #5BADFF -50%, #5BADFF 50%);"> </div></td>
+                </tr>
+            </table>
+        </div>
+        
+        <table width="100%" class="ui-body-d ui-shadow table-stripe ui-responsive" id="beneficiaryCount" style="cell-spacing:0px; color:#FFF;"  data-role="table" data-theme="d"  data-mode="display:none">
+        	<tr style="background: linear-gradient(to top, #5BADFF -50%, #5BADFF 50%);">
+                 <td style="width:50%; vertical-align:middle;";>Issu & Allocation</td>
+                 <td style="padding:padding:0px 6px 0px 0px; width:50%;"><input type="number" id="issue_qty" name="issue_qty" style="background-color:#FFF; color:#000;"/></td>
+                 
+              </tr>
+              <tr style="background: linear-gradient(to top, #5BADFF -50%, #5BADFF 50%);">
+                	<td colspan="2" style="border-radius:0px 0px 6px 6px;">
+                    	<a data-role="button" id="btn_take_pic" onClick="#getReceiveImage();" class="ui-btn" style="background:linear-gradient(to top, #5BADFF -50%, #5BADFF 100%); color:#fff; border-radius:4px;">Issu Picture</a>       
+                        <img src="" width="128" height="128" alt="Image" id="myImageA"/>       
+                        <input name="recPhoto_path" id="recPhoto_path" value=""  type="hidden">
+                        <input name="recPhoto_name" id="recPhoto_name" value=""  type="hidden">
+                    </td>
+              </tr>     
+        </table>  
+         
+        </div> 
+        <a data-role="button" id="submit_data_issu" onClick="submit_data_issu();" class="ui-btn" style="background:linear-gradient(to top, #5BADFF -50%, #5BADFF 100%); color:#fff; border-radius:6px; font-size:18px;">CONFIRM</a>
+         <div id="issuSubmitbufferImage" style="text-align:center;"><img src="running.gif" /></div>
+         <div class="sucMsg" style="color:#005E2F; font-size:20px; text-align:center; padding:30px 0px 30px 0px; border-radius:10px;"><!--<img src="submitLogo.png"/>-->Submitted Successfully </div>
+    <div class="errorChk" style="color:#F00;"></div>
+    
+    </div>
+    <div data-theme="d" data-role="footer" data-position="fixed" style=" background-color:#fff; border:none;">
+        <!--<a data-role="button" id="menuLogo" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets " style="background-color:#0080FF; color:#fff; font-weight:1; font-size:14px; height:15px; width:40px;">Home</a>-->
+        <a data-role="button" id="menuLogo" onclick="backClick();" data-rel="back" class="ui-btn" data-transition="slide" style="background-color:#5BADFF; color:#fff; font-weight:1; font-size:14px; height:15px; width:40px; border-radius:4px;">BACK</a>
+        
+     </div>
+
+</div>
+
   <script type="text/javascript" src="phonegap.js"></script>
   
 </body>
