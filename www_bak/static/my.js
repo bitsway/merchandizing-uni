@@ -39,14 +39,11 @@ var auditProfileBoxStatusC='';
 var auditStoreTypeC='';
 var agencyAuditPaintComboN='';
 var attendanceTypeC='';
-var joinCallQueNo1='';
-var joinCallQueNo2='';
-var joinCallQueNo3='';
-var joinCallQueNo4='';
+
 //localStorage.rep_type='';
 
 //---Online
-var apipath="http://w02.yeapps.com/postit/syncmobile_20190701/";
+var apipath="http://w02.yeapps.com/postit/syncmobile_20190527/";
 var apipath_image="http://w02.yeapps.com/postit/";
 
 //--- local
@@ -58,7 +55,7 @@ url ="";
 $(document).ready(function(){
 	$('#bufferImageSync').hide();
 	$("#bufferImageSelectTown").hide();
-	
+	$("#attandanceButton").hide();
 	$("#bufferImageAtendanceLocation").hide();
 	
 	/*if (localStorage.synced=="NO"){*/
@@ -66,10 +63,6 @@ $(document).ready(function(){
 	//$("#routeList").next().css("background-color", "yellow");
 	
 	if (localStorage.rep_type=='CM'){
-		
-		$('#onHandStockSup').hide();
-		$('#merchandizingToolsSup').hide();
-		$('#allocationSup').hide();
 		$('#attendanceButtonShow').show();
 		$('#dff_Usages_Audit').hide();
 		$("#posmReportAuditSub").hide();	
@@ -87,7 +80,7 @@ $(document).ready(function(){
 		$("#reportAuditSub").hide();
 		$("#entryAgency").hide();
 		$("#summaryAgency").hide();
-		$('#btn_stockSup').hide();			
+					
 		$("#btn_receive").show();
 		$("#townSelct").show();
 		
@@ -106,22 +99,11 @@ $(document).ready(function(){
 		$('#outletList').empty();
 		$('#outletList').append(localStorage.outletList).trigger('create');
 		
-		if (localStorage.attendanceCheck=='' || localStorage.attendanceCheck==undefined){
-			
-			$(".successMsgATT").text("");	
-			url = "#salfiePage";						
-			$.mobile.navigate(url);
-		}else{
-			url = "#homePage";					
-			$.mobile.navigate(url);
-			}	
+		url = "#homePage";
+		$.mobile.navigate(url);	
 			
 	}else if (localStorage.rep_type == 'SUPERVISOR'){
 		
-		
-		$('#onHandStockSup').show();
-		$('#merchandizingToolsSup').show();
-		$('#allocationSup').show();
 		$("#posmReportAuditSub").hide();
 		$('#attendanceButtonShow').show();	
 		$("#posmAuditDiv").hide();
@@ -146,7 +128,7 @@ $(document).ready(function(){
 		$('#dff_Usages_Audit').hide();
 		$('#btn_stock').show();
 		$('#reportbtn').show();
-		$('#btn_stockSup').show();
+		
 		$('#townList').empty();
 		$('#townList').append(localStorage.townStr).trigger('create');
 		
@@ -162,15 +144,8 @@ $(document).ready(function(){
 		$('#outletList').empty();
 		$('#outletList').append(localStorage.outletList).trigger('create');
 		
-		if (localStorage.attendanceCheck=='' || localStorage.attendanceCheck==undefined){
-			
-			$(".successMsgATT").text("");
-			url = "#salfiePage";						
-			$.mobile.navigate(url);
-		}else{
-			url = "#homePage";					
-			$.mobile.navigate(url);
-			}	
+		url = "#homePage";
+		$.mobile.navigate(url);
 		
 	}else if(localStorage.rep_type == 'AGENCY'){
 		
@@ -331,8 +306,6 @@ function syncBasic(){
 					localStorage.rep_type=syncResultArray[6];	
 					localStorage.routeList=syncResultArray[7];
 					localStorage.townListPosm=syncResultArray[8].replace("['","").replace("']","").replace("'" ,"").replace("'","").replace("'", "").replace("'" ,"").replace("'","").replace("'", "").replace("'" ,"").replace("'","").replace("'", "").replace("'", "").replace("'" ,"").replace("'","").replace("'", "").replace("'", "").replace("'","").replace("'", "").replace("'", "").replace("'" ,"").replace("'","").replace("'", "").replace("'", "").replace("'","").replace("'", "").replace("'", "").replace("'" ,"").replace("'","").replace("'", "").replace("'", "").replace("'","").replace("'", "").replace("'", "").replace("'" ,"").replace("'","").replace("'", "").replace("'", "").replace("'","").replace("'", "").replace("'", "").replace("'" ,"").replace("'","").replace("'", "").replace("'", "");
-					localStorage.attendanceCheck=syncResultArray[9];
-					
 					
 					$('#townListPosmAuditDFF').html("Town Code	:		"+localStorage.townListPosm);
 					
@@ -360,7 +333,7 @@ function syncBasic(){
 						townCode=townLi[0];
 						townName=townLi[1];
 						//onclick="sRoute(\''+cmRoute[i]+'\')"		
-						townStr += '<li id="town_select" style="background:linear-gradient(to top, #00468C -50%, #409FFF 100%); color:#fff; font-weight:1; border-radius:4px;" onclick="townSelect(\''+ townCode+'-'+ townName+'\')">'+ townCode+'-'+ townName+'</li>'
+						townStr += '<li id="town_select" style="background-color:#FFF; border-top-color:#F03; border-bottom-color:#F03;" onclick="townSelect(\''+ townCode+'-'+ townName+'\')">'+ townCode+'-'+ townName+'</li>'
 						
 					}
 					townStr +='</ul>';
@@ -388,9 +361,6 @@ function syncBasic(){
 					cmRouteStr +='</ul>'
 					localStorage.route=cmRouteStr;
 					if (localStorage.rep_type=='CM'){
-						$('#onHandStockSup').hide();
-						$('#merchandizingToolsSup').hide();
-						$('#allocationSup').hide();
 						$('#attendanceButtonShow').show();
 						$('#dff_Usages_Audit').hide();
 						$("#posmReportAuditSub").hide();	
@@ -400,7 +370,7 @@ function syncBasic(){
 						$("#auditorDiv").hide();
 						$("#auditorHead").hide();
 						$("#reportAuditSub").hide();
-						$('#btn_stockSup').hide();
+						
 						$("#entryAgency").hide();
 						$("#stockAgency").hide();
 						$("#reportbtnAgency").hide();
@@ -422,21 +392,9 @@ function syncBasic(){
 						$("#suprepname").html("Name	:		"+localStorage.repName);
 						$("#supreptype").html("Type	:		"+localStorage.rep_type);
 						$("#suprepid").html("ID	:		"+localStorage.repID);
-						
-						if (localStorage.attendanceCheck=='' || localStorage.attendanceCheck==undefined){
-							
-							$(".successMsgATT").text("");
-							url = "#salfiePage";						
-							$.mobile.navigate(url);
-						}else{
-							url = "#homePage";					
-							$.mobile.navigate(url);
-							}	
-			
+						url = "#homePage";						
+						$.mobile.navigate(url);
 					}else if (localStorage.rep_type == 'SUPERVISOR'){
-						$('#onHandStockSup').show();
-						$('#merchandizingToolsSup').show();
-						$('#allocationSup').show();
 						$('#dff_Usages_Audit').hide();
 						$('#attendanceButtonShow').show();
 						$("#posmReportAuditSub").hide();	
@@ -452,7 +410,7 @@ function syncBasic(){
 						$('#btn_usages').show();
 						$('#btn_stock').show();
 						$('#reportbtn').show();
-						$('#btn_stockSup').show();
+						
 						$("#entryAgency").hide();
 						$("#stockAgency").hide();
 						$("#reportbtnAgency").hide();
@@ -461,18 +419,8 @@ function syncBasic(){
 						$("#suprepname").html("Name	:		"+localStorage.repName);
 						$("#supreptype").html("Type	:		"+localStorage.rep_type);
 						$("#suprepid").html("ID	:		"+localStorage.repID);
-						
-						if (localStorage.attendanceCheck=='' || localStorage.attendanceCheck==undefined){
-							
-							$(".successMsgATT").text("");
-							url = "#salfiePage";						
-							$.mobile.navigate(url);
-						}else{
-							
-							
-							url = "#homePage";					
-							$.mobile.navigate(url);
-							}	
+						url = "#homePage";
+						$.mobile.navigate(url);
 							
 					}else if(localStorage.rep_type == 'AGENCY'){
 						$('#attendanceButtonShow').hide();
@@ -592,187 +540,9 @@ function syncBasic(){
 	}//-----/field			
 }
 
-function receiveAndIssu(){
-	
-	$('#menuBufferingImage').hide();
-	//alert(apipath+'get_posm_sup?select_town='+localStorage.select_town+"&repID="+localStorage.repID)
-	$.ajax({
-			  url:apipath+'get_posm_sup?select_town='+localStorage.select_town+"&repID="+localStorage.repID,
-			  success: function(result) {
-				var resultArray = result.split('rdrd');
-					if (resultArray[0]=='Success'){
-						$('#menuBufferingImage').show();	
-						localStorage.posmCodeCmSup=resultArray[1];
-						if(localStorage.posmCodeCmSup!=''){			
-					//====CM/Sup	
-					var posmCodeCmSup=localStorage.posmCodeCmSup.split('fdfd');
-					var posmStrRec = '<select style="background:none;" id="posmCodeRec" class="auto_break" name="posmCodeRec" onchange="alloDetails();"><option selected="selected" value="">Select POSM</option>'
-           
-					for (i=0;i<posmCodeCmSup.length;i++){	
-						posmCodeCmSupStr=posmCodeCmSup[i].split('-');								
-						posmStrRec += '<option value='+posmCodeCmSupStr[1]+'>'+posmCodeCmSupStr[0]+'-'+posmCodeCmSupStr[1]+'</option>'
-					}
-					 posmStrRec +='</select>'
-					posmStrRec =posmStrRec
-					localStorage.posmCodeSup=posmStrRec;
-					$("#receivePOSMSelect").empty();
-					$("#receivePOSMSelect").append(localStorage.posmCodeSup).trigger('create');
-					
-					}else{
-						$("#receivePOSMSelect").empty();
-						
-					}
-				}
-			  }
-		});
-	
-	var csmListTools=localStorage.toolsStr.split('fdfd');
-	var cmListStr = '<select id="cmToolsRecRecData" class="auto_break" name="cmToolsRecRecData" style="display:inline-block;"><option selected="selected" value="">Select Tool</option>'
-	for (j=0;j<csmListTools.length;j++){	
-		cmListStr += '<option value="'+csmListTools[j]+'">'+csmListTools[j]+'</option>'
-	}
-	cmListStr+='</select>'
-	localStorage.ToolsListCM=cmListStr;
-	$("#cmToolsRecRec").empty();
-	$("#cmToolsRecRec").append(localStorage.ToolsListCM).trigger('create');
-	
-	
-	url = "#receiveAndissuPage";
-	$.mobile.navigate(url);
-	}
-
-
-
-function alloDetailsTarget(){
-	
-	$(".errorChkP").text("");
-	$("#received").val("");
-	$(".errorChk").text("");
-	$("#recPhoto").val("");
-	$("#bufferImageTarget").hide();
-	$("#recDataTarget").hide();	
-	$(".sucMsgTarget").hide();
-	var posmCode=$("#targetPOSMS").val();
-	
-	if(posmCode==""|| posmCode==null){
-		$(".errorChk").text("Select posm Code");
-		$("#recDataTarget").hide();
-		$("#allHideTarget").hide();
-		$("#submitDataTarget").hide();
-	}else{
-	
-	//alert(apipath+"getAllData?&posmCode="+posmCode+"&townR="+localStorage.select_town);
-	$("#bufferImageTarget").show();
-	$.ajax({
-		type: 'POST',
-		url:apipath+"getAllData?&posmCode="+posmCode+"&townR="+localStorage.select_town,																																																											
-		success: function(result) {	
-			var resultArray = result.split('rdrd');
-				recStatus=resultArray[0];
-			if (recStatus=='Success'){
-				$("#bufferImageTarget").hide();
-				$("#submitDataTarget").show();
-				$("#recDataTarget").show();
-				$("#allHideTarget").show();	
-				var posmType=resultArray[1];	
-				var brand=resultArray[2];
-				var a_qty=resultArray[3];
-				var dueTarget=resultArray[4];
-				var alc_idT=resultArray[5];
-				var balance_qty=resultArray[6];
-				var imageRec=resultArray[7];
-				var inagUrl=apipath_image+'static/images/alc_image/'+imageRec;
-				
-				var imageIss = '<img height="100px"  src="'+inagUrl+'"  alt="POSM Image"/>';
-				
-				$("#imageTarget").empty();
-				$("#imageTarget").append(imageIss).trigger('create');
-				
-				//$("#imageReceive").val(imageRec);
-				
-				$("#posm_typeT").html("Posm Type	:	"+posmType);
-				$("#brandT").html("Brand			:	"+brand);
-				$("#allocationT").html("Allocation Qty	:	"+a_qty);
-				$("#dueTarget").html("Due	:	"+dueTarget);
-				$("#balanceT").html("Balance	:	"+balance_qty);
-				
-				$("#posm_typeT").val(posmType);
-				$("#brandT").val(brand);
-				$("#allocationT").val(a_qty);
-				$("#dueTarget").val(dueTarget);
-				$("#alc_idT").val(alc_idT);
-				
-				$(".errorChkP").text("");
-			}else{
-				$("#bufferImageTarget").hide();
-				$(".errorChk").text("Please check internet connection");
-			}
-		}
-	});
-	}
-}
-
-function submitDataTargetCM(){
-	
-	$("#btn_submit_receive").hide();
-	//alert(localStorage.target_li);
-	if (localStorage.target_li=='' || localStorage.target_li==undefined){
-		
-		$(".errorChk").text("Required Values");
-		$("#btn_submit_receive").show();
-		
-	}else{
-	
-	$("#TargetSubmitbufferImage").show();			
-		//alert(apipath+"submitDataCmTarget?&syncCode="+localStorage.sync_code+"&repID="+localStorage.repID+"&repName="+localStorage.repName+"&mobileNo="+localStorage.mobileNo+"&select_town="+localStorage.select_town+"&recordDataTargget="+localStorage.target_li);	
-		$.ajax({
-			type: 'POST',
-			url:apipath+"submitDataCmTarget?&syncCode="+localStorage.sync_code+"&repID="+localStorage.repID+"&repName="+localStorage.repName+"&mobileNo="+localStorage.mobileNo+"&select_town="+localStorage.select_town+"&recordDataTargget="+localStorage.target_li,
-																																																													
-			success: function(result) {	
-				var resultArray = result.split('rdrd');
-				
-				if(resultArray[0]=='Success'){
-					
-					$("#TargetSubmitbufferImage").hide();
-					localStorage.target_li='';
-					$("#target_table").empty();
-					$("#targetPOSMSelect").empty();
-					$("#targetPOSMSelect").append(localStorage.posmCodeTarget).trigger('create');	
-					$(".errorChk").text("");
-					$(".sucMsgTarget").show();
-					$("#allHideTarget").hide();
-					$(".sucMsgTarget").text('Successfully Submitted');
-						
-					url="#targetSetCM";					
-					$.mobile.navigate(url);
-					
-				/*}else if(result=='Failed'){
-					$("#TargetSubmitbufferImage").hide();
-					$(".errorChk").text("Already Exists");
-					url="#targetSetCM";					
-					$.mobile.navigate(url);*/
-					
-					
-				}else{
-					rec_target_del(resultArray[1]);
-					$("#TargetSubmitbufferImage").hide();	
-					$(".errorChk").text(resultArray[2]);	
-					$("#allHideTarget").show();
-				}
-				
-			}//end result
-		});//end ajax*/	
-		
-	}
-
-}
-
-
-
 function attandance(){
 	
-	$(".successMsgATT").text("");
+	$(".successMsg").html("");
 	$(".errMsg").html("");
 	$("input:radio").removeAttr('checked');
 	
@@ -796,59 +566,74 @@ function attandance(){
 
 function salfie_next_page(){
 		
-		
+		$(".successMsg").html("");
 		$(".errMsg").html("");
 		var salfie_image_name=$("#salfie_image_name_hidden").val();				
-		var attendance=$("#attendance").val();
+		var attendance=$("input[name='attendance']:checked").val();
 		
 		selfie_lat=$("#selfie_lat").val();
 		selfie_long=$("#selfie_long").val();
-		if(salfie_image_name==''){
+		 //alert(selfie_lat+"-"+selfie_long);
+		if (attendance=="" || attendance==undefined){
+			$(".errMsg").html("Check Attendance Type");
+			$("#attandanceButton").show();
+			
+		}else if((attendance!="" || attendance!=undefined) && salfie_image_name==''){
 			$("#attandanceButton").show();
 			$(".errMsg").text("Required Salfie");
+		
+		/*}else if (selfie_lat==0 || selfie_lat==undefined|| selfie_long==0 || selfie_long==undefined){
+			$(".errMsg").html("Required Location");*/
 		
 		}else{		
 			var salfie_image_name=$("#salfie_image_name_hidden").val();
 			var salfie_image_path=$("#salfie_image_div_hidden").val();					
 			
-			if (salfie_image_path.length < 10){
-								
+			if (salfie_image_path.length < 10){				
 					var url = "#salfiePage";
 					$.mobile.navigate(url);
 			}else{															
 				$("#bufferImageAtendanceLocation").show();
-				//alert(apipath+'syncAttendanceData?select_town='+localStorage.town+"&repID="+localStorage.repID+'&salfie_data='+salfie_image_name+'&selfie_lat='+selfie_lat+'&selfie_long='+selfie_long+'&attendance='+attendance,);
+				//alert(apipath+'syncAttendanceData?select_town='+localStorage.select_town+"&repID="+localStorage.repID+'&salfie_data='+salfie_image_name+'&attendance='+encodeURIComponent(attendance)+'&selfie_lat='+selfie_lat+'&selfie_long='+selfie_long);
 				
 				$.ajax({
 				//type: 'POST',
-				url: apipath+'syncAttendanceData?select_town='+localStorage.town+"&repID="+localStorage.repID+'&salfie_data='+salfie_image_name+'&selfie_lat='+selfie_lat+'&selfie_long='+selfie_long+'&attendance='+attendance,
+				url: apipath+'syncAttendanceData?select_town='+localStorage.select_town+"&repID="+localStorage.repID+'&salfie_data='+salfie_image_name+'&attendance='+encodeURIComponent(attendance)+'&selfie_lat='+selfie_lat+'&selfie_long='+selfie_long,
 				 success: function(result) {	
 						
 						if (result==''){
 							alert ('Sorry Network not available');
 						}else if(result=='Success'){
-							
-							localStorage.attendanceCheck="Day Start"
 							$("#attandanceButton").hide();
 							$("#bufferImageAtendanceLocation").hide();
-							$("#salfie_image_name_hidden").val("");
-							$("#salfie_image_div_hidden").val("");
-							$("#attendance").val("");
-							$(".successMsgATT").text("Submitted Successfully");
+							$("#salfie_data").val("");
 							
-							document.getElementById('salfie_image_div').src = '';
-							uploadPhotoRecSelfie(salfie_image_path, salfie_image_name);
-												
 							
+							/*localStorage.attendanceType=attendance;
+							
+							if (localStorage.attendanceType=="Day Start"){
+								localStorage.attendanceFlag=1;								
+							}else{
+								localStorage.attendanceFlag=0;
+								localStorage.attendanceType="";
+							}*/
+							//alert(localStorage.attendanceFlag);	
+							//localStorage.selfie_flag=1;
+							$(".successMsg").text("Submitted Successfully");													
+							upload_salfie()
+							
+							
+							/*if (localStorage.attendanceFlag==1){ // Faisal
+								$.mobile.navigate("#routePage");	
+							}*/
+									
 						}else if(result=='Already Exists'){
-							
 							$("#bufferImageAtendanceLocation").hide();
 							$(".errMsg").html('Already Exists'); // Faisal
-							
-																
+							//$.mobile.navigate("#salfiePage");// Faisal
+							//$.mobile.navigate("#routePage");												
 						}else{
-							$(".errMsg").html(result);
-												
+							$(".errMsg").html(result);						
 						}
 				 	}
 				 })				
@@ -890,8 +675,8 @@ function get_salfie() {
 	$("#salfie_image_name_hidden").val(salfie_image_name);
 	$("#salfie_image_div_hidden").val(salfie_image_name);
 	navigator.camera.getPicture(onSuccessSalfie, onFailSalfie, { quality: 60,
-	targetWidth: 350,
-	destinationType: Camera.DestinationType.FILE_URI , correctOrientation: true });
+		targetWidth: 350,
+		destinationType: Camera.DestinationType.FILE_URI , correctOrientation: true });
 }
 
 function onSuccessSalfie(imageURI) {
@@ -905,33 +690,6 @@ function onFailSalfie(message) {
 	imagePathA="";
     alert('Failed because: ' + message);
 }
-function uploadPhotoRecSelfie(imageURI, salfie_image_name) { 	
-	var options = new FileUploadOptions();
-    options.fileKey="upload";
-    options.fileName=salfie_image_name;
-    options.mimeType="image/jpeg";
-
-    var params = {};
-    params.value1 = "test";
-    params.value2 = "param";
-    options.params = params;
-	
-	options.chunkedMode = false;
-
-    var ft = new FileTransfer();
-	ft.upload(imageURI, encodeURI("http://i001.yeapps.com/image_hub/merchandizing_image/merchandizing_image/"),winS,onfailS,options);
-}
-
-function winS(s) {	
-	
-	$(".errorChk").text('');
-}
-
-function onfailS(s) {
-	$(".errorChk").text('');
-	
-}
-
 
 function syncValueClean(){
 	
@@ -978,9 +736,6 @@ function menuClick(){
 }
 //----------------back button
 function backClick(){
-	
-	$("#targetVSach").hide();
-	$("#psInstallSummary").hide();
 	$(".errPOSMAudit").text("");
 	$(".errorChkP").text("");
 	$(".errorChk").text("");
@@ -1028,21 +783,7 @@ function townSelect(town){
 						localStorage.posmCodeAgency=resultArray[2];	
 						localStorage.agencyTaxarea=resultArray[4];
 						localStorage.posmAll=resultArray[5];
-						localStorage.csmListTools=resultArray[6];
-						localStorage.toolsStr=resultArray[7];
-						
-						var csmListTools=localStorage.csmListTools.split('fdfd');
-						var cmListStr = '<select id="csmToolsRecRec" class="auto_break" name="csmToolsRecRec" style="display:inline-block;"><option selected="selected" value="">Select CM</option>'
-						for (j=0;j<csmListTools.length;j++){	
-							cmListStr += '<option value="'+csmListTools[j]+'">'+csmListTools[j]+'</option>'
-						}
-						cmListStr+='</select>'
-						localStorage.cmListToolsList=cmListStr;
-						$("#csmListToolsRecRec").empty();
-						$("#csmListToolsRecRec").append(localStorage.cmListToolsList).trigger('create');
-						
-						
-						
+					
 						var recPOSMcode=localStorage.posmAll.split('fdfd');
 						var posmAllStr='<input list="posmAllRec" name="selectPOSM" id="selectPOSM"><datalist id="posmAllRec">';
 						
@@ -1056,37 +797,30 @@ function townSelect(town){
 						$('#posmAllStrListAllRec').append(localStorage.posmAllStr).trigger('create');
 						
 					//=======Agency
-						if(localStorage.posmCodeAgency!=''){
-						var posmCodeAgency=localStorage.posmCodeAgency.split('fdfd');
-						var posmAgencyStr = '<select id="posmCodeAgn" class="auto_break" name="posmCodeAgn" onchange="alloDetailsAgency();"><option selected="selected" value="">Select POSM</option>'
-						for (k=0;k<posmCodeAgency.length;k++){	
-							posmCodeAgencyStr=posmCodeAgency[k].split('-');								
-							posmAgencyStr += '<option value='+posmCodeAgencyStr[1]+'>'+posmCodeAgencyStr[0]+'-'+posmCodeAgencyStr[1]+'</option>'
-						}
-						posmAgencyStr+='</select>'
-						posmAgencyStr =posmAgencyStr
-						localStorage.posmCode_agency=posmAgencyStr;
+					if(localStorage.posmCodeAgency!=''){
+					var posmCodeAgency=localStorage.posmCodeAgency.split('fdfd');
+					var posmAgencyStr = '<select id="posmCodeAgn" class="auto_break" name="posmCodeAgn" onchange="alloDetailsAgency();"><option selected="selected" value="">Select POSM</option>'
+					for (i=0;i<posmCodeAgency.length;i++){	
+						posmCodeAgencyStr=posmCodeAgency[i].split('-');								
+						posmAgencyStr += '<option value='+posmCodeAgencyStr[1]+'>'+posmCodeAgencyStr[0]+'-'+posmCodeAgencyStr[1]+'</option>'
+					}
+					posmAgencyStr+='</select>'
+					posmAgencyStr =posmAgencyStr
+					localStorage.posmCode_agency=posmAgencyStr;
+					$("#agencyPOSMrec").empty();
+					$("#agencyPOSMrec").append(localStorage.posmCode_agency).trigger('create');	
+					}else{
 						$("#agencyPOSMrec").empty();
-						$("#agencyPOSMrec").append(localStorage.posmCode_agency).trigger('create');	
-						}else{
-							$("#agencyPOSMrec").empty();
-							}
-						$("#townSelct").html("Town	:		"+localStorage.select_town);
-						$('#townSelctRec').html("Town	:		"+localStorage.select_town);
-						$('#townSelctdef').html("Town	:		"+localStorage.select_town);
-						$('#townSelctAgency').html("Town	:		"+localStorage.select_town);
+						}
+					$("#townSelct").html("Town	:		"+localStorage.select_town);
+					$('#townSelctRec').html("Town	:		"+localStorage.select_town);
+					$('#townSelctdef').html("Town	:		"+localStorage.select_town);
+					$('#townSelctAgency').html("Town	:		"+localStorage.select_town);
 				
-						if (localStorage.rep_type != 'SUPERVISOR'){
-							//$("#menuBufferingImage").hide();
-							$(".errorChk").text("");
-							url="#first_page";					
-							$.mobile.navigate(url);
-						}else{
-							//$("#menuBufferingImage").hide();
-							$(".errorChk").text("");
-							url="#supHome";					
-							$.mobile.navigate(url);
-							}
+					
+					$(".errorChk").text("");		
+					url="#first_page";					
+					$.mobile.navigate(url);
 					}else{
 						$(".errorChk").text("");
 						url="#homePage";					
@@ -1107,7 +841,36 @@ function alloDetailsagency(){
 }
 
 function receive(){
-	
+	$('#menuBufferingImage').hide();
+	$.ajax({
+			  url:apipath+'get_posm_sup?select_town='+localStorage.select_town+"&repID="+localStorage.repID,
+			  success: function(result) {
+				var resultArray = result.split('rdrd');
+					if (resultArray[0]=='Success'){
+						$('#menuBufferingImage').show();	
+						localStorage.posmCodeCmSup=resultArray[1];
+						if(localStorage.posmCodeCmSup!=''){			
+					//====CM/Sup	
+					var posmCodeCmSup=localStorage.posmCodeCmSup.split('fdfd');
+					var posmStrRec = '<select style="background:none;" id="posmCodeRec" class="auto_break" name="posmCodeRec" onchange="alloDetails();"><option selected="selected" value="">Select POSM</option>'
+           
+					for (i=0;i<posmCodeCmSup.length;i++){	
+						posmCodeCmSupStr=posmCodeCmSup[i].split('-');								
+						posmStrRec += '<option value='+posmCodeCmSupStr[1]+'>'+posmCodeCmSupStr[0]+'-'+posmCodeCmSupStr[1]+'</option>'
+					}
+					 posmStrRec +='</select>'
+					posmStrRec =posmStrRec
+					localStorage.posmCodeSup=posmStrRec;
+					//alert(localStorage.posmCodeSup);
+					$("#receivePOSMSelect").empty();
+					$("#receivePOSMSelect").append(localStorage.posmCodeSup).trigger('create');
+					}else{
+						$("#receivePOSMSelect").empty();
+						
+					}
+				}
+			  }
+		});
 					
 	
 		$(".sucMsgR").hide();
@@ -1188,282 +951,142 @@ function alloDetails(){
 }
 
 
-function submitData_ReceiveList(){
-	
-	$(".errorChk_medicienList").html('');	
-	var receiveQtyR=$("#receiveQty").val();
-	var damageQtyR=$("#damageQty").val();
-	var posm_code=$("#posmCodeRec").val();
-	var posm_type=$("#posm_type").val();
-	//alert(posm_code+'=='+receiveQtyR +'=='+damageQtyR);
-	var brand=$("#brand").val();
-	var dueRec=$("#due").val();
-	var alcId=$("#alcId").val();
-	
-	
-	if (receiveQtyR==''){
-		receiveQtyR=0;
-		}
-	if(damageQtyR==''){
-		damageQtyR=0;
-		}
-	
-	if (receiveQtyR!=0){
-		if ( receiveQty <= 0){
-			$(".errorChk").html('Qty Greater Then Zero');	
-		
-		}else if (receiveQty!=''){
-			if((localStorage.receive_li==undefined)||(localStorage.receive_li=='')){	
-				
-				localStorage.receive_li=posm_code+'||'+posm_type+'||'+brand+'||'+dueRec+'||'+alcId+'||'+receiveQtyR+'||'+damageQtyR;
-				$("#posm_code").val('');
-				$("#posm_type").val('');
-				$("#brand").val('');	
-				$("#dueRec").val('');
-				$("#alcId").val('');
-				$("#receiveQty").val('');
-				$("#damageQty").val('');	
-				
-			}else{
-				if( localStorage.receive_li.indexOf(posm_code) >-1 ){
-					$(".errorChk").html('Already Exits');	
-				}else{
-					localStorage.receive_li+='<rdrd>'+posm_code+'||'+posm_type+'||'+brand+'||'+dueRec+'||'+alcId+'||'+receiveQtyR+'||'+damageQtyR;
-					//alert(localStorage.receive_li);
-					$("#posm_code").val('');
-					$("#posm_type").val('');
-					$("#brand").val('');	
-					$("#dueRec").val('');
-					$("#alcId").val('');
-					$("#receiveQty").val('');
-					$("#damageQty").val('');
-				}
-			}
-		}
-	}else{
-		$(".errorChk").html('Required Qty');
-	}
-	receive_list_show();
-}
-
-function receive_list_show(){
-	
-	if ((localStorage.receive_li==undefined) || (localStorage.receive_li=="")){
-		
-	}else{
-		var medicien_rx=localStorage.receive_li.split('<rdrd>');
-		
-		var medicienStr='';
-		medicienStr += '<tr style="font-size:12px;"><th>POSM_CODE_BRAND</th><th>Rec_Qty</th><th>Def_Qty</th></tr>'
-		for(i=0;i<medicien_rx.length;i++){
-			medicienList=medicien_rx[i].split('||');
-			posm_code=medicienList[0];
-			//posm_type=medicienList[1];
-			brand=medicienList[2];
-			//dueRec=medicienList[3];
-			//alcId=medicienList[4];
-			receiveQtyLi=medicienList[5];
-			damageQtyLi=medicienList[6];
-			
-			
-			medicienStr+='<tr id="'+posm_code+'" style="font-size:12px;"><td width="60%">'+posm_code+'-'+brand+'</td><td width="15%" style="text-align:center;">'+receiveQtyLi+'</td><td width="15%" style="text-align:center;">'+damageQtyLi+'</td><td width="5%"><input type="button" onClick="rec_defe_del(\''+posm_code+'\')" value="X" style="background-color: #0E5887;color: #fff;"></td></tr>'
-			
-		}
-		
-		$("#med_table").empty();
-		$("#med_table").append(medicienStr);
-		
-	}
-}
-function rec_defe_del(id){
-		var successData = id.split('|');
-		var iStrS=localStorage.receive_li
-		for(j=0;j<successData.length;j++){
-			var listS1='';
-			iStrS=iStrS.split('<rdrd>');
-			iLenS=iStrS.length
-			for(i=0;i<iLenS;i++){
-				iStrDS=iStrS[i].split('||');
-				if(iStrDS[0]!=successData[j]){					
-					if (listS1==''){
-						listS1=iStrS[i]	
-					}else{
-						listS1+='<rdrd>'+iStrS[i]		
-					}
-				}
-			}
-			iStrS=listS1		
-		}
-	$("#med_table").empty();
-	localStorage.receive_li=iStrS
-	receive_list_show()
-}
-
-function submitData_TargetList(){
-	
-	$(".errorChk").html('');
-	var cm_id=$("#csmTargetRecRec").val();
-	var posm_code=$("#targetPOSMS").val();
-	var targetQty=$("#targetQty").val();
-	var targetDate=$("#targetDate").val();
-	
-	var posm_type=$("#posm_typeT").val();
-	//alert(posm_code+'=='+receiveQtyR +'=='+damageQtyR);
-	var brand=$("#brandT").val();
-	var alcQty=$("#allocationT").val();
-	var dueTarg=$("#dueTarget").val();
-	var alcId=$("#alc_idT").val();
-	
-	
-	if (targetQty==''){
-		targetQty=0;
-		}
-	
-	if(cm_id==''){
-		$(".errorChk").html('Required CM ID');	
-	}else if(posm_code=='' || posm_code==undefined){
-		$(".errorChk").html('Please Select POSM Again');	
-	}else if (targetQty==0){
-		$(".errorChk").html('Required Target Qty');
-	}else if(targetDate!=''){
-		if ( targetQty <= 0){
-			$(".errorChk").html('Qty Greater Then Zero');	
-		
-		}else if (receiveQty!=''){
-			if((localStorage.target_li==undefined)||(localStorage.target_li=='')){	
-				
-				localStorage.target_li=posm_code+'||'+cm_id+'||'+posm_type+'||'+brand+'||'+alcQty+'||'+dueTarg+'||'+alcId+'||'+targetQty+'||'+targetDate;
-				
-				$("#targetPOSMS").val('');
-				$("#targetQty").val('');
-				$("#targetDate").val('');	
-				$("#posm_typeT").val('');
-				$("#brandT").val('');
-				$("#dueTarget").val('');
-				$("#alc_idT").val('');	
-				
-			}else{
-				if( localStorage.target_li.indexOf(posm_code) >-1 ){
-					$(".errorChk").html('Already Exits');	
-				}else{
-					localStorage.target_li+='<rdrd>'+posm_code+'||'+cm_id+'||'+posm_type+'||'+brand+'||'+alcQty+'||'+dueTarg+'||'+alcId+'||'+targetQty+'||'+targetDate;
-					//alert(localStorage.receive_li);
-					$("#targetPOSMS").val('');
-					$("#targetQty").val('');
-					$("#targetDate").val('');	
-					$("#posm_typeT").val('');
-					$("#brandT").val('');
-					$("#dueTarget").val('');
-					$("#alc_idT").val('');
-				}
-			}
-		}
-	}else{
-		$(".errorChk").html('Required Target Date');
-	}
-	target_list_show();
-}
-
-function target_list_show(){
-	
-	if ((localStorage.target_li==undefined) || (localStorage.target_li=="")){
-		
-	}else{
-		var medicien_rx=localStorage.target_li.split('<rdrd>');
-		
-		var medicienStr='';
-		medicienStr += '<tr style="font-size:12px;"><th>CM_ID POSM</th><th>Tar_Qty</th><th>Tar_Date</th></tr>'
-		for(i=0;i<medicien_rx.length;i++){
-			medicienList=medicien_rx[i].split('||');
-			
-			posmCodeT=medicienList[0];
-			cm_id=medicienList[1];
-			targetQty=medicienList[7];
-			targetDate=medicienList[8];
-			
-			
-			medicienStr+='<tr id="'+posmCodeT+'" style="font-size:12px;"><td width="60%">'+cm_id+'</br>'+posmCodeT+'</td><td width="9%" style="text-align:center;">'+targetQty+'</td><td width="20%" style="text-align:center;">'+targetDate+'</td><td width="5%"><input type="button" onClick="rec_target_del(\''+posmCodeT+'\')" value="X" style="background-color: #0E5887;color: #fff;"></td></tr>'
-			
-		}
-		
-		$("#target_table").empty();
-		$("#target_table").append(medicienStr);
-		
-	}
-}
-
-function rec_target_del(id){
-	
-	var successData = id.split('|');
-		var iStrS=localStorage.target_li
-		for(j=0;j<successData.length;j++){
-			var listS1='';
-			iStrS=iStrS.split('<rdrd>');
-			iLenS=iStrS.length
-			for(i=0;i<iLenS;i++){
-				iStrDS=iStrS[i].split('||');
-				if(iStrDS[0]!=successData[j]){					
-					if (listS1==''){
-						listS1=iStrS[i]	
-					}else{
-						listS1+='<rdrd>'+iStrS[i]		
-					}
-				}
-			}
-			iStrS=listS1		
-		}
-	$("#target_table").empty();
-	localStorage.target_li=iStrS
-	target_list_show()
-	
-}
-
-
 function submit_data_receive(){
 	
 	$("#btn_submit_receive").hide();
+	var d = new Date();	
+	var get_time=d.getTime();
 	
+	var posm_code=$("#posmCodeRec").val();
+	var posm_type=$("#posm_type").val();
 	
-	
+	var brand=$("#brand").val();
+	var dueRec=$("#due").val();
+	var reg = /^[0-9]*$/;
+	var received=$("#received").val().replace('+','').replace('-','').replace('.','').replace('/','').replace('*','').replace(',','');
 	imageName=$("#recPhoto_name").val();
 	imagePathA=$("#recPhoto_path").val();
-	if(localStorage.receive_li=='' || localStorage.receive_li==undefined){
-		
-		$(".errorChk").text("Required Value");
+	var alcId=$("#alcId").val();
+	
+	var regg = /^[0-9]*$/;
+	var def_qty=$("#def_qty").val().replace('+','').replace('-','').replace('.','').replace('/','').replace('*','').replace(',','');
+	
+	imageName6=$("#defPhoto_name").val();
+	imagePathE=$("#defPhoto_path").val();
+	
+	//alert(received);
+	/*var rec_flag=false;
+	
+	if (Number(received)==0){
+		$(".errorChk").text("Receive Qty must Number");
 		$("#btn_submit_receive").show();
-		
-	}else if (imageName==''){
-		
-		$(".errorChk").text("Required Picture");
+	}else{
+		if(imageName==''){
+			$(".errorChk").text("Required Receive Picture");
+			$("#btn_submit_receive").show();
+			
+			}else{
+				rec_flag=true;
+				$(".errorChk").text("Receive Image Upload Successfully");
+				}
+	}
+	
+	//alert (a_qty);
+	var def_flag=false;
+	if (Number(a_qty)==0){
+		$(".errorChk").text("Def Qty must Number");
 		$("#btn_submit_receive").show();
+	}else{
+		if(imageName6==''){
+			$(".errorChk").text("Required Defective Picture");
+			$("#btn_submit_receive").show();
+			
+			}else{
+				def_flag=true;
+				$(".errorChk").text("Defective Image Upload Successfully");
+				}
+	}*/
+	
+	/*if (rec_flag==false && def_flag==false){
+		$(".errorChk").text("Required Qty");
+		$("#btn_submit_receive").show();
+	}else{*/
+	if (received==''){
+		received=0;
+		}
+	if(def_qty==''){
+		def_qty=0;
+		}
+	
+	if (received==0 && def_qty==0){
 		
+		$(".errorChk").text("Required Qty");
+		$("#btn_submit_receive").show();
+	}else if(!reg.test(received)){
+		$(".errorChk").text("Receive Qty must Number");
+		$("#btn_submit_receive").show();
+	}else if(received!=0 && imageName==''){
+		$(".errorChk").text("Required Receive Image");
+		$("#btn_submit_receive").show();
+	}else if(!regg.test(def_qty)){
+		$(".errorChk").text("Defective Qty must Number");
+		$("#btn_submit_receive").show();
+	}else if(def_qty!=0 && imageName6==''){
+		
+		$(".errorChk").text("Required Defective Image");
+		$("#btn_submit_receive").show();
 	}else{
 	
-	$("#receiveSubmitbufferImage").show();			
-		//alert(apipath+"submitData_receive?&syncCode="+localStorage.sync_code+"&repID="+localStorage.repID+"&repName="+localStorage.repName+"&mobileNo="+localStorage.mobileNo+"&select_town="+localStorage.select_town+"&imageName="+imageName+"&recordData_list="+localStorage.receive_li);	
+	
+	/*if(received=='' || received==0){
+		$(".errorChk").text("Required Receive Qty");
+		$("#btn_submit_receive").show();
+	}else*/ 
+	/*if (!reg.test(received)){
+		$(".errorChk").text("Qty must Number");
+		$("#btn_submit_receive").show();
+	}else if ((received != '' || received!=0) && imageName == ''){
+		$(".errorChk").text("Required Receive Picture");
+		$("#btn_submit_receive").show();
+	}else if(!regg.test(a_qty)){
+		$(".errorChk").text("Qty must Number");
+		$("#btn_submit_receive").show();*/
+	/*}else if(a_qty=='' || a_qty==0){
+		$(".errorChk").text("Required Defective Qty");
+		$("#btn_submit_receive").show();*/
+	/*}else if((a_qty != '' || a_qty==0) && imageName6 == ''){
+		$(".errorChk").text("Required Defective Picture");
+		$("#btn_submit_receive").show();
+	}else if(a_qty != '' || a_qty!=0 || received=='' || received==0){
+		$(".errorChk").text("Required Qty");
+		$("#btn_submit_receive").show();	
+	}else{*/
+		$("#receiveSubmitbufferImage").show();			
+		//alert(apipath+"submitData_receive?&syncCode="+localStorage.sync_code+"&repID="+localStorage.repID+"&repName="+localStorage.repName+"&mobileNo="+localStorage.mobileNo+"&select_town="+localStorage.select_town+"&posm_code="+posm_code+"&posm_type="+posm_type+"&brand="+brand+"&dueRec="+dueRec+"&received="+received+"&imageName="+imageName+"&alcId="+alcId+"&def_qty="+def_qty+"&imageName6="+imageName6);	
 		$.ajax({
 			type: 'POST',
-			url:apipath+"submitData_receive?&syncCode="+localStorage.sync_code+"&repID="+localStorage.repID+"&repName="+localStorage.repName+"&mobileNo="+localStorage.mobileNo+"&select_town="+localStorage.select_town+"&imageName="+imageName+"&recordData_list="+localStorage.receive_li,
+			url:apipath+"submitData_receive?&syncCode="+localStorage.sync_code+"&repID="+localStorage.repID+"&repName="+localStorage.repName+"&mobileNo="+localStorage.mobileNo+"&select_town="+localStorage.select_town+"&posm_code="+posm_code+"&posm_type="+posm_type+"&brand="+brand+"&dueRec="+dueRec+"&received="+received+"&imageName="+imageName+"&alcId="+alcId+"&def_qty="+def_qty+"&imageName6="+imageName6,
 																																																													
-			success: function(result) {	
-				var resultArray = result.split('rdrd');
-				//alert(resultArray);
-				if(resultArray[0]=='Success'){
+			success: function(result) {			
+				if(result=='Success'){
 					
-					localStorage.receive_li='';
-					$("#med_table").empty();
 					$("#receivePOSMSelect").empty();
 					$("#receivePOSMSelect").append(localStorage.posmCodeSup).trigger('create');	
 					$("#receiveSubmitbufferImage").hide();
-					
+					$("#received").val("");
+					$("#def_qty").val("");
+					$("#posm_type").val("");
+					$("#brand").val("");
+					$("#dueRec").val("");
 					$("#alcId").val("");
 					$("#recPhoto_name").val("");
 					$("#recPhoto_path").val("");
 					
-					
+					$("#defPhoto_name").val("");
+					$("#defPhoto_path").val("");
 					
 					document.getElementById('myImageA').src = '';
-					
+					document.getElementById('myImageE').src = '';
 									
 					$(".errorChk").text("");
 					$(".sucMsgR").show();
@@ -1474,7 +1097,7 @@ function submit_data_receive(){
 					
 					
 					uploadPhotoRec(imagePathA, imageName);
-					
+					uploadPhotoDefective(imagePathE, imageName6);
 					
 					$(".sucMsgR").text('Successfully Submitted');
 						
@@ -1483,7 +1106,7 @@ function submit_data_receive(){
 					/*setTimeout(function(){
 						location.reload();
 					},500);*/	
-				/*}else if (result=='Faild'){
+				}else if (result=='Faild'){
 						$("#receiveSubmitbufferImage").hide();
 						$(".errorChk").text("Can't Receive more than Due Qty");
 						$("#allHideR").show();
@@ -1492,17 +1115,10 @@ function submit_data_receive(){
 						$("#receiveSubmitbufferImage").hide();
 						$(".errorChk").text("Can't Defective more than Balance Qty");
 						$("#allHideR").show();
-						$("#btn_submit_receive").show();*/
+						$("#btn_submit_receive").show();
 				}else{
-					/*var failData = resultArray[1].split('|');
-					for(i=0;i<failData.length;i++){
-						rec_defe_del(failData[i]);
-					}*/
-						rec_defe_del(resultArray[1]);
-						
-					
 					$("#receiveSubmitbufferImage").hide();		
-					$(".errorChk").text(resultArray[2]);															
+					$(".errorChk").text("Please check internet connection");															
 					$("#btn_submit_receive").show();
 					$("#allHideR").show();
 					
@@ -1512,10 +1128,7 @@ function submit_data_receive(){
 		});//end ajax*/	
 		
 	}
-
 }
-
-
 
 
 function getReceiveImage() {
@@ -1569,53 +1182,6 @@ function onfail(r) {
 	$("#btn_submit_receive").hide();
 }
 
-
-function cmToolsSubmit(){
-	
-	
-	var csmListToolsRecRec=$("#csmToolsRecRec").val();
-	var cmToolsRecRec=$("#cmToolsRecRecData").val();
-	var toolqty=$("#toolqty").val();
-	
-	if(csmListToolsRecRec==''){
-		$(".errorChk").text("Required CM");
-		
-	}else if(cmToolsRecRec==''){
-		$(".errorChk").text("Required Tool");
-		
-	}else if(toolqty==0){
-		$(".errorChk").text("Required Qty");
-		
-	}else{
-		$("#toolSubmitbufferImage").show();			
-		//alert(apipath+"submitData_toolsRec?&repID="+localStorage.repID+"&repName="+localStorage.repName+"&select_town="+localStorage.select_town+"&cmCode="+csmListToolsRecRec+"&toolsName="+cmToolsRecRec+"&toolqty="+toolqty);	
-		$.ajax({
-			type: 'POST',
-			url:apipath+"submitData_toolsRec?&repID="+localStorage.repID+"&repName="+localStorage.repName+"&select_town="+localStorage.select_town+"&cmCode="+csmListToolsRecRec+"&toolsName="+cmToolsRecRec+"&toolqty="+toolqty,
-																																																													
-			success: function(result) {			
-				if(result=='Success'){
-					
-					
-					$("#toolSubmitbufferImage").hide();
-					$("#toolqty").val('');
-					$("#csmListToolsRecRec").empty();
-					$("#csmListToolsRecRec").append(localStorage.cmListToolsList).trigger('create');
-					$("#cmToolsRecRec").empty();
-					$("#cmToolsRecRec").append(localStorage.ToolsListCM).trigger('create');
-					$(".errorChk").text("");
-					$(".sucMsgTools").text('Successfully Submitted');
-	
-				}else{
-					$(".errorChk").text("Please Check Your Internet Connection");
-					
-					$("#toolSubmitbufferImage").hide();
-					}
-			}
-		});
-	}
-	
-}
 /*================usagepage3=================*/
 var outletSeperator='';
 function usages(outletSep){
@@ -1691,131 +1257,6 @@ function usages(outletSep){
 }
 
 /************************usage*page4********************/
-function dayCloseFunc(){
-	
-	url = "#dayClose";
-	$.mobile.navigate(url);
-	}
-	
-function joinCallFiexDisplay(){
-	
-	joinCallQueNo1='<fieldset data-role="controlgroup" data-theme="c" data-type="horizontal" data-mini="true"><input type="radio" name="joinNo1" id="radio-choice-h-6a" value="YES" checked="checked"><label for="radio-choice-h-6a">YES</label><input type="radio" name="joinNo1" id="radio-choice-h-6b" value="NO"><label for="radio-choice-h-6b">NO</label></fieldset>'
-	
-	$("#joinCallQueNo1Show").empty();
-	$("#joinCallQueNo1Show").append(joinCallQueNo1).trigger('create');
-	
-	joinCallQueNo2='<fieldset data-role="controlgroup" data-theme="c" data-type="horizontal" data-mini="true"><input type="radio" name="joinNo2" id="radio-choice-h-6a" value="YES" checked="checked"><label for="radio-choice-h-6a">YES</label><input type="radio" name="joinNo2" id="radio-choice-h-6b" value="NO"><label for="radio-choice-h-6b">NO</label></fieldset>'
-	
-	$("#joinCallQueNo2Show").empty();
-	$("#joinCallQueNo2Show").append(joinCallQueNo2).trigger('create');
-	
-	joinCallQueNo3='<fieldset data-role="controlgroup" data-theme="c" data-type="horizontal" data-mini="true"><input type="radio" name="joinNo3" id="radio-choice-h-6a" value="YES" checked="checked"><label for="radio-choice-h-6a">YES</label><input type="radio" name="joinNo3" id="radio-choice-h-6b" value="NO"><label for="radio-choice-h-6b">NO</label></fieldset>'
-	
-	$("#joinCallQueNo3Show").empty();
-	$("#joinCallQueNo3Show").append(joinCallQueNo3).trigger('create');
-	
-	joinCallQueNo4='<fieldset data-role="controlgroup" data-theme="c" data-type="horizontal" data-mini="true"><input type="radio" name="joinNo4" id="radio-choice-h-6a" value="YES" checked="checked"><label for="radio-choice-h-6a">YES</label><input type="radio" name="joinNo4" id="radio-choice-h-6b" value="NO"><label for="radio-choice-h-6b">NO</label></fieldset>'
-	
-	$("#joinCallQueNo4Show").empty();
-	$("#joinCallQueNo4Show").append(joinCallQueNo4).trigger('create');
-	
-	
-	 var routeJoinSubBB=$("#routeJoinSub").val();
-	 var outletJoinSubBB=$("#outletJoinSub").val();
-	
-	
-	$("#townJoinCallShow").html('Town	:		' + localStorage.select_town.replace('|','-'));
-	$("#routeJoinCa").html('Route		:		' + routeJoinSubBB);
-	$("#outletJoinCa").html('Outlet		:	' + outletJoinSubBB);
-	
-	url = "#joinCallFxDisplay";
-	$.mobile.navigate(url);
-	
-	
-	}
-	
-	
-function fixwedDisplayGo(){
-	
-	
-	 var routeJoinAA=$("#routeNameF").val();
-	 var outletJoinAA=$("#outletNameF").val();
-	
-	
-	$("#townFXDis").html('Town	:		' + localStorage.select_town.replace('|','-'));
-	$("#routeFXDis").html('Route		:		' + routeJoinAA);
-	$("#outletFXDis").html('Outlet		:	' + outletJoinAA);
-	
-	$("#routeJoinSub").val(routeJoinAA);
-	$("#outletJoinSub").val(outletJoinAA);
-	
-	url = "#fixwedDisplay";
-	$.mobile.navigate(url);
-	}
-	
-function targetSetCMGo(){
-	
-	var posmCodeCmSup=localStorage.posmCodeCmSup.split('fdfd');
-	
-	var posmStrRec = '<select style="background:none;" id="targetPOSMS" class="auto_break" name="targetPOSMS" onchange="alloDetailsTarget();"><option selected="selected" value="">Select POSM</option>'
-
-	for (i=0;i<posmCodeCmSup.length;i++){	
-		posmCodeCmSupStr=posmCodeCmSup[i].split('-');								
-		posmStrRec += '<option value='+posmCodeCmSupStr[1]+'>'+posmCodeCmSupStr[0]+'-'+posmCodeCmSupStr[1]+'</option>'
-	}
-	 posmStrRec +='</select>'
-	posmStrRec =posmStrRec
-	localStorage.posmCodeTarget=posmStrRec;
-	$("#targetPOSMSelect").empty();
-	$("#targetPOSMSelect").append(localStorage.posmCodeTarget).trigger('create');
-
-	var csmListTools=localStorage.csmListTools.split('fdfd');
-	var cmListStr = '<select id="csmTargetRecRec" class="auto_break" name="csmTargetRecRec" style="display:inline-block;"><option selected="selected" value="">Select CM</option>'
-	for (j=0;j<csmListTools.length;j++){	
-		cmListStr += '<option value="'+csmListTools[j]+'">'+csmListTools[j]+'</option>'
-	}
-	cmListStr+='</select>'
-	localStorage.cmListTargetsList=cmListStr;
-	$("#csmListTargetRecRec").empty();
-	$("#csmListTargetRecRec").append(localStorage.cmListTargetsList).trigger('create');
-	
-	$("#submitDataTarget").hide();
-	$("#bufferImageTarget").hide();
-	$("#TargetSubmitbufferImage").hide();
-	$("#allHideTarget").hide();
-	$(".sucMsgTarget").text('');
-	url = "#targetSetCM";
-	$.mobile.navigate(url);
-	}	
-function goHomePage(){
-	
-	if (localStorage.attendanceCheck=='' || localStorage.attendanceCheck==undefined){
-		$(".errMsg").text("Required Attendence");
-	}else{
-		url = "#homePage";					
-		$.mobile.navigate(url);
-		}	
-	}
-function goSyncPage(){
-	
-	url = "#pagesync";
-	$.mobile.navigate(url);
-	}	
-function goSelfiePage(){
-	$(".errorChk").text("");
-	$(".successMsgATT").text("");
-	url = "#salfiePage";
-	$.mobile.navigate(url);
-	}		
-	
-function merchandizingToolsSup(){
-	$(".sucMsgTools").text("");
-	$(".errorChk").text("");
-	$('#toolSubmitbufferImage').hide();
-	
-	url = "#merchandizingTools";
-	$.mobile.navigate(url);
-	}
 
 var rName='';
 function sRoute(routeName){
@@ -1967,6 +1408,132 @@ function auditorOutlet(){
 }
 
 
+
+/*function posmAuditorOutlet(){
+	
+		
+		
+		$(".errPOSMAudit").text("");
+		$(".errposmAudit").text("");
+		if (localStorage.synced!='YES'){
+			$(".errorChk").text("Required Sync");
+		}else{
+			var posmAuditOutSearch=$("#posmAuditOutSearch").val();
+			alert (posmAuditOutSearch);
+			if(posmAuditOutSearch==''){
+				$(".errPOSMAudit").text("Please Search Outlet");
+				
+				$('#posmOuditOutletList').hide();
+				$("#posmAuditor").hide();
+				$("#posmReportAuditSub").show();
+				$("#btn_posm_entry").hide();
+			}else{
+				
+				$("#posmAuditor").hide();
+				$("#posmReportAuditSub").hide();
+				$('#bufferImageOutletposm').show();	
+				//alert(apipath+"getOutletPosmAuditor?&posmAuditOutSearch="+posmAuditOutSearch+"&repID="+localStorage.repID);
+				$.ajax({
+				type: 'POST',
+				url:apipath+"getOutletPosmAuditor?&posmAuditOutSearch="+posmAuditOutSearch+"&repID="+localStorage.repID,
+																																																														
+				success: function(result) {	
+					var syncResultArray = result.split('rdrd');	
+					if(syncResultArray[0]=='Success'){	
+					
+						$('#bufferImageOutletposm').hide();
+						$("#posmAuditor").show();	
+						
+						localStorage.posmOutletCode=syncResultArray[1];
+						localStorage.posmOutletName=syncResultArray[2];
+						localStorage.posmOutletTerritory=syncResultArray[3];
+						localStorage.posmOutletRoute=syncResultArray[4];
+						localStorage.posmTown=syncResultArray[5];
+						localStorage.posmBrand=syncResultArray[6];
+						localStorage.outletDetailsLi=syncResultArray[7];
+						localStorage.outletTaxAreaDFF=syncResultArray[8];
+						
+						//alert (localStorage.outletTaxAreaDFF);
+						
+						if(localStorage.outletTaxAreaDFF!=''){
+							var rectaxStrDFF=localStorage.outletTaxAreaDFF.split('|');
+							var posmStrTaxAreaDFF = '<option selected="selected" value="">Select Tax Area</option>'
+							for (i=0;i<rectaxStrDFF.length;i++){	
+								
+								posmStrTaxAreaDFF += '<option value="'+rectaxStrDFF[i]+'">'+rectaxStrDFF[i]+'</option>'
+							}
+							posmStrTaxAreaDFF =posmStrTaxAreaDFF
+							localStorage.rectaxStrDFF=posmStrTaxAreaDFF;
+							
+							$("#outletTaxAreaDFFListRec").empty();
+							$("#outletTaxAreaDFFListRec").append(localStorage.rectaxStrDFF).trigger('create');	
+						}else{
+								$("#outletTaxAreaDFFListRec").empty();
+								}
+						
+						
+							
+						var auditorBrand=localStorage.posmBrand.split(',');
+						var brandStr = '<option selected="selected" value="">Select Brand</option>'
+						for (i=0;i<auditorBrand.length;i++){	
+							brandStr += '<option value="'+auditorBrand[i]+'">'+auditorBrand[i]+'</option>'
+						}
+						localStorage.auditorPOSMBrand=brandStr;
+						$("#auditorPOSMBrandList").empty();
+						$("#auditorPOSMBrandList").append(localStorage.auditorPOSMBrand).trigger('create');
+						
+						if (localStorage.posmOutletCode==''){
+								$('#posmOuditOutletList').hide();
+								$("#posmReportAuditSub").hide();
+								$("#btn_posm_entry").hide();
+								$("#posmAuditor").hide();
+								$(".errposmAudit").text("দোকানটি লিষ্টে নাই |");								
+							}else{								
+								$('#posmOuditOutletList').show();
+								$('#posmOutletCode').text(localStorage.posmOutletCode+'|'+localStorage.posmOutletName);
+								$('#posmOutleAddress').text(localStorage.posmOutletTerritory);
+								$('#posmOutleRoute').text(localStorage.posmOutletRoute);
+								$('#posmOutleTown').text(localStorage.posmTown);
+								
+								if (localStorage.outletDetailsLi ==''){
+									
+									$('#posmOuditOutletList').hide();
+									$("#btn_posm_entry").show();
+									$('#posmOuditOutletList').empty();
+								}else{
+									
+									$('#posmOuditOutletList').show();
+									$("#posmAuditor").show();	
+									$("#btn_posm_entry").hide();
+									
+									var posmOutletDetails = localStorage.outletDetailsLi.split('fdfd');
+									
+									var posmAuditOutletStr='<span style="background-color:#900; color:#FFF; margin:0px; padding:0px; display:block;">Submitted Data</span>';
+										for (i=0;i<posmOutletDetails.length;i++){					
+											posmOutletLi=posmOutletDetails[i].split('|');
+											
+											posmAuditOutletStr += '<p style="margin:0px; padding:0px; background-color:#FFF; border:1px solid #F00;">'+"Board Available : "+posmOutletLi[0]+' | '+"Brand : "+posmOutletLi[1]+' | '+"POSM type : "+posmOutletLi[2]+' | '+"Board Qty : "+posmOutletLi[3]+' | '+"Board Condition : "+posmOutletLi[4]+' | '+"Mega Hanger : "+posmOutletLi[5]+' | '+"Mega Hanger Condition : "+posmOutletLi[6]+' | '+"Plugin Dispenser : "+posmOutletLi[7]+' | '+"Plugin Dispenser Condition : "+posmOutletLi[8]+' | '+"Mini Solomon : "+posmOutletLi[9]+' | '+"Skin Care : "+posmOutletLi[10]+' | '+"Skin Care Condition : "+posmOutletLi[11]+' | '+"Hair Care : "+posmOutletLi[12]+' | '+"Hair Care Condition : "+posmOutletLi[13]+' | '+"Drug Store Posm : "+posmOutletLi[14]+' | '+"POSM Qty : "+posmOutletLi[15]+' | '+"POSM Condition : "+posmOutletLi[16]+' | '+"Tax Area : "+posmOutletLi[17]+'</p>'
+										}
+										//alert(posmAuditOutletStr);
+										localStorage.posmOuditOutletList=posmAuditOutletStr;
+										//alert (localStorage.posmOuditOutletList);		
+										$('#posmOuditOutletList').empty();
+										$('#posmOuditOutletList').append(localStorage.posmOuditOutletList).trigger('create');
+									}
+							}
+					}	
+				},error: function(){
+					$('#bufferImageOutletposm').hide();
+					$('#posmOuditOutletList').hide();
+					$("#posmAuditor").hide();
+					$(".errAudit").text("Please check internet connection");
+				}
+			});
+		}
+	}
+	
+
+}*/
 
 function outletAudit(){
 	var auditSerach=$("#auditOutSearch").val();
@@ -2476,14 +2043,8 @@ function outlet(outletIDName){
 				$("#townAusa").html('Town	:		' + localStorage.select_town.replace('|','-'));	
 				url="#page5";					
 			}else if (localStorage.rep_type =='SUPERVISOR'){
-				$("#townJoinCall").html('Town	:		' + localStorage.select_town.replace('|','-'));
-				$("#routeJoinCallShow").html('Route		:		' + rName);
-				$("#outletJoinCallShow").html('Outlet		:	' + outletIDName);
-				
-				$("#routeNameF").val(rName);
-				$("#outletNameF").val(outletIDName);
-				
-				url="#jointCall";
+				$("#townAusa").html('Town	:		' + localStorage.select_town.replace('|','-'));
+				url="#page5";
 				
 			}else if (localStorage.rep_type =='DFF'){
 				$("#townDFFAudit").html('Town	:		' + localStorage.select_town.replace('|','-'));
@@ -2647,7 +2208,6 @@ function alloDetailsU(){
 					var a_qty=resultArray[3];
 					var balance_qty=resultArray[4];
 					var alc_id=resultArray[5];
-					//alert(alc_id);
 					var imageUsage=resultArray[6];
 					var inagUrl=apipath_image+'static/images/alc_image/'+imageUsage;
 					
@@ -3040,166 +2600,18 @@ function onfail3(r) {
 }
 
 function repo(){
+	/*if (localStorage.rep_type == 'CM'){
+		$("#recReport").hide();
+		
+	}else{
+		$("#recReport").show();
+		$("#allHide").show();
+	}*/
+	
 	$(".errorChk").text("");			
 	url="#page9";				
 	$.mobile.navigate(url);	
 }
-
-function summaryCM(){
-	$("#bufferImageTARvsACH").hide();
-	$("#targetVSach").hide();
-	$("#psInstallSummary").hide();
-	$(".errorChk").text("");
-	$("#cmIDNameSummmary").html('Rep	:		' + localStorage.repID+','+localStorage.repName);				
-	url="#pageSummary";				
-	$.mobile.navigate(url);	
-}
-function psVisitSumB(){
-	
-	$("#targetVSach").hide();
-	$("#psInstallSummary").show();
-}
-function psInsSumB(){
-	
-	$("#targetVSach").show();
-	$("#psInstallSummary").hide();
-	$("#bufferImageTARvsACH").show();
-	//alert(apipath+"posmInstallationSummary?&repID="+localStorage.repID+"&repName="+localStorage.repName+"&select_town="+localStorage.select_town);
-	$.ajax({
-			type: 'POST',
-			url:apipath+"posmInstallationSummary?&repID="+localStorage.repID+"&repName="+localStorage.repName+"&select_town="+localStorage.select_town,
-																																																													
-			success: function(result) {
-				getResult=result.split('||');
-				
-				if(getResult[0]=='Success'){
-				$("#bufferImageTARvsACH").hide();				
-				localStorage.posmInstallData=getResult[1];	
-				
-				var stockRPT=localStorage.posmInstallData.split('rdrd');			
-				var cmRouteSTr='<table id="aaaaaaaa" width="100%">';
-					cmRouteSTr += '<tr style="font-size:12px;"><th style="text-align:center;">POSM</th><th>Target</th><th>Today ACH</th><th>Total ACH</th><th>ACH %</th></tr>'
-					for (i=0;i<stockRPT.length;i++){	
-						stockR=stockRPT[i].split('|');
-						posm_code=stockR[0];
-						target_qty=stockR[1];
-						totalACH=stockR[2];
-						ach=stockR[3];
-						todayACH=stockR[4];
-											
-						cmRouteSTr += '<tr style="font-size:11px;"><td>'+posm_code+'</td><td>'+target_qty+'</td><td>'+todayACH+'</td><td>'+totalACH+'</td><td style="text-align:center;">'+ach+'</td></tr>'
-					
-					}
-					cmRouteSTr +='</table>'
-					$('#targetVSach').empty();
-					$('#targetVSach').append(cmRouteSTr).trigger('create');
-					
-					
-					var repid=localStorage.repID;
-					$("#townName").html ("Town	:		"+localStorage.select_town);
-					$("#repID").html ("Rep ID	:		"+repid);
-				
-			}else{
-				
-				$("#bufferImageTARvsACH").hide();
-				var repid=localStorage.repID;
-				$("#townName").html ("Town	:		"+localStorage.select_town);
-				$("#repID").html ("Rep ID	:		"+repid);
-				$("#bufferImageStockR").hide();
-				$(".errorChk").text("No Record In DataBase");
-				}
-		}
-	});
-
-	
-	$(".errorChk").text("");			
-	url="#pageSummary";				
-	$.mobile.navigate(url);
-
-}
-
-function leave(){
-	$("#bufferImageLeaveS").hide();
-	$("#bufferImageLeaveR").hide();
-	$("#bufferImageanualLeave").hide();
-	$("#anualLeaveDiv").hide();
-	$("#sickLeaveDiv").hide();		
-	
-	$("#cmIDName").html('Rep	:		' + localStorage.repID+','+localStorage.repName);	
-	$(".errorChk").text("");
-	$(".sucChk").text("");			
-	url="#leaveHome";				
-	$.mobile.navigate(url);	
-}
-function anualLeave(){
-	$(".sucChk").text("");	
-	$("#sickLeaveDiv").hide();
-	$("#anualLeaveDiv").show();	
-	$("#bufferImageanualLeave").show();
-	//alert(apipath+"getAllDataLeave?&repID="+localStorage.repID);
-	$.ajax({
-			type: 'POST',
-			url:apipath+"getAllDataLeave?&repID="+localStorage.repID,																																																											
-			success: function(result) {	
-				var resultArray = result.split('rdrd');
-					recStatus=resultArray[0];
-				if (recStatus=='Success'){	
-					$("#bufferImageanualLeave").hide();
-					var allocated_leave=resultArray[1];	
-					var leave_taken=resultArray[2];
-					var leave_reamin=resultArray[3];
-					
-				
-					
-					$("#allocated_leave").html("Allocated leave:	"+ allocated_leave);
-					$("#leave_taken").html("Leave Taken	:	"+leave_taken);
-					$("#leave_reamin").html("Leave Reamin:	"+leave_reamin);
-					
-				}else{
-					$("#bufferImageanualLeave").hide();
-					$(".errorChk").text("Please check internet connection");
-				}
-			}
-		})	
-	
-	}
-function sickLeave(){
-	$(".sucChk").text("");
-	$("#anualLeaveDiv").hide();
-	$("#sickLeaveDiv").show();
-	
-	$("#bufferImageanualLeave").show();
-	//alert(apipath+"getAllDataLeave?&repID="+localStorage.repID);
-	$.ajax({
-			type: 'POST',
-			url:apipath+"getAllDataLeave?&repID="+localStorage.repID,																																																											
-			success: function(result) {	
-				var resultArray = result.split('rdrd');
-					recStatus=resultArray[0];
-				if (recStatus=='Success'){	
-					$("#bufferImageanualLeave").hide();
-					var allocated_leave=resultArray[1];	
-					var leave_taken=resultArray[2];
-					var leave_reamin=resultArray[3];
-					
-				
-					
-					//$("#allocated_leave").html("Allocated leave:	"+ allocated_leave);
-					$("#leave_takenSick").html("Leave Taken	:	"+leave_taken);
-					//$("#leave_reamin").html("Leave Reamin:	"+leave_reamin);
-					
-				}else{
-					$("#bufferImageanualLeave").hide();
-					$(".errorChk").text("Please check internet connection");
-				}
-			}
-		})	
-	
-			
-	
-	}
-
-
 
 function repoAgency(){
 	
@@ -3207,82 +2619,6 @@ function repoAgency(){
 	url="#reportPageA9";				
 	$.mobile.navigate(url);	
 }
-
-function anualLeaveSub(){
-	
-	var fr_dateLeave=$("#fr_dateLeave").val();
-	var to_dateLeave=$("#to_dateLeave").val();
-	var anual_leave=$("#anual_leave").val();
-	
-	$('#bufferImageLeaveR').show();
-	//alert(apipath+'anualLeaveSubmit?select_town='+localStorage.select_town+"&repID="+localStorage.repID+"&fr_dateLeave="+fr_dateLeave+"&to_dateLeave="+to_dateLeave+"&anual_leave="+anual_leave);
-$.ajax({
-	  url:apipath+'anualLeaveSubmit?select_town='+localStorage.select_town+"&repID="+localStorage.repID+"&fr_dateLeave="+fr_dateLeave+"&to_dateLeave="+to_dateLeave+"&anual_leave="+anual_leave,
-	 success: function(result) {			
-				if(result=='Success'){
-					$('#bufferImageLeaveR').hide();
-					$("#anualLeaveSub").hide();
-					$("#fr_dateLeave").val("");
-					$("#to_dateLeave").val("");	
-					$("#anual_leave").val("");
-					$(".sucChk").text('Successfully Submitted');
-					$(".errorChk").text("");
-					$("#anualLeaveDiv").hide();
-					$("#sickLeaveDiv").hide();
-					url="#leaveHome";					
-					$.mobile.navigate(url);	
-				
-				}else{
-					$("#bufferImageLeaveR").hide();
-					$(".errorChk").text("Select Date Range");															
-					$('#anualLeaveSub').show();
-					
-					
-				}
-				
-			}//end result
-		});//end ajax
-		
-}
-
-
-function sickLeaveSub(){
-	
-	var fr_dateLeaveS=$("#fr_dateLeaveS").val();
-	var to_dateLeaveS=$("#to_dateLeaveS").val();
-	var sick_leave=$("#sick_leave").val();
-	
-	$('#bufferImageLeaveS').show();
-	//alert(apipath+'sickLeaveSubmit?select_town='+localStorage.select_town+"&repID="+localStorage.repID+"&fr_dateLeaveS="+fr_dateLeaveS+"&to_dateLeaveS="+to_dateLeaveS+"&sick_leave="+sick_leave);
-$.ajax({
-	  url:apipath+'sickLeaveSubmit?select_town='+localStorage.select_town+"&repID="+localStorage.repID+"&fr_dateLeaveS="+fr_dateLeaveS+"&to_dateLeaveS="+to_dateLeaveS+"&sick_leave="+sick_leave,
-	 success: function(result) {			
-				if(result=='Success'){
-					$('#bufferImageLeaveS').hide();
-					$("#sickLeaveSub").hide();
-					$("#fr_dateLeaveS").val("");
-					$("#to_dateLeaveS").val("");	
-					$("#sick_leave").val("");
-					$(".sucChk").text('Successfully Submitted');
-					$(".errorChk").text("");$("#anualLeaveDiv").hide();
-					$("#sickLeaveDiv").hide();
-					url="#leaveHome";							
-					$.mobile.navigate(url);	
-				
-				}else{
-					$("#bufferImageLeaveS").hide();
-					$(".errorChk").text("Select Date Range");															
-					$('#sickLeaveSub').show();
-					
-					
-				}
-				
-			}//end result
-		});//end ajax
-		
-}
-
-
 
 function recReport(){
 	if (localStorage.rep_type == 'CM'){
@@ -3305,7 +2641,7 @@ function recReport(){
 				
 				var ReceiveRpt=localStorage.receiveReportR.split('rdrd');					
 				var rectable='<table id="reccRepp">';
-					rectable += '<tr style="font-size:12px;" ><th>Date and Time</th><th style="text-align:center;">POSM</th><th>Receive Qty</th><th>Defective Qty</th><th>Stock</th></tr>'
+					rectable += '<tr style="font-size:12px;" ><th>Date and Time</th><th>Brand</th><th>POSM Type</th><th>POSM Code</th><th>Receive Qty</th><th>Defective Qty</th><th>Stock</th></tr>'
 					for (i=0;i<ReceiveRpt.length;i++){	
 						recordR=ReceiveRpt[i].split('|');
 						dateR=recordR[0];
@@ -3316,7 +2652,7 @@ function recReport(){
 						posmCode=recordR[5];
 						defectqty=recordR[6];
 								
-						rectable +='<tr style="font-size:11px;"><td>'+dateR+'</td><td>'+posmCode+'</br>'+posmType+'</br>'+brand+'</td><td style="text-align:center;">'+recQty+'</td><td style="text-align:center;">'+defectqty+'</td><td style="text-align:center;">'+stock+'</td></tr>'
+						rectable +='<tr style="font-size:11px;"><td>'+dateR+'</td><td>'+brand+'</td><td>'+posmType+'</td><td>'+posmCode+'</td><td style="text-align:center;">'+recQty+'</td><td style="text-align:center;">'+defectqty+'</td><td style="text-align:center;">'+stock+'</td></tr>'
 					
 					}
 					rectable +='</table>'
@@ -3363,7 +2699,7 @@ function recUsage(){
 				//alert(localStorage.usageReportR);
 				var UsageRpt=localStorage.usageReportR.split('rdrd');			
 				var usatable='<table id="usageRepp">';
-					usatable +='<tr style="font-size:12px;" ><th>Date and Time</th><th>Outlet Code</th><th>Outlet Name</th><th style="text-align:center;">POSM</th><th>Usage Qty</th></tr>'
+					usatable +='<tr style="font-size:12px;" ><th>Date and Time</th><th>Outlet Code</th><th>Outlet Name</th><th>Brand</th><th>POSM Type</th><th>POSM Code</th><th>Usage Qty</th></tr>'
 					for (i=0;i<UsageRpt.length;i++){	
 						usageR=UsageRpt[i].split('|');
 						dateU=usageR[0];
@@ -3374,7 +2710,7 @@ function recUsage(){
 						uposmCode=usageR[5];
 						brand=usageR[6];
 				
-						usatable += '<tr style="font-size:11px;"><td>'+dateU+'</td><td>'+outletcode+'</td><td>'+outletname+'</td><td>'+uposmCode+'</br>'+uposmType+'</br>'+brand+'</td><td style="text-align:center;">'+Uqty+'</td></tr>'
+						usatable += '<tr style="font-size:11px;"><td>'+dateU+'</td><td>'+outletcode+'</td><td>'+outletname+'</td><td>'+brand+'</td><td>'+uposmType+'</td><td>'+uposmCode+'</td><td style="text-align:center;">'+Uqty+'</td></tr>'
 					
 					}
 					usatable +='</table>'
@@ -3423,8 +2759,8 @@ function stockReport(){
 				localStorage.stockReport=getResult[1];	
 				
 				var stockRPT=localStorage.stockReport.split('rdrd');			
-				var cmRouteSTr='<table id="stockRepp" width="100%">';
-					cmRouteSTr += '<tr style="font-size:12px;"><th style="text-align:center;">POSM</th><th>Allocation</th><th>Receive</th><th>Defective</th><th>Usage</th><th>Stock</th></tr>'
+				var cmRouteSTr='<table id="stockRepp">';
+					cmRouteSTr += '<tr style="font-size:12px;"><th>Brand</th><th>POSM Type</th><th>POSM Code</th><th>Allocation</th><th>Receive</th><th>Defective</th><th>Usage</th><th>Stock</th></tr>'
 					for (i=0;i<stockRPT.length;i++){	
 						stockR=stockRPT[i].split('|');
 						brand=stockR[0];
@@ -3436,7 +2772,7 @@ function stockReport(){
 						defectiveQty=stockR[6];
 						usageQty=stockR[7];	
 											
-						cmRouteSTr += '<tr style="font-size:11px;"><td>'+posmCode+'</br>'+posmType+'</br>'+brand+'</td><td style="text-align:center;">'+allocation+'</td><td style="text-align:center;">'+receiveQty+'</td><td style="text-align:center;">'+defectiveQty+'</td><td style="text-align:center;">'+usageQty+'</td><td style="text-align:center;">'+stock+'</td></tr>'
+						cmRouteSTr += '<tr style="font-size:11px;"><td>'+brand+'</td><td>'+posmType+'</td><td>'+posmCode+'</td><td style="text-align:center;">'+allocation+'</td><td style="text-align:center;">'+receiveQty+'</td><td style="text-align:center;">'+defectiveQty+'</td><td style="text-align:center;">'+usageQty+'</td><td style="text-align:center;">'+stock+'</td></tr>'
 					
 					}
 					cmRouteSTr +='</table>'
@@ -3675,7 +3011,7 @@ function alloDetailsDef(){
 					$("#defposm_type").val(posmType);
 					$("#defbrand").val(brand);
 					$("#defbalance").val(balance_qty);
-					$("#dalcId").val(alc_id);
+					$("#ualcId").val(alc_id);
 				}else{
 					$("#bufferImagedef").hide();
 					$(".errorChk").text("Please check internet connection");
@@ -3697,7 +3033,7 @@ function submit_data_defective(){
 	
 	var ubrand=$("#defbrand").val();
 	var baUsage=$("#defbalance").val();
-	var alcId=$("#dalcId").val();
+	var alcId=$("#ualcId").val();
 	
 	var regg = /^[0-9]*$/;
 	var a_qty=$("#def_qty").val().replace('+','').replace('-','').replace('.','').replace('/','').replace('*','').replace(',','');
@@ -4517,115 +3853,3 @@ function posmSaveAuditSub(){
 	url="#saveDFF";				
 	$.mobile.navigate(url);
 }
-
-
-function leaveManageSUP(){
-	
-	
-	$('#menuBufferingImage').show();
-	$("#agencySTRimage").show();
-	//alert(apipath+"leaveManageSUPData?&repID="+localStorage.repID+"&select_town="+localStorage.select_town);
-	$.ajax({
-			type: 'POST',
-			url:apipath+"leaveManageSUPData?&repID="+localStorage.repID+"&select_town="+localStorage.select_town,
-																																																													
-			success: function(result) {
-				getResult=result.split('||');
-				
-				if(getResult[0]=='Success'){
-				$('#menuBufferingImage').hide();
-				$("#agencySTRimage").hide();
-				localStorage.adadsasa=getResult[1];	
-					if(localStorage.adadsasa!=''){
-					var stockRPA=localStorage.adadsasa.split('rdrd');			
-					var cmRouteSTA='<table id="leaveTable">';
-						cmRouteSTA += '<tr style="font-size:12px;"><th>CM ID</th><th>Date</th><th>Day</th><th></th><th></th></tr>'
-						for (i=0;i<stockRPA.length;i++){	
-							medicienList=stockRPA[i].split('|');
-							rowID=medicienList[0];
-							cmID=medicienList[1];
-							frDate=medicienList[2];
-							toDate=medicienList[3];
-							days=medicienList[4];	
-												
-							cmRouteSTA += '<tr id="'+rowID+'" style="font-size:12px;"><td width="20%">'+cmID+'</td><td width="40%">'+frDate+' To '+toDate+'</td><td width="10%" style="text-align:center;">'+days+'</td><td width="10%"><input type="button" onClick="rec_defe_deldddd(\''+rowID+'\')" value="X" style="background-color:#f00; color:#fff;"></td><td width="15%"><input type="button" onClick="rec_defe_deldddd(\''+rowID+'\')" value="Approve" style="background-color: #0E5887;color: #fff;"></td></tr>'
-						
-						}
-						cmRouteSTA +='</table>'		
-						$("#leaveViewTable").empty();
-						$("#leaveViewTable").append(cmRouteSTA);
-					}else{
-						$("#leaveViewTable").empty();
-						$(".errorChk").text("No Leave Request In Town");
-						}
-				
-			}else{
-				
-				
-				$(".errorChk").text("No Record In DataBase");
-				}
-		}
-	});
-
-	
-	$(".errorChk").text("");			
-	url="#leaveMageSUP";				
-	$.mobile.navigate(url);
-
-	
-	
-	
-}
-	
-function getShopeForntImage() {
-	var get_time=$.now();
-	var image_Name = localStorage.mobileNo+"_"+get_time+".jpg";
-	$("#shopeFornt_path").val(image_Name);
-	$("#shopeFornt_name").val(image_Name);
-	
-	navigator.camera.getPicture(onSuccess10, onFail10, { quality: 90,
-	targetWidth: 600,
-	destinationType: Camera.DestinationType.FILE_URI,correctOrientation: true });	
-}
-
-function onSuccess10(imageURI) {		
-    var image = document.getElementById('ShopeForntImageA');
-    image.src = imageURI;
-	var image_path = "shopeFornt_path";	
-	$("#"+image_path).val(imageURI);
-	
-}
-
-function onFail10(message) {
-	image_path="";
-	$("#shopeFornt_name").val('');
-    alert('Failed because: ' + message);
-}
-
-function uploadShopeForntPhoto(imageURI, ShopeForntImageA) { 	
-	var options = new FileUploadOptions();
-    options.fileKey="upload";
-    options.fileName=ShopeForntImageA;
-    options.mimeType="image/jpeg";
-
-    var params = {};
-    params.value1 = "test";
-    params.value2 = "param";
-    options.params = params;
-	
-	options.chunkedMode = false;
-
-    var ft = new FileTransfer();
-	ft.upload(imageURI, encodeURI("http://i001.yeapps.com/image_hub/merchandizing_image/merchandizing_image/"),win10,onfail0,options);
-}
-
-function win10(r) {	
-	$(".errorChk").text('');
-}
-
-function onfail0(r) {
-	$(".errorChk").text('');
-	$("#btn_submit_usages").hide();
-}
-
-
