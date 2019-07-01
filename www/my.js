@@ -595,6 +595,7 @@ function syncBasic(){
 function receiveAndIssu(){
 	
 	$('#menuBufferingImage').hide();
+	//alert(apipath+'get_posm_sup?select_town='+localStorage.select_town+"&repID="+localStorage.repID)
 	$.ajax({
 			  url:apipath+'get_posm_sup?select_town='+localStorage.select_town+"&repID="+localStorage.repID,
 			  success: function(result) {
