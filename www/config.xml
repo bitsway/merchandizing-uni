@@ -3,10 +3,10 @@
 <!-- config.xml reference: https://build.phonegap.com/docs/config-xml -->
 <widget xmlns     = "http://www.w3.org/ns/widgets"
         xmlns:gap = "http://phonegap.com/ns/1.0"
-        id        = "com.yeapps.POST-IT"
-        version   = "4.0.01">
+        id        = "com.yeapps.he50"
+        version   = "5.0.01">
 
-    <name>POST-IT</name>
+    <name>HE 5.0</name>
 
     <description>
        M-Reporting
