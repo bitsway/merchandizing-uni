@@ -49,7 +49,7 @@
         Define a specific version of PhoneGap to build into your app.
         
     -->
-	<preference name="phonegap-version"       value="6.5.0" />
+	<preference name="phonegap-version"       value="6.1.2" />
 	
     <!-- Plugins -->
 
