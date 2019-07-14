@@ -47,9 +47,10 @@
 	<preference name="SplashShowOnlyFirstTime" value="true" />
 	<!--
         Define a specific version of PhoneGap to build into your app.
+		<preference name="phonegap-version"       value="7.1.2" />
         
     -->
-	<preference name="phonegap-version"       value="7.1.2" />
+
 	
     <!-- Plugins -->
 
