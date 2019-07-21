@@ -46,7 +46,7 @@ var joinCallQueNo4='';
 //localStorage.p_rep_type='';
 
 //---Online
-var apipath="http://w02.yeapps.com/postit/syncmobile_20190721/";
+var apipath="http://w02.yeapps.com/postit/syncmobile_20190715/";
 var apipath_image="http://w02.yeapps.com/postit/";
 
 //--- local
@@ -327,7 +327,7 @@ function syncBasic(){
 		if(localStorage.p_sync_code==undefined || localStorage.p_sync_code==""){
 			localStorage.p_sync_code=0;
 		}	
-		//alert(apipath+'user_check?mobile='+mobile+'&password='+encodeURIComponent(password)+'&sync_code='+localStorage.p_sync_code);
+	//alert(apipath+'user_check?mobile='+mobile+'&password='+encodeURIComponent(password)+'&sync_code='+localStorage.p_sync_code);
 		$.ajax({
 		  url:apipath+'user_check?mobile='+mobile+'&password='+encodeURIComponent(password)+'&sync_code='+localStorage.p_sync_code,
 		  success: function(result) { 
@@ -350,56 +350,8 @@ function syncBasic(){
 					localStorage.p_attendanceCheck=syncResultArray[9];
 					localStorage.p_townSup=syncResultArray[10];
 					localStorage.p_toolsStr=syncResultArray[11];
-					localStorage.routeExList=syncResultArray[12];
-					localStorage.cancelList=syncResultArray[13];
-					localStorage.place_strList=syncResultArray[14];
 					
-					localStorage.sync_date=get_date();
-					//alert(localStorage.sync_date);
-					//alert(localStorage.routeExList+'====='+localStorage.cancelList+'====='+localStorage.place_strList);
-					
-					var routeExSingleArray = localStorage.routeExList.split('fdfd');	
-					//alert(routeExSingleArray);
-					var routeExSingleTtotal = routeExSingleArray.length;
-					var routeExStringShow=''
-					for (var re=0; re < routeExSingleTtotal-1; re++){
-						routeExArray = routeExSingleArray[re].split('-');
-						routeExID=routeExArray[0];
-						routeExName=routeExArray[1];
-						routeExStringShow=routeExStringShow+'<label><input type="radio" name="RadioRouteEx" value="'+routeExName+'" > '+routeExName+'</label>'
-					}
-					localStorage.routeExStringShow=routeExStringShow
-					//alert(localStorage.routeExStringShow);
-					$("#routeExString").html(localStorage.routeExStringShow);
-					
-					
-					var cancelArray = localStorage.cancelList.split('fdfd');	
-					var cancel_combo_str='<select name="cancel_cause" id="cancel_cause" >'
-					cancel_combo_str=cancel_combo_str+'<option value=""></option>'
-					cancel_combo_str=cancel_combo_str+'<option value="Will try later">Will try later</option>'
-					for (var i=0; i < cancelArray.length; i++){				
-						cancel_combo_str=cancel_combo_str +'<option value="'+cancelArray[i].split('-')[0]+'">'+cancelArray[i].split('-')[1]+'</option>'			  	
-					}
-					cancel_combo_str=cancel_combo_str+'</select>'
-					localStorage.cancel_combo_str=cancel_combo_str
-					$('#cancel_reason').empty();
-					$('#cancel_reason').append(localStorage.cancel_combo_str);
-					
-					
-					//create place  combo
-					var placeArray = localStorage.place_strList.split('rdrd');	
-					var place_combo_str='Select Place Location: </br>'
-					place_combo_str=place_combo_str +'<label><input type="checkbox" name="is_near_inFront_actual" id="is_near_inFront_actual" value=""/>Near or In front of Entrance</label>'	
-					place_combo_str=place_combo_str +'<label ><input type="checkbox" name="is_beside_adjacent_actual" id="is_beside_adjacent_actual" value=""/>Beside or Adjacent Cash Counter</label>'	
-					place_combo_str=place_combo_str +'<label  ><input type="checkbox" name="is_eyeLevel_actual" id="is_eyeLevel_actual" value=""/>Eye Level of Consumers</label>'	
-					place_combo_str=place_combo_str +'<label  ><input type="checkbox" name="is_clearlyVis_noObs_actual" id="is_clearlyVis_noObs_actual" value=""/> Clearly Visible or No obstacle in front of the shelf</label>'	
-													
-					localStorage.place_combo_str=place_combo_str;
-					$('#place_combo_show').empty();
-					$('#place_combo_show').append(localStorage.place_combo_str);
-		
-		
-					
+						
 					
 					var csmListTools=localStorage.p_toolsStr.split('fdfd');
 					var cmListStr = '<select id="cmToolsRecRecData" class="auto_break" name="cmToolsRecRecData" style="display:inline-block;"><option selected="selected" value="">Select Tool</option>'
@@ -980,10 +932,13 @@ function submitDataTargetCM(){
 
 
 
-function attandance(){	
+function attandance(){
+	
 	$(".successMsgATT").text("");
 	$(".errMsg").html("");
 	$("input:radio").removeAttr('checked');
+	
+	
 	
 	var d = new Date();
 	var days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
@@ -998,72 +953,75 @@ function attandance(){
 	$("#get_salfieButton").show();
 	$("#attandanceButton").show();
 	$.mobile.navigate("#salfiePage");
-}
+	}
 
 
 function salfie_next_page(){
-	$("#get_salfieButton").hide();
-	$("#attandanceButton").hide();
-	$(".errMsg").html("");
-	var salfie_image_name=$("#salfie_image_name_hidden").val();				
-	var attendance=$("#attendance").val();
-	
-	selfie_lat=$("#selfie_lat").val();
-	selfie_long=$("#selfie_long").val();
-	if(salfie_image_name==''){
-		$("#get_salfieButton").show();
-		$("#attandanceButton").show();
-		$(".errMsg").text("Required Salfie");	
-	}else{		
-		var salfie_image_name=$("#salfie_image_name_hidden").val();
-		var salfie_image_path=$("#salfie_image_div_hidden").val();					
-		//alert(salfie_image_path.length);
-		if (salfie_image_path.length < 10){							
-			var url = "#salfiePage";
-			$.mobile.navigate(url);
-		}else{															
-			$("#bufferImageAtendanceLocation").show();
-			//alert(apipath+'syncAttendanceData?select_town='+localStorage.p_town+"&repID="+localStorage.p_repID+'&salfie_data='+salfie_image_name+'&selfie_lat='+selfie_lat+'&selfie_long='+selfie_long+'&attendance='+attendance);
+		
+		$("#get_salfieButton").hide();
+		$("#attandanceButton").hide();
+		$(".errMsg").html("");
+		var salfie_image_name=$("#salfie_image_name_hidden").val();				
+		var attendance=$("#attendance").val();
+		
+		selfie_lat=$("#selfie_lat").val();
+		selfie_long=$("#selfie_long").val();
+		if(salfie_image_name==''){
+			$("#get_salfieButton").show();
+			$("#attandanceButton").show();
+			$(".errMsg").text("Required Salfie");
+		
+		}else{		
+			var salfie_image_name=$("#salfie_image_name_hidden").val();
+			var salfie_image_path=$("#salfie_image_div_hidden").val();					
 			
-			$.ajax({
-			//type: 'POST',
-			url: apipath+'syncAttendanceData?select_town='+localStorage.p_town+"&repID="+localStorage.p_repID+'&salfie_data='+salfie_image_name+'&selfie_lat='+selfie_lat+'&selfie_long='+selfie_long+'&attendance='+attendance,
-			 success: function(result) {	
-					
-					if (result==''){
-						alert ('Sorry Network not available');
-					}else if(result=='Success'){
+			if (salfie_image_path.length < 10){
+								
+					var url = "#salfiePage";
+					$.mobile.navigate(url);
+			}else{															
+				$("#bufferImageAtendanceLocation").show();
+				//alert(apipath+'syncAttendanceData?select_town='+localStorage.p_town+"&repID="+localStorage.p_repID+'&salfie_data='+salfie_image_name+'&selfie_lat='+selfie_lat+'&selfie_long='+selfie_long+'&attendance='+attendance,);
+				
+				$.ajax({
+				//type: 'POST',
+				url: apipath+'syncAttendanceData?select_town='+localStorage.p_town+"&repID="+localStorage.p_repID+'&salfie_data='+salfie_image_name+'&selfie_lat='+selfie_lat+'&selfie_long='+selfie_long+'&attendance='+attendance,
+				 success: function(result) {	
 						
-						localStorage.p_attendanceCheck="Day Start"
-						$("#get_salfieButton").hide();
-						$("#attandanceButton").hide();
-						$("#bufferImageAtendanceLocation").hide();
-						$("#salfie_image_name_hidden").val("");
-						$("#salfie_image_div_hidden").val("");
-						$("#attendance").val("");
-						$(".successMsgATT").text("Submitted Successfully");
-						goHomePage()
-						document.getElementById('salfie_image_div').src = '';
-						
-						/*var url = "#homePage";
-						$.mobile.navigate(url);*/
-						uploadPhotoRecSelfie(salfie_image_path, salfie_image_name);
-											
-						
-					}else if(result=='Already Exists'){
-						
-						$("#bufferImageAtendanceLocation").hide();
-						$(".errMsg").html('Already Exists'); // Faisal
-						
-															
-					}else{
-						$(".errMsg").html(result);
-											
-					}
-				}
-			 })				
+						if (result==''){
+							alert ('Sorry Network not available');
+						}else if(result=='Success'){
+							
+							localStorage.p_attendanceCheck="Day Start"
+							$("#get_salfieButton").hide();
+							$("#attandanceButton").hide();
+							$("#bufferImageAtendanceLocation").hide();
+							$("#salfie_image_name_hidden").val("");
+							$("#salfie_image_div_hidden").val("");
+							$("#attendance").val("");
+							$(".successMsgATT").text("Submitted Successfully");
+							goHomePage()
+							document.getElementById('salfie_image_div').src = '';
+							
+							/*var url = "#homePage";
+							$.mobile.navigate(url);*/
+							uploadPhotoRecSelfie(salfie_image_path, salfie_image_name);
+												
+							
+						}else if(result=='Already Exists'){
+							
+							$("#bufferImageAtendanceLocation").hide();
+							$(".errMsg").html('Already Exists'); // Faisal
+							
+																
+						}else{
+							$(".errMsg").html(result);
+												
+						}
+				 	}
+				 })				
+			}
 		}
-	}
 }
 
 function getLocationInfoSelfe(){
@@ -2036,13 +1994,13 @@ function usages(outletSep){
 										var routeName=routeS[0]	
 										routeDate=routeS[1]
 										
-										//alert(routeDate+'=='+current_date+'=='+bak_date1+'=='+bak_date2+'=='+bak_date3);
+										//alert(routeDate+'=='+current_date);
 										if (routeDate==current_date){
-											routeStr +='<label style="background:#81C0C0"><input type="radio" name="RadioRoute" value="'+routeName+'|'+routeDate+'" id="RadioGroup1_0"> '+routeName+'</label>'
+											routeStr +='<label style="background:#81C0C0"><input type="radio" name="RadioRoute" value="'+routeName+'" id="RadioGroup1_0"> '+routeName+'</label>'
 										}else if((routeDate==bak_date1)||(routeDate==bak_date2)||(routeDate==bak_date3)){
-											routeStr +='<label><input type="radio" name="RadioRoute" value="'+routeName+'|'+routeDate+'" id="RadioGroup1_0"> '+routeName+'</label>'
+											routeStr +='<label><input type="radio" name="RadioRoute" value="'+routeName+'" id="RadioGroup1_0"> '+routeName+'</label>'
 										}else{
-											routeStr +='<label style="background:#ddeeee"><input type="radio" name="RadioRoute" value="'+routeName+'|'+routeDate+'" id="RadioGroup1_0"> '+routeName+'</label>'
+											routeStr +='<label style="background:#ddeeee"><input type="radio" name="RadioRoute" value="'+routeName+'" id="RadioGroup1_0"> '+routeName+'</label>'
 										}						
 									}
 									//routeStr +=routeStr;
@@ -2103,32 +2061,11 @@ function usages(outletSep){
 
 function selectRouteException() { 
 	var selected_route_exception=($("input:radio[name='RadioRouteEx']:checked").val())
-    //alert(selected_route_exception);
+   
 	if(selected_route_exception!=undefined){
 		localStorage.routeException=selected_route_exception;
-		var url = "#outletPage";
+		var url = "#menuPage";
 		$.mobile.navigate(url);	
-	}
-}
-
-function selectOutletException() { 
-	var selected_outlet_exception=($("input:radio[name='RadioOutletEx']:checked").val())
-	//alert(selected_outlet_exception);
-	if(selected_outlet_exception!=undefined){
-		localStorage.outletException=selected_outlet_exception;
-		
-		if (localStorage.fdSkip==0){
-			var url = "#fixedDisplay";
-			$.mobile.navigate(url);		
-		}else if (localStorage.qpdsSkip==0){
-			var url = "#qpdsPage";
-			$.mobile.navigate(url);
-		}else{
-			var url = "#npdPage";
-			$.mobile.navigate(url);
-		}
-		$.mobile.navigate(url);
-	//	$(url).trigger('create');
 	}
 }
 
@@ -2160,180 +2097,218 @@ function syncRoute() {
 	if (sync_d.length==1){sync_d='0'+sync_d}
 	var sync_date=sync_y +'-'+ sync_m +'-'+sync_d;
 	//sync_date.substring(1,10)
-	
-	var current_date=get_date();
-	var bak_date1=get_bak_date_one();
-	var bak_date2=get_bak_date_two();
-	var bak_date3=get_bak_date_three();
 
 	localStorage.sync_date=sync_date;
 	
 	//alert(localStorage.sync_date);
-	var selected_routeArray = selected_route.split('|');	
+	/*var selected_routeArray = selected_route.split('|');	
 	var selected_routeID=selected_routeArray[0];
-	var selected_date=selected_routeArray[1];
-	//var selected_routeDay=selected_routeArray[2];
+	var selected_routeName=selected_routeArray[1];
+	var selected_routeDay=selected_routeArray[2];*/
 	
 	//localStorage.routeIDName=selected_routeName+" | "+selected_routeID
-	//alert(selected_date);
-	localStorage.routeIDName=selected_routeID;
-	localStorage.p_routeIDName=selected_routeID;
-	//alert(selected_date+'=='+sync_date_get);
-	if (selected_date==sync_date_get){
-		localStorage.selectedRoute=selected_routeID;
-		localStorage.routeException_found='0';		
-	}else if(selected_date==bak_date1 || selected_date==bak_date2 || selected_date==bak_date3){
-		localStorage.selectedRoute=selected_routeID;
-		localStorage.routeException_found='1';
-	}else{
-		localStorage.routeException_found='2';			
+	
+	localStorage.routeIDName=selected_route;
+	if (routeDate==today_get){
+		localStorage.selectedRoute=selected_route;
+		localStorage.routeException_found='0';			
 	}
+	else {
+		localStorage.selectedRoute=selected_route;
+		localStorage.routeException_found='1';			
+	}
+
 	if(localStorage.selectedRoute!=undefined){
+		//$("#errorChk").html(apipath+'sync_route?mobileNo='+localStorage.p_mobileNo+'&cm_pass='+localStorage.p_SyncPass+'&synccode='+localStorage.p_sync_code+'&route='+localStorage.selectedRoute);
+	//======================================	
 		//alert(apipath+'sync_route?cm_id='+localStorage.p_repID+'&mobileNo='+localStorage.p_mobileNo+'&cm_pass='+localStorage.p_SyncPass+'&synccode='+localStorage.p_sync_code+'&route='+localStorage.selectedRoute+'&townCodeName='+localStorage.p_select_town);
 		localStorage.routeException='';
 		$.ajax({
-			type: 'POST',
-			url: apipath+'sync_route?cm_id='+localStorage.p_repID+'&mobileNo='+localStorage.p_mobileNo+'&cm_pass='+localStorage.p_SyncPass+'&synccode='+localStorage.p_sync_code+'&route='+localStorage.selectedRoute+'&townCodeName='+localStorage.p_select_town,
-			success: function(result) {
-				if (result==''){
-					alert ('Sorry Network not available');
-				}else{
-					var resultArray = result.split('<SYNCDATA>');			
-					if (resultArray[0]=='FAILED'){
-						$("#errorChk").html('Unauthorized User');
-					}
-					if (resultArray[0]=='SUCCESS'){
-						result_string=resultArray[1];
-						//alert(result_string);
-						if (result_string=='N'){
-							outletStringShow_n='<label style="color:#800000; font-size:18px" ><table width="100%" border="0"> <tr> <td >Schedule Not Available </td>	</tr></table></label>'
-							$("#errorChk").html(outletStringShow_n);
-							$("#bufferImageRoute").hide();
-							$("#RSButton").show();
-						}else{
-							var outletArray = result_string.split('</outletList>');	
-							var outletSArray = result_string.split('<outletexList>');	
-							
-							outletList = outletSArray[0].replace("<outletList>","");									
-							var outletAllArray = outletSArray[1].split('</outletexList>');	
-															
-							outletExList = outletAllArray[0];
-							allOutletString = outletAllArray[1];
-							
-							localStorage.allOutletString=allOutletString;
-							//alert(localStorage.allOutletString);
-							
-							//	============Create exception list============	
-							var outletExStringShow=''
-							var outletExSingleArray = outletExList.split('rdrd');	
-							var outletExSingleTtotal = outletExSingleArray.length;
-							var outletExStringShow=''
-							for (var oe=0; oe < outletExSingleTtotal-1; oe++){
-								outletExArray = outletExSingleArray[oe].split('fdfd');
-								outletExID=outletExArray[0];
-								outletExName=outletExArray[1];
-								outletExStringShow=outletExStringShow+'<label><input type="radio" name="RadioOutletEx"    value="'+outletExName+'" > '+outletExName+'</label>'
-							}
-							localStorage.outletExStringShow=outletExStringShow;
-							//alert(localStorage.outletExStringShow);
-							$("#outletExString").html(localStorage.outletExStringShow);
-							
-							//==========Create outlet list
-							var outletSingleArray = outletList.split('rdrd');
-							var outletSingleTtotal = outletSingleArray.length;
-							var outletStringShow=''
-							//alert(outletSingleArray);
-							outletStringShow=outletStringShow+'<table width="100%" border="0" cellpadding="0" cellspacing="0"><tr style="color:#006A6A; font-size:18px;"><td>'+localStorage.routeIDName+'</td></tr></table>'
-							
-							for (var o=0; o < outletSingleTtotal-1; o++){
-								outletArray = outletSingleArray[o].split('fdfd');
-								outletID=outletArray[0];
-								outletName=outletArray[1];
-								//total_visit=outletArray[2];
-								//total_visit_done=outletArray[3];
-								//outlet_c=outletArray[4];
-								//depot_id=outletArray[5];
-								//schedule_date=outletArray[6];
-								channel=outletArray[2];
-								schedule_date=outletArray[3];
-								//alert(outletID);
-								
-								/*outletColor="";
-								if (outlet_c=='g'){
-									outletColor='<img style="height:20px; width:20px" src="green.png">';
-								}
-								if (outlet_c=='b'){
-									outletColor='<img style="height:20px; width:20px" src="orange.png">';
-								}
-								if (outlet_c=='r'){
-									outletColor='<img style="height:20px; width:20px" src="red.png">';
-								}*/
-								
-								outletStringShow=outletStringShow+'<label ><table width="100%" border="0"> <tr> <td width="5%">'+
-												'<input type="radio" name="RadioOutlet" value="'+outletID+'rdrd'+selected_date+'"></td><td width="60%">'+outletName +' | '+ outletID +' | '+  selected_date +' | '+channel +'</td> </tr></table></label>'
-							/*<td width="15%">'+ total_visit+'/'+total_visit_done+' </td>	<td>'+outletColor+'</td>*/
-								
-							}
-								
-								
-							// If schedule not available
-							if (outletSingleArray.length==1){
-								outletStringShow=outletStringShow+'<label style="color:#800000; font-size:18px" ><table width="100%" border="0"> <tr> <td >Schedule Not Available </td>	</tr></table></label>'
-							}
-							outletStringShow=outletStringShow+'<br/><br/> <a id="selectOButton" data-role="button" onClick="select_outlet();" >Next</a>'
-							
-							//outletStringShow=outletStringShow+'<div id="outletWait" style="display:none"><img height="40px" width="40px" src="loading.gif"></div>'
-							
-							localStorage.outletString=outletStringShow
-							$("#outletString").empty();
-							$("#outletString").append(localStorage.outletString).trigger('create');
-							
-							$("#bufferImageRoute").hide();
-							$("#RSButton").show();
-							//alert(selected_date+'=='+sync_date_get);
-							if (selected_date==sync_date_get){
-								//localStorage.selectedRoute=selected_routeID;
-								localStorage.selectedRoute=selected_routeID;
-								localStorage.routeException_found='0';
-								
-								var url = "#outletPage";
-							   $.mobile.navigate(url);	
-							}else if(selected_date==bak_date1 || selected_date==bak_date2 || selected_date==bak_date3){
-								//localStorage.selectedRoute=selected_routeID;
-								localStorage.selectedRoute=selected_routeID;
-								localStorage.routeException_found='1';								
-								
-								var url = "#routeexceptionPage";
-								$.mobile.navigate(url);	
-								$('#routeexceptionPage').trigger('create');
-							}else {
-								//localStorage.selectedRoute=selected_routeID;
-								//localStorage.selectedRoute=selected_routeID;
-								localStorage.routeException_found='2';								
-								
-								var url = "#outletPage";
-								$.mobile.navigate(url);	
-								$('#routeexceptionPage').trigger('create');
-							}
-							
-							
-							
-							//=======end outlet list====================								
+				 type: 'POST',
+				 url: apipath+'sync_route?cm_id='+localStorage.p_repID+'&mobileNo='+localStorage.p_mobileNo+'&cm_pass='+localStorage.p_SyncPass+'&synccode='+localStorage.p_sync_code+'&route='+localStorage.selectedRoute+'&townCodeName='+localStorage.p_select_town,
+				 success: function(result) {	
+				
+						if (result==''){
+							alert ('Sorry Network not available');
 						}
-					}
-				}//end else
-			},
-			error: function(result) {					  
-				$("#errorChk").html('Network timeout. Please ensure you have good network signal and working Internet.');
+						else{
+							var resultArray = result.split('<SYNCDATA>');			
+							if (resultArray[0]=='FAILED'){
+								$("#errorChk").html('Unauthorized User');
+								
+							}
+							if (resultArray[0]=='SUCCESS'){
+								result_string=resultArray[1];
+								//alert(result_string);
+								if (result_string=='N'){
+									outletStringShow_n='<label style="color:#800000; font-size:18px" ><table width="100%" border="0"> <tr> <td >Schedule Not Available </td>	</tr></table></label>'
+									$("#errorChk").html(outletStringShow_n);
+									$("#bufferImageRoute").hide();
+									$("#RSButton").show();
+								}
+								else{
+										//merchandising distribution by billal
+										/*var merchandisingDistribStr=resultArray[2];
+										localStorage.merchandisingDistribStr=merchandisingDistribStr
+										
+										var mar_distrib_stock=""
+										if(merchandisingDistribStr!=""){
+											var merchanDistribList=merchandisingDistribStr.split('rdrd')
+											var merchanDistribListLength=merchanDistribList.length;	
+											for (var i=0; i < merchanDistribListLength; i++){
+												merDistrbItemArray = merchanDistribList[i].split('fdfd');		
+												camp_sl=merDistrbItemArray[0];
+												allocate_qty=merDistrbItemArray[5];
+												given_qty=merDistrbItemArray[6];
+												channel=merDistrbItemArray[7];
+												
+												try{
+													var availableQty=eval(allocate_qty)-eval(given_qty);
+												}catch(e){			
+													var availableQty=0;
+												}
+												
+												campSlChannel=camp_sl.toString()+'_'+channel.toString()
+												
+												if(mar_distrib_stock==""){
+													mar_distrib_stock=campSlChannel+','+availableQty;
+												}else{
+													mar_distrib_stock+='rd'+campSlChannel+','+availableQty;
+												}
+											}
+										}
+										localStorage.mar_distrib_stock=mar_distrib_stock;*/
+										
+										
+										//-----------
 				
-				$("#outletCancel").hide();
-				$("#bufferImageRoute").hide();
-				$("#RSButton").show();
-				
-				var url = "#page3";
-				$.mobile.navigate(url);
-			}
-		});//end ajax*/
+										
+										var outletArray = result_string.split('</outletList>');									
+										//alert(outletArray);
+										var outletSArray = result_string.split('<outletexList>');	
+										
+										outletList = outletSArray[0].replace("<outletList>","");
+										
+										var outletAllArray = outletSArray[1].split('</outletexList>');	
+																		
+										outletExList = outletAllArray[0];
+										allOutletString = outletAllArray[1];
+										
+										localStorage.allOutletString=allOutletString;
+										//alert(localStorage.allOutletString);
+										
+										//	============Create exception list============	
+																
+										var outletExStringShow=''
+										var outletExSingleArray = outletExList.split('rdrd');	
+										var outletExSingleTtotal = outletExSingleArray.length;
+										var outletExStringShow=''
+										for (var oe=0; oe < outletExSingleTtotal-1; oe++){
+											outletExArray = outletExSingleArray[oe].split('fdfd');
+											outletExID=outletExArray[0];
+											outletExName=outletExArray[1];
+											outletExStringShow=outletExStringShow+'<label><input type="radio" name="RadioOutletEx"    value="'+outletExName+'" > '+outletExName+'</label>'
+										}
+										localStorage.outletExStringShow=outletExStringShow;
+										//alert(localStorage.outletExStringShow);
+										$("#outletExString").html(localStorage.outletExStringShow);
+										
+										
+										
+										//==========Create outlet list
+										var outletSingleArray = outletList.split('rdrd');
+											
+										var outletSingleTtotal = outletSingleArray.length;
+										var outletStringShow=''
+										//alert(outletSingleArray);
+										outletStringShow=outletStringShow+'<table width="100%" border="0" cellpadding="0" cellspacing="0"><tr style="color:#006A6A; font-size:18px;"><td>'+localStorage.routeIDName+'</td></tr></table>'
+										
+										for (var o=0; o < outletSingleTtotal-1; o++){
+											outletArray = outletSingleArray[o].split('fdfd');
+											outletID=outletArray[0];
+											outletName=outletArray[1];
+											//total_visit=outletArray[2];
+											//total_visit_done=outletArray[3];
+											//outlet_c=outletArray[4];
+											//depot_id=outletArray[5];
+											//schedule_date=outletArray[6];
+											channel=outletArray[2];
+											schedule_date=outletArray[3];
+											//alert(outletID);
+											
+											/*outletColor="";
+											if (outlet_c=='g'){
+												outletColor='<img style="height:20px; width:20px" src="green.png">';
+											}
+											if (outlet_c=='b'){
+												outletColor='<img style="height:20px; width:20px" src="orange.png">';
+											}
+											if (outlet_c=='r'){
+												outletColor='<img style="height:20px; width:20px" src="red.png">';
+											}*/
+											
+											outletStringShow=outletStringShow+'<label ><table width="100%" border="0"> <tr> <td width="5%">'+
+															'<input type="radio" name="RadioOutlet" value="'+outletID+'rdrd'+schedule_date+'"></td><td width="60%">'+outletName +' | '+ outletID +' | '+  schedule_date +' | '+channel +'</td> </tr></table></label>'
+										/*<td width="15%">'+ total_visit+'/'+total_visit_done+' </td>	<td>'+outletColor+'</td>*/
+											
+										}
+										
+										
+										// If schedule not available
+									
+										if (outletSingleArray.length==1){
+											outletStringShow=outletStringShow+'<label style="color:#800000; font-size:18px" ><table width="100%" border="0"> <tr> <td >Schedule Not Available </td>	</tr></table></label>'
+											
+										}
+										outletStringShow=outletStringShow+'<br/><br/> <a id="selectOButton" data-role="button" onClick="select_outlet();" >Next</a>'
+										
+										//outletStringShow=outletStringShow+'<div id="outletWait" style="display:none"><img height="40px" width="40px" src="loading.gif"></div>'
+										
+										localStorage.outletString=outletStringShow
+										//alert(localStorage.outletString);
+										$("#outletString").html(localStorage.outletString);
+										
+										$("#bufferImageRoute").hide();
+										$("#RSButton").show();
+										//alert(schedule_date+'=='+sync_date_get);
+										if (schedule_date==sync_date_get){
+											//localStorage.selectedRoute=selected_routeID;
+											localStorage.selectedRoute=selected_route;
+											localStorage.routeException_found='0';
+											
+											var url = "#outletPage";
+										   $.mobile.navigate(url);	
+										}else {
+											//localStorage.selectedRoute=selected_routeID;
+											localStorage.selectedRoute=selected_route;
+											localStorage.routeException_found='1';
+											
+											
+											var url = "#routeexceptionPage";
+											$.mobile.navigate(url);	
+											$('#routeexceptionPage').trigger('create');
+										}
+									
+									//=======end outlet list====================								
+									}
+		
+								}
+								
+						   }//end else
+				      },
+				  error: function(result) {
+					  
+					  $("#errorChk").html('Network timeout. Please ensure you have good network signal and working Internet.');
+					  
+					  $("#outletCancel").hide();
+					  $("#bufferImageRoute").hide();
+					  $("#RSButton").show();
+					 
+					 //$("#dataerrorRoute").html('Network timeout. Please ensure you have good network signal and working Internet.');
+					  var url = "#page3";
+					  $.mobile.navigate(url);
+				  }
+			  });//end ajax*/
 		
 	}
 }
@@ -2383,7 +2358,6 @@ function select_outlet() {
 				$("#outletExString").html(localStorage.outletExStringShow);
 	
 				localStorage.selectedOutlet=selected_outletID;
-				localStorage.p_selectedOutlet=selected_outletID;
 				
 				localStorage.selected_date_get=selected_date_get;
 				
@@ -2462,11 +2436,12 @@ function select_outlet() {
 				  location.reload();
 				  
 			  }
-		}else{
+		}
+		else{
 			$("#dataerrorOutlet").html('Please submit from saved data');
 			 var check_outlet= localStorage.outletString;
 						
-			//localStorage.outletString=check_outlet.replace('<input type="radio" name="RadioOutlet" value="'+selected_outletID+'rdrd'+selected_date_get+'">','<input type="radio" name="RadioOutlet" value="'+selected_outletID+'rdrd'+selected_date_get+'" disabled="True">')
+			localStorage.outletString=check_outlet.replace('<input type="radio" name="RadioOutlet" value="'+selected_outletID+'rdrd'+selected_date_get+'">','<input type="radio" name="RadioOutlet" value="'+selected_outletID+'rdrd'+selected_date_get+'" disabled="True">')
 			
 			$("#outletString").empty();
 			$("#outletString").append(localStorage.outletString).trigger('create');
@@ -2481,7 +2456,7 @@ function div_change(){
 	$("#menujpj").hide();
 	
 	$("#backjpj").hide();
-	//$("#link_route").hide();
+	$("#link_route").hide();
 	//alert(localStorage.outletNameID);
 	$("#outletName_show").html(localStorage.outletNameID);
 }
@@ -2500,7 +2475,7 @@ function cancel_outlet_next(){
 	
 	var url = "#cancelPage";
 	$.mobile.navigate(url);
-	//location.reload();
+	location.reload();
 	
 }
 
@@ -2515,92 +2490,15 @@ function cancel_outlet_next_next(){
 	$("#cpageOutletNameID").empty();
 	$("#cpageOutletNameID").append(localStorage.outletIDnameShow).trigger('create');
 	
-	if(localStorage.routeException_found == '2'){
-		$(".errorChk").text("");				
-		$(".sucMsgU").hide();
-		$("#btn_submit_usages").hide();
-		$("#allHide").hide();
-		$("#bufferImageU").hide();
-		$("#usageSubmitbufferImage").hide();
-		$("#NOutlet_button").hide();
-		var url = "#page5";
-		$.mobile.navigate(url);
-		$(url).trigger('create');
-	}else{
-		var url = "#cancelPage";
-		$.mobile.navigate(url);
+	var url = "#cancelPage";
+	$.mobile.navigate(url);
 	//location.reload();
-	}
-}
-
-function cancel_outlet_Back(){
-	$("#cancelButton").hide();
-	$("#login_image_cancel").show();
-	var cancel_reason=$("#cancel_cause").val();
-	var imageName=$("#shop_image_name_hidden").val();
-	var imagePath=$("#shop_image_div_hidden").val();
-	var latitude=$("#lat").val();
-	var longitude=$("#long").val();
-	//alert(imageName+'====='+imagePath);
-	if (cancel_reason==""){
-		$("#c_reason").html('Please Select Reason');
-		$("#cancelButton").show();
-		$("#login_image_cancel").hide();
-	}else{
-		if (cancel_reason=="Will try later"){
-			cancel_outlet();
-			$("#cancelButton").show();
-			$("#login_image_cancel").hide();
-			var url = "#outletPage";
-			$.mobile.navigate(url);
-		}else{
-			if (imageName.length < 10){
-				$("#c_reason").html('Please Take Picture');
-				$("#cancelButton").show();
-				$("#login_image_cancel").hide();
-			}else{
-				var outletID= (localStorage.outletNameID).split('|')[1]	
-				//alert(apipath+'cancel_outlet?cm_id='+localStorage.p_repID+'&cm_pass='+localStorage.p_SyncPass+'&synccode='+localStorage.p_sync_code+'&selectedRoute='+localStorage.selectedRoute+'&routeEx='+localStorage.routeException+'&outlet='+outletID+'&outletEx='+localStorage.outletException+'&cancel_reason='+cancel_reason+'&imageName='+imageName+'&imagePath='+imagePath+'&latitude='+latitude+'&longitude='+longitude);
-				$.ajax({
-					 type: 'POST',
-					 url: apipath+'cancel_outlet?cm_id='+localStorage.p_repID+'&cm_pass='+localStorage.p_SyncPass+'&synccode='+localStorage.p_sync_code+'&selectedRoute='+localStorage.selectedRoute+'&routeEx='+localStorage.routeException+'&outlet='+outletID+'&outletEx='+localStorage.outletException+'&cancel_reason='+cancel_reason+'&imageName='+imageName+'&imagePath='+imagePath+'&latitude='+latitude+'&longitude='+longitude,
-					 success: function(result) {
-						$("#cancelButton").show();
-						$("#login_image_cancel").hide();
-						if (result==''){
-							alert ('Sorry Network not available');
-						}else{	
-							if (result=='FAILED'){									
-								$("#error_login").html('Please Try Again');
-							}
-							if (result=='SUCCESS') {
-								cancel_outlet();
-								var url = "#outletPage";
-								$.mobile.navigate(url);
-							}
-					    }
-					},
-					error: function(result) {
-					  $("#error_login").html('Network timeout. Please ensure you have good network signal and working Internet.');
-					  $("#cancelButton").show();
-					  $("#login_image_cancel").hide();
-					  var url = "#login";
-					  $.mobile.navigate(url);	
-					}
-				});//end ajax
-				upload_shop();
-				$("#shop_image_name_hidden").val("");
-				$("#shop_image_div_hidden").val("");
-				$("#cancelButton").show();
-				$("#login_image_cancel").hide();
-			} // End else
-		} //End else
-	} //end else	
 }
 
 function cancel_outlet(){
 	localStorage.show_cancel=0;
 	localStorage.outletNameID='';
+	
 	
 	localStorage.selectedOutlet="";
 	localStorage.selected_date="";
@@ -2716,7 +2614,6 @@ function syncOutlet() {
 					
 //=====================Create Fixed Display list
 			var fdisplaySlabArray = fdisplayList.split('</slab>');
-			//alert(fdisplaySlabArray);
 			var fdisplaySlabTotal = fdisplaySlabArray.length;
 			//alert(fdisplaySlabArray);
 			
@@ -2844,36 +2741,27 @@ function syncOutlet() {
 				minQty_qpds=qpdsArray[2];
 				qpds_image=qpdsArray[3];
 				qpdsSL=qpdsArray[4];
-				//alert(itemID+'=='+itemName+'=='+minQty_qpds+'=='+qpds_image+'=='+qpdsSL);
+				//alert(qpds_image);
 				var i_text=i.toString()
 				var ItemQtyQpds='ItemQtyQpds_'+i_text
 				var ItemNameQpds='ItemNameQpds_'+i_text
+				var ItemFaceupqpds='ItemFaceupqpds_'+i_text
 				var ItemVisibleqpds='ItemVisibleqpds_'+i_text
 				var minQtyQpds='minQtyQpds_'+i_text
 				
-				var qpdsSL_image_div='qpdsSL_image_div_'+i_text
-				var qpdsSL_image_div_hidden='qpdsSL_image_div_hidden_'+i_text
-				var qpdsSL_image_name_hidden='qpdsSL_image_name_hidden_'+i_text
+				var qpds_image_div='qpds_image_div_'+i_text
+				var qpds_image_div_hidden='qpds_image_div_hidden_'+i_text
+				var qpds_image_name_hidden='qpds_image_name_hidden_'+i_text
 				var qpdsSL_total_hidden='qpdsSL_total_hidden_'+i_text
 				
 				qpdsStringShow=qpdsStringShow+'<img height="100px" src="'+apipath_image+'static/uni_images/promo/'+qpds_image+'" alt="QPDS" />';
 				qpdsStringShow=qpdsStringShow+'<table width="100%" border="0" cellpadding="0" cellspacing="0">'
 				qpdsStringShow=qpdsStringShow+'<tr bgcolor="#9FCED7" ><td width="1%" >&nbsp;</td><td width="80%">Item</td> <td width="15%">QTY</td><td></td><td width="4%">Visible</td></tr>'
 				
-				/*qpdsStringShow=qpdsStringShow+
+				qpdsStringShow=qpdsStringShow+
 					'<tr ><td width="1%" >&nbsp;</td><td width="80%">'+itemName+'<input type="hidden" name="'+ ItemQtyQpds +'" id="'+ ItemQtyQpds +'" value="'+itemID+'" min="0">'+
 					'<input type="hidden" name="'+ itemName +'" id="'+ itemName +'" value="'+ItemQtyQpds+'" min="0"> </td>'+
 					'<td width="15%"><input onClick="checkQtyQpds('+i+')" onKeyUp="checkQtyQpds(/'+i_text+'/)"  type="number" name="'+ItemQtyQpds +'" id="'+ ItemQtyQpds +'" value="" min="0"></td>'+
-					
-					'<td width="4%"></td><td><label style="padding:8px 2px 8px 2px; height:10px;"><input type="checkbox" name="'+ ItemVisibleqpds +'" id="'+ ItemVisibleqpds +'" value=""/></label></td></tr>'
-				qpdsStringShow=qpdsStringShow+'<tr height="1px" bgcolor="#CCCCCC" ><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>'
-				*/
-				
-				qpdsStringShow=qpdsStringShow+
-					'<tr ><td width="1%" >&nbsp;</td><td width="80%">'+itemName+'<input type="hidden" name="'+ ItemNameQpds +'" id="'+ ItemNameQpds +'" value="'+itemID+'" min="0">'+
-					'<input type="hidden" name="'+ minQtyQpds +'" id="'+ minQtyQpds +'" value="'+minQty_qpds+'" min="0"> </td>'+
-										
-					'<td width="15%"><input type="number" name="'+ItemQtyQpds +'" id="'+ ItemQtyQpds +'" value="" min="0"></td>'+
 					
 					'<td width="4%"></td><td><label style="padding:8px 2px 8px 2px; height:10px;"><input type="checkbox" name="'+ ItemVisibleqpds +'" id="'+ ItemVisibleqpds +'" value=""/></label></td></tr>'
 				qpdsStringShow=qpdsStringShow+'<tr height="1px" bgcolor="#CCCCCC" ><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>'
@@ -2885,19 +2773,11 @@ function syncOutlet() {
 					'<a data-role="button" href="#" onClick="get_pic_qpds('+i_text+')" >Take Picture </a></td></tr></table>'
 				
 				qpdsStringShow=qpdsStringShow+
-					/*'<img id="'+qpds_image_div+'" height="100px" width="100px"  src="" alt="Promotion" />'+
+					'<img id="'+qpds_image_div+'" height="100px" width="100px"  src="" alt="Promotion" />'+
 					'<input type="hidden" name="'+ qpds_image_div_hidden +'" id="'+ qpds_image_div_hidden +'" value="" >'+
-					'<input type="hidden" name="'+ qpdsSL_image_name_hidden +'" id="'+ qpdsSL_image_name_hidden +'" value="" >'+
-					'<input type="hidden" name="'+ qpdsSL_total_hidden +'" id="'+ qpdsSL_total_hidden +'" value="'+qpdsSingleTotal+'" >'*/
-					
-					'<img id="'+qpdsSL_image_div+'" height="100px" width="100px"  src="" alt="Promotion" />'+
-					'<input type="hidden" name="'+ qpdsSL_image_div_hidden +'" id="'+ qpdsSL_image_div_hidden +'" value="" >'+
-					'<input type="hidden" name="'+ qpdsSL_image_name_hidden +'" id="'+ qpdsSL_image_name_hidden +'" value="" >'+
+					'<input type="hidden" name="'+ qpds_image_name_hidden +'" id="'+ qpds_image_name_hidden +'" value="" >'+
 					'<input type="hidden" name="'+ qpdsSL_total_hidden +'" id="'+ qpdsSL_total_hidden +'" value="'+qpdsSingleTotal+'" >'
-					
-					
 				qpdsStringShow=qpdsStringShow+'<br/>'
-				
 					
 			}
 			qpdsStringShow=qpdsStringShow+'</table>'
@@ -2905,8 +2785,7 @@ function syncOutlet() {
 			localStorage.qpdsStringShow=qpdsStringShow
 			//alert(localStorage.qpdsStringShow);
 			$("#qpds").html(localStorage.qpdsStringShow);	
-			
-				
+								
 
 //==========Create NPD list
 			var npdSingleArray = npdList.split('rdrd');	
@@ -3062,7 +2941,6 @@ function outlet_next_page(){
 			$.mobile.navigate(url);
 			$(url).trigger('create');
 		}else{
-			//alert(localStorage.fdSkip+'===='+localStorage.qpdsSkip);
 			if (localStorage.fdSkip==0){
 				var url = "#fixedDisplay";
 				$.mobile.navigate(url);
@@ -3220,16 +3098,16 @@ function fdisplay_ready_data() {
 		
 		var fdTotal=$("#fdSL_total_hidden_"+i.toString()).val();
 		
-		//var fdSLfdisplay_image_path=$("#fdSL_image_div_hidden_"+i.toString()).val(); 
+		var fdSLfdisplay_image_path=$("#fdSL_image_div_hidden_"+i.toString()).val(); 
 		var fdSLfdisplay_image_name=$("#fdSL_image_name_hidden_"+i.toString()).val(); 
-		//alert(fdSLfdisplay_image_name);
+		//alert(fdSLfdisplay_image_path+'=='+fdSLfdisplay_image_name);
 		//if (fdSLfdisplay_image_path.length<10){
 			//image_flag=1
 		//}
-		//var fdSLfdisplay_image_path_before=$("#fdSL_image_div_hidden_"+i.toString()+"_before").val(); 
-		//var fdSLfdisplay_image_name_before=$("#fdSL_image_name_hidden_"+i.toString()+"_before").val();
+		var fdSLfdisplay_image_path_before=$("#fdSL_image_div_hidden_"+i.toString()+"_before").val(); 
+		var fdSLfdisplay_image_name_before=$("#fdSL_image_name_hidden_"+i.toString()+"_before").val();
 		//alert(fdSLfdisplay_image_path_before+'=='+fdSLfdisplay_image_name_before);
-		//var fdSLfdisplay=$("#fdSLfdisplay_"+i.toString()).val(); 
+		var fdSLfdisplay=$("#fdSLfdisplay_"+i.toString()).val(); 
 		//alert(fdSLfdisplay);
 		for (var d=0; d < fdTotal-1; d++){
 			var ItemQtyfdisplay=$("#ItemQtyfdisplay_"+i.toString()+"_"+d.toString()).val();
@@ -3250,15 +3128,14 @@ function fdisplay_ready_data() {
 				error_qty_flag=1;
 			}
 			
-			fdisplay_data_detail=fdisplay_data_detail+Itemfdisplay+'fdfd'+ItemQtyfdisplay+'fdfd'+ItemFaceupfdisplay+'fdfd'+ItemVisiblefdisplay+'fdfd'+slabfdisplay+'fdfd'+'rdrd'
+			fdisplay_data_detail=fdisplay_data_detail+Itemfdisplay+'fdfd'+ItemQtyfdisplay+'fdfd'+ItemFaceupfdisplay+'fdfd'+ItemVisiblefdisplay+'fdfd'+slabfdisplay+'fdfd'+fdSLfdisplay+'fdfd'+'rdrd'
 			
 		}
 		//alert(fdisplay_data_detail);
 		fdisplay_data_detail=fdisplay_data_detail+'detaildetail'
-		//alert(fdisplay_data_detail);
-		/*fdisplay_data_head=fdisplay_data_head+slabfdisplay+'fdfd'+fdSLfdisplay+'fdfd'+fdSLfdisplay_image_name+'fdfd'+fdSLfdisplay_image_path+'fdfd'+fdSLfdisplay_image_name_before+'fdfd'+fdSLfdisplay_image_path_before+'rdrd'*/
-		fdisplay_data_head=fdisplay_data_head+slabfdisplay+'fdfd'+fdSLfdisplay_image_name+'rdrd'
-		//alert(fdisplay_data_head+'===='+'Head');
+		
+		fdisplay_data_head=fdisplay_data_head+slabfdisplay+'fdfd'+fdSLfdisplay+'fdfd'+fdSLfdisplay_image_name+'fdfd'+fdSLfdisplay_image_path+'fdfd'+fdSLfdisplay_image_name_before+'fdfd'+fdSLfdisplay_image_path_before+'rdrd'
+		//alert(fdisplay_data_head);
 	}
 	fdisplay_data='headstart'+fdisplay_data_head+'headend'+fdisplay_data_detail
 	localStorage.fdisplay_data_ready=fdisplay_data;
@@ -3289,42 +3166,38 @@ function fdisplay_ready_data() {
 
 function fdisplay_page_set() { 
 	if (localStorage.fdisplay_data_ready.length > 10){
-		//alert(localStorage.fdisplay_data_ready);
 		var fdisplay_array =  localStorage.fdisplay_data_ready.split('headend');
 		var fdisplay_head=fdisplay_array[0].replace("headstart","");
-		
 		var fdisplay_detail=fdisplay_array[1];
-		//alert(fdisplay_detail);
+		
 		var fdisplay_head_array =  fdisplay_head.split('rdrd');
-		//alert(fdisplay_head_array);
 		for (var i=0; i < localStorage.fdisplaySlabTotal-1; i++){
 			var head_s_array=fdisplay_head_array[i].split('fdfd');
-			var slabfdisplay =head_s_array[0];
-			//var fdisplayTotal=head_s_array[1];
-			var fdisplayImg=head_s_array[1];
-			//var fdisplayImg_path=head_s_array[3];
 			
-			//var fdisplayImg_before=head_s_array[4];
-			//var fdisplayImg_path_before=head_s_array[5].replace("rdrd","");
-			//alert(slabfdisplay+'=='+fdisplayImg);
-			//$("#fdSL_image_div_hidden_"+i.toString()).val(fdisplayImg_path);
+			var slabfdisplay =head_s_array[0];
+			var fdisplayTotal=head_s_array[1];
+			var fdisplayImg=head_s_array[2];
+			var fdisplayImg_path=head_s_array[3];
+			var fdisplayImg_before=head_s_array[4];
+			var fdisplayImg_path_before=head_s_array[5].replace("rdrd","");
+			//alert(slabfdisplay+'=='+fdisplayTotal+'=='+fdisplayImg+'=='+fdisplayImg_path+'=='+fdisplayImg_before+'=='+fdisplayImg_path_before);
+			$("#fdSL_image_div_hidden_"+i.toString()).val(fdisplayImg_path);
 			$("#fdSL_image_name_hidden_"+i.toString()).val(fdisplayImg);
 			
 			//$("#fdSL_image_div_hidden_"+i.toString()+"_before").val(fdisplayImg_path_before); 
 			//$("#fdSL_image_name_hidden_"+i.toString()+"_before").val(fdisplayImg_before);
 				
 			var image = document.getElementById('fdSL_image_div_'+i.toString());
-			image.src = fdisplayImg;
+			image.src = fdisplayImg_path;
 			
 			//var image_before = document.getElementById('fdSL_image_div_'+i.toString()+"_before");
 			//image_before.src = fdisplayImg_path_before;
-			//alert(fdisplay_detail);	
+					
 			var fdisplay_detail_array =  fdisplay_detail.split('detaildetail');
-			//alert(fdisplay_detail_array);
+			
 			var fdisplay_detail_n=fdisplay_detail_array[i]
 			//alert(fdisplay_detail_n);
 			var fdisplay_detail_s_array_1 =  fdisplay_detail_n.split('rdrd');
-			//alert(fdisplay_detail_s_array_1);
 			var fdTotal_detail=fdisplay_detail_s_array_1.length
 			
 			for (var d=0; d < fdTotal_detail-1; d++){
@@ -3361,11 +3234,11 @@ function qpds_ready_data() {
 	var qpds_data_head="";
 	var qpds_image_flag=0;	
 	var error_qty_flag_qpds=0;
-	/*for (var i=0; i < localStorage.qpdsSlabTotal-1; i++){
-		//var qpdsSL_image_path=$("#qpdsSL_image_div_hidden_"+i.toString()).val(); 
-		
-		//var qpdsSL_image_path_before=$("#qpdsSL_image_div_hidden_"+i.toString()+"_before").val(); 
-		//var qpdsSL_image_name_before=$("#qpdsSL_image_name_hidden_"+i.toString()+"_before").val(); 
+	for (var i=0; i < localStorage.qpdsSlabTotal-1; i++){
+		var qpdsSL_image_path=$("#qpdsSL_image_div_hidden_"+i.toString()).val(); 
+		var qpdsSL_image_name=$("#qpdsSL_image_name_hidden_"+i.toString()).val(); 
+		var qpdsSL_image_path_before=$("#qpdsSL_image_div_hidden_"+i.toString()+"_before").val(); 
+		var qpdsSL_image_name_before=$("#qpdsSL_image_name_hidden_"+i.toString()+"_before").val(); 
 		
 		var qpdsSL=$("#qpdsSL_"+i.toString()).val();
 		var qpdsTotal='qpdsTotal'+i.toString()
@@ -3373,43 +3246,37 @@ function qpds_ready_data() {
 		
 		if (qpdsSL_image_path.length<10){
 			qpds_image_flag=1
-		}*/
+		}
 		
-		for (var i=0; i < localStorage.qpdsTotal-1; i++){
-			var ItemQtyqpds= $("#ItemQtyQpds_"+i.toString()).val();  
-			var Itemqpds= $("#ItemNameQpds_"+i.toString()).val();  
+		for (var d=0; d < qpdsTotal_1-1; d++){
+			var ItemQtyqpds= $("#ItemQtyqpds_"+i.toString()+"_"+d.toString()).val();  
+			var Itemqpds= $("#Itemqpds_"+i.toString()+"_"+d.toString()).val();  
+			var ItemFaceupqpds=$("#ItemFaceupqpds_"+i.toString()+"_"+d.toString()).val();   
+			var schemeqpds=$("#schemeqpds_"+i.toString()+"_"+d.toString()).val(); 
 			
-			//var ItemFaceupqpds=$("#ItemFaceupqpds_"+i.toString()+"_"+d.toString()).val();   
-			//var schemeqpds=$("#schemeqpds_"+i.toString()+"_"+d.toString()).val(); 
-			var qpdsSL_image_name=$("#qpdsSL_image_name_hidden_"+i.toString()).val(); 
-			//alert(ItemQtyqpds+'==='+Itemqpds+'==='+qpdsSL_image_name);
-			var ItemVisibleqpds_f="#ItemVisibleqpds_"+i.toString();
+			var ItemVisibleqpds_f="#ItemVisibleqpds_"+i.toString()+"_"+d.toString();
      		var ItemVisibleqpds_g= ($(ItemVisibleqpds_f).is(':checked') ? 1 : 0);
-						
+			
 			if (ItemVisibleqpds_g==0){
 				ItemVisibleqpds='NO'
 			}
 			if (ItemVisibleqpds_g==1){
 				ItemVisibleqpds='YES'
-			}			
+			}
+			
 			if  ((ItemQtyqpds.length < 1) || (ItemVisibleqpds=='NO')){
-				error_qty_flag_qpds=1;
+					error_qty_flag_qpds=1;
 			}
 			
-			if (qpdsSL_image_name.length<10){
-				qpds_image_flag=1
-			}
-			
-			qpds_data=qpds_data+Itemqpds+'fdfd'+ItemQtyqpds+'fdfd'+ItemVisibleqpds+'fdfd'+qpdsSL_image_name+'rdrd'
-			//alert(qpds_data);
+			qpds_data_detail=qpds_data_detail+Itemqpds+'fdfd'+ItemQtyqpds+'fdfd'+ItemFaceupqpds+'fdfd'+ItemVisibleqpds+'fdfd'+schemeqpds+'fdfd'+qpdsSL+'rdrd'
 		}
-		//qpds_data_detail=qpds_data_detail+'detaildetail'
-		//qpds_data_head=qpds_data_head+schemeqpds+'fdfd'+qpdsSL+'fdfd'+qpdsSL_image_name+'rdrd'
+		qpds_data_detail=qpds_data_detail+'detaildetail'
+		qpds_data_head=qpds_data_head+schemeqpds+'fdfd'+qpdsSL+'fdfd'+qpdsSL_image_name+'fdfd'+qpdsSL_image_path+'fdfd'+qpdsSL_image_name_before+'fdfd'+qpdsSL_image_path_before+'rdrd'
 	
-	//}
-	//qpds_data='headstart'+qpds_data_head+'headend'+qpds_data_detail
+	}
+	qpds_data='headstart'+qpds_data_head+'headend'+qpds_data_detail
 	localStorage.qpds_data_ready=qpds_data;
-	//alert(localStorage.qpds_data_ready);
+	
 	qpds_page_set();
 	
 	if (localStorage.latlongSubmit==1){
@@ -3433,13 +3300,13 @@ function qpds_ready_data() {
 
 function qpds_page_set() { 
 	if (localStorage.qpds_data_ready.length > 10){
-		/*var qpds_array =  localStorage.qpds_data_ready.split('headend');
+		var qpds_array =  localStorage.qpds_data_ready.split('headend');
 		var qpds_head=qpds_array[0].replace("headstart","");
-		var qpds_detail=qpds_array[1];*/
+		var qpds_detail=qpds_array[1];
 		
-		var qpds_head_array =  localStorage.qpds_data_ready.split('rdrd');
-		for (var i=0; i < localStorage.qpdsTotal-1; i++){
-			/*var head_s_array=qpds_head_array[i].split('fdfd');
+		var qpds_head_array =  qpds_head.split('rdrd');
+		for (var i=0; i < localStorage.qpdsSlabTotal-1; i++){
+			var head_s_array=qpds_head_array[i].split('fdfd');
 			var slabqpds =head_s_array[0];
 			var qpdsTotal=head_s_array[1];
 			
@@ -3457,27 +3324,20 @@ function qpds_page_set() {
 			var qpds_detail_s_array_1=qpds_detail_n.split('rdrd');
 			var qpdsDTotal=qpds_detail_s_array_1.length
 				
-			for (var d=0; d < qpdsDTotal-1; d++){*/
-				var qpds_detail_s_array =  qpds_head_array[i].split('fdfd');
+			for (var d=0; d < qpdsDTotal-1; d++){
+				var qpds_detail_s_array =  qpds_detail_s_array_1[d].split('fdfd');
 				
 				var ItemQtyqpds = qpds_detail_s_array[1];
-				//var ItemFaceupqpds = qpds_detail_s_array[2];
-				var ItemVisibleqpds = qpds_detail_s_array[2];
-				var qpdsImg_path = qpds_detail_s_array[3];
+				var ItemFaceupqpds = qpds_detail_s_array[2];
+				var ItemVisibleqpds = qpds_detail_s_array[3];
 				
-				//alert(ItemQtyqpds+'=='+ItemVisibleqpds+'=='+qpdsImg_path);
-				
-				$("#ItemQtyqpds_"+i.toString()).val(ItemQtyqpds);
-				//$("#ItemFaceupqpds_"+i.toString()).val(ItemFaceupqpds);
-				
+				$("#ItemQtyqpds_"+i.toString()+"_"+d.toString()).val(ItemQtyqpds);
+				$("#ItemFaceupqpds_"+i.toString()+"_"+d.toString()).val(ItemFaceupqpds);
 				if (ItemVisibleqpds=='YES'){
-					$("#ItemVisibleqpds_"+i.toString()).attr('checked',true);
+					$("#ItemVisibleqpds_"+i.toString()+"_"+d.toString()).attr('checked',true);
 				}
-				
-				var image = document.getElementById('qpdsSL_image_div_'+i.toString());
-				image.src = qpdsImg_path;
 	
-			//}
+			}
 		}
 	}// End if
 	
@@ -3515,7 +3375,7 @@ function npd_ready_data() {
 		var minQty=$( "#minQty_npd_"+i.toString()).val(); 
 		var npd_image_div_path=$("#npd_image_div_hidden_"+i.toString()).val(); 
 		var npd_image_name_hidden=$("#npd_image_name_hidden_"+i.toString()).val(); 
-		//alert(ItemQtynpd+'==='+minQty+'==='+npd_image_name_hidden);
+		
 		/*if (ItemQtynpd.length < 1){
 			error_flag_qty_npd=1;
 		}
@@ -3811,13 +3671,13 @@ function task_ready_data() {
 	
 	keyTaskPage_set();
 
-	var url = "#submitPage";
-	/*$(".sucMsgU").hide();
+	//var url = "#submitPage";
+	$(".sucMsgU").hide();
 	$("#btn_submit_usages").hide();
 	$("#allHide").hide();
 	$("#bufferImageU").hide();
 	$("#usageSubmitbufferImage").hide();
-	var url = "#page5";*/
+	var url = "#page5";
 	$.mobile.navigate(url);
 }
 
@@ -3891,8 +3751,6 @@ function buttonCheck(){
 	if ((localStorage.latlongSubmit==1) && (localStorage.dataSubmit==0) && ((localStorage.fddataSubmit==0) || (localStorage.qpdsdataSubmit==0) || (localStorage.npddataSubmit==0) || (localStorage.giftdataSubmit==0) || (localStorage.placedataSubmit==0) || (localStorage.shopdataSubmit==0))){
 		$("#location_button").hide();
 		$("#sub_button_div").show();
-		//$("#usages_button_div").show();
-		
 
 		$("#image_up_button").hide();
 		$("#NOutlet_button").hide();	
@@ -3900,196 +3758,18 @@ function buttonCheck(){
 	if ((localStorage.latlongSubmit==1) && (localStorage.dataSubmit==1) && ((localStorage.fddataSubmit==0) || (localStorage.qpdsdataSubmit==0) || (localStorage.npddataSubmit==0) || (localStorage.giftdataSubmit==0) || (localStorage.placedataSubmit==0) || (localStorage.shopdataSubmit==0))){
 		$("#location_button").hide();
 		$("#sub_button_div").hide();
-		//$("#usages_button_div").show();
-		
+
 		$("#image_up_button").show();
 		$("#NOutlet_button").hide();
 	}
 	if ((localStorage.latlongSubmit==1) && (localStorage.dataSubmit==1) && (localStorage.fddataSubmit==1) && (localStorage.qpdsdataSubmit==1) && (localStorage.npddataSubmit==1) && (localStorage.giftdataSubmit==1) && (localStorage.placedataSubmit==1) && (localStorage.shopdataSubmit==1)){
 		$("#location_button").hide();
 		$("#sub_button_div").hide();
-		//$("#usages_button_div").show();
-		
+
 		$("#image_up_button").hide();
 		$("#NOutlet_button").show();
 	}
 }
-
-function usages_data(){
-	$(".errorChk").text("");				
-	$(".sucMsgU").hide();
-	$("#btn_submit_usages").hide();
-	$("#allHide").hide();
-	$("#bufferImageU").hide();
-	$("#usageSubmitbufferImage").hide();
-	$("#NOutlet_button").hide();		
-	var url = "#page5";
-	$.mobile.navigate(url);	
-}
-
-//==================upload image===============
-
-//------------------------------------------------------------------------
-function upload_fd(){
-	//fixed display
-	localStorage.step_flag=1; //1 fd , 2 qpds, 3 gift
-	file_upload_error = 0;
-	
-	$( "#sub_fd_button").hide();
-	$("#submit_data").html('<img height="40px" width="40px" src="loading.gif">');
-	//$("#submit_data").html('localStorage.fdisplay_data_ready:' + localStorage.fdisplay_data_ready);
-	
-
-	if (typeof localStorage.fdisplay_data_ready === "undefined") {
-		localStorage.fdisplay_data_ready = "_";
-	}
-	
-	for (var i=0; i < localStorage.fdisplaySlabTotal-1; i++){
-		var image_name=$("#fdSL_image_name_hidden_"+i.toString()).val();
-		var fdSLfdisplay_image_path=$("#fdSL_image_div_hidden_"+i.toString()).val();
-		
-		
-		var image_name_before=$("#fdSL_image_name_hidden_"+i.toString() + "_before").val();
-		var fdSLfdisplay_image_path_before=$("#fdSL_image_div_hidden_"+i.toString()+ "_before").val();
-		
-		
-		if (image_name.length >10){
-			uploadPhoto(fdSLfdisplay_image_path, image_name);
-			uploadPhoto(fdSLfdisplay_image_path_before, image_name_before);
-			localStorage.fddataSubmit=1;
-			//if upload is successfull then "file_upload_error" will be 0 , if error 1
-		} else {
-			localStorage.fddataSubmit=1;
-			$("#submit_data").html("Fixed Display Image Not Available");
-		}
-					
-	}//end for
-	upload_qpds();
-
-}
-
-function upload_qpds(){
-	//QPDS
-	localStorage.step_flag=2; //1 fd , 2 qpds, 3 gift
-	file_upload_error = 0;
-	$( "#sub_qpds_button").hide();
-	
-	if (typeof localStorage.qpds_data_ready === "undefined") {
-		localStorage.qpds_data_ready ="_";
-	}
- 	localStorage.qpdsdataSubmit=1;
-	if (localStorage.qpds_data_ready.length > 10){	
-		for (var i=0; i < localStorage.qpdsSlabTotal-1; i++){
-			var image_name=$("#qpdsSL_image_name_hidden_"+i.toString()).val();
-			var qpds_image_path=$("#qpdsSL_image_div_hidden_"+i.toString()).val();
-			
-			var image_name_before=$("#qpdsSL_image_name_hidden_"+i.toString()+"_before").val();
-			var qpds_image_path_before=$("#qpdsSL_image_div_hidden_"+i.toString()+"_before").val();
-			localStorage.qpdsdataSubmit=1;
-			if (qpds_image_path.length >10){
-				uploadPhoto(qpds_image_path, image_name);
-				$("#submit_data").html("");	
-				}else{
-					$("#submit_data").html("Promotion Image Not Available");				
-				}
-		}//end for
-	}//end if
-	else{
-		 localStorage.qpdsdataSubmit=1;
-	}
-	 upload_npd();
-}
-
-function upload_gift_confirm(){
-	//Gift
-	localStorage.giftdataSubmit=1;
-	localStorage.step_flag=4; //1 fd , 2 qpds, 3 gift
-	file_upload_error = 0;
-	$( "#sub_gift_button").hide();
-	//$("#submit_data").html('<img height="40px" width="40px" src="loading.gif">');
-	//$("#submit_data").html('Gift');
-	
-	var image_name=$("#gift_image_name_hidden").val();
-	var gift_image_path=$("#gift_image_div_hidden").val();
-	
-	if (image_name.length >10){
-		uploadPhoto(gift_image_path, image_name);
-		$("#submit_data").html("");
-
-	}else {
-		$("#submit_data").html("Gift Image Not Available");
-	}
-	upload_shop()
-}
-
-//==============upload npd
-function upload_npd(){
-	localStorage.step_flag=3; 
-	localStorage.npddataSubmit=1;
-	if (typeof localStorage.npd_data_ready === "undefined") {
-		localStorage.npd_data_ready = "_";
-	}
-	
-	if (localStorage.npdTotal  > 0){
-		for (var i=0; i < localStorage.npdTotal-1; i++){
-			var image_name=$("#npd_image_name_hidden_"+i.toString()).val();
-			var npd_image_path=$("#npd_image_div_hidden_"+i.toString()).val();
-			
-			if (image_name.length >10){
-				uploadPhoto(npd_image_path, image_name);
-				$("#submit_data").html("");
-			} else {
-
-					$("#submit_data").html("Npd Image Not Available");
-
-			}
-					
-		}//end for
-	}
-	else{
-		upload_gift_confirm()
-		buttonCheck();
-	}
-
-}
-//========================Place upload
-function upload_place(){
-	localStorage.step_flag=5; 
-	localStorage.placedataSubmit=1;
-	//step_flag=2; //1 fd , 2 qpds, 3 gift
-	file_upload_error = 0;
-	//$( "#sub_qpds_button").hide();
-
-	var image_name_place=$("#place_image_name_hidden").val();
-	var place_image_path=$("#place_image_div_hidden").val();
-	
-	if (image_name_place.length >10){
-		uploadPhoto(place_image_path, image_name_place);
-		$("#submit_data").html("");
-	}else{
-		$("#submit_data").html("Place Image Not Available");
-	}
-	buttonCheck();
-}
-function upload_shop(){
-	localStorage.step_flag=6;
-	file_upload_error = 0;
-	//$( "#sub_qpds_button").hide();
-	localStorage.shopdataSubmit=1;
-
-	var image_name_shop=$("#shop_image_name_hidden").val();
-	var shop_image_path=$("#shop_image_div_hidden").val();
-	
-	if (image_name_shop.length >10){
-		uploadPhoto(shop_image_path, image_name_shop);
-		$("#submit_data").html("");
-	} else {
-		$("#submit_data").html("Shop Image Not Available");
-	}
-	upload_place()
-	//buttonCheck();
-}
-
 
 function check_step() {
 	if (localStorage.step_flag==0){
@@ -4115,327 +3795,6 @@ function check_step() {
 	}
 }
 
-function uploadPhoto(imageURI, imageName) {
-	
-  var options = new FileUploadOptions();
-  options.fileKey="upload";
-  
-  options.fileName=imageName;
-  options.mimeType="image/jpeg";
-		
-  var params = {};
-  params.value1 = "test";
-  params.value2 = "param";
-
-  options.params = params;
-  options.chunkedMode = false;
-
-  var ft = new FileTransfer();
-	
-
-
-//ft.upload(imageURI, encodeURI("http://127.0.0.1:8000/postit/syncmobile/fileUploader/"),win,fail,options);
-
- //ft.upload(imageURI, encodeURI("http://e4.businesssolutionapps.com/mrepimage/syncmobile/fileUploader/"),win,fail,options);
- ft.upload(imageURI, encodeURI("http://i001.yeapps.com/image_hub/uniext/upload_image/"),win,fail,options);
-}
-
-function win(r) {
-
-	file_upload_error = 0;
-	
-//	step_flag=0; //1 fd , 2 qpds, 3 gift
-	
-	if (localStorage.step_flag==1){ //for fixed display
-		$("#submit_data").html("Fixed Display Synced Successfully");
-		localStorage.qpdsdataSubmit=1;
-		upload_qpds();
-		//buttonCheck();
-	}
-	
-	if (localStorage.step_flag==2){ // QPDS
-		$("#submit_data").html("Promotion Synced Successfully");
-		localStorage.npddataSubmit=1;
-		upload_npd()
-		//buttonCheck();		
-	}	
-	if (localStorage.step_flag==3){  // Gift
-		$("#submit_data").html("Promotion Synced Successfully");
-		localStorage.giftdataSubmit=1;
-		upload_gift_confirm();
-		//buttonCheck();
-	}
-	if (localStorage.step_flag==4){  // Gift
-		$("#submit_data").html("Gift Synced Successfully");
-		localStorage.shopdataSubmit=1;
-		upload_shop();
-	//	buttonCheck();
-	}
-	if (localStorage.step_flag==5){  // Gift
-		$("#submit_data").html("Place Synced Successfully");
-		localStorage.placedataSubmit=1;
-		
-		upload_place();
-		buttonCheck();
-	}
-	if (localStorage.step_flag==6){  // Gift
-		$("#submit_data").html("All Sync Completted");
-		localStorage.shopdataSubmit=1;
-		cancel_outlet()
-		buttonCheck();
-	}
-
-	
-	localStorage.step_flag=0; //Reset step flag
-}
-
-function fail(error) {
-	file_upload_error = 1;
-	
-//	step_flag=0; //1 fd , 2 qpds, 3 gift
-	
-	if (step_flag==1){ //for fixed display
-		$("#submit_data").html("Network timeout. Please ensure you have good network signal and working Internet.");
-		localStorage.fddataSubmit=0;
-		buttonCheck();
-	}
-	
-	if (step_flag==2){ // QPDS
-		$("#submit_data").html("Network timeout. Please ensure you have good network signal and working Internet.");
-		localStorage.qpdsdataSubmit=0;
-		buttonCheck();
-	}
-	
-	if (step_flag==3){  // NPD
-		$("#submit_data").html("Network timeout. Please ensure you have good network signal and working Internet.");
-		localStorage.npddataSubmit=0;
-		buttonCheck();
-	}	
-	
-	if (step_flag==4){  // Gift
-		$("#submit_data").html("Network timeout. Please ensure you have good network signal and working Internet.");
-		localStorage.giftdataSubmit=0;
-		buttonCheck();
-	}
-	
-	if (step_flag==5){  // Place
-		$("#submit_data").html("Network timeout. Please ensure you have good network signal and working Internet.");
-		localStorage.placedataSubmit=0;
-		buttonCheck();
-	}
-	
-	if (step_flag==6){  // Shop
-		$("#submit_data").html("Network timeout. Please ensure you have good network signal and working Internet.");
-		localStorage.shopdataSubmit=0;
-		buttonCheck();
-	}
-	step_flag=0; //Reset step flag
-}
-
-
-
-function menupage(){	
-	var check_outlet= localStorage.outletString;
-								
-	//localStorage.outletString=check_outlet.replace('<input type="radio" name="RadioOutlet" value="'+localStorage.selectedOutlet+'rdrd'+localStorage.selected_date_get+'">','<input type="radio" name="RadioOutlet" value="'+localStorage.selectedOutlet+'rdrd'+localStorage.selected_date_get+'" disabled="True">');
-	cancel_outlet();
-	var url = "#outletPage";
-	$.mobile.navigate(url);
-	//location.reload();
-	
-}
-
-function submit_data() { 
-	var sync_date_get=get_date();
-	//var sync_date=sync_date_get.split(' ')[0];
-	var sync_y=sync_date_get.split('-')[0];
-	var sync_m=sync_date_get.split('-')[1];
-	if (sync_m.length==1){sync_m='0'+sync_m}
-	var sync_d=sync_date_get.split('-')[2].split(' ')[0];
-	if (sync_d.length==1){sync_d='0'+sync_d}
-	var sync_date=sync_y +'-'+ sync_m +'-'+sync_d;
-	
-	if ((localStorage.synced=='YES') & (localStorage.sync_date!=sync_date)){
-					
-		cancel_outlet();
-		
-		localStorage.show_cancel=0;
-		localStorage.m_new_string="";
-		localStorage.m_new="";
-		localStorage.selectedOutlet="";
-		localStorage.outletExStringShow="";
-		localStorage.outletException="";
-		localStorage.outletChanne="";
-		localStorage.outletNameID="";
-		localStorage.mhskusTotal="";
-		
-		localStorage.npdTotal="";
-		localStorage.fdisplaySlabTotal="";
-		localStorage.fdisplayTotal="";
-		localStorage.qpdsSlabTotal="";
-		
-		localStorage.qpdsTotal="";
-		localStorage.giftTotal="";
-		localStorage.marchadizingTotal="";
-		localStorage.mhskus_data_ready="";
-		localStorage.npd_data_ready="";
-		localStorage.fdisplay_data_ready="";
-		localStorage.qpds_data_ready="";
-		localStorage.gift_data_ready="";
-		localStorage.mar_data_ready="";
-		localStorage.key_data_ready="";
-		
-		//localStorage.sync_date=sync_date;
-		//localStorage.synced=='YES';
-		
-		//distributon
-		localStorage.mar_distrib_data=""
-		localStorage.merchandisingDistribStr=""
-		localStorage.mar_distrib_stock=""
-		
-		//check_route();
-		var url = "#login";
-		$.mobile.navigate(url);
-		
-	//	location.reload()
-	}else if ((localStorage.synced=='YES') & (localStorage.selectedOutlet=="")){
-		cancel_outlet();
-		localStorage.show_cancel=0;
-		localStorage.m_new_string="";
-		localStorage.m_new="";
-		localStorage.selectedOutlet="";
-		localStorage.outletExStringShow="";
-		localStorage.outletException="";
-		localStorage.outletChanne="";
-		localStorage.outletNameID="";
-		localStorage.mhskusTotal="";
-		
-		localStorage.npdTotal="";
-		localStorage.fdisplaySlabTotal="";
-		localStorage.fdisplayTotal="";
-		localStorage.qpdsSlabTotal="";
-		localStorage.qpdsTotal="";
-		localStorage.giftTotal="";
-		localStorage.marchadizingTotal="";
-		localStorage.mhskus_data_ready="";
-		localStorage.npd_data_ready="";
-		
-		localStorage.fdisplay_data_ready="";
-		localStorage.qpds_data_ready="";
-		localStorage.gift_data_ready="";
-		localStorage.mar_data_ready="";
-		localStorage.key_data_ready="";
-		localStorage.mar_distrib_data=""
-		localStorage.merchandisingDistribStr=""
-		localStorage.mar_distrib_stock=""
-		
-		//check_route();
-		var url = "#outletPage";
-		$.mobile.navigate(url);
-	}else{
-		$("#sub_button").hide();
-		
-		$("#submit_data").html('<img height="40px" width="40px" src="loading.gif">');
-		//=========================AJAX Submit==========================	
-		var lat=$( "#lat").val();
-		var long=$( "#long").val();
-		var visitDate=get_date().split(' ')[0];
-		var endTime=get_date();
-		var giftImage=$( "#gift_image_name_hidden").val();
-		var latlong=lat.toString()+","+long.toString()
-		
-		$( "#sub_button_div").hide();
-		
-		/*if (localStorage.mar_distrib_data==undefined || localStorage.mar_distrib_data=="undefined"){
-			localStorage.mar_distrib_data=""
-		}*/
-		
-		var fdisplay_data=localStorage.fdisplay_data_ready.replace('detaildetail','')
-		var qpds_data=localStorage.qpds_data_ready.replace('detaildetail','')
-		
-		//alert(apipath+'syncSubmitData?cm_id='+localStorage.p_repID+'&cm_pass='+localStorage.p_SyncPass+'&synccode='+localStorage.p_sync_code+'&route='+localStorage.selectedRoute+'&routeEx='+localStorage.routeException+'&outlet='+localStorage.selectedOutlet+'&scheduleDate='+ localStorage.selected_date +'&outletEx='+localStorage.outletException+'&channel='+localStorage.outletChannel+'&latlong='+latlong+'&visitDate='+visitDate+'&startTime='+localStorage.startTime+'&endTime='+endTime+'&giftImage='+giftImage+'&mhskus_data='+localStorage.mhskus_data_ready+'&npd_data='+localStorage.npd_data_ready+'&fdisplay_data='+fdisplay_data+'&qpds_data='+qpds_data+'&gift_data='+localStorage.gift_data_ready+'&place_data='+localStorage.place_data_ready+'&shop_data='+localStorage.shop_data_ready+'&key_data='+localStorage.key_data_ready);
-		
-		var check_outlet= localStorage.outletString;
-		$.ajax({
-			type: 'POST',
-			url: apipath+'syncSubmitData?cm_id='+localStorage.p_repID+'&cm_pass='+localStorage.p_SyncPass+'&synccode='+localStorage.p_sync_code+'&route='+localStorage.selectedRoute+'&routeEx='+localStorage.routeException+'&outlet='+localStorage.selectedOutlet+'&scheduleDate='+ localStorage.selected_date +'&outletEx='+localStorage.outletException+'&channel='+localStorage.outletChannel+'&latlong='+latlong+'&visitDate='+visitDate+'&startTime='+localStorage.startTime+'&endTime='+endTime+'&giftImage='+giftImage+'&mhskus_data='+localStorage.mhskus_data_ready+'&npd_data='+localStorage.npd_data_ready+'&fdisplay_data='+fdisplay_data+'&qpds_data='+qpds_data+'&gift_data='+localStorage.gift_data_ready+'&place_data='+localStorage.place_data_ready+'&shop_data='+localStorage.shop_data_ready+'&key_data='+localStorage.key_data_ready,
-			success: function(result) {
-				if (result==''){
-					alert ('Sorry Network not available');
-				}else{
-					if (result!='SUCCESS'){
-						$("#submit_data_check").html(result);
-					}
-					if (result=='SUCCESS'){							
-						
-						localStorage.dataSubmit=1;
-						buttonCheck();
-						
-						localStorage.show_cancel=0;
-
-						//localStorage.outletString=check_outlet.replace('<input type="radio" name="RadioOutlet" value="'+localStorage.selectedOutlet+'rdrd'+localStorage.selected_date_get+'">','<input type="radio" name="RadioOutlet" value="'+localStorage.selectedOutlet+'rdrd'+localStorage.selected_date_get+'" disabled="True">');
-												
-						$("#outletString").empty();
-						$("#outletString").append(localStorage.outletString).trigger('create');
-						
-						$("#submit_data_check").html("Data Synced Successfully");
-						$("#submit_data").html('');
-						localStorage.step_flag=0;
-						
-						
-						// Enable all disable div start
-						$('#mhskus').find('input, textarea, button, select').attr('disabled',false);
-						$('#npd').find('input, textarea, button, select').attr('disabled',false);
-						$('#fdisplayStringShowBefore').find('input, textarea, button, select').attr('disabled',false);
-						$('#fdisplay').find('input, textarea, button, select').attr('disabled',false);
-						$('#qpds').find('input, textarea, button, select').attr('disabled',false);
-						$('#gift').find('input, textarea, button, select').attr('disabled',false);
-						$('#place_show').find('input, textarea, button, select').attr('disabled',false);
-						$('#shop_show').find('input, textarea, button, select').attr('disabled',false);
-						
-						// Enable disable div end
-						
-						upload_fd();
-						cancel_outlet();
-						var url = "#outletPage";
-						$.mobile.navigate(url);
-						//location.reload();
-						localStorage.dataSubmit=0
-					}	
-				}
-			}, 
-			error: function(result) {			 
-				$("#sub_button").show();
-				localStorage.dataSubmit=0;
-				localStorage.submit_count=parseInt(localStorage.submit_count)+1
-				 
-				
-				if (localStorage.submit_count<1){
-				 	buttonCheck();
-					$("#submit_data").html('');
-					var url = "#submitPage";
-					$.mobile.navigate(url);	
-				}else{
-					$("#submit_data").html("Saved Request. Please try later");
-				  
-				  
-				 	//localStorage.outletString=check_outlet.replace('<input type="radio" name="RadioOutlet" value="'+localStorage.selectedOutlet+'rdrd'+localStorage.selected_date_get+'">','<input type="radio" name="RadioOutlet" value="'+localStorage.selectedOutlet+'rdrd'+localStorage.selected_date_get+'" disabled="True">');
-				
-				
-				 	localStorage.saved_req=localStorage.saved_req+'<savedsaved><'+localStorage.selectedOutlet+'><OidOid>'+localStorage.outletIDnameShow+'<showshow>'+apipath+'syncSubmitData?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&synccode='+localStorage.synccode+'&route='+localStorage.selectedRoute+'&routeEx='+localStorage.routeException+'&outlet='+localStorage.selectedOutlet+'&scheduleDate='+ localStorage.selected_date +'&outletEx='+localStorage.outletException+'&channel='+localStorage.outletChannel+'&latlong='+latlong+'&visitDate='+visitDate+'&startTime='+localStorage.startTime+'&endTime='+endTime+'&giftImage='+giftImage+'&mhskus_data='+localStorage.mhskus_data_ready+'&npd_data='+localStorage.npd_data_ready+'&fdisplay_data='+localStorage.fdisplay_data_ready+'&qpds_data='+localStorage.qpds_data_ready+'&gift_data='+localStorage.gift_data_ready+'&place_data='+localStorage.place_data_ready+'&shop_data='+localStorage.shop_data_ready+'&key_data='+localStorage.key_data_ready+'&fdisplayTotal='+localStorage.fdisplayTotal+'&qpdsSlabTotal='+localStorage.qpdsSlabTotal+'</'+localStorage.selectedOutlet+'>'
-				;
-				
-					$("#outletString").empty();
-					$("#outletString").append(localStorage.outletString).trigger('create');
-					
-					cancel_outlet();
-				
-				}
-		  	}
-	  	});//end ajax
-	
-	}//Check sync date
-}
 
 /************************=====================================================================================********************/
 
@@ -4606,7 +3965,7 @@ function targetSetCMGo(){
 		}
 }	
 function goHomePage(){
-	//alert(localStorage.p_attendanceCheck+'=='+localStorage.p_rep_type);
+	
 	if (localStorage.p_attendanceCheck=='' || localStorage.p_attendanceCheck==undefined){
 		$(".errMsg").text("Required Attendence");
 	}else if(localStorage.p_rep_type != 'SUPERVISOR'){
@@ -5575,13 +4934,18 @@ function alloDetailsU(){
 	}
 }
 
-function submit_data_usages(){	
+function submit_data_usages(){
+	
 	$("#btn_submit_usages").hide();
 	var d = new Date();	
 	var get_time=d.getTime();
+
 	
-	town=localStorage.p_select_town.replace('-', '|');	
+	town=localStorage.p_select_town.replace('-', '|');
+		
+	
 	var uposm_type=$("#uposm_type").val();
+	
 	var ubrand=$("#ubrand").val();
 	var baUsage=$("#balance").val();
 	var alcId=$("#ualcId").val();
@@ -5601,10 +4965,10 @@ function submit_data_usages(){
 		$("#btn_submit_usages").show();	
 	}else{
 		$("#usageSubmitbufferImage").show();		
-		//alert(apipath+"submitData_usages?&syncCode="+localStorage.p_sync_code+"&repID="+localStorage.p_repID+"&repName="+localStorage.p_repName+"&mobileNo="+localStorage.p_mobileNo+"&town="+town+"&routeName="+localStorage.p_routeIDName+"&outlet_code="+ localStorage.p_selectedOutlet+"&posmCode="+posmCode+"&uposm_type="+uposm_type+"&ubrand="+ubrand+"&baUsage="+baUsage+"&a_qty="+a_qty+"&alcId="+alcId+"&imageName2="+imageName2);
+		//alert(apipath+"submitData_usages?&syncCode="+localStorage.p_sync_code+"&repID="+localStorage.p_repID+"&repName="+localStorage.p_repName+"&mobileNo="+localStorage.p_mobileNo+"&town="+town+"&routeName="+rName+"&outlet_code="+outlet_code+"&outlet_name="+outlet_name+"&posmCode="+posmCode+"&uposm_type="+uposm_type+"&ubrand="+ubrand+"&baUsage="+baUsage+"&a_qty="+a_qty+"&alcId="+alcId+"&imageName2="+imageName2);
 		$.ajax({
 			type: 'POST',
-			url:apipath+"submitData_usages?&syncCode="+localStorage.p_sync_code+"&repID="+localStorage.p_repID+"&repName="+localStorage.p_repName+"&mobileNo="+localStorage.p_mobileNo+"&town="+town+"&routeName="+localStorage.p_routeIDName+"&outlet_code="+ localStorage.p_selectedOutlet+"&posmCode="+posmCode+"&uposm_type="+uposm_type+"&ubrand="+ubrand+"&baUsage="+baUsage+"&a_qty="+a_qty+"&alcId="+alcId+"&imageName2="+imageName2,
+			url:apipath+"submitData_usages?&syncCode="+localStorage.p_sync_code+"&repID="+localStorage.p_repID+"&repName="+localStorage.p_repName+"&mobileNo="+localStorage.p_mobileNo+"&town="+town+"&routeName="+rName+"&outlet_code="+outlet_code+"&outlet_name="+outlet_name+"&posmCode="+posmCode+"&uposm_type="+uposm_type+"&ubrand="+ubrand+"&baUsage="+baUsage+"&a_qty="+a_qty+"&alcId="+alcId+"&imageName2="+imageName2,
 																																																													
 			success: function(result) {			
 				if(result=='Success'){
@@ -5625,7 +4989,7 @@ function submit_data_usages(){
 					$(".sucMsgU").show();
 					$("#allHide").hide();
 					$("#btn_submit_usages").hide();
-					$("#NOutlet_button").show();
+					
 					uploadPhotoUsa(imagePathB, imageName2);
 					
 					$(".sucMsgU").text('Successfully Submitted');
@@ -5636,14 +5000,13 @@ function submit_data_usages(){
 						$("#usageSubmitbufferImage").hide();				
 						$(".errorChk").text("Usage Qty less then Balance Qty");
 						$("#allHide").show();
-						$("#btn_submit_usages").show();
-						$("#NOutlet_button").hide();
+						$("#btn_submit_usages").show();	
 				}else{
 					$("#usageSubmitbufferImage").hide();
 					$(".errorChk").text("Please check internet connection");															
 					$("#btn_submit_usages").show();
 					$("#allHide").show();
-					$("#NOutlet_button").hide();
+					
 				}
 				
 			}//end result
@@ -6058,7 +5421,7 @@ function anualLeave(){
 					
 					$("#allocated_leave").html("Allocated leave:	"+ allocated_leave);
 					$("#leave_taken").html("Leave Taken	:	"+leave_taken);
-					$("#leave_reamin").html("Leave Remain:	"+leave_reamin);
+					$("#leave_reamin").html("Leave Reamin:	"+leave_reamin);
 					
 				}else{
 					$("#anualLeaveDiv").hide();	
@@ -6093,7 +5456,7 @@ function sickLeave(){
 					
 					$("#allocated_leaveSick").html("Allocated leave:	"+ allocated_leave);
 					$("#leave_takenSick").html("Leave Taken	:	"+leave_taken);
-					$("#leave_reaminSick").html("Leave Remain:	"+leave_reamin);
+					$("#leave_reaminSick").html("Leave Reamin:	"+leave_reamin);
 					
 				}else{
 					$("#sickLeaveDiv").hide();
