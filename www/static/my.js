@@ -54,7 +54,8 @@ var apipath_image="http://w02.yeapps.com/postit/";
 //var apipath_image="http://127.0.0.1:8000/postit/";
 url ="";
 
-$(document).ready(function(){	
+$(document).ready(function(){
+	
 	
 	$('#bufferImageSync').hide();
 	$("#bufferImageSelectTown").hide();
@@ -114,7 +115,7 @@ $(document).ready(function(){
 		if (localStorage.p_attendanceCheck=='' || localStorage.p_attendanceCheck==undefined){			
 			$(".successMsgATT").text("");
 			$("#get_salfieButton").show();
-			$("#attandanceButton").hide();	
+			$("#attandanceButton").show();	
 			url = "#salfiePage";						
 			$.mobile.navigate(url);
 		}else{
@@ -170,7 +171,7 @@ $(document).ready(function(){
 		if (localStorage.p_attendanceCheck=='' || localStorage.p_attendanceCheck==undefined){			
 			$(".successMsgATT").text("");
 			$("#get_salfieButton").show();
-			$("#attandanceButton").hide();
+			$("#attandanceButton").show();	
 			url = "#salfiePage";						
 			$.mobile.navigate(url);
 		}else{
@@ -534,7 +535,7 @@ function syncBasic(){
 							$("#salfie_image_div").hide();
 							$(".successMsgATT").text("");
 							$("#get_salfieButton").show();
-							$("#attandanceButton").hide();
+							$("#attandanceButton").show();	
 							url = "#salfiePage";						
 							$.mobile.navigate(url);
 						}else{
@@ -575,7 +576,7 @@ function syncBasic(){
 							$("#salfie_image_div").hide();
 							$(".successMsgATT").text("");
 							$("#get_salfieButton").show();
-							$("#attandanceButton").hide();
+							$("#attandanceButton").show();	
 							url = "#salfiePage";						
 							$.mobile.navigate(url);
 						}else{
@@ -1011,7 +1012,12 @@ function salfie_next_page(){
 		var salfie_image_name=$("#salfie_image_name_hidden").val();
 		var salfie_image_path=$("#salfie_image_div_hidden").val();					
 		//alert(salfie_image_path.length);
-		if (salfie_image_path.length < 10){							
+		if (salfie_image_name.length < 10){							
+			var url = "#salfiePage";
+			$.mobile.navigate(url);
+		}else if(selfie_lat==0 || selfie_long==0){
+			$("#attandanceButton").show();
+			$(".errMsg").html("Failed to Confirmed Location.");
 			var url = "#salfiePage";
 			$.mobile.navigate(url);
 		}else{															
@@ -1027,7 +1033,7 @@ function salfie_next_page(){
 						alert ('Sorry Network not available');
 					}else if(result=='Success'){
 						
-						localStorage.p_attendanceCheck="Day Start"
+						//localStorage.p_attendanceCheck="Day Start"
 						$("#get_salfieButton").hide();
 						$("#attandanceButton").hide();
 						$("#bufferImageAtendanceLocation").hide();
@@ -1050,6 +1056,7 @@ function salfie_next_page(){
 						
 															
 					}else{
+						$("#attandanceButton").show();
 						$(".errMsg").html(result);
 											
 					}
@@ -1060,7 +1067,7 @@ function salfie_next_page(){
 }
 
 function getLocationInfoSelfe(){	
-	$("#attandanceButton").hide();
+	$("#attandanceButton").show();
 	$("#bufferImageAtendanceLocation").show();
 	var options = { enableHighAccuracy: true, timeout:30000};	
 	navigator.geolocation.getCurrentPosition(onSuccessSelfie, onErrorSelfie, options);				
@@ -1082,7 +1089,7 @@ function onErrorSelfie(error) {
     $("#selfie_lat").val(0);
     $("#selfie_long").val(0);
     $(".errMsg").html("Failed to Confirmed Location.");
-    $("#attandanceButton").hide();
+    $("#attandanceButton").show();
 }	
 
 
@@ -3966,10 +3973,10 @@ function onError(error) {
 }
 
 function buttonCheck(){
-	alert();
+	//alert();
 	if ((localStorage.latlongSubmit==0) && (localStorage.placeLatLongCount >3)){
 		localStorage.latlongSubmit=1
-		alert('1');
+		//alert('1');
 	}
 	if ((localStorage.latlongSubmit==0) & (localStorage.dataSubmit==0)){
 		$("#location_button").show();
@@ -3980,13 +3987,13 @@ function buttonCheck(){
 		
 		$("#lat").val(0);
 		$("#long").val(0);
-		alert('2');
+		//alert('2');
 	}
 	if ((localStorage.latlongSubmit==1) && (localStorage.dataSubmit==0) && ((localStorage.fddataSubmit==0) || (localStorage.qpdsdataSubmit==0) || (localStorage.npddataSubmit==0) || (localStorage.giftdataSubmit==0) || (localStorage.placedataSubmit==0) || (localStorage.shopdataSubmit==0))){
 		$("#location_button").hide();
 		$("#sub_button_div").show();
 		//$("#usages_button_div").show();
-		alert('3');
+		//alert('3');
 
 		$("#image_up_button").hide();
 		$("#NOutlet_button").hide();	
@@ -3995,7 +4002,7 @@ function buttonCheck(){
 		$("#location_button").hide();
 		$("#sub_button_div").hide();
 		//$("#usages_button_div").show();
-		alert('4');
+		//alert('4');
 		$("#image_up_button").show();
 		$("#NOutlet_button").hide();
 	}
@@ -4003,7 +4010,7 @@ function buttonCheck(){
 		$("#location_button").hide();
 		$("#sub_button_div").hide();
 		//$("#usages_button_div").show();
-		alert('5');
+		//alert('5');
 		$("#image_up_button").hide();
 		$("#NOutlet_button").show();
 	}
@@ -4049,7 +4056,7 @@ function upload_fd(){
 		
 		if (image_name.length >10){
 			uploadPhoto(fdSLfdisplay_image_path, image_name);
-			uploadPhoto(fdSLfdisplay_image_path_before, image_name_before);
+			//uploadPhoto(fdSLfdisplay_image_path_before, image_name_before);
 			localStorage.fddataSubmit=1;
 			//if upload is successfull then "file_upload_error" will be 0 , if error 1
 		} else {
@@ -4447,10 +4454,10 @@ function submit_data() {
 						$("#submit_data_check").html(result);
 					}
 					if (result=='SUCCESS'){							
-						alert('9');
+						//alert('9');
 						localStorage.dataSubmit=1;
 						buttonCheck();
-						alert('10');
+						//alert('10');
 						localStorage.show_cancel=0;
 
 						//localStorage.outletString=check_outlet.replace('<input type="radio" name="RadioOutlet" value="'+localStorage.selectedOutlet+'rdrd'+localStorage.selected_date_get+'">','<input type="radio" name="RadioOutlet" value="'+localStorage.selectedOutlet+'rdrd'+localStorage.selected_date_get+'" disabled="True">');
