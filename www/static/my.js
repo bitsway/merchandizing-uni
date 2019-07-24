@@ -46,7 +46,7 @@ var joinCallQueNo4='';
 //localStorage.p_rep_type='';
 
 //---Online
-var apipath="http://w02.yeapps.com/postit/syncmobile_20190721/";
+var apipath="http://w02.yeapps.com/postit/syncmobile_20190725/";
 var apipath_image="http://w02.yeapps.com/postit/";
 
 //--- local
@@ -54,8 +54,7 @@ var apipath_image="http://w02.yeapps.com/postit/";
 //var apipath_image="http://127.0.0.1:8000/postit/";
 url ="";
 
-$(document).ready(function(){
-	
+$(document).ready(function(){	
 	
 	$('#bufferImageSync').hide();
 	$("#bufferImageSelectTown").hide();
@@ -112,21 +111,17 @@ $(document).ready(function(){
 		$('#outletList').empty();
 		$('#outletList').append(localStorage.p_outletList).trigger('create');
 		
-		if (localStorage.p_attendanceCheck=='' || localStorage.p_attendanceCheck==undefined){
-			
+		if (localStorage.p_attendanceCheck=='' || localStorage.p_attendanceCheck==undefined){			
 			$(".successMsgATT").text("");
 			$("#get_salfieButton").show();
-			$("#attandanceButton").show();	
+			$("#attandanceButton").hide();	
 			url = "#salfiePage";						
 			$.mobile.navigate(url);
 		}else{
 			url = "#homePage";					
 			$.mobile.navigate(url);
-			}	
-			
-	}else if (localStorage.p_rep_type == 'SUPERVISOR'){
-		
-		
+		}	
+	}else if (localStorage.p_rep_type == 'SUPERVISOR'){		
 		$('#onHandStockSup').show();
 		$('#merchandizingToolsSup').show();
 		$('#allocationSup').show();
@@ -172,11 +167,10 @@ $(document).ready(function(){
 		
 		
 		
-		if (localStorage.p_attendanceCheck=='' || localStorage.p_attendanceCheck==undefined){
-			
+		if (localStorage.p_attendanceCheck=='' || localStorage.p_attendanceCheck==undefined){			
 			$(".successMsgATT").text("");
 			$("#get_salfieButton").show();
-			$("#attandanceButton").show();
+			$("#attandanceButton").hide();
 			url = "#salfiePage";						
 			$.mobile.navigate(url);
 		}else{
@@ -184,8 +178,7 @@ $(document).ready(function(){
 			$.mobile.navigate(url);
 			}	
 		
-	}else if(localStorage.p_rep_type == 'AGENCY'){
-		
+	}else if(localStorage.p_rep_type == 'AGENCY'){		
 		$("#reportbtnAgency").show();
 		$('#attendanceButtonShow').hide();
 		$("#posmReportAuditSub").hide();	
@@ -310,7 +303,7 @@ $(document).ready(function(){
 
 
 function syncBasic(){
-	
+	localStorage.selectedRoute='';
 	$("#bufferImageSelectTown").hide();
 	$(".errorChk").html("");
 	
@@ -375,7 +368,7 @@ function syncBasic(){
 					
 					var cancelArray = localStorage.cancelList.split('fdfd');	
 					var cancel_combo_str='<select name="cancel_cause" id="cancel_cause" >'
-					cancel_combo_str=cancel_combo_str+'<option value=""></option>'
+					cancel_combo_str=cancel_combo_str+'<option value="">Select Reason</option>'
 					cancel_combo_str=cancel_combo_str+'<option value="Will try later">Will try later</option>'
 					for (var i=0; i < cancelArray.length; i++){				
 						cancel_combo_str=cancel_combo_str +'<option value="'+cancelArray[i].split('-')[0]+'">'+cancelArray[i].split('-')[1]+'</option>'			  	
@@ -538,10 +531,10 @@ function syncBasic(){
 						$("#suprepid").html("ID	:		"+localStorage.p_repID);
 						
 						if (localStorage.p_attendanceCheck=='' || localStorage.p_attendanceCheck==undefined){
-							
+							$("#salfie_image_div").hide();
 							$(".successMsgATT").text("");
 							$("#get_salfieButton").show();
-							$("#attandanceButton").show();
+							$("#attandanceButton").hide();
 							url = "#salfiePage";						
 							$.mobile.navigate(url);
 						}else{
@@ -579,10 +572,10 @@ function syncBasic(){
 						$("#suprepid").html("ID	:		"+localStorage.p_repID);
 						
 						if (localStorage.p_attendanceCheck=='' || localStorage.p_attendanceCheck==undefined){
-							
+							$("#salfie_image_div").hide();
 							$(".successMsgATT").text("");
 							$("#get_salfieButton").show();
-							$("#attandanceButton").show();
+							$("#attandanceButton").hide();
 							url = "#salfiePage";						
 							$.mobile.navigate(url);
 						}else{
@@ -980,7 +973,7 @@ function submitDataTargetCM(){
 
 
 
-function attandance(){	
+/*function attandance(){	
 	$(".successMsgATT").text("");
 	$(".errMsg").html("");
 	$("input:radio").removeAttr('checked');
@@ -998,7 +991,7 @@ function attandance(){
 	$("#get_salfieButton").show();
 	$("#attandanceButton").show();
 	$.mobile.navigate("#salfiePage");
-}
+}*/
 
 
 function salfie_next_page(){
@@ -1066,8 +1059,7 @@ function salfie_next_page(){
 	}
 }
 
-function getLocationInfoSelfe(){
-	
+function getLocationInfoSelfe(){	
 	$("#attandanceButton").hide();
 	$("#bufferImageAtendanceLocation").show();
 	var options = { enableHighAccuracy: true, timeout:30000};	
@@ -1090,7 +1082,7 @@ function onErrorSelfie(error) {
     $("#selfie_lat").val(0);
     $("#selfie_long").val(0);
     $(".errMsg").html("Failed to Confirmed Location.");
-    $("#attandanceButton").show();
+    $("#attandanceButton").hide();
 }	
 
 
@@ -1105,6 +1097,7 @@ function get_salfie() {
 }
 
 function onSuccessSalfie(imageURI) {
+	$("#salfie_image_div").show();
 	var image = document.getElementById('salfie_image_div');
     image.src = imageURI;
     var hidden_path="salfie_image_div_hidden";
@@ -1112,6 +1105,7 @@ function onSuccessSalfie(imageURI) {
 }
 
 function onFailSalfie(message) {
+	$("#salfie_image_div").hide();
 	imagePathA="";
     alert('Failed because: ' + message);
 }
@@ -1217,8 +1211,10 @@ function backClick(){
 }
 
 //---------
+var outletSeperator='';
+var routeDate='';
 function townSelect(town){
-
+	localStorage.selectedRoute='';
 	$('#menuBufferingImage').hide();
 	$("#cmprepname").text("");
 	$("#cmpreptype").text("");
@@ -1228,53 +1224,144 @@ function townSelect(town){
 		$(".errorChk").text("Required Sync");
 	}else{
 		$("#bufferImageSelectTown").show();
+		$('#townList').hide();
 		/*if($("#townList").find("input[name='town_select']:checked").length==0){
 			$(".errorChk").text("Select Town");
 		}else{
 			$("#bufferImageSelectTown").show();*/
 			//localStorage.p_select_town=$("input[name='town_select']:checked").val();
-			localStorage.p_select_town=town;
-			
-			//alert (apipath+'get_posm_sup?select_town='+localStorage.p_select_town+"&repID="+localStorage.p_repID)
-			$.ajax({
-			  url:apipath+'get_posm_sup?select_town='+localStorage.p_select_town+"&repID="+localStorage.p_repID,
-			  success: function(result) {
-				var resultArray = result.split('rdrd');
-					if (resultArray[0]=='Success'){	
-						
-						$("#bufferImageSelectTown").hide();
-						localStorage.p_posmCodeAgency=resultArray[2];	
-						localStorage.p_agencyTaxarea=resultArray[4];
-						localStorage.p_posmAll=resultArray[5];
-						localStorage.p_csmListTools=resultArray[6];
-						
-						
-						var csmListTools=localStorage.p_csmListTools.split('fdfd');
-						var cmListStr = '<select id="csmToolsRecRec" class="auto_break" name="csmToolsRecRec" style="display:inline-block;"><option selected="selected" value="">Select CM</option>'
-						for (j=0;j<csmListTools.length;j++){	
-							cmListStr += '<option value="'+csmListTools[j]+'">'+csmListTools[j]+'</option>'
+		localStorage.p_select_town=town;
+		
+		var current_date=get_date();
+		var bak_date1=get_bak_date_one();
+		var bak_date2=get_bak_date_two();
+		var bak_date3=get_bak_date_three();
+		//alert(current_date+'=='+bak_date1+'=='+bak_date2+'=='+bak_date3);
+		//outletSeperator=outletSep;
+		/*if (localStorage.p_rep_type!='CM'){	*/
+		$('#bufferImageRoute').hide();
+		$('#menuBufferingImage').show();	
+			//$('#bufferImageOutlet').show();	
+
+		//alert(apipath+"getRoutetest?&townCodeName="+localStorage.p_select_town+"&cm_id="+localStorage.p_repID);
+		$.ajax({
+			type: 'POST',
+			url:apipath+"getRoutetest?&townCodeName="+localStorage.p_select_town+"&cm_id="+localStorage.p_repID,																																																															
+			success: function(result) {	
+				var resultArray = result.split('rdrd');	
+				if(resultArray[0]=='Success'){
+					$('#menuBufferingImage').hide();	
+					//$('#bufferImageOutlet').hide();			
+					localStorage.p_routeListSupALL=resultArray[1];
+					//localStorage.p_scheduleDate=resultArray[2].split('|');
+					
+					//alert(localStorage.p_routeListSupALL);
+					if(localStorage.p_routeListSupALL!=''){
+						var routeListSupALL=localStorage.p_routeListSupALL.split('fdfd');
+						//var routeStr='<ul data-role="listview" class="list" data-filter="true" data-inset="true" style="height:400px; overflow:scroll;">';
+						var routeStr='';
+						var routeDate='';
+						for (i=0;i<routeListSupALL.length;i++){	
+							var routeS=routeListSupALL[i].split('|');
+							var routeName=routeS[0]	
+							routeDate=routeS[1]
+							
+							//alert(routeDate+'==='+current_date);
+							if (routeDate==current_date){
+								routeStr +='<label style="background:#81C0C0"><input type="radio" name="RadioRoute" value="'+routeName+'|'+routeDate+'" id="RadioGroup1_0"> '+routeName+'</label>'
+							}else if((routeDate==bak_date1)||(routeDate==bak_date2)||(routeDate==bak_date3)){
+								routeStr +='<label><input type="radio" name="RadioRoute" value="'+routeName+'|'+routeDate+'" id="RadioGroup1_0"> '+routeName+'</label>'
+							}else{
+								routeStr +='<label style="background:#ddeeee"><input type="radio" name="RadioRoute" value="'+routeName+'|'+routeDate+'|'+routeDate+'" id="RadioGroup1_0"> '+routeName+'</label>'
+							}						
 						}
-						cmListStr+='</select>'
-						localStorage.p_cmListToolsList=cmListStr;
-						$("#csmListToolsRecRec").empty();
-						$("#csmListToolsRecRec").append(localStorage.p_cmListToolsList).trigger('create');
+						//routeStr +=routeStr;
+						localStorage.p_routeListSup=routeStr;
 						
+						$('#routeList').empty();
+						$('#routeList').append(localStorage.p_routeListSup).trigger('create');
+							
+					}
+				}
+			}
+		})
+			
+			
+			
+		$("#town").html('Town		:		' + localStorage.p_select_town.replace('|','-'));
+		$(".errorChk").text("");
+		$.ajax({
+			url:apipath+'get_posm_sup?select_town='+localStorage.p_select_town+"&repID="+localStorage.p_repID,
+			success: function(result) {
+				var resultArray = result.split('rdrd');
+				if (resultArray[0]=='Success'){	
+					localStorage.p_posmCodeCMUsage=resultArray[3];			
+				//====CM/Sup	
+					if(localStorage.p_posmCodeCMUsage!=''){
+						var posmCodeCmSup=localStorage.p_posmCodeCMUsage.split('fdfd');
+						var posmStr = '<select id="posmCodeUsges" class="auto_break" name="posmCodeUsges" onchange="alloDetailsU();"><option selected="selected" value="">Select POSM</option>'
+						for (i=0;i<posmCodeCmSup.length;i++){	
+							posmCodeCmSupStr=posmCodeCmSup[i].split('-');								
+							posmStr += '<option value='+posmCodeCmSupStr[1]+'>'+posmCodeCmSupStr[0]+'-'+posmCodeCmSupStr[1]+'</option>'
+						}
+						posmStr+='</select>'
+						posmStr =posmStr
+						localStorage.p_posmCodeSup=posmStr;	
 						
-						
-						var recPOSMcode=localStorage.p_posmAll.split('fdfd');
-						var posmAllStr='<input list="posmAllRec" name="selectPOSM" id="selectPOSM"><datalist id="posmAllRec">';
-						
-						for (i=0;i<recPOSMcode.length;i++){								
+						$("#usagePOSMSelect").empty();
+						$("#usagePOSMSelect").append(localStorage.p_posmCodeSup).trigger('create');	
+					
+					}else{
+						$("#usagePOSMSelect").empty();
+					}
+				}
+			}
+		});
+		
+			
+/*},error: function(result){
+		$(".errorChk").text("Please check internet connection");
+	}	*/		
+			
+			
+		//alert (apipath+'get_posm_sup?select_town='+localStorage.p_select_town+"&repID="+localStorage.p_repID)
+		$.ajax({
+		    url:apipath+'get_posm_sup?select_town='+localStorage.p_select_town+"&repID="+localStorage.p_repID,
+		    success: function(result) {
+				var resultArray = result.split('rdrd');
+				if (resultArray[0]=='Success'){						
+					$("#bufferImageSelectTown").hide();
+					$('#townList').show();
+					localStorage.p_posmCodeAgency=resultArray[2];	
+					localStorage.p_agencyTaxarea=resultArray[4];
+					localStorage.p_posmAll=resultArray[5];
+					localStorage.p_csmListTools=resultArray[6];
+					
+					
+					var csmListTools=localStorage.p_csmListTools.split('fdfd');
+					var cmListStr = '<select id="csmToolsRecRec" class="auto_break" name="csmToolsRecRec" style="display:inline-block;"><option selected="selected" value="">Select CM</option>'
+					for (j=0;j<csmListTools.length;j++){	
+						cmListStr += '<option value="'+csmListTools[j]+'">'+csmListTools[j]+'</option>'
+					}
+					cmListStr+='</select>'
+					localStorage.p_cmListToolsList=cmListStr;
+					$("#csmListToolsRecRec").empty();
+					$("#csmListToolsRecRec").append(localStorage.p_cmListToolsList).trigger('create');
+					
+					
+					
+					var recPOSMcode=localStorage.p_posmAll.split('fdfd');
+					var posmAllStr='<input list="posmAllRec" name="selectPOSM" id="selectPOSM"><datalist id="posmAllRec">';					
+					for (i=0;i<recPOSMcode.length;i++){								
 						posmAllStr += '<option style="background-color:#FFF; border-top-color:#F03; border-bottom-color:#F03;"(\''+ recPOSMcode[i]+'\')"><a>'+ recPOSMcode[i]+'</a></option>'
 					}
-						posmAllStr +='</datalist>';
-						localStorage.p_posmAllStr=posmAllStr;
+					posmAllStr +='</datalist>';
+					localStorage.p_posmAllStr=posmAllStr;				
+					$('#posmAllStrListAllRec').empty();
+					$('#posmAllStrListAllRec').append(localStorage.p_posmAllStr).trigger('create');
 					
-						$('#posmAllStrListAllRec').empty();
-						$('#posmAllStrListAllRec').append(localStorage.p_posmAllStr).trigger('create');
-						
-					//=======Agency
-						if(localStorage.p_posmCodeAgency!=''){
+				//=======Agency
+					if(localStorage.p_posmCodeAgency!=''){
 						var posmCodeAgency=localStorage.p_posmCodeAgency.split('fdfd');
 						var posmAgencyStr = '<select id="posmCodeAgn" class="auto_break" name="posmCodeAgn" onchange="alloDetailsAgency();"><option selected="selected" value="">Select POSM</option>'
 						for (k=0;k<posmCodeAgency.length;k++){	
@@ -1286,36 +1373,69 @@ function townSelect(town){
 						localStorage.p_posmCode_agency=posmAgencyStr;
 						$("#agencyPOSMrec").empty();
 						$("#agencyPOSMrec").append(localStorage.p_posmCode_agency).trigger('create');	
-						}else{
-							$("#agencyPOSMrec").empty();
-							}
-						$("#townSelct").html("Town	:		"+localStorage.p_select_town);
-						$('#townSelctRec').html("Town	:		"+localStorage.p_select_town);
-						$('#townSelctdef').html("Town	:		"+localStorage.p_select_town);
-						$('#townSelctAgency').html("Town	:		"+localStorage.p_select_town);
-				
-						if (localStorage.p_rep_type != 'SUPERVISOR'){
-							//$("#menuBufferingImage").hide();
-							$("#townSelctAll").html("Town	:		"+localStorage.p_select_town);
-							$(".errorChk").text("");
-							url="#first_page";					
-							$.mobile.navigate(url);
-						}else{
-							//$("#menuBufferingImage").hide();
-							$(".errorChk").text("");
-							url="#supHome";					
-							$.mobile.navigate(url);
-							}
 					}else{
-						$(".errorChk").text("");
-						url="#homePage";					
-						$.mobile.navigate(url);
-						
-							
+						$("#agencyPOSMrec").empty();
 					}
+					$("#townSelct").html("Town	:		"+localStorage.p_select_town);
+					$('#townSelctRec').html("Town	:		"+localStorage.p_select_town);
+					$('#townSelctdef').html("Town	:		"+localStorage.p_select_town);
+					$('#townSelctAgency').html("Town	:		"+localStorage.p_select_town);
+			
 				}
-			  });
-		//}
+			}
+		});
+		if (localStorage.p_rep_type == 'CM'){
+			//$("#menuBufferingImage").hide();
+			$("#btn_receive").show();
+			$("#btn_usages").show();
+			$("#summarytbtn").show();
+			$("#leavebtn").show();
+			$("#reportbtn").show();
+			$("#noticeForCM").show();
+			$("#entryAgency").hide();
+			$("#reportbtnAgency").hide();
+			$("#townSelctAll").html("Town	:		"+localStorage.p_select_town);
+			$(".errorChk").text("");
+			url="#first_page";					
+			$.mobile.navigate(url);
+		}else if (localStorage.p_rep_type == 'AGENCY'){			
+			$("#btn_receive").hide();
+			$("#btn_usages").hide();
+			$("#summarytbtn").hide();
+			$("#leavebtn").hide();
+			$("#reportbtn").hide();
+			$("#noticeForCM").hide();
+			$("#entryAgency").show();
+			$("#reportbtnAgency").show();
+			$("#townSelctAll").html("Town	:		"+localStorage.p_select_town);
+			$(".errorChk").text("");
+			url="#first_page";					
+			$.mobile.navigate(url);
+		}else if (localStorage.p_rep_type == 'DFF'){			
+			$("#btn_receive").hide();
+			$("#btn_usages").hide();
+			$("#summarytbtn").hide();
+			$("#leavebtn").hide();
+			$("#reportbtn").hide();
+			$("#noticeForCM").hide();
+			$("#entryAgency").hide();
+			$("#reportbtnAgency").hide();
+			$("#dff_Usages_Audit").show();
+			$("#posmReportAuditSub").show();
+			$("#townSelctAll").html("Town	:		"+localStorage.p_select_town);
+			$(".errorChk").text("");
+			url="#first_page";					
+			$.mobile.navigate(url);
+		}else if (localStorage.p_rep_type == 'SUPERVISOR'){
+			$("#btn_receive").show();
+			$(".errorChk").text("");
+			url="#supHome";					
+			$.mobile.navigate(url);
+		}else{
+			$(".errorChk").text("");
+			url="#homePage";					
+			$.mobile.navigate(url);
+		}
 	}
 }
 
@@ -1976,129 +2096,26 @@ function get_bak_date_three() {
 	return datetime;
 }
 
-var outletSeperator='';
-var routeDate='';
-function usages(outletSep){
-	
-	/*outletSeperator=outletSep;
-	
-	$('#bufferImageRoute').show();	
-		$.ajax({
-			type: 'POST',
-			url:apipath+"getRoute?&townCodeName="+localStorage.p_select_town,
-																																																													
-			success: function(result) {	
-				var resultArray = result.split('rdrd');	
-				if(resultArray[0]=='Success'){
-					$('#bufferImageRoute').hide();	
-					//$('#bufferImageOutlet').hide();			
-					localStorage.p_routeListSupALL=resultArray[1];
-					
-					if(localStorage.p_routeListSupALL!=''){
-					var routeListSupALL=localStorage.p_routeListSupALL.split('||');
-					var routeStr='<ul data-role="listview" class="list" data-filter="true" data-inset="true" style="height:400px; overflow:scroll;">';
-					for (i=0;i<routeListSupALL.length;i++){								
-					routeStr += '<li style="background-color:#FFF; border-top-color:#F03; border-bottom-color:#F03;" onclick="sRoute(\''+ routeListSupALL[i]+'\')"><a>'+ routeListSupALL[i]+'</a></li>'
-				}
-					routeStr +='</ul>';
-					localStorage.p_routeListSup=routeStr;
-					
-					$('#routeList').empty();
-					$('#routeList').append(localStorage.p_routeListSup).trigger('create');*/
-					
-					var current_date=get_date();
-					var bak_date1=get_bak_date_one();
-					var bak_date2=get_bak_date_two();
-					var bak_date3=get_bak_date_three();
-					//alert(current_date+'=='+bak_date1+'=='+bak_date2+'=='+bak_date3);
-					outletSeperator=outletSep;
-					/*if (localStorage.p_rep_type!='CM'){	*/
-					$('#bufferImageRoute').hide();
-					$('#menuBufferingImage').show();	
-						//$('#bufferImageOutlet').show();	
-						//alert(apipath+"getRoutetest?&townCodeName="+localStorage.p_select_town);
-						$.ajax({
-							type: 'POST',
-							url:apipath+"getRoutetest?&townCodeName="+localStorage.p_select_town,
-																																																																	
-							success: function(result) {	
-								var resultArray = result.split('rdrd');	
-								if(resultArray[0]=='Success'){
-									$('#menuBufferingImage').hide();	
-									//$('#bufferImageOutlet').hide();			
-									localStorage.p_routeListSupALL=resultArray[1];
-									if(localStorage.p_routeListSupALL!=''){
-									var routeListSupALL=localStorage.p_routeListSupALL.split('||');
-									//var routeStr='<ul data-role="listview" class="list" data-filter="true" data-inset="true" style="height:400px; overflow:scroll;">';
-									var routeStr='';
-									for (i=0;i<routeListSupALL.length;i++){	
-										var routeS=routeListSupALL[i].split('|');
-										var routeName=routeS[0]	
-										routeDate=routeS[1]
-										
-										//alert(routeDate+'=='+current_date+'=='+bak_date1+'=='+bak_date2+'=='+bak_date3);
-										if (routeDate==current_date){
-											routeStr +='<label style="background:#81C0C0"><input type="radio" name="RadioRoute" value="'+routeName+'|'+routeDate+'" id="RadioGroup1_0"> '+routeName+'</label>'
-										}else if((routeDate==bak_date1)||(routeDate==bak_date2)||(routeDate==bak_date3)){
-											routeStr +='<label><input type="radio" name="RadioRoute" value="'+routeName+'|'+routeDate+'" id="RadioGroup1_0"> '+routeName+'</label>'
-										}else{
-											routeStr +='<label style="background:#ddeeee"><input type="radio" name="RadioRoute" value="'+routeName+'|'+routeDate+'" id="RadioGroup1_0"> '+routeName+'</label>'
-										}						
-									}
-									//routeStr +=routeStr;
-									localStorage.p_routeListSup=routeStr;
-									
-									$('#routeList').empty();
-									$('#routeList').append(localStorage.p_routeListSup).trigger('create');
-										
-					
-					
-					
-				
-					/*$(".placeholder").attr('placeholder',"asad");*/
-					$("#town").html('Town		:		' + localStorage.p_select_town.replace('|','-'));
-					$(".errorChk").text("");
-					$.ajax({
-					  url:apipath+'get_posm_sup?select_town='+localStorage.p_select_town+"&repID="+localStorage.p_repID,
-					  success: function(result) {
-						var resultArray = result.split('rdrd');
-							if (resultArray[0]=='Success'){	
-								localStorage.p_posmCodeCMUsage=resultArray[3];			
-							//====CM/Sup	
-							if(localStorage.p_posmCodeCMUsage!=''){
-							var posmCodeCmSup=localStorage.p_posmCodeCMUsage.split('fdfd');
-							var posmStr = '<select id="posmCodeUsges" class="auto_break" name="posmCodeUsges" onchange="alloDetailsU();"><option selected="selected" value="">Select POSM</option>'
-							for (i=0;i<posmCodeCmSup.length;i++){	
-								posmCodeCmSupStr=posmCodeCmSup[i].split('-');								
-								posmStr += '<option value='+posmCodeCmSupStr[1]+'>'+posmCodeCmSupStr[0]+'-'+posmCodeCmSupStr[1]+'</option>'
-							}
-							posmStr+='</select>'
-							posmStr =posmStr
-							localStorage.p_posmCodeSup=posmStr;	
-							
-							$("#usagePOSMSelect").empty();
-							$("#usagePOSMSelect").append(localStorage.p_posmCodeSup).trigger('create');	
-							
-								}else{
-									$("#usagePOSMSelect").empty();
-									}
-							}
-							}
-						});
-					
-					url="#page3";					
-					$.mobile.navigate(url);					
-					}else{
-						$(".errorChk").text("Route not Available");
-					}
-				}
-			},error: function(result){
-				$(".errorChk").text("Please check internet connection");
-			}
-		});
-		
+
+function usages(){	
+	if ((localStorage.selectedRoute=="") || (localStorage.selectedRoute=='undefined')){
+		$(".errorChk").text("");
+		//url="#outletPage";	
+		url="#page3";				
+		$.mobile.navigate(url);
+	}else{
+		$(".errorChk").text("");
+		url="#outletPage";	
+		//url="#page3";					
+		$.mobile.navigate(url);
+	}
 }
 
+function usages_panel(){	
+		$(".errorChk").text("");	
+		url="#page3";	
+		$.mobile.navigate(url);
+}
 /************************=====================================================================================********************/
 
 function selectRouteException() { 
@@ -2119,19 +2136,22 @@ function selectOutletException() {
 		
 		if (localStorage.fdSkip==0){
 			var url = "#fixedDisplay";
-			$.mobile.navigate(url);		
+			$.mobile.navigate(url);	
+			$(url).trigger('create');	
 		}else if (localStorage.qpdsSkip==0){
 			var url = "#qpdsPage";
 			$.mobile.navigate(url);
+			$(url).trigger('create');
 		}else{
 			var url = "#npdPage";
 			$.mobile.navigate(url);
+			$(url).trigger('create');
 		}
 		$.mobile.navigate(url);
-	//	$(url).trigger('create');
+		//$(url).trigger('create');
 	}
 }
-
+localStorage.selectedRoute='';
 function syncRoute() { 
 	var selected_route_exception=($("input:radio[name='RadioRouteEx']:checked").val())
 	var selected_route=($("input:radio[name='RadioRoute']:checked").val())
@@ -2168,8 +2188,8 @@ function syncRoute() {
 
 	localStorage.sync_date=sync_date;
 	
-	//alert(localStorage.sync_date);
-	var selected_routeArray = selected_route.split('|');	
+	//alert(selected_route.length);
+	var selected_routeArray = selected_route.split('|');
 	var selected_routeID=selected_routeArray[0];
 	var selected_date=selected_routeArray[1];
 	//var selected_routeDay=selected_routeArray[2];
@@ -2179,7 +2199,8 @@ function syncRoute() {
 	localStorage.routeIDName=selected_routeID;
 	localStorage.p_routeIDName=selected_routeID;
 	//alert(selected_date+'=='+sync_date_get);
-	if (selected_date==sync_date_get){
+	localStorage.selectedRoute=selected_routeID;
+	/*if (selected_date==sync_date_get){
 		localStorage.selectedRoute=selected_routeID;
 		localStorage.routeException_found='0';		
 	}else if(selected_date==bak_date1 || selected_date==bak_date2 || selected_date==bak_date3){
@@ -2187,7 +2208,7 @@ function syncRoute() {
 		localStorage.routeException_found='1';
 	}else{
 		localStorage.routeException_found='2';			
-	}
+	}*/
 	if(localStorage.selectedRoute!=undefined){
 		//alert(apipath+'sync_route?cm_id='+localStorage.p_repID+'&mobileNo='+localStorage.p_mobileNo+'&cm_pass='+localStorage.p_SyncPass+'&synccode='+localStorage.p_sync_code+'&route='+localStorage.selectedRoute+'&townCodeName='+localStorage.p_select_town);
 		localStorage.routeException='';
@@ -2240,6 +2261,7 @@ function syncRoute() {
 							
 							//==========Create outlet list
 							var outletSingleArray = outletList.split('rdrd');
+							//alert(outletSingleArray);
 							var outletSingleTtotal = outletSingleArray.length;
 							var outletStringShow=''
 							//alert(outletSingleArray);
@@ -2255,8 +2277,8 @@ function syncRoute() {
 								//depot_id=outletArray[5];
 								//schedule_date=outletArray[6];
 								channel=outletArray[2];
-								schedule_date=outletArray[3];
-								//alert(outletID);
+								scheduleDate=outletArray[3];
+								//alert(outletName+'==='+schedule_date);
 								
 								/*outletColor="";
 								if (outlet_c=='g'){
@@ -2269,8 +2291,23 @@ function syncRoute() {
 									outletColor='<img style="height:20px; width:20px" src="red.png">';
 								}*/
 								
-								outletStringShow=outletStringShow+'<label ><table width="100%" border="0"> <tr> <td width="5%">'+
-												'<input type="radio" name="RadioOutlet" value="'+outletID+'rdrd'+selected_date+'"></td><td width="60%">'+outletName +' | '+ outletID +' | '+  selected_date +' | '+channel +'</td> </tr></table></label>'
+								//alert(scheduleDate+'=='+current_date);
+								
+								if (scheduleDate==current_date){
+									outletStringShow=outletStringShow+'<label style="background:#81C0C0"><table width="100%" border="0"><tr><td width="5%">'+
+												'<input type="radio" name="RadioOutlet" value="'+outletID+'rdrd'+scheduleDate+'"></td><td width="60%">'+outletName +' | '+ outletID +' | '+  scheduleDate +' | '+channel +'</td> </tr></table></label>'
+												
+								}else if(scheduleDate==bak_date1 || scheduleDate==bak_date2 || scheduleDate==bak_date3){
+									outletStringShow=outletStringShow+'<label ><table width="100%" border="0"> <tr> <td width="5%">'+
+												'<input type="radio" name="RadioOutlet" value="'+outletID+'rdrd'+scheduleDate+'"></td><td width="60%">'+outletName +' | '+ outletID +' | '+  scheduleDate +' | '+channel +'</td> </tr></table></label>'
+												
+								}else{
+									outletStringShow=outletStringShow+'<label style="background:#ddeeee"><table width="100%" border="0"><tr><td width="5%">'+
+												'<input type="radio" name="RadioOutlet" value="'+outletID+'rdrd'+scheduleDate+'"></td><td width="60%">'+outletName +' | '+ outletID +' | '+  scheduleDate +' | '+channel +'</td> </tr></table></label>'
+								}
+												
+												
+												
 							/*<td width="15%">'+ total_visit+'/'+total_visit_done+' </td>	<td>'+outletColor+'</td>*/
 								
 							}
@@ -2291,17 +2328,17 @@ function syncRoute() {
 							$("#bufferImageRoute").hide();
 							$("#RSButton").show();
 							//alert(selected_date+'=='+sync_date_get);
-							if (selected_date==sync_date_get){
+							//if (selected_date==sync_date_get){
 								//localStorage.selectedRoute=selected_routeID;
-								localStorage.selectedRoute=selected_routeID;
-								localStorage.routeException_found='0';
+								//localStorage.selectedRoute=selected_routeID;
+								//localStorage.routeException_found='0';
 								
 								var url = "#outletPage";
 							   $.mobile.navigate(url);	
-							}else if(selected_date==bak_date1 || selected_date==bak_date2 || selected_date==bak_date3){
+							/*}else if(selected_date==bak_date1 || selected_date==bak_date2 || selected_date==bak_date3){
 								//localStorage.selectedRoute=selected_routeID;
 								localStorage.selectedRoute=selected_routeID;
-								localStorage.routeException_found='1';								
+								//localStorage.routeException_found='1';								
 								
 								var url = "#routeexceptionPage";
 								$.mobile.navigate(url);	
@@ -2309,14 +2346,12 @@ function syncRoute() {
 							}else {
 								//localStorage.selectedRoute=selected_routeID;
 								//localStorage.selectedRoute=selected_routeID;
-								localStorage.routeException_found='2';								
+								//localStorage.routeException_found='2';								
 								
 								var url = "#outletPage";
 								$.mobile.navigate(url);	
 								$('#routeexceptionPage').trigger('create');
-							}
-							
-							
+							}*/
 							
 							//=======end outlet list====================								
 						}
@@ -2361,12 +2396,11 @@ function select_outlet() {
 		localStorage.longitude=0;
 		
 		var selected_outletID_get=($("input:radio[name='RadioOutlet']:checked").val())	
-		//alert(selected_outletID_get);	
 		var selected_outletID_list = selected_outletID_get.split('rdrd');
-		
-		var selected_outletID=selected_outletID_list[0];	
-		var selected_date_get=selected_outletID_list[1];
-		//alert(selected_outletID+'===='+selected_date_get);
+		localStorage.selectedOutlet=selected_outletID_list[0];	
+		localStorage.p_selectedOutlet=selected_outletID_list[0];	
+		localStorage.selected_date=selected_outletID_list[1];
+		//alert(localStorage.selectedOutlet+'===='+localStorage.selected_date);
 		/*var saved_outlet_flag=0;
 		if  (localStorage.saved_req.length > 10){
 			var saved_req=localStorage.saved_req
@@ -2377,19 +2411,19 @@ function select_outlet() {
 		//alert(selected_outletID);
 		//localStorage.selected_outletID_get=selected_outletID_get;
 		//if (saved_outlet_flag==0){
-			if ((selected_outletID!=undefined) && (selected_outletID!='undefined')){
+			if ((localStorage.selectedOutlet!=undefined) && (localStorage.selectedOutlet!='undefined')){
 				
 				// ---------
 				$("#outletExString").html(localStorage.outletExStringShow);
 	
-				localStorage.selectedOutlet=selected_outletID;
+				/*localStorage.selectedOutlet=selected_outletID;
 				localStorage.p_selectedOutlet=selected_outletID;
 				
 				localStorage.selected_date_get=selected_date_get;
-				
+				//alert(localStorage.selected_date_get);
 				selected_date=selected_date_get;
 				localStorage.selected_date=selected_date.substr(0,10);
-				//alert(localStorage.selected_date);
+				//alert(localStorage.selected_date);*/
 				//--------
 				div_change();
 				
@@ -2414,41 +2448,61 @@ function select_outlet() {
 				var selected_outletinfo_all=selected_outletinfo_list_end[0];
 				//alert(selected_outletinfo_all);
 				
-					if (selected_outletinfo.length > 20){
-						var selected_outletinfo_show_list =  selected_outletinfo.split('<mhskusList>');
-						//alert(selected_outletinfo_show_list);
-						var outlet_show=selected_outletinfo_show_list[0]
-						var outlet_show_list =  outlet_show.split(',');
-						var channel=outlet_show_list[0];
-						var outlet=outlet_show_list[2] +" | "+outlet_show_list[1]+" | "+channel
-						//alert(outlet);
-						
-						var replace_str=outlet_show_list[0] + "," + outlet_show_list[1] + "," + outlet_show_list[2] 
-						var selected_outletinfo_all_final=selected_outletinfo_all.replace(replace_str,"");
-						
-						localStorage.selected_outletinfo_all_final=selected_outletinfo_all_final;
-						//alert(localStorage.selected_outletinfo_all_final);
-						
-						var outletStringShow='';
-						outletStringShow=outletStringShow+'<table width="100%" border="0" cellpadding="0" cellspacing="0">'
-						outletStringShow=outletStringShow+'<tr> <td colspan="3" style="color:#006A6A; font-size:18px;">'+outlet+'</td></tr> '
-						outletStringShow=outletStringShow+'</table>'						
-						
-						localStorage.outletinfoString=outletStringShow
-						localStorage.outletChannel=channel
-						localStorage.outletNameID=outlet
-						//alert(localStorage.outletNameID);
-						$("#outletName_show").html(localStorage.outletNameID);
-						$("#outletInfo").html(localStorage.outletinfoString);
-								  
-						//alert(localStorage.outletChannel);
-						syncOutlet();
-						
-						//}//endif
+				if (selected_outletinfo.length > 20){
+					var selected_outletinfo_show_list =  selected_outletinfo.split('<mhskusList>');
+					//alert(selected_outletinfo_show_list);
+					var outlet_show=selected_outletinfo_show_list[0]
+					var outlet_show_list =  outlet_show.split(',');
+					var channel=outlet_show_list[0];
+					var outlet=outlet_show_list[2] +" | "+outlet_show_list[1]+" | "+channel
+					//alert(outlet);
 					
-				}//end if
+					var replace_str=outlet_show_list[0] + "," + outlet_show_list[1] + "," + outlet_show_list[2] 
+					var selected_outletinfo_all_final=selected_outletinfo_all.replace(replace_str,"");
 					
-			 else{
+					localStorage.selected_outletinfo_all_final=selected_outletinfo_all_final;
+					//alert(localStorage.selected_outletinfo_all_final);
+					
+					var outletStringShow='';
+					outletStringShow=outletStringShow+'<table width="100%" border="0" cellpadding="0" cellspacing="0">'
+					outletStringShow=outletStringShow+'<tr> <td colspan="3" style="color:#006A6A; font-size:18px;">'+outlet+'</td></tr> '
+					outletStringShow=outletStringShow+'</table>'						
+					
+					localStorage.outletinfoString=outletStringShow
+					localStorage.outletChannel=channel
+					localStorage.outletNameID=outlet
+					//alert(localStorage.outletNameID);
+					$("#outletName_show").html(localStorage.outletNameID);
+					$("#outletInfo").html(localStorage.outletinfoString);
+							  
+					//alert(localStorage.outletChannel);
+					syncOutlet();
+					
+					/*var current_date=get_date();
+					var bak_date1=get_bak_date_one();
+					var bak_date2=get_bak_date_two();
+					var bak_date3=get_bak_date_three();
+					if (localStorage.selected_date==current_date){						
+						var url = "#outletPage";
+						$.mobile.navigate(url);
+						$(url).trigger('create');
+					}else if ((localStorage.selected_date==bak_date1)||(localStorage.selected_date==bak_date2)||(localStorage.selected_date==bak_date3)){
+						var url = "#outletexceptionPage";
+						$.mobile.navigate(url);
+						$(url).trigger('create');
+					}else{
+						$(".errorChk").text("");				
+						$(".sucMsgU").hide();
+						$("#btn_submit_usages").hide();
+						$("#allHide").hide();
+						$("#bufferImageU").hide();
+						$("#usageSubmitbufferImage").hide();
+						$("#NOutlet_button").hide();
+						var url = "#page5";
+						$.mobile.navigate(url);
+						$(url).trigger('create');	
+					}*/
+				}else{
 				  
 				  localStorage.show_cancel=0;
 				  
@@ -2479,6 +2533,7 @@ function div_change(){
 	$("#outletCancel").show();
 	$("#outletString").hide();
 	$("#menujpj").hide();
+	$("#menujpj1").hide();
 	
 	$("#backjpj").hide();
 	//$("#link_route").hide();
@@ -2515,22 +2570,12 @@ function cancel_outlet_next_next(){
 	$("#cpageOutletNameID").empty();
 	$("#cpageOutletNameID").append(localStorage.outletIDnameShow).trigger('create');
 	
-	if(localStorage.routeException_found == '2'){
-		$(".errorChk").text("");				
-		$(".sucMsgU").hide();
-		$("#btn_submit_usages").hide();
-		$("#allHide").hide();
-		$("#bufferImageU").hide();
-		$("#usageSubmitbufferImage").hide();
-		$("#NOutlet_button").hide();
-		var url = "#page5";
-		$.mobile.navigate(url);
-		$(url).trigger('create');
-	}else{
-		var url = "#cancelPage";
-		$.mobile.navigate(url);
+	//alert(localStorage.selected_date+'==='+current_date);
+	
+	var url = "#cancelPage";
+	$.mobile.navigate(url);
 	//location.reload();
-	}
+	//}
 }
 
 function cancel_outlet_Back(){
@@ -2598,6 +2643,17 @@ function cancel_outlet_Back(){
 	} //end else	
 }
 
+function menupage(){	
+	var check_outlet= localStorage.outletString;
+								
+	//localStorage.outletString=check_outlet.replace('<input type="radio" name="RadioOutlet" value="'+localStorage.selectedOutlet+'rdrd'+localStorage.selected_date_get+'">','<input type="radio" name="RadioOutlet" value="'+localStorage.selectedOutlet+'rdrd'+localStorage.selected_date_get+'" disabled="True">');
+	cancel_outlet();
+	var url = "#outletPage";
+	$.mobile.navigate(url);
+	//location.reload();
+	
+}
+
 function cancel_outlet(){
 	localStorage.show_cancel=0;
 	localStorage.outletNameID='';
@@ -2633,8 +2689,8 @@ function cancel_outlet(){
 	
 	localStorage.shop_data_ready="";
 	localStorage.place_data_ready="";
-	localStorage.key_data_ready="";
-	
+	localStorage.key_data_ready="";	
+		
 	localStorage.shop_next_flag=0;
 	localStorage.before_flag=0;
 	localStorage.fd_done_flag=0;
@@ -2658,10 +2714,13 @@ function cancel_outlet(){
 	$("#outletCancel").hide();
 	$("#outletString").show();
 	$("#menujpj").show();
+	$("#menujpj1").show();
 	$("#backjpj").show();
 	$("#link_route").show();
 	$("#outletWait").show();
 	$("#outletButton").hide();
+	$("#location_button").show();
+	$("#sub_button_div").show();
 	$("#outletName_show").html(localStorage.outletNameID);
 	//location.reload();
 }
@@ -3050,6 +3109,7 @@ function syncOutlet() {
 
 function outlet_next_page(){
 	shop_ready_data();
+	
 	var shop_image_name=$("#shop_image_name_hidden").val();
 	var shop_image_path=$("#shop_image_div_hidden").val();
 	//alert(shop_image_name);
@@ -3057,8 +3117,33 @@ function outlet_next_page(){
 		var url = "#cancelPage";
 		$.mobile.navigate(url);
 	}else{*/
-	    if ((localStorage.routeException_found == '1') && ((localStorage.outletException=='undefined') || (localStorage.outletException==undefined))){
+	    //if ((localStorage.routeException_found == '1') && ((localStorage.outletException=='undefined') || (localStorage.outletException==undefined))){
+		var current_date=get_date();
+		var bak_date1=get_bak_date_one();
+		var bak_date2=get_bak_date_two();
+		var bak_date3=get_bak_date_three();
+		/*if (localStorage.selected_date==current_date){						
+			var url = "#outletPage";
+			$.mobile.navigate(url);
+			$(url).trigger('create');
+		}else */
+		if ((localStorage.selected_date==bak_date1)||(localStorage.selected_date==bak_date2)||(localStorage.selected_date==bak_date3)){
 			var url = "#outletexceptionPage";
+			$.mobile.navigate(url);
+			$(url).trigger('create');	
+		/*}else if (localStorage.selected_date==current_date){						
+			var url = "#outletPage";
+			$.mobile.navigate(url);
+			$(url).trigger('create');*/
+		}else if(localStorage.selected_date!=current_date){
+			$(".errorChk").text("");				
+			$(".sucMsgU").hide();
+			$("#btn_submit_usages").hide();
+			$("#allHide").hide();
+			$("#bufferImageU").hide();
+			$("#usageSubmitbufferImage").hide();
+			$("#newOutletButton").hide();
+			var url = "#page5";
 			$.mobile.navigate(url);
 			$(url).trigger('create');
 		}else{
@@ -3066,18 +3151,21 @@ function outlet_next_page(){
 			if (localStorage.fdSkip==0){
 				var url = "#fixedDisplay";
 				$.mobile.navigate(url);
+				$(url).trigger('create');
 				$('#shop_show').find('input, textarea, button, select').attr('disabled','disabled');
 				$('#shop_show').addClass('disabledAnchor');
 				localStorage.shop_next_flag=1;
 			}else if (localStorage.qpdsSkip==0){
 				var url = "#qpdsPage";
 				$.mobile.navigate(url);
+				$(url).trigger('create');
 				$('#shop_show').find('input, textarea, button, select').attr('disabled','disabled');
 				$('#shop_show').addClass('disabledAnchor');	
 				localStorage.shop_next_flag=1;
-			}else {
+			}else{
 				var url = "#giftAckPage";
 				$.mobile.navigate(url);
+				$(url).trigger('create');
 				$('#shop_show').find('input, textarea, button, select').attr('disabled','disabled');
 				$('#shop_show').addClass('disabledAnchor');	
 				localStorage.shop_next_flag=1;
@@ -3223,9 +3311,9 @@ function fdisplay_ready_data() {
 		//var fdSLfdisplay_image_path=$("#fdSL_image_div_hidden_"+i.toString()).val(); 
 		var fdSLfdisplay_image_name=$("#fdSL_image_name_hidden_"+i.toString()).val(); 
 		//alert(fdSLfdisplay_image_name);
-		//if (fdSLfdisplay_image_path.length<10){
-			//image_flag=1
-		//}
+		if (fdSLfdisplay_image_name.length<10){
+			image_flag=1
+		}
 		//var fdSLfdisplay_image_path_before=$("#fdSL_image_div_hidden_"+i.toString()+"_before").val(); 
 		//var fdSLfdisplay_image_name_before=$("#fdSL_image_name_hidden_"+i.toString()+"_before").val();
 		//alert(fdSLfdisplay_image_path_before+'=='+fdSLfdisplay_image_name_before);
@@ -3610,6 +3698,7 @@ function mhskus_ready_data() {
 	}else{
 		var url = "#giftAckPage";
 		$.mobile.navigate(url);
+		$(url).trigger('create');
 		$('#mhskus').find('input, textarea, button, select').attr('disabled','disabled');
 		$('#mhskus').addClass('disabledAnchor');	
 		localStorage.mhskus_next_flag=1;
@@ -3644,6 +3733,7 @@ function gift_ready_data() {
 	if ((gift_month !='')){
 		var url = "#placePage";
 		$.mobile.navigate(url);
+		//$(url).trigger('create');
 		$('#gift').addClass('disabledAnchor');	
 		localStorage.gift_next_flag=1;
 	}else{
@@ -3727,15 +3817,16 @@ function place_ready_data() {
 	//alert(localStorage.place_data_ready);
 	place_page_set();
 	
-	//if ((place_image_path.length > 10)){
+	if ((image_name.length > 10)){
 		var url = "#keyTaskPage";
 		$.mobile.navigate(url);
-		$('#place_show').addClass('disabledAnchor');
+		//$(url).trigger('create');
+		$('#place_combo_show').addClass('disabledAnchor');
 		localStorage.place_next_flag=1;
-	/*}else{
+	}else{
 		var url = "#placePage";
 		$.mobile.navigate(url);
-	}*/
+	}
 }
 
 function place_page_set() { 
@@ -3875,8 +3966,10 @@ function onError(error) {
 }
 
 function buttonCheck(){
+	alert();
 	if ((localStorage.latlongSubmit==0) && (localStorage.placeLatLongCount >3)){
 		localStorage.latlongSubmit=1
+		alert('1');
 	}
 	if ((localStorage.latlongSubmit==0) & (localStorage.dataSubmit==0)){
 		$("#location_button").show();
@@ -3887,12 +3980,13 @@ function buttonCheck(){
 		
 		$("#lat").val(0);
 		$("#long").val(0);
+		alert('2');
 	}
 	if ((localStorage.latlongSubmit==1) && (localStorage.dataSubmit==0) && ((localStorage.fddataSubmit==0) || (localStorage.qpdsdataSubmit==0) || (localStorage.npddataSubmit==0) || (localStorage.giftdataSubmit==0) || (localStorage.placedataSubmit==0) || (localStorage.shopdataSubmit==0))){
 		$("#location_button").hide();
 		$("#sub_button_div").show();
 		//$("#usages_button_div").show();
-		
+		alert('3');
 
 		$("#image_up_button").hide();
 		$("#NOutlet_button").hide();	
@@ -3901,7 +3995,7 @@ function buttonCheck(){
 		$("#location_button").hide();
 		$("#sub_button_div").hide();
 		//$("#usages_button_div").show();
-		
+		alert('4');
 		$("#image_up_button").show();
 		$("#NOutlet_button").hide();
 	}
@@ -3909,7 +4003,7 @@ function buttonCheck(){
 		$("#location_button").hide();
 		$("#sub_button_div").hide();
 		//$("#usages_button_div").show();
-		
+		alert('5');
 		$("#image_up_button").hide();
 		$("#NOutlet_button").show();
 	}
@@ -3922,7 +4016,7 @@ function usages_data(){
 	$("#allHide").hide();
 	$("#bufferImageU").hide();
 	$("#usageSubmitbufferImage").hide();
-	$("#NOutlet_button").hide();		
+	$("#newOutletButton").hide();
 	var url = "#page5";
 	$.mobile.navigate(url);	
 }
@@ -4137,15 +4231,13 @@ function uploadPhoto(imageURI, imageName) {
 //ft.upload(imageURI, encodeURI("http://127.0.0.1:8000/postit/syncmobile/fileUploader/"),win,fail,options);
 
  //ft.upload(imageURI, encodeURI("http://e4.businesssolutionapps.com/mrepimage/syncmobile/fileUploader/"),win,fail,options);
- ft.upload(imageURI, encodeURI("http://i001.yeapps.com/image_hub/uniext/upload_image/"),win,fail,options);
+// ft.upload(imageURI, encodeURI("http://i001.yeapps.com/image_hub/uniext/upload_image/"),win,fail,options);
+ ft.upload(imageURI, encodeURI("http://i001.yeapps.com/image_hub/merchandizing_image/merchandizing_image/"),win,fail,options);
 }
 
 function win(r) {
-
 	file_upload_error = 0;
-	
-//	step_flag=0; //1 fd , 2 qpds, 3 gift
-	
+		
 	if (localStorage.step_flag==1){ //for fixed display
 		$("#submit_data").html("Fixed Display Synced Successfully");
 		localStorage.qpdsdataSubmit=1;
@@ -4232,18 +4324,6 @@ function fail(error) {
 	step_flag=0; //Reset step flag
 }
 
-
-
-function menupage(){	
-	var check_outlet= localStorage.outletString;
-								
-	//localStorage.outletString=check_outlet.replace('<input type="radio" name="RadioOutlet" value="'+localStorage.selectedOutlet+'rdrd'+localStorage.selected_date_get+'">','<input type="radio" name="RadioOutlet" value="'+localStorage.selectedOutlet+'rdrd'+localStorage.selected_date_get+'" disabled="True">');
-	cancel_outlet();
-	var url = "#outletPage";
-	$.mobile.navigate(url);
-	//location.reload();
-	
-}
 
 function submit_data() { 
 	var sync_date_get=get_date();
@@ -4367,10 +4447,10 @@ function submit_data() {
 						$("#submit_data_check").html(result);
 					}
 					if (result=='SUCCESS'){							
-						
+						alert('9');
 						localStorage.dataSubmit=1;
 						buttonCheck();
-						
+						alert('10');
 						localStorage.show_cancel=0;
 
 						//localStorage.outletString=check_outlet.replace('<input type="radio" name="RadioOutlet" value="'+localStorage.selectedOutlet+'rdrd'+localStorage.selected_date_get+'">','<input type="radio" name="RadioOutlet" value="'+localStorage.selectedOutlet+'rdrd'+localStorage.selected_date_get+'" disabled="True">');
@@ -4440,12 +4520,17 @@ function submit_data() {
 /************************=====================================================================================********************/
 
 /************************usage*page4********************/
-
 var selectOutletTownSup='';
 function routeListSup(outletTown){
-	
-	selectOutletTownSup=outletTown;
-	
+	/*-------------------------------edit suza 22-07-2019------------------------------*/
+	if(localStorage.p_rep_type=='AGENCY'){
+		selectOutletTownSup = localStorage.p_select_town;
+	}else if(localStorage.p_rep_type=='DFF'){
+		selectOutletTownSup = localStorage.p_select_town;
+	}else{
+		selectOutletTownSup=outletTown;
+		}
+	/*-------------------------------edit suza 22-07-2019------------------------------*/
 	$('.bufferImageSupCall').show();	
 		$.ajax({
 			type: 'POST',
@@ -4740,24 +4825,212 @@ function outletListSup(routeNameId){
 }
 var outletIDNameSupCall='';
 function supCallSubmitPage(outletIDNameSup){
-	$('.bufferImageSupCall').hide();
+	$('#dffsubmittedDetailsData').hide();
+	$("#dffsubmitfrom").hide();
 	outletIDNameSupCall=outletIDNameSup;
 	
-	$("#townJoinCall").html('Town	:		' + selectOutletTownSup.replace('|','-'));
-	$("#routeJoinCallShow").html('Route		:		' + routeNameIdSup);
-	$("#outletJoinCallShow").html('Outlet		:	'+ outletIDNameSupCall);
+	//alert(apipath+"getOutletDFFCheck?&outletCode="+outletIDNameSupCall);
+			$.ajax({
+			type: 'POST',
+			url:apipath+"getOutletDFFCheck?&outletCode="+outletIDNameSupCall,
+																																																													
+			success: function(result) {	
+				var syncResultArray = result.split('rdrd');	
+				if(syncResultArray[0]=='Success'){
+					$('#dffsubmittedDetailsData').show();
+					$("#dffsubmitfrom").hide();
+					localStorage.p_outletDetailsDFFCek=syncResultArray[1];
+					var posmOutletDetails = localStorage.p_outletDetailsDFFCek.split('fdfd');
+									
+					var posmAuditOutletStr='<span style="background-color:#409FFF; color:#FFF; margin:0px; padding:0px; display:block;">Submitted Data</span>';
+						for (i=0;i<posmOutletDetails.length;i++){					
+							posmOutletLi=posmOutletDetails[i].split('|');
+							
+							posmAuditOutletStr += '<p style="margin:0px; padding:0px; background-color:#FFF; color:#00376F; border:2px solid #409FFF;">'+"Shop Board Available : "+posmOutletLi[0]+' </br> '+"Brand : "+posmOutletLi[1]+' </br> '+"POSM type : "+posmOutletLi[2]+' </br> '+"Board Qty : "+posmOutletLi[3]+' </br> '+"Board Condition : "+posmOutletLi[4]+' </br> '+"Mega Hanger : "+posmOutletLi[5]+' </br> '+"Mega Hanger Condition : "+posmOutletLi[6]+' </br> '+"Plugin Dispenser : "+posmOutletLi[7]+' </br> '+"Plugin Dispenser Condition : "+posmOutletLi[8]+' </br> '+"Mini Solomon : "+posmOutletLi[9]+' </br> '+"Skin Care : "+posmOutletLi[10]+' </br> '+"Skin Care Condition : "+posmOutletLi[11]+' </br> '+"Hair Care : "+posmOutletLi[12]+' </br> '+"Hair Care Condition : "+posmOutletLi[13]+' </br> '+"Drug Store Posm : "+posmOutletLi[14]+' </br> '+"POSM Qty : "+posmOutletLi[15]+' </br> '+"POSM Condition : "+posmOutletLi[16]+' </br> '+"Tax Area : "+posmOutletLi[17]+'</p>'
+						}
+						//alert(posmAuditOutletStr);
+						localStorage.p_posmOuditOutletList=posmAuditOutletStr;
+						//alert (localStorage.p_posmOuditOutletList);		
+						$('#dffsubmittedDetailsData').empty();
+						$('#dffsubmittedDetailsData').append(localStorage.p_posmOuditOutletList).trigger('create');
+						if (localStorage.p_outletDetailsDFFCek ==''){
+							$('#dffsubmittedDetailsData').hide();
+							$("#dffsubmitfrom").show();
+							$('#posmOuditOutletList').empty();
+						}else{
+							$('#dffsubmittedDetailsData').show();
+							$("#posmAuditor").show();	
+							$("#dffsubmitfrom").hide();
+							}
+				}else{
+					$('.bufferImageSupCall').hide();
+					$(".errorChk").text("Please check internet connection");
+					}
+			}
+		});
 	
-	$(".sucMsg").text('');
-	$(".sucMsgSupCall").text('');
-	
-	$("#supCallDataHide").show();
-	$("#joinCallSubmitDataAll").hide();
-	$(".auditSubmitLocationBufferImage").hide();
-	url="#jointCall";
-	$.mobile.navigate(url);	
-	
-	
+	if(localStorage.p_rep_type == 'SUPERVISOR'){
+		$('.bufferImageSupCall').hide();
+		$("#townJoinCall").html('Town	:		' + selectOutletTownSup.replace('|','-'));
+		$("#routeJoinCallShow").html('Route		:		' + routeNameIdSup);
+		$("#outletJoinCallShow").html('Outlet		:	'+ outletIDNameSupCall);
+		
+		$(".sucMsg").text('');
+		$(".sucMsgSupCall").text('');
+		
+		$("#supCallDataHide").show();
+		$("#joinCallSubmitDataAll").hide();
+		$(".auditSubmitLocationBufferImage").hide();
+		url="#jointCall";
+		$.mobile.navigate(url);	
+		
+	}else if(localStorage.p_rep_type == 'AGENCY'){
+		
+		$("#routeSelectAbc").html('Route		:		' + routeNameIdSup);
+		$("#outletSelectAbc").html('Outlet		:	' + outletIDNameSupCall);
+		$("#sucMsgAgency").hide();
+		$("#bufferImageAgency").hide();
+		$("#btn_submit_Agency").hide();
+		$("#recDataAgency").hide();
+		$("#allHideAgency").hide();
+		$("#auditAgencySubmitBufferImage").hide();
+		
+		 agencyAuditPaintComboN='<fieldset data-theme="c" data-role="controlgroup" data-type="horizontal" data-mini="true"><input name="paint" id="radio-choice-h-6a" value="YES"  type="radio"><label for="radio-choice-h-6a">YES</label><input name="paint" id="radio-choice-h-6b"  value="NO" type="radio"><label for="radio-choice-h-6b">NO</label></fieldset>'
+		 
+		$("#agencyAuditPaintCombo").empty();
+		$("#agencyAuditPaintCombo").append(agencyAuditPaintComboN).trigger('create');
+
+		url="#page14";	
+		$.mobile.navigate(url);	
+			
+	}else if (localStorage.p_rep_type =='DFF'){
+		$("#townDFFAudit").html('Town	:		' + localStorage.p_select_town.replace('|','-'));
+		$("#routeSelectDFF").html('Route		:		' + routeNameIdSup);
+		$("#outletSelectDFF").html('Outlet		:	' + outletIDNameSupCall);
+		
+		var auditorBrand=localStorage.p_posmAll.split('fdfd');
+		var brandStr = '<select id="auditorPOSMBrandList" class="auto_break" name="auditorPOSMBrandList"  style="display:inline-block;"><option selected="selected" value="">Select Brand</option>'
+		for (i=0;i<auditorBrand.length;i++){	
+			brandStr += '<option value="'+auditorBrand[i]+'">'+auditorBrand[i]+'</option>'
+		}
+		brandStr+='</select>'
+		localStorage.p_auditorPOSMBrand=brandStr;
+		$("#auditorPOSMBrandListShow").empty();
+		$("#auditorPOSMBrandListShow").append(localStorage.p_auditorPOSMBrand).trigger('create');
+		
+		
+		if(localStorage.p_agencyTaxarea!=''){
+			var rectaxStrDFF=localStorage.p_agencyTaxarea.split('fdfd');
+			var posmStrTaxAreaDFF = '<select id="outletTaxAreaDFFListRec" class="auto_break" name="outletTaxAreaDFFListRec"  style="width:150px; display:inline-block;"><option selected="selected" value="">Select Tax Area</option>'
+			for (i=0;i<rectaxStrDFF.length;i++){	
+				
+				posmStrTaxAreaDFF += '<option value="'+rectaxStrDFF[i]+'">'+rectaxStrDFF[i]+'</option>'
+			}
+			posmStrTaxAreaDFF+='</select>'
+			posmStrTaxAreaDFF =posmStrTaxAreaDFF
+			localStorage.p_rectaxStrDFF=posmStrTaxAreaDFF;
+			
+			$("#TaxAreaDFFRec").empty();
+			$("#TaxAreaDFFRec").append(localStorage.p_rectaxStrDFF).trigger('create');	
+		}else{
+			$("#TaxAreaDFFRec").empty();
+			}
+
+		
+		boardCresteN = '<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true" ><input name="posmBoard" id="radio-choice-h-6a" value="YES"  type="radio" onchange="posmboardYesNo();"><label for="radio-choice-h-6a">YES</label><input name="posmBoard" id="radio-choice-h-6b"  value="NO" type="radio" onchange="posmboardYesNo();"><label for="radio-choice-h-6b">NO</label></fieldset>'
+
+		$("#boarAvailableCrest").empty();
+		$("#boarAvailableCrest").append(boardCresteN).trigger('create');
+		
+		posmCreateN = '<input type="hidden" id="rowID" name="rowID" /><fieldset data-role="controlgroup" data-type="horizontal" data-mini="true"><input name="auditPosm_type" id="radio-choice-h-6a" value="SHOPBOARD_BACKLIT"   type="radio"><label for="radio-choice-h-6a">Lit</label><input name="auditPosm_type" id="radio-choice-h-6b"  value="SHOPBOARD_NONLIT" type="radio"><label for="radio-choice-h-6b">Non-Lit</label></fieldset>'
+		
+		$("#posmConditionCrest").empty();
+		$("#posmConditionCrest").append(posmCreateN).trigger('create');
+		
+		posmBoardConditionN='<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true"><input name="boardCondition" id="radio-choice-h-6a" value="Good"  type="radio"><label for="radio-choice-h-6a">Good</label><input name="boardCondition" id="radio-choice-h-6b"  value="Bad" type="radio"><label for="radio-choice-h-6b">Bad</label></fieldset>';
+		
+		$("#posmBoardConditionCrest").empty();
+		$("#posmBoardConditionCrest").append(posmBoardConditionN).trigger('create');
+		
+		posmMegaHangerCrestN='<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true" ><input name="megaHanger" id="radio-choice-h-6a" value="YES"  type="radio" onchange="megaHangerYesNo();"><label for="radio-choice-h-6a">YES</label><input name="megaHanger" id="radio-choice-h-6b"  value="NO" type="radio" onchange="megaHangerYesNo();"><label for="radio-choice-h-6b">NO</label></fieldset>'
+		
+		$("#posmMegaHangerCrest").empty();
+		$("#posmMegaHangerCrest").append(posmMegaHangerCrestN).trigger('create');
+		
+		posmMegaHangerConditionCrestN='<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true"><input name="megaHangerCondition" id="radio-choice-h-6a" value="Good"  type="radio"><label for="radio-choice-h-6a">Good</label><input name="megaHangerCondition" id="radio-choice-h-6b"  value="Bad" type="radio"><label for="radio-choice-h-6b">Bad</label></fieldset>'
+		
+		$("#posmMegaHangerConditionCrest").empty();
+		$("#posmMegaHangerConditionCrest").append(posmMegaHangerConditionCrestN).trigger('create');
+		
+		posmPlugInDispenserCrestN='<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true" ><input name="plugInDispenser" id="radio-choice-h-6a" value="YES"  type="radio" onchange="plugInDispenserYesNo();"><label for="radio-choice-h-6a">YES</label><input name="plugInDispenser" id="radio-choice-h-6b"  value="NO" type="radio" onchange="plugInDispenserYesNo();"><label for="radio-choice-h-6b">NO</label></fieldset>'
+		
+		$("#posmPlugInDispenserCrest").empty();
+		$("#posmPlugInDispenserCrest").append(posmPlugInDispenserCrestN).trigger('create');
+		
+		plugInDispenserConditionCrestN='<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true"><input name="plugInDispenserCondition" id="radio-choice-h-6a" value="Good"  type="radio"><label for="radio-choice-h-6a">Good</label><input name="plugInDispenserCondition" id="radio-choice-h-6b"  value="Bad" type="radio"><label for="radio-choice-h-6b">Bad</label></fieldset>'
+		
+		$("#plugInDispenserConditionCrest").empty();
+		$("#plugInDispenserConditionCrest").append(plugInDispenserConditionCrestN).trigger('create');
+		
+		posmMiniSolomonCrestN='<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true" ><input name="miniSolomon" id="radio-choice-h-6a" value="YES"  type="radio" onchange="miniSolomonYesNo();"><label for="radio-choice-h-6a">YES</label><input name="miniSolomon" id="radio-choice-h-6b"  value="NO" type="radio" onchange="miniSolomonYesNo();"><label for="radio-choice-h-6b">NO</label></fieldset>'
+		
+		$("#posmMiniSolomonCrest").empty();
+		$("#posmMiniSolomonCrest").append(posmMiniSolomonCrestN).trigger('create');
+		
+		posmMiniSkinCareCrestN='<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true"><input name="skinCare" id="radio-choice-h-6a" value="YES"  type="radio" onchange="skinCareYesNo();"><label for="radio-choice-h-6a">YES</label><input name="skinCare" id="radio-choice-h-6b"  value="NO" type="radio" onchange="skinCareYesNo();"><label for="radio-choice-h-6b">NO</label></fieldset>'
+		
+		$("#posmMiniSkinCareCrest").empty();
+		$("#posmMiniSkinCareCrest").append(posmMiniSkinCareCrestN).trigger('create');
+		
+		posmMiniskinCareConditionCrestN='<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true"><input name="skinCareCondition" id="radio-choice-h-6a" value="Good"  type="radio"><label for="radio-choice-h-6a">Good</label><input name="skinCareCondition" id="radio-choice-h-6b"  value="Bad" type="radio"><label for="radio-choice-h-6b">Bad</label></fieldset>'
+		
+		$("#posmMiniskinCareConditionCrest").empty();
+		$("#posmMiniskinCareConditionCrest").append(posmMiniskinCareConditionCrestN).trigger('create');
+		
+		posmMiniHairCareCrestN='<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true"><input name="hairCare" id="radio-choice-h-6a" value="YES"  type="radio" onchange="hairCareYesNo();"><label for="radio-choice-h-6a">YES</label><input name="hairCare" id="radio-choice-h-6b"  value="NO" type="radio" onchange="hairCareYesNo();"><label for="radio-choice-h-6b">NO</label></fieldset>'
+		
+		$("#posmMiniHairCareCrest").empty();
+		$("#posmMiniHairCareCrest").append(posmMiniHairCareCrestN).trigger('create');
+		
+		posmhairCareConditionCrestN='<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true"><input name="hairCareCondition" id="radio-choice-h-6a" value="Good"  type="radio" ><label for="radio-choice-h-6a">Good</label><input name="hairCareCondition" id="radio-choice-h-6b"  value="Bad" type="radio" ><label for="radio-choice-h-6b">Bad</label></fieldset>'
+		
+		$("#posmhairCareConditionCrest").empty();
+		$("#posmhairCareConditionCrest").append(posmhairCareConditionCrestN).trigger('create');
+		
+		posmDrugStorePOSMCrestN='<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true" ><input name="drugStorePosm" id="radio-choice-h-6a" value="YES"  type="radio" onchange="drugStorePosmYesNo();"><label for="radio-choice-h-6a">YES</label><input name="drugStorePosm" id="radio-choice-h-6b"  value="NO" type="radio" onchange="drugStorePosmYesNo();"><label for="radio-choice-h-6b">NO</label></fieldset>'
+		
+		$("#posmDrugStorePOSMCrest").empty();
+		$("#posmDrugStorePOSMCrest").append(posmDrugStorePOSMCrestN).trigger('create');
+		
+		posmdrugStorePosmConditionCrestN='<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true"><input name="drugStorePosmCondition" id="radio-choice-h-6a" value="Good"  type="radio"><label for="radio-choice-h-6a">Good</label><input name="drugStorePosmCondition" id="radio-choice-h-6b"  value="Bad" type="radio"><label for="radio-choice-h-6b">Bad</label></fieldset>'
+		
+		$("#posmdrugStorePosmConditionCrest").empty();
+		$("#posmdrugStorePosmConditionCrest").append(posmdrugStorePosmConditionCrestN).trigger('create');
+		
+		$("#drugStorePosmQtyShow").hide();
+		$("#drugStorePosmConditionShow").hide();
+		$("#miniSolomonConditionSkinShow").hide();
+		$("#miniSolomonConditionHairShow").hide();
+		$("#skinCareConditionShow").hide();
+		$("#hairCareConditionShow").hide();
+		$("#plugInDispenserConditionShow").hide();
+		$("#megaHangerConditionShow").hide();
+		$("#posmAuditBrandShow").hide();
+		$("#posmAuditposmShow").hide();
+		$("#posmAuditBoardQtyShow").hide();
+		$("#posmAuditBoardConditionShow").hide();
+		$("#btn_submit_posmAudit").show();
+		$("#submit_data_posmAuditor_Save").show();
+		$("#allHideAuditPosm").show();
+		$("#posmAuditSubmitBufferImage").hide();
+		$("#msg_submit_posmAudit").hide();
+		$("#msg_Save_posmAudit").hide();
+		
+		url="#page18";	
+		$.mobile.navigate(url);	
 	}
+
+}
 
 function auditorOutlet(){
 		$(".errAudit").text("");
@@ -5287,7 +5560,7 @@ function outlet(outletIDName){
 						localStorage.p_outletDetailsLi=syncResultArray[7];
 						localStorage.p_outletTaxAreaDFF=syncResultArray[8];
 						
-						if(localStorage.p_outletTaxAreaDFF!=''){
+					/*	if(localStorage.p_outletTaxAreaDFF!=''){
 							var rectaxStrDFF=localStorage.p_outletTaxAreaDFF.split('|');
 							var posmStrTaxAreaDFF = '<select id="outletTaxAreaDFFListRec" class="auto_break" name="outletTaxAreaDFFListRec"  style="width:150px; display:inline-block;"><option selected="selected" value="">Select Tax Area</option>'
 							for (i=0;i<rectaxStrDFF.length;i++){	
@@ -5301,10 +5574,10 @@ function outlet(outletIDName){
 							$("#TaxAreaDFFRec").empty();
 							$("#TaxAreaDFFRec").append(localStorage.p_rectaxStrDFF).trigger('create');	
 						}else{
-								$("#TaxAreaDFFRec").empty();
-								}
+							$("#TaxAreaDFFRec").empty();
+						}*/
 						
-						var auditorBrand=localStorage.p_posmBrand.split(',');
+						/*var auditorBrand=localStorage.p_posmBrand.split(',');
 						var brandStr = '<select id="auditorPOSMBrandList" class="auto_break" name="auditorPOSMBrandList"  style="display:inline-block;"><option selected="selected" value="">Select Brand</option>'
 						for (i=0;i<auditorBrand.length;i++){	
 							brandStr += '<option value="'+auditorBrand[i]+'">'+auditorBrand[i]+'</option>'
@@ -5312,7 +5585,7 @@ function outlet(outletIDName){
 						brandStr+='</select>'
 						localStorage.p_auditorPOSMBrand=brandStr;
 						$("#auditorPOSMBrandListShow").empty();
-						$("#auditorPOSMBrandListShow").append(localStorage.p_auditorPOSMBrand).trigger('create');
+						$("#auditorPOSMBrandListShow").append(localStorage.p_auditorPOSMBrand).trigger('create');*/
 						
 						if (localStorage.p_posmOutletCode==''){
 								$('#posmOuditOutletList').hide();
@@ -5338,7 +5611,7 @@ function outlet(outletIDName){
 									$("#posmAuditor").show();	
 									$("#dffsubmitfrom").hide();
 									
-									var posmOutletDetails = localStorage.p_outletDetailsLi.split('fdfd');
+									/*var posmOutletDetails = localStorage.p_outletDetailsLi.split('fdfd');
 									
 									var posmAuditOutletStr='<span style="background-color:#900; color:#FFF; margin:0px; padding:0px; display:block;">Submitted Data</span>';
 										for (i=0;i<posmOutletDetails.length;i++){					
@@ -5350,7 +5623,7 @@ function outlet(outletIDName){
 										localStorage.p_posmOuditOutletList=posmAuditOutletStr;
 										//alert (localStorage.p_posmOuditOutletList);		
 										$('#dffsubmittedDetailsData').empty();
-										$('#dffsubmittedDetailsData').append(localStorage.p_posmOuditOutletList).trigger('create');
+										$('#dffsubmittedDetailsData').append(localStorage.p_posmOuditOutletList).trigger('create');*/
 									}
 							}
 					}	
@@ -5375,8 +5648,9 @@ function outlet(outletIDName){
 			$("#usageSubmitbufferImage").hide();		
 			if(localStorage.p_rep_type =='CM'){
 				$("#townAusa").html('Town	:		' + localStorage.p_select_town.replace('|','-'));	
+				$("#newOutletButton").hide();
 				url="#page5";					
-			}else if (localStorage.p_rep_type =='SUPERVISOR'){
+			}/*else if (localStorage.p_rep_type =='SUPERVISOR'){
 				$("#townJoinCall").html('Town	:		' + localStorage.p_select_town.replace('|','-'));
 				$("#routeJoinCallShow").html('Route		:		' + rName);
 				$("#outletJoinCallShow").html('Outlet		:	' + outletIDName);
@@ -5392,11 +5666,11 @@ function outlet(outletIDName){
 				$("#routeSelectDFF").html('Route		:		' + rName);
 				$("#outletSelectDFF").html('Outlet		:	' + outletIDName);
 				
-				/*localStorage.p_auditorPOSMBrand=brandStr;
+				localStorage.p_auditorPOSMBrand=brandStr;
 				$("#auditorPOSMBrandList").empty();
 				$("#auditorPOSMBrandList").append(localStorage.p_auditorPOSMBrand).trigger('create');*/
 				
-				boardCresteN = '<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true" ><input name="posmBoard" id="radio-choice-h-6a" value="YES"  type="radio" onchange="posmboardYesNo();"><label for="radio-choice-h-6a">YES</label><input name="posmBoard" id="radio-choice-h-6b"  value="NO" type="radio" onchange="posmboardYesNo();"><label for="radio-choice-h-6b">NO</label></fieldset>'
+				/*boardCresteN = '<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true" ><input name="posmBoard" id="radio-choice-h-6a" value="YES"  type="radio" onchange="posmboardYesNo();"><label for="radio-choice-h-6a">YES</label><input name="posmBoard" id="radio-choice-h-6b"  value="NO" type="radio" onchange="posmboardYesNo();"><label for="radio-choice-h-6b">NO</label></fieldset>'
 	
 				$("#boarAvailableCrest").empty();
 				$("#boarAvailableCrest").append(boardCresteN).trigger('create');
@@ -5505,12 +5779,13 @@ function outlet(outletIDName){
 
 				url="#page14";					
 				
-			}
+			}*/
 		$.mobile.navigate(url);
 }
 
 /*=======================usage page5============================*/
 function alloDetailsU(){
+	$("#newOutletButton").hide();
 	$("#qty").val("");
 	$(".errorChk").text("");
 	$(".errorChkP").text("");
@@ -5576,6 +5851,7 @@ function alloDetailsU(){
 }
 
 function submit_data_usages(){	
+	$("#newOutletButton").hide();
 	$("#btn_submit_usages").hide();
 	var d = new Date();	
 	var get_time=d.getTime();
@@ -5625,7 +5901,7 @@ function submit_data_usages(){
 					$(".sucMsgU").show();
 					$("#allHide").hide();
 					$("#btn_submit_usages").hide();
-					$("#NOutlet_button").show();
+					$("#newOutletButton").show();
 					uploadPhotoUsa(imagePathB, imageName2);
 					
 					$(".sucMsgU").text('Successfully Submitted');
@@ -5637,13 +5913,13 @@ function submit_data_usages(){
 						$(".errorChk").text("Usage Qty less then Balance Qty");
 						$("#allHide").show();
 						$("#btn_submit_usages").show();
-						$("#NOutlet_button").hide();
+						$("#newOutletButton").hide();
 				}else{
 					$("#usageSubmitbufferImage").hide();
 					$(".errorChk").text("Please check internet connection");															
 					$("#btn_submit_usages").show();
 					$("#allHide").show();
-					$("#NOutlet_button").hide();
+					$("#newOutletButton").hide();
 				}
 				
 			}//end result
@@ -5792,8 +6068,11 @@ function alloDetailsAgency(){
 }
 
 var acity=''
-function submit_data_agency(){
-	
+function submit_data_agency(){	
+	var outletStr = outletIDNameSupCall.split('|');
+	var outletName = outletStr[0];
+	var outletCode = outletStr[1];
+
 	$("#btn_submit_Agency").hide();
 	var posmCode=$("#posmCodeAgn").val();
 	var posmType=$("#agencyposm_type").val();
@@ -5832,13 +6111,12 @@ function submit_data_agency(){
 		$(".errorChk").text("Required Picture");
 		$("#btn_submit_Agency").show();	
 	}else{
-		
-		$("#auditAgencySubmitBufferImage").show();
-		//alert(apipath+"submitData_agency?&syncCode="+localStorage.p_sync_code+"&posmCode="+posmCode+"&repID="+localStorage.p_repID+"&repName="+localStorage.p_repName+"&mobileNo="+localStorage.p_mobileNo+"&town="+town+"&routeName="+rName+"&outlet_code="+outlet_code+"&outlet_name="+outlet_name+"&posmType="+posmType+"&brandAgency="+brandAgency+"&balanceAgency="+balanceAgency+"&allocationAgency="+allocationAgency+"&aqty="+aqty+"&aset="+aset+"&alight="+alight+"&apaint="+apaint+"&acity="+acity+"&imageName3="+imageName3);
+		$("#auditAgencySubmitBufferImage").show();    
+
+		//alert(apipath+"submitData_agency?&syncCode="+localStorage.p_sync_code+"&posmCode="+posmCode+"&repID="+localStorage.p_repID+"&repName="+localStorage.p_repName+"&mobileNo="+localStorage.p_mobileNo+"&town="+town+"&routeName="+routeNameIdSup+"&outlet_code="+outletCode+"&outlet_name="+outletName+"&posmType="+posmType+"&brandAgency="+brandAgency+"&balanceAgency="+balanceAgency+"&allocationAgency="+allocationAgency+"&aqty="+aqty+"&aset="+aset+"&alight="+alight+"&apaint="+apaint+"&acity="+acity+"&imageName3="+imageName3);
 		$.ajax({
 			type: 'POST',
-			url:apipath+"submitData_agency?&syncCode="+localStorage.p_sync_code+"&posmCode="+posmCode+"&repID="+localStorage.p_repID+"&repName="+localStorage.p_repName+"&mobileNo="+localStorage.p_mobileNo+"&town="+town+"&routeName="+rName+"&outlet_code="+outlet_code+"&outlet_name="+outlet_name+"&posmType="+posmType+"&brandAgency="+brandAgency+"&balanceAgency="+balanceAgency+"&allocationAgency="+allocationAgency+"&aqty="+aqty+"&aset="+aset+"&alight="+alight+"&apaint="+apaint+"&acity="+acity+"&imageName3="+imageName3,
-																																																													
+			url:apipath+"submitData_agency?&syncCode="+localStorage.p_sync_code+"&posmCode="+posmCode+"&repID="+localStorage.p_repID+"&repName="+localStorage.p_repName+"&mobileNo="+localStorage.p_mobileNo+"&town="+town+"&routeName="+routeNameIdSup+"&outlet_code="+outletCode+"&outlet_name="+outletName+"&posmType="+posmType+"&brandAgency="+brandAgency+"&balanceAgency="+balanceAgency+"&allocationAgency="+allocationAgency+"&aqty="+aqty+"&aset="+aset+"&alight="+alight+"&apaint="+apaint+"&acity="+acity+"&imageName3="+imageName3,																																																												
 			success: function(result) {			
 				if(result=='Success'){
 					
@@ -6205,7 +6483,7 @@ $.ajax({
 function recReport(){
 	//alert(select_townSupCombo);
 	if (localStorage.p_rep_type == 'CM'){
-		town=localStorage.p_town;
+		town=localStorage.p_select_town;
 		
 	}else{
 		town=select_townSupCombo;
@@ -6274,7 +6552,7 @@ function recUsage(){
 	var to_date=$("#to_date").val();
 	
 	if (localStorage.p_rep_type == 'CM'){
-		var town=localStorage.p_town;
+		var town=localStorage.p_select_town;
 		
 	}else{
 		var town=select_townSupCombo;
@@ -6339,13 +6617,10 @@ function recUsage(){
 }
 
 
-function stockReport(){
-	
-	
+function stockReport(){	
 	var selectPOSM=$("#selectPOSM").val();
 	if (localStorage.p_rep_type == 'CM'){
-		var town=localStorage.p_town;
-		
+		var town=localStorage.p_select_town;
 	}else{
 		var town=select_townSupCombo;
 	}
@@ -6418,7 +6693,7 @@ function stockOnHand(){
 	
 	var selectPOSM=$("#selectPOSM").val();
 	if (localStorage.p_rep_type == 'CM'){
-		var town=localStorage.p_town;
+		var town=localStorage.p_select_town;
 		
 	}else{
 		var town=select_townSupCombo;
@@ -6504,9 +6779,10 @@ function summary_report(){
 				$('#menuBufferingImage').hide();
 				$("#bufferImageAgencyA").hide();				
 				localStorage.p_usageReportA=getResult[1];
-				var agnRpt=localStorage.p_usageReportA.split('rdrd');			
-				var agentable='<table id="sumRepp">';
-					agentable +='<tr style="font-size:12px;" ><th>Date and Time</th><th>Outlet Code</th><th>Outlet Name</th><th>Tax Area</th><th>Brand</th><th>POSM Type</th><th>POSM Code</th><th>Usage Qty</th></tr>'
+				var agnRpt=localStorage.p_usageReportA.split('rdrd');
+		/*-------------------------------edit suza 22-07-2019------------------------------*/			
+				var agentable='<table id="sumRepp" width="100%">';
+					agentable +='<tr style="font-size:12px;" ><th>Date and Time</th><th>Outlet</th><th>Tax Area</th><th>POSM</th><th>Usage Qty</th></tr>'
 					for (i=0;i<agnRpt.length;i++){	
 						agnR=agnRpt[i].split('|');
 						date=agnR[0];
@@ -6517,10 +6793,11 @@ function summary_report(){
 						brand=agnR[5];
 						posmtype=agnR[6];
 						city_cor=agnR[7];
-				
-						agentable += '<tr style="font-size:11px;"><td>'+date+'</td><td>'+outletid+'</td><td>'+outletname+'</td><td>'+city_cor+'</td><td>'+brand+'</td><td>'+posmtype+'</td><td>'+posmcode+'</td><td style="text-align:center;">'+qty+'</td></tr>'
+						time=agnR[8];
+						agentable += '<tr style="font-size:11px;"><td>'+date+'</br>'+time+'</td><td>'+outletid+'</br>'+outletname+'</td><td>'+city_cor+'</td><td>'+posmcode+'</br>'+posmtype+'</br>'+brand+'</td><td style="text-align:center;">'+qty+'</td></tr>'
 					
 					}
+			/*-------------------------------edit suza 22-07-2019------------------------------*/
 					agentable +='</table>'
 					
 					
@@ -6569,9 +6846,10 @@ function stockAgency(){
 				$("#agencySTRimage").hide();				
 				localStorage.p_stockReportAbc=getResult[1];	
 				
-				var stockRPA=localStorage.p_stockReportAbc.split('rdrd');			
-				var cmRouteSTA='<table id="stockAgnP">';
-					cmRouteSTA += '<tr style="font-size:12px;"><th>Brand</th><th>POSM Type</th><th>POSM Code</th><th>Allocation</th><th>Usage</th><th>Stock</th></tr>'
+				var stockRPA=localStorage.p_stockReportAbc.split('rdrd');
+		/*-------------------------------edit suza 22-07-2019------------------------------*/			
+				var cmRouteSTA='<table id="stockAgnP" width="100%">';
+					cmRouteSTA += '<tr style="font-size:12px;"><th>POSM</th><th>Allocation</th><th>Usage</th><th>Stock</th></tr>'
 					for (i=0;i<stockRPA.length;i++){	
 						stockR=stockRPA[i].split('|');
 						brand=stockR[0];
@@ -6581,9 +6859,10 @@ function stockAgency(){
 						usage=stockR[4];
 						balance=stockR[5];	
 											
-						cmRouteSTA += '<tr style="font-size:11px;"><td>'+brand+'</td><td>'+posmType+'</td><td>'+posmCode+'</td><td style="text-align:center;">'+allocation+'</td><td style="text-align:center;">'+usage+'</td><td style="text-align:center;">'+balance+'</td></tr>'
+						cmRouteSTA += '<tr style="font-size:11px;"><td>'+posmCode+'</br>'+posmType+'</br>'+brand+'</td><td style="text-align:center;">'+allocation+'</td><td style="text-align:center;">'+usage+'</td><td style="text-align:center;">'+balance+'</td></tr>'
 					
 					}
+				/*-------------------------------edit suza 22-07-2019------------------------------*/	
 					cmRouteSTA +='</table>'
 					$('#stockAgencyS').empty();
 					$('#stockAgencyS').append(cmRouteSTA).trigger('create');
@@ -7174,15 +7453,16 @@ var posmQty='';
 var drugStorePosmCondition='';
 var cityCorp_DFF='';
 
-function submit_data_posmAuditor(){
-	
+function submit_data_posmAuditor(){	
 	
 	$("#submit_data_posmAuditor_Save").hide();
 	$("#btn_submit_posmAudit").hide();
 	$("#msg_submit_posmAudit").hide();
 	$("#msg_Save_posmAudit").hide();
-	var posmAuditOutSearch=outlet_codeDFF
 	
+	var outletStr = outletIDNameSupCall.split('|');
+	var outletName = outletStr[0];
+	var posmAuditOutSearch = outletStr[1];
 	
 	var d = new Date();	
 	var get_time=d.getTime();
@@ -7300,6 +7580,7 @@ function submit_data_posmAuditor(){
 					$("#auditorPOSMBrandListShow").empty();
 					$("#auditorPOSMBrandListShow").append(localStorage.p_auditorPOSMBrand).trigger('create');
 					$("#boarAvailableCrest").empty();
+
 					$("#boarAvailableCrest").append(boardCresteN).trigger('create');
 					$("#posmConditionCrest").empty();
 					$("#posmConditionCrest").append(posmCreateN).trigger('create');
@@ -7539,11 +7820,10 @@ function posmSaveAuditSub(){
 
 
 function leaveManageSUP(type){
-	
 	var leaveType = type;
 	if(leaveType==undefined){
 		leaveType=''
-		}
+	}
 	
 	$('.leaveCalculateBuffar').show();
 	
@@ -7572,7 +7852,7 @@ function leaveManageSUP(type){
 							status=leaveData[6];
 							if(status!='APPROVED'){
 										
-							cmRouteSTA += '<tr id="'+rowIDRecLeave+'" style="font-size:12px;"><td>'+cmID+'</td><td>'+type+'</td><td>'+frDate+'</td><td>'+toDate+'</td><td style="text-align:center;">'+days+'</td><td style="text-align:center;">'+status+'</td><td><input type="button" onClick="recDeleteFunc(\''+cmID+'|'+rowIDRecLeave+'|'+days+'|'+type+'\')" value="X" style="background-color:#f00; color:#fff;"></td><td><input type="button" onClick="recAcceptFunc(\''+cmID+'|'+rowIDRecLeave+'|'+days+'|'+type+'\')" value="Approve" style="background-color: #0E5887;color: #fff;"></td></tr>'
+							cmRouteSTA += '<tr id="'+rowIDRecLeave+'" style="font-size:12px; font-weight:bold;"><td>'+cmID+'</td><td>'+type+'</td><td>'+frDate+'</td><td>'+toDate+'</td><td style="text-align:center;">'+days+'</td><td style="text-align:center;">'+status+'</td><td style="text-align:center;"><input type="button" onClick="recDeleteFunc(\''+cmID+'|'+rowIDRecLeave+'|'+days+'|'+type+'\')" value="X" style="background-color:#f00; color:#fff;"></td><td style="text-align:center;"><input type="button" onClick="recAcceptFunc(\''+cmID+'|'+rowIDRecLeave+'|'+days+'|'+type+'\')" value="Approve" style="background-color: #0E5887;color: #fff;"></td></tr>'
 							}else{
 								cmRouteSTA += '<tr id="'+rowIDRecLeave+'" style="font-size:12px;"><td>'+cmID+'</td><td>'+type+'</td><td>'+frDate+'</td><td>'+toDate+'</td><td style="text-align:center;">'+days+'</td><td style="text-align:center;">'+status+'</td></tr>'
 								
@@ -7589,7 +7869,6 @@ function leaveManageSUP(type){
 							}
 				
 			}else{
-				
 				
 				$(".errorChk").text("No Leave Request");
 				$('.leaveCalculateBuffar').hide();
@@ -7775,7 +8054,7 @@ function onFail12(message) {
     alert('Failed because: ' + message);
 }
 
-function uploadPhotoSupCall(imageURI, ShopeForntImageA) { 	
+function uploadPhotoSupCall(imageURI, shopeForntImageA) { 	
 	var options = new FileUploadOptions();
     options.fileKey="upload";
     options.fileName=shopeForntImageA;
@@ -7798,7 +8077,7 @@ function win10(r) {
 
 function onfail0(r) {
 	$(".errorChk").text('');
-	$("#btn_submit_usages").hide();
+	//$("#btn_submit_usages").hide();
 }
 
 
@@ -7842,9 +8121,7 @@ function joinCallSubmitDataAll(){
 	getFixedDisplayAfter_path=$("#getFixedDisplayAfter_path").val();
 	getFixedDisplayAfter_name=$("#getFixedDisplayAfter_name").val();
 	
-	
-	
-	if(shopeFornt_path=='' || shopeFornt_path==undefined){
+	if(shopeFornt_name=='' || shopeFornt_name==undefined){
 		$(".errorChk").text("Required Shope Fornt Picture");
 		$("#joinCallSubmitDataAll").show();
 		
@@ -7883,8 +8160,7 @@ function joinCallSubmitDataAll(){
 					//$('input[name=joinNo2]:checked').val('');
 					//$('input[name=joinNo3]:checked').val('');
 					//$('input[name=joinNo4]:checked').val('');
-					$("#shopeFornt_path").val("");
-					$("#shopeFornt_name").val("");
+					
 					$("#supCall_lat").val(0);
 					$("#supCall_long").val(0);
 					$(".sucMsgSupCall").text('Successfully Submitted');
@@ -7909,12 +8185,16 @@ function joinCallSubmitDataAll(){
 					$(".errorChk").text("");
 					
 					uploadPhotoSupCall(shopeFornt_path, shopeFornt_name);
+					
+					$("#shopeFornt_path").val("");
+					$("#shopeFornt_name").val("");
+					document.getElementById('shopeForntImageA').src = '';
 						
 				}else{
-						$("#bufferImagejoinCallSubmitDataAll").hide();
-						$(".errorChk").text('Outlet Already Exists')
-						$(".sucMsgSupCall").text('');
-						$("#joinCallSubmitDataAll").hide();
+					$("#bufferImagejoinCallSubmitDataAll").hide();
+					$(".errorChk").text('Outlet Already Exists')
+					$(".sucMsgSupCall").text('');
+					$("#joinCallSubmitDataAll").hide();
 				}
 				
 			}//end result
