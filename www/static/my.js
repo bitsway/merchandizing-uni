@@ -1015,12 +1015,12 @@ function salfie_next_page(){
 		if (salfie_image_name.length < 10){							
 			var url = "#salfiePage";
 			$.mobile.navigate(url);
-		}else if(selfie_lat==0 || selfie_long==0){
+		/*}else if(selfie_lat==0 || selfie_long==0){
 			$("#attandanceButton").show();
 			$("#get_salfieButton").show();
 			$(".errMsg").html("Failed to Confirmed Location.");
 			var url = "#salfiePage";
-			$.mobile.navigate(url);
+			$.mobile.navigate(url);*/
 		}else{															
 			$("#bufferImageAtendanceLocation").show();
 			//alert(apipath+'syncAttendanceData?select_town='+localStorage.p_town+"&repID="+localStorage.p_repID+'&salfie_data='+salfie_image_name+'&selfie_lat='+selfie_lat+'&selfie_long='+selfie_long+'&attendance='+attendance);
@@ -4517,8 +4517,8 @@ function submit_data() {
 
 						//localStorage.outletString=check_outlet.replace('<input type="radio" name="RadioOutlet" value="'+localStorage.selectedOutlet+'rdrd'+localStorage.selected_date_get+'">','<input type="radio" name="RadioOutlet" value="'+localStorage.selectedOutlet+'rdrd'+localStorage.selected_date_get+'" disabled="True">');
 												
-						$("#outletString").empty();
-						$("#outletString").append(localStorage.outletString).trigger('create');
+						//$("#outletString").empty();
+						//$("#outletString").append(localStorage.outletString).trigger('create');
 						
 						//$("#submit_data_check").html("Success");
 						$("#submit_data").html('');
@@ -4539,8 +4539,9 @@ function submit_data() {
 						
 						upload_fd();
 						cancel_outlet();
-						var url = "#outletPage";
-						$.mobile.navigate(url);
+						buttonCheck();
+						//var url = "#outletPage";
+						//$.mobile.navigate(url);
 						//location.reload();
 						localStorage.dataSubmit=0
 					}	
