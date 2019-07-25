@@ -46,7 +46,7 @@ var joinCallQueNo4='';
 //localStorage.p_rep_type='';
 
 //---Online
-var apipath="http://w02.yeapps.com/postit/syncmobile_20190721/";
+var apipath="http://w02.yeapps.com/postit/syncmobile_20190725_1/";
 var apipath_image="http://w02.yeapps.com/postit/";
 
 //--- local
@@ -1015,12 +1015,12 @@ function salfie_next_page(){
 		if (salfie_image_name.length < 10){							
 			var url = "#salfiePage";
 			$.mobile.navigate(url);
-		/*}else if(selfie_lat==0 || selfie_long==0){
+		}else if(selfie_lat==0 || selfie_long==0){
 			$("#attandanceButton").show();
 			$("#get_salfieButton").show();
 			$(".errMsg").html("Failed to Confirmed Location.");
 			var url = "#salfiePage";
-			$.mobile.navigate(url);*/
+			$.mobile.navigate(url);
 		}else{															
 			$("#bufferImageAtendanceLocation").show();
 			//alert(apipath+'syncAttendanceData?select_town='+localStorage.p_town+"&repID="+localStorage.p_repID+'&salfie_data='+salfie_image_name+'&selfie_lat='+selfie_lat+'&selfie_long='+selfie_long+'&attendance='+attendance);
