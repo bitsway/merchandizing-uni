@@ -439,7 +439,7 @@ function syncBasic(){
 						townCode=townLi[0];
 						townName=townLi[1];
 						//onclick="sRoute(\''+cmRoute[i]+'\')"		
-						townStr += '<li id="town_select" style="background:linear-gradient(to top, #00468C -50%, #409FFF 100%); color:#fff; font-weight:1; border-radius:4px;" onclick="townSelect(\''+ townCode+'-'+ townName+'\')">'+ townCode+'-'+ townName+'</li>'
+						townStr += '<li id="town_select" style="background:linear-gradient(to top, #00468C -50%, #409FFF 100%); color:#fff; font-size:18px; border-radius:4px; font-weight:bold;" onclick="townSelect(\''+ townCode+'-'+ townName+'\')">'+ townCode+'-'+ townName+'</li>'
 						
 					}
 					townStr +='</ul>';
@@ -1278,9 +1278,9 @@ function townSelect(town){
 							
 							//alert(routeDate+'==='+current_date);
 							if (routeDate==current_date){
-								routeStr +='<label style="background:#81C0C0"><input type="radio" name="RadioRoute" value="'+routeName+'|'+routeDate+'" id="RadioGroup1_0"> '+routeName+'</label>'
+								routeStr +='<label style="background:#81C0C0"><input type="radio" name="RadioRoute" value="'+routeName+'|'+routeDate+'" id="RadioGroup1_0"> '+routeName+'|'+routeDate+'</label>'
 							}else if((routeDate==bak_date1)||(routeDate==bak_date2)||(routeDate==bak_date3)){
-								routeStr +='<label><input type="radio" name="RadioRoute" value="'+routeName+'|'+routeDate+'" id="RadioGroup1_0"> '+routeName+'</label>'
+								routeStr +='<label><input type="radio" name="RadioRoute" value="'+routeName+'|'+routeDate+'" id="RadioGroup1_0"> '+routeName+'|'+routeDate+'</label>'
 							}else{
 								routeStr +='<label style="background:#ddeeee"><input type="radio" name="RadioRoute" value="'+routeName+'|'+routeDate+'|'+routeDate+'" id="RadioGroup1_0"> '+routeName+'</label>'
 							}						
@@ -2313,7 +2313,7 @@ function syncRoute() {
 												
 								}else{
 									outletStringShow=outletStringShow+'<label style="background:#ddeeee"><table width="100%" border="0"><tr><td width="5%">'+
-												'<input type="radio" name="RadioOutlet" value="'+outletID+'rdrd'+scheduleDate+'"></td><td width="60%">'+outletName +' | '+ outletID +' | '+  scheduleDate +' | '+channel +'</td> </tr></table></label>'
+												'<input type="radio" name="RadioOutlet" value="'+outletID+'rdrd'+scheduleDate+'"></td><td width="60%">'+outletName +' | '+ outletID +' | '+channel +'</td> </tr></table></label>'
 								}
 												
 												
@@ -4098,7 +4098,7 @@ function upload_qpds(){
 	}
  	localStorage.qpdsdataSubmit=1;
 	if (localStorage.qpds_data_ready.length > 10){	
-		for (var i=0; i < localStorage.qpdsSlabTotal-1; i++){
+		for (var i=0; i < localStorage.qpdsTotal-1; i++){
 			var image_name=$("#qpdsSL_image_name_hidden_"+i.toString()).val();
 			var qpds_image_path=$("#qpdsSL_image_div_hidden_"+i.toString()).val();
 			
@@ -4565,6 +4565,8 @@ function submit_data() {
 						upload_fd();
 						//cancel_outlet();
 						//alert();
+						document.getElementById('shop_image_div').src = '';
+						$("#shop_image_name_hidden").val('');
 						$("#sub_button_div").show();
 						//buttonCheck();
 						//var url = "#outletPage";

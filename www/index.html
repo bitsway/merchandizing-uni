@@ -152,6 +152,7 @@
 		background-color:#FFF;
 		color:#00376F;
 		border:1px solid #0063C6;
+		font-weight:bold;
 		}	
 	#reportAudAgencyS> table{
 		border-collapse:collapse;
@@ -401,9 +402,9 @@
  <!--======================supHome==================-->   
  
 <div data-theme="d" data-role="page" id="supHome">
-	<div data-theme="c" data-role="header" data-position="fixed" style="border:none; background-color:#17b0b0;">
-        <a data-role="button" id="menuLogo" onClick="syncValueClean();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets" style="border:none; background-color:#fff;""><img src="menu.png" /></a>
-        <a data-role="button" id="menuLogo" onclick="backClick();" data-rel="back" class="ui-btn-right" data-transition="slide"><img src="back1.png" /></a>
+	<div data-theme="c" data-role="header" data-position="fixed" style="border:none; background-color:#17b0b0;"><!--background-color:#42A2F0;-->
+       <a data-role="button" id="menuLogo" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets"><img src="town3.png" /></a>
+        <a data-role="button" id="menuLogo" onclick="backClick();" data-rel="back" class="ui-btn-right" data-transition="slide" ><img src="back1.png" /></a>
         <h3 class="headerc">Menu</h3>
     </div>
     <div data-role="content" style="height:90%"> 
@@ -465,7 +466,7 @@
     </br>
     
     <div class="errorMsg" style="color:#F00;"></div>
-    <div data-role="" data-position="fixed" style="font-size:12px; color:#7A7A7A; background-color:#FFF; font-weight:1;" align="center">V-2019-07-26.1</div>
+    <div data-role="" data-position="fixed" style="font-size:12px; color:#7A7A7A; background-color:#FFF; font-weight:1;" align="center">V-20190726.2</div>
     </div>
     </br></br> </br></br> </br>
     <div><img src="bottom.png" alt="Post-it" style="height:65px; width:100%;"/></div>
@@ -549,20 +550,20 @@
         
          <tr style="background-color:#0062C4; color:#FFF; border-top:2px solid #FFF;"><td><div class="imageReceive" style="text-align:center;"></div></td>
          </tr>
-         <tr style="background-color:#0062C4; color:#FFF; border-top:2px solid #FFF;"><td><div class="brand"></div></td>
+         <tr style="background-color:#0062C4; color:#FFF; border-top:2px solid #FFF; font-weight:bold;"><td><div class="brand"></div></td>
          </tr>
        
         <tr>
-        	<td style="background-color:#0062C4; color:#FFF; border-top:2px solid #FFF;"><div class="posm_type"></div> </td>
+        	<td style="background-color:#0062C4; color:#FFF; border-top:2px solid #FFF; font-weight:bold;"><div class="posm_type"></div> </td>
         </tr>
         <tr>
-        	<td style="background-color:#0062C4; color:#FFF; border-top:2px solid #FFF;"><div class="allocation"> </div></td>
+        	<td style="background-color:#0062C4; color:#FFF; border-top:2px solid #FFF; font-weight:bold;"><div class="allocation"> </div></td>
         </tr>
         <tr>
-        	<td style="background-color:#0062C4; color:#FFF; border-top:2px solid #FFF;"><div class="due"></div></td>
+        	<td style="background-color:#0062C4; color:#FFF; border-top:2px solid #FFF; font-weight:bold;"><div class="due"></div></td>
         </tr>
         <tr>
-        	<td style="background-color:#0062C4; color:#FFF; border-top:2px solid #FFF;"><div class="balance_qty"></div><input type="hidden" class="alcId" name="alcId" /></td>
+        	<td style="background-color:#0062C4; color:#FFF; border-top:2px solid #FFF; font-weight:bold;"><div class="balance_qty"></div><input type="hidden" class="alcId" name="alcId" /></td>
         </tr>
     </table>
      </div>
@@ -585,7 +586,7 @@
    <table width="100%" border="1" cellpadding="1" cellspacing="1" id="target_table" class="sample_border">
     </table>
     -->
-    <a data-role="button" id="submitDataTarget" onClick="submitDataTargetCM();" class="ui-btn" style="background:linear-gradient(to top, #00468C -50%, #409FFF 100%); color:#fff; font-weight:1; border-radius:4px; font-size:18px;">SUBMIT</a>
+    <a data-role="button" id="submitDataTarget" onClick="submitDataTargetCM();" class="ui-btn" style="background:linear-gradient(to top, #00468C -50%, #409FFF 100%); color:#fff; font-weight:bold; font-size:24px; border-radius:4px;">SUBMIT</a>
     
         </div>
       
@@ -715,12 +716,12 @@
     </div>
     <div data-role="content" style="height:90%">
     <br /><br />
-    <button data-role="button" id="" onclick="receive('Receive')" href="#" data-transition="slide" style="background:linear-gradient(to top, #00468C -50%, #409FFF 100%); color:#fff; font-weight:1; border-radius:4px;">Receive </button> 
+    <button data-role="button" id="" onclick="receive('Receive')" href="#" data-transition="slide" style="background:linear-gradient(to top, #00468C -50%, #409FFF 100%); color:#fff; font-weight:bold; font-size:18px; border-radius:4px;">Receive </button> 
     
     <!--<a data-role="button" id="" onclick="issue('Receive');" class="ui-btn" style="background:linear-gradient(to top, #5BADFF -50%, #5BADFF 100%); color:#fff;  font-weight:1; border-radius:4px;">Issu & Allocation</a>-->
-    <button data-role="button" id="allocationSup" onclick="targetSetCMGo();" href="#" data-transition="slide" style="background:linear-gradient(to top, #00468C -50%, #409FFF 100%); color:#fff; font-weight:1; border-radius:4px;">CM Target </button> 
+    <button data-role="button" id="allocationSup" onclick="targetSetCMGo();" href="#" data-transition="slide" style="background:linear-gradient(to top, #00468C -50%, #409FFF 100%); color:#fff; font-weight:bold; font-size:18px; border-radius:4px;">CM Target </button> 
     <!--<button data-role="button" id="btn_stockSup" onclick="stockReport();" href="#" class="ui-btn" data-transition="slide" style="background:linear-gradient(to top, #00468C -50%, #409FFF 100%); color:#fff; font-weight:1; border-radius:4px;">On Hand Stock</button> -->
-    <button data-role="button" id="merchandizingToolsSup" onclick="merchandizingToolsSup();" href="#" data-transition="slide" style="background:linear-gradient(to top, #00468C -50%, #409FFF 100%); color:#fff; font-weight:1; border-radius:4px;">Merchandizing Tool </button> 
+    <button data-role="button" id="merchandizingToolsSup" onclick="merchandizingToolsSup();" href="#" data-transition="slide" style="background:linear-gradient(to top, #00468C -50%, #409FFF 100%); color:#fff; font-weight:bold; font-size:18px; border-radius:4px;">Merchandizing Tool </button> 
     
     </div>
    <!-- <div data-theme="d" data-role="footer" data-position="fixed" style=" background-color:#fff; border:none;">
@@ -777,27 +778,27 @@
         
          <tr style="background-color:#0062C4; color:#FFF; border-top:2px solid #FFF;"><td><div class="imageReceive" style="text-align:center;"></div></td>
          </tr>
-         <tr style="background-color:#0062C4; color:#FFF; border-top:2px solid #FFF;"><td><div class="brand"></div></td>
+         <tr style="background-color:#0062C4; color:#FFF; border-top:2px solid #FFF; font-weight:bold;"><td><div class="brand"></div></td>
          </tr>
        
         <tr>
-        	<td style="background-color:#0062C4; color:#FFF; border-top:2px solid #FFF;"><div class="posm_type"></div> </td>
+        	<td style="background-color:#0062C4; color:#FFF; border-top:2px solid #FFF; font-weight:bold;"><div class="posm_type"></div> </td>
         </tr>
         <tr>
-        	<td style="background-color:#0062C4; color:#FFF; border-top:2px solid #FFF;"><div class="allocation"></div></td>
+        	<td style="background-color:#0062C4; color:#FFF; border-top:2px solid #FFF; font-weight:bold;"><div class="allocation"></div></td>
         </tr>
         <tr>
-        	<td style="background-color:#0062C4; color:#FFF; border-top:2px solid #FFF;"><div class="due"></div></td>
+        	<td style="background-color:#0062C4; color:#FFF; border-top:2px solid #FFF; font-weight:bold;"><div class="due"></div></td>
         </tr>
         <tr>
-        	<td style="background-color:#0062C4; color:#FFF; border-top:2px solid #FFF;"><div class="balance_qty"></div></td>
+        	<td style="background-color:#0062C4; color:#FFF; border-top:2px solid #FFF; font-weight:bold;"><div class="balance_qty"></div></td>
         </tr>
     </table>
         </div>
         
         <table table width="100%" class="ui-body-d ui-shadow table-stripe ui-responsive" style="cell-spacing:0px; background:linear-gradient(to top, #ff -50%, #fff 100%); color:#003264; font-weight:1; border-top:1px solid #FFF;"  data-role="table" data-theme="d"  data-mode="display:none">
         	<tr style=" background-color:#0062C4;">
-                 <td style="width:50%; vertical-align:middle; color:#FFF;";>Receive Qty :</td>
+                 <td style="width:50%; vertical-align:middle; color:#FFF; font-weight:bold;";>Receive Qty :</td>
                  <td style="padding:padding:0px 6px 0px 0px; width:50%;"><input type="number" id="received" name="received" style="background-color:#fff; color:#000;"/> <input type="hidden" class="alcId" name="alcId" /></td>
                  
               </tr>
@@ -812,7 +813,7 @@
         </table>  
          <table table width="100%" class="ui-body-d ui-shadow table-stripe ui-responsive" style="cell-spacing:0px; background:linear-gradient(to top, #ff -50%, #fff 100%); color:#003264; font-weight:1;"  data-role="table" data-theme="d"  data-mode="display:none">
         	<tr style=" background-color:#0062C4;">
-                 <td style="width:50%; vertical-align:middle; color:#FFF;";>Defective Qty :</td>
+                 <td style="width:50%; vertical-align:middle; color:#FFF; font-weight:bold;";>Defective Qty :</td>
                 <td style="padding:padding:0px 6px 0px 0px; width:50%;"><input type="number" id="def_qty" name="def_qty" style="background-color:#fff; color:#000;""/><input type="hidden" id="ualcId" name="alcId" /></td>
               </tr>
              <tr style="background: linear-gradient(to top, #0062C4 -50%, #0062C4 50%);">
@@ -825,7 +826,7 @@
               </tr>     
         </table>  
         </div> 
-        <a data-role="button" id="btn_submit_receive" onClick="submit_data_receive();" class="ui-btn" style="background:linear-gradient(to top, #00468C -50%, #409FFF 100%); color:#fff; font-weight:bold; border-radius:4px; font-size:18px;">Submit</a>
+        <a data-role="button" id="btn_submit_receive" onClick="submit_data_receive();" class="ui-btn" style="background:linear-gradient(to top, #00468C -50%, #409FFF 100%); color:#fff; font-weight:bold; border-radius:4px; font-size:24px;">SUBMIT</a>
          <div id="receiveSubmitbufferImage" style="text-align:center;"><img src="running.gif" /></div>
          <div class="sucMsgR" style="color:#0062C4; font-size:20px; text-align:center; padding:30px 0px 30px 0px; border-radius:10px;"><!--<img src="submitLogo.png"/>-->Submitted Successfully </div>
     <div class="errorChk" style="color:#F00;;"></div>
@@ -1239,7 +1240,7 @@
         </br>
         </br>
         <div id="usages_button_div">
-        <a data-role="button" onClick="usages_data();" >Execution</a>
+        <a data-role="button" onClick="usages_data();" >POSM Execution</a>
         </div> 
         <br />
         <br />
@@ -1340,16 +1341,16 @@
             	 <tr style="background-color:#0062C4; color:#FFF; border-top:2px solid #FFF;">
                     <td><div id="imageExecution" style="text-align:center;"></div></td>
                 </tr>
-            	<tr style="background-color:#0062C4; color:#FFF; border-top:2px solid #FFF;">
+            	<tr style="background-color:#0062C4; color:#FFF; border-top:2px solid #FFF; font-weight:bold;">
                     <td><div id="ubrand"></div></td>
                 </tr>
-                <tr style="background-color:#0062C4; color:#FFF; border-top:2px solid #FFF;">
+                <tr style="background-color:#0062C4; color:#FFF; border-top:2px solid #FFF; font-weight:bold;">
                     <td><div id="uposm_type" ></div> </td>
                 </tr>
-                <tr style="background-color:#0062C4; color:#FFF; border-top:2px solid #FFF;">
+                <tr style="background-color:#0062C4; color:#FFF; border-top:2px solid #FFF; font-weight:bold;">
                		 <td><div id="uallocation"></div></td>
                 </tr>
-                <tr style="background-color:#0062C4; color:#FFF; border-top:2px solid #FFF;">
+                <tr style="background-color:#0062C4; color:#FFF; border-top:2px solid #FFF; font-weight:bold;">
                		 <td><div id="balance"></div></td>
                 </tr>
                
@@ -1358,7 +1359,7 @@
         
         <table table width="100%" class="ui-body-d ui-shadow table-stripe ui-responsive" style="cell-spacing:0px; background:linear-gradient(to top, #ff -50%, #fff 100%); color:#003264; font-weight:1; border-top:1px solid #FFF;"  data-role="table" data-theme="d"  data-mode="display:none">
         	<tr style=" background-color:#0062C4;">
-                 <td style="width:50%; vertical-align:middle; color:#FFF;";>Execution Qty :</td>
+                 <td style="width:50%; vertical-align:middle; color:#FFF; font-weight:bold;" font-weight:bold;;>Execution Qty :</td>
                  <td style="padding:0px 6px 0px 0px; width:50%;"><input type="number" id="qty" name="qty" style="background-color:#fff; color:#000;"/> <input type="hidden" id="ualcId" name="ualcId" /></td>
                  
               </tr>
@@ -1374,7 +1375,7 @@
             
         </div>   
        
-        <a data-role="button" id="btn_submit_usages" onClick="submit_data_usages();" class="ui-btn" style="background:linear-gradient(to top, #00468C -50%, #409FFF 100%); color:#fff; font-weight:bold; border-radius:4px; font-size:18px;">SUBMIT</a>
+        <a data-role="button" id="btn_submit_usages" onClick="submit_data_usages();" class="ui-btn" style="background:linear-gradient(to top, #00468C -50%, #409FFF 100%); color:#fff; font-weight:bold; border-radius:4px; font-size:24px;">SUBMIT</a>
         <div id="usageSubmitbufferImage" style="text-align:center;"><img src="running.gif" /></div>
         <div class="sucMsgU" style="color:#5BADFF; font-size:20px; text-align:center; padding-top:20px"><!--<img src="submitLogo.png"/>-->Submitted Successfully</div> 
         <div id="newOutletButton">
@@ -1592,10 +1593,10 @@
      <table table width="100%">
         	<tr style="background-color:#FFF;">
                  <td>
-                	<a data-role="button" id="" onClick="psVisitSumB();" class="hoverButton" style="width:140px;">PS VISIT<br/>SUMMARY</a>
+                	<a data-role="button" id="" onClick="psVisitSumB();" class="hoverButton" style="width:140px; font-weight:bold; font-size:18px;">PS VISIT<br/>SUMMARY</a>
                  </td>
                  <td>
-                	<a data-role="button" id="" onClick="psInsSumB();" class="hoverButton" style="width:140px;">POSM INSTALLATION<br/>SUMMARY</a>
+                	<a data-role="button" id="" onClick="psInsSumB();" class="hoverButton" style="width:140px; font-weight:bold; font-size:18px;">POSM INSTALLATION<br/>SUMMARY</a>
                  </td>
               </tr>
          </table>
@@ -1648,11 +1649,11 @@
     <table width="100%">
         	<tr style="background-color:#FFF;">
                  <td>
-                	<a data-role="button" id="" onClick="anualLeave();" class="hoverButton" style=" width:140px;">Annual Leave</a>
+                	<a data-role="button" id="" onClick="anualLeave();" class="hoverButton" style=" width:140px; font-weight:bold; font-size:18px;">Annual Leave</a>
                  	
                  </td>
                  <td>
-                	<a data-role="button" id="" onClick="sickLeave();" class="hoverButton" style="width:140px;">Sick Leave</a>
+                	<a data-role="button" id="" onClick="sickLeave();" class="hoverButton" style="width:140px; font-weight:bold; font-size:18px;">Sick Leave</a>
                  	
                  </td>
               </tr>
@@ -1751,7 +1752,7 @@
 <!--------------------------------Report Viev page10----------------------->
 <div data-theme="d" data-role="page" id="page10">
 	<div data-theme="c" data-role="header" data-position="fixed" style="border:none; background-color:#17b0b0;">
-         <a data-role="button" id="menuLogo" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets" style="border:none; background-color:#fff;" ><img src="Home.png" /></a>
+         <a data-role="button" id="menuLogo" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets"><img src="town3.png" /></a>
         <a data-role="button" id="menuLogo" onclick="backClick();" data-rel="back" class="ui-btn-right" data-transition="slide"><img src="back1.png" /></a>
     	<h3 class="headerc">Receive Reports</h3>
     </div>
@@ -1804,7 +1805,7 @@
 <!--------------------------------------------------------------->
 <div data-theme="d" data-role="page" id="page12">
 	<div data-theme="c" data-role="header" data-position="fixed" style="border:none; background-color:#17b0b0;">
-         <a data-role="button" id="menuLogo" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets" style="border:none; background-color:#fff;" ><img src="Home.png" /></a>
+         <a data-role="button" id="menuLogo" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets"><img src="town3.png" /></a>
         <a data-role="button" id="menuLogo" onclick="backClick();" data-rel="back" class="ui-btn-right" data-transition="slide"><img src="back1.png" /></a>
     	<h3 class="headerc">Execution Details</h3>
     </div>
