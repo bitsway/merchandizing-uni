@@ -4277,7 +4277,7 @@ function fail(error) {
 }
 
 function check_step() {
-	/*if (localStorage.step_flag==0){
+	if (localStorage.step_flag==0){
 		upload_fd();
 	}
 	if (localStorage.step_flag==1){
@@ -4297,7 +4297,7 @@ function check_step() {
 	}
 	if (localStorage.step_flag==6){
 		cancel_outlet();
-	}*/
+	}
 	
 		
 	var url = "#outletSelectPage";
@@ -4510,7 +4510,7 @@ function submit_data() {
 						
 						// Enable disable div end
 						
-						//upload_fd();
+						upload_fd();
 						//cancel_outlet();
 						//alert();
 						$("#sub_button_div").show();
