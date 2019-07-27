@@ -3202,22 +3202,22 @@ function outlet_next_page(){
 				var url = "#fixedDisplay";
 				$.mobile.navigate(url);
 				$(url).trigger('create');
-				$('#shop_show').find('input, textarea, select').attr('disabled','disabled');
-				$('#shop_show').addClass('disabledAnchor');
+				//$('#shop_show').find('input, textarea, select').attr('disabled','disabled');
+				//$('#shop_show').addClass('disabledAnchor');
 				localStorage.shop_next_flag=1;
 			}else if (localStorage.qpdsSkip==0){
 				var url = "#qpdsPage";
 				$.mobile.navigate(url);
 				$(url).trigger('create');
-				$('#shop_show').find('input, textarea, select').attr('disabled','disabled');
-				$('#shop_show').addClass('disabledAnchor');	
+				//$('#shop_show').find('input, textarea, select').attr('disabled','disabled');
+				//$('#shop_show').addClass('disabledAnchor');	
 				localStorage.shop_next_flag=1;
 			}else{
 				var url = "#giftAckPage";
 				$.mobile.navigate(url);
 				$(url).trigger('create');
-				$('#shop_show').find('input, textarea, select').attr('disabled','disabled');
-				$('#shop_show').addClass('disabledAnchor');	
+				//$('#shop_show').find('input, textarea, select').attr('disabled','disabled');
+				//$('#shop_show').addClass('disabledAnchor');	
 				localStorage.shop_next_flag=1;
 			}
 			$(url).trigger('create');
@@ -3247,8 +3247,8 @@ function shop_page_set() {
     image.src = shop_image_path;
 		
 	if (localStorage.shop_next_flag==1){
-		$('#shop_show').find('input, textarea, button, select').attr('disabled','disabled');
-	    $('#shop_show').addClass('disabledAnchor');	
+		//$('#shop_show').find('input, textarea, button, select').attr('disabled','disabled');
+	   // $('#shop_show').addClass('disabledAnchor');	
 	}
 }
 
@@ -4548,6 +4548,18 @@ function submit_data() {
 						//$("#submit_data_check").html("Success");
 						$("#submit_data").html('');
 						localStorage.step_flag=0;
+												
+						/*document.getElementById("is_near_inFront_actual").checked = false;	
+						document.getElementById("is_beside_adjacent_actual").checked = false;				
+						document.getElementById("is_eyeLevel_actual").checked = false;
+						document.getElementById("is_clearlyVis_noObs_actual").checked = false;
+					
+						document.getElementById("planKey").checked = false;						
+						document.getElementById("productKey").checked = false;
+						document.getElementById("posmKey").checked = false;
+						document.getElementById("catKey").checked = false;
+						
+						$("#is_near_inFront_actual").attr('checked',false);*/
 						
 						
 						// Enable all disable div start
@@ -4563,8 +4575,7 @@ function submit_data() {
 						// Enable disable div end
 						
 						upload_fd();
-						//cancel_outlet();
-						//alert();
+						
 						document.getElementById('shop_image_div').src = '';
 						$("#shop_image_name_hidden").val('');
 						$("#sub_button_div").show();
@@ -5965,7 +5976,7 @@ function submit_data_usages(){
 		$(".errorChk").text("Qty must Number");
 		$("#btn_submit_usages").show();
 	}else if(a_qty=='' || a_qty==0){
-		$(".errorChk").text("Required Usage Qty");
+		$(".errorChk").text("Required Qty");
 		$("#btn_submit_usages").show();
 	}else if (imageName2==''){
 		$(".errorChk").text("Required Picture");
