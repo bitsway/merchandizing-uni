@@ -18,6 +18,23 @@
 				$("#mobile").val(localStorage.p_SyncMobile);
 				$("#password").val(localStorage.p_SyncPass);
 			}
+			//===========Route
+			$("#routeSearch").on("keyup", function(){
+				var serVal=$(this).val().toLowerCase();
+
+				$("#routeList div").filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(serVal) >-1)
+                });
+			});
+			//===========Outlet
+			$("#outletSearch").on("keyup", function(){
+				var serVal=$(this).val().toLowerCase();
+
+				$("#outletString div").filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(serVal) >-1)
+                });
+			});
+			
 			/*var test=get_date();
 			
 			if (localStorage.p_attendanceCheck!=test){
@@ -108,6 +125,7 @@
 	#reportPosmAudRec> table tr td{
 		background-color:#FFF;
 		color:#00376F;
+		font-weight:bold;
 		border:1px solid #0063C6;
 		}	
 	#stockAgencyS> table{
@@ -122,6 +140,7 @@
 	#stockAgencyS> table tr td{
 		background-color:#FFF;
 		color:#00376F;
+		font-weight:bold;
 		border:1px solid #0063C6;
 		}	
 
@@ -137,6 +156,7 @@
 	#usageReportAgency> table tr td{
 		background-color:#FFF;
 		color:#00376F;
+		font-weight:bold;
 		border:1px solid #0063C6;
 		}	
 	#stockReportOnHand> table{
@@ -166,6 +186,7 @@
 	#reportAudAgencyS> table tr td{
 		background-color:#FFF;
 		color:#00376F;
+		font-weight:bold;
 		border:1px solid #0063C6;
 		}	
 	#targetVSach> table{
@@ -180,6 +201,7 @@
 	#targetVSach> table tr td{
 		background-color:#FFF;
 		color:#00376F;
+		font-weight:bold;
 		border:1px solid #0063C6;
 		}
 	#syncBasicBtn{
@@ -200,6 +222,7 @@
 	#leaveViewTable> table tr td{
 		background-color:#FFF;
 		color:#00376F;
+		font-weight:bold;
 		border:1px solid #0063C6;
 		}
 	
@@ -321,8 +344,26 @@
 
  
 <div data-theme="d" data-role="page" id="homePage">
+	<div data-theme="c" data-role="panel" id="syncPanel" data-position="left" data-display="overlay" style="width:60%;">
+        <!-- panel content goes here -->
+        <img style="width:100%;"  src="unilogo1.png" alt="UNILEVER" /><br>
+        <font style="color:#007D7D; font-size:25px;">HAWK'S EYE</font><br>
+        <font style="color:#007D7D; font-size:11px;">© Unilever Bangladesh Ltd.</font>
+        <br><br><br>
+        
+        <ul data-role="listview">            
+            <div style="background:#008A8A; height:1px"></div>
+                <li style="text-align:center;"><a href="#pagesync" onClick="clear_autho();"><img src="sync.png"></a></li>
+            <div style="background:#008A8A; height:1px"></div>
+            <!--<li><a onClick="clear_autho()" href="#login">Clear Authorization</a></li>
+            <div style="background:#008A8A; height:1px"></div>-->
+        </ul>
+        <br>
+        <div style="margin:100%;"></div>        
+    </div><!-- /panel -->
+<!--onClick="syncValueClean();"-->
     <div data-theme="c" data-role="header" data-position="fixed" style="border:none; background-color:#17b0b0;">
-        <a data-role="button" id="menuLogo" onClick="syncValueClean();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets"><img src="sync1.png" /></a>
+        <a data-role="button" id="menuLogo" href="#syncPanel" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets"><img src="sync1.png" /></a>
         <a style="background:none; border:none;" id="menuLogo" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-right ui-icon-power ui-btn-icon-notext " onClick="exit()" ></a>
     
     	<h3 class="headerc">Select Town</h3>
@@ -402,8 +443,26 @@
  <!--======================supHome==================-->   
  
 <div data-theme="d" data-role="page" id="supHome">
+	<div data-theme="c" data-role="panel" id="syncPanelSup" data-position="left" data-display="overlay" style="width:60%;">
+        <!-- panel content goes here -->
+        <img style="width:100%;"  src="unilogo1.png" alt="UNILEVER" /><br>
+        <font style="color:#007D7D; font-size:25px;">HAWK'S EYE</font><br>
+        <font style="color:#007D7D; font-size:11px;">© Unilever Bangladesh Ltd.</font>
+        <br><br><br>
+        
+        <ul data-role="listview">            
+            <div style="background:#008A8A; height:1px"></div>
+                <li style="text-align:center;"><a href="#pagesync" onClick="clear_autho();"><img src="sync.png"></a></li>
+            <div style="background:#008A8A; height:1px"></div>
+            <!--<li><a onClick="clear_autho()" href="#login">Clear Authorization</a></li>
+            <div style="background:#008A8A; height:1px"></div>-->
+        </ul>
+        <br>
+        <div style="margin:100%;"></div>        
+    </div><!-- /panel -->
+    
 	<div data-theme="c" data-role="header" data-position="fixed" style="border:none; background-color:#17b0b0;"><!--background-color:#42A2F0;-->
-       <a data-role="button" id="menuLogo" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets"><img src="town3.png" /></a>
+       <a data-role="button" id="menuLogo" href="#syncPanelSup" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets"><img src="town3.png" /></a>
         <a data-role="button" id="menuLogo" onclick="backClick();" data-rel="back" class="ui-btn-right" data-transition="slide" ><img src="back1.png" /></a>
         <h3 class="headerc">Menu</h3>
     </div>
@@ -465,10 +524,10 @@
     <div id="bufferImageSync" style="text-align:center;"><img height="40px" width="40px" src="running.gif"></div>
     </br>
     
-    <div class="errorMsg" style="color:#F00;"></div>
-    <div data-role="" data-position="fixed" style="font-size:12px; color:#7A7A7A; background-color:#FFF; font-weight:1;" align="center">V-20190727</div>
+    <div class="errorMsg" style="color:#F00; text-align:center;"></div>    
     </div>
-    </br></br> </br></br> </br>
+    </br> </br></br> </br></br>
+    <div data-position="fixed" style="font-size:12px; color:#7A7A7A; background-color:#FFF; font-weight:1;" align="center">V.190728</div>
     <div><img src="bottom.png" alt="Post-it" style="height:65px; width:100%;"/></div>
  </div>
     
@@ -639,7 +698,7 @@
     	<h3 class="headerc">Home</h3>
     </div>
     <div data-role="content" style="height:90%"> 
-    <br />
+    <br /><br />
      <div id="townSelctAll" style="color:#002F5E; text-align:center;"></div>
   <table align="center" width="100%">
      <tr>
@@ -868,7 +927,9 @@
     	<h3 class="headerc">Select Route</h3>
     </div>
     <div data-role="content" style="height:90%"> 
-        <div id="town" style="color:#5BADFF;"></div>
+    	<br /><br />
+        <div id="town" style="color:#006A6A; font-size:18px;"></div>
+        <div id="routeSearchDiv"><input type="text" id="routeSearch" placeholder="Search Route..." /></div>
          <div id="routeList"></div>
          <br />
         <!-- <a id="RSButton" data-role="button" onClick="syncRoute();" >Sync Route</a>-->
@@ -916,7 +977,7 @@
             <div style="background:#008A8A; height:1px"></div>
             </br></br></br>
             <div style="background:#008A8A; height:1px"></div>
-                <li style="text-align:center;"><a href="#pagesync" ><img src="sync.png"></a></li>
+                <li style="text-align:center;"><a href="#pagesync" onClick="clear_autho();"><img src="sync.png"></a></li>
             <div style="background:#008A8A; height:1px"></div>
             <!--<li><a onClick="clear_autho()" href="#login">Clear Authorization</a></li>
             <div style="background:#008A8A; height:1px"></div>-->
@@ -928,14 +989,14 @@
     </div><!-- /panel -->
 
 	<div data-theme="d" data-role="header" data-position="fixed" style="border:none; background-color:#17b0b0;">
-       <!--<a style="height:18px"  href="#routePanel" ><img src="menu.png" /></a>-->
        <a id="menujpj" style="height:18px" href="#first_page" class="ui-btn-left ui-btn-icon-notext"><img src="unilogo13.png"></a>
        <a id="menujpj1" style="height:18px"  href="#routePanel" ><img src="menu_new.png"> </a>
     	<h3 class="headerc">Select Outlet</h3>
     </div>
     <div data-role="content" style="height:90%">  
     <span style=" font-size:5"> <br/><br/></span>
-        
+    	<div class="routeshowPS" style="color:#006A6A; font-size:18px;"></div>
+        <div id="outletSearchDiv"><input type="text" id="outletSearch" placeholder="Search Outlet..." /></div>
         <div id="outletString"> </div>	
         <div id="outletCancel" style="display:none"> 
         	Work in progress:
@@ -955,6 +1016,12 @@
         <br/><br/><br/><br/><br/>
                         
     </div>
+    
+    <div id="outletFooter" data-theme="d" data-role="footer" data-position="fixed" style="border:none;text-align:center;">
+    	 <!--<div id="bufferImageOutlet" style="text-align:center;"><img src="running.gif" width="50" height="50"/></div>
+    	 <div class="errorChk" style="color:#cc0000; background-color:#FFF;"></div>-->
+         <a id="RSButton" style="width:85%; font-size:18px;" data-role="button" onClick="select_outlet();" >Sync Outlet</a>
+	</div>
 </div><!-- /outlet page -->
 
 
@@ -1119,7 +1186,7 @@
     	<h3 class="headerc">Place</h3>
     </div>
     <div data-role="content" style="height:90%">
-    
+
     <div id="place_outlet_nameID"></div>
     </br></br>
     <div id="place_show" >
@@ -1153,13 +1220,7 @@
     <div data-role="content" style="height:90%">
         <div id="place_outlet_nameID"></div>
         </br></br>
-        <div id="place_show1" >
-            Key Tasks Performed:
-            <label><input type="checkbox" name="planKey" id="planKey" value=""/>Plan o gram maintenance</label>	
-            <label ><input type="checkbox" name="productKey" id="productKey" value=""/>Product cleaning</label>
-            <label  ><input type="checkbox" name="posmKey" id="posmKey" value=""/>POSM execution</label>	
-            <label  ><input type="checkbox" name="catKey" id="catKey" value=""/>Category Shelf management</label>	
-        </div>
+        <div id="place_show1" ></div>
         </br></br>
         
         <a data-role="button" onClick="task_ready_data();" >Next</a>
@@ -1188,12 +1249,17 @@
         <!--<div id="location_button">
         <a data-role="button" onClick="getlocationand_askhelp();">Confirm Location</a>
         </div>-->
+        <div class="routeshowPS" style="color:#006291;"></div>
+        <div class="outletshowPS" style="color:#006291;"></div>
+        <br /><br />
         <span style="color:#006291;"><p style="text-align:center;">Data Verification & Synchronization</p></span>
+        <br /><br />
+                
         <div id="sub_button_div">
         <a data-role="button" onClick="submit_data();" >Next</a>
         </div> 
         <div class="bufferImageSubmit" style="text-align:center;"><img height="40px" width="40px" src="running.gif"></div>  
-        <br/><br/> 
+        
         <div id="executionSub">
         <a data-role="button" onClick="usages_data();" >Execution</a>
        	</div>
@@ -1211,14 +1277,17 @@
 
 <div data-theme="c" data-role="page" id="imageSubmitPage">
 	<div data-theme="d" data-role="header" data-position="fixed" style="border:none; background-color:#17b0b0;">
-       <a data-role="button" id="menuLogo" href="#outletPage" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets" ><img src="unilogo13.png" /></a>
-        <a data-role="button" id="menuLogo" onclick="backClick();" data-rel="back" class="ui-btn-right" data-transition="slide"><img src="back1.png" /></a>
+       <!--<a data-role="button" id="menuLogo" href="#outletPage" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets" ><img src="unilogo13.png" /></a>
+        <a data-role="button" id="menuLogo" onclick="backClick();" data-rel="back" class="ui-btn-right" data-transition="slide"><img src="back1.png" /></a>-->
     	<h3 class="headerc">Submit</h3>
     </div>
     <div data-role="content" style="height:90%">
         <div id="outlet_info_msg" style="color:#006A6A; font-size:18px;"> </div>
         </br>
         </br>
+        <div class="routeshowPS" style="color:#006291;"></div>
+        <div class="outletshowPS" style="color:#006291;"></div>
+        <br /><br />
         <div id="image_up_button">
         <a data-role="button" onClick="check_step();" >Submit</a>			
         </div>       
@@ -1231,14 +1300,17 @@
 
 <div data-theme="c" data-role="page" id="outletSelectPage">
 	<div data-theme="d" data-role="header" data-position="fixed" style="border:none; background-color:#17b0b0;">
-       <a data-role="button" id="menuLogo" href="#outletPage" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets" ><img src="unilogo13.png" /></a>
-        <a data-role="button" id="menuLogo" onclick="backClick();" data-rel="back" class="ui-btn-right" data-transition="slide"><img src="back1.png" /></a>
+       <!--<a data-role="button" id="menuLogo" href="#outletPage" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets" ><img src="unilogo13.png" /></a>
+        <a data-role="button" id="menuLogo" onclick="backClick();" data-rel="back" class="ui-btn-right" data-transition="slide"><img src="back1.png" /></a>-->
     	<h3 class="headerc">Next</h3>
     </div>
     <div data-role="content" style="height:90%">
         <div id="outlet_info_msg" style="color:#006A6A; font-size:18px;"> </div>
         </br>
         </br>
+        <div class="routeshowPS" style="color:#006291;"></div>
+        <div class="outletshowPS" style="color:#006291;"></div>
+        <br /><br />
         <div id="usages_button_div">
         <a data-role="button" onClick="usages_data();" >POSM Execution</a>
         </div> 
@@ -1313,16 +1385,20 @@
 <!----------------------------------usage-page5---------------------------------------->
 <div data-theme="d" data-role="page" id="page5">
 	<div data-theme="c" data-role="header" data-position="fixed" style="border:none; background-color:#17b0b0;">
-       <a data-role="button" id="menuLogo" onClick="cancel_outlet();menupage();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets"><img src="town3.png"/></a>
-        <a data-role="button" id="menuLogo" onclick="backClick();" data-rel="back" class="ui-btn-right" data-transition="slide"><img src="back1.png" /></a>
+       <!--<a data-role="button" id="menuLogo" onClick="cancel_outlet();menupage();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets"><img src="town3.png"/></a>
+        <a data-role="button" id="menuLogo" onclick="backClick();" data-rel="back" class="ui-btn-right" data-transition="slide"><img src="back1.png" /></a>-->
     	<h3 class="headerc">POSM Execution</h3>
     </div>
     </br>
     <div data-role="content" style="height:90%"> 
+    </br>
+    <div class="routeshowPS" style="color:#006291;"></div>
+    <div class="outletshowPS" style="color:#006291;"></div>
+    <br />
    <!-- <div id="townAusa" style="color:#002F5E;"></div>
     <div id="routeSelectA" style="color:#002F5E;"></div>
     <div id="outletSelect" style="color:#002F5E; margin:0px 0px 2px 0px;"></div>-->      
-   </br>
+
       <table width="100%" class="ui-body-d ui-shadow table-stripe ui-responsive" style="cell-spacing:0px; background:linear-gradient(to top, #00468C -50%, #409FFF 100%); color:#fff; font-weight:1; border-radius:4px;" data-role="table" data-theme="d"  data-mode="display:none">
           <tr >
             <td>
@@ -1822,8 +1898,8 @@
 </div>
 <!-------------Agency Report------------------------------------------------------------>
 <div data-theme="d" data-role="page" id="page13">
-	<div data-theme="c" data-role="header" data-position="fixed" style="border:none; background-color:#17b0b0;">
-       <a data-role="button" id="menuLogo" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets" style="border:none; background-color:#fff;" ><img src="Home.png" /></a>
+	 <div data-theme="c" data-role="header" data-position="fixed" style="border:none; background-color:#17b0b0;"><!--background-color:#42A2F0;-->
+       <a data-role="button" id="menuLogo" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets"><img src="town3.png" /></a>
         <a data-role="button" id="menuLogo" onclick="backClick();" data-rel="back" class="ui-btn-right" data-transition="slide" ><img src="back1.png" /></a>
     	<h3 class="headerc">Execution Details</h3>
     </div>
@@ -1925,8 +2001,8 @@
 
 <!---------------------------------------------audit-------------------------------------------------------->
 <div data-theme="d" data-role="page" id="page15">
-    <div data-theme="c" data-role="header" data-position="fixed" style="border:none; background-color:#17b0b0;">
-        <a data-role="button" id="menuLogo" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets" style="border:none; background-color:#fff;" ><img src="Home.png" /></a>
+    <div data-theme="c" data-role="header" data-position="fixed" style="border:none; background-color:#17b0b0;"><!--background-color:#42A2F0;-->
+       <a data-role="button" id="menuLogo" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets"><img src="town3.png" /></a>
         <a data-role="button" id="menuLogo" onclick="backClick();" data-rel="back" class="ui-btn-right" data-transition="slide" ><img src="back1.png" /></a>
     	<h3 class="headerc">POSM Audit</h3>
     </div>
@@ -2041,8 +2117,8 @@
  
  <!-----------------------------------Agency Stock---------------------->
 <div data-theme="d" data-role="page" id="page16">
-	<div data-theme="c" data-role="header" data-position="fixed" style="border:none; background-color:#17b0b0;">
-       <a data-role="button" id="menuLogo" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets" style="border:none; background-color:#fff;" ><img src="Home.png" /></a>
+	 <div data-theme="c" data-role="header" data-position="fixed" style="border:none; background-color:#17b0b0;"><!--background-color:#42A2F0;-->
+       <a data-role="button" id="menuLogo" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets"><img src="town3.png" /></a>
         <a data-role="button" id="menuLogo" onclick="backClick();" data-rel="back" class="ui-btn-right" data-transition="slide" ><img src="back1.png" /></a>
     	<h3 class="headerc">POSM Summary</h3>
     </div>
@@ -2061,8 +2137,8 @@
 </div>
 <!-----------------------auditor Report------------------------------->
 <div data-theme="d" data-role="page" id="page17">
-	<div data-theme="c" data-role="header" data-position="fixed" style="border:none; background-color:#17b0b0;">
-       <a data-role="button" id="menuLogo" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets" style="border:none; background-color:#fff;" ><img src="Home.png" /></a>
+	<div data-theme="c" data-role="header" data-position="fixed" style="border:none; background-color:#17b0b0;"><!--background-color:#42A2F0;-->
+       <a data-role="button" id="menuLogo" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets"><img src="town3.png" /></a>
         <a data-role="button" id="menuLogo" onclick="backClick();" data-rel="back" class="ui-btn-right" data-transition="slide" ><img src="back1.png" /></a>
     	<h3 class="headerc">Report</h3>
     </div>
@@ -2075,14 +2151,14 @@
      	<div id="reportAudAgencyS" style="overflow:scroll;"></div>
      	</li>
     </ul>
-     <div class="errorChk" style="color:#F00;"></div>
+     <div class="errorChk" style="color:#900;"></div>
     </div>
     
 </div>
 <!------------------------------POSM Audit----------------------------------------->
 <div data-theme="c" data-role="page" id="page18" style="background-color:#FFF;">
 	<div data-theme="c" data-role="header" data-position="fixed" style="border:none; background-color:#17b0b0;"><!--background-color:#42A2F0;-->
-       <a data-role="button" id="menuLogo" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets" style="border:none; background-color:#fff;" ><img src="Home.png" /></a>
+       <a data-role="button" id="menuLogo" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets"><img src="town3.png" /></a>
         <a data-role="button" id="menuLogo" onclick="backClick();" data-rel="back" class="ui-btn-right" data-transition="slide" ><img src="back1.png" /></a>
     	<h3 class="headerc">POSM Audit</h3>
     </div>
@@ -2195,7 +2271,7 @@
     <div id="repNamePosmAud" style="color:#00376F;"></div>     
   	<div id="posmAuditRecordBufferImage" style="text-align:center;"><img src="running.gif" /></div>
      <div id="reportPosmAudRec" style="overflow:scroll;"></div>
-     <div class="errorChk" style="color:##F00;"></div>
+     <div class="errorChk" style="color:#F00;"></div>
     </div>
 </div>
 <!----------------------------Save DFF------------------------------------>

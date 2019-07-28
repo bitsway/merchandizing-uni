@@ -106,8 +106,8 @@ $(document).ready(function(){
 		$("#usagePOSMSelect").empty();
 		$("#usagePOSMSelect").append(localStorage.p_posmCodeSup).trigger('create');	
 		
-		$('#routeList').empty();
-		$('#routeList').append(localStorage.p_route).trigger('create');
+		/*$('#routeList').empty();
+		$('#routeList').append(localStorage.p_route).trigger('create');*/
 								
 		$('#outletList').empty();
 		$('#outletList').append(localStorage.p_outletList).trigger('create');
@@ -301,22 +301,25 @@ $(document).ready(function(){
 	}
 });
 
-
+function clear_autho(){
+	$(".errorMsg").hide();	
+}
 
 function syncBasic(){
 	localStorage.selectedRoute='';
 	$("#bufferImageSelectTown").hide();
-	$(".errorChk").html("");
+	$(".errorMsg").hide();
 	
 	var mobile=$("#mobile").val();
 	var password=$("#password").val();
 	if (mobile=="" || password==""){
 		$('#bufferImageSync').hide();
+		$(".errorMsg").show();
 		$(".errorMsg").html("Required mobile no and password");	
 	}else{
 		$('#bufferImageSync').show();	
 		$('#syncBasicBtn').hide();	
-		
+		$(".errorMsg").show();
 		$(".errorMsg").html("Sync in progress. Please wait...");
 		if(localStorage.p_sync_code==undefined || localStorage.p_sync_code==""){
 			localStorage.p_sync_code=0;
@@ -369,7 +372,7 @@ function syncBasic(){
 					
 					var cancelArray = localStorage.cancelList.split('fdfd');	
 					var cancel_combo_str='<select name="cancel_cause" id="cancel_cause" >'
-					cancel_combo_str=cancel_combo_str+'<option value="">Select Reason</option>'
+					cancel_combo_str=cancel_combo_str+'<option selected="selected" value="">Select Reason</option>'
 					cancel_combo_str=cancel_combo_str+'<option value="Will try later">Will try later</option>'
 					for (var i=0; i < cancelArray.length; i++){				
 						cancel_combo_str=cancel_combo_str +'<option value="'+cancelArray[i].split('-')[0]+'">'+cancelArray[i].split('-')[1]+'</option>'			  	
@@ -378,22 +381,7 @@ function syncBasic(){
 					localStorage.cancel_combo_str=cancel_combo_str
 					$('#cancel_reason').empty();
 					$('#cancel_reason').append(localStorage.cancel_combo_str);
-					
-					
-					//create place  combo
-					var placeArray = localStorage.place_strList.split('rdrd');	
-					var place_combo_str='Select Place Location: </br>'
-					place_combo_str=place_combo_str +'<label><input type="checkbox" name="is_near_inFront_actual" id="is_near_inFront_actual" value=""/>Near or In front of Entrance</label>'	
-					place_combo_str=place_combo_str +'<label ><input type="checkbox" name="is_beside_adjacent_actual" id="is_beside_adjacent_actual" value=""/>Beside or Adjacent Cash Counter</label>'	
-					place_combo_str=place_combo_str +'<label  ><input type="checkbox" name="is_eyeLevel_actual" id="is_eyeLevel_actual" value=""/>Eye Level of Consumers</label>'	
-					place_combo_str=place_combo_str +'<label  ><input type="checkbox" name="is_clearlyVis_noObs_actual" id="is_clearlyVis_noObs_actual" value=""/> Clearly Visible or No obstacle in front of the shelf</label>'	
-													
-					localStorage.place_combo_str=place_combo_str;
-					$('#place_combo_show').empty();
-					$('#place_combo_show').append(localStorage.place_combo_str);
-		
-		
-					
+										
 					
 					var csmListTools=localStorage.p_toolsStr.split('fdfd');
 					var cmListStr = '<select id="cmToolsRecRecData" class="auto_break" name="cmToolsRecRecData" style="display:inline-block;"><option selected="selected" value="">Select Tool</option>'
@@ -407,7 +395,7 @@ function syncBasic(){
 					
 					$('#townListPosmAuditDFF').html("Town Code	:		"+localStorage.p_townListPosm);
 					
-					
+					$(".errorMsg").show();
 					$(".errorMsg").html("Sync Successful");
 					$('#syncBasicBtn').show();
 					
@@ -474,14 +462,14 @@ function syncBasic(){
 						}
 					//========================
 					
-					var cmRoute=localStorage.p_routeList.split('||');					
+					/*var cmRoute=localStorage.p_routeList.split('||');					
 					var cmRouteStr='<ul data-role="listview" class="list" data-filter="true" data-inset="true" style="height:400px;  overflow:scroll;">';
 					for (i=0;i<cmRoute.length;i++){						
 						cmRouteStr += '<li style="background-color:#FFF; border-top-color:#F03; border-bottom-color:#F03;" onclick="sRoute(\''+cmRoute[i]+'\')"><a>'+cmRoute[i]+'</a></li>'
 					
 					}
 					cmRouteStr +='</ul>'
-					localStorage.p_route=cmRouteStr;
+					localStorage.p_route=cmRouteStr;*/
 					
 					var leaveTypeStr = 'APPROVEDfdfdCENCELfdfdREQUEST';
 					var typeListSTR=leaveTypeStr.split('fdfd');
@@ -524,8 +512,8 @@ function syncBasic(){
 						var townCodeName=localStorage.p_town.replace('|','-');				
 						$("#townSelct").html(townCodeName);
 												
-						$('#routeList').empty();
-						$('#routeList').append(localStorage.p_route).trigger('create');
+						/*$('#routeList').empty();
+						$('#routeList').append(localStorage.p_route).trigger('create');*/
 												
 						$("#suprepname").html("Name	:		"+localStorage.p_repName);
 						$("#supreptype").html("Type	:		"+localStorage.p_rep_type);
@@ -580,12 +568,9 @@ function syncBasic(){
 							url = "#salfiePage";						
 							$.mobile.navigate(url);
 						}else{
-							
-							
 							url = "#supHome";					
 							$.mobile.navigate(url);
-							}	
-							
+						}								
 					}else if(localStorage.p_rep_type == 'AGENCY'){
 						$('#attendanceButtonShow').hide();
 						$('#dff_Usages_Audit').hide();
@@ -692,7 +677,8 @@ function syncBasic(){
 						}													
 				}else{
 					$("#auditorHead").hide();
-					$('#bufferImageSync').hide();						
+					$('#bufferImageSync').hide();	
+					$(".errorChk").hide();					
 					$(".errorMsg").html("Sync Failed. Authorization Error.");
 					$('#syncBasicBtn').show();					
 				};				
@@ -1217,7 +1203,7 @@ function backClick(){
 	$("#posmAuditOutSearch").val('');
 	$('#menuBufferingImage').hide();
 	$('#bufferImageRoute').hide();
-		
+	$('#bufferImageOutlet').hide();	
 }
 
 //---------
@@ -1278,11 +1264,11 @@ function townSelect(town){
 							
 							//alert(routeDate+'==='+current_date);
 							if (routeDate==current_date){
-								routeStr +='<label style="background:#81C0C0"><input type="radio" name="RadioRoute" value="'+routeName+'|'+routeDate+'" id="RadioGroup1_0"> '+routeName+'|'+routeDate+'</label>'
+								routeStr +='<div><label style="background:#81C0C0"><input type="radio" name="RadioRoute" value="'+routeName+'|'+routeDate+'" id="RadioGroup1_0"> '+routeName+'|'+routeDate+'</label></div>'
 							}else if((routeDate==bak_date1)||(routeDate==bak_date2)||(routeDate==bak_date3)){
-								routeStr +='<label><input type="radio" name="RadioRoute" value="'+routeName+'|'+routeDate+'" id="RadioGroup1_0"> '+routeName+'|'+routeDate+'</label>'
+								routeStr +='<div><label><input type="radio" name="RadioRoute" value="'+routeName+'|'+routeDate+'" id="RadioGroup1_0"> '+routeName+'|'+routeDate+'</label></div>'
 							}else{
-								routeStr +='<label style="background:#ddeeee"><input type="radio" name="RadioRoute" value="'+routeName+'|'+routeDate+'|'+routeDate+'" id="RadioGroup1_0"> '+routeName+'</label>'
+								routeStr +='<div><label style="background:#ddeeee"><input type="radio" name="RadioRoute" value="'+routeName+'|'+routeDate+'|'+routeDate+'" id="RadioGroup1_0"> '+routeName+'</label></div>'
 							}						
 						}
 						//routeStr +=routeStr;
@@ -1404,7 +1390,7 @@ function townSelect(town){
 			$("#noticeForCM").show();
 			$("#entryAgency").hide();
 			$("#reportbtnAgency").hide();
-			$("#townSelctAll").html("Town	:		"+localStorage.p_select_town);
+			$("#townSelctAll").html("Town	:		"+localStorage.p_select_town);			
 			$(".errorChk").text("");
 			url="#first_page";					
 			$.mobile.navigate(url);
@@ -1695,33 +1681,31 @@ function submitData_TargetList(){
 	
 	if (targetQty==0){
 		$(".errorChk").html('Required Target Qty');
-	}else if(targetDate!=''){
-		
-			if((localStorage.p_target_li==undefined)||(localStorage.p_target_li=='')){	
+	}else if(targetDate!=''){		
+		if((localStorage.p_target_li==undefined)||(localStorage.p_target_li=='')){	
+			
+			localStorage.p_target_li=posm_code+'||'+town+'||'+posm_type+'||'+brand+'||'+alcQty+'||'+dueTarg+'||'+alcId+'||'+targetQty+'||'+targetDate;
+			$("#targetQty").val('');
+			$("#targetDate").val('');	
+			$(".posm_type").val('');
+			$(".brand").val('');
+			$(".due").val('');
+			$(".alcId").val('');				
+		}else{
+			if( localStorage.p_target_li.indexOf(posm_code) >-1 ){
+				$(".errorChk").html('Already Exits');	
+			}else{
+				localStorage.p_target_li+='<rdrd>'+posm_code+'||'+town+'||'+posm_type+'||'+brand+'||'+alcQty+'||'+dueTarg+'||'+alcId+'||'+targetQty+'||'+targetDate;
+				//alert(localStorage.p_receive_li);
 				
-				localStorage.p_target_li=posm_code+'||'+town+'||'+posm_type+'||'+brand+'||'+alcQty+'||'+dueTarg+'||'+alcId+'||'+targetQty+'||'+targetDate;
 				$("#targetQty").val('');
 				$("#targetDate").val('');	
 				$(".posm_type").val('');
 				$(".brand").val('');
 				$(".due").val('');
-				$(".alcId").val('');	
-				
-			}else{
-				if( localStorage.p_target_li.indexOf(posm_code) >-1 ){
-					$(".errorChk").html('Already Exits');	
-				}else{
-					localStorage.p_target_li+='<rdrd>'+posm_code+'||'+town+'||'+posm_type+'||'+brand+'||'+alcQty+'||'+dueTarg+'||'+alcId+'||'+targetQty+'||'+targetDate;
-					//alert(localStorage.p_receive_li);
-					
-					$("#targetQty").val('');
-					$("#targetDate").val('');	
-					$(".posm_type").val('');
-					$(".brand").val('');
-					$(".due").val('');
-					$(".alcId").val('');
-				}
+				$(".alcId").val('');
 			}
+		}
 		target_list_show();
 		
 	}else{
@@ -1730,8 +1714,7 @@ function submitData_TargetList(){
 	
 }
 
-function target_list_show(){
-	
+function target_list_show(){	
 	if ((localStorage.p_target_li==undefined) || (localStorage.p_target_li=="")){
 		
 	}else{
@@ -2163,6 +2146,8 @@ function selectOutletException() {
 }
 localStorage.selectedRoute='';
 function syncRoute() { 
+	cancel_outlet();
+	
 	var selected_route_exception=($("input:radio[name='RadioRouteEx']:checked").val())
 	var selected_route=($("input:radio[name='RadioRoute']:checked").val())
 	
@@ -2275,7 +2260,9 @@ function syncRoute() {
 							var outletSingleTtotal = outletSingleArray.length;
 							var outletStringShow=''
 							//alert(outletSingleArray);
-							outletStringShow=outletStringShow+'<table width="100%" border="0" cellpadding="0" cellspacing="0"><tr style="color:#006A6A; font-size:18px;"><td>'+localStorage.routeIDName+'</td></tr></table>'
+							
+							//outletStringShow=outletStringShow+'<table width="100%" border="0" cellpadding="0" cellspacing="0"><tr style="color:#006A6A; font-size:18px;"><td>'+localStorage.routeIDName+'</td></tr></table>'
+							//outletStringShow=outletStringShow+'<input type="text" id="outletSearch" placeholder="Search Outlet..." />'
 							
 							for (var o=0; o < outletSingleTtotal-1; o++){
 								outletArray = outletSingleArray[o].split('fdfd');
@@ -2304,16 +2291,16 @@ function syncRoute() {
 								//alert(scheduleDate+'=='+current_date);
 								
 								if (scheduleDate==current_date){
-									outletStringShow=outletStringShow+'<label style="background:#81C0C0"><table width="100%" border="0"><tr><td width="5%">'+
-												'<input type="radio" name="RadioOutlet" value="'+outletID+'rdrd'+scheduleDate+'"></td><td width="60%">'+outletName +' | '+ outletID +' | '+  scheduleDate +' | '+channel +'</td> </tr></table></label>'
+									outletStringShow=outletStringShow+'<div><label style="background:#81C0C0">'+
+												'<input type="radio" name="RadioOutlet" value="'+outletID+'rdrd'+scheduleDate+'"></td><td width="60%">'+outletName +' | '+ outletID +' | '+  scheduleDate +' | '+channel +'</label></div>'
 												
 								}else if(scheduleDate==bak_date1 || scheduleDate==bak_date2 || scheduleDate==bak_date3){
-									outletStringShow=outletStringShow+'<label ><table width="100%" border="0"> <tr> <td width="5%">'+
-												'<input type="radio" name="RadioOutlet" value="'+outletID+'rdrd'+scheduleDate+'"></td><td width="60%">'+outletName +' | '+ outletID +' | '+  scheduleDate +' | '+channel +'</td> </tr></table></label>'
+									outletStringShow=outletStringShow+'<div><label>'+
+												'<input type="radio" name="RadioOutlet" value="'+outletID+'rdrd'+scheduleDate+'"></td><td width="60%">'+outletName +' | '+ outletID +' | '+  scheduleDate +' | '+channel +'</label></div>'
 												
 								}else{
-									outletStringShow=outletStringShow+'<label style="background:#ddeeee"><table width="100%" border="0"><tr><td width="5%">'+
-												'<input type="radio" name="RadioOutlet" value="'+outletID+'rdrd'+scheduleDate+'"></td><td width="60%">'+outletName +' | '+ outletID +' | '+channel +'</td> </tr></table></label>'
+									outletStringShow=outletStringShow+'<div><label style="background:#ddeeee">'+
+												'<input type="radio" name="RadioOutlet" value="'+outletID+'rdrd'+scheduleDate+'"></td><td width="60%">'+outletName +' | '+ outletID +' | '+channel +'</label></div>'
 								}
 												
 												
@@ -2327,7 +2314,12 @@ function syncRoute() {
 							if (outletSingleArray.length==1){
 								outletStringShow=outletStringShow+'<label style="color:#800000; font-size:18px" ><table width="100%" border="0"> <tr> <td >Schedule Not Available </td>	</tr></table></label>'
 							}
-							outletStringShow=outletStringShow+'<br/><br/> <a id="selectOButton" data-role="button" onClick="select_outlet();" >Next</a>'
+							//outletStringShow=outletStringShow+'<br/><br/> <a id="selectOButton" data-role="button" onClick="select_outlet();" >Next</a>'
+							
+							
+							
+							
+							
 							
 							//outletStringShow=outletStringShow+'<div id="outletWait" style="display:none"><img height="40px" width="40px" src="loading.gif"></div>'
 							
@@ -2337,6 +2329,8 @@ function syncRoute() {
 							
 							$("#bufferImageRoute").hide();
 							$("#RSButton").show();
+							
+							$(".routeshowPS").html("Route	:		"+localStorage.routeIDName);
 							//alert(selected_date+'=='+sync_date_get);
 							//if (selected_date==sync_date_get){
 								//localStorage.selectedRoute=selected_routeID;
@@ -2383,162 +2377,189 @@ function syncRoute() {
 	}
 }
 
-function select_outlet() { 		
-		localStorage.latlongSubmit=0;
-		localStorage.dataSubmit=0;
-		localStorage.fddataSubmit=0;
-		localStorage.qpdsdataSubmit=0;
-		localStorage.npddataSubmit=0;
-		localStorage.giftdataSubmit=0;
-		localStorage.shopdataSubmit=0;
-		localStorage.placedataSubmit=0;
-		localStorage.placeLatLongCount=0
-		
-		localStorage.m_new="";
-		localStorage.submitted_outlet="";
-		
-		localStorage.npdSkip=0;
-		localStorage.fdSkip=0;
-		localStorage.qpdsSkip=0;
-		localStorage.giftSkip=0;
-		
-		localStorage.latitude=0;
-		localStorage.longitude=0;
-		
-		var selected_outletID_get=($("input:radio[name='RadioOutlet']:checked").val())	
-		var selected_outletID_list = selected_outletID_get.split('rdrd');
-		localStorage.selectedOutlet=selected_outletID_list[0];	
-		localStorage.p_selectedOutlet=selected_outletID_list[0];	
-		localStorage.selected_date=selected_outletID_list[1];
-		//alert(localStorage.selectedOutlet+'===='+localStorage.selected_date);
-		/*var saved_outlet_flag=0;
-		if  (localStorage.saved_req.length > 10){
-			var saved_req=localStorage.saved_req
-			if  ((saved_req.indexOf(selected_outletID))!=-1){
-				saved_outlet_flag=1;
-			}
-		}*/
-		//alert(selected_outletID);
-		//localStorage.selected_outletID_get=selected_outletID_get;
-		
-		
-		
-		
-		//if (saved_outlet_flag==0){
-			if ((localStorage.selectedOutlet!=undefined) && (localStorage.selectedOutlet!='undefined')){
-				
-				// ---------
-				$("#outletExString").html(localStorage.outletExStringShow);
+function select_outlet() { 
+	localStorage.latlongSubmit=0;
+	localStorage.dataSubmit=0;
+	localStorage.fddataSubmit=0;
+	localStorage.qpdsdataSubmit=0;
+	localStorage.npddataSubmit=0;
+	localStorage.giftdataSubmit=0;
+	localStorage.shopdataSubmit=0;
+	localStorage.placedataSubmit=0;
+	localStorage.placeLatLongCount=0
 	
-				/*localStorage.selectedOutlet=selected_outletID;
-				localStorage.p_selectedOutlet=selected_outletID;
-				
-				localStorage.selected_date_get=selected_date_get;
-				//alert(localStorage.selected_date_get);
-				selected_date=selected_date_get;
-				localStorage.selected_date=selected_date.substr(0,10);
-				//alert(localStorage.selected_date);*/
-				//--------
-				div_change();
-				
-				$("#dataerrorOutlet").html('');
-				$("#outletWait").show();
-				
-				// $("#selectOButton").hide();
-				
-				var all_outlet=localStorage.allOutletString;
-				//alert(all_outlet);
-				var outlet_s="<"+localStorage.selectedOutlet+">"
-				
-				var outlet_end="</"+localStorage.selectedOutlet+">"
-				//alert(outlet_s);
-				var selected_outletinfo_list = all_outlet.split(outlet_s);
-				
-				var selected_outletinfo=selected_outletinfo_list[1];
-				//alert(selected_outletinfo);
-				
-				var selected_outletinfo_list_end = selected_outletinfo.split(outlet_end);
-				
-				var selected_outletinfo_all=selected_outletinfo_list_end[0];
-				//alert(selected_outletinfo_all);
-				
-				if (selected_outletinfo.length > 20){
-					var selected_outletinfo_show_list =  selected_outletinfo.split('<mhskusList>');
-					//alert(selected_outletinfo_show_list);
-					var outlet_show=selected_outletinfo_show_list[0]
-					var outlet_show_list =  outlet_show.split(',');
-					var channel=outlet_show_list[0];
-					var outlet=outlet_show_list[2] +" | "+outlet_show_list[1]+" | "+channel
-					//alert(outlet);
-					
-					var replace_str=outlet_show_list[0] + "," + outlet_show_list[1] + "," + outlet_show_list[2] 
-					var selected_outletinfo_all_final=selected_outletinfo_all.replace(replace_str,"");
-					
-					localStorage.selected_outletinfo_all_final=selected_outletinfo_all_final;
-					//alert(localStorage.selected_outletinfo_all_final);
-					
-					var outletStringShow='';
-					outletStringShow=outletStringShow+'<table width="100%" border="0" cellpadding="0" cellspacing="0">'
-					outletStringShow=outletStringShow+'<tr> <td colspan="3" style="color:#006A6A; font-size:18px;">'+outlet+'</td></tr> '
-					outletStringShow=outletStringShow+'</table>'						
-					
-					localStorage.outletinfoString=outletStringShow
-					localStorage.outletChannel=channel
-					localStorage.outletNameID=outlet
-					//alert(localStorage.outletNameID);
-					$("#outletName_show").html(localStorage.outletNameID);
-					$("#outletInfo").html(localStorage.outletinfoString);
-							  
-					//alert(localStorage.outletChannel);
-					syncOutlet();
-					
-					/*var current_date=get_date();
-					var bak_date1=get_bak_date_one();
-					var bak_date2=get_bak_date_two();
-					var bak_date3=get_bak_date_three();
-					if (localStorage.selected_date==current_date){						
-						var url = "#outletPage";
-						$.mobile.navigate(url);
-						$(url).trigger('create');
-					}else if ((localStorage.selected_date==bak_date1)||(localStorage.selected_date==bak_date2)||(localStorage.selected_date==bak_date3)){
-						var url = "#outletexceptionPage";
-						$.mobile.navigate(url);
-						$(url).trigger('create');
-					}else{
-						$(".errorChk").text("");				
-						$(".sucMsgU").hide();
-						$("#btn_submit_usages").hide();
-						$("#allHide").hide();
-						$("#bufferImageU").hide();
-						$("#usageSubmitbufferImage").hide();
-						$("#NOutlet_button").hide();
-						var url = "#page5";
-						$.mobile.navigate(url);
-						$(url).trigger('create');	
-					}*/
-				}else{
-				  
-				  localStorage.show_cancel=0;
-				  
-				  $("#selectOButton").show();
-				  
-				  //cancel_outlet();
-				  $("#outletCancel").hide();
-				  var url = "#outletPage";
-				  $.mobile.navigate(url);	
-				  $(url).trigger('create');
-				  location.reload();
-				  
-			  }
-		}else{
-			$("#dataerrorOutlet").html('Please submit from saved data');
-			 var check_outlet= localStorage.outletString;
-						
-			//localStorage.outletString=check_outlet.replace('<input type="radio" name="RadioOutlet" value="'+selected_outletID+'rdrd'+selected_date_get+'">','<input type="radio" name="RadioOutlet" value="'+selected_outletID+'rdrd'+selected_date_get+'" disabled="True">')
-			
-			$("#outletString").empty();
-			$("#outletString").append(localStorage.outletString).trigger('create');
+	localStorage.m_new="";
+	localStorage.submitted_outlet="";
+	
+	localStorage.npdSkip=0;
+	localStorage.fdSkip=0;
+	localStorage.qpdsSkip=0;
+	localStorage.giftSkip=0;
+	
+	localStorage.latitude=0;
+	localStorage.longitude=0;
+	
+	var selected_outletID_get=($("input:radio[name='RadioOutlet']:checked").val())	
+	var selected_outletID_list = selected_outletID_get.split('rdrd');
+	localStorage.selectedOutlet=selected_outletID_list[0];	
+	localStorage.p_selectedOutlet=selected_outletID_list[0];	
+	localStorage.selected_date=selected_outletID_list[1];
+	
+	
+	//alert(localStorage.selectedOutlet+'===='+localStorage.selected_date);
+	/*var saved_outlet_flag=0;
+	if  (localStorage.saved_req.length > 10){
+		var saved_req=localStorage.saved_req
+		if  ((saved_req.indexOf(selected_outletID))!=-1){
+			saved_outlet_flag=1;
 		}
+	}*/
+	//alert(selected_outletID);
+	//localStorage.selected_outletID_get=selected_outletID_get;
+	
+	//alert(localStorage.selectedOutlet);
+	
+	
+	//if (saved_outlet_flag==0){
+		if ((localStorage.selectedOutlet!=undefined) || (localStorage.selectedOutlet!='undefined')){
+			$("#outletSearchDiv").hide();
+			$("#outletFooter").hide();
+			// ---------
+			$("#outletExString").html(localStorage.outletExStringShow);
+
+			/*localStorage.selectedOutlet=selected_outletID;
+			localStorage.p_selectedOutlet=selected_outletID;
+			
+			localStorage.selected_date_get=selected_date_get;
+			//alert(localStorage.selected_date_get);
+			selected_date=selected_date_get;
+			localStorage.selected_date=selected_date.substr(0,10);
+			//alert(localStorage.selected_date);*/
+			//--------
+			div_change();
+			
+			$("#dataerrorOutlet").html('');
+			$("#outletWait").show();
+			
+			// $("#selectOButton").hide();
+			
+			var all_outlet=localStorage.allOutletString;
+			//alert(all_outlet);
+			var outlet_s="<"+localStorage.selectedOutlet+">"
+			
+			var outlet_end="</"+localStorage.selectedOutlet+">"
+			//alert(outlet_s);
+			var selected_outletinfo_list = all_outlet.split(outlet_s);
+			
+			var selected_outletinfo=selected_outletinfo_list[1];
+			//alert(selected_outletinfo);
+			
+			var selected_outletinfo_list_end = selected_outletinfo.split(outlet_end);
+			
+			var selected_outletinfo_all=selected_outletinfo_list_end[0];
+			//alert(selected_outletinfo_all);
+			
+			if (selected_outletinfo.length > 20){
+				var selected_outletinfo_show_list =  selected_outletinfo.split('<mhskusList>');
+				//alert(selected_outletinfo_show_list);
+				var outlet_show=selected_outletinfo_show_list[0]
+				var outlet_show_list =  outlet_show.split(',');
+				var channel=outlet_show_list[0];
+				var outlet=outlet_show_list[2] +" | "+outlet_show_list[1]+" | "+channel
+				//alert(outlet);
+				
+				var replace_str=outlet_show_list[0] + "," + outlet_show_list[1] + "," + outlet_show_list[2] 
+				var selected_outletinfo_all_final=selected_outletinfo_all.replace(replace_str,"");
+				
+				localStorage.selected_outletinfo_all_final=selected_outletinfo_all_final;
+				//alert(localStorage.selected_outletinfo_all_final);
+				
+				var outletStringShow='';
+				outletStringShow=outletStringShow+'<table width="100%" border="0" cellpadding="0" cellspacing="0">'
+				outletStringShow=outletStringShow+'<tr> <td colspan="3" style="color:#006A6A; font-size:18px;">'+outlet+'</td></tr> '
+				outletStringShow=outletStringShow+'</table>'						
+				
+				localStorage.outletinfoString=outletStringShow
+				localStorage.outletChannel=channel
+				localStorage.outletNameID=outlet
+				//alert(localStorage.outletNameID);
+				$("#outletName_show").html(localStorage.outletNameID);
+				$("#outletInfo").html(localStorage.outletinfoString);
+				
+				//create place  combo
+				var placeArray = localStorage.place_strList.split('rdrd');	
+				var place_combo_str='Select Place Location: </br>'
+				place_combo_str=place_combo_str +'<label><input type="checkbox" name="is_near_inFront_actual" id="is_near_inFront_actual" value=""/>Near or In front of Entrance</label>'	
+				place_combo_str=place_combo_str +'<label ><input type="checkbox" name="is_beside_adjacent_actual" id="is_beside_adjacent_actual" value=""/>Beside or Adjacent Cash Counter</label>'	
+				place_combo_str=place_combo_str +'<label  ><input type="checkbox" name="is_eyeLevel_actual" id="is_eyeLevel_actual" value=""/>Eye Level of Consumers</label>'	
+				place_combo_str=place_combo_str +'<label  ><input type="checkbox" name="is_clearlyVis_noObs_actual" id="is_clearlyVis_noObs_actual" value=""/> Clearly Visible or No obstacle in front of the shelf</label>'	
+												
+				localStorage.place_combo_str=place_combo_str;
+				$('#place_combo_show').empty();
+				$('#place_combo_show').append(localStorage.place_combo_str).trigger('create');
+				
+				//Create Key Task
+				var keyTask_combo_str='Key Tasks Performe: </br>'
+				keyTask_combo_str=keyTask_combo_str +'<label><input type="checkbox" name="planKey" id="planKey" value=""/>Plan o gram maintenance</label>'	
+				keyTask_combo_str=keyTask_combo_str +'<label><input type="checkbox" name="productKey" id="productKey" value=""/>Product cleaning</label>'	
+				keyTask_combo_str=keyTask_combo_str +'<label><input type="checkbox" name="posmKey" id="posmKey" value=""/>POSM execution</label>'	
+				keyTask_combo_str=keyTask_combo_str +'<label><input type="checkbox" name="catKey" id="catKey" value=""/>Category Shelf management</label>'	
+												
+				localStorage.keyTask_combo_str=keyTask_combo_str;
+				$('#place_show1').empty();
+				$('#place_show1').append(localStorage.keyTask_combo_str).trigger('create');
+				
+					  
+				//alert(localStorage.outletChannel);
+				syncOutlet();
+				
+				/*var current_date=get_date();
+				var bak_date1=get_bak_date_one();
+				var bak_date2=get_bak_date_two();
+				var bak_date3=get_bak_date_three();
+				if (localStorage.selected_date==current_date){						
+					var url = "#outletPage";
+					$.mobile.navigate(url);
+					$(url).trigger('create');
+				}else if ((localStorage.selected_date==bak_date1)||(localStorage.selected_date==bak_date2)||(localStorage.selected_date==bak_date3)){
+					var url = "#outletexceptionPage";
+					$.mobile.navigate(url);
+					$(url).trigger('create');
+				}else{
+					$(".errorChk").text("");				
+					$(".sucMsgU").hide();
+					$("#btn_submit_usages").hide();
+					$("#allHide").hide();
+					$("#bufferImageU").hide();
+					$("#usageSubmitbufferImage").hide();
+					$("#NOutlet_button").hide();
+					var url = "#page5";
+					$.mobile.navigate(url);
+					$(url).trigger('create');	
+				}*/
+			}else{
+			  
+			  localStorage.show_cancel=0;
+			  
+			  $("#selectOButton").show();
+			  
+			  //cancel_outlet();
+			  $("#outletCancel").hide();
+			  var url = "#outletPage";
+			  $.mobile.navigate(url);	
+			  $(url).trigger('create');
+			  location.reload();
+			  
+		  }
+	}else{
+		$("#dataerrorOutlet").html('Please submit from saved data');
+		 var check_outlet= localStorage.outletString;
+					
+		//localStorage.outletString=check_outlet.replace('<input type="radio" name="RadioOutlet" value="'+selected_outletID+'rdrd'+selected_date_get+'">','<input type="radio" name="RadioOutlet" value="'+selected_outletID+'rdrd'+selected_date_get+'" disabled="True">')
+		
+		$("#outletString").empty();
+		$("#outletString").append(localStorage.outletString).trigger('create');
+	}
 		
 }
 
@@ -2567,6 +2588,9 @@ function cancel_outlet_next(){
 	$("#cpageOutletNameID").empty();
 	$("#cpageOutletNameID").append(localStorage.outletIDnameShow).trigger('create');
 	
+	$('#cancel_reason').empty();
+	$('#cancel_reason').append(localStorage.cancel_combo_str).trigger('create');
+	
 	$('#mhskus').find('input, textarea, button, select').attr('disabled',false);
 	$('#npd').find('input, textarea, button, select').attr('disabled',false);
 	//$('#fdisplayStringShowBefore').find('input, textarea, button, select').attr('disabled',false);
@@ -2593,7 +2617,8 @@ function cancel_outlet_next_next(){
 	$("#cpageOutletNameID").empty();
 	$("#cpageOutletNameID").append(localStorage.outletIDnameShow).trigger('create');
 	
-	//alert(localStorage.selected_date+'==='+current_date);
+	$(".routeshowPS").html("Route	:		"+localStorage.routeIDName);
+	$(".outletshowPS").html("Outlet	:		"+localStorage.outletNameID);
 	
 	$('#mhskus').find('input, textarea, button, select').attr('disabled',false);
 	$('#npd').find('input, textarea, button, select').attr('disabled',false);
@@ -2630,8 +2655,13 @@ function cancel_outlet_Back(){
 			$("#shop_image_name_hidden").val('');
 			$("#cancelButton").show();
 			$("#login_image_cancel").hide();
+			
+			$("#outletString").empty();
+			$("#outletString").append(localStorage.outletString).trigger('create');
+			
 			var url = "#outletPage";
 			$.mobile.navigate(url);
+			
 		}else{
 			if ((imageName.length < 10) || imageName==''){
 				$("#c_reason").html('Please Take Picture');
@@ -2656,6 +2686,10 @@ function cancel_outlet_Back(){
 								cancel_outlet();
 								document.getElementById('shop_image_div').src = '';
 								$("#shop_image_name_hidden").val('');
+								
+								$("#outletString").empty();
+								$("#outletString").append(localStorage.outletString).trigger('create');
+								
 								var url = "#outletPage";
 								$.mobile.navigate(url);
 							}
@@ -2683,7 +2717,12 @@ function menupage(){
 	var check_outlet= localStorage.outletString;
 								
 	//localStorage.outletString=check_outlet.replace('<input type="radio" name="RadioOutlet" value="'+localStorage.selectedOutlet+'rdrd'+localStorage.selected_date_get+'">','<input type="radio" name="RadioOutlet" value="'+localStorage.selectedOutlet+'rdrd'+localStorage.selected_date_get+'" disabled="True">');
+	
 	cancel_outlet();
+	
+	$("#outletString").empty();
+	$("#outletString").append(localStorage.outletString).trigger('create');
+			
 	var url = "#outletPage";
 	$.mobile.navigate(url);
 	//location.reload();
@@ -2755,6 +2794,8 @@ function cancel_outlet(){
 	$("#link_route").show();
 	$("#outletWait").show();
 	$("#outletButton").hide();
+	$("#outletSearchDiv").show();
+	$("#outletFooter").show();
 	/*$("#location_button").show();
 	$("#sub_button_div").show();
 	$("#image_up_button").show();
@@ -3656,12 +3697,12 @@ function npd_ready_data() {
 		var npd_image_div_path=$("#npd_image_div_hidden_"+i.toString()).val(); 
 		var npd_image_name_hidden=$("#npd_image_name_hidden_"+i.toString()).val(); 
 		//alert(ItemQtynpd+'==='+minQty+'==='+npd_image_name_hidden);
-		/*if (ItemQtynpd.length < 1){
+		if (ItemQtynpd.length < 1){
 			error_flag_qty_npd=1;
 		}
-		if (npd_image_div_path.length < 1){
+		if (npd_image_name_hidden.length < 1){
 			error_image_flag_npd=1;
-		}*/
+		}
 		npd_data=npd_data+Itemnpd+'fdfd'+ItemQtynpd+'fdfd'+minQty+'fdfd'+npd_image_div_path+'fdfd'+npd_image_name_hidden+'rdrd';
 	}
 	localStorage.npd_data_ready=npd_data
@@ -4247,7 +4288,7 @@ function win(r) {
 		//buttonCheck();		
 	}	
 	if (localStorage.step_flag==3){  // Gift
-		$("#submit_data").html("Promotion Synced Successfully");
+		$("#submit_data").html("NPD Synced Successfully");
 		localStorage.giftdataSubmit=1;
 		upload_gift_confirm();
 		//buttonCheck();
@@ -4342,9 +4383,14 @@ function check_step() {
 		cancel_outlet();
 	}
 	
-		
-	var url = "#outletSelectPage";
-	$.mobile.navigate(url);
+	
+	//if (localStorage.qpdsdataSubmit==1 && localStorage.npddataSubmit==1 && localStorage.giftdataSubmit==1 && localStorage.placedataSubmit==1 && localStorage.shopdataSubmit==1){
+		var url = "#outletSelectPage";
+		$.mobile.navigate(url);
+	/*}else{
+		var url = "#imageSubmitPage";
+		$.mobile.navigate(url);
+	}*/
 }
 
 function buttonCheck(){	
@@ -4413,7 +4459,7 @@ function submit_data() {
 	var sync_date=sync_y +'-'+ sync_m +'-'+sync_d;
 	//alert('1');
 	if ((localStorage.synced=='YES') & (localStorage.sync_date!=sync_date)){
-			//alert('2');		
+		//alert('2');		
 		cancel_outlet();
 		
 		localStorage.show_cancel=0;
@@ -4549,7 +4595,7 @@ function submit_data() {
 						$("#submit_data").html('');
 						localStorage.step_flag=0;
 												
-						/*document.getElementById("is_near_inFront_actual").checked = false;	
+						document.getElementById("is_near_inFront_actual").checked = false;	
 						document.getElementById("is_beside_adjacent_actual").checked = false;				
 						document.getElementById("is_eyeLevel_actual").checked = false;
 						document.getElementById("is_clearlyVis_noObs_actual").checked = false;
@@ -4559,7 +4605,7 @@ function submit_data() {
 						document.getElementById("posmKey").checked = false;
 						document.getElementById("catKey").checked = false;
 						
-						$("#is_near_inFront_actual").attr('checked',false);*/
+						$("#is_near_inFront_actual").attr('checked',false);
 						
 						
 						// Enable all disable div start
@@ -4578,7 +4624,7 @@ function submit_data() {
 						
 						document.getElementById('shop_image_div').src = '';
 						$("#shop_image_name_hidden").val('');
-						$("#sub_button_div").show();
+						//$("#sub_button_div").show();
 						//buttonCheck();
 						//var url = "#outletPage";
 						var url = "#imageSubmitPage";
@@ -4830,7 +4876,7 @@ function merchandizingToolsSup(){
 	$.mobile.navigate(url);
 	}
 
-var rName='';
+/*var rName='';
 function sRoute(routeName){
 	
 	rName=routeName;
@@ -4877,7 +4923,7 @@ function sRoute(routeName){
 				$(".errorChk").text("Please check internet connection");
 			}
 		})
-}
+}*/
 
 var routeNameIdSup='';
 function outletListSup(routeNameId){
