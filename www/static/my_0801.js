@@ -43,14 +43,10 @@ var joinCallQueNo1='';
 var joinCallQueNo2='';
 var joinCallQueNo3='';
 var joinCallQueNo4='';
-
-var step_flag=0; 
-var temp_image_div='';
-var temp_image_div_promo='';
 //localStorage.p_rep_type='';
 
 //---Online
-var apipath="http://w02.yeapps.com/postit/syncmobile_20190801/";
+var apipath="http://w02.yeapps.com/postit/syncmobile_20190725_1/";
 var apipath_image="http://w02.yeapps.com/postit/";
 
 //--- local
@@ -59,17 +55,6 @@ var apipath_image="http://w02.yeapps.com/postit/";
 url ="";
 
 $(document).ready(function(){
-	
-	$("#shop_image_div").hide();
-	//$("#"+temp_image_div).hide();
-	$("#gift_image_div").hide();
-	$("#place_image_div").hide();
-	$("#myImageD").hide();
-	$("#myImageB").hide();
-	$("#myImageC").hide();
-	$("#myImageE").hide();
-	$("#shopeForntImageA").hide();
-	$("#getFixedDisplayAfterA").hide();
 	
 	
 	$('#bufferImageSync').hide();
@@ -430,6 +415,7 @@ function syncBasic(){
 					
 					}else{
 						$(".supreceiveTownSelect").empty();
+						
 					}
 							
 					if(localStorage.p_town!=''){
@@ -472,8 +458,8 @@ function syncBasic(){
 						$(".errorChk").html("Town Not Available");
 						}else{
 							$(".errorChk").html("");
+							}
 						}
-					}
 					//========================
 					
 					/*var cmRoute=localStorage.p_routeList.split('||');					
@@ -1033,7 +1019,7 @@ function salfie_next_page(){
 					if (result==''){
 						alert ('Sorry Network not available');
 					}else if(result=='Success'){
-						localStorage.psSubmittedOutlet='';
+						
 						localStorage.p_attendanceCheck="Day Start"
 						$("#get_salfieButton").hide();
 						$("#attandanceButton").hide();
@@ -1116,7 +1102,6 @@ function onSuccessSalfie(imageURI) {
 
 function onFailSalfie(message) {
 	$("#salfie_image_div").hide();
-	$("#salfie_image_name_hidden").val('');
 	imagePathA="";
     alert('Failed because: ' + message);
 }
@@ -1252,7 +1237,7 @@ function townSelect(town){
 		/*if (localStorage.p_rep_type!='CM'){	*/
 		$('#bufferImageRoute').hide();
 		$('#menuBufferingImage').show();	
-		$('.bufferImageSupCall').hide();	
+			//$('#bufferImageOutlet').show();	
 
 		//alert(apipath+"getRoutetest?&townCodeName="+localStorage.p_select_town+"&cm_id="+localStorage.p_repID);
 		$.ajax({
@@ -1269,53 +1254,22 @@ function townSelect(town){
 					//alert(localStorage.p_routeListSupALL);
 					if(localStorage.p_routeListSupALL!=''){
 						var routeListSupALL=localStorage.p_routeListSupALL.split('fdfd');
-						//alert(routeListSupALL);
 						//var routeStr='<ul data-role="listview" class="list" data-filter="true" data-inset="true" style="height:400px; overflow:scroll;">';
 						var routeStr='';
 						var routeDate='';
-						var dateStr='';
-						for (j=0;j<routeListSupALL.length;j++){	
-							var routeS=routeListSupALL[j].split('|');
-							routeDate=routeS[1]
-							
-							if (dateStr.indexOf(routeDate)==-1){
-								if (dateStr==''){
-									dateStr=routeDate
-								}else{
-									dateStr+=','+routeDate	
-								}
-							}
-						}
-						
-						var dateList=dateStr.split(',');
-						//alert(dateList);
-						for (k=0;k<dateList.length;k++){	
-							for (i=0;i<routeListSupALL.length;i++){	
-								var routeS=routeListSupALL[i].split('|');
-								var routeName=routeS[0]	
-								routeDate=routeS[1]
-								//alert(dateCheck+'==='+routeDate);
-								//alert(routeDate+'==='+current_date+'==='+bak_date1+'==='+bak_date2+'==='+bak_date3);
-								if (dateList[k]==routeDate){
-									if (k==0){
-									routeStr +='<div><label style="background:#81C0C0"><input type="radio" name="RadioRoute" value="'+routeName+'|'+routeDate+'" id="RadioGroup1_0"> '+routeName+'|'+routeDate+'</label></div>'
-									
-									}else{
-										routeStr +='<div><label><input type="radio" name="RadioRoute" value="'+routeName+'|'+routeDate+'" id="RadioGroup1_0"> '+routeName+'|'+routeDate+'</label></div>'
-									}
-								}
-							}
-								
-						}
-						
-						for (l=0;l<routeListSupALL.length;l++){	
-							var routeS=routeListSupALL[l].split('|');
+						for (i=0;i<routeListSupALL.length;i++){	
+							var routeS=routeListSupALL[i].split('|');
 							var routeName=routeS[0]	
 							routeDate=routeS[1]
 							
-							if (routeDate==''){	
+							//alert(routeDate+'==='+current_date);
+							if (routeDate==current_date){
+								routeStr +='<div><label style="background:#81C0C0"><input type="radio" name="RadioRoute" value="'+routeName+'|'+routeDate+'" id="RadioGroup1_0"> '+routeName+'|'+routeDate+'</label></div>'
+							}else if((routeDate==bak_date1)||(routeDate==bak_date2)||(routeDate==bak_date3)){
+								routeStr +='<div><label><input type="radio" name="RadioRoute" value="'+routeName+'|'+routeDate+'" id="RadioGroup1_0"> '+routeName+'|'+routeDate+'</label></div>'
+							}else{
 								routeStr +='<div><label style="background:#ddeeee"><input type="radio" name="RadioRoute" value="'+routeName+'|'+routeDate+'|'+routeDate+'" id="RadioGroup1_0"> '+routeName+'</label></div>'
-							}
+							}						
 						}
 						//routeStr +=routeStr;
 						localStorage.p_routeListSup=routeStr;
@@ -1504,9 +1458,10 @@ function receive(){
 			$("#cmPOSMdivShow").show();
 			$("#supTownDivShow").hide();
 		}else{
+			
 			$("#cmPOSMdivShow").hide();
 			$("#supTownDivShow").show();
-		}
+			}
 		url="#second_page";					
 		$.mobile.navigate(url);
 }
@@ -1528,10 +1483,12 @@ function alloDetails(ab){
 	}else{
 		var posmCode=posmCodeCMTarget;
 		var town = select_townSupCombo;
-	}
+		}
 	
 	if(localStorage.p_rep_type!="CM" && select_townSupCombo==''){
+		
 		$(".errorChkP").text("Select Town");
+			
 	}else if(posmCode==""|| posmCode==null){
 		$(".errorChkP").text("Select posm Code");
 		$(".recDataR").hide();
@@ -1606,10 +1563,10 @@ function submitData_ReceiveList(){
 	
 	if (receiveQtyR==''){
 		receiveQtyR=0;
-	}
+		}
 	if(damageQtyR==''){
 		damageQtyR=0;
-	}
+		}
 	
 	if (receiveQtyR!=0){
 		if ( receiveQty <= 0){
@@ -1720,7 +1677,7 @@ function submitData_TargetList(){
 	
 	if (targetQty==''){
 		targetQty=0;
-	}
+		}
 	
 	if (targetQty==0){
 		$(".errorChk").html('Required Target Qty');
@@ -1812,13 +1769,14 @@ function rec_target_del(id){
 
 
 function submit_data_receive(){
+	
 	if(localStorage.p_rep_type=="CM"){
 		var posmCode=$("#posmCodeRec").val();
 		var town = localStorage.p_select_town;
 	}else{
 		var posmCode = posmCodeCMTarget
 		var town = select_townSupCombo;
-	}
+		}
 	
 	$("#btn_submit_receive").hide();
 	var d = new Date();	
@@ -1843,10 +1801,10 @@ function submit_data_receive(){
 	
 	if (received==''){
 		received=0;
-	}
+		}
 	if(def_qty==''){
 		def_qty=0;
-	}
+		}
 	
 	if (received==0 && def_qty==0){
 		
@@ -1901,7 +1859,10 @@ function submit_data_receive(){
 					$(".sucMsgR").show();
 					$(".allHideR").hide();
 					$("#btn_submit_receive").hide();
-										
+					
+					
+					
+					
 					uploadPhotoRec(imagePathA, imageName);
 					uploadPhotoDefective(imagePathE, imageName6);
 					
@@ -1950,8 +1911,7 @@ function getReceiveImage() {
 	destinationType: Camera.DestinationType.FILE_URI,correctOrientation: true });	
 }
 
-function onSuccessA(imageURI) {	
-	$("#myImageA").show();	
+function onSuccessA(imageURI) {		
     var image = document.getElementById('myImageA');
     image.src = imageURI;
 	var image_path = "recPhoto_path";	
@@ -1960,7 +1920,6 @@ function onSuccessA(imageURI) {
 }
 
 function onFailA(message) {
-	$("#myImageA").hide();
 	imagePathA="";
 	$("#recPhoto_name").val('');
     alert('Failed because: ' + message);
@@ -2068,7 +2027,6 @@ function get_bak_date_one() {
 	var y = currentdate.getFullYear() 
 	var rm = currentdate.getMonth()+1
 	var rd = currentdate.getDate()-1
-	//alert(rm+'===='+rd);
 	lm=rm.toString().length;
 	if (lm==1){
 		m='0'+rm
@@ -2091,7 +2049,6 @@ function get_bak_date_two() {
 	var y = currentdate.getFullYear() 
 	var rm = currentdate.getMonth()+1
 	var rd = currentdate.getDate()-2
-	
 	lm=rm.toString().length;
 	if (lm==1){
 		m='0'+rm
@@ -2114,7 +2071,6 @@ function get_bak_date_three() {
 	var y = currentdate.getFullYear() 
 	var rm = currentdate.getMonth()+1
 	var rd = currentdate.getDate()-3
-	
 	lm=rm.toString().length;
 	if (lm==1){
 		m='0'+rm
@@ -2137,21 +2093,21 @@ function get_bak_date_three() {
 function usages(){	
 	if ((localStorage.selectedRoute=="") || (localStorage.selectedRoute=='undefined')){
 		$(".errorChk").text("");
-		$("#routeSearch").val('');	
+		//url="#outletPage";	
 		url="#page3";				
 		$.mobile.navigate(url);
 	}else{
 		$(".errorChk").text("");
-		$("#outletSearch").val('');
-		url="#outletPage";					
+		url="#outletPage";	
+		//url="#page3";					
 		$.mobile.navigate(url);
 	}
 }
 
 function usages_panel(){	
-	$(".errorChk").text("");	
-	url="#page3";	
-	$.mobile.navigate(url);
+		$(".errorChk").text("");	
+		url="#page3";	
+		$.mobile.navigate(url);
 }
 /************************=====================================================================================********************/
 
@@ -2191,9 +2147,12 @@ function selectOutletException() {
 localStorage.selectedRoute='';
 function syncRoute() { 
 	cancel_outlet();
-
+	
 	var selected_route_exception=($("input:radio[name='RadioRouteEx']:checked").val())
 	var selected_route=($("input:radio[name='RadioRoute']:checked").val())
+	
+	$("#bufferImageRoute").show();
+	$("#RSButton").hide();
 	
 	var d=new Date();
 	var weekday=new Array(7);
@@ -2246,8 +2205,6 @@ function syncRoute() {
 		localStorage.routeException_found='2';			
 	}*/
 	if(localStorage.selectedRoute!=undefined){
-		$("#bufferImageRoute").show();
-		$("#RSButton").hide();
 		//alert(apipath+'sync_route?cm_id='+localStorage.p_repID+'&mobileNo='+localStorage.p_mobileNo+'&cm_pass='+localStorage.p_SyncPass+'&synccode='+localStorage.p_sync_code+'&route='+localStorage.selectedRoute+'&townCodeName='+localStorage.p_select_town);
 		localStorage.routeException='';
 		$.ajax({
@@ -2298,7 +2255,6 @@ function syncRoute() {
 							$("#outletExString").html(localStorage.outletExStringShow);
 							
 							//==========Create outlet list
-							localStorage.psOutletList=outletList;
 							var outletSingleArray = outletList.split('rdrd');
 							//alert(outletSingleArray);
 							var outletSingleTtotal = outletSingleArray.length;
@@ -2308,123 +2264,65 @@ function syncRoute() {
 							//outletStringShow=outletStringShow+'<table width="100%" border="0" cellpadding="0" cellspacing="0"><tr style="color:#006A6A; font-size:18px;"><td>'+localStorage.routeIDName+'</td></tr></table>'
 							//outletStringShow=outletStringShow+'<input type="text" id="outletSearch" placeholder="Search Outlet..." />'
 							
-							var dateStr='';
-							for (var j=0; j < outletSingleTtotal-1; j++){
-								outletArray = outletSingleArray[j].split('fdfd');								
-								scheduleDate=outletArray[3];								
-								if (dateStr.indexOf(scheduleDate)==-1){
-									if (dateStr==''){
-										dateStr=scheduleDate
-									}else{
-										dateStr+=','+scheduleDate	
-									}
-								}
-							}
-							
-							var dateList=dateStr.split(',');
-							for (k=0;k<dateList.length;k++){	
-								for (var o=0; o < outletSingleTtotal-1; o++){
-									outletArray = outletSingleArray[o].split('fdfd');
-									outletID=outletArray[0];
-									outletName=outletArray[1];
-									channel=outletArray[2];
-									scheduleDate=outletArray[3];
-									psStatus=outletArray[4];
-									
-									if (scheduleDate!=''){
-										//alert(scheduleDate);
-										if (dateList[k]==scheduleDate){	
-											if (k==0){
-												if (localStorage.psSubmittedOutlet.indexOf(outletID)!=-1){							
-													outletStringShow=outletStringShow+'<div><label style="background:#ddeeee;">'+
-														'<input type="radio" name="RadioOutlet" value="'+outletID+'rdrd'+scheduleDate+'rdrd'+"othersV"+'">'+outletName +' | '+ outletID +' | '+  scheduleDate +' | '+channel+' | '+psStatus +'</label></div>'
-												}else{
-													outletStringShow=outletStringShow+'<div><label style="background:#81C0C0;">'+
-														'<input type="radio" name="RadioOutlet" value="'+outletID+'rdrd'+scheduleDate+'rdrd'+"currentV"+'rdrd'+psStatus+'">'+outletName +' | '+ outletID +' | '+  scheduleDate +' | '+channel+' | '+psStatus +'</label></div>'
-												}
-											}else{
-												if (localStorage.psSubmittedOutlet.indexOf(outletID)!=-1){	
-													outletStringShow=outletStringShow+'<div><label style="background:#ddeeee;">'+
-														'<input type="radio" name="RadioOutlet" value="'+outletID+'rdrd'+scheduleDate+'rdrd'+"othersV"+'">'+outletName +' | '+ outletID +' | '+  scheduleDate +' | '+channel+' | '+psStatus +'</label></div>'
-												}else{
-													outletStringShow=outletStringShow+'<div><label>'+
-														'<input type="radio" name="RadioOutlet" value="'+outletID+'rdrd'+scheduleDate+'rdrd'+"backV"+'rdrd'+psStatus+'">'+outletName +' | '+ outletID +' | '+  scheduleDate +' | '+channel+' | '+psStatus +'</label></div>'
-												}
-											}
-										}
-									}
-								}
-							}
-									/*if (k==0){
-										if (localStorage.psSubmittedOutlet.indexOf(outletID)!=-1){
-											outletStringShow=outletStringShow+'<div><label style="background:#ddeeee;">'+
-													'<input type="radio" name="RadioOutlet" value="'+outletID+'rdrd'+scheduleDate+'rdrd'+"currentV"+'">'+outletName +' | '+ outletID +' | '+  scheduleDate +' | '+channel+' | '+psStatus +'</label></div>'
-										}else{
-											outletStringShow=outletStringShow+'<div><label style="background:#81C0C0;">'+
-													'<input type="radio" name="RadioOutlet" value="'+outletID+'rdrd'+scheduleDate+'rdrd'+psStatus+'">'+outletName +' | '+ outletID +' | '+scheduleDate +' | '+channel +' | '+psStatus+'</label></div>'
-										}	
-									}*/
-									
-									
-									
-									/*if (scheduleDate!=''){
-										if (dateList[k]==scheduleDate){
-											
-										}else{
-											//alert(scheduleDate);
-											if (localStorage.psSubmittedOutlet.indexOf(outletID)!=-1){
-												outletStringShow=outletStringShow+'<div><label style="background:#ddeeee">'+
-														'<input type="radio" name="RadioOutlet" value="'+outletID+'rdrd'+scheduleDate+'rdrd'+"backV"+'">'+outletName +' | '+ outletID +' | '+scheduleDate +' | '+channel +' | '+psStatus+'</label></div>'
-											}else{
-												alert(scheduleDate);
-												outletStringShow=outletStringShow+'<div><label>'+
-														'<input type="radio" name="RadioOutlet" value="'+outletID+'rdrd'+scheduleDate+'rdrd'+"outletEX"+'rdrd'+psStatus+'">'+outletName +' | '+ outletID +' | '+  scheduleDate +' | '+channel +' | '+psStatus+'</label></div>'
-											}		
-										}
-									}*/
-								//}
-							//}
-							
-							for (var i=0; i < outletSingleTtotal-1; i++){
-								outletArray = outletSingleArray[i].split('fdfd');	
-								othertsOutletID=outletArray[0];
-								othertsOutletName=outletArray[1];
-								othersChannel=outletArray[2];							
-								othertsScheduleDate=outletArray[3];								
-								if (othertsScheduleDate==''){	
-									outletStringShow=outletStringShow+'<div><label style="background:#ddeeee">'+
-												'<input type="radio" name="RadioOutlet" value="'+othertsOutletID+'rdrd'+othertsScheduleDate+'rdrd'+"othersV"+'">'+othertsOutletName +' | '+ othertsOutletID +' | '+othersChannel+'</label></div>'
-								}
-							}
+							for (var o=0; o < outletSingleTtotal-1; o++){
+								outletArray = outletSingleArray[o].split('fdfd');
+								outletID=outletArray[0];
+								outletName=outletArray[1];
+								//total_visit=outletArray[2];
+								//total_visit_done=outletArray[3];
+								//outlet_c=outletArray[4];
+								//depot_id=outletArray[5];
+								//schedule_date=outletArray[6];
+								channel=outletArray[2];
+								scheduleDate=outletArray[3];
+								//alert(outletName+'==='+schedule_date);
 								
-								/*if (scheduleDate==current_date){
-									if (localStorage.psSubmittedOutlet.indexOf(outletID)!=-1){
-										outletStringShow=outletStringShow+'<div><label style="background:#ddeeee;">'+
-												'<input type="radio" name="RadioOutlet" value="'+outletID+'rdrd'+0+'">'+outletName +' | '+ outletID +' | '+  scheduleDate +' | '+channel+' | '+psStatus +'</label></div>'
-									}else{
-										outletStringShow=outletStringShow+'<div><label style="background:#81C0C0;">'+
-												'<input type="radio" name="RadioOutlet" value="'+outletID+'rdrd'+scheduleDate+'rdrd'+psStatus+'">'+outletName +' | '+ outletID +' | '+scheduleDate +' | '+channel +' | '+psStatus+'</label></div>'
-									}												
-								}else if(scheduleDate==bak_date1 || scheduleDate==bak_date2 || scheduleDate==bak_date3){
-									if (localStorage.psSubmittedOutlet.indexOf(outletID)!=-1){
-										outletStringShow=outletStringShow+'<div><label style="background:#ddeeee">'+
-												'<input type="radio" name="RadioOutlet" value="'+outletID+'rdrd'+0+'">'+outletName +' | '+ outletID +' | '+scheduleDate +' | '+channel +' | '+psStatus+'</label></div>'
-									}else{
-										outletStringShow=outletStringShow+'<div><label>'+
-												'<input type="radio" name="RadioOutlet" value="'+outletID+'rdrd'+scheduleDate+'rdrd'+psStatus+'">'+outletName +' | '+ outletID +' | '+  scheduleDate +' | '+channel +' | '+psStatus+'</label></div>'
-									}		
-								}else{
-									outletStringShow=outletStringShow+'<div><label style="background:#ddeeee">'+
-												'<input type="radio" name="RadioOutlet" value="'+outletID+'rdrd'+0+'">'+outletName +' | '+ outletID +' | '+channel +' | '+psStatus+'</label></div>'
+								/*outletColor="";
+								if (outlet_c=='g'){
+									outletColor='<img style="height:20px; width:20px" src="green.png">';
+								}
+								if (outlet_c=='b'){
+									outletColor='<img style="height:20px; width:20px" src="orange.png">';
+								}
+								if (outlet_c=='r'){
+									outletColor='<img style="height:20px; width:20px" src="red.png">';
 								}*/
 								
-							//}
+								//alert(scheduleDate+'=='+current_date);
+								
+								if (scheduleDate==current_date){
+									outletStringShow=outletStringShow+'<div><label style="background:#81C0C0">'+
+												'<input type="radio" name="RadioOutlet" value="'+outletID+'rdrd'+scheduleDate+'"></td><td width="60%">'+outletName +' | '+ outletID +' | '+  scheduleDate +' | '+channel +'</label></div>'
+												
+								}else if(scheduleDate==bak_date1 || scheduleDate==bak_date2 || scheduleDate==bak_date3){
+									outletStringShow=outletStringShow+'<div><label>'+
+												'<input type="radio" name="RadioOutlet" value="'+outletID+'rdrd'+scheduleDate+'"></td><td width="60%">'+outletName +' | '+ outletID +' | '+  scheduleDate +' | '+channel +'</label></div>'
+												
+								}else{
+									outletStringShow=outletStringShow+'<div><label style="background:#ddeeee">'+
+												'<input type="radio" name="RadioOutlet" value="'+outletID+'rdrd'+scheduleDate+'"></td><td width="60%">'+outletName +' | '+ outletID +' | '+channel +'</label></div>'
+								}
+												
+												
+												
+							/*<td width="15%">'+ total_visit+'/'+total_visit_done+' </td>	<td>'+outletColor+'</td>*/
+								
+							}
+								
 								
 							// If schedule not available
 							if (outletSingleArray.length==1){
 								outletStringShow=outletStringShow+'<label style="color:#800000; font-size:18px" ><table width="100%" border="0"> <tr> <td >Schedule Not Available </td>	</tr></table></label>'
 							}
-						
+							//outletStringShow=outletStringShow+'<br/><br/> <a id="selectOButton" data-role="button" onClick="select_outlet();" >Next</a>'
+							
+							
+							
+							
+							
+							
+							//outletStringShow=outletStringShow+'<div id="outletWait" style="display:none"><img height="40px" width="40px" src="loading.gif"></div>'
+							
 							localStorage.outletString=outletStringShow
 							$("#outletString").empty();
 							$("#outletString").append(localStorage.outletString).trigger('create');
@@ -2506,9 +2404,8 @@ function select_outlet() {
 	localStorage.selectedOutlet=selected_outletID_list[0];	
 	localStorage.p_selectedOutlet=selected_outletID_list[0];	
 	localStorage.selected_date=selected_outletID_list[1];
-	localStorage.outletVisitStatus=selected_outletID_list[2];
-	localStorage.psStatus=selected_outletID_list[3];
-
+	
+	
 	//alert(localStorage.selectedOutlet+'===='+localStorage.selected_date);
 	/*var saved_outlet_flag=0;
 	if  (localStorage.saved_req.length > 10){
@@ -2790,11 +2687,8 @@ function cancel_outlet_Back(){
 								document.getElementById('shop_image_div').src = '';
 								$("#shop_image_name_hidden").val('');
 								
-								localStorage.psSubmittedOutlet+=',"'+outletID+'"';
-								
-								menupage();
-								//$("#outletString").empty();
-								//$("#outletString").append(localStorage.outletString).trigger('create');
+								$("#outletString").empty();
+								$("#outletString").append(localStorage.outletString).trigger('create');
 								
 								var url = "#outletPage";
 								$.mobile.navigate(url);
@@ -2821,77 +2715,11 @@ function cancel_outlet_Back(){
 
 function menupage(){	
 	var check_outlet= localStorage.outletString;
-									
+								
+	//localStorage.outletString=check_outlet.replace('<input type="radio" name="RadioOutlet" value="'+localStorage.selectedOutlet+'rdrd'+localStorage.selected_date_get+'">','<input type="radio" name="RadioOutlet" value="'+localStorage.selectedOutlet+'rdrd'+localStorage.selected_date_get+'" disabled="True">');
+	
 	cancel_outlet();
-		
-	var outletSingleArray = localStorage.psOutletList.split('rdrd');
-	var outletSingleTtotal = outletSingleArray.length;
-	var outletStringShow=''	
-		
-	var dateStr='';
-	for (var j=0; j < outletSingleTtotal-1; j++){
-		outletArray = outletSingleArray[j].split('fdfd');								
-		scheduleDate=outletArray[3];								
-		if (dateStr.indexOf(scheduleDate)==-1){
-			if (dateStr==''){
-				dateStr=scheduleDate
-			}else{
-				dateStr+=','+scheduleDate	
-			}
-		}
-	}
 	
-	var dateList=dateStr.split(',');
-	for (k=0;k<dateList.length;k++){	
-		for (var o=0; o < outletSingleTtotal-1; o++){
-			outletArray = outletSingleArray[o].split('fdfd');
-			outletID=outletArray[0];
-			outletName=outletArray[1];
-			channel=outletArray[2];
-			scheduleDate=outletArray[3];
-			psStatus=outletArray[4];
-												
-			//alert(scheduleDate+'=='+current_date);
-			
-			if (scheduleDate!=''){
-				if (dateList[k]==scheduleDate){	
-					if (k==0){
-						if (localStorage.psSubmittedOutlet.indexOf(outletID)!=-1){							
-							outletStringShow=outletStringShow+'<div><label style="background:#ddeeee;">'+
-								'<input type="radio" name="RadioOutlet" value="'+outletID+'rdrd'+scheduleDate+'rdrd'+"othersV"+'">'+outletName +' | '+ outletID +' | '+  scheduleDate +' | '+channel+' | '+psStatus +'</label></div>'
-						}else{
-							outletStringShow=outletStringShow+'<div><label style="background:#81C0C0;">'+
-								'<input type="radio" name="RadioOutlet" value="'+outletID+'rdrd'+scheduleDate+'rdrd'+"currentV"+'rdrd'+psStatus+'">'+outletName +' | '+ outletID +' | '+  scheduleDate +' | '+channel+' | '+psStatus +'</label></div>'
-						}
-					}else{
-						if (localStorage.psSubmittedOutlet.indexOf(outletID)!=-1){	
-							outletStringShow=outletStringShow+'<div><label style="background:#ddeeee;">'+
-								'<input type="radio" name="RadioOutlet" value="'+outletID+'rdrd'+scheduleDate+'rdrd'+"othersV"+'">'+outletName +' | '+ outletID +' | '+  scheduleDate +' | '+channel+' | '+psStatus +'</label></div>'
-						}else{
-							outletStringShow=outletStringShow+'<div><label>'+
-								'<input type="radio" name="RadioOutlet" value="'+outletID+'rdrd'+scheduleDate+'rdrd'+"backV"+'rdrd'+psStatus+'">'+outletName +' | '+ outletID +' | '+  scheduleDate +' | '+channel+' | '+psStatus +'</label></div>'
-						}
-					}
-				}
-			}
-		}
-	}
-	
-	
-	for (var i=0; i < outletSingleTtotal-1; i++){
-		outletArray = outletSingleArray[i].split('fdfd');	
-		othertsOutletID=outletArray[0];
-		othertsOutletName=outletArray[1];
-		othersChannel=outletArray[2];							
-		othertsScheduleDate=outletArray[3];								
-		if (othertsScheduleDate==''){	
-			outletStringShow=outletStringShow+'<div><label style="background:#ddeeee">'+
-						'<input type="radio" name="RadioOutlet" value="'+othertsOutletID+'rdrd'+othertsScheduleDate+'rdrd'+"othersV"+'">'+othertsOutletName +' | '+ othertsOutletID +' | '+othersChannel+'</label></div>'
-		}
-	}
-	
-	
-	localStorage.outletString=outletStringShow
 	$("#outletString").empty();
 	$("#outletString").append(localStorage.outletString).trigger('create');
 			
@@ -2958,7 +2786,6 @@ function cancel_outlet(){
 	localStorage.placedataSubmit=0;
 	localStorage.placeLatLongCount=0;
 	localStorage.outletException='undefined';
-	$("#outletSearch").val('');
 	$("#outletCancel").hide();
 	$("#outletString").show();
 	$("#menujpj").show();
@@ -2995,359 +2822,379 @@ function syncOutlet() {
 	//alert(result_string);
 	if (result_string.length > 50){
 			
-		var mhskusArray = result_string.split('</mhskusList>');									
-		mhskusList = mhskusArray[0].replace("<mhskusList>","");
-		
-		npd = mhskusArray[1];			
-		var npdArray = npd.split('</npdList>');									
-		npdList = npdArray[0].replace("<npdList>","");
-		//alert(npdList);					
-							
-		fdisplay = npdArray[1];
-		//alert(fdisplay);
-		var fdisplayArray = fdisplay.split('</fdisplayList>');									
-		fdisplayList = fdisplayArray[0].replace("<fdisplayList>","");
-		//alert(fdisplayList);
-		//$("#show_result").text(fdisplayList);
-		
-							
-		qpds = fdisplayArray[1];
-		var qpdsArray = qpds.split('</qpdsList>');									
-		qpdsList = qpdsArray[0].replace("<qpdsList>","");
-		//alert(qpdsList);
-		
-				
+			var mhskusArray = result_string.split('</mhskusList>');									
+			mhskusList = mhskusArray[0].replace("<mhskusList>","");
+			
+			npd = mhskusArray[1];			
+			var npdArray = npd.split('</npdList>');									
+			npdList = npdArray[0].replace("<npdList>","");
+			//alert(npdList);					
+								
+			fdisplay = npdArray[1];
+			//alert(fdisplay);
+			var fdisplayArray = fdisplay.split('</fdisplayList>');									
+			fdisplayList = fdisplayArray[0].replace("<fdisplayList>","");
+			//alert(fdisplayList);
+			//$("#show_result").text(fdisplayList);
+			
+								
+			qpds = fdisplayArray[1];
+			var qpdsArray = qpds.split('</qpdsList>');									
+			qpdsList = qpdsArray[0].replace("<qpdsList>","");
+			//alert(qpdsList);
+			
+			/*gift = qpdsArray[1];
+			var giftArray = gift.split('</giftList>');									
+			giftList = giftArray[0].replace("<giftList>","");
+			
+			marchadizing = giftArray[1];
+			var marchadizingArray = marchadizing.split('</marList>');									
+			marchadizingList = marchadizingArray[0].replace("<marList>","");
+								
+			
+			//=====marchandizing Item=======
+			marchadizingItem = marchadizingArray[1];
+			var marchadizingItemArray = marchadizingItem.split('</marItemList>');									
+			marchadizingItemList = marchadizingItemArray[0].replace("<marItemList>","");
+			
+			//=====marchandizing Brand=======
+			marchadizingBrand = marchadizingItemArray[1];
+			
+			var marchadizingBrandArray = marchadizingBrand.split('</marBrandList>');									
+			marchadizingBrandList = marchadizingBrandArray[0].replace("<marBrandList>","");*/
+			
+					
 //=====================Create Fixed Display list
-		var fdisplaySlabArray = fdisplayList.split('</slab>');
-		//alert(fdisplaySlabArray);
-		var fdisplaySlabTotal = fdisplaySlabArray.length;
-		//alert(fdisplaySlabArray);
-		
-		var fdisplayStringShow=''
-		var fdisplayStringShowBefore=''
-		fdisplayStringShow=fdisplayStringShow+'<table width="100%" border="0"><tr style="color:#0329C0"> <td colspan="2" style="color:#006A6A; font-size:18px;">'+localStorage.routeIDName+'<br>'+localStorage.outletNameID+'</td></tr><tr > </table></br>'
-		
-		
-		fdisplayStringShowBefore=fdisplayStringShowBefore+'<table width="100%" border="0"><tr style="color:#0329C0"> <td colspan="2" style="color:#006A6A; font-size:18px;">'+localStorage.routeIDName+'<br>'+localStorage.outletNameID+'</td></tr><tr > </table></br>'
-		
-		localStorage.fdisplaySlabTotal=fdisplaySlabTotal
-		//alert(localStorage.fdisplaySlabTotal);
-		if (parseInt(localStorage.fdisplaySlabTotal)==1){
-			localStorage.fdSkip=1;
-		}
-		
-		for (var slab=0; slab < fdisplaySlabTotal-1; slab++){
-			var fdisplaySlabList = fdisplaySlabArray[slab].replace("<slab>","");
-			var fdisplaySlab_1Array = fdisplayList.split('<slab>');
-			//alert(fdisplaySlab_1Array+'==='+1);
-			var fdisplaySlab_image = fdisplaySlabArray[slab].split('<slab>')[0].split('<fdfd>')[1];
-			var fdisplaySlab_name = fdisplaySlabArray[slab].split('<slab>')[0].split('<fdfd>')[0];
-			//alert(fdisplaySlab_image+'=='+fdisplaySlab_name);
-			var slab_text=slab.toString()
-			var fdSL_image_div='fdSL_image_div_'+slab_text
-			var fdSL_image_div_hidden='fdSL_image_div_hidden_'+slab_text
-			var fdSL_image_name_hidden='fdSL_image_name_hidden_'+slab_text
-			//alert(fdSL_image_div_hidden+'==='+fdSL_image_name_hidden);
-			var fdSL_image='fdSL_image_'+slab_text
-			var fdSL_image_div='fdSL_image_div_'+slab_text
-			var fdSLfdisplay='fdSLfdisplay_'+slab_text
+			var fdisplaySlabArray = fdisplayList.split('</slab>');
+			//alert(fdisplaySlabArray);
+			var fdisplaySlabTotal = fdisplaySlabArray.length;
+			//alert(fdisplaySlabArray);
 			
-			//fdisplayStringShow=fdisplayStringShow+'<div id="fddiv_'+slab.toString()+'">'
-			fdisplayStringShow=fdisplayStringShow+'</br></br><table width="100%" border="0"> <tr><td style=" font-weight:bold; font-size:28px color:#006A6A; background:#FFECFF">'+fdisplaySlab_name+'</td> </tr></table>';
-			fdisplayStringShow=fdisplayStringShow+'<img height="100px" width="100%"  src="'+apipath_image+'static/uni_images/fdisplay/'+fdisplaySlab_image+'" alt="FixedDisplay" />';
+			var fdisplayStringShow=''
+			var fdisplayStringShowBefore=''
+			fdisplayStringShow=fdisplayStringShow+'<table width="100%" border="0"><tr style="color:#0329C0"> <td colspan="2" style="color:#006A6A; font-size:18px;">'+localStorage.routeIDName+'<br>'+localStorage.outletNameID+'</td></tr><tr > </table></br>'
 			
-			fdisplayStringShow=fdisplayStringShow+'<table width="100%" border="0" cellpadding="0" cellspacing="0">'
 			
-			fdisplayStringShow=fdisplayStringShow+'<tr bgcolor="#9FCED7" ><td width="1%" >&nbsp;</td><td >Item</td> <td width="50px">QTY</td><td></td><td width="50px">Face Up</td><td></td><td width="100px">Order</td></tr>'
+			fdisplayStringShowBefore=fdisplayStringShowBefore+'<table width="100%" border="0"><tr style="color:#0329C0"> <td colspan="2" style="color:#006A6A; font-size:18px;">'+localStorage.routeIDName+'<br>'+localStorage.outletNameID+'</td></tr><tr > </table></br>'
 			
-			var fdisplaySingleArray = fdisplaySlabList.split('rdrd');	
-			var fdisplaySingleTotal = fdisplaySingleArray.length;
-			var fdisplayTotal='fdisplayTotal'+slab.toString()
-			var fdSL_total_hidden='fdSL_total_hidden_'+slab.toString()
-			
-			localStorage.fdisplayTotal=fdisplaySingleTotal
-			//alert(localStorage.fdisplayTotal);
-			for (var i=0; i < fdisplaySingleTotal-1; i++){
-				var test=fdisplaySingleArray[i].replace(fdisplaySlabArray[slab].split('<slab>')[0],"");
-				fdisplayArray = test.split('fdfd');
-				//alert(fdisplayArray);				
-				slab_fdisplay=fdisplayArray[0]
-				itemID=fdisplayArray[1];
-				itemName=fdisplayArray[2];
-				fdSL_fdisplay=fdisplayArray[3];
-				//alert(fdSL_fdisplay);
-				var i_text=i.toString()
-				var ItemQtyfdisplay='ItemQtyfdisplay_'+slab_text+'_'+i_text
-				var Itemfdisplay='Itemfdisplay_'+slab_text+'_'+i_text
-				
-				var ItemFaceupfdisplay='ItemFaceupfdisplay_'+slab_text+'_'+i_text
-				var ItemVisiblefdisplay='ItemVisiblefdisplay_'+slab_text+'_'+i_text
-				var slabfdisplay='slabfdisplay_'+slab_text+'_'+i_text
-				var fdSLfdisplay='fdSLfdisplay_'+i_text
-										
-				fdisplayStringShow=fdisplayStringShow+'<tr ><td width="1%" >&nbsp;</td><td width="66%">'+itemName+'<input type="hidden" name="'+ Itemfdisplay +'" id="'+ Itemfdisplay +'" value="'+itemID+'" min="0"> <input type="hidden" name="'+ slabfdisplay +'" id="'+ slabfdisplay +'" value="'+slab_fdisplay+'" min="0"></td>'+
-								  '<td width="15%" ><input onClick="checkQtyFd(/'+slab_text+'_'+i_text+'/)" onKeyUp="checkQtyFd(/'+slab_text+'_'+i_text+'/)" type="number" name="'+ItemQtyfdisplay +'" id="'+ ItemQtyfdisplay +'" value="" min="0"></td><td style="padding-right:3px"></td>'+
-								  '<td width="15%"><input onKeyUp="checkQtyFd(/'+slab_text+'_'+i_text+'/)" type="number" name="'+ItemFaceupfdisplay +'" id="'+ ItemFaceupfdisplay +'" value="" min="0"></td>'+
-								  '<td width="4%"></td><td><label style="padding:8px 2px 8px 2px; height:10px;"><input type="checkbox" name="'+ ItemVisiblefdisplay +'" id="'+ ItemVisiblefdisplay +'" value="" /></label></td></tr>'
-				fdisplayStringShow=fdisplayStringShow+'<tr height="1px" bgcolor="#CCCCCC" ><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>'
-				
+			localStorage.fdisplaySlabTotal=fdisplaySlabTotal
+			//alert(localStorage.fdisplaySlabTotal);
+			if (parseInt(localStorage.fdisplaySlabTotal)==1){
+				localStorage.fdSkip=1;
 			}
-			fdisplayStringShow=fdisplayStringShow+'</table>'
-			fdisplayStringShow=fdisplayStringShow+'</div>'	
-			//alert(fdisplayStringShow);
 			
+			for (var slab=0; slab < fdisplaySlabTotal-1; slab++){
+				var fdisplaySlabList = fdisplaySlabArray[slab].replace("<slab>","");
+				var fdisplaySlab_1Array = fdisplayList.split('<slab>');
+				//alert(fdisplaySlab_1Array+'==='+1);
+				var fdisplaySlab_image = fdisplaySlabArray[slab].split('<slab>')[0].split('<fdfd>')[1];
+				var fdisplaySlab_name = fdisplaySlabArray[slab].split('<slab>')[0].split('<fdfd>')[0];
+				//alert(fdisplaySlab_image+'=='+fdisplaySlab_name);
+				var slab_text=slab.toString()
+				var fdSL_image_div='fdSL_image_div_'+slab_text
+				var fdSL_image_div_hidden='fdSL_image_div_hidden_'+slab_text
+				var fdSL_image_name_hidden='fdSL_image_name_hidden_'+slab_text
+				//alert(fdSL_image_div_hidden+'==='+fdSL_image_name_hidden);
+				var fdSL_image='fdSL_image_'+slab_text
+				var fdSL_image_div='fdSL_image_div_'+slab_text
+				var fdSLfdisplay='fdSLfdisplay_'+slab_text
+				
+				//fdisplayStringShow=fdisplayStringShow+'<div id="fddiv_'+slab.toString()+'">'
+				fdisplayStringShow=fdisplayStringShow+'</br></br><table width="100%" border="0"> <tr><td style=" font-weight:bold; font-size:28px color:#006A6A; background:#FFECFF">'+fdisplaySlab_name+'</td> </tr></table>';
+				fdisplayStringShow=fdisplayStringShow+'<img height="100px" width="100%"  src="'+apipath_image+'static/uni_images/fdisplay/'+fdisplaySlab_image+'" alt="FixedDisplay" />';
+				
+				fdisplayStringShow=fdisplayStringShow+'<table width="100%" border="0" cellpadding="0" cellspacing="0">'
+				
+				fdisplayStringShow=fdisplayStringShow+'<tr bgcolor="#9FCED7" ><td width="1%" >&nbsp;</td><td >Item</td> <td width="50px">QTY</td><td></td><td width="50px">Face Up</td><td></td><td width="100px">Order</td></tr>'
+				
+				var fdisplaySingleArray = fdisplaySlabList.split('rdrd');	
+				var fdisplaySingleTotal = fdisplaySingleArray.length;
+				var fdisplayTotal='fdisplayTotal'+slab.toString()
+				var fdSL_total_hidden='fdSL_total_hidden_'+slab.toString()
+				
+				localStorage.fdisplayTotal=fdisplaySingleTotal
+				//alert(localStorage.fdisplayTotal);
+				for (var i=0; i < fdisplaySingleTotal-1; i++){
+					var test=fdisplaySingleArray[i].replace(fdisplaySlabArray[slab].split('<slab>')[0],"");
+					fdisplayArray = test.split('fdfd');
+					//alert(fdisplayArray);				
+					slab_fdisplay=fdisplayArray[0]
+					itemID=fdisplayArray[1];
+					itemName=fdisplayArray[2];
+					fdSL_fdisplay=fdisplayArray[3];
+					//alert(fdSL_fdisplay);
+					var i_text=i.toString()
+					var ItemQtyfdisplay='ItemQtyfdisplay_'+slab_text+'_'+i_text
+					var Itemfdisplay='Itemfdisplay_'+slab_text+'_'+i_text
+					
+					var ItemFaceupfdisplay='ItemFaceupfdisplay_'+slab_text+'_'+i_text
+					var ItemVisiblefdisplay='ItemVisiblefdisplay_'+slab_text+'_'+i_text
+					var slabfdisplay='slabfdisplay_'+slab_text+'_'+i_text
+					var fdSLfdisplay='fdSLfdisplay_'+i_text
+											
+					fdisplayStringShow=fdisplayStringShow+'<tr ><td width="1%" >&nbsp;</td><td width="66%">'+itemName+'<input type="hidden" name="'+ Itemfdisplay +'" id="'+ Itemfdisplay +'" value="'+itemID+'" min="0"> <input type="hidden" name="'+ slabfdisplay +'" id="'+ slabfdisplay +'" value="'+slab_fdisplay+'" min="0"></td>'+
+									  '<td width="15%" ><input onClick="checkQtyFd(/'+slab_text+'_'+i_text+'/)" onKeyUp="checkQtyFd(/'+slab_text+'_'+i_text+'/)" type="number" name="'+ItemQtyfdisplay +'" id="'+ ItemQtyfdisplay +'" value="" min="0"></td><td style="padding-right:3px"></td>'+
+									  '<td width="15%"><input onKeyUp="checkQtyFd(/'+slab_text+'_'+i_text+'/)" type="number" name="'+ItemFaceupfdisplay +'" id="'+ ItemFaceupfdisplay +'" value="" min="0"></td>'+
+									  '<td width="4%"></td><td><label style="padding:8px 2px 8px 2px; height:10px;"><input type="checkbox" name="'+ ItemVisiblefdisplay +'" id="'+ ItemVisiblefdisplay +'" value="" /></label></td></tr>'
+					fdisplayStringShow=fdisplayStringShow+'<tr height="1px" bgcolor="#CCCCCC" ><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>'
+					
+				}
+				fdisplayStringShow=fdisplayStringShow+'</table>'
+				fdisplayStringShow=fdisplayStringShow+'</div>'	
+				//alert(fdisplayStringShow);
+				
 //====================	before
-			fdisplayStringShowBefore=fdisplayStringShowBefore+'</br></br><table width="100%" border="0"> <tr><td style=" font-weight:bold; font-size:28px color:#006A6A; background:#FFECFF">'+fdisplaySlab_name+'</td> </tr></table>';
-			fdisplayStringShowBefore=fdisplayStringShowBefore+'<img height="100px" width="100%"  src="'+apipath_image+'static/uni_images/fdisplay/'+fdisplaySlab_image+'" alt="FixedDisplay" />';
-			
-			fdisplayStringShowBefore=fdisplayStringShowBefore+'<table width="100%" border="0"><tr>'+
-				'<td> <a data-role="button" href="#" onClick="get_pic_fdisplay_before('+slab+')" >Take Picture Before </a></td></tr></table>'+ 
-				'<img id="'+fdSL_image_div+'_before" height="100px" width="100px"  src="" alt="FixedDisplay" />'+ 
-				'<input type="hidden" name="'+fdSL_image_div_hidden+'_before" id="'+fdSL_image_div_hidden+'_before" value="" >'+
-				'<input type="hidden" name="'+fdSL_image_name_hidden+'_before" id="'+fdSL_image_name_hidden+'_before" value="" >'
-										
+				fdisplayStringShowBefore=fdisplayStringShowBefore+'</br></br><table width="100%" border="0"> <tr><td style=" font-weight:bold; font-size:28px color:#006A6A; background:#FFECFF">'+fdisplaySlab_name+'</td> </tr></table>';
+				fdisplayStringShowBefore=fdisplayStringShowBefore+'<img height="100px" width="100%"  src="'+apipath_image+'static/uni_images/fdisplay/'+fdisplaySlab_image+'" alt="FixedDisplay" />';
+				
+				fdisplayStringShowBefore=fdisplayStringShowBefore+'<table width="100%" border="0"><tr>'+
+					'<td> <a data-role="button" href="#" onClick="get_pic_fdisplay_before('+slab+')" >Take Picture Before </a></td></tr></table>'+ 
+					'<img id="'+fdSL_image_div+'_before" height="100px" width="100px"  src="" alt="FixedDisplay" />'+ 
+					'<input type="hidden" name="'+fdSL_image_div_hidden+'_before" id="'+fdSL_image_div_hidden+'_before" value="" >'+
+					'<input type="hidden" name="'+fdSL_image_name_hidden+'_before" id="'+fdSL_image_name_hidden+'_before" value="" >'
+											
 //====================	After //fdSL_fdisplay
-			fdisplayStringShow=fdisplayStringShow+'<table width="100%" border="0"><tr>'+
-				'<input type="hidden" name="'+ fdSLfdisplay +'" id="'+ fdSLfdisplay +'" value="'+fdSL_fdisplay+'" min="0">  '+
-				'<td> <a data-role="button" href="#" onClick="get_pic_fdisplay('+slab+')" >Take Picture </a></td></tr></table>'+ 
-				'<img id="'+fdSL_image_div+'" height="100px" width="100px"  src="" alt="FixedDisplay" />'+
-				'<input type="hidden" name="'+fdSL_image_div_hidden+'" id="'+fdSL_image_div_hidden+'" value="" >'+
-				'<input type="hidden" name="'+fdSL_image_name_hidden+'" id="'+fdSL_image_name_hidden+'" value="" >'+
-				'<input type="hidden" name="'+fdSL_total_hidden+'" id="'+fdSL_total_hidden+'" value="'+fdisplaySingleTotal+'" >'
-									
-		}
-		
-		localStorage.fdisplayStringShowBefore=fdisplayStringShowBefore
-		//alert(localStorage.fdisplayStringShowBefore+'==='+1);
-		$("#fdisplayStringShowBefore").html(localStorage.fdisplayStringShowBefore);
-		
-		localStorage.fdisplayStringShow=fdisplayStringShow
-		//alert(localStorage.fdisplayStringShow);
-		$("#fdisplay").html(localStorage.fdisplayStringShow);
-		
+				fdisplayStringShow=fdisplayStringShow+'<table width="100%" border="0"><tr>'+
+					'<input type="hidden" name="'+ fdSLfdisplay +'" id="'+ fdSLfdisplay +'" value="'+fdSL_fdisplay+'" min="0">  '+
+					'<td> <a data-role="button" href="#" onClick="get_pic_fdisplay('+slab+')" >Take Picture </a></td></tr></table>'+ 
+					'<img id="'+fdSL_image_div+'" height="100px" width="100px"  src="" alt="FixedDisplay" />'+
+					'<input type="hidden" name="'+fdSL_image_div_hidden+'" id="'+fdSL_image_div_hidden+'" value="" >'+
+					'<input type="hidden" name="'+fdSL_image_name_hidden+'" id="'+fdSL_image_name_hidden+'" value="" >'+
+					'<input type="hidden" name="'+fdSL_total_hidden+'" id="'+fdSL_total_hidden+'" value="'+fdisplaySingleTotal+'" >'
+										
+			}
+			
+			localStorage.fdisplayStringShowBefore=fdisplayStringShowBefore
+			//alert(localStorage.fdisplayStringShowBefore+'==='+1);
+			$("#fdisplayStringShowBefore").html(localStorage.fdisplayStringShowBefore);
+			
+			localStorage.fdisplayStringShow=fdisplayStringShow
+			//alert(localStorage.fdisplayStringShow);
+			$("#fdisplay").html(localStorage.fdisplayStringShow);
+			
 
 //==========Create Promotion Display list	
-		var qpdsSingleArray = qpdsList.split('rdrd');	
-		var qpdsSingleTotal = qpdsSingleArray.length;			
-		
-		var qpdsStringShow=''
-		qpdsStringShow=qpdsStringShow+'<div>'
-		qpdsStringShow=qpdsStringShow+'<table width="100%" border="0"><tr style="color:#0329C0"> <td colspan="2" style="color:#006A6A; font-size:18px;">'+localStorage.routeIDName+'<br>'+localStorage.outletNameID+'</td></tr><tr > </table></br>'
-		
-		localStorage.qpdsTotal=qpdsSingleTotal;
-		if (parseInt(localStorage.qpdsTotal)==1){	
-			localStorage.qpdsSkip=1;	
-		}
-		for (var i=0; i < qpdsSingleTotal-1; i++){
-			qpdsArray = qpdsSingleArray[i].split('fdfd');
-			//alert(qpdsArray);
-			localStorage.qpdsArrayTotal=qpdsArray.length;
-			itemID=qpdsArray[0];
-			itemName=qpdsArray[1];
-			minQty_qpds=qpdsArray[2];
-			qpds_image=qpdsArray[3];
-			qpdsSL=qpdsArray[4];
-			//alert(itemID+'=='+itemName+'=='+minQty_qpds+'=='+qpds_image+'=='+qpdsSL);
-			var i_text=i.toString()
-			var ItemQtyQpds='ItemQtyQpds_'+i_text
-			var ItemNameQpds='ItemNameQpds_'+i_text
-			var ItemVisibleqpds='ItemVisibleqpds_'+i_text
-			var minQtyQpds='minQtyQpds_'+i_text
+			var qpdsSingleArray = qpdsList.split('rdrd');	
+			var qpdsSingleTotal = qpdsSingleArray.length;			
 			
-			var qpdsSL_image_div='qpdsSL_image_div_'+i_text
-			var qpdsSL_image_div_hidden='qpdsSL_image_div_hidden_'+i_text
-			var qpdsSL_image_name_hidden='qpdsSL_image_name_hidden_'+i_text
-			var qpdsSL_total_hidden='qpdsSL_total_hidden_'+i_text
+			var qpdsStringShow=''
+			qpdsStringShow=qpdsStringShow+'<div>'
+			qpdsStringShow=qpdsStringShow+'<table width="100%" border="0"><tr style="color:#0329C0"> <td colspan="2" style="color:#006A6A; font-size:18px;">'+localStorage.routeIDName+'<br>'+localStorage.outletNameID+'</td></tr><tr > </table></br>'
 			
-			qpdsStringShow=qpdsStringShow+'<img height="100px" src="'+apipath_image+'static/uni_images/promo/'+qpds_image+'" alt="Promotion" />';
-			qpdsStringShow=qpdsStringShow+'<table width="100%" border="0" cellpadding="0" cellspacing="0">'
-			qpdsStringShow=qpdsStringShow+'<tr bgcolor="#9FCED7" ><td width="1%" >&nbsp;</td><td width="80%">Item</td> <td width="15%">QTY</td><td></td><td width="4%">Visible</td></tr>'
-			
-			/*qpdsStringShow=qpdsStringShow+
-				'<tr ><td width="1%" >&nbsp;</td><td width="80%">'+itemName+'<input type="hidden" name="'+ ItemQtyQpds +'" id="'+ ItemQtyQpds +'" value="'+itemID+'" min="0">'+
-				'<input type="hidden" name="'+ itemName +'" id="'+ itemName +'" value="'+ItemQtyQpds+'" min="0"> </td>'+
-				'<td width="15%"><input onClick="checkQtyQpds('+i+')" onKeyUp="checkQtyQpds(/'+i_text+'/)"  type="number" name="'+ItemQtyQpds +'" id="'+ ItemQtyQpds +'" value="" min="0"></td>'+
+			localStorage.qpdsTotal=qpdsSingleTotal;
+			if (parseInt(localStorage.qpdsTotal)==1){	
+				localStorage.qpdsSkip=1;	
+			}
+			for (var i=0; i < qpdsSingleTotal-1; i++){
+				qpdsArray = qpdsSingleArray[i].split('fdfd');
+				//alert(qpdsArray);
+				localStorage.qpdsArrayTotal=qpdsArray.length;
+				itemID=qpdsArray[0];
+				itemName=qpdsArray[1];
+				minQty_qpds=qpdsArray[2];
+				qpds_image=qpdsArray[3];
+				qpdsSL=qpdsArray[4];
+				//alert(itemID+'=='+itemName+'=='+minQty_qpds+'=='+qpds_image+'=='+qpdsSL);
+				var i_text=i.toString()
+				var ItemQtyQpds='ItemQtyQpds_'+i_text
+				var ItemNameQpds='ItemNameQpds_'+i_text
+				var ItemVisibleqpds='ItemVisibleqpds_'+i_text
+				var minQtyQpds='minQtyQpds_'+i_text
 				
-				'<td width="4%"></td><td><label style="padding:8px 2px 8px 2px; height:10px;"><input type="checkbox" name="'+ ItemVisibleqpds +'" id="'+ ItemVisibleqpds +'" value=""/></label></td></tr>'
-			qpdsStringShow=qpdsStringShow+'<tr height="1px" bgcolor="#CCCCCC" ><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>'
-			*/
-			
-			qpdsStringShow=qpdsStringShow+
-				'<tr ><td width="1%" >&nbsp;</td><td width="80%">'+itemName+'<input type="hidden" name="'+ ItemNameQpds +'" id="'+ ItemNameQpds +'" value="'+itemID+'" min="0">'+
-				'<input type="hidden" name="'+ minQtyQpds +'" id="'+ minQtyQpds +'" value="'+minQty_qpds+'" min="0"> </td>'+
-									
-				'<td width="15%"><input type="number" name="'+ItemQtyQpds +'" id="'+ ItemQtyQpds +'" value="" min="0"></td>'+
+				var qpdsSL_image_div='qpdsSL_image_div_'+i_text
+				var qpdsSL_image_div_hidden='qpdsSL_image_div_hidden_'+i_text
+				var qpdsSL_image_name_hidden='qpdsSL_image_name_hidden_'+i_text
+				var qpdsSL_total_hidden='qpdsSL_total_hidden_'+i_text
 				
-				'<td width="4%"></td><td><label style="padding:8px 2px 8px 2px; height:10px;"><input type="checkbox" name="'+ ItemVisibleqpds +'" id="'+ ItemVisibleqpds +'" value=""/></label></td></tr>'
-			qpdsStringShow=qpdsStringShow+'<tr height="1px" bgcolor="#CCCCCC" ><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>'
-			
-			//After================
-			qpdsStringShow=qpdsStringShow+
-				'<table width="100%" border="0"><tr><td>'+
-				'<input type="hidden" name="'+ i_text +'" id="'+ i_text +'" value="'+qpdsSL+'" min="0">'+
-				'<a data-role="button" href="#" onClick="get_pic_qpds('+i_text+')" >Take Picture </a></td></tr></table>'
-			
-			qpdsStringShow=qpdsStringShow+
-				/*'<img id="'+qpds_image_div+'" height="100px" width="100px"  src="" alt="Promotion" />'+
-				'<input type="hidden" name="'+ qpds_image_div_hidden +'" id="'+ qpds_image_div_hidden +'" value="" >'+
-				'<input type="hidden" name="'+ qpdsSL_image_name_hidden +'" id="'+ qpdsSL_image_name_hidden +'" value="" >'+
-				'<input type="hidden" name="'+ qpdsSL_total_hidden +'" id="'+ qpdsSL_total_hidden +'" value="'+qpdsSingleTotal+'" >'*/
+				qpdsStringShow=qpdsStringShow+'<img height="100px" src="'+apipath_image+'static/uni_images/promo/'+qpds_image+'" alt="QPDS" />';
+				qpdsStringShow=qpdsStringShow+'<table width="100%" border="0" cellpadding="0" cellspacing="0">'
+				qpdsStringShow=qpdsStringShow+'<tr bgcolor="#9FCED7" ><td width="1%" >&nbsp;</td><td width="80%">Item</td> <td width="15%">QTY</td><td></td><td width="4%">Visible</td></tr>'
 				
-				'<img id="'+qpdsSL_image_div+'" height="100px" width="100px"  src="" alt="Promotion" />'+
-				'<input type="hidden" name="'+ qpdsSL_image_div_hidden +'" id="'+ qpdsSL_image_div_hidden +'" value="" >'+
-				'<input type="hidden" name="'+ qpdsSL_image_name_hidden +'" id="'+ qpdsSL_image_name_hidden +'" value="" >'+
-				'<input type="hidden" name="'+ qpdsSL_total_hidden +'" id="'+ qpdsSL_total_hidden +'" value="'+qpdsSingleTotal+'" >'
+				/*qpdsStringShow=qpdsStringShow+
+					'<tr ><td width="1%" >&nbsp;</td><td width="80%">'+itemName+'<input type="hidden" name="'+ ItemQtyQpds +'" id="'+ ItemQtyQpds +'" value="'+itemID+'" min="0">'+
+					'<input type="hidden" name="'+ itemName +'" id="'+ itemName +'" value="'+ItemQtyQpds+'" min="0"> </td>'+
+					'<td width="15%"><input onClick="checkQtyQpds('+i+')" onKeyUp="checkQtyQpds(/'+i_text+'/)"  type="number" name="'+ItemQtyQpds +'" id="'+ ItemQtyQpds +'" value="" min="0"></td>'+
+					
+					'<td width="4%"></td><td><label style="padding:8px 2px 8px 2px; height:10px;"><input type="checkbox" name="'+ ItemVisibleqpds +'" id="'+ ItemVisibleqpds +'" value=""/></label></td></tr>'
+				qpdsStringShow=qpdsStringShow+'<tr height="1px" bgcolor="#CCCCCC" ><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>'
+				*/
 				
+				qpdsStringShow=qpdsStringShow+
+					'<tr ><td width="1%" >&nbsp;</td><td width="80%">'+itemName+'<input type="hidden" name="'+ ItemNameQpds +'" id="'+ ItemNameQpds +'" value="'+itemID+'" min="0">'+
+					'<input type="hidden" name="'+ minQtyQpds +'" id="'+ minQtyQpds +'" value="'+minQty_qpds+'" min="0"> </td>'+
+										
+					'<td width="15%"><input type="number" name="'+ItemQtyQpds +'" id="'+ ItemQtyQpds +'" value="" min="0"></td>'+
+					
+					'<td width="4%"></td><td><label style="padding:8px 2px 8px 2px; height:10px;"><input type="checkbox" name="'+ ItemVisibleqpds +'" id="'+ ItemVisibleqpds +'" value=""/></label></td></tr>'
+				qpdsStringShow=qpdsStringShow+'<tr height="1px" bgcolor="#CCCCCC" ><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>'
 				
-			qpdsStringShow=qpdsStringShow+'<br/>'
+				//After================
+				qpdsStringShow=qpdsStringShow+
+					'<table width="100%" border="0"><tr><td>'+
+					'<input type="hidden" name="'+ i_text +'" id="'+ i_text +'" value="'+qpdsSL+'" min="0">'+
+					'<a data-role="button" href="#" onClick="get_pic_qpds('+i_text+')" >Take Picture </a></td></tr></table>'
+				
+				qpdsStringShow=qpdsStringShow+
+					/*'<img id="'+qpds_image_div+'" height="100px" width="100px"  src="" alt="Promotion" />'+
+					'<input type="hidden" name="'+ qpds_image_div_hidden +'" id="'+ qpds_image_div_hidden +'" value="" >'+
+					'<input type="hidden" name="'+ qpdsSL_image_name_hidden +'" id="'+ qpdsSL_image_name_hidden +'" value="" >'+
+					'<input type="hidden" name="'+ qpdsSL_total_hidden +'" id="'+ qpdsSL_total_hidden +'" value="'+qpdsSingleTotal+'" >'*/
+					
+					'<img id="'+qpdsSL_image_div+'" height="100px" width="100px"  src="" alt="Promotion" />'+
+					'<input type="hidden" name="'+ qpdsSL_image_div_hidden +'" id="'+ qpdsSL_image_div_hidden +'" value="" >'+
+					'<input type="hidden" name="'+ qpdsSL_image_name_hidden +'" id="'+ qpdsSL_image_name_hidden +'" value="" >'+
+					'<input type="hidden" name="'+ qpdsSL_total_hidden +'" id="'+ qpdsSL_total_hidden +'" value="'+qpdsSingleTotal+'" >'
+					
+					
+				qpdsStringShow=qpdsStringShow+'<br/>'
+				
+					
+			}
+			qpdsStringShow=qpdsStringShow+'</table>'
+			qpdsStringShow=qpdsStringShow+'</div>'
+			localStorage.qpdsStringShow=qpdsStringShow
+			//alert(localStorage.qpdsStringShow);
+			$("#qpds").html(localStorage.qpdsStringShow);	
 			
 				
-		}
-		qpdsStringShow=qpdsStringShow+'</table>'
-		qpdsStringShow=qpdsStringShow+'</div>'
-		localStorage.qpdsStringShow=qpdsStringShow
-		//alert(localStorage.qpdsStringShow);
-		$("#qpds").html(localStorage.qpdsStringShow);	
-		
-			
 
 //==========Create NPD list
-		var npdSingleArray = npdList.split('rdrd');	
-		//alert(npdSingleArray);
-		var npdSingleTotal = npdSingleArray.length;
-		var npdStringShow=''
-		npdStringShow=npdStringShow+'<table width="100%" border="0"><tr style="color:#0329C0"> <td colspan="2" style="color:#006A6A; font-size:18px;">'+localStorage.routeIDName+'<br>'+localStorage.outletNameID+'</td></tr><tr > </table></br>'
-		
-		localStorage.npdTotal=npdSingleTotal			
-		if (parseInt(localStorage.npdTotal)==1){
-			localStorage.npdSkip=1;
-		}
-		
-		for (var i=0; i < npdSingleTotal-1; i++){
-			npdArray = npdSingleArray[i].split('fdfd');
-			localStorage.npdArrayTotal=npdArray.length;
+			var npdSingleArray = npdList.split('rdrd');	
+			//alert(npdSingleArray);
+			var npdSingleTotal = npdSingleArray.length;
+			var npdStringShow=''
+			npdStringShow=npdStringShow+'<table width="100%" border="0"><tr style="color:#0329C0"> <td colspan="2" style="color:#006A6A; font-size:18px;">'+localStorage.routeIDName+'<br>'+localStorage.outletNameID+'</td></tr><tr > </table></br>'
 			
-			itemID=npdArray[0];
-			itemName=npdArray[1];
-			minQty_npd=npdArray[2];
-			npd_image=npdArray[3];
+			localStorage.npdTotal=npdSingleTotal			
+			if (parseInt(localStorage.npdTotal)==1){
+				localStorage.npdSkip=1;
+			}
 			
-			var i_text=i.toString()
-			var ItemQtynpd='ItemQtynpd_'+i_text
-			var Itemnpd='Itemnpd_'+i_text
-			var minQty='minQty_npd_'+i_text
-			
-			var npd_image_div='npd_image_div_'+i_text
-			var npd_image_div_hidden='npd_image_div_hidden_'+i_text
-			var npd_image_name_hidden='npd_image_name_hidden_'+i_text
-			
-			npdStringShow=npdStringShow+'<img src="'+apipath_image+'static/uni_images/npd/'+npd_image+'" alt="NPD" />';
-			npdStringShow=npdStringShow+'<table width="100%" border="0" cellpadding="0" cellspacing="0">'
-			npdStringShow=npdStringShow+'<tr bgcolor="#9FCED7" ><td></td><td width="85%">Item</td><td></td><td width="14%">QTY</td></tr><tr height="1px" bgcolor="#CCCCCC" ><td></td><td></td><td> </td><td ></td><td></td></tr>'
-			
-			npdStringShow=npdStringShow+
-				'<tr ><td width="1%" >&nbsp;</td><td width="85%">'+itemName+'<input type="hidden" name="'+ Itemnpd +'" id="'+ Itemnpd +'" value="'+itemID+'" min="0">'+
-				'<input type="hidden" name="'+ minQty +'" id="'+ minQty +'" value="'+minQty_npd+'" min="0"> </td>'+
-									
-				'<td></td><td width="14%"><input type="number" name="'+ItemQtynpd +'" id="'+ ItemQtynpd +'" value="" min="0"></td><td></td></tr>'
-			npdStringShow=npdStringShow+'<tr height="1px" bgcolor="#CCCCCC" ><td></td><td></td><td></td><td></td><td></td></tr>'
-			
-			//====================	After
-			npdStringShow=npdStringShow+'<table width="100%" border="0"><tr>'+
-				'<td> <a data-role="button" href="#" onClick="get_pic_npd('+i_text+')" >Take Picture </a></td></tr></table>'+ 
-				'<img id="'+npd_image_div+'" height="100px" width="100px"  src="" alt="NPDPic" />'+
-				'<input type="hidden" name="'+ npd_image_div_hidden +'" id="'+ npd_image_div_hidden +'" value="" >'+
-				'<input type="hidden" name="'+ npd_image_name_hidden +'" id="'+ npd_image_name_hidden +'" value="" ><br>'
-					
-		}
-		npdStringShow=npdStringShow+'</table>'
-		localStorage.npdStringShow=npdStringShow
-		//alert(localStorage.npdStringShow);
-		$("#npd").html(localStorage.npdStringShow);
+			for (var i=0; i < npdSingleTotal-1; i++){
+				npdArray = npdSingleArray[i].split('fdfd');
+				localStorage.npdArrayTotal=npdArray.length;
+				
+				itemID=npdArray[0];
+				itemName=npdArray[1];
+				minQty_npd=npdArray[2];
+				npd_image=npdArray[3];
+				
+				var i_text=i.toString()
+				var ItemQtynpd='ItemQtynpd_'+i_text
+				var Itemnpd='Itemnpd_'+i_text
+				var minQty='minQty_npd_'+i_text
+				
+				var npd_image_div='npd_image_div_'+i_text
+				var npd_image_div_hidden='npd_image_div_hidden_'+i_text
+				var npd_image_name_hidden='npd_image_name_hidden_'+i_text
+				
+				npdStringShow=npdStringShow+'<img src="'+apipath_image+'static/uni_images/npd/'+npd_image+'" alt="NPD" />';
+				npdStringShow=npdStringShow+'<table width="100%" border="0" cellpadding="0" cellspacing="0">'
+				npdStringShow=npdStringShow+'<tr bgcolor="#9FCED7" ><td></td><td width="85%">Item</td><td></td><td width="14%">QTY</td></tr><tr height="1px" bgcolor="#CCCCCC" ><td></td><td></td><td> </td><td ></td><td></td></tr>'
+				
+				npdStringShow=npdStringShow+
+					'<tr ><td width="1%" >&nbsp;</td><td width="85%">'+itemName+'<input type="hidden" name="'+ Itemnpd +'" id="'+ Itemnpd +'" value="'+itemID+'" min="0">'+
+					'<input type="hidden" name="'+ minQty +'" id="'+ minQty +'" value="'+minQty_npd+'" min="0"> </td>'+
+										
+					'<td></td><td width="14%"><input type="number" name="'+ItemQtynpd +'" id="'+ ItemQtynpd +'" value="" min="0"></td><td></td></tr>'
+				npdStringShow=npdStringShow+'<tr height="1px" bgcolor="#CCCCCC" ><td></td><td></td><td></td><td></td><td></td></tr>'
+				
+				//====================	After
+				npdStringShow=npdStringShow+'<table width="100%" border="0"><tr>'+
+					'<td> <a data-role="button" href="#" onClick="get_pic_npd('+i_text+')" >Take Picture </a></td></tr></table>'+ 
+					'<img id="'+npd_image_div+'" height="100px" width="100px"  src="" alt="NPDPic" />'+
+					'<input type="hidden" name="'+ npd_image_div_hidden +'" id="'+ npd_image_div_hidden +'" value="" >'+
+					'<input type="hidden" name="'+ npd_image_name_hidden +'" id="'+ npd_image_name_hidden +'" value="" ><br>'
+						
+			}
+			npdStringShow=npdStringShow+'</table>'
+			localStorage.npdStringShow=npdStringShow
+			//alert(localStorage.npdStringShow);
+			$("#npd").html(localStorage.npdStringShow);
 
 
 //==========Create MHSKUS list
-		var mhskusSingleArray = mhskusList.split('rdrd');	
-		var mhskusSingleTotal = mhskusSingleArray.length;
-		
-		var mhskusStringShow=''
-		//alert(mhskusSingleTotal);
-		mhskusStringShow=mhskusStringShow+'<table width="100%" border="0"><tr style="color:#0329C0"> <td colspan="2" style="color:#006A6A; font-size:18px;">'+localStorage.routeIDName+'<br>'+localStorage.outletNameID+'</td></tr><tr > </table></br>'
-		mhskusStringShow=mhskusStringShow+'<table  width="100%" border="0" cellpadding="0" cellspacing="0">'
-		mhskusStringShow=mhskusStringShow+'<tr bgcolor="#9FCED7"  ><td></td><td>Item</td><td> QTY</td><td ></td></tr><tr height="1px" bgcolor="#CCCCCC" ><td></td><td></td><td> </td><td ></td></tr>'
-		
-		localStorage.mhskusTotal=mhskusSingleTotal
-		for (var i=0; i < mhskusSingleTotal-1; i++){
-			mhskusArray = mhskusSingleArray[i].split('fdfd');
-			itemID=mhskusArray[0];
-			itemName=mhskusArray[1];
-			minQty=mhskusArray[2];
+			var mhskusSingleArray = mhskusList.split('rdrd');	
+			var mhskusSingleTotal = mhskusSingleArray.length;
 			
-			var i_text=i.toString()
-			var ItemQtymskus='ItemQtymskus_'+i_text
-			var Itemmskus='Itemmskus_'+i_text
-			var minQtymskus='minQtymskus_'+i_text
-			//alert(ItemQtymskus);
+			var mhskusStringShow=''
+			//alert(mhskusSingleTotal);
+			mhskusStringShow=mhskusStringShow+'<table width="100%" border="0"><tr style="color:#0329C0"> <td colspan="2" style="color:#006A6A; font-size:18px;">'+localStorage.routeIDName+'<br>'+localStorage.outletNameID+'</td></tr><tr > </table></br>'
+			mhskusStringShow=mhskusStringShow+'<table  width="100%" border="0" cellpadding="0" cellspacing="0">'
+			mhskusStringShow=mhskusStringShow+'<tr bgcolor="#9FCED7"  ><td></td><td>Item</td><td> QTY</td><td ></td></tr><tr height="1px" bgcolor="#CCCCCC" ><td></td><td></td><td> </td><td ></td></tr>'
 			
-			mhskusStringShow=mhskusStringShow+'<tr ><td>&nbsp;</td><td>'+itemName+
-			'<input type="hidden" name="'+ Itemmskus +'" id="'+ Itemmskus +'" value="'+itemID+'" min="0">'+
-			'<input type="hidden" name="'+ minQtymskus +'" id="'+ minQtymskus +'" value="'+minQty+'" min="0">'+
-			'</td><td width="60"><input type="number" name="'+ItemQtymskus +'" id="'+ ItemQtymskus +'" value="" min="0"></td><td width="5px">&nbsp;</td></tr>'
-			mhskusStringShow=mhskusStringShow+'<tr height="1px" bgcolor="#CCCCCC" ><td></td><td></td><td> </td><td ></td></tr>'
-			
-		}
-		mhskusStringShow=mhskusStringShow+'</table>'
-		
-		localStorage.mhskusStringShow=mhskusStringShow
-		//alert(localStorage.mhskusStringShow);
-		$("#mhskus").html(localStorage.mhskusStringShow);
-
-										
-//==========Create Gift Ack list
-		//var giftSingleArray = giftList.split('rdrd');	
-		//var giftSingleTotal = giftSingleArray.length;
-		
-		var giftStringShow=''
-		giftStringShow=giftStringShow+'<table width="100%" border="0"><tr style="color:#0329C0"> <td colspan="2" style="color:#006A6A; font-size:18px;">'+localStorage.routeIDName+'<br>'+localStorage.outletNameID+'</td></tr><tr > </table></br>Select Month: </br> <div id="gift_combo">'
-		
-		  giftStringShow=giftStringShow +'<select name="gift_month" id="gift_month" >'
-		  giftStringShow=giftStringShow +'<option value="No Gift">No Gift</option>'
-		  giftStringShow=giftStringShow +'<option value="JANUARY">JANUARY</option>'
-		  giftStringShow=giftStringShow +'<option value="FEBRUARY">FEBRUARY</option>'
-		  giftStringShow=giftStringShow +'<option value="MARCH">MARCH</option>'
-		  giftStringShow=giftStringShow +'<option value="APRIL">APRIL</option>'
-		  giftStringShow=giftStringShow +'<option value="MAY">MAY</option>'
-		  giftStringShow=giftStringShow +'<option value="JUNE">JUNE</option>'
-		  giftStringShow=giftStringShow +'<option value="JULY">JULY</option>'
-		  giftStringShow=giftStringShow +'<option value="AUGUST">AUGUST</option>'
-		  giftStringShow=giftStringShow +'<option value="SEPTEMBER">SEPTEMBER</option>'
-		  giftStringShow=giftStringShow +'<option value="OCTOBER">OCTOBER</option>'
-		  giftStringShow=giftStringShow +'<option value="NOVEMBER">NOVEMBER</option>'
-		  giftStringShow=giftStringShow +'<option value="DECEMBER">DECEMBER</option></select></div>'
-		  giftStringShow=giftStringShow+'</br><table width="100%" border="0" cellpadding="0" cellspacing="0"><tr><td>'+              
-						   '<a data-role="button" href="#" onClick="get_pic_gift();" >Take Picture </a></td> </tr></table>'
-		  giftStringShow=giftStringShow+'<img id="gift_image_div"  height="100px" width="100px"  src="" alt="Gift" />'
-		  giftStringShow=giftStringShow+
-						'<input type="hidden" name="gift_image_div_hidden" id="gift_image_div_hidden" value="" >'+
-						'<input type="hidden" name="gift_image_name_hidden" id="gift_image_name_hidden" value="" >'
-
-		localStorage.giftStringShow=giftStringShow;
-		//alert(localStorage.giftStringShow);
-		$("#gift").html(localStorage.giftStringShow);
-		
-		//==========Create Marchandizing list
-		var outletIDnameShow=''
-		outletIDnameShow=outletIDnameShow+'<table width="100%" border="0"><tr style="color:#0329C0"> <td colspan="2" style="color:#006A6A; font-size:18px;">'+localStorage.routeIDName+'<br>'+localStorage.outletNameID+'</td></tr><tr > </table></br>'
-		localStorage.outletIDnameShow=outletIDnameShow
+			localStorage.mhskusTotal=mhskusSingleTotal
+			for (var i=0; i < mhskusSingleTotal-1; i++){
+				mhskusArray = mhskusSingleArray[i].split('fdfd');
+				itemID=mhskusArray[0];
+				itemName=mhskusArray[1];
+				minQty=mhskusArray[2];
 				
-		var startTime=get_date()
-		localStorage.startTime=startTime
-		
-		$("#startTime").val(localStorage.startTime);
-		
-		$("#outletButton").show();
-		$("#outletWait").hide();
-	}  
+				var i_text=i.toString()
+				var ItemQtymskus='ItemQtymskus_'+i_text
+				var Itemmskus='Itemmskus_'+i_text
+				var minQtymskus='minQtymskus_'+i_text
+				//alert(ItemQtymskus);
+				
+				mhskusStringShow=mhskusStringShow+'<tr ><td>&nbsp;</td><td>'+itemName+
+				'<input type="hidden" name="'+ Itemmskus +'" id="'+ Itemmskus +'" value="'+itemID+'" min="0">'+
+				'<input type="hidden" name="'+ minQtymskus +'" id="'+ minQtymskus +'" value="'+minQty+'" min="0">'+
+				'</td><td width="60"><input type="number" name="'+ItemQtymskus +'" id="'+ ItemQtymskus +'" value="" min="0"></td><td width="5px">&nbsp;</td></tr>'
+				mhskusStringShow=mhskusStringShow+'<tr height="1px" bgcolor="#CCCCCC" ><td></td><td></td><td> </td><td ></td></tr>'
+				
+			}
+			mhskusStringShow=mhskusStringShow+'</table>'
+			
+			localStorage.mhskusStringShow=mhskusStringShow
+			//alert(localStorage.mhskusStringShow);
+			$("#mhskus").html(localStorage.mhskusStringShow);
+
+											
+//==========Create Gift Ack list
+			//var giftSingleArray = giftList.split('rdrd');	
+			//var giftSingleTotal = giftSingleArray.length;
+			
+			var giftStringShow=''
+			giftStringShow=giftStringShow+'<table width="100%" border="0"><tr style="color:#0329C0"> <td colspan="2" style="color:#006A6A; font-size:18px;">'+localStorage.routeIDName+'<br>'+localStorage.outletNameID+'</td></tr><tr > </table></br>Select Month: </br> <div id="gift_combo">'
+			
+			  giftStringShow=giftStringShow +'<select name="gift_month" id="gift_month" >'
+			  giftStringShow=giftStringShow +'<option value="No Gift">No Gift</option>'
+			  giftStringShow=giftStringShow +'<option value="JANUARY">JANUARY</option>'
+			  giftStringShow=giftStringShow +'<option value="FEBRUARY">FEBRUARY</option>'
+			  giftStringShow=giftStringShow +'<option value="MARCH">MARCH</option>'
+			  giftStringShow=giftStringShow +'<option value="APRIL">APRIL</option>'
+			  giftStringShow=giftStringShow +'<option value="MAY">MAY</option>'
+			  giftStringShow=giftStringShow +'<option value="JUNE">JUNE</option>'
+			  giftStringShow=giftStringShow +'<option value="JULY">JULY</option>'
+			  giftStringShow=giftStringShow +'<option value="AUGUST">AUGUST</option>'
+			  giftStringShow=giftStringShow +'<option value="SEPTEMBER">SEPTEMBER</option>'
+			  giftStringShow=giftStringShow +'<option value="OCTOBER">OCTOBER</option>'
+			  giftStringShow=giftStringShow +'<option value="NOVEMBER">NOVEMBER</option>'
+			  giftStringShow=giftStringShow +'<option value="DECEMBER">DECEMBER</option></select></div>'
+			  giftStringShow=giftStringShow+'</br><table width="100%" border="0" cellpadding="0" cellspacing="0"><tr><td>'+              
+							   '<a data-role="button" href="#" onClick="get_pic_gift();" >Take Picture </a></td> </tr></table>'
+			  giftStringShow=giftStringShow+'<img id="gift_image_div"  height="100px" width="100px"  src="" alt="Gift" />'
+			  giftStringShow=giftStringShow+
+							'<input type="hidden" name="gift_image_div_hidden" id="gift_image_div_hidden" value="" >'+
+							'<input type="hidden" name="gift_image_name_hidden" id="gift_image_name_hidden" value="" >'
+	
+			localStorage.giftStringShow=giftStringShow;
+			//alert(localStorage.giftStringShow);
+			$("#gift").html(localStorage.giftStringShow);
+			
+			//==========Create Marchandizing list
+			var outletIDnameShow=''
+			outletIDnameShow=outletIDnameShow+'<table width="100%" border="0"><tr style="color:#0329C0"> <td colspan="2" style="color:#006A6A; font-size:18px;">'+localStorage.routeIDName+'<br>'+localStorage.outletNameID+'</td></tr><tr > </table></br>'
+			localStorage.outletIDnameShow=outletIDnameShow
+					
+			var startTime=get_date()
+			localStorage.startTime=startTime
+			
+			$("#startTime").val(localStorage.startTime);
+			
+			$("#outletButton").show();
+			$("#outletWait").hide();
+		}  
 }
 
 
@@ -3361,12 +3208,25 @@ function outlet_next_page(){
 		var url = "#cancelPage";
 		$.mobile.navigate(url);
 	}else{
-	 	
-		if (localStorage.outletVisitStatus=='backV'){
+	    //if ((localStorage.routeException_found == '1') && ((localStorage.outletException=='undefined') || (localStorage.outletException==undefined))){
+		var current_date=get_date();
+		var bak_date1=get_bak_date_one();
+		var bak_date2=get_bak_date_two();
+		var bak_date3=get_bak_date_three();
+		/*if (localStorage.selected_date==current_date){						
+			var url = "#outletPage";
+			$.mobile.navigate(url);
+			$(url).trigger('create');
+		}else */
+		if ((localStorage.selected_date==bak_date1)||(localStorage.selected_date==bak_date2)||(localStorage.selected_date==bak_date3)){
 			var url = "#outletexceptionPage";
 			$.mobile.navigate(url);
 			$(url).trigger('create');	
-		}else if(localStorage.outletVisitStatus=='othersV'){
+		/*}else if (localStorage.selected_date==current_date){						
+			var url = "#outletPage";
+			$.mobile.navigate(url);
+			$(url).trigger('create');*/
+		}else if(localStorage.selected_date!=current_date){
 			$(".errorChk").text("");				
 			$(".sucMsgU").hide();
 			$("#btn_submit_usages").hide();
@@ -3444,15 +3304,12 @@ function get_pic_shop() {
 		destinationType: Camera.DestinationType.FILE_URI , correctOrientation: true });
 }
 function onSuccessShop(imageURI) {
-	$("#shop_image_div").show();
 	var image = document.getElementById('shop_image_div');
     image.src = imageURI;
     var hidden_path="shop_image_div_hidden";
 	$("#"+hidden_path).val(imageURI);
 }
 function onFailShop(message) {
-	$("#shop_image_div").hide();
-	$("#shop_image_name_hidden").val('');
 	imagePathA="";
     alert('Failed because: ' + message);
 }
@@ -3470,15 +3327,12 @@ function get_pic_fdisplay(id) {
 		destinationType: Camera.DestinationType.FILE_URI , correctOrientation: true });
 }
 function onSuccessFd(imageURI) {
-	$("#"+temp_image_div).show();
 	var image = document.getElementById(temp_image_div);
     image.src = imageURI;
     var hidden_path=temp_image_div.replace("fdSL_image_div","fdSL_image_div_hidden");
 	$("#"+hidden_path).val(imageURI);
 }
 function onFailFd(message) {
-	$("#"+temp_image_div).hide();
-	$("#"+hidden_name).val('');
 	imagePathA="";
     alert('Failed because: ' + message);
 }
@@ -3510,25 +3364,22 @@ function onFailFd_before(message) {
 //QPDS  After
 function get_pic_qpds(id) {
 	var div_id="qpdsSL_image_div_"+id;
-	temp_image_div_promo=div_id;
-	var hidden_name_qpds="qpdsSL_image_name_hidden_"+id;
+	temp_image_div=div_id;
+	var hidden_name="qpdsSL_image_name_hidden_"+id;
 	var tempTime = $.now();
 	qpds_image_name=tempTime.toString()+"_"+localStorage.selectedOutlet+".jpg";
-	$("#"+hidden_name_qpds).val(qpds_image_name);
+	$("#"+hidden_name).val(qpds_image_name);
 	navigator.camera.getPicture(onSuccessQpds, onFailQpds, {  quality: 70,
 		targetWidth: 450,
 		destinationType: Camera.DestinationType.FILE_URI , correctOrientation: true});
 }
 function onSuccessQpds(imageURI) {
-	$("#"+temp_image_div_promo).show();
-	var image = document.getElementById(temp_image_div_promo);
+	var image = document.getElementById(temp_image_div);
     image.src = imageURI;
-    var hidden_path=temp_image_div_promo.replace("qpdsSL_image_div","qpdsSL_image_div_hidden");
+    var hidden_path=temp_image_div.replace("qpdsSL_image_div","qpdsSL_image_div_hidden");
 	$("#"+hidden_path).val(imageURI);
 }
 function onFailQpds(message) {
-	$("#"+temp_image_div_promo).hide();
-	$("#"+hidden_name_qpds).val('');
 	imagePathA="";
     alert('Failed because: ' + message);
 }
@@ -3594,24 +3445,19 @@ function fdisplay_ready_data() {
 	
 	fdisplay_page_set()
 		//alert(error_qty_flag+'=='+image_flag+'=='+localStorage.qpdsSkip+'=='+localStorage.npdTotal);
-	//alert(localStorage.psStatus);
 	if (error_qty_flag==1){
 		var url = "#fixedDisplay";
 		$.mobile.navigate(url);
 	}else if (image_flag==1){
 		var url = "#fixedDisplay";
 		$.mobile.navigate(url);
-	}else if (localStorage.qpdsSkip==0 && localStorage.psStatus==1){
+	}else if (localStorage.qpdsSkip==0){
 		var url = "#qpdsPage";
 		$.mobile.navigate(url);
 		$(url).trigger('create');
 		//$('#fdisplay').find('input, textarea, select').attr('disabled','disabled');
 		//$('#fdisplay').addClass('disabledAnchor');	
 		localStorage.fd_done_flag=1;
-	}else if(localStorage.qpdsSkip==0 && localStorage.psStatus==0){
-		var url = "#giftAckPage";
-		$.mobile.navigate(url);
-		$(url).trigger('create');
 	}else if (localStorage.npdTotal > 0){
 		var url = "#npdPage";
 		$.mobile.navigate(url);
@@ -3913,15 +3759,12 @@ function get_pic_npd(id) {
 	     //   targetHeight: 512,
 }
 function onSuccessNpd(imageURI) {
-	$("#"+temp_image_div).show();
 	var image = document.getElementById(temp_image_div);
     image.src = imageURI;
     var hidden_path=temp_image_div.replace("npd_image_div","npd_image_div_hidden");
 	$("#"+hidden_path).val(imageURI);
 }
 function onFailNpd(message) {
-	$("#"+temp_image_div).hide();
-	$("#"+hidden_name).val('');
 	imagePathA="";
     alert('Failed because: ' + message);
 }
@@ -4042,15 +3885,12 @@ function get_pic_gift() {
 		destinationType: Camera.DestinationType.FILE_URI , correctOrientation: true });
 }
 function onSuccessGift(imageURI) {
-	$("#gift_image_div").show();
 	var image = document.getElementById('gift_image_div');
     image.src = imageURI;
     var hidden_path="gift_image_div_hidden";
 	$("#"+hidden_path).val(imageURI);
 }
 function onFailGift(message) {
-	$("#gift_image_div").hide();
-	$("#gift_image_name_hidden").val('');
 	imagePathA="";
     alert('Failed because: ' + message);
 }
@@ -4135,15 +3975,12 @@ function get_pic_place() {
 		destinationType: Camera.DestinationType.FILE_URI , correctOrientation: true });
 }
 function onSuccessPlace(imageURI) {
-	$("#place_image_div").show();
 	var image = document.getElementById('place_image_div');
     image.src = imageURI;
     var hidden_path="place_image_div_hidden";
 	$("#"+hidden_path).val(imageURI);
 }
 function onFailPlace(message) {
-	$("#place_image_div").hide();
-	$("#place_image_name_hidden").val('');
 	imagePathA="";
     alert('Failed because: ' + message);
 }
@@ -4725,7 +4562,6 @@ function submit_data() {
 		//alert(apipath+'syncSubmitData?cm_id='+localStorage.p_repID+'&cm_pass='+localStorage.p_SyncPass+'&synccode='+localStorage.p_sync_code+'&route='+localStorage.selectedRoute+'&routeEx='+localStorage.routeException+'&outlet='+localStorage.selectedOutlet+'&scheduleDate='+ localStorage.selected_date +'&outletEx='+localStorage.outletException+'&channel='+localStorage.outletChannel+'&latlong='+latlong+'&visitDate='+visitDate+'&startTime='+localStorage.startTime+'&endTime='+endTime+'&giftImage='+giftImage+'&mhskus_data='+localStorage.mhskus_data_ready+'&npd_data='+localStorage.npd_data_ready+'&fdisplay_data='+fdisplay_data+'&qpds_data='+qpds_data+'&gift_data='+localStorage.gift_data_ready+'&place_data='+localStorage.place_data_ready+'&shop_data='+localStorage.shop_data_ready+'&key_data='+localStorage.key_data_ready);
 		
 		var check_outlet= localStorage.outletString;
-		//alert(check_outlet);
 		$.ajax({
 			type: 'POST',
 			url: apipath+'syncSubmitData?cm_id='+localStorage.p_repID+'&cm_pass='+localStorage.p_SyncPass+'&synccode='+localStorage.p_sync_code+'&route='+localStorage.selectedRoute+'&routeEx='+localStorage.routeException+'&outlet='+localStorage.selectedOutlet+'&scheduleDate='+ localStorage.selected_date +'&outletEx='+localStorage.outletException+'&channel='+localStorage.outletChannel+'&latlong='+latlong+'&visitDate='+visitDate+'&startTime='+localStorage.startTime+'&endTime='+endTime+'&giftImage='+giftImage+'&mhskus_data='+localStorage.mhskus_data_ready+'&npd_data='+localStorage.npd_data_ready+'&fdisplay_data='+fdisplay_data+'&qpds_data='+qpds_data+'&gift_data='+localStorage.gift_data_ready+'&place_data='+localStorage.place_data_ready+'&shop_data='+localStorage.shop_data_ready+'&key_data='+localStorage.key_data_ready,
@@ -4738,8 +4574,6 @@ function submit_data() {
 						$(".bufferImageSubmit").hide();
 						$("#executionSub").show();
 						$("#selectNewOutlet").show();
-						document.getElementById('shop_image_div').src = '';
-						$("#shop_image_name_hidden").val('');
 					}
 					if (result=='SUCCESS'){	
 						$(".bufferImageSubmit").hide();
@@ -4760,10 +4594,19 @@ function submit_data() {
 						//$("#submit_data_check").html("Success");
 						$("#submit_data").html('');
 						localStorage.step_flag=0;
-						
 												
-						localStorage.psSubmittedOutlet+=',"'+localStorage.selectedOutlet+'"';
-									
+						document.getElementById("is_near_inFront_actual").checked = false;	
+						document.getElementById("is_beside_adjacent_actual").checked = false;				
+						document.getElementById("is_eyeLevel_actual").checked = false;
+						document.getElementById("is_clearlyVis_noObs_actual").checked = false;
+					
+						document.getElementById("planKey").checked = false;						
+						document.getElementById("productKey").checked = false;
+						document.getElementById("posmKey").checked = false;
+						document.getElementById("catKey").checked = false;
+						
+						$("#is_near_inFront_actual").attr('checked',false);
+						
 						
 						// Enable all disable div start
 						$('#mhskus').find('input, textarea, button, select').attr('disabled',false);
@@ -4796,7 +4639,6 @@ function submit_data() {
 				localStorage.dataSubmit=0;
 				localStorage.submit_count=parseInt(localStorage.submit_count)+1
 				$("#submit_data_check").html('Please Check Your Internet Connection');
-				$("#sub_button_div").show();
 				$("#executionSub").show();
 				$("#selectNewOutlet").show();
 				$(".bufferImageSubmit").hide();
@@ -4832,55 +4674,53 @@ function submit_data() {
 /************************usage*page4********************/
 var selectOutletTownSup='';
 function routeListSup(outletTown){
-	$("#searchRouteDff").val('');
-	
+	/*-------------------------------edit suza 22-07-2019------------------------------*/
 	if(localStorage.p_rep_type=='AGENCY'){
 		selectOutletTownSup = localStorage.p_select_town;
 	}else if(localStorage.p_rep_type=='DFF'){
 		selectOutletTownSup = localStorage.p_select_town;
 	}else{
 		selectOutletTownSup=outletTown;
-	}
-
-	$('.bufferImageSupCall').show();	
-	
-	$.ajax({
-		type: 'POST',
-		url:apipath+"getRouteSup?&townCodeName="+selectOutletTownSup,
-																																																												
-		success: function(result) {	
-			var resultArray = result.split('rdrd');	
-			if(resultArray[0]=='Success'){
-				$('.bufferImageSupCall').hide();	
-				//$('#bufferImageOutlet').hide();			
-				routeListSupCall=resultArray[1];
-				
-				if(routeListSupCall!=''){
-				var routeListSupALL=routeListSupCall.split('||');
-				var routeStr='<ul data-role="listview" data-inset="true">';
-				for (i=0;i<routeListSupALL.length;i++){								
-				routeStr += '<li style="background-color:#FFF; border-top-color:#F03; border-bottom-color:#F03;" onclick="outletListSup(\''+ routeListSupALL[i]+'\')"><a>'+ routeListSupALL[i]+'</a></li>'
-			}
-				routeStr +='</ul>';
-				routeListSupSTR=routeStr;
-				
-				$('#routeListSupCall').empty();
-				$('#routeListSupCall').append(routeListSupSTR).trigger('create');
-				/*$(".placeholder").attr('placeholder',"asad");*/
-				$(".townSupCallLebel").html('Town		:		' + selectOutletTownSup.replace('|','-'));
-				$(".errorChk").text("");
-				url="#pageSupRoute";					
-				$.mobile.navigate(url);					
-				}else{
-					$('.bufferImageSupCall').hide();
-					$(".errorChk").text("Route not Available");
-				}
-			}
-		},error: function(result){
-			$('.bufferImageSupCall').hide();
-			$(".errorChk").text("Please check internet connection");
 		}
-	});
+	/*-------------------------------edit suza 22-07-2019------------------------------*/
+	$('.bufferImageSupCall').show();	
+		$.ajax({
+			type: 'POST',
+			url:apipath+"getRouteSup?&townCodeName="+selectOutletTownSup,
+																																																													
+			success: function(result) {	
+				var resultArray = result.split('rdrd');	
+				if(resultArray[0]=='Success'){
+					$('.bufferImageSupCall').hide();	
+					//$('#bufferImageOutlet').hide();			
+					routeListSupCall=resultArray[1];
+					
+					if(routeListSupCall!=''){
+					var routeListSupALL=routeListSupCall.split('||');
+					var routeStr='<ul data-role="listview" class="list" data-filter="true" data-inset="true" style="height:400px; overflow:scroll;">';
+					for (i=0;i<routeListSupALL.length;i++){								
+					routeStr += '<li style="background-color:#FFF; border-top-color:#F03; border-bottom-color:#F03;" onclick="outletListSup(\''+ routeListSupALL[i]+'\')"><a>'+ routeListSupALL[i]+'</a></li>'
+				}
+					routeStr +='</ul>';
+					routeListSupSTR=routeStr;
+					
+					$('#routeListSupCall').empty();
+					$('#routeListSupCall').append(routeListSupSTR).trigger('create');
+					/*$(".placeholder").attr('placeholder',"asad");*/
+					$(".townSupCallLebel").html('Town		:		' + selectOutletTownSup.replace('|','-'));
+					$(".errorChk").text("");
+					url="#pageSupRoute";					
+					$.mobile.navigate(url);					
+					}else{
+						$('.bufferImageSupCall').hide();
+						$(".errorChk").text("Route not Available");
+					}
+				}
+			},error: function(result){
+				$('.bufferImageSupCall').hide();
+				$(".errorChk").text("Please check internet connection");
+			}
+		});
 		
 }
 
@@ -5087,49 +4927,53 @@ function sRoute(routeName){
 
 var routeNameIdSup='';
 function outletListSup(routeNameId){
-	routeNameIdSup=routeNameId;
 	
-	$("#searchOutletDff").val('');
-	$('.bufferImageSupCall').show();	
-	$.ajax({
-		type: 'POST',
-		url:apipath+"getOutletSup?&routeName="+routeNameIdSup+"&townCode="+selectOutletTownSup,																																																											
-		success: function(result) {	
-			var syncResultArray = result.split('|||');	
-			if(syncResultArray[0]=='Success'){
-				$('.bufferImageSupCall').hide();			
-				//$('#bufferImageOutlet').hide();			
-				outletListSupCall=syncResultArray[1];
-				if(outletListSupCall!=''){
-				var outletListaAll=outletListSupCall.split('rdrd');
-				
-				var outletStr='<ul data-role="listview" data-inset="true">';
-				for (i=0;i<outletListaAll.length;i++){					
-					outletLi=outletListaAll[i].split('|');
+	routeNameIdSup=routeNameId;
+		
+			//alert(apipath+"getOutletSup?&routeName="+routeNameIdSup+"&townCode="+selectOutletTownSup);
+			
+			$('.bufferImageSupCall').show();	
+			$.ajax({
+			type: 'POST',
+			url:apipath+"getOutletSup?&routeName="+routeNameIdSup+"&townCode="+selectOutletTownSup,
+																																																													
+			success: function(result) {	
+				var syncResultArray = result.split('|||');	
+				if(syncResultArray[0]=='Success'){
+					$('.bufferImageSupCall').hide();			
+					//$('#bufferImageOutlet').hide();			
+					outletListSupCall=syncResultArray[1];
+					if(outletListSupCall!=''){
+					var outletListaAll=outletListSupCall.split('rdrd');
 					
-					outletStr += '<li style="background-color:#FFF; border-top-color:#F03; border-bottom-color:#F03;" onclick="supCallSubmitPage(\''+ outletLi[0]+'|'+ outletLi[1]+'\')"><a>'+ outletLi[0]+'-'+ outletLi[1]+'</a></li>'
+					var outletStr='<ul data-role="listview" class="list" data-filter="true" data-inset="true" style="height:400px; overflow:scroll;">';
+					for (i=0;i<outletListaAll.length;i++){					
+						outletLi=outletListaAll[i].split('|');
+						
+						outletStr += '<li style="background-color:#FFF; border-top-color:#F03; border-bottom-color:#F03;" onclick="supCallSubmitPage(\''+ outletLi[0]+'|'+ outletLi[1]+'\')"><a>'+ outletLi[0]+'-'+ outletLi[1]+'</a></li>'
+						
+					}
+					outletStr +='</ul>';
+					outletListSupCallSTR=outletStr;		
+					$('#outletListSupCall').empty();
+					$('#outletListSupCall').append(outletListSupCallSTR).trigger('create');
 					
+					$(".townSupCallLebel").html('Town	:		' + selectOutletTownSup.replace('|','-'));
+					$("#routeSelectSupCall").html('Route	:		' + routeNameIdSup);
+					$(".errorChk").text("");			
+					url="#pageSupOutlet";					
+					$.mobile.navigate(url);		
+					}else{
+						$('.bufferImageSupCall').hide();
+						$(".errorChk").text("Outlet Not Available");
+						
+						}
 				}
-				outletStr +='</ul>';
-				outletListSupCallSTR=outletStr;		
-				$('#outletListSupCall').empty();
-				$('#outletListSupCall').append(outletListSupCallSTR).trigger('create');
-				
-				$(".townSupCallLebel").html('Town	:		' + selectOutletTownSup.replace('|','-'));
-				$("#routeSelectSupCall").html('Route	:		' + routeNameIdSup);
-				$(".errorChk").text("");			
-				url="#pageSupOutlet";					
-				$.mobile.navigate(url);		
-				}else{
-					$('.bufferImageSupCall').hide();
-					$(".errorChk").text("Outlet Not Available");
-				}
+			},error: function(result){
+				$('.bufferImageSupCall').hide();
+				$(".errorChk").text("Please check internet connection");
 			}
-		},error: function(result){
-			$('.bufferImageSupCall').hide();
-			$(".errorChk").text("Please check internet connection");
-		}
-	})
+		})
 }
 var outletIDNameSupCall='';
 function supCallSubmitPage(outletIDNameSup){
@@ -5747,16 +5591,15 @@ function getAgencyAuditImage() {
 	destinationType: Camera.DestinationType.FILE_URI,correctOrientation: true });	
 }
 
-function onSuccessD(imageURI) {	
-	$("#myImageD").show();
+function onSuccessD(imageURI) {		
     var image = document.getElementById('myImageD');
     image.src = imageURI;
 	var image_path = "agnAudPhoto_path";	
 	$("#"+image_path).val(imageURI);
+	
 }
 
 function onFailD(message) {
-	$("#myImageD").hide();
 	imagePathD="";
 	$("#agnAudPhoto_name").val('');
     alert('Failed because: ' + message);
@@ -6206,9 +6049,6 @@ function submit_data_usages(){
 					
 					document.getElementById('myImageB').src = '';
 					
-					document.getElementById('shop_image_div').src = '';
-					$("#shop_image_name_hidden").val('');
-					
 					$(".errorChk").text("");
 					$(".sucMsgU").show();
 					$("#allHide").hide();
@@ -6253,7 +6093,6 @@ function getUsagesImage() {
 }
 
 function onSuccessB(imageURI) {		
-	$("#myImageB").show();
     var image = document.getElementById('myImageB');
     image.src = imageURI;
 	var image_path = "usePhoto_path";	
@@ -6262,7 +6101,6 @@ function onSuccessB(imageURI) {
 }
 
 function onFailB(message) {
-	$("#myImageB").hide();
 	imagePathB="";
 	$("#usePhoto_name").val('');
     alert('Failed because: ' + message);
@@ -6489,16 +6327,15 @@ function getAgencyImage() {
 	destinationType: Camera.DestinationType.FILE_URI,correctOrientation: true });	
 }
 
-function onSuccessC(imageURI) {	
-	$("#myImageC").show();	
+function onSuccessC(imageURI) {		
     var image = document.getElementById('myImageC');
     image.src = imageURI;
 	var image_path = "agnPhoto_path";	
 	$("#"+image_path).val(imageURI);
+	
 }
 
 function onFailC(message) {
-	$("#myImageC").hide();
 	imagePathC="";
 	$("#agnPhoto_name").val('');
     alert('Failed because: ' + message);
@@ -7387,15 +7224,14 @@ function getdefectiveImage() {
 }
 
 function onSuccessE(imageURI) {		
-	$("#myImageE").show();
     var image = document.getElementById('myImageE');
     image.src = imageURI;
 	var image_path = "defPhoto_path";	
 	$("#"+image_path).val(imageURI);
+	
 }
 
 function onFailE(message) {
-	$("#myImageE").hide();
 	imagePathE="";
 	$("#defPhoto_name").val('');
     alert('Failed because: ' + message);
@@ -8306,8 +8142,7 @@ function getShopeForntImage() {
 	destinationType: Camera.DestinationType.FILE_URI,correctOrientation: true });	
 }
 
-function onSuccess10(imageURI) {	
-	$("#shopeForntImageA").show();
+function onSuccess10(imageURI) {		
     var image = document.getElementById('shopeForntImageA');
     image.src = imageURI;
 	var image_path = "shopeFornt_path";	
@@ -8316,7 +8151,6 @@ function onSuccess10(imageURI) {
 }
 
 function onFail10(message) {
-	$("#shopeForntImageA").hide();
 	image_path="";
 	$("#shopeFornt_name").val('');
     alert('Failed because: ' + message);
@@ -8333,8 +8167,7 @@ function getFixedDisplayBeforImage() {
 	destinationType: Camera.DestinationType.FILE_URI,correctOrientation: true });	
 }
 
-function onSuccess11(imageURI) {	
-	$("#getFixedDisplayA").show();	
+function onSuccess11(imageURI) {		
     var image = document.getElementById('getFixedDisplayA');
     image.src = imageURI;
 	var image_path = "getFixedDisplayBefor_path";	
@@ -8343,7 +8176,6 @@ function onSuccess11(imageURI) {
 }
 
 function onFail11(message) {
-	$("#getFixedDisplayA").hide();
 	image_path="";
 	$("#getFixedDisplayBefor_name").val('');
     alert('Failed because: ' + message);
@@ -8360,8 +8192,7 @@ function getFixedDisplayAfterImage() {
 	destinationType: Camera.DestinationType.FILE_URI,correctOrientation: true });	
 }
 
-function onSuccess12(imageURI) {
-	$("#getFixedDisplayAfterA").show();		
+function onSuccess12(imageURI) {		
     var image = document.getElementById('getFixedDisplayAfterA');
     image.src = imageURI;
 	var image_path = "getFixedDisplayAfter_path";	
@@ -8370,7 +8201,6 @@ function onSuccess12(imageURI) {
 }
 
 function onFail12(message) {
-	$("#getFixedDisplayAfterA").hide();
 	image_path="";
 	$("#getFixedDisplayAfter_name").val('');
     alert('Failed because: ' + message);
