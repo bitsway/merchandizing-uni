@@ -2339,18 +2339,18 @@ function syncRoute() {
 											if (k==0){
 												if (localStorage.psSubmittedOutlet.indexOf(outletID)!=-1){							
 													outletStringShow=outletStringShow+'<div><label style="background:#ddeeee;">'+
-														'<input type="radio" name="RadioOutlet" value="'+outletID+'rdrd'+scheduleDate+'rdrd'+"othersV"+'">'+outletName +' | '+ outletID +' | '+  scheduleDate +' | '+channel+' | '+psStatus +'</label></div>'
+														'<input type="radio" name="RadioOutlet" value="'+outletID+'rdrd'+scheduleDate+'rdrd'+"othersV"+'">'+outletName +' | '+ outletID +' | '+  scheduleDate +' | '+channel +'</label></div>'
 												}else{
 													outletStringShow=outletStringShow+'<div><label style="background:#81C0C0;">'+
-														'<input type="radio" name="RadioOutlet" value="'+outletID+'rdrd'+scheduleDate+'rdrd'+"currentV"+'rdrd'+psStatus+'">'+outletName +' | '+ outletID +' | '+  scheduleDate +' | '+channel+' | '+psStatus +'</label></div>'
+														'<input type="radio" name="RadioOutlet" value="'+outletID+'rdrd'+scheduleDate+'rdrd'+"currentV"+'rdrd'+psStatus+'">'+outletName +' | '+ outletID +' | '+  scheduleDate +' | '+channel +'</label></div>'
 												}
 											}else{
 												if (localStorage.psSubmittedOutlet.indexOf(outletID)!=-1){	
 													outletStringShow=outletStringShow+'<div><label style="background:#ddeeee;">'+
-														'<input type="radio" name="RadioOutlet" value="'+outletID+'rdrd'+scheduleDate+'rdrd'+"othersV"+'">'+outletName +' | '+ outletID +' | '+  scheduleDate +' | '+channel+' | '+psStatus +'</label></div>'
+														'<input type="radio" name="RadioOutlet" value="'+outletID+'rdrd'+scheduleDate+'rdrd'+"othersV"+'">'+outletName +' | '+ outletID +' | '+  scheduleDate +' | '+channel +'</label></div>'
 												}else{
 													outletStringShow=outletStringShow+'<div><label>'+
-														'<input type="radio" name="RadioOutlet" value="'+outletID+'rdrd'+scheduleDate+'rdrd'+"backV"+'rdrd'+psStatus+'">'+outletName +' | '+ outletID +' | '+  scheduleDate +' | '+channel+' | '+psStatus +'</label></div>'
+														'<input type="radio" name="RadioOutlet" value="'+outletID+'rdrd'+scheduleDate+'rdrd'+"backV"+'rdrd'+psStatus+'">'+outletName +' | '+ outletID +' | '+  scheduleDate +' | '+channel +'</label></div>'
 												}
 											}
 										}
@@ -2860,18 +2860,18 @@ function menupage(){
 					if (k==0){
 						if (localStorage.psSubmittedOutlet.indexOf(outletID)!=-1){							
 							outletStringShow=outletStringShow+'<div><label style="background:#ddeeee;">'+
-								'<input type="radio" name="RadioOutlet" value="'+outletID+'rdrd'+scheduleDate+'rdrd'+"othersV"+'">'+outletName +' | '+ outletID +' | '+  scheduleDate +' | '+channel+' | '+psStatus +'</label></div>'
+								'<input type="radio" name="RadioOutlet" value="'+outletID+'rdrd'+scheduleDate+'rdrd'+"othersV"+'">'+outletName +' | '+ outletID +' | '+  scheduleDate +' | '+channel +'</label></div>'
 						}else{
 							outletStringShow=outletStringShow+'<div><label style="background:#81C0C0;">'+
-								'<input type="radio" name="RadioOutlet" value="'+outletID+'rdrd'+scheduleDate+'rdrd'+"currentV"+'rdrd'+psStatus+'">'+outletName +' | '+ outletID +' | '+  scheduleDate +' | '+channel+' | '+psStatus +'</label></div>'
+								'<input type="radio" name="RadioOutlet" value="'+outletID+'rdrd'+scheduleDate+'rdrd'+"currentV"+'rdrd'+psStatus+'">'+outletName +' | '+ outletID +' | '+  scheduleDate +' | '+channel +'</label></div>'
 						}
 					}else{
 						if (localStorage.psSubmittedOutlet.indexOf(outletID)!=-1){	
 							outletStringShow=outletStringShow+'<div><label style="background:#ddeeee;">'+
-								'<input type="radio" name="RadioOutlet" value="'+outletID+'rdrd'+scheduleDate+'rdrd'+"othersV"+'">'+outletName +' | '+ outletID +' | '+  scheduleDate +' | '+channel+' | '+psStatus +'</label></div>'
+								'<input type="radio" name="RadioOutlet" value="'+outletID+'rdrd'+scheduleDate+'rdrd'+"othersV"+'">'+outletName +' | '+ outletID +' | '+  scheduleDate +' | '+channel +'</label></div>'
 						}else{
 							outletStringShow=outletStringShow+'<div><label>'+
-								'<input type="radio" name="RadioOutlet" value="'+outletID+'rdrd'+scheduleDate+'rdrd'+"backV"+'rdrd'+psStatus+'">'+outletName +' | '+ outletID +' | '+  scheduleDate +' | '+channel+' | '+psStatus +'</label></div>'
+								'<input type="radio" name="RadioOutlet" value="'+outletID+'rdrd'+scheduleDate+'rdrd'+"backV"+'rdrd'+psStatus+'">'+outletName +' | '+ outletID +' | '+  scheduleDate +' | '+channel +'</label></div>'
 						}
 					}
 				}
@@ -3429,7 +3429,7 @@ function shop_page_set() {
 	$("#shop_image_div_hidden").val(shop_image_path );
 		
 	var image = document.getElementById('shop_image_div');
-    image.src = shop_image_path;
+    image.src = image_name;
 		
 	if (localStorage.shop_next_flag==1){
 		//$('#shop_show').find('input, textarea, button, select').attr('disabled','disabled');
@@ -4528,7 +4528,7 @@ function fail(error) {
 }
 
 function check_step() {
-	/*if (localStorage.step_flag==0){
+	if (localStorage.step_flag==0){
 		upload_fd();
 	}
 	if (localStorage.step_flag==1){
@@ -4548,7 +4548,7 @@ function check_step() {
 	}
 	if (localStorage.step_flag==6){
 		cancel_outlet();
-	}*/
+	}
 	
 	
 	//if (localStorage.qpdsdataSubmit==1 && localStorage.npddataSubmit==1 && localStorage.giftdataSubmit==1 && localStorage.placedataSubmit==1 && localStorage.shopdataSubmit==1){
@@ -4781,7 +4781,7 @@ function submit_data() {
 						
 						// Enable disable div end
 						
-						//upload_fd();
+						upload_fd();
 						
 						document.getElementById('shop_image_div').src = '';
 						$("#shop_image_name_hidden").val('');
