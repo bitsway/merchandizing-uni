@@ -47,10 +47,11 @@ var joinCallQueNo4='';
 var step_flag=0; 
 var temp_image_div='';
 var temp_image_div_promo='';
+
 //localStorage.p_rep_type='';
 
 //---Online
-var apipath="http://w02.yeapps.com/postit/syncmobile_20190801/";
+var apipath="http://w02.yeapps.com/postit/syncmobile_20190803/";
 var apipath_image="http://w02.yeapps.com/postit/";
 
 //--- local
@@ -364,8 +365,10 @@ function syncBasic(){
 					localStorage.p_toolsStr=syncResultArray[11];
 					localStorage.routeExList=syncResultArray[12];
 					localStorage.cancelList=syncResultArray[13];
-					localStorage.place_strList=syncResultArray[14];
+					localStorage.psSubmittedOutlet=syncResultArray[14];
+					localStorage.place_strList=syncResultArray[15];
 					
+										
 					localStorage.sync_date=get_date();
 					//alert(localStorage.sync_date);
 					//alert(localStorage.routeExList+'====='+localStorage.cancelList+'====='+localStorage.place_strList);
@@ -1032,8 +1035,7 @@ function salfie_next_page(){
 					
 					if (result==''){
 						alert ('Sorry Network not available');
-					}else if(result=='Success'){
-						localStorage.psSubmittedOutlet='';
+					}else if(result=='Success'){						
 						localStorage.p_attendanceCheck="Day Start"
 						$("#get_salfieButton").hide();
 						$("#attandanceButton").hide();
@@ -1190,12 +1192,12 @@ function menuClick(){
 		$.mobile.navigate(url);
 	}else{
 		if(localStorage.p_rep_type!='SUPERVISOR'){
-		url = "#homePage";
-		$.mobile.navigate(url);
+			url = "#first_page";
+			$.mobile.navigate(url);
 		}else{
 			url = "#supHome";
 			$.mobile.navigate(url);
-			}
+		}
 	}
 	
 }
@@ -3358,6 +3360,8 @@ function outlet_next_page(){
 	var shop_image_path=$("#shop_image_div_hidden").val();
 	//alert(shop_image_name);
 	if (shop_image_name.length < 10){
+		document.getElementById('shop_image_div').src = '';
+		$("#shop_image_name_hidden").val('');
 		var url = "#cancelPage";
 		$.mobile.navigate(url);
 	}else{
@@ -4524,7 +4528,7 @@ function fail(error) {
 }
 
 function check_step() {
-	if (localStorage.step_flag==0){
+	/*if (localStorage.step_flag==0){
 		upload_fd();
 	}
 	if (localStorage.step_flag==1){
@@ -4544,7 +4548,7 @@ function check_step() {
 	}
 	if (localStorage.step_flag==6){
 		cancel_outlet();
-	}
+	}*/
 	
 	
 	//if (localStorage.qpdsdataSubmit==1 && localStorage.npddataSubmit==1 && localStorage.giftdataSubmit==1 && localStorage.placedataSubmit==1 && localStorage.shopdataSubmit==1){
@@ -4777,7 +4781,7 @@ function submit_data() {
 						
 						// Enable disable div end
 						
-						upload_fd();
+						//upload_fd();
 						
 						document.getElementById('shop_image_div').src = '';
 						$("#shop_image_name_hidden").val('');
