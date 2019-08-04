@@ -51,7 +51,7 @@ var temp_image_div_promo='';
 //localStorage.p_rep_type='';
 
 //---Online
-var apipath="http://w02.yeapps.com/postit/syncmobile_20190803/";
+var apipath="http://w02.yeapps.com/postit/syncmobile_20190804/";
 var apipath_image="http://w02.yeapps.com/postit/";
 
 //--- local
@@ -366,11 +366,12 @@ function syncBasic(){
 					localStorage.routeExList=syncResultArray[12];
 					localStorage.cancelList=syncResultArray[13];
 					localStorage.psSubmittedOutlet=syncResultArray[14];
-					localStorage.place_strList=syncResultArray[15];
+					localStorage.currentDateServer=syncResultArray[15];
+					localStorage.place_strList=syncResultArray[16];
 					
 										
 					localStorage.sync_date=get_date();
-					//alert(localStorage.sync_date);
+					//alert(localStorage.currentDateServer);
 					//alert(localStorage.routeExList+'====='+localStorage.cancelList+'====='+localStorage.place_strList);
 					
 					var routeExSingleArray = localStorage.routeExList.split('fdfd');	
@@ -2336,7 +2337,8 @@ function syncRoute() {
 									if (scheduleDate!=''){
 										//alert(scheduleDate);
 										if (dateList[k]==scheduleDate){	
-											if (k==0){
+											//alert(dateList[k]);
+											if (dateList[k]==localStorage.currentDateServer){
 												if (localStorage.psSubmittedOutlet.indexOf(outletID)!=-1){							
 													outletStringShow=outletStringShow+'<div><label style="background:#ddeeee;">'+
 														'<input type="radio" name="RadioOutlet" value="'+outletID+'rdrd'+scheduleDate+'rdrd'+"othersV"+'">'+outletName +' | '+ outletID +' | '+  scheduleDate +' | '+channel +'</label></div>'
@@ -2761,8 +2763,9 @@ function cancel_outlet_Back(){
 			$("#cancelButton").show();
 			$("#login_image_cancel").hide();
 			
-			$("#outletString").empty();
-			$("#outletString").append(localStorage.outletString).trigger('create');
+			menupage();
+			//$("#outletString").empty();
+			//$("#outletString").append(localStorage.outletString).trigger('create');
 			
 			var url = "#outletPage";
 			$.mobile.navigate(url);
@@ -3429,7 +3432,7 @@ function shop_page_set() {
 	$("#shop_image_div_hidden").val(shop_image_path );
 		
 	var image = document.getElementById('shop_image_div');
-    image.src = image_name;
+    image.src = shop_image_path;
 		
 	if (localStorage.shop_next_flag==1){
 		//$('#shop_show').find('input, textarea, button, select').attr('disabled','disabled');
@@ -3467,7 +3470,7 @@ function get_pic_fdisplay(id) {
 	temp_image_div=div_id;
 	var hidden_name="fdSL_image_name_hidden_"+id;
 	var tempTime = $.now();
-	fd_image_name=tempTime.toString()+"_"+localStorage.selectedOutlet+id.toString()+".jpg";
+	fd_image_name=tempTime.toString()+"_"+localStorage.selectedOutlet+id.toString()+"_fd.jpg";
 	$("#"+hidden_name).val(fd_image_name);
 	navigator.camera.getPicture(onSuccessFd, onFailFd, { quality: 70,
 		targetWidth: 450,
@@ -3517,7 +3520,7 @@ function get_pic_qpds(id) {
 	temp_image_div_promo=div_id;
 	var hidden_name_qpds="qpdsSL_image_name_hidden_"+id;
 	var tempTime = $.now();
-	qpds_image_name=tempTime.toString()+"_"+localStorage.selectedOutlet+".jpg";
+	qpds_image_name=tempTime.toString()+"_"+localStorage.selectedOutlet+"_promo.jpg";
 	$("#"+hidden_name_qpds).val(qpds_image_name);
 	navigator.camera.getPicture(onSuccessQpds, onFailQpds, {  quality: 70,
 		targetWidth: 450,
@@ -4034,12 +4037,12 @@ function gift_page_set() {
 	$("#gift_combo").append(giftStringShow_combo).trigger('create');
 		
 	var image = document.getElementById('gift_image_div');
-	image.src = gift_image_path;
+	image.src = image_name;
 }
 
 function get_pic_gift() {
 	var tempTime = $.now();
-	gift_image_name=tempTime.toString()+"_"+localStorage.selectedOutlet+".jpg";
+	gift_image_name=tempTime.toString()+"_"+localStorage.selectedOutlet+"_gift.jpg";
 	$("#gift_image_name_hidden").val(gift_image_name);
 	navigator.camera.getPicture(onSuccessGift, onFailGift, { quality: 70,
 		targetWidth: 450,
@@ -4546,18 +4549,40 @@ function check_step() {
 	if (localStorage.step_flag==5){
 		upload_place();
 	}
-	if (localStorage.step_flag==6){
+	
+	/*if (localStorage.step_flag==6){
 		cancel_outlet();
+	}*/
+	
+	
+	if ((localStorage.psStatus==1)&&((localStorage.dataSubmit==1) && (localStorage.fddataSubmit==1) &&(localStorage.qpdsdataSubmit==1) && (localStorage.npddataSubmit==1) && (localStorage.giftdataSubmit==1) && (localStorage.placedataSubmit==1) && (localStorage.shopdataSubmit==1))){			
+		document.getElementById('shop_image_div').src = '';
+		$("#shop_image_name_hidden").val('');
+		document.getElementById('place_image_div').src = '';
+		$("#place_image_name_hidden").val('');
+		localStorage.psStatus=0;
+		//cancel_outlet();
+		var url = "#outletSelectPage";
+		$.mobile.navigate(url);
+	}else if((localStorage.psStatus==0)&&((localStorage.dataSubmit==1) && (localStorage.fddataSubmit==1) &&(localStorage.giftdataSubmit==1) && (localStorage.placedataSubmit==1) && (localStorage.shopdataSubmit==1))){
+		document.getElementById('shop_image_div').src = '';
+		$("#shop_image_name_hidden").val('');
+		document.getElementById('place_image_div').src = '';
+		$("#place_image_name_hidden").val('');
+		localStorage.psStatus=0;
+		//cancel_outlet();
+		var url = "#outletSelectPage";
+		$.mobile.navigate(url);
+	}else{
+		$("#image_up_button").show();
+		var url = "#imageSubmitPage";
+		$.mobile.navigate(url);
 	}
 	
 	
-	//if (localStorage.qpdsdataSubmit==1 && localStorage.npddataSubmit==1 && localStorage.giftdataSubmit==1 && localStorage.placedataSubmit==1 && localStorage.shopdataSubmit==1){
-		var url = "#outletSelectPage";
-		$.mobile.navigate(url);
-	/*}else{
-		var url = "#imageSubmitPage";
-		$.mobile.navigate(url);
-	}*/
+	/*cancel_outlet();
+	var url = "#outletSelectPage";
+	$.mobile.navigate(url);*/
 }
 
 function buttonCheck(){	
@@ -4742,8 +4767,8 @@ function submit_data() {
 						$(".bufferImageSubmit").hide();
 						$("#executionSub").show();
 						$("#selectNewOutlet").show();
-						document.getElementById('shop_image_div').src = '';
-						$("#shop_image_name_hidden").val('');
+						//document.getElementById('shop_image_div').src = '';
+						//$("#shop_image_name_hidden").val('');
 					}
 					if (result=='SUCCESS'){	
 						$(".bufferImageSubmit").hide();
@@ -4783,8 +4808,7 @@ function submit_data() {
 						
 						upload_fd();
 						
-						document.getElementById('shop_image_div').src = '';
-						$("#shop_image_name_hidden").val('');
+						
 						//$("#sub_button_div").show();
 						//buttonCheck();
 						//var url = "#outletPage";
@@ -4798,7 +4822,7 @@ function submit_data() {
 			error: function(result) {			 
 				//$("#sub_button").show();
 				localStorage.dataSubmit=0;
-				localStorage.submit_count=parseInt(localStorage.submit_count)+1
+				//localStorage.submit_count=parseInt(localStorage.submit_count)+1
 				$("#submit_data_check").html('Please Check Your Internet Connection');
 				$("#sub_button_div").show();
 				$("#executionSub").show();
