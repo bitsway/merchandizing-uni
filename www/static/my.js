@@ -51,7 +51,7 @@ var temp_image_div_promo='';
 //localStorage.p_rep_type='';
 
 //---Online
-var apipath="http://w02.yeapps.com/postit/syncmobile_20190804/";
+var apipath="http://w02.yeapps.com/postit/syncmobile_20190805/";
 var apipath_image="http://w02.yeapps.com/postit/";
 
 //--- local
@@ -1168,8 +1168,7 @@ function syncValueClean(){
 	$.mobile.navigate(url);
 	}
 	
-function menuClick(){
-	
+function menuClick(){	
 	$(".allHideR").hide();
 	$('#menuBufferingImage').hide();
 	$(".errorMsg").text("");
@@ -4577,9 +4576,9 @@ function check_step() {
 		cancel_outlet();
 	}*/
 	
-	//alert(localStorage.psStatus+'=='+localStorage.dataSubmit+'=='+localStorage.fddataSubmit+'=='+localStorage.qpdsdataSubmit+'=='+localStorage.npddataSubmit+'=='+localStorage.giftdataSubmit+'=='+localStorage.placedataSubmit+'=='+localStorage.shopdataSubmit);
+	/*alert(localStorage.psStatus+'=='+localStorage.dataSubmit+'=='+localStorage.fddataSubmit+'=='+localStorage.qpdsdataSubmit+'=='+localStorage.npddataSubmit+'=='+localStorage.giftdataSubmit+'=='+localStorage.placedataSubmit+'=='+localStorage.shopdataSubmit);
 	
-	/*if ((localStorage.psStatus==1)&&((localStorage.dataSubmit==1) && (localStorage.fddataSubmit==1) &&(localStorage.qpdsdataSubmit==1) && (localStorage.npddataSubmit==1) && (localStorage.giftdataSubmit==1) && (localStorage.placedataSubmit==1) && (localStorage.shopdataSubmit==1))){			
+	if ((localStorage.psStatus==1)&&((localStorage.dataSubmit==1) && (localStorage.fddataSubmit==1) &&(localStorage.qpdsdataSubmit==1) && (localStorage.npddataSubmit==1) && (localStorage.giftdataSubmit==1) && (localStorage.placedataSubmit==1) && (localStorage.shopdataSubmit==1))){			
 		document.getElementById('shop_image_div').src = '';
 		$("#shop_image_name_hidden").val('');
 		document.getElementById('place_image_div').src = '';
@@ -4603,6 +4602,14 @@ function check_step() {
 		$.mobile.navigate(url);
 	}*/
 	
+	document.getElementById('shop_image_div').src = '';
+	$("#shop_image_name_hidden").val('');
+	
+	document.getElementById('gift_image_div').src = '';
+	$("#gift_image_name_hidden").val('');
+
+	document.getElementById('place_image_div').src = '';
+	$("#place_image_name_hidden").val('');	
 	
 	//cancel_outlet();
 	var url = "#outletSelectPage";
@@ -5075,7 +5082,7 @@ function goSelfiePage(){
 	$(".successMsgATT").text("");
 	url = "#salfiePage";
 	$.mobile.navigate(url);
-	}		
+}		
 	
 function merchandizingToolsSup(){
 	$(".receivePOSMSelectNew").empty();
